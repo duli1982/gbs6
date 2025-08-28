@@ -51,6 +51,11 @@
         </header>
 
         <main>
+            <!-- Search Bar -->
+            <div class="mb-8 max-w-lg mx-auto">
+                <input type="search" id="use-case-search" placeholder="Search success stories by keyword..." class="w-full p-3 border border-gray-300 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
             <!-- Filter Categories -->
             <div id="filters" class="flex flex-wrap justify-center gap-3 mb-12">
                 <button data-filter="all" class="category-filter active px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">All Stories</button>
@@ -313,6 +318,12 @@
 
             </div>
 
+            <!-- No Results Message -->
+            <div id="no-results-message" class="text-center py-16 hidden">
+                <h3 class="text-xl font-semibold text-gray-700">No matching success stories found</h3>
+                <p class="text-gray-500 mt-2">Please try adjusting your search or filter criteria.</p>
+            </div>
+
             <!-- Interactive Demo Section -->
             <div id="demo-section" class="demo-section mt-16 p-8 rounded-xl hidden">
                 <div class="max-w-4xl mx-auto">
@@ -498,23 +509,31 @@ Requirements:
             if (result) result.classList.remove('hidden');
         }
 
-        // Filter functionality (no inline 'event' usage)
-        function filterCases(category, targetButton) {
+        // Combined filter and search functionality
+        function runFilters() {
+            const activeCategory = document.querySelector('.category-filter.active')?.dataset.filter || 'all';
+            const searchTerm = document.getElementById('use-case-search').value.toLowerCase().trim();
             const cases = document.querySelectorAll('.case-item');
-            const filters = document.querySelectorAll('.category-filter');
+            let visibleCount = 0;
 
-            // Update active filter classes
-            filters.forEach(f => f.classList.remove('active'));
-            if (targetButton) targetButton.classList.add('active');
-
-            // Show/hide cases
             cases.forEach(c => {
-                if (category === 'all' || c.dataset.category === category) {
+                const categoryMatch = activeCategory === 'all' || c.dataset.category === activeCategory;
+                const textContent = c.textContent.toLowerCase();
+                const searchMatch = !searchTerm || textContent.includes(searchTerm);
+
+                if (categoryMatch && searchMatch) {
                     c.style.display = '';
+                    visibleCount++;
                 } else {
                     c.style.display = 'none';
                 }
             });
+
+            // Optional: Show a message if no results found
+            const noResultsMessage = document.getElementById('no-results-message');
+            if (noResultsMessage) {
+                noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
         }
 
         // DOM ready
@@ -529,14 +548,20 @@ Requirements:
             `;
             document.head.appendChild(style);
 
-            // Wire filter buttons
+            const searchInput = document.getElementById('use-case-search');
             const filterButtons = document.querySelectorAll('#filters .category-filter');
+
+            // Wire filter buttons
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    const cat = btn.getAttribute('data-filter') || 'all';
-                    filterCases(cat, btn);
+                    filterButtons.forEach(f => f.classList.remove('active'));
+                    btn.classList.add('active');
+                    runFilters();
                 });
             });
+
+            // Wire search input
+            searchInput.addEventListener('input', runFilters);
 
             // Wire demo buttons
             const demoButtons = document.querySelectorAll('.demo-btn');
