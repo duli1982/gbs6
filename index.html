@@ -644,12 +644,15 @@
                 const highlightedTitle = this.highlightText(result.title, query);
                 const highlightedDescription = this.highlightText(result.description, query);
 
-                // Add relevance indicator
-                const relevanceClass = result.score > 15 ? 'high' : result.score > 8 ? 'medium' : 'low';
+                // Section title display
+                const sectionDisplay = result.sectionTitle
+                    ? `<div class="search-result-section" style="font-size: 12px; color: #1967d2; font-weight: 500; margin-top: 4px;">↳ In: ${this.highlightText(result.sectionTitle, query)}</div>`
+                    : '';
 
                 div.innerHTML = `
                     <div class="search-result-title">${highlightedTitle}</div>
                     <div class="search-result-description">${highlightedDescription}</div>
+                    ${sectionDisplay}
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
                         <span class="search-result-category">${result.category || this.getCategoryFromUrl(result.url)}</span>
                         ${result.type === 'lesson' ? '<span style="font-size: 11px; color: #9ca3af;">📚 Lesson</span>' : ''}
@@ -659,10 +662,17 @@
                 `;
 
                 div.addEventListener('click', () => {
-                    window.location.href = result.url;
+                    this.handleResultClick(result);
                 });
 
                 return div;
+            }
+
+            handleResultClick(result) {
+                // The full implementation with smooth scrolling will be in the next step.
+                // For now, this just navigates to the URL with anchor.
+                const targetUrl = result.anchor ? `${result.url}#${result.anchor}` : result.url;
+                window.location.href = targetUrl;
             }
 
             highlightText(text, query) {
