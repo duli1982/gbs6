@@ -987,6 +987,13 @@
                 const subCategoryPrompts = category[subCategoryName];
 
                 const subHeader = document.createElement('h2');
+                // Create a URL-friendly ID from the subcategory name
+                const subCategoryId = subCategoryName.toLowerCase()
+                    .replace(/ & /g, ' and ')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .trim()
+                    .replace(/\s+/g, '-');
+                subHeader.id = subCategoryId;
                 subHeader.className = 'text-2xl font-bold mt-8 mb-4 main-heading';
                 subHeader.textContent = subCategoryName;
                 promptDisplayArea.appendChild(subHeader);
@@ -1173,7 +1180,36 @@ copyGemBtn.addEventListener('click', () => {
 
         // --- INITIAL LOAD ---
         document.addEventListener('DOMContentLoaded', () => {
-            loadPrompts();
+            loadPrompts().then(() => {
+                // This function handles incoming anchor links to show the right category view
+                if (window.location.hash) {
+                    try {
+                        const anchor = decodeURIComponent(window.location.hash.substring(1));
+                        let foundCategory = null;
+
+                        // Find which category name matches the anchor "slug"
+                        for (const categoryName in promptData) {
+                            const categoryId = categoryName.toLowerCase()
+                                .replace(/ & /g, ' and ')
+                                .replace(/[^a-z0-9\s-]/g, '')
+                                .trim()
+                                .replace(/\s+/g, '-');
+
+                            if (categoryId === anchor) {
+                                foundCategory = categoryName;
+                                break;
+                            }
+                        }
+
+                        if (foundCategory) {
+                            // If we found a category, show the detailed view for it
+                            showAllCategoryView(foundCategory);
+                        }
+                    } catch (e) {
+                        console.error("Error handling anchor navigation:", e);
+                    }
+                }
+            });
         });
 
     </script>
@@ -1286,6 +1322,7 @@ copyGemBtn.addEventListener('click', () => {
     </div>
 </div>
     </div>
+    <script src="../shared/scripts/smooth-scroll.js" defer></script>
 </body>
 
 </html>
