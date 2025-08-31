@@ -156,8 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
         copyrightYear.textContent = new Date().getFullYear();
     }
 
-    // Set up initial page view
-    navigateTo('main-page');
+    // Set up initial page view - check for URL anchor first
+    const hash = window.location.hash.substring(1); // Remove the # symbol
+    if (hash && Object.keys(pageTitles).includes(hash)) {
+        navigateTo(hash);
+    } else {
+        navigateTo('main-page');
+    }
 
     // --- Back to Top Button Logic ---
     const backToTopBtn = document.getElementById('back-to-top');
