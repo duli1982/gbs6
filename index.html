@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="tour.css">
     <style>
         .google-sans {
             font-family: 'Google Sans', sans-serif;
@@ -350,6 +351,30 @@
     </div>
 
     <div id="footer-placeholder"></div>
+
+    <!-- Replay Tour Button Container -->
+    <div class="text-center py-4">
+        <button id="replay-tour-btn">Replay Onboarding Tour</button>
+    </div>
+
+    <!-- Tour HTML Structure -->
+    <div class="tour-overlay"></div>
+    <div class="tour-highlight"></div>
+    <div class="tour-popover">
+        <div class="tour-popover-arrow"></div>
+        <div class="tour-popover-content">
+            <h3 class="tour-popover-title"></h3>
+            <p></p>
+        </div>
+        <div class="tour-navigation">
+            <span class="tour-progress"></span>
+            <div class="tour-buttons">
+                <button class="tour-btn tour-btn-skip">Skip</button>
+                <button class="tour-btn tour-btn-next">Next</button>
+            </div>
+        </div>
+    </div>
+
     <script src="shared/scripts/footer.js" defer></script>
 
     <script>
@@ -833,6 +858,7 @@
             });
         });
     </script>
+    <script src="tour.js"></script>
 </body>
 
 </html>
