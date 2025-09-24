@@ -32,6 +32,12 @@ class Tour {
                 placement: 'top'
             },
             {
+                selector: 'a[href="/use-cases/"]',
+                title: 'AI Success Stories',
+                description: 'Real-world examples and case studies showcasing how AI transforms daily work at Randstad GBS. See the impact firsthand.',
+                placement: 'top'
+            },
+            {
                 selector: '.hub-button, .back-to-hub-btn', // Generic selector for back button
                 title: 'Return to Hub',
                 description: 'Whenever you\'re in a sub-module, look for a "Back to Hub" button to easily return to this main page.',
@@ -114,6 +120,9 @@ class Tour {
             nextBtn.textContent = 'Next';
         }
 
+        // Scroll the element into view first to ensure its position is calculated correctly.
+        targetElement.scrollIntoView({ block: 'center' });
+
         // Position highlight and popover
         const rect = targetElement.getBoundingClientRect();
 
@@ -124,8 +133,6 @@ class Tour {
 
         this.tourPopover.classList.add('active');
         this.positionPopover(targetElement, step.placement);
-
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     positionPopover(target, placement) {
