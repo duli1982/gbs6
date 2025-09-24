@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback - Randstad GBS Learning Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../shared/hub-button.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
@@ -47,6 +46,29 @@
             background: #1557b0;
             transform: translateY(-1px);
         }
+
+        /* Replicating hub-button styles */
+        .hub-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            text-align: center;
+            color: #1967d2;
+            background-color: transparent;
+            border: 1px solid #dadce0;
+            transition-property: background-color, border-color, color, transform, box-shadow;
+            transition-duration: 0.2s;
+            transition-timing-function: ease;
+        }
+
+        .hub-button:hover {
+            background-color: #f0f4f9;
+            border-color: #c5d8f0;
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 
@@ -57,8 +79,7 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <a href="/" class="google-sans text-xl font-bold text-gray-900">Randstad GBS Learning Hub</a>
-                <a href="/" class="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">← Back to
-                    Hub</a>
+                <a href="../index.html" class="hub-button">Back To Hub</a>
             </div>
         </div>
     </nav>
@@ -74,14 +95,17 @@
         <main class="max-w-3xl mx-auto">
             <div class="feedback-form p-8">
                 <!-- Hidden iframe to handle form submission -->
-                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessMessage();}"></iframe>
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+                    onload="if(submitted) {showSuccessMessage();}"></iframe>
 
-                <form id="feedbackForm" class="space-y-6" action="YOUR_GOOGLE_FORM_ACTION_URL" method="POST" target="hidden_iframe">
+                <form id="feedbackForm" class="space-y-6" action="https://docs.google.com/forms/d/e/1FAIpQLSelwbgIYE0mtrU9m2HUKAOyy3-Nt4HrHAoLzLoEFGDCfaZ5MA/formResponse
+" method="POST" target="hidden_iframe">
 
                     <!-- Feedback Type -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Feedback Type</label>
-                        <select name="entry.FEEDBACK_TYPE_ENTRY_ID" class="form-input w-full px-4 py-3 text-gray-700" required>
+                        <select name="entry.1374134785"
+                            class="form-input w-full px-4 py-3 text-gray-700" required>
                             <option value="">Select feedback type...</option>
                             <option value="General Feedback">General Feedback</option>
                             <option value="Bug Report">Bug Report</option>
@@ -96,7 +120,8 @@
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Related Page/Section
                             (Optional)</label>
-                        <select name="entry.RELATED_SECTION_ENTRY_ID" class="form-input w-full px-4 py-3 text-gray-700">
+                        <select name="entry.472344537"
+                            class="form-input w-full px-4 py-3 text-gray-700">
                             <option value="">Select if applicable...</option>
                             <option value="RPO AI Acceleration Program">RPO AI Acceleration Program</option>
                             <option value="Guide for GBS Leaders">Guide for GBS Leaders</option>
@@ -112,21 +137,23 @@
                     <!-- Name -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Your Name</label>
-                        <input type="text" name="entry.NAME_ENTRY_ID" class="form-input w-full px-4 py-3 text-gray-700"
-                            placeholder="Enter your name" required>
+                        <input type="text" name="entry.367209013"
+                            class="form-input w-full px-4 py-3 text-gray-700" placeholder="Enter your name" required>
                     </div>
 
                     <!-- Email -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                        <input type="email" name="entry.EMAIL_ENTRY_ID" class="form-input w-full px-4 py-3 text-gray-700"
-                            placeholder="your.email@randstad.com" required>
+                        <input type="email" name="entry.1285442051"
+                            class="form-input w-full px-4 py-3 text-gray-700" placeholder="your.email@randstad.com"
+                            required>
                     </div>
 
                     <!-- Department/Role -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Department/Role (Optional)</label>
-                        <input type="text" name="entry.DEPARTMENT_ENTRY_ID" class="form-input w-full px-4 py-3 text-gray-700"
+                        <input type="text" name="entry.183746620"
+                            class="form-input w-full px-4 py-3 text-gray-700"
                             placeholder="e.g., RPO, GBS Leadership, Sourcing">
                     </div>
 
@@ -135,23 +162,28 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Overall Experience Rating</label>
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center space-x-1">
-                                <input type="radio" name="entry.RATING_ENTRY_ID" value="Excellent" id="rating5" class="text-blue-600">
+                                <input type="radio" name="entry.851188432" value="Excellent" id="rating5"
+                                    class="text-blue-600">
                                 <label for="rating5" class="text-sm text-gray-700">Excellent</label>
                             </div>
                             <div class="flex items-center space-x-1">
-                                <input type="radio" name="entry.RATING_ENTRY_ID" value="Good" id="rating4" class="text-blue-600">
+                                <input type="radio" name="entry.851188432" value="Good" id="rating4"
+                                    class="text-blue-600">
                                 <label for="rating4" class="text-sm text-gray-700">Good</label>
                             </div>
                             <div class="flex items-center space-x-1">
-                                <input type="radio" name="entry.RATING_ENTRY_ID" value="Average" id="rating3" class="text-blue-600">
+                                <input type="radio" name="entry.851188432" value="Average" id="rating3"
+                                    class="text-blue-600">
                                 <label for="rating3" class="text-sm text-gray-700">Average</label>
                             </div>
                             <div class="flex items-center space-x-1">
-                                <input type="radio" name="entry.RATING_ENTRY_ID" value="Poor" id="rating2" class="text-blue-600">
+                                <input type="radio" name="entry.851188432" value="Poor" id="rating2"
+                                    class="text-blue-600">
                                 <label for="rating2" class="text-sm text-gray-700">Poor</label>
                             </div>
                             <div class="flex items-center space-x-1">
-                                <input type="radio" name="entry.RATING_ENTRY_ID" value="Very Poor" id="rating1" class="text-blue-600">
+                                <input type="radio" name="entry.851188432" value="Very Poor" id="rating1"
+                                    class="text-blue-600">
                                 <label for="rating1" class="text-sm text-gray-700">Very Poor</label>
                             </div>
                         </div>
@@ -160,7 +192,7 @@
                     <!-- Feedback Message -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Your Feedback</label>
-                        <textarea name="entry.MESSAGE_ENTRY_ID" rows="6"
+                        <textarea name="entry.2131644124" rows="6"
                             class="form-input w-full px-4 py-3 text-gray-700 resize-vertical"
                             placeholder="Please share your detailed feedback, suggestions, or report any issues you've encountered..."
                             required></textarea>
@@ -170,7 +202,7 @@
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Suggestions for Improvement
                             (Optional)</label>
-                        <textarea name="entry.SUGGESTIONS_ENTRY_ID" rows="4"
+                        <textarea name="entry.1715663794" rows="4"
                             class="form-input w-full px-4 py-3 text-gray-700 resize-vertical"
                             placeholder="What specific improvements would you like to see?"></textarea>
                     </div>
@@ -220,7 +252,14 @@
     </div>
 
     <div id="footer-placeholder"></div>
-    <script src="../shared/scripts/footer.js" defer></script>
+    <script>
+        // Replicating footer.js functionality
+        document.getElementById('footer-placeholder').innerHTML = `
+        <footer class="bg-gray-200 text-gray-600 text-center py-4 text-sm mt-12">
+            © 2024 Randstad GBS Learning Hub. All rights reserved.
+        </footer>
+    `;
+    </script>
 
     <script>
         var submitted = false;
