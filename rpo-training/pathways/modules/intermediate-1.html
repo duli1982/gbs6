@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Prompting Techniques - Intermediate Module 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .technique-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .prompt-example {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .ai-response {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            border-left: 4px solid #10b981;
+        }
+        
+        .pro-tip {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .interactive-exercise {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../../index.html" class="hub-button">Back To Hub</a>
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 1 of 4</div>
+        <div class="text-xs text-gray-500">15 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🎯</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Advanced Prompting Techniques</h1>
+            <p class="text-lg text-gray-600">Master sophisticated strategies to get exceptional results from AI</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Beyond Basic Prompts</h2>
+                <p class="text-lg text-gray-700 mb-4">
+                    You've mastered the basics of AI communication. Now it's time to learn advanced techniques that will make you an AI power user. These strategies will help you get more precise, creative, and useful results.
+                </p>
+                
+                <div class="pro-tip">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">🚀</div>
+                        <div>
+                            <h3 class="font-bold text-amber-800 mb-2">What You'll Master Today</h3>
+                            <ul class="text-amber-700 space-y-1">
+                                <li>• Chain-of-thought prompting for complex problems</li>
+                                <li>• Few-shot learning with examples</li>
+                                <li>• Prompt templates for consistency</li>
+                                <li>• Role-based prompting for expertise</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technique 1: Chain-of-Thought -->
+            <section class="content-section mb-8">
+                <div class="technique-card">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">🔗 Technique 1: Chain-of-Thought Prompting</h2>
+                    <p class="text-blue-700 mb-4">
+                        Instead of asking AI to jump to conclusions, guide it through step-by-step reasoning. This is especially powerful for complex decisions or analysis.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-blue-800 mb-2">❌ Basic Approach:</h4>
+                            <div class="prompt-example">
+                                Should we hire this candidate for the sales role?
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-blue-800 mb-2">✅ Chain-of-Thought:</h4>
+                            <div class="prompt-example">
+                                Analyze this candidate for our sales role. Please think through this step by step:
+
+1. First, evaluate their relevant experience
+2. Then assess their communication skills based on the interview
+3. Consider how well they match our company culture
+4. Finally, weigh the pros and cons before making a recommendation
+
+Here's the candidate information: [candidate details]
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="example-box mt-4">
+                        <h4 class="font-semibold text-gray-800 mb-2">Real Example - Candidate Evaluation:</h4>
+                        <div class="prompt-example">
+                            Help me evaluate a Marketing Manager candidate. Think through this systematically:
+
+1. Experience Analysis: Review their 5 years in digital marketing
+2. Skill Assessment: Evaluate their campaign management experience  
+3. Cultural Fit: Consider their collaborative approach mentioned in interview
+4. Growth Potential: Assess their leadership capabilities
+5. Final Recommendation: Provide hire/no-hire with reasoning
+
+Candidate Profile: Sarah Chen, 5 years digital marketing experience, led 3 successful product launches, strong in data analysis, collaborative leadership style, seeking growth opportunities.
+                        </div>
+                        
+                        <div class="ai-response">
+                            <strong>AI Response:</strong> Let me analyze Sarah Chen systematically:
+
+<strong>1. Experience Analysis:</strong> 5 years in digital marketing shows solid foundation. Leading 3 successful product launches demonstrates project management and results delivery...
+
+<strong>2. Skill Assessment:</strong> Strong data analysis skills are crucial for modern marketing. Campaign management experience directly relevant...
+
+<strong>3. Cultural Fit:</strong> Collaborative leadership style aligns well with our team-oriented culture...
+
+<strong>4. Growth Potential:</strong> Seeking growth opportunities suggests ambition and long-term potential...
+
+<strong>5. Final Recommendation:</strong> HIRE - Strong technical skills, proven results, cultural alignment, and growth mindset make her an excellent fit.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technique 2: Few-Shot Learning -->
+            <section class="content-section mb-8">
+                <div class="technique-card">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📚 Technique 2: Few-Shot Learning</h2>
+                    <p class="text-blue-700 mb-4">
+                        Show AI examples of what you want before asking for new content. This dramatically improves consistency and quality.
+                    </p>
+                    
+                    <div class="example-box">
+                        <h4 class="font-semibold text-gray-800 mb-2">Example - Consistent Job Posting Format:</h4>
+                        <div class="prompt-example">
+                            I need you to write job postings in our company style. Here are 2 examples of our format:
+
+Example 1:
+🚀 Marketing Specialist - Join Our Growing Team!
+We're seeking a creative Marketing Specialist to drive our brand forward.
+Key Responsibilities: • Campaign development • Social media management • Analytics reporting
+What We Offer: Competitive salary, flexible hours, growth opportunities
+Ready to make an impact? Apply now!
+
+Example 2:  
+🚀 Sales Representative - Join Our Growing Team!
+We're seeking a motivated Sales Representative to expand our client base.
+Key Responsibilities: • Lead generation • Client meetings • Pipeline management  
+What We Offer: Competitive salary, commission structure, career advancement
+Ready to make an impact? Apply now!
+
+Now create a job posting for a Customer Service Manager using this exact format and tone.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technique 3: Role-Based Prompting -->
+            <section class="content-section mb-8">
+                <div class="technique-card">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">🎭 Technique 3: Role-Based Prompting</h2>
+                    <p class="text-blue-700 mb-4">
+                        Ask AI to take on the role of an expert. This taps into specialized knowledge and appropriate tone.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-blue-800 mb-2">❌ Generic:</h4>
+                            <div class="prompt-example">
+                                Write interview questions for a software developer.
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-blue-800 mb-2">✅ Role-Based:</h4>
+                            <div class="prompt-example">
+                                Act as a senior technical recruiter with 10 years of experience hiring software developers. Create 8 interview questions that will help assess both technical skills and cultural fit for a mid-level full-stack developer role. Include a mix of technical, behavioral, and situational questions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technique 4: Prompt Templates -->
+            <section class="content-section mb-8">
+                <div class="technique-card">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📋 Technique 4: Prompt Templates</h2>
+                    <p class="text-blue-700 mb-4">
+                        Create reusable templates for common tasks. This ensures consistency and saves time.
+                    </p>
+                    
+                    <div class="example-box">
+                        <h4 class="font-semibold text-gray-800 mb-2">Template - Candidate Rejection Email:</h4>
+                        <div class="prompt-example">
+                            Write a professional rejection email using this template:
+
+ROLE: [Position Title]
+CANDIDATE: [Candidate Name]  
+TONE: Respectful and encouraging
+STRUCTURE:
+- Thank them for their time and interest
+- Acknowledge their qualifications positively  
+- Deliver the decision clearly but kindly
+- Encourage future applications
+- Professional closing
+
+SPECIFIC DETAILS: [Add any specific feedback or details here]
+
+Now write the email for:
+ROLE: Marketing Manager
+CANDIDATE: Jennifer Smith
+SPECIFIC DETAILS: Strong background but looking for someone with more B2B experience
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Exercise -->
+            <section class="content-section mb-8">
+                <div class="interactive-exercise">
+                    <h2 class="google-sans text-xl font-bold text-purple-800 mb-4">🎯 Practice Exercise</h2>
+                    <p class="text-purple-700 mb-4">
+                        Let's practice these techniques! Choose a scenario and write an advanced prompt using the techniques you've learned.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-gray-800 mb-2">Scenario A: Performance Review</h4>
+                            <p class="text-gray-600 text-sm">Write a prompt to help create a performance review for a team member who's doing well but needs to improve time management.</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-gray-800 mb-2">Scenario B: Training Plan</h4>
+                            <p class="text-gray-600 text-sm">Create a prompt to develop a 30-day onboarding plan for a new hire in your department.</p>
+                        </div>
+                    </div>
+                    
+                    <textarea 
+                        id="practice-prompt" 
+                        rows="6" 
+                        class="w-full p-3 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" 
+                        placeholder="Write your advanced prompt here using the techniques you've learned..."
+                    ></textarea>
+                    
+                    <button onclick="analyzePrompt()" class="mt-3 bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                        Analyze My Prompt
+                    </button>
+                    
+                    <div id="analysis-result" class="mt-4"></div>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="content-section">
+                <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-3">🎉 You're Now an Advanced Prompt Engineer!</h2>
+                    <p class="text-green-700 mb-4">
+                        You've learned four powerful techniques that will dramatically improve your AI results. Remember to combine these techniques for even better outcomes.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">Quick Reference:</h4>
+                            <ul class="text-green-700 space-y-1">
+                                <li>• Chain-of-thought for complex analysis</li>
+                                <li>• Few-shot learning for consistency</li>
+                                <li>• Role-based for expertise</li>
+                                <li>• Templates for efficiency</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">Next Up:</h4>
+                            <p class="text-green-700">Module 2 will show you role-specific AI applications tailored to your exact job function.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../intermediate.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Intermediate Path
+            </a>
+            
+            <button onclick="completeModule()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                Complete Module 1 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function analyzePrompt() {
+            const prompt = document.getElementById('practice-prompt').value.trim();
+            const resultDiv = document.getElementById('analysis-result');
+            
+            if (!prompt) {
+                resultDiv.innerHTML = `
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <p class="text-red-700">Please write a prompt first!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Simple analysis based on techniques
+            let score = 0;
+            let feedback = [];
+            
+            if (prompt.toLowerCase().includes('step by step') || prompt.includes('1.') || prompt.includes('first') || prompt.includes('then')) {
+                score++;
+                feedback.push('✅ Great use of chain-of-thought prompting!');
+            }
+            
+            if (prompt.toLowerCase().includes('act as') || prompt.toLowerCase().includes('role of') || prompt.toLowerCase().includes('expert')) {
+                score++;
+                feedback.push('✅ Excellent role-based prompting!');
+            }
+            
+            if (prompt.toLowerCase().includes('example') || prompt.toLowerCase().includes('format') || prompt.toLowerCase().includes('template')) {
+                score++;
+                feedback.push('✅ Good use of examples/templates!');
+            }
+            
+            if (prompt.length > 100) {
+                score++;
+                feedback.push('✅ Good detail and specificity!');
+            }
+            
+            let resultClass = score >= 3 ? 'bg-green-50 border-green-200' : score >= 2 ? 'bg-yellow-50 border-yellow-200' : 'bg-red-50 border-red-200';
+            let resultColor = score >= 3 ? 'text-green-700' : score >= 2 ? 'text-yellow-700' : 'text-red-700';
+            
+            resultDiv.innerHTML = `
+                <div class="${resultClass} border rounded-lg p-4">
+                    <h4 class="font-semibold ${resultColor} mb-2">Analysis Results (${score}/4 techniques used):</h4>
+                    ${feedback.length > 0 ? feedback.map(f => `<p class="${resultColor} text-sm">${f}</p>`).join('') : `<p class="${resultColor} text-sm">Try incorporating more advanced techniques!</p>`}
+                </div>
+            `;
+        }
+        
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('intermediate-path-progress') || '[]');
+            if (!completedModules.includes(1)) {
+                completedModules.push(1);
+                localStorage.setItem('intermediate-path-progress', JSON.stringify(completedModules));
+            }
+            
+            alert('🎉 Module 1 completed! You now master advanced prompting techniques. Ready for role-specific applications in Module 2?');
+            window.location.href = '../intermediate.html';
+        }
+    </script>
+</body>
+</html>

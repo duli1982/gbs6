@@ -122,3 +122,80 @@ body {
         font-size: 16px;
     }
 }
+
+/* Learning Pathways Styles */
+.learning-pathways-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.pathway-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pathway-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.role-path-btn {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.role-path-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Micro-learning indicators */
+.micro-learning-badge {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Interactive elements */
+.simulation-indicator {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Progress indicators */
+.progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+    background: #10b981;
+    transform: scale(1.2);
+}
+
+.progress-dot.completed {
+    background: #059669;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .learning-pathways-section {
+        padding: 1.5rem;
+    }
+    
+    .pathway-card {
+        margin-bottom: 1rem;
+    }
+}

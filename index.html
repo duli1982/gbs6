@@ -10,7 +10,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="tour.css">
     <style>
         .google-sans {
             font-family: 'Google Sans', sans-serif;
@@ -222,10 +221,233 @@
             background-color: #4A90E2;
             color: white;
         }
+
+        /* Onboarding Tour Styles */
+        .tour-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            animation: pulse 2s infinite;
+        }
+
+        .tour-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+        }
+
+        .tour-button.hidden {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 4px 20px rgba(74, 144, 226, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+            }
+        }
+
+        /* Tour Overlay */
+        .tour-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tour-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Tour Tooltip */
+        .tour-tooltip {
+            position: absolute;
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            max-width: 320px;
+            z-index: 1001;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .tour-tooltip.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .tour-tooltip h3 {
+            color: #1967d2;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .tour-tooltip p {
+            color: #5f6368;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .tour-tooltip-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tour-button-secondary {
+            background: none;
+            border: none;
+            color: #5f6368;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .tour-button-secondary:hover {
+            background: #f8f9fa;
+            color: #1967d2;
+        }
+
+        .tour-button-primary {
+            background: #1967d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tour-button-primary:hover {
+            background: #1557b0;
+        }
+
+        /* Tour Progress */
+        .tour-progress {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0 20px 0;
+            gap: 8px;
+        }
+
+        .tour-progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .tour-progress-dot.active {
+            background: #1967d2;
+            transform: scale(1.2);
+        }
+
+        /* Tour Highlight */
+        .tour-highlight {
+            position: relative;
+            z-index: 1001;
+            border-radius: 12px;
+            box-shadow: 0 0 0 4px rgba(25, 103, 210, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tour Arrow */
+        .tour-tooltip::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .tour-tooltip.arrow-top::before {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-color: white;
+        }
+
+        .tour-tooltip.arrow-bottom::before {
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top-color: white;
+        }
+
+        .tour-tooltip.arrow-left::before {
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-right-color: white;
+        }
+
+        .tour-tooltip.arrow-right::before {
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left-color: white;
+        }
     </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
+
+    <!-- Tour Button -->
+    <button id="tour-button" class="tour-button">
+        🚀 Quick Tour
+    </button>
+
+    <!-- Tour Overlay -->
+    <div id="tour-overlay" class="tour-overlay">
+        <div id="tour-tooltip" class="tour-tooltip">
+            <div class="tour-progress" id="tour-progress">
+                <div class="tour-progress-dot active"></div>
+                <div class="tour-progress-dot"></div>
+                <div class="tour-progress-dot"></div>
+                <div class="tour-progress-dot"></div>
+                <div class="tour-progress-dot"></div>
+            </div>
+            <h3 id="tour-title">Welcome to GBS Learning Hub!</h3>
+            <p id="tour-description">Let's take a quick 30-second tour to show you around.</p>
+            <div class="tour-tooltip-buttons">
+                <button id="tour-skip" class="tour-button-secondary">Skip Tour</button>
+                <button id="tour-next" class="tour-button-primary">Start Tour</button>
+            </div>
+        </div>
+    </div>
 
     <div class="container mx-auto px-4 py-12 md:py-20">
 
@@ -273,7 +495,50 @@
         </div>
 
         <main>
+            <!-- Quick Wins Section -->
+            <div
+                class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12 max-w-4xl mx-auto border border-blue-100">
+                <div class="text-center mb-6">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2">🚀 Quick Wins - Start Using AI Today
+                    </h2>
+                    <p class="text-gray-600">Immediate tools you can use right now to transform your daily work</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="/gbs-prompts/"
+                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
+                        <div class="text-2xl mb-2">✨</div>
+                        <h3 class="font-semibold text-gray-900 mb-1">AI Prompts</h3>
+                        <p class="text-sm text-gray-600">Ready-to-use prompts for emails, sourcing, and more</p>
+                    </a>
+                    <a href="/daily-focus/"
+                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Daily Focus</h3>
+                        <p class="text-sm text-gray-600">Micro-coaching cards for skill improvement</p>
+                    </a>
+                    <a href="/use-cases/"
+                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
+                        <div class="text-2xl mb-2">💡</div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Success Stories</h3>
+                        <p class="text-sm text-gray-600">See how colleagues save hours daily</p>
+                    </a>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto" id="modules-grid">
+
+                <a href="/onboarding-flow/"
+                    class="hub-card bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-xl block border-2 border-green-200"
+                    data-keywords="onboarding get started new user orientation role-based personalized assessment quiz quick start">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-2">🌟</span>
+                        <h3 class="google-sans text-2xl font-bold text-green-800">Get Started with AI</h3>
+                    </div>
+                    <p class="text-green-700">New to AI? Start here! Personalized onboarding based on your role, skill
+                        assessment, and immediate tools you can use today.</p>
+                    <div class="mt-4 text-sm text-green-600 font-medium">✓ Role-based recommendations ✓ Skill assessment
+                        ✓ Quick wins</div>
+                </a>
 
                 <a href="/rpo-training/" class="hub-card bg-white p-8 rounded-xl block"
                     data-keywords="rpo ai acceleration program training curriculum foundations leadership strategy modules phases">
@@ -351,30 +616,6 @@
     </div>
 
     <div id="footer-placeholder"></div>
-
-    <!-- Replay Tour Button Container -->
-    <div class="text-center py-4">
-        <button id="replay-tour-btn">Replay Onboarding Tour</button>
-    </div>
-
-    <!-- Tour HTML Structure -->
-    <div class="tour-overlay"></div>
-    <div class="tour-highlight"></div>
-    <div class="tour-popover">
-        <div class="tour-popover-arrow"></div>
-        <div class="tour-popover-content">
-            <h3 class="tour-popover-title"></h3>
-            <p></p>
-        </div>
-        <div class="tour-navigation">
-            <span class="tour-progress"></span>
-            <div class="tour-buttons">
-                <button class="tour-btn tour-btn-skip">Skip</button>
-                <button class="tour-btn tour-btn-next">Next</button>
-            </div>
-        </div>
-    </div>
-
     <script src="shared/scripts/footer.js" defer></script>
 
     <script>
@@ -845,9 +1086,332 @@
             }
         }
 
+        // Onboarding Tour Functionality
+        class OnboardingTour {
+            constructor() {
+                this.currentStep = 0;
+                this.tourButton = document.getElementById('tour-button');
+                this.tourOverlay = document.getElementById('tour-overlay');
+                this.tourTooltip = document.getElementById('tour-tooltip');
+                this.tourTitle = document.getElementById('tour-title');
+                this.tourDescription = document.getElementById('tour-description');
+                this.tourProgress = document.getElementById('tour-progress');
+                this.tourSkip = document.getElementById('tour-skip');
+                this.tourNext = document.getElementById('tour-next');
+
+                this.steps = [
+                    {
+                        title: "Welcome to GBS Learning Hub!",
+                        description: "Let's take a quick 30-second tour to show you around.",
+                        target: null,
+                        position: 'center',
+                        buttonText: "Start Tour"
+                    },
+                    {
+                        title: "Global Search",
+                        description: "Find any content instantly across all modules, prompts, and resources with our powerful search.",
+                        target: ".search-container",
+                        position: 'bottom',
+                        buttonText: "Next"
+                    },
+                    {
+                        title: "RPO Training Program",
+                        description: "Start with our comprehensive AI acceleration program - perfect for building your foundation.",
+                        target: "a[href='/rpo-training/']",
+                        position: 'top',
+                        buttonText: "Next"
+                    },
+                    {
+                        title: "AI Prompts Library",
+                        description: "Access expert-crafted prompts for daily tasks, from emails to candidate sourcing.",
+                        target: "a[href='/gbs-prompts/']",
+                        position: 'top',
+                        buttonText: "Next"
+                    },
+                    {
+                        title: "Success Stories",
+                        description: "See real examples of how AI transforms work at Randstad GBS. Get inspired by your colleagues!",
+                        target: "a[href='/use-cases/']",
+                        position: 'top',
+                        buttonText: "Start Exploring!"
+                    }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                // Check if user has already seen the tour
+                if (this.hasSeenTour()) {
+                    this.hideTourButton();
+                    return;
+                }
+
+                this.showTourButton();
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                this.tourButton.addEventListener('click', () => this.startTour());
+                this.tourSkip.addEventListener('click', () => this.skipTour());
+                this.tourNext.addEventListener('click', () => this.nextStep());
+
+                // Close on overlay click
+                this.tourOverlay.addEventListener('click', (e) => {
+                    if (e.target === this.tourOverlay) {
+                        this.skipTour();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (this.tourOverlay.classList.contains('active')) {
+                        if (e.key === 'Escape') {
+                            this.skipTour();
+                        } else if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.nextStep();
+                        }
+                    }
+                });
+            }
+
+            hasSeenTour() {
+                return localStorage.getItem('gbs-hub-tour-completed') === 'true';
+            }
+
+            markTourCompleted() {
+                localStorage.setItem('gbs-hub-tour-completed', 'true');
+            }
+
+            showTourButton() {
+                this.tourButton.classList.remove('hidden');
+            }
+
+            hideTourButton() {
+                this.tourButton.classList.add('hidden');
+            }
+
+            startTour() {
+                this.currentStep = 0;
+                this.showTourOverlay();
+                this.showStep();
+            }
+
+            skipTour() {
+                this.markTourCompleted();
+                this.hideTourButton();
+                this.hideTourOverlay();
+            }
+
+            nextStep() {
+                this.currentStep++;
+
+                if (this.currentStep >= this.steps.length) {
+                    this.completeTour();
+                    return;
+                }
+
+                this.showStep();
+            }
+
+            completeTour() {
+                this.markTourCompleted();
+                this.hideTourButton();
+
+                // First hide the tooltip immediately
+                this.tourTooltip.classList.remove('active');
+
+                // Then hide the overlay and show completion message
+                this.hideTourOverlay();
+
+                // Show completion message after overlay is fully hidden
+                setTimeout(() => {
+                    this.showCompletionMessage();
+                }, 600); // Increased delay to ensure overlay is fully hidden
+            }
+
+            showCompletionMessage() {
+                const message = document.createElement('div');
+                message.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    padding: 24px;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                    z-index: 1002;
+                    text-align: center;
+                    max-width: 320px;
+                `;
+
+                message.innerHTML = `
+                    <h3 style="color: #1967d2; font-size: 18px; font-weight: 700; margin-bottom: 8px; font-family: 'Google Sans', sans-serif;">🎉 You're all set!</h3>
+                    <p style="color: #5f6368; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Start exploring the GBS Learning Hub and discover how AI can transform your daily work.</p>
+                    <button onclick="this.parentElement.remove()" style="background: #1967d2; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer;">Got it!</button>
+                `;
+
+                document.body.appendChild(message);
+
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (message.parentElement) {
+                        message.remove();
+                    }
+                }, 5000);
+            }
+
+            showStep() {
+                const step = this.steps[this.currentStep];
+
+                // Update content
+                this.tourTitle.textContent = step.title;
+                this.tourDescription.textContent = step.description;
+                this.tourNext.textContent = step.buttonText;
+
+                // Update progress dots
+                this.updateProgress();
+
+                // Remove previous highlights
+                this.removeHighlights();
+
+                // Position tooltip and highlight target
+                if (step.target) {
+                    this.positionTooltipAndHighlight(step);
+                } else {
+                    this.centerTooltip();
+                }
+
+                // Show tooltip with animation
+                setTimeout(() => {
+                    this.tourTooltip.classList.add('active');
+                }, 100);
+            }
+
+            updateProgress() {
+                const dots = this.tourProgress.querySelectorAll('.tour-progress-dot');
+                dots.forEach((dot, index) => {
+                    if (index <= this.currentStep) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            positionTooltipAndHighlight(step) {
+                const target = document.querySelector(step.target);
+                if (!target) {
+                    this.centerTooltip();
+                    return;
+                }
+
+                // Add highlight
+                target.classList.add('tour-highlight');
+
+                // Scroll target into view
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                setTimeout(() => {
+                    const targetRect = target.getBoundingClientRect();
+                    const tooltipRect = this.tourTooltip.getBoundingClientRect();
+
+                    let top, left;
+                    const margin = 24; // Increased margin for more space
+                    const extraUpwardOffset = this.currentStep === this.steps.length - 1 ? 40 : 0; // Extra offset for last step
+
+                    // Remove previous arrow classes
+                    this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
+
+                    // Default: show tooltip above or below target, with margin
+                    if (step.position === 'top') {
+                        // Place tooltip above the target, with extra offset for last step
+                        const requiredSpace = tooltipRect.height + margin + extraUpwardOffset;
+                        if (targetRect.top - requiredSpace > 0) {
+                            top = targetRect.top - tooltipRect.height - margin - extraUpwardOffset;
+                            left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
+                            this.tourTooltip.classList.add('arrow-bottom');
+                        } else {
+                            // Not enough space above, place to the right but higher up
+                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                            left = targetRect.right + margin;
+                            this.tourTooltip.classList.add('arrow-left');
+                        }
+                    } else if (step.position === 'bottom') {
+                        // Place tooltip below the target, but if not enough space, place to the left
+                        if (targetRect.bottom + tooltipRect.height + margin < window.innerHeight) {
+                            top = targetRect.bottom + margin;
+                            left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
+                            this.tourTooltip.classList.add('arrow-top');
+                        } else {
+                            // Not enough space below, place to the left but higher up
+                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                            left = targetRect.left - tooltipRect.width - margin;
+                            this.tourTooltip.classList.add('arrow-right');
+                        }
+                    } else if (step.position === 'left') {
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                        left = targetRect.left - tooltipRect.width - margin;
+                        this.tourTooltip.classList.add('arrow-right');
+                    } else if (step.position === 'right') {
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                        left = targetRect.right + margin;
+                        this.tourTooltip.classList.add('arrow-left');
+                    } else {
+                        this.centerTooltip();
+                        return;
+                    }
+
+                    // Ensure tooltip stays within viewport
+                    top = Math.max(margin, Math.min(top, window.innerHeight - tooltipRect.height - margin));
+                    left = Math.max(margin, Math.min(left, window.innerWidth - tooltipRect.width - margin));
+
+                    this.tourTooltip.style.top = `${top}px`;
+                    this.tourTooltip.style.left = `${left}px`;
+                    this.tourTooltip.style.transform = 'none';
+                }, 200);
+            }
+
+            centerTooltip() {
+                this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
+                this.tourTooltip.style.top = '50%';
+                this.tourTooltip.style.left = '50%';
+                this.tourTooltip.style.transform = 'translate(-50%, -50%)';
+            }
+
+            removeHighlights() {
+                document.querySelectorAll('.tour-highlight').forEach(el => {
+                    el.classList.remove('tour-highlight');
+                });
+            }
+
+            showTourOverlay() {
+                this.tourOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            hideTourOverlay() {
+                this.tourTooltip.classList.remove('active');
+                setTimeout(() => {
+                    this.tourOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    this.removeHighlights();
+
+                    // Reset tooltip position and styling
+                    this.tourTooltip.style.top = '';
+                    this.tourTooltip.style.left = '';
+                    this.tourTooltip.style.transform = '';
+                    this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
+                }, 300);
+            }
+        }
+
         // Initialize search when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             window.globalSearch = new GlobalSearch();
+            window.onboardingTour = new OnboardingTour();
 
             // Add keyboard shortcut (Ctrl/Cmd + K)
             document.addEventListener('keydown', function (e) {
@@ -858,7 +1422,6 @@
             });
         });
     </script>
-    <script src="tour.js"></script>
 </body>
 
 </html>

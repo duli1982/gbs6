@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role-Specific AI Applications - Intermediate Module 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .role-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .application-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .application-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .prompt-template {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../../index.html" class="hub-button">Back To Hub</a>
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 2 of 4</div>
+        <div class="text-xs text-gray-500">20 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🛠️</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Role-Specific AI Applications</h1>
+            <p class="text-lg text-gray-600">Discover AI tools and techniques tailored to your specific role</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">AI for Your Specific Role</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    While AI fundamentals are universal, the most powerful applications are often role-specific. This module shows you exactly how to leverage AI for your particular job function, with proven templates and techniques used by top performers.
+                </p>
+            </section>
+
+            <!-- Recruiter Section -->
+            <section class="content-section mb-8">
+                <div class="role-section">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">👥 For Recruiters & Sourcers</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">🔍 Boolean Search Generation</h3>
+                            <p class="text-gray-600 text-sm mb-3">Generate complex Boolean search strings for any role.</p>
+                            <div class="prompt-template">
+Create a Boolean search string for LinkedIn to find:
+Role: [ROLE TITLE]
+Skills: [KEY SKILLS]
+Experience: [YEARS] years
+Location: [LOCATION]
+Exclude: Agencies, consultants
+
+Format: (title OR title) AND (skill OR skill) AND location NOT (exclude)
+                            </div>
+                        </div>
+                        
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📧 Personalized Outreach</h3>
+                            <p class="text-gray-600 text-sm mb-3">Create compelling, personalized candidate messages.</p>
+                            <div class="prompt-template">
+Write a personalized LinkedIn message to:
+Candidate: [NAME] at [COMPANY]
+Role: [THEIR CURRENT ROLE]
+Opportunity: [YOUR ROLE]
+Personal touch: [SOMETHING FROM THEIR PROFILE]
+
+Tone: Professional but friendly, 150 words max
+Include: Why they're a great fit, role highlights, next steps
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manager Section -->
+            <section class="content-section mb-8">
+                <div class="role-section">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📊 For Managers & Team Leaders</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📈 Performance Analysis</h3>
+                            <p class="text-gray-600 text-sm mb-3">Analyze team performance and create actionable insights.</p>
+                            <div class="prompt-template">
+Analyze this team performance data and provide insights:
+
+Team: [TEAM NAME]
+Metrics: [KEY METRICS AND VALUES]
+Time period: [PERIOD]
+Goals: [TARGETS]
+
+Provide: 1) Key insights, 2) Areas of concern, 3) Recommendations, 4) Action items
+Format as executive summary
+                            </div>
+                        </div>
+                        
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">🎯 Strategic Planning</h3>
+                            <p class="text-gray-600 text-sm mb-3">Develop comprehensive strategic plans and roadmaps.</p>
+                            <div class="prompt-template">
+Create a strategic plan for:
+Objective: [MAIN GOAL]
+Timeline: [TIMEFRAME]
+Resources: [AVAILABLE RESOURCES]
+Constraints: [LIMITATIONS]
+
+Include: Goals, milestones, resource allocation, risk mitigation, success metrics
+Format as actionable roadmap
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Continue with remaining content... -->
+            <div class="text-center mt-8">
+                <button onclick="completeModule()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Complete Module 2 →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            let completedModules = JSON.parse(localStorage.getItem('intermediate-path-progress') || '[]');
+            if (!completedModules.includes(2)) {
+                completedModules.push(2);
+                localStorage.setItem('intermediate-path-progress', JSON.stringify(completedModules));
+            }
+            alert('🎉 Module 2 completed! Ready for workflow integration?');
+            window.location.href = '../intermediate.html';
+        }
+    </script>
+</body>
+</html>

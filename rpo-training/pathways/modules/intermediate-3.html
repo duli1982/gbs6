@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Workflow Integration - Intermediate Module 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .workflow-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .workflow-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .integration-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            position: relative;
+        }
+        
+        .integration-step::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0.5rem;
+            height: 0.5rem;
+            background: #3b82f6;
+            border-radius: 50%;
+        }
+        
+        .before-after-workflow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .workflow-before {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .workflow-after {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .tool-integration {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .automation-example {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .before-after-workflow {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../../index.html" class="hub-button">Back To Hub</a>
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 3 of 4</div>
+        <div class="text-xs text-gray-500">15 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🔄</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">AI Workflow Integration</h1>
+            <p class="text-lg text-gray-600">Learn how to seamlessly integrate AI into your existing workflows and processes</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">From AI Tools to AI Workflows</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    You've mastered individual AI applications. Now it's time to integrate AI seamlessly into your daily workflows, creating efficient, automated processes that save time and improve consistency across your entire workday.
+                </p>
+                
+                <div class="tool-integration">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">⚡</div>
+                        <div>
+                            <h3 class="font-bold text-amber-800 mb-2">The Integration Advantage</h3>
+                            <p class="text-amber-700">
+                                Instead of using AI for isolated tasks, integrated workflows can save you <strong>4-6 hours per day</strong> by connecting multiple AI-powered steps into seamless processes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workflow Transformation Examples -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Workflow Transformation Examples</h2>
+                
+                <!-- Candidate Sourcing Workflow -->
+                <div class="workflow-card mb-6">
+                    <h3 class="google-sans text-xl font-bold text-blue-800 mb-4">🔍 Candidate Sourcing Workflow</h3>
+                    
+                    <div class="before-after-workflow">
+                        <div class="workflow-before">
+                            <h4 class="font-semibold text-red-800 mb-3">❌ Traditional Process (4+ hours):</h4>
+                            <div class="space-y-2 text-sm text-red-700">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-red-200 rounded-full flex items-center justify-center text-xs mr-2">1</span>
+                                    <span>Manually create Boolean search (30 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-red-200 rounded-full flex items-center justify-center text-xs mr-2">2</span>
+                                    <span>Search multiple platforms (60 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-red-200 rounded-full flex items-center justify-center text-xs mr-2">3</span>
+                                    <span>Research each candidate (90 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-red-200 rounded-full flex items-center justify-center text-xs mr-2">4</span>
+                                    <span>Write personalized outreach (60 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-red-200 rounded-full flex items-center justify-center text-xs mr-2">5</span>
+                                    <span>Track and follow up manually (30 min)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-after">
+                            <h4 class="font-semibold text-green-800 mb-3">✅ AI-Integrated Process (45 min):</h4>
+                            <div class="space-y-2 text-sm text-green-700">
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-xs mr-2">1</span>
+                                    <span>AI generates Boolean search (2 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-xs mr-2">2</span>
+                                    <span>AI-assisted platform search (15 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-xs mr-2">3</span>
+                                    <span>AI researches candidates (10 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-xs mr-2">4</span>
+                                    <span>AI creates personalized outreach (8 min)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-xs mr-2">5</span>
+                                    <span>AI-powered tracking & follow-up (10 min)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Posting Workflow -->
+                <div class="workflow-card">
+                    <h3 class="google-sans text-xl font-bold text-blue-800 mb-4">📝 Job Posting Creation Workflow</h3>
+                    
+                    <div class="before-after-workflow">
+                        <div class="workflow-before">
+                            <h4 class="font-semibold text-red-800 mb-3">❌ Manual Process (2+ hours):</h4>
+                            <div class="space-y-1 text-sm text-red-700">
+                                <div>• Research role requirements (30 min)</div>
+                                <div>• Write job description (45 min)</div>
+                                <div>• Review and revise (30 min)</div>
+                                <div>• Format for different platforms (20 min)</div>
+                                <div>• Post across multiple sites (15 min)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-after">
+                            <h4 class="font-semibold text-green-800 mb-3">✅ AI-Integrated Process (20 min):</h4>
+                            <div class="space-y-1 text-sm text-green-700">
+                                <div>• AI researches role requirements (3 min)</div>
+                                <div>• AI creates optimized job description (5 min)</div>
+                                <div>• AI suggests improvements (2 min)</div>
+                                <div>• AI formats for all platforms (5 min)</div>
+                                <div>• AI-assisted posting workflow (5 min)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Integration Framework -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">The FLOW Integration Framework</h2>
+                <p class="text-gray-700 mb-6">
+                    Use this systematic approach to integrate AI into any workflow:
+                </p>
+                
+                <div class="space-y-4">
+                    <div class="integration-step">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold text-sm">F</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-2">Find Repetitive Tasks</h3>
+                                <p class="text-gray-600 text-sm">Identify tasks you do repeatedly that follow similar patterns. These are prime candidates for AI integration.</p>
+                                <div class="bg-gray-50 rounded p-2 mt-2 text-xs">
+                                    <strong>Examples:</strong> Writing similar emails, researching companies, creating reports, scheduling interviews
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-step">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold text-sm">L</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-2">Link AI Tools Together</h3>
+                                <p class="text-gray-600 text-sm">Connect multiple AI applications to create seamless workflows where the output of one becomes input for the next.</p>
+                                <div class="bg-gray-50 rounded p-2 mt-2 text-xs">
+                                    <strong>Example:</strong> AI research → AI job description → AI posting optimization → AI candidate outreach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-step">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold text-sm">O</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-2">Optimize and Standardize</h3>
+                                <p class="text-gray-600 text-sm">Create templates and standard prompts that ensure consistent, high-quality results across your integrated workflow.</p>
+                                <div class="bg-gray-50 rounded p-2 mt-2 text-xs">
+                                    <strong>Tip:</strong> Save your best-performing prompts as templates for reuse
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-step">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold text-sm">W</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-2">Watch and Improve</h3>
+                                <p class="text-gray-600 text-sm">Monitor your integrated workflows, measure time savings, and continuously refine for better results.</p>
+                                <div class="bg-gray-50 rounded p-2 mt-2 text-xs">
+                                    <strong>Metrics:</strong> Time saved, quality improvements, consistency gains, error reduction
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practical Integration Examples -->
+            <section class="content-section mb-8">
+                <div class="automation-example">
+                    <h2 class="google-sans text-xl font-bold text-purple-800 mb-4">🎯 Hands-On Integration: Interview Process Workflow</h2>
+                    <p class="text-purple-700 mb-4">
+                        Let's build a complete AI-integrated interview process from start to finish:
+                    </p>
+                    
+                    <div class="bg-white rounded-lg p-4 mb-4">
+                        <h4 class="font-semibold text-purple-800 mb-3">Step-by-Step Integration:</h4>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-start">
+                                <span class="bg-purple-100 text-purple-800 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">1</span>
+                                <div>
+                                    <strong>AI Prompt:</strong> "Create interview questions for [ROLE] focusing on [KEY SKILLS]. Include behavioral, technical, and cultural fit questions."
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <span class="bg-purple-100 text-purple-800 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">2</span>
+                                <div>
+                                    <strong>AI Prompt:</strong> "Create an interview agenda for a 45-minute interview using these questions: [PASTE QUESTIONS]. Include time allocations."
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <span class="bg-purple-100 text-purple-800 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">3</span>
+                                <div>
+                                    <strong>AI Prompt:</strong> "Write a professional interview invitation email to [CANDIDATE] for [ROLE] on [DATE/TIME]. Include agenda and logistics."
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <span class="bg-purple-100 text-purple-800 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">4</span>
+                                <div>
+                                    <strong>AI Prompt:</strong> "Create an interview evaluation form based on these questions: [PASTE QUESTIONS]. Include rating scales and comment sections."
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <span class="bg-purple-100 text-purple-800 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">5</span>
+                                <div>
+                                    <strong>AI Prompt:</strong> "Based on this interview feedback: [PASTE NOTES], write a candidate summary and recommendation for the hiring team."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 rounded-lg p-3 border border-purple-200">
+                        <div class="text-sm text-purple-700">
+                            <strong>Result:</strong> Complete interview process that used to take 3+ hours of preparation and follow-up now takes 30 minutes, with higher consistency and quality.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Common Integration Patterns -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Common Integration Patterns</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="tool-integration">
+                        <h3 class="font-bold text-amber-800 mb-2">📊 Research → Analysis → Report</h3>
+                        <p class="text-amber-700 text-sm mb-3">Perfect for market research, candidate analysis, or competitive intelligence.</p>
+                        <div class="text-xs text-amber-600">
+                            <strong>Flow:</strong> AI gathers data → AI analyzes patterns → AI creates formatted report
+                        </div>
+                    </div>
+                    
+                    <div class="tool-integration">
+                        <h3 class="font-bold text-amber-800 mb-2">✍️ Template → Personalize → Distribute</h3>
+                        <p class="text-amber-700 text-sm mb-3">Ideal for outreach campaigns, job postings, or communication templates.</p>
+                        <div class="text-xs text-amber-600">
+                            <strong>Flow:</strong> AI creates template → AI personalizes for each recipient → AI formats for channels
+                        </div>
+                    </div>
+                    
+                    <div class="tool-integration">
+                        <h3 class="font-bold text-amber-800 mb-2">🔍 Search → Screen → Engage</h3>
+                        <p class="text-amber-700 text-sm mb-3">Essential for recruitment, lead generation, or prospect identification.</p>
+                        <div class="text-xs text-amber-600">
+                            <strong>Flow:</strong> AI finds candidates → AI screens qualifications → AI creates engagement strategy
+                        </div>
+                    </div>
+                    
+                    <div class="tool-integration">
+                        <h3 class="font-bold text-amber-800 mb-2">📅 Plan → Execute → Track</h3>
+                        <p class="text-amber-700 text-sm mb-3">Great for project management, event planning, or process improvement.</p>
+                        <div class="text-xs text-amber-600">
+                            <strong>Flow:</strong> AI creates plan → AI generates tasks → AI tracks progress
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Integration Checklist -->
+            <section class="content-section">
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-4">✅ Your Integration Success Checklist</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-3">This Week:</h4>
+                            <div class="space-y-2 text-sm text-green-700">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Identify 3 repetitive workflows in your role</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Map out the steps in your most time-consuming process</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Create your first integrated AI workflow</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Test and time your new workflow</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-3">Next Week:</h4>
+                            <div class="space-y-2 text-sm text-green-700">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Optimize your workflow based on results</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Create templates for your best prompts</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Integrate AI into 2 more workflows</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Share your success with a colleague</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <p class="text-green-600 text-sm">
+                            <strong>Next:</strong> Module 4 will teach you how to measure and demonstrate the ROI of your AI integrations.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../intermediate.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Intermediate Path
+            </a>
+            
+            <button onclick="completeModule()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                Complete Module 3 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('intermediate-path-progress') || '[]');
+            if (!completedModules.includes(3)) {
+                completedModules.push(3);
+                localStorage.setItem('intermediate-path-progress', JSON.stringify(completedModules));
+            }
+            
+            alert('🎉 Module 3 completed! You now know how to integrate AI into seamless workflows. Ready to learn about measuring AI impact and ROI?');
+            window.location.href = '../intermediate.html';
+        }
+    </script>
+</body>
+</html>

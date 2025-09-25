@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise AI Integration - Advanced Module 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .integration-framework {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .api-example {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #0ea5e9;
+            overflow-x: auto;
+        }
+        
+        .architecture-diagram {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .security-alert {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .automation-workflow {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .integration-step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .integration-step:hover {
+            border-color: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .monitoring-dashboard {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../../index.html" class="hub-button">Back To Hub</a>
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 3 of 5</div>
+        <div class="text-xs text-gray-500">28 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🔄</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Enterprise AI Integration</h1>
+            <p class="text-lg text-gray-600">Master advanced integration techniques, API usage, and automation workflows for enterprise-scale AI deployment</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Enterprise-Scale AI Integration</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Moving from individual AI tools to enterprise-wide integration requires sophisticated architecture, robust security, and scalable automation. This module covers the technical and strategic aspects of deploying AI at organizational scale.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-center">
+                        <div class="text-2xl mb-2">🔗</div>
+                        <h3 class="font-bold text-blue-800">API Integration</h3>
+                        <p class="text-blue-700 text-sm">Connect AI with existing enterprise systems</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200 text-center">
+                        <div class="text-2xl mb-2">⚙️</div>
+                        <h3 class="font-bold text-green-800">Automation</h3>
+                        <p class="text-green-700 text-sm">Build scalable, self-managing workflows</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200 text-center">
+                        <div class="text-2xl mb-2">📊</div>
+                        <h3 class="font-bold text-purple-800">Analytics</h3>
+                        <p class="text-purple-700 text-sm">Monitor performance and optimize at scale</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Integration Architecture -->
+            <section class="content-section mb-8">
+                <div class="architecture-diagram">
+                    <h2 class="google-sans text-2xl font-bold text-purple-800 mb-4">🏗️ Enterprise AI Architecture Patterns</h2>
+                    <p class="text-purple-700 mb-6">
+                        Understanding these architectural patterns is crucial for successful enterprise AI integration:
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h3 class="font-bold text-purple-800 mb-3">🌐 Hub-and-Spoke Model</h3>
+                            <p class="text-purple-700 text-sm mb-3">Central AI hub serves multiple business units with standardized interfaces.</p>
+                            <div class="text-xs text-purple-600">
+                                <strong>Best For:</strong> Large organizations with diverse departments<br>
+                                <strong>Benefits:</strong> Centralized governance, consistent quality, cost efficiency<br>
+                                <strong>Challenges:</strong> Potential bottlenecks, customization limitations
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h3 class="font-bold text-purple-800 mb-3">🔗 Federated Integration</h3>
+                            <p class="text-purple-700 text-sm mb-3">Distributed AI capabilities with shared standards and governance.</p>
+                            <div class="text-xs text-purple-600">
+                                <strong>Best For:</strong> Organizations with autonomous business units<br>
+                                <strong>Benefits:</strong> Flexibility, local optimization, faster deployment<br>
+                                <strong>Challenges:</strong> Governance complexity, potential inconsistencies
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h3 class="font-bold text-purple-800 mb-3">🚀 Microservices Architecture</h3>
+                            <p class="text-purple-700 text-sm mb-3">AI capabilities deployed as independent, scalable microservices.</p>
+                            <div class="text-xs text-purple-600">
+                                <strong>Best For:</strong> Cloud-native organizations with DevOps maturity<br>
+                                <strong>Benefits:</strong> Scalability, resilience, independent deployment<br>
+                                <strong>Challenges:</strong> Complexity, monitoring overhead, service coordination
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h3 class="font-bold text-purple-800 mb-3">🔄 Event-Driven Integration</h3>
+                            <p class="text-purple-700 text-sm mb-3">AI processes triggered by business events and data changes.</p>
+                            <div class="text-xs text-purple-600">
+                                <strong>Best For:</strong> Real-time processing and reactive systems<br>
+                                <strong>Benefits:</strong> Real-time response, loose coupling, scalability<br>
+                                <strong>Challenges:</strong> Event management, debugging complexity
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Integration Framework -->
+            <section class="content-section mb-8">
+                <div class="integration-framework">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">🔗 API Integration Best Practices</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="integration-step">
+                            <h3 class="font-bold text-gray-800 mb-2">1. API Design & Documentation</h3>
+                            <p class="text-gray-600 text-sm mb-3">Create clear, consistent APIs that are easy to understand and integrate.</p>
+                            
+                            <div class="api-example">
+# RESTful AI Service API Example
+POST /api/v1/ai/analyze-resume
+Content-Type: application/json
+Authorization: Bearer {api_key}
+
+{
+  "resume_text": "John Doe, Software Engineer...",
+  "job_requirements": {
+    "skills": ["Python", "React", "AWS"],
+    "experience_years": 3,
+    "role_level": "mid"
+  },
+  "analysis_type": "full_assessment"
+}
+
+# Response
+{
+  "analysis_id": "uuid-12345",
+  "status": "completed",
+  "results": {
+    "skills_match": 85,
+    "experience_level": "mid",
+    "strengths": ["Strong Python skills", "Cloud experience"],
+    "concerns": ["Limited React experience"],
+    "recommendation": "interview"
+  },
+  "processing_time_ms": 2340
+}
+                            </div>
+                        </div>
+                        
+                        <div class="integration-step">
+                            <h3 class="font-bold text-gray-800 mb-2">2. Authentication & Security</h3>
+                            <p class="text-gray-600 text-sm mb-3">Implement robust security measures for API access and data protection.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Authentication Methods:</strong><br>
+                                    • API Keys for service-to-service<br>
+                                    • OAuth 2.0 for user authentication<br>
+                                    • JWT tokens for stateless auth<br>
+                                    • mTLS for high-security environments
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Security Controls:</strong><br>
+                                    • Rate limiting and throttling<br>
+                                    • Input validation and sanitization<br>
+                                    • Encryption in transit and at rest<br>
+                                    • Audit logging and monitoring
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="integration-step">
+                            <h3 class="font-bold text-gray-800 mb-2">3. Error Handling & Resilience</h3>
+                            <p class="text-gray-600 text-sm mb-3">Build robust error handling and recovery mechanisms for production reliability.</p>
+                            
+                            <div class="api-example">
+# Error Response Format
+{
+  "error": {
+    "code": "INVALID_INPUT",
+    "message": "Resume text is required",
+    "details": {
+      "field": "resume_text",
+      "validation": "non_empty_string"
+    },
+    "request_id": "req-67890",
+    "timestamp": "2024-01-15T10:30:00Z"
+  },
+  "retry_after": 1000,
+  "documentation_url": "https://api.company.com/docs/errors"
+}
+
+# Retry Logic with Exponential Backoff
+def call_ai_api_with_retry(payload, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(api_url, json=payload)
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 429:  # Rate limited
+                wait_time = 2 ** attempt
+                time.sleep(wait_time)
+            else:
+                response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            if attempt == max_retries - 1:
+                raise e
+            time.sleep(2 ** attempt)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Considerations -->
+            <section class="content-section mb-8">
+                <div class="security-alert">
+                    <h2 class="google-sans text-xl font-bold text-red-800 mb-4">🔒 Enterprise Security Requirements</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-red-800 mb-3">Data Protection:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• Encrypt sensitive data at rest and in transit</li>
+                                <li>• Implement data classification and handling policies</li>
+                                <li>• Use data masking for non-production environments</li>
+                                <li>• Establish data retention and deletion policies</li>
+                                <li>• Monitor data access and usage patterns</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-red-800 mb-3">Access Control:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• Implement role-based access control (RBAC)</li>
+                                <li>• Use principle of least privilege</li>
+                                <li>• Enable multi-factor authentication</li>
+                                <li>• Regular access reviews and audits</li>
+                                <li>• Automated provisioning and deprovisioning</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-red-800 mb-3">Compliance:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• GDPR compliance for EU data processing</li>
+                                <li>• SOC 2 Type II for security controls</li>
+                                <li>• Industry-specific regulations (HIPAA, PCI-DSS)</li>
+                                <li>• Regular compliance assessments</li>
+                                <li>• Documentation and audit trails</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-red-800 mb-3">Monitoring:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• Real-time security event monitoring</li>
+                                <li>• Anomaly detection and alerting</li>
+                                <li>• Incident response procedures</li>
+                                <li>• Security metrics and reporting</li>
+                                <li>• Regular penetration testing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Automation Workflows -->
+            <section class="content-section mb-8">
+                <div class="automation-workflow">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-4">⚙️ Enterprise Automation Patterns</h2>
+                    <p class="text-green-700 mb-4">
+                        These automation patterns enable scalable, self-managing AI workflows:
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h3 class="font-bold text-green-800 mb-2">🔄 Event-Driven Automation</h3>
+                            <p class="text-green-700 text-sm mb-3">Automatically trigger AI processes based on business events.</p>
+                            
+                            <div class="api-example">
+# Event-Driven Resume Processing
+# Trigger: New resume uploaded to ATS
+{
+  "event_type": "resume_uploaded",
+  "data": {
+    "candidate_id": "12345",
+    "resume_url": "s3://bucket/resumes/12345.pdf",
+    "job_id": "job-67890",
+    "uploaded_at": "2024-01-15T10:30:00Z"
+  }
+}
+
+# Automated Workflow:
+1. Extract text from PDF → AI Text Extraction Service
+2. Analyze resume → AI Resume Analysis Service  
+3. Score candidate → AI Scoring Service
+4. Update ATS → ATS API Integration
+5. Notify recruiter → Email/Slack Notification
+6. Schedule interview → Calendar Integration (if high score)
+
+# All steps automated, no human intervention required
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h3 class="font-bold text-green-800 mb-2">📊 Batch Processing Automation</h3>
+                            <p class="text-green-700 text-sm mb-3">Process large volumes of data efficiently with scheduled batch jobs.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 text-xs">
+                                <div class="bg-gray-50 rounded p-3">
+                                    <strong>Daily Batch Jobs:</strong><br>
+                                    • Process overnight resume submissions<br>
+                                    • Generate daily performance reports<br>
+                                    • Update candidate scoring models<br>
+                                    • Sync data between systems
+                                </div>
+                                <div class="bg-gray-50 rounded p-3">
+                                    <strong>Optimization Strategies:</strong><br>
+                                    • Parallel processing for large datasets<br>
+                                    • Incremental processing for efficiency<br>
+                                    • Error recovery and retry mechanisms<br>
+                                    • Progress monitoring and alerting
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h3 class="font-bold text-green-800 mb-2">🎯 Intelligent Routing</h3>
+                            <p class="text-green-700 text-sm mb-3">Automatically route requests to appropriate AI services based on content and context.</p>
+                            
+                            <div class="api-example">
+# Intelligent Request Router
+def route_ai_request(request):
+    content_type = detect_content_type(request.data)
+    
+    if content_type == "resume":
+        return route_to_resume_service(request)
+    elif content_type == "job_description":
+        return route_to_jd_service(request)
+    elif content_type == "interview_notes":
+        return route_to_analysis_service(request)
+    else:
+        return route_to_general_nlp_service(request)
+
+# Load balancing and failover
+def route_to_resume_service(request):
+    primary_service = get_healthiest_service("resume-analysis")
+    try:
+        return primary_service.process(request)
+    except ServiceUnavailable:
+        backup_service = get_backup_service("resume-analysis")
+        return backup_service.process(request)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Monitoring & Analytics -->
+            <section class="content-section mb-8">
+                <div class="monitoring-dashboard">
+                    <h2 class="google-sans text-xl font-bold text-amber-800 mb-4">📊 Enterprise Monitoring & Analytics</h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-amber-200">
+                            <h4 class="font-semibold text-amber-800 mb-2">⚡ Performance Metrics</h4>
+                            <ul class="text-amber-700 text-sm space-y-1">
+                                <li>• Response time percentiles</li>
+                                <li>• Throughput (requests/second)</li>
+                                <li>• Error rates and types</li>
+                                <li>• Resource utilization</li>
+                                <li>• Queue depths and wait times</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-amber-200">
+                            <h4 class="font-semibold text-amber-800 mb-2">🎯 Quality Metrics</h4>
+                            <ul class="text-amber-700 text-sm space-y-1">
+                                <li>• Accuracy scores by service</li>
+                                <li>• User satisfaction ratings</li>
+                                <li>• Output consistency measures</li>
+                                <li>• Human override rates</li>
+                                <li>• Model drift detection</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-amber-200">
+                            <h4 class="font-semibold text-amber-800 mb-2">💰 Business Metrics</h4>
+                            <ul class="text-amber-700 text-sm space-y-1">
+                                <li>• Cost per transaction</li>
+                                <li>• ROI by use case</li>
+                                <li>• Time savings achieved</li>
+                                <li>• Adoption rates by department</li>
+                                <li>• Business impact scores</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-white rounded-lg p-4 border border-amber-200">
+                        <h4 class="font-semibold text-amber-800 mb-3">📈 Sample Monitoring Dashboard</h4>
+                        <div class="api-example">
+# Key Performance Indicators (KPIs) Dashboard
+{
+  "system_health": {
+    "overall_status": "healthy",
+    "uptime_percentage": 99.97,
+    "active_services": 12,
+    "failed_services": 0
+  },
+  "performance": {
+    "avg_response_time_ms": 245,
+    "p95_response_time_ms": 890,
+    "requests_per_second": 1250,
+    "error_rate_percentage": 0.03
+  },
+  "business_impact": {
+    "daily_time_saved_hours": 340,
+    "monthly_cost_savings": 45000,
+    "user_satisfaction_score": 4.7,
+    "adoption_rate_percentage": 87
+  },
+  "alerts": [
+    {
+      "level": "warning",
+      "message": "Resume analysis service response time above threshold",
+      "timestamp": "2024-01-15T10:30:00Z"
+    }
+  ]
+}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Roadmap -->
+            <section class="content-section">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                    <h2 class="google-sans text-xl font-bold text-blue-800 mb-4">🗺️ Enterprise Integration Roadmap</h2>
+                    
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h4 class="font-semibold text-blue-800 mb-2">Phase 1: Foundation</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• API design and documentation</li>
+                                <li>• Security framework setup</li>
+                                <li>• Basic monitoring implementation</li>
+                                <li>• Pilot service deployment</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h4 class="font-semibold text-blue-800 mb-2">Phase 2: Integration</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• Connect to existing systems</li>
+                                <li>• Implement authentication</li>
+                                <li>• Set up automated workflows</li>
+                                <li>• Deploy to production</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h4 class="font-semibent text-blue-800 mb-2">Phase 3: Scale</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• Horizontal scaling setup</li>
+                                <li>• Advanced monitoring</li>
+                                <li>• Performance optimization</li>
+                                <li>• Multi-region deployment</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h4 class="font-semibold text-blue-800 mb-2">Phase 4: Optimize</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• AI model improvements</li>
+                                <li>• Cost optimization</li>
+                                <li>• Advanced analytics</li>
+                                <li>• Continuous innovation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <p class="text-blue-600 text-sm">
+                            <strong>Next:</strong> Module 4 will focus on team implementation strategies and change management for successful AI adoption.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../advanced.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Advanced Path
+            </a>
+            
+            <button onclick="completeModule()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                Complete Module 3 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('advanced-path-progress') || '[]');
+            if (!completedModules.includes(3)) {
+                completedModules.push(3);
+                localStorage.setItem('advanced-path-progress', JSON.stringify(completedModules));
+            }
+            
+            alert('🎉 Module 3 completed! You now understand enterprise AI integration, APIs, and automation at scale. Ready to learn team implementation strategies?');
+            window.location.href = '../advanced.html';
+        }
+    </script>
+</body>
+</html>

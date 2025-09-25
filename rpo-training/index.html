@@ -20,18 +20,7 @@
     <!-- Header -->
     <header class="bg-white site-header sticky top-0 z-10">
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <h1 id="header-title" class="google-sans text-2xl text-gray-700">RPO AI Acceleration Program</h1>
-                <div id="overall-progress" class="hidden">
-                    <div class="flex items-center space-x-2 text-sm">
-                        <span class="text-gray-600">Progress:</span>
-                        <span id="progress-text" class="font-medium text-blue-600">0/13 sessions</span>
-                        <div class="w-16 bg-gray-200 rounded-full h-2">
-                            <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h1 id="header-title" class="google-sans text-2xl text-gray-700">RPO AI Acceleration Program</h1>
             <a href="../index.html" class="hub-button">Back To Hub</a>
         </div>
     </header>
@@ -44,17 +33,124 @@
             <div class="content-section text-center">
                 <h2 class="google-sans text-4xl font-bold text-gray-800">Full Training Curriculum</h2>
                 <p class="mt-4 text-lg text-gray-600">Welcome to the complete training portal for the RPO AI
-                    Acceleration Program. The program is divided into three distinct phases. Select a session from any
-                    module below to begin.</p>
+                    Acceleration Program. Choose your learning path below or explore the full curriculum.</p>
+            </div>
+
+            <!-- Learning Pathways Section -->
+            <section class="learning-pathways-section mb-16">
+                <div class="text-center mb-10">
+                    <h3 class="google-sans text-2xl font-bold text-gray-800 mb-4">🎯 Choose Your Learning Path</h3>
+                    <p class="text-gray-600">Personalized learning journeys based on your experience level and role</p>
+                </div>
                 
-                <!-- Continue Learning Button -->
-                <div id="continue-learning" class="hidden mt-6">
-                    <button id="continue-btn" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m2-10v18a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2h8l4 4z"></path>
-                        </svg>
-                        Continue Learning: <span id="next-session-title"></span>
-                    </button>
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <!-- Beginner Path -->
+                    <div class="pathway-card bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                        <div class="text-3xl mb-4">🌱</div>
+                        <h4 class="google-sans text-xl font-bold text-green-800 mb-3">Beginner Path</h4>
+                        <p class="text-green-700 mb-4">New to AI? Start here with simple, jargon-free basics.</p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center text-sm text-green-600">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                AI Basics (10 min)
+                            </div>
+                            <div class="flex items-center text-sm text-green-600">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                First AI Prompts (15 min)
+                            </div>
+                            <div class="flex items-center text-sm text-green-600">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                Practice Simulation (10 min)
+                            </div>
+                        </div>
+                        <button onclick="startLearningPath('beginner')" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors">
+                            Start Beginner Path
+                        </button>
+                    </div>
+
+                    <!-- Intermediate Path -->
+                    <div class="pathway-card bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                        <div class="text-3xl mb-4">🚀</div>
+                        <h4 class="google-sans text-xl font-bold text-blue-800 mb-3">Intermediate Path</h4>
+                        <p class="text-blue-700 mb-4">Some AI experience? Level up your skills.</p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center text-sm text-blue-600">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                Advanced Prompting (15 min)
+                            </div>
+                            <div class="flex items-center text-sm text-blue-600">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                Role-Specific Tools (20 min)
+                            </div>
+                            <div class="flex items-center text-sm text-blue-600">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                Workflow Integration (15 min)
+                            </div>
+                        </div>
+                        <button onclick="startLearningPath('intermediate')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors">
+                            Start Intermediate Path
+                        </button>
+                    </div>
+
+                    <!-- Advanced Path -->
+                    <div class="pathway-card bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                        <div class="text-3xl mb-4">⚡</div>
+                        <h4 class="google-sans text-xl font-bold text-purple-800 mb-3">Advanced Path</h4>
+                        <p class="text-purple-700 mb-4">AI expert? Explore cutting-edge applications.</p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center text-sm text-purple-600">
+                                <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                                AI Strategy (25 min)
+                            </div>
+                            <div class="flex items-center text-sm text-purple-600">
+                                <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                                Custom Solutions (30 min)
+                            </div>
+                            <div class="flex items-center text-sm text-purple-600">
+                                <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                                Team Implementation (20 min)
+                            </div>
+                        </div>
+                        <button onclick="startLearningPath('advanced')" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors">
+                            Start Advanced Path
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Role-Specific Pathways -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h4 class="google-sans text-lg font-bold text-gray-800 mb-4 text-center">📋 Role-Specific Learning Tracks</h4>
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <button onclick="startRolePath('recruiter')" class="role-path-btn bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 text-center transition-all duration-200">
+                            <div class="text-2xl mb-2">👥</div>
+                            <div class="font-semibold text-gray-800">Recruiter</div>
+                            <div class="text-xs text-gray-600">Sourcing & Outreach</div>
+                        </button>
+                        <button onclick="startRolePath('manager')" class="role-path-btn bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 text-center transition-all duration-200">
+                            <div class="text-2xl mb-2">📊</div>
+                            <div class="font-semibold text-gray-800">Manager</div>
+                            <div class="text-xs text-gray-600">Strategy & Leadership</div>
+                        </button>
+                        <button onclick="startRolePath('analyst')" class="role-path-btn bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 text-center transition-all duration-200">
+                            <div class="text-2xl mb-2">📈</div>
+                            <div class="font-semibold text-gray-800">Analyst</div>
+                            <div class="text-xs text-gray-600">Data & Insights</div>
+                        </button>
+                        <button onclick="startRolePath('coordinator')" class="role-path-btn bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg p-4 text-center transition-all duration-200">
+                            <div class="text-2xl mb-2">⚙️</div>
+                            <div class="font-semibold text-gray-800">Coordinator</div>
+                            <div class="text-xs text-gray-600">Process & Admin</div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center">
+                    <div class="w-16 h-px bg-gray-300"></div>
+                    <span class="px-4 text-gray-500 text-sm">OR EXPLORE FULL CURRICULUM</span>
+                    <div class="w-16 h-px bg-gray-300"></div>
                 </div>
             </div>
 
@@ -176,6 +272,65 @@
 
     <script src="js/app.js"></script>
     <script src="../shared/scripts/smooth-scroll.js" defer></script>
+    
+    <script>
+        // Learning Pathway Navigation Functions
+        function startLearningPath(level) {
+            // Store the selected path for personalization
+            localStorage.setItem('selectedLearningPath', level);
+            
+            // Navigate to the appropriate pathway page
+            switch(level) {
+                case 'beginner':
+                    window.location.href = 'pathways/beginner.html';
+                    break;
+                case 'intermediate':
+                    window.location.href = 'pathways/intermediate.html';
+                    break;
+                case 'advanced':
+                    window.location.href = 'pathways/advanced.html';
+                    break;
+                default:
+                    alert('Pathway coming soon!');
+            }
+        }
+        
+        function startRolePath(role) {
+            // Store the selected role path
+            localStorage.setItem('selectedRolePath', role);
+            
+            // Navigate to role-specific pathway
+            switch(role) {
+                case 'recruiter':
+                    window.location.href = 'pathways/recruiter.html';
+                    break;
+                case 'manager':
+                    window.location.href = 'pathways/manager.html';
+                    break;
+                case 'analyst':
+                    window.location.href = 'pathways/analyst.html';
+                    break;
+                case 'coordinator':
+                    window.location.href = 'pathways/coordinator.html';
+                    break;
+                default:
+                    alert('Role-specific pathway coming soon!');
+            }
+        }
+        
+        // Add hover effects to pathway cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const pathwayCards = document.querySelectorAll('.pathway-card');
+            pathwayCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
 
 </body>
 

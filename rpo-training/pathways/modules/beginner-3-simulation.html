@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Practice Simulation - Beginner Module 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .simulation-chat {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            min-height: 400px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .user-message {
+            background: #3b82f6;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 4px 18px;
+            margin: 0.5rem 0;
+            max-width: 80%;
+            margin-left: auto;
+        }
+        
+        .ai-message {
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 18px 4px;
+            margin: 0.5rem 0;
+            max-width: 80%;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .scenario-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .input-area {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .hint-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .feedback-good {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .feedback-improve {
+            background: linear-gradient(135deg, #fef7f0 0%, #fed7aa 100%);
+            border: 2px solid #f97316;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../../index.html" class="hub-button">Back To Hub</a>
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 3 of 5</div>
+        <div class="text-xs text-gray-500">Interactive Practice</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🎯</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Interactive AI Practice</h1>
+            <p class="text-lg text-gray-600">Practice your AI conversation skills in a safe environment</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Current Scenario -->
+            <div id="scenario-container">
+                <div class="scenario-card">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">📧</div>
+                        <div>
+                            <h3 class="google-sans font-bold text-amber-800 mb-2">Practice Scenario 1: Writing a Follow-up Email</h3>
+                            <p class="text-amber-700 mb-3">
+                                You interviewed a candidate named Alex Johnson for a Marketing Coordinator position last week. You want to send a follow-up email to let them know they've moved to the next round and schedule a second interview.
+                            </p>
+                            <div class="text-sm text-amber-600">
+                                <strong>Your task:</strong> Write a prompt that will help AI create this follow-up email.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simulation Chat Area -->
+            <div class="simulation-chat" id="chat-area">
+                <div class="ai-message">
+                    👋 Hi! I'm your AI practice assistant. I'm here to help you practice writing good prompts. 
+                    <br><br>
+                    Look at the scenario above, then type your prompt in the box below. I'll give you feedback and help you improve!
+                    <br><br>
+                    <em>Remember: Be specific about what you want, who it's for, and what tone to use.</em>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <label for="user-prompt" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Type your AI prompt here:
+                </label>
+                <textarea 
+                    id="user-prompt" 
+                    rows="4" 
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    placeholder="Example: Write an email to Alex Johnson about..."
+                ></textarea>
+                <div class="flex justify-between items-center mt-3">
+                    <button onclick="showHint()" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                        💡 Need a hint?
+                    </button>
+                    <button onclick="submitPrompt()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                        Submit Prompt
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hint Box (Hidden by default) -->
+            <div id="hint-box" class="hint-box hidden">
+                <div class="flex items-start">
+                    <div class="text-xl mr-3">💡</div>
+                    <div>
+                        <h4 class="font-bold text-blue-800 mb-2">Hint for this scenario:</h4>
+                        <p class="text-blue-700 text-sm">
+                            Think about: What type of document (email), who it's to (Alex Johnson), what the purpose is (follow-up about moving to next round), what information to include (scheduling second interview), and what tone (professional but encouraging).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Area -->
+            <div id="feedback-area"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Beginner Path
+            </a>
+            
+            <button id="complete-btn" onclick="completeModule()" class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed" disabled>
+                Complete Practice Session
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentScenario = 1;
+        let practiceCompleted = false;
+        
+        const scenarios = [
+            {
+                icon: "📧",
+                title: "Practice Scenario 1: Writing a Follow-up Email",
+                description: "You interviewed a candidate named Alex Johnson for a Marketing Coordinator position last week. You want to send a follow-up email to let them know they've moved to the next round and schedule a second interview.",
+                task: "Write a prompt that will help AI create this follow-up email.",
+                goodPrompts: [
+                    "write an email to alex johnson",
+                    "follow-up email",
+                    "second interview",
+                    "marketing coordinator",
+                    "professional tone"
+                ],
+                hint: "Think about: What type of document (email), who it's to (Alex Johnson), what the purpose is (follow-up about moving to next round), what information to include (scheduling second interview), and what tone (professional but encouraging)."
+            },
+            {
+                icon: "🔍",
+                title: "Practice Scenario 2: Creating Interview Questions",
+                description: "You need to prepare for interviewing candidates for a Customer Service Representative role. You want questions that will help you assess their communication skills and problem-solving abilities.",
+                task: "Write a prompt to generate good interview questions.",
+                goodPrompts: [
+                    "interview questions",
+                    "customer service",
+                    "communication skills",
+                    "problem-solving",
+                    "behavioral questions"
+                ],
+                hint: "Consider: What type of content (interview questions), for what role (Customer Service Rep), what skills to assess (communication, problem-solving), and what question types (behavioral, situational)."
+            }
+        ];
+        
+        function showHint() {
+            const hintBox = document.getElementById('hint-box');
+            hintBox.classList.remove('hidden');
+        }
+        
+        function submitPrompt() {
+            const userPrompt = document.getElementById('user-prompt').value.trim();
+            
+            if (!userPrompt) {
+                alert('Please enter a prompt first!');
+                return;
+            }
+            
+            // Add user message to chat
+            addMessageToChat(userPrompt, 'user');
+            
+            // Analyze the prompt and provide feedback
+            setTimeout(() => {
+                const feedback = analyzePrompt(userPrompt, currentScenario - 1);
+                addMessageToChat(feedback.message, 'ai');
+                showFeedback(feedback);
+                
+                // Clear input
+                document.getElementById('user-prompt').value = '';
+                
+                // If good prompt, enable next scenario or completion
+                if (feedback.score >= 3) {
+                    if (currentScenario < scenarios.length) {
+                        setTimeout(() => {
+                            nextScenario();
+                        }, 2000);
+                    } else {
+                        enableCompletion();
+                    }
+                }
+            }, 1000);
+        }
+        
+        function analyzePrompt(prompt, scenarioIndex) {
+            const scenario = scenarios[scenarioIndex];
+            const promptLower = prompt.toLowerCase();
+            let score = 0;
+            let feedback = [];
+            
+            // Check for key elements
+            scenario.goodPrompts.forEach(element => {
+                if (promptLower.includes(element)) {
+                    score++;
+                }
+            });
+            
+            // Generate feedback based on score
+            if (score >= 4) {
+                return {
+                    score: score,
+                    type: 'excellent',
+                    message: `🎉 Excellent prompt! You included all the key elements: specific task, recipient/context, purpose, and tone. Here's what AI might generate for you:\n\n"Subject: Next Steps - Marketing Coordinator Position\n\nDear Alex,\n\nThank you for taking the time to interview with us last week for the Marketing Coordinator position. I'm pleased to inform you that you've been selected to move forward to the next round...\n\nWould you be available for a second interview next week? I have the following times available:\n• Tuesday at 2:00 PM\n• Wednesday at 10:00 AM\n• Friday at 3:00 PM\n\nLooking forward to hearing from you!\n\nBest regards,\n[Your name]"`
+                };
+            } else if (score >= 2) {
+                return {
+                    score: score,
+                    type: 'good',
+                    message: `👍 Good start! Your prompt has some key elements, but could be more specific. Try adding more details about the tone, specific information to include, or the exact purpose.`
+                };
+            } else {
+                return {
+                    score: score,
+                    type: 'needs-improvement',
+                    message: `🤔 Your prompt needs more details. Remember to include: what type of document, who it's for, the specific purpose, and what tone to use. Try being more specific!`
+                };
+            }
+        }
+        
+        function addMessageToChat(message, sender) {
+            const chatArea = document.getElementById('chat-area');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'user-message' : 'ai-message';
+            messageDiv.innerHTML = message.replace(/\n/g, '<br>');
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        
+        function showFeedback(feedback) {
+            const feedbackArea = document.getElementById('feedback-area');
+            const feedbackClass = feedback.type === 'excellent' || feedback.type === 'good' ? 'feedback-good' : 'feedback-improve';
+            
+            feedbackArea.innerHTML = `
+                <div class="${feedbackClass}">
+                    <h4 class="font-bold mb-2">Feedback on your prompt:</h4>
+                    <p class="text-sm">${feedback.message}</p>
+                </div>
+            `;
+        }
+        
+        function nextScenario() {
+            currentScenario++;
+            const scenario = scenarios[currentScenario - 1];
+            
+            document.getElementById('scenario-container').innerHTML = `
+                <div class="scenario-card">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">${scenario.icon}</div>
+                        <div>
+                            <h3 class="google-sans font-bold text-amber-800 mb-2">${scenario.title}</h3>
+                            <p class="text-amber-700 mb-3">${scenario.description}</p>
+                            <div class="text-sm text-amber-600">
+                                <strong>Your task:</strong> ${scenario.task}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Update hint
+            document.getElementById('hint-box').innerHTML = `
+                <div class="flex items-start">
+                    <div class="text-xl mr-3">💡</div>
+                    <div>
+                        <h4 class="font-bold text-blue-800 mb-2">Hint for this scenario:</h4>
+                        <p class="text-blue-700 text-sm">${scenario.hint}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('hint-box').classList.add('hidden');
+            
+            addMessageToChat(`Great job! Let's try scenario ${currentScenario}. Look at the new scenario above and write your prompt.`, 'ai');
+        }
+        
+        function enableCompletion() {
+            practiceCompleted = true;
+            const completeBtn = document.getElementById('complete-btn');
+            completeBtn.disabled = false;
+            completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+            completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+            
+            addMessageToChat(`🎉 Fantastic! You've completed both practice scenarios. You're getting really good at writing AI prompts. Click "Complete Practice Session" when you're ready to move on.`, 'ai');
+        }
+        
+        function completeModule() {
+            if (!practiceCompleted) {
+                alert('Please complete the practice scenarios first!');
+                return;
+            }
+            
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
+            if (!completedModules.includes(3)) {
+                completedModules.push(3);
+                localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
+            }
+            
+            alert('🎉 Practice session completed! You now have hands-on experience with AI prompting. Ready for Module 4?');
+            window.location.href = '../beginner.html';
+        }
+    </script>
+</body>
+</html>

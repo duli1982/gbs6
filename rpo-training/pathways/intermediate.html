@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate AI Learning Path - RPO Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .module-card {
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+        }
+
+        .module-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+
+        .module-card.completed {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../index.html" class="hub-button">Back To Hub</a>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🚀</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Intermediate AI Learning Path</h1>
+            <p class="text-lg text-gray-600 mb-6">Level up your AI skills with advanced techniques and role-specific
+                applications.</p>
+
+            <!-- Progress Bar -->
+            <div class="max-w-md mx-auto">
+                <div class="bg-gray-200 rounded-full h-3">
+                    <div id="progress-bar" class="progress-bar bg-blue-500 h-3 rounded-full" style="width: 0%"></div>
+                </div>
+                <div class="text-sm text-gray-600 mt-2">
+                    <span id="progress-text">0 of 4 modules completed</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Modules -->
+        <div class="max-w-3xl mx-auto space-y-6">
+
+            <!-- Module 1: Advanced Prompting Techniques -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="1">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-blue-600 font-bold">1</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">Advanced Prompting Techniques</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 15 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Master sophisticated prompting strategies: chain-of-thought,
+                            few-shot learning, and prompt engineering.</p>
+                        <div class="bg-blue-50 rounded-lg p-3 mb-4">
+                            <div class="text-sm text-blue-800 font-semibold mb-1">You'll Learn:</div>
+                            <ul class="text-sm text-blue-700 space-y-1">
+                                <li>• How to break complex tasks into steps</li>
+                                <li>• Using examples to guide AI responses</li>
+                                <li>• Prompt templates for consistent results</li>
+                            </ul>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(1)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                                Start Module
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">🎯</div>
+                </div>
+            </div>
+
+            <!-- Module 2: Role-Specific AI Tools -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="2">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-gray-400 font-bold">2</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">Role-Specific AI Applications</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 20 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Discover AI tools and techniques tailored to your specific role
+                            and industry challenges.</p>
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-gray-50 rounded p-2 text-center">
+                                <div class="text-lg mb-1">👥</div>
+                                <div class="text-xs font-semibold">Recruiters</div>
+                            </div>
+                            <div class="bg-gray-50 rounded p-2 text-center">
+                                <div class="text-lg mb-1">📊</div>
+                                <div class="text-xs font-semibold">Managers</div>
+                            </div>
+                            <div class="bg-gray-50 rounded p-2 text-center">
+                                <div class="text-lg mb-1">📈</div>
+                                <div class="text-xs font-semibold">Analysts</div>
+                            </div>
+                            <div class="bg-gray-50 rounded p-2 text-center">
+                                <div class="text-lg mb-1">⚙️</div>
+                                <div class="text-xs font-semibold">Coordinators</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(2)"
+                                class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed"
+                                disabled>
+                                Complete Module 1 First
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">🛠️</div>
+                </div>
+            </div>
+
+            <!-- Module 3: Workflow Integration -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="3">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-gray-400 font-bold">3</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">AI Workflow Integration</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 15 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Learn how to seamlessly integrate AI into your existing workflows
+                            and processes.</p>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(3)"
+                                class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed"
+                                disabled>
+                                Complete Previous Modules
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">🔄</div>
+                </div>
+            </div>
+
+            <!-- Module 4: Measuring AI Impact -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="4">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-gray-400 font-bold">4</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">Measuring AI Impact & ROI</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 12 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Track your AI success with metrics, KPIs, and ROI measurement
+                            techniques.</p>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(4)"
+                                class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed"
+                                disabled>
+                                Complete Previous Modules
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">📊</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="max-w-3xl mx-auto mt-12">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                <h3 class="google-sans text-lg font-bold text-blue-800 mb-3">🎓 Ready for More?</h3>
+                <p class="text-blue-700 mb-4">After completing this path, consider exploring:</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <a href="advanced.html"
+                        class="bg-white rounded-lg p-4 border border-blue-200 hover:border-blue-400 transition-colors">
+                        <div class="font-semibold text-gray-900">Advanced AI Path</div>
+                        <div class="text-sm text-gray-600">Strategic implementation & leadership</div>
+                    </a>
+                    <a href="../index.html"
+                        class="bg-white rounded-lg p-4 border border-blue-200 hover:border-blue-400 transition-colors">
+                        <div class="font-semibold text-gray-900">Full RPO Curriculum</div>
+                        <div class="text-sm text-gray-600">Complete training program</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="text-center mt-12">
+            <a href="../index.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to RPO Training
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let completedModules = JSON.parse(localStorage.getItem('intermediate-path-progress') || '[]');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateProgress();
+            updateModuleStates();
+        });
+
+        function startModule(moduleNumber) {
+            // Navigate to the actual module content
+            switch (moduleNumber) {
+                case 1:
+                    window.location.href = 'modules/intermediate-1.html';
+                    break;
+                case 2:
+                    window.location.href = 'modules/intermediate-2.html';
+                    break;
+                case 3:
+                    window.location.href = 'modules/intermediate-3.html';
+                    break;
+                case 4:
+                    window.location.href = 'modules/intermediate-4.html';
+                    break;
+                default:
+                    alert('Module content coming soon!');
+            }
+        }
+
+        function updateProgress() {
+            const progress = (completedModules.length / 4) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${completedModules.length} of 4 modules completed`;
+        }
+
+        function updateModuleStates() {
+            const modules = document.querySelectorAll('.module-card');
+
+            modules.forEach((module, index) => {
+                const moduleNumber = index + 1;
+                const isCompleted = completedModules.includes(moduleNumber);
+                const canStart = moduleNumber === 1 || completedModules.includes(moduleNumber - 1);
+
+                const button = module.querySelector('button');
+                const numberCircle = module.querySelector('.w-8');
+
+                if (isCompleted) {
+                    module.classList.add('completed');
+                    button.textContent = '✓ Completed';
+                    button.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    button.classList.add('bg-green-600');
+                    button.disabled = true;
+                } else if (canStart) {
+                    numberCircle.classList.remove('bg-gray-100');
+                    numberCircle.classList.add('bg-blue-100');
+                    numberCircle.querySelector('span').classList.remove('text-gray-400');
+                    numberCircle.querySelector('span').classList.add('text-blue-600');
+                    button.disabled = false;
+                    button.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    button.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                    button.textContent = 'Start Module';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

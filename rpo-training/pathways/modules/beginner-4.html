@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Your Daily Tasks - Beginner Module 4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .task-category {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .task-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .before-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .after-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .ai-tool-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.2s ease;
+        }
+        
+        .ai-tool-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .time-saver {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../../index.html" class="hub-button">Back To Hub</a>
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 4 of 5</div>
+        <div class="text-xs text-gray-500">12 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">📝</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">AI for Your Daily Tasks</h1>
+            <p class="text-lg text-gray-600">Discover how AI can transform your everyday work activities</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Your AI-Powered Workday</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Now that you know how to communicate with AI, let's explore specific ways it can help with tasks you do every day. You'll be amazed at how much time and effort AI can save you!
+                </p>
+                
+                <div class="time-saver">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">⏰</div>
+                        <div>
+                            <h3 class="font-bold text-amber-800 mb-2">The Time-Saving Reality</h3>
+                            <p class="text-amber-700">
+                                Our colleagues report saving <strong>2-4 hours per day</strong> by using AI for routine tasks. That's 10-20 hours per week you could spend on more strategic, creative work!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Email & Communication -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📧 Email & Communication</h2>
+                    <p class="text-blue-700 mb-4">
+                        Stop staring at blank emails! AI can help you write professional, clear, and effective communications in seconds.
+                    </p>
+                    
+                    <div class="before-after">
+                        <div class="before-box">
+                            <h4 class="font-semibold text-red-800 mb-2">❌ Without AI:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• 15-30 minutes per important email</li>
+                                <li>• Struggling with tone and wording</li>
+                                <li>• Multiple drafts and revisions</li>
+                                <li>• Inconsistent messaging</li>
+                                <li>• Stress about professionalism</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="after-box">
+                            <h4 class="font-semibold text-green-800 mb-2">✅ With AI:</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• 2-5 minutes per email</li>
+                                <li>• Perfect tone every time</li>
+                                <li>• First draft is usually final</li>
+                                <li>• Consistent professional style</li>
+                                <li>• Confidence in communication</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mt-4">
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📨 Interview Scheduling</h4>
+                            <p class="text-gray-600 text-sm mb-2">Prompt example:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Write a professional email to schedule a second interview with candidate John Smith for the Sales Manager role. Offer 3 time slots next week, mention it will be 45 minutes, and include our office address."
+                            </div>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 Follow-up Messages</h4>
+                            <p class="text-gray-600 text-sm mb-2">Prompt example:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Write a polite follow-up email to a candidate who hasn't responded to our job offer from last week. Keep it friendly but professional, and give them a deadline to respond."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Research & Information Gathering -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">🔍 Research & Information Gathering</h2>
+                    <p class="text-blue-700 mb-4">
+                        Let AI be your research assistant. It can quickly gather, organize, and summarize information from multiple sources.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="ai-tool-card">
+                            <div class="text-2xl mb-2">🏢</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Company Research</h4>
+                            <p class="text-gray-600 text-sm">Research companies, their culture, recent news, and key decision makers before outreach.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <div class="text-2xl mb-2">💼</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Job Market Analysis</h4>
+                            <p class="text-gray-600 text-sm">Get insights on salary ranges, skill requirements, and market trends for specific roles.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <div class="text-2xl mb-2">📊</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Industry Insights</h4>
+                            <p class="text-gray-600 text-sm">Stay updated on industry trends, challenges, and opportunities in your sector.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-4 mt-4 border border-blue-200">
+                        <h4 class="font-semibold text-blue-800 mb-2">💡 Pro Tip: Research Prompt Template</h4>
+                        <div class="bg-white rounded p-3 text-sm font-mono">
+                            "Research [COMPANY NAME] and provide: 1) Company overview and recent news, 2) Company culture and values, 3) Key leadership team, 4) Recent hiring trends, 5) Any challenges they might be facing. Format as a brief summary I can use for candidate outreach."
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Creation -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">✍️ Content Creation</h2>
+                    <p class="text-blue-700 mb-4">
+                        From job descriptions to social media posts, AI can help you create engaging, professional content quickly.
+                    </p>
+                    
+                    <div class="before-after">
+                        <div class="before-box">
+                            <h4 class="font-semibold text-red-800 mb-2">❌ Traditional Job Posting:</h4>
+                            <div class="text-red-700 text-sm">
+                                "We are looking for a Marketing Manager. Must have 5+ years experience. Send resume."
+                                <br><br>
+                                <em>Result: Low response rates, generic applications</em>
+                            </div>
+                        </div>
+                        
+                        <div class="after-box">
+                            <h4 class="font-semibold text-green-800 mb-2">✅ AI-Enhanced Job Posting:</h4>
+                            <div class="text-green-700 text-sm">
+                                "🚀 Marketing Manager - Shape Our Brand's Future!<br>
+                                Join our innovative team and lead campaigns that make a real impact...<br>
+                                What You'll Do: • Strategic campaign development • Team leadership • ROI optimization<br>
+                                What We Offer: Competitive salary, flexible work, growth opportunities"
+                                <br><br>
+                                <em>Result: 3x more qualified applications</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Analysis & Reporting -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📊 Data Analysis & Reporting</h2>
+                    <p class="text-blue-700 mb-4">
+                        Turn raw data into insights and create professional reports that tell a clear story.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📈 Recruitment Metrics</h4>
+                            <p class="text-gray-600 text-sm mb-2">Example prompt:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Analyze this recruitment data and create a summary report: Time-to-fill: 25 days, Applications: 150, Interviews: 12, Offers: 3. Include insights and recommendations for improvement."
+                            </div>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 Performance Summaries</h4>
+                            <p class="text-gray-600 text-sm mb-2">Example prompt:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Create a monthly performance summary from this data: 45 positions filled, 89% client satisfaction, 15% faster than target. Make it executive-ready with key highlights."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Planning & Organization -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📅 Planning & Organization</h2>
+                    <p class="text-blue-700 mb-4">
+                        Let AI help you plan projects, organize tasks, and create structured workflows.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">🎯 Project Planning</h4>
+                            <p class="text-gray-600 text-sm">Create detailed project plans with timelines, milestones, and resource allocation.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📝 Meeting Agendas</h4>
+                            <p class="text-gray-600 text-sm">Generate structured meeting agendas with time allocations and clear objectives.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">✅ Task Lists</h4>
+                            <p class="text-gray-600 text-sm">Break down complex projects into manageable, prioritized task lists.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📊 Process Documentation</h4>
+                            <p class="text-gray-600 text-sm">Document workflows and procedures in clear, step-by-step formats.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Wins Checklist -->
+            <section class="content-section mb-8">
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-4">🎯 Your AI Quick Wins Checklist</h2>
+                    <p class="text-green-700 mb-4">Start with these high-impact, low-effort AI applications:</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">This Week:</h4>
+                            <ul class="text-green-700 space-y-1 text-sm">
+                                <li>☐ Use AI to write 3 professional emails</li>
+                                <li>☐ Create one job description with AI help</li>
+                                <li>☐ Research a company using AI</li>
+                                <li>☐ Generate interview questions for a role</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">Next Week:</h4>
+                            <ul class="text-green-700 space-y-1 text-sm">
+                                <li>☐ Create a project plan with AI assistance</li>
+                                <li>☐ Analyze recruitment data and create insights</li>
+                                <li>☐ Write a performance summary report</li>
+                                <li>☐ Plan a team meeting agenda</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What's Next -->
+            <section class="content-section">
+                <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                    <h2 class="google-sans text-xl font-bold text-blue-800 mb-3">🎉 You're Becoming an AI Power User!</h2>
+                    <p class="text-blue-700 mb-4">
+                        You now know how to apply AI to your most common work tasks. The key is to start small, practice regularly, and gradually expand your AI toolkit.
+                    </p>
+                    <div class="text-sm text-blue-600">
+                        <strong>Final module coming up:</strong> We'll celebrate your progress and show you how to continue your AI journey with confidence!
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Beginner Path
+            </a>
+            
+            <button onclick="completeModule()" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                Complete Module 4 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
+            if (!completedModules.includes(4)) {
+                completedModules.push(4);
+                localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
+            }
+            
+            alert('🎉 Module 4 completed! You now know how to use AI for your daily work tasks. Ready for the final celebration module?');
+            window.location.href = '../beginner.html';
+        }
+    </script>
+</body>
+</html>
