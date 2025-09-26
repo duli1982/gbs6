@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Learning Track - RPO Training Hub</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Recruiter Learning Track</h1>
+            <p class="subtitle">Specialized AI training for recruitment professionals</p>
+        </header>
+
+        <div class="role-welcome">
+            <div class="welcome-card">
+                <h2>Welcome, Recruiter!</h2>
+                <p>As a recruitment professional, you'll benefit most from our <strong>Intermediate Learning Path</strong>, which focuses on advanced prompting techniques and practical applications for candidate sourcing, screening, and engagement.</p>
+            </div>
+
+            <div class="recommended-modules">
+                <h3>🌟 Recommended Focus Areas</h3>
+                <div class="module-grid">
+                    <div class="module-card highlight">
+                        <h4>Advanced Prompting Techniques</h4>
+                        <p>Master complex prompts for candidate evaluation and job description optimization</p>
+                    </div>
+                    <div class="module-card highlight">
+                        <h4>Candidate Sourcing with AI</h4>
+                        <p>Learn to create effective Boolean searches and candidate personas</p>
+                    </div>
+                    <div class="module-card highlight">
+                        <h4>Interview Question Generation</h4>
+                        <p>Generate role-specific, behavioral, and technical interview questions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pathway-redirect">
+                <h3>🚀 Ready to Start?</h3>
+                <p>You'll be directed to the Intermediate Learning Path with recruiter-specific examples and use cases.</p>
+                <button onclick="startRecruiterPath()" class="cta-button">Begin Recruiter Training</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startRecruiterPath() {
+            // Set role-specific context
+            localStorage.setItem('userRole', 'recruiter');
+            localStorage.setItem('roleSpecificFocus', JSON.stringify([
+                'candidate-sourcing',
+                'interview-preparation', 
+                'job-description-optimization',
+                'candidate-evaluation'
+            ]));
+            
+            // Redirect to intermediate path
+            window.location.href = 'intermediate.html';
+        }
+
+        // Auto-redirect after 3 seconds if user doesn't click
+        setTimeout(() => {
+            startRecruiterPath();
+        }, 5000);
+    </script>
+</body>
+</html>

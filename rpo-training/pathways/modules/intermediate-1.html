@@ -129,14 +129,14 @@
                     
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <h4 class="font-semibold text-blue-800 mb-2">❌ Basic Approach:</h4>
+                            <h3 class="font-semibold text-blue-800 mb-2">❌ Basic Approach:</h3>
                             <div class="prompt-example">
                                 Should we hire this candidate for the sales role?
                             </div>
                         </div>
                         
                         <div>
-                            <h4 class="font-semibold text-blue-800 mb-2">✅ Chain-of-Thought:</h4>
+                            <h3 class="font-semibold text-blue-800 mb-2">✅ Chain-of-Thought:</h3>
                             <div class="prompt-example">
                                 Analyze this candidate for our sales role. Please think through this step by step:
 
@@ -151,7 +151,7 @@ Here's the candidate information: [candidate details]
                     </div>
                     
                     <div class="example-box mt-4">
-                        <h4 class="font-semibold text-gray-800 mb-2">Real Example - Candidate Evaluation:</h4>
+                        <h3 class="font-semibold text-gray-800 mb-2">Real Example - Candidate Evaluation:</h3>
                         <div class="prompt-example">
                             Help me evaluate a Marketing Manager candidate. Think through this systematically:
 
@@ -190,7 +190,7 @@ Candidate Profile: Sarah Chen, 5 years digital marketing experience, led 3 succe
                     </p>
                     
                     <div class="example-box">
-                        <h4 class="font-semibold text-gray-800 mb-2">Example - Consistent Job Posting Format:</h4>
+                        <h3 class="font-semibold text-gray-800 mb-2">Example - Consistent Job Posting Format:</h3>
                         <div class="prompt-example">
                             I need you to write job postings in our company style. Here are 2 examples of our format:
 
@@ -224,14 +224,14 @@ Now create a job posting for a Customer Service Manager using this exact format 
                     
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <h4 class="font-semibold text-blue-800 mb-2">❌ Generic:</h4>
+                            <h3 class="font-semibold text-blue-800 mb-2">❌ Generic:</h3>
                             <div class="prompt-example">
                                 Write interview questions for a software developer.
                             </div>
                         </div>
                         
                         <div>
-                            <h4 class="font-semibold text-blue-800 mb-2">✅ Role-Based:</h4>
+                            <h3 class="font-semibold text-blue-800 mb-2">✅ Role-Based:</h3>
                             <div class="prompt-example">
                                 Act as a senior technical recruiter with 10 years of experience hiring software developers. Create 8 interview questions that will help assess both technical skills and cultural fit for a mid-level full-stack developer role. Include a mix of technical, behavioral, and situational questions.
                             </div>
@@ -249,7 +249,7 @@ Now create a job posting for a Customer Service Manager using this exact format 
                     </p>
                     
                     <div class="example-box">
-                        <h4 class="font-semibold text-gray-800 mb-2">Template - Candidate Rejection Email:</h4>
+                        <h3 class="font-semibold text-gray-800 mb-2">Template - Candidate Rejection Email:</h3>
                         <div class="prompt-example">
                             Write a professional rejection email using this template:
 
@@ -284,12 +284,12 @@ SPECIFIC DETAILS: Strong background but looking for someone with more B2B experi
                     
                     <div class="grid md:grid-cols-2 gap-4 mb-4">
                         <div class="bg-white rounded-lg p-4 border border-purple-200">
-                            <h4 class="font-semibold text-gray-800 mb-2">Scenario A: Performance Review</h4>
+                            <h3 class="font-semibold text-gray-800 mb-2">Scenario A: Performance Review</h3>
                             <p class="text-gray-600 text-sm">Write a prompt to help create a performance review for a team member who's doing well but needs to improve time management.</p>
                         </div>
                         
                         <div class="bg-white rounded-lg p-4 border border-purple-200">
-                            <h4 class="font-semibold text-gray-800 mb-2">Scenario B: Training Plan</h4>
+                            <h3 class="font-semibold text-gray-800 mb-2">Scenario B: Training Plan</h3>
                             <p class="text-gray-600 text-sm">Create a prompt to develop a 30-day onboarding plan for a new hire in your department.</p>
                         </div>
                     </div>
@@ -319,7 +319,7 @@ SPECIFIC DETAILS: Strong background but looking for someone with more B2B experi
                     
                     <div class="grid md:grid-cols-2 gap-4 text-sm">
                         <div>
-                            <h4 class="font-semibold text-green-800 mb-2">Quick Reference:</h4>
+                            <h3 class="font-semibold text-green-800 mb-2">Quick Reference:</h3>
                             <ul class="text-green-700 space-y-1">
                                 <li>• Chain-of-thought for complex analysis</li>
                                 <li>• Few-shot learning for consistency</li>
@@ -329,7 +329,7 @@ SPECIFIC DETAILS: Strong background but looking for someone with more B2B experi
                         </div>
                         
                         <div>
-                            <h4 class="font-semibold text-green-800 mb-2">Next Up:</h4>
+                            <h3 class="font-semibold text-green-800 mb-2">Next Up:</h3>
                             <p class="text-green-700">Module 2 will show you role-specific AI applications tailored to your exact job function.</p>
                         </div>
                     </div>
@@ -392,7 +392,7 @@ SPECIFIC DETAILS: Strong background but looking for someone with more B2B experi
             
             resultDiv.innerHTML = `
                 <div class="${resultClass} border rounded-lg p-4">
-                    <h4 class="font-semibold ${resultColor} mb-2">Analysis Results (${score}/4 techniques used):</h4>
+                    <h3 class="font-semibold ${resultColor} mb-2">Analysis Results (${score}/4 techniques used):</h3>
                     ${feedback.length > 0 ? feedback.map(f => `<p class="${resultColor} text-sm">${f}</p>`).join('') : `<p class="${resultColor} text-sm">Try incorporating more advanced techniques!</p>`}
                 </div>
             `;

@@ -499,26 +499,26 @@
             <div
                 class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12 max-w-4xl mx-auto border border-blue-100">
                 <div class="text-center mb-6">
-                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2">🚀 Quick Wins - Start Using AI Today
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2">Quick Wins - Start Using AI Today
                     </h2>
                     <p class="text-gray-600">Immediate tools you can use right now to transform your daily work</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <a href="/gbs-prompts/"
-                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
-                        <div class="text-2xl mb-2">✨</div>
+                        class="bg-white p-4 rounded-lg border transition-all duration-200 hover:shadow-md" style="border-color: #4A90E2;" onmouseover="this.style.borderColor='#357ABD'" onmouseout="this.style.borderColor='#4A90E2'">
+                        <div class="text-2xl mb-2"></div>
                         <h3 class="font-semibold text-gray-900 mb-1">AI Prompts</h3>
                         <p class="text-sm text-gray-600">Ready-to-use prompts for emails, sourcing, and more</p>
                     </a>
                     <a href="/daily-focus/"
-                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
-                        <div class="text-2xl mb-2">🎯</div>
+                        class="bg-white p-4 rounded-lg border transition-all duration-200 hover:shadow-md" style="border-color: #4A90E2;" onmouseover="this.style.borderColor='#357ABD'" onmouseout="this.style.borderColor='#4A90E2'">
+                        <div class="text-2xl mb-2"></div>
                         <h3 class="font-semibold text-gray-900 mb-1">Daily Focus</h3>
                         <p class="text-sm text-gray-600">Micro-coaching cards for skill improvement</p>
                     </a>
                     <a href="/use-cases/"
-                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
-                        <div class="text-2xl mb-2">💡</div>
+                        class="bg-white p-4 rounded-lg border transition-all duration-200 hover:shadow-md" style="border-color: #4A90E2;" onmouseover="this.style.borderColor='#357ABD'" onmouseout="this.style.borderColor='#4A90E2'">
+                        <div class="text-2xl mb-2"></div>
                         <h3 class="font-semibold text-gray-900 mb-1">Success Stories</h3>
                         <p class="text-sm text-gray-600">See how colleagues save hours daily</p>
                     </a>
@@ -531,7 +531,7 @@
                     class="hub-card bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-xl block border-2 border-green-200"
                     data-keywords="onboarding get started new user orientation role-based personalized assessment quiz quick start">
                     <div class="flex items-center mb-2">
-                        <span class="text-2xl mr-2">🌟</span>
+                        <span class="text-2xl mr-2"></span>
                         <h3 class="google-sans text-2xl font-bold text-green-800">Get Started with AI</h3>
                     </div>
                     <p class="text-green-700">New to AI? Start here! Personalized onboarding based on your role, skill
@@ -608,7 +608,7 @@
                     <h3 class="text-lg font-medium text-gray-900 mb-2">No results found</h3>
                     <p class="text-gray-500 mb-4">Try adjusting your search terms or browse our available modules above.
                     </p>
-                    <button class="text-blue-600 hover:text-blue-800 font-medium" onclick="clearSearch()">Clear
+                    <button class="font-medium" style="color: #4A90E2;" onmouseover="this.style.color='#357ABD'" onmouseout="this.style.color='#4A90E2'" onclick="clearSearch()">Clear
                         search</button>
                 </div>
             </div>
@@ -921,9 +921,9 @@
                     ${sectionDisplay}
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
                         <span class="search-result-category">${result.category || this.getCategoryFromUrl(result.url)}</span>
-                        ${result.type === 'lesson' ? '<span style="font-size: 11px; color: #9ca3af;">📚 Lesson</span>' : ''}
-                        ${result.type === 'prompt-category' ? '<span style="font-size: 11px; color: #9ca3af;">🎯 Prompts</span>' : ''}
-                        ${result.type === 'use-case' ? '<span style="font-size: 11px; color: #9ca3af;">📈 Case Study</span>' : ''}
+                        ${result.type === 'lesson' ? '<span style="font-size: 11px; color: #9ca3af;">Lesson</span>' : ''}
+                        ${result.type === 'prompt-category' ? '<span style="font-size: 11px; color: #9ca3af;">Prompts</span>' : ''}
+                        ${result.type === 'use-case' ? '<span style="font-size: 11px; color: #9ca3af;">Case Study</span>' : ''}
                     </div>
                 `;
 

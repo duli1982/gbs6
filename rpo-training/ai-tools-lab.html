@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Lab - RPO Training Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .tool-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+        
+        .tool-card.premium {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-color: #f59e0b;
+        }
+        
+        .tool-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .active-tool {
+            display: block;
+        }
+        
+        .hidden-tool {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../index.html" class="hub-button">Back To Hub</a>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🛠️</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">AI Tools Lab</h1>
+            <p class="text-lg text-gray-600 mb-6">Practical AI tools to supercharge your recruitment workflow</p>
+            
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
+                <p class="text-blue-800 text-sm">
+                    <strong>💡 Pro Tip:</strong> These tools are integrated into our learning modules, but you can access them anytime here for quick use!
+                </p>
+            </div>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- AI Prompt Builder -->
+            <div class="tool-card" onclick="openTool('prompt-builder')">
+                <div class="text-3xl mb-3">🎯</div>
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Prompt Builder</h2>
+                <p class="text-gray-600 text-sm mb-3">Create effective prompts with templates for job descriptions, interview questions, and more.</p>
+                <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
+            </div>
+
+            <!-- Email Enhancement Tool -->
+            <div class="tool-card" onclick="openTool('email-enhancer')">
+                <div class="text-3xl mb-3">📧</div>
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Email Enhancement</h2>
+                <p class="text-gray-600 text-sm mb-3">Transform your recruitment emails with AI assistance and before/after examples.</p>
+                <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
+            </div>
+
+            <!-- Boolean Search Constructor -->
+            <div class="tool-card" onclick="openTool('boolean-search')">
+                <div class="text-3xl mb-3">🔍</div>
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Boolean Search Builder</h2>
+                <p class="text-gray-600 text-sm mb-3">Build complex search queries for LinkedIn and job boards with AI assistance.</p>
+                <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
+            </div>
+
+            <!-- Resume Optimizer -->
+            <div class="tool-card" onclick="openTool('resume-optimizer')">
+                <div class="text-3xl mb-3">📄</div>
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Resume Optimizer</h2>
+                <p class="text-gray-600 text-sm mb-3">Analyze and improve resumes with AI-powered suggestions and formatting tips.</p>
+                <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
+            </div>
+
+            <!-- Meeting Summary Generator -->
+            <div class="tool-card premium" onclick="openTool('meeting-summary')">
+                <div class="text-3xl mb-3">📝</div>
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Meeting Summary Generator</h2>
+                <p class="text-gray-600 text-sm mb-3">Convert interview notes into structured summaries and action items.</p>
+                <div class="text-amber-700 font-semibold text-sm">Premium Tool →</div>
+            </div>
+
+            <!-- Document Analyzer -->
+            <div class="tool-card premium" onclick="openTool('document-analyzer')">
+                <div class="text-3xl mb-3">📊</div>
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Document Analyzer</h2>
+                <p class="text-gray-600 text-sm mb-3">Analyze job descriptions, resumes, and other documents for AI improvement suggestions.</p>
+                <div class="text-amber-700 font-semibold text-sm">Premium Tool →</div>
+            </div>
+        </div>
+
+        <!-- Tool Sections (Hidden by default) -->
+        
+        <!-- AI Prompt Builder Tool -->
+        <div id="prompt-builder" class="tool-section hidden-tool">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">🎯</div>
+                    <h2 class="google-sans text-2xl font-bold text-blue-800">AI Prompt Builder</h2>
+                </div>
+                <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+            </div>
+            
+            <!-- Template Selection -->
+            <div class="mb-6">
+                <h2 class="font-bold text-gray-900 mb-3">Choose a Template:</h2>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('job-description')">
+                        <h3 class="font-semibold text-gray-900">📝 Job Description</h3>
+                        <p class="text-sm text-gray-600">Create compelling job postings</p>
+                    </div>
+                    
+                    <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('interview-questions')">
+                        <h3 class="font-semibold text-gray-900">❓ Interview Questions</h3>
+                        <p class="text-sm text-gray-600">Generate role-specific questions</p>
+                    </div>
+                    
+                    <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('candidate-email')">
+                        <h3 class="font-semibold text-gray-900">📧 Candidate Email</h3>
+                        <p class="text-sm text-gray-600">Write professional outreach</p>
+                    </div>
+                    
+                    <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('boolean-search')">
+                        <h3 class="font-semibold text-gray-900">🔍 Boolean Search</h3>
+                        <p class="text-sm text-gray-600">Build complex search queries</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt Builder Form -->
+            <div id="prompt-form" class="hidden">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Role/Position:</label>
+                        <input type="text" id="role-input" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g., Senior Software Engineer">
+                        
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 mt-4">Company/Industry:</label>
+                        <input type="text" id="company-input" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g., Fintech startup">
+                        
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 mt-4">Key Requirements:</label>
+                        <textarea id="requirements-input" class="w-full p-3 border border-gray-300 rounded-lg" rows="3" placeholder="e.g., 5+ years experience, Python, React"></textarea>
+                        
+                        <button onclick="generatePrompt()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mt-4 transition-colors">
+                            Generate Prompt
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Generated Prompt:</label>
+                        <div id="generated-prompt" class="bg-gray-50 border border-gray-300 rounded-lg p-3 min-h-[200px] font-mono text-sm whitespace-pre-wrap">
+                            Your customized prompt will appear here...
+                        </div>
+                        
+                        <button onclick="copyPrompt()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mt-3 transition-colors">
+                            📋 Copy Prompt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Enhancement Tool -->
+        <div id="email-enhancer" class="tool-section hidden-tool">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">📧</div>
+                    <h2 class="google-sans text-2xl font-bold text-blue-800">Email Enhancement Tool</h2>
+                </div>
+                <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Your Email Draft:</label>
+                    <textarea id="email-input" class="w-full p-3 border border-gray-300 rounded-lg" rows="12" placeholder="Paste your email draft here..."></textarea>
+                    
+                    <button onclick="enhanceEmail()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mt-3 transition-colors">
+                        🚀 Enhance with AI
+                    </button>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">AI Enhancement Suggestions:</label>
+                    <div id="email-suggestions" class="bg-gray-50 border border-gray-300 rounded-lg p-3 min-h-[300px] text-sm">
+                        Your AI-enhanced suggestions will appear here...
+                    </div>
+                    
+                    <button onclick="copyEnhanced()" class="w-full bg-green-600 hover:green-700 text-white font-semibold py-2 px-4 rounded-lg mt-3 transition-colors">
+                        📋 Copy Enhanced Email
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boolean Search Builder -->
+        <div id="boolean-search" class="tool-section hidden-tool">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">🔍</div>
+                    <h2 class="google-sans text-2xl font-bold text-blue-800">Boolean Search Builder</h2>
+                </div>
+                <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Job Title:</label>
+                    <input type="text" id="job-title" class="w-full p-3 border border-gray-300 rounded-lg mb-4" placeholder="e.g., Software Engineer">
+                    
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Required Skills (comma-separated):</label>
+                    <input type="text" id="required-skills" class="w-full p-3 border border-gray-300 rounded-lg mb-4" placeholder="e.g., Python, React, AWS">
+                    
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Years of Experience:</label>
+                    <input type="text" id="experience" class="w-full p-3 border border-gray-300 rounded-lg mb-4" placeholder="e.g., 3-5 years">
+                    
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Location:</label>
+                    <input type="text" id="location" class="w-full p-3 border border-gray-300 rounded-lg mb-4" placeholder="e.g., San Francisco, Remote">
+                    
+                    <button onclick="buildBooleanSearch()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                        🔍 Build Search Query
+                    </button>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Generated Boolean Search:</label>
+                    <div id="boolean-output" class="bg-gray-50 border border-gray-300 rounded-lg p-3 min-h-[200px] font-mono text-sm">
+                        Your Boolean search query will appear here...
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h3 class="font-semibold text-gray-700 mb-2">Platform-Specific Versions:</h3>
+                        <div class="space-y-2">
+                            <button onclick="generateForPlatform('linkedin')" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm">
+                                LinkedIn Search
+                            </button>
+                            <button onclick="generateForPlatform('indeed')" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm">
+                                Indeed Search
+                            </button>
+                            <button onclick="generateForPlatform('github')" class="w-full bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded text-sm">
+                                GitHub Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coming Soon Tools -->
+        <div id="resume-optimizer" class="tool-section hidden-tool">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">📄</div>
+                    <h2 class="google-sans text-2xl font-bold text-blue-800">Resume Optimizer</h2>
+                </div>
+                <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+            </div>
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">🚧</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Coming Soon!</h3>
+                <p class="text-gray-600">This tool is currently in development. Check back soon!</p>
+            </div>
+        </div>
+
+        <div id="meeting-summary" class="tool-section hidden-tool">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">📝</div>
+                    <h2 class="google-sans text-2xl font-bold text-blue-800">Meeting Summary Generator</h2>
+                </div>
+                <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+            </div>
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">⭐</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Premium Feature</h3>
+                <p class="text-gray-600 mb-4">This advanced tool is available in our premium tier.</p>
+                <button class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-6 rounded-lg">
+                    Learn More About Premium
+                </button>
+            </div>
+        </div>
+
+        <div id="document-analyzer" class="tool-section hidden-tool">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">📊</div>
+                    <h2 class="google-sans text-2xl font-bold text-blue-800">Document Analyzer</h2>
+                </div>
+                <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+            </div>
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">⭐</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Premium Feature</h3>
+                <p class="text-gray-600 mb-4">This advanced tool is available in our premium tier.</p>
+                <button class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-6 rounded-lg">
+                    Learn More About Premium
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tool management
+        function openTool(toolId) {
+            // Hide all tools
+            document.querySelectorAll('.tool-section').forEach(section => {
+                section.classList.remove('active-tool');
+                section.classList.add('hidden-tool');
+            });
+            
+            // Show selected tool
+            const tool = document.getElementById(toolId);
+            tool.classList.remove('hidden-tool');
+            tool.classList.add('active-tool');
+            
+            // Scroll to tool
+            tool.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function closeTool() {
+            document.querySelectorAll('.tool-section').forEach(section => {
+                section.classList.remove('active-tool');
+                section.classList.add('hidden-tool');
+            });
+        }
+
+        // Prompt Builder Functions (same as in beginner-3.html)
+        let selectedTemplate = '';
+        
+        const templates = {
+            'job-description': {
+                template: `Act as an experienced recruiter. Write a compelling job description for a [ROLE] position at a [COMPANY]. 
+
+Include the following:
+- Role overview and key responsibilities
+- Required qualifications: [REQUIREMENTS]
+- Preferred skills and experience
+- Company culture and benefits
+- Clear call-to-action
+
+Keep it engaging, professional, and under 300 words. Use bullet points for easy reading.`
+            },
+            'interview-questions': {
+                template: `Act as a hiring manager. Create 8-10 interview questions for a [ROLE] position at a [COMPANY].
+
+Include a mix of:
+- Behavioral questions (STAR method)
+- Technical/role-specific questions based on: [REQUIREMENTS]
+- Culture fit questions
+- Situational scenarios
+
+Format each question with the purpose/what you're evaluating in parentheses.`
+            },
+            'candidate-email': {
+                template: `Act as a professional recruiter. Write a personalized outreach email to a potential candidate for a [ROLE] position at [COMPANY].
+
+The email should:
+- Have an engaging subject line
+- Mention specific skills: [REQUIREMENTS]
+- Highlight the opportunity and company benefits
+- Include a clear call-to-action
+- Be professional but friendly
+- Keep it under 150 words
+
+Tone: Professional, enthusiastic, personalized`
+            },
+            'boolean-search': {
+                template: `Act as a sourcing expert. Create a comprehensive Boolean search string to find candidates for a [ROLE] position at [COMPANY].
+
+Based on these requirements: [REQUIREMENTS]
+
+Provide:
+1. A primary Boolean search string for LinkedIn
+2. An alternative search for job boards
+3. Key synonyms and variations to try
+4. Location and experience level modifiers
+
+Format the searches clearly with explanations of each component.`
+            }
+        };
+        
+        function selectTemplate(templateKey) {
+            // Remove previous selection
+            document.querySelectorAll('.prompt-template').forEach(el => {
+                el.classList.remove('border-blue-500', 'bg-blue-50');
+                el.classList.add('border-gray-300');
+            });
+            
+            // Select new template
+            event.target.closest('.prompt-template').classList.add('border-blue-500', 'bg-blue-50');
+            event.target.closest('.prompt-template').classList.remove('border-gray-300');
+            selectedTemplate = templateKey;
+            
+            // Show form
+            document.getElementById('prompt-form').classList.remove('hidden');
+        }
+        
+        function generatePrompt() {
+            if (!selectedTemplate) return;
+            
+            const role = document.getElementById('role-input').value || '[ROLE]';
+            const company = document.getElementById('company-input').value || '[COMPANY]';
+            const requirements = document.getElementById('requirements-input').value || '[REQUIREMENTS]';
+            
+            let prompt = templates[selectedTemplate].template;
+            prompt = prompt.replace(/\[ROLE\]/g, role);
+            prompt = prompt.replace(/\[COMPANY\]/g, company);
+            prompt = prompt.replace(/\[REQUIREMENTS\]/g, requirements);
+            
+            document.getElementById('generated-prompt').textContent = prompt;
+        }
+        
+        function copyPrompt() {
+            const promptText = document.getElementById('generated-prompt').textContent;
+            navigator.clipboard.writeText(promptText);
+            showCopyFeedback(event.target);
+        }
+
+        // Email Enhancement Functions
+        function enhanceEmail() {
+            const email = document.getElementById('email-input').value;
+            if (!email.trim()) {
+                alert('Please enter an email draft first!');
+                return;
+            }
+            
+            const suggestions = generateEmailSuggestions(email);
+            document.getElementById('email-suggestions').innerHTML = suggestions;
+        }
+
+        function generateEmailSuggestions(email) {
+            let suggestions = '<div class="space-y-3">';
+            
+            if (!email.toLowerCase().includes('subject:')) {
+                suggestions += '<div class="bg-yellow-50 border border-yellow-200 rounded p-2"><strong>📝 Add Subject Line:</strong> Include a compelling subject that mentions the role and company</div>';
+            }
+            
+            if (!email.includes('Hi ') && !email.includes('Hello ')) {
+                suggestions += '<div class="bg-blue-50 border border-blue-200 rounded p-2"><strong>👋 Personalization:</strong> Start with a personalized greeting using their name</div>';
+            }
+            
+            if (email.length < 100) {
+                suggestions += '<div class="bg-red-50 border border-red-200 rounded p-2"><strong>📏 Too Short:</strong> Add more details about the role and value proposition</div>';
+            }
+            
+            suggestions += '<div class="bg-purple-50 border border-purple-200 rounded p-3 mt-4"><strong>🚀 AI-Enhanced Version:</strong><br><br>';
+            suggestions += '<div class="font-mono text-sm bg-white p-3 rounded border mt-2">';
+            suggestions += generateEnhancedEmail(email);
+            suggestions += '</div></div>';
+            
+            suggestions += '</div>';
+            return suggestions;
+        }
+
+        function generateEnhancedEmail(originalEmail) {
+            let enhanced = originalEmail;
+            
+            if (!enhanced.toLowerCase().includes('subject:')) {
+                enhanced = 'Subject: Exciting Opportunity - [Role] at [Company]\n\n' + enhanced;
+            }
+            
+            enhanced = enhanced.replace(/^hi,?/i, 'Hi [Name],');
+            enhanced = enhanced.replace(/^hello,?/i, 'Hello [Name],');
+            
+            if (!enhanced.includes('Best') && !enhanced.includes('Regards')) {
+                enhanced += '\n\nBest regards,\n[Your Name]\n[Title] | [Company]\n[Email] | [Phone]';
+            }
+            
+            return enhanced;
+        }
+
+        function copyEnhanced() {
+            const suggestions = document.getElementById('email-suggestions').textContent;
+            navigator.clipboard.writeText(suggestions);
+            showCopyFeedback(event.target);
+        }
+
+        // Boolean Search Functions
+        function buildBooleanSearch() {
+            const jobTitle = document.getElementById('job-title').value;
+            const skills = document.getElementById('required-skills').value;
+            const experience = document.getElementById('experience').value;
+            const location = document.getElementById('location').value;
+            
+            if (!jobTitle) {
+                alert('Please enter a job title!');
+                return;
+            }
+            
+            let search = `("${jobTitle}" OR "${jobTitle.replace(' ', '')}")`;
+            
+            if (skills) {
+                const skillArray = skills.split(',').map(s => s.trim());
+                search += ' AND (' + skillArray.map(skill => `"${skill}"`).join(' OR ') + ')';
+            }
+            
+            if (experience) {
+                search += ` AND ("${experience}" OR "${experience.replace('-', ' to ')}")`;
+            }
+            
+            if (location) {
+                search += ` AND ("${location}")`;
+            }
+            
+            document.getElementById('boolean-output').textContent = search;
+        }
+
+        function generateForPlatform(platform) {
+            const baseSearch = document.getElementById('boolean-output').textContent;
+            if (!baseSearch || baseSearch === 'Your Boolean search query will appear here...') {
+                alert('Please build a search query first!');
+                return;
+            }
+            
+            let platformSearch = baseSearch;
+            
+            switch(platform) {
+                case 'linkedin':
+                    platformSearch = baseSearch + ' AND site:linkedin.com/in/';
+                    break;
+                case 'indeed':
+                    platformSearch = baseSearch.replace(/"/g, '');
+                    break;
+                case 'github':
+                    platformSearch = baseSearch + ' AND site:github.com';
+                    break;
+            }
+            
+            document.getElementById('boolean-output').textContent = platformSearch;
+        }
+
+        // Utility function
+        function showCopyFeedback(button) {
+            const originalText = button.textContent;
+            button.textContent = '✅ Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyst Learning Track - RPO Training Hub</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Analyst Learning Track</h1>
+            <p class="subtitle">Data-driven AI training for recruitment analysts</p>
+        </header>
+
+        <div class="role-welcome">
+            <div class="welcome-card">
+                <h2>Welcome, Analyst!</h2>
+                <p>As a recruitment analyst, you'll benefit most from our <strong>Intermediate Learning Path</strong>, with additional focus on data analysis, reporting, and AI-powered insights for recruitment metrics.</p>
+            </div>
+
+            <div class="recommended-modules">
+                <h3>🌟 Recommended Focus Areas</h3>
+                <div class="module-grid">
+                    <div class="module-card highlight">
+                        <h4>Data Analysis with AI</h4>
+                        <p>Learn to analyze recruitment data, identify trends, and generate insights</p>
+                    </div>
+                    <div class="module-card highlight">
+                        <h4>Automated Reporting</h4>
+                        <p>Create dynamic reports and dashboards using AI assistance</p>
+                    </div>
+                    <div class="module-card highlight">
+                        <h4>Predictive Analytics</h4>
+                        <p>Use AI for forecasting hiring needs and candidate success rates</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pathway-redirect">
+                <h3>🚀 Ready to Analyze?</h3>
+                <p>You'll be directed to the Intermediate Learning Path with analyst-specific examples and data-focused use cases.</p>
+                <button onclick="startAnalystPath()" class="cta-button">Begin Analyst Training</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startAnalystPath() {
+            // Set role-specific context
+            localStorage.setItem('userRole', 'analyst');
+            localStorage.setItem('roleSpecificFocus', JSON.stringify([
+                'data-analysis',
+                'reporting-automation',
+                'predictive-analytics',
+                'metrics-optimization'
+            ]));
+            
+            // Redirect to intermediate path
+            window.location.href = 'intermediate.html';
+        }
+
+        // Auto-redirect after 5 seconds if user doesn't click
+        setTimeout(() => {
+            startAnalystPath();
+        }, 5000);
+    </script>
+</body>
+</html>

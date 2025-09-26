@@ -75,7 +75,7 @@
                             <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-green-600 font-bold">1</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">What is AI? (Simple Explanation)</h3>
+                            <h2 class="google-sans text-xl font-bold text-gray-900">What is AI? (Simple Explanation)</h2>
                             <span class="ml-3 text-sm text-gray-500">⏱ 5 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Understand AI in plain English - what it is, what it isn't, and why it matters for your daily work.</p>
@@ -100,7 +100,7 @@
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">2</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">Your First AI Conversation</h3>
+                            <h2 class="google-sans text-xl font-bold text-gray-900">Your First AI Conversation</h2>
                             <span class="ml-3 text-sm text-gray-500">⏱ 8 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Learn how to "talk" to AI tools effectively - the basics of writing good prompts.</p>
@@ -122,7 +122,7 @@
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">3</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">Interactive Practice Session</h3>
+                            <h2 class="google-sans text-xl font-bold text-gray-900">Interactive Practice Session</h2>
                             <span class="ml-3 text-sm text-gray-500">⏱ 10 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Try it yourself! Practice writing prompts in a safe, guided environment.</p>
@@ -144,7 +144,7 @@
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">4</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">AI for Your Daily Tasks</h3>
+                            <h2 class="google-sans text-xl font-bold text-gray-900">AI for Your Daily Tasks</h2>
                             <span class="ml-3 text-sm text-gray-500">⏱ 12 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">See how AI can help with emails, research, writing, and other tasks you do every day.</p>
@@ -166,7 +166,7 @@
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">5</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">Your AI Journey Continues</h3>
+                            <h2 class="google-sans text-xl font-bold text-gray-900">Your AI Journey Continues</h2>
                             <span class="ml-3 text-sm text-gray-500">⏱ 5 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Celebrate your progress and discover what to learn next!</p>
@@ -196,6 +196,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateProgress();
             updateModuleStates();
+            displayRoleSpecificContent();
         });
         
         function startModule(moduleNumber) {
@@ -268,6 +269,21 @@
                     }
                 }
             });
+        }
+
+        function displayRoleSpecificContent() {
+            const userRole = localStorage.getItem('userRole');
+            if (userRole === 'coordinator') {
+                // Add coordinator-specific welcome message
+                const header = document.querySelector('.text-center.mb-8');
+                const roleMessage = document.createElement('div');
+                roleMessage.className = 'bg-green-50 border border-green-200 rounded-lg p-4 mt-4 max-w-md mx-auto';
+                roleMessage.innerHTML = `
+                    <div class="text-green-800 font-semibold mb-2">🤝 Coordinator Focus</div>
+                    <div class="text-green-700 text-sm">This path emphasizes practical applications, communication enhancement, and workflow optimization for daily coordination tasks.</div>
+                `;
+                header.appendChild(roleMessage);
+            }
         }
     </script>
 </body>
