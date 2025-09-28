@@ -7,32 +7,14 @@
     <title>Randstad GBS - AI Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="shared/hub-button.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="shared/fonts.css">
+    <link rel="stylesheet" href="shared/scroll-to-top.css">
+    <link rel="stylesheet" href="shared/buttons.css">
+    <link rel="stylesheet" href="shared/card-animations.css">
     <style>
-        .google-sans {
-            font-family: 'Google Sans', sans-serif;
-        }
+        /* Font styles now handled by shared/fonts.css */
 
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .hub-card {
-            border: 1px solid #dadce0;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease, filter 0.3s ease;
-        }
-
-        .hub-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .hub-card h3 {
-            color: #1967d2;
-            /* Google Blue */
-        }
+        /* Hub card styles now handled by shared/card-animations.css */
 
         /* Search functionality styles */
         .search-container {
@@ -156,18 +138,7 @@
             margin-top: 4px;
         }
 
-        /* Card filtering styles */
-        .hub-card.filtered-out {
-            opacity: 0.3;
-            filter: grayscale(50%);
-            transform: scale(0.95);
-            pointer-events: none;
-        }
-
-        .hub-card.highlighted {
-            border-color: #4A90E2;
-            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
+        /* Card filtering styles now handled by shared/card-animations.css */
 
         /* Search highlight */
         .search-highlight {
@@ -336,11 +307,11 @@
 
         .tour-button-secondary:hover {
             background: #f8f9fa;
-            color: #1967d2;
+            color: var(--btn-primary, #4A90E2);
         }
 
         .tour-button-primary {
-            background: #1967d2;
+            background: var(--btn-primary, #4A90E2);
             color: white;
             border: none;
             padding: 10px 20px;
@@ -352,7 +323,7 @@
         }
 
         .tour-button-primary:hover {
-            background: #1557b0;
+            background: var(--btn-primary-hover, #357ABD);
         }
 
         /* Tour Progress */
@@ -372,7 +343,7 @@
         }
 
         .tour-progress-dot.active {
-            background: #1967d2;
+            background: var(--btn-primary, #4A90E2);
             transform: scale(1.2);
         }
 
@@ -499,26 +470,26 @@
             <div
                 class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12 max-w-4xl mx-auto border border-blue-100">
                 <div class="text-center mb-6">
-                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2">Quick Wins - Start Using AI Today
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2">🚀 Quick Wins - Start Using AI Today
                     </h2>
                     <p class="text-gray-600">Immediate tools you can use right now to transform your daily work</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <a href="/gbs-prompts/"
-                        class="bg-white p-4 rounded-lg border transition-all duration-200 hover:shadow-md" style="border-color: #4A90E2;" onmouseover="this.style.borderColor='#357ABD'" onmouseout="this.style.borderColor='#4A90E2'">
-                        <div class="text-2xl mb-2"></div>
+                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
+                        <div class="text-2xl mb-2">✨</div>
                         <h3 class="font-semibold text-gray-900 mb-1">AI Prompts</h3>
                         <p class="text-sm text-gray-600">Ready-to-use prompts for emails, sourcing, and more</p>
                     </a>
                     <a href="/daily-focus/"
-                        class="bg-white p-4 rounded-lg border transition-all duration-200 hover:shadow-md" style="border-color: #4A90E2;" onmouseover="this.style.borderColor='#357ABD'" onmouseout="this.style.borderColor='#4A90E2'">
-                        <div class="text-2xl mb-2"></div>
+                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
+                        <div class="text-2xl mb-2">🎯</div>
                         <h3 class="font-semibold text-gray-900 mb-1">Daily Focus</h3>
                         <p class="text-sm text-gray-600">Micro-coaching cards for skill improvement</p>
                     </a>
                     <a href="/use-cases/"
-                        class="bg-white p-4 rounded-lg border transition-all duration-200 hover:shadow-md" style="border-color: #4A90E2;" onmouseover="this.style.borderColor='#357ABD'" onmouseout="this.style.borderColor='#4A90E2'">
-                        <div class="text-2xl mb-2"></div>
+                        class="bg-white p-4 rounded-lg border border-blue-200 hover:border-blue-400 transition-all duration-200 hover:shadow-md">
+                        <div class="text-2xl mb-2">💡</div>
                         <h3 class="font-semibold text-gray-900 mb-1">Success Stories</h3>
                         <p class="text-sm text-gray-600">See how colleagues save hours daily</p>
                     </a>
@@ -528,10 +499,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto" id="modules-grid">
 
                 <a href="/onboarding-flow/"
-                    class="hub-card bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-xl block border-2 border-green-200"
+                    class="card-hub card-gradient-green p-8 block"
                     data-keywords="onboarding get started new user orientation role-based personalized assessment quiz quick start">
                     <div class="flex items-center mb-2">
-                        <span class="text-2xl mr-2"></span>
+                        <span class="text-2xl mr-2">🌟</span>
                         <h3 class="google-sans text-2xl font-bold text-green-800">Get Started with AI</h3>
                     </div>
                     <p class="text-green-700">New to AI? Start here! Personalized onboarding based on your role, skill
@@ -540,54 +511,56 @@
                         ✓ Quick wins</div>
                 </a>
 
-                <a href="/rpo-training/" class="hub-card bg-white p-8 rounded-xl block"
+                <a href="/rpo-training/" class="card-hub p-8 block"
                     data-keywords="rpo ai acceleration program training curriculum foundations leadership strategy modules phases">
                     <h3 class="google-sans text-2xl font-bold mb-2">RPO AI Acceleration Program</h3>
                     <p class="text-gray-600">The complete, multi-phase training curriculum for all RPO team members,
                         from AI foundations to leadership strategy.</p>
                 </a>
 
-                <a href="/gbs-ai-workshop/" class="hub-card bg-white p-8 rounded-xl block"
+                <a href="/gbs-ai-workshop/" class="card-hub p-8 block"
                     data-keywords="gbs leaders guide interactive training prompt libraries simulators case studies workshop">
                     <h3 class="google-sans text-2xl font-bold mb-2">Guide for GBS Leaders</h3>
                     <p class="text-gray-600">An interactive training for GBS leaders, complete with prompt libraries,
                         simulators, and case studies.</p>
                 </a>
 
-                <a href="/daily-focus/" class="hub-card bg-white p-8 rounded-xl block"
+                <a href="/daily-focus/" class="card-hub p-8 block"
                     data-keywords="daily sourcing focus micro-coaching tool actionable cards talent sourcers skills">
                     <h3 class="google-sans text-2xl font-bold mb-2">Daily Sourcing Focus</h3>
                     <p class="text-gray-600">A daily micro-coaching tool with actionable focus cards designed to sharpen
                         the skills of our talent sourcers.</p>
                 </a>
 
-                <a href="/gbs-prompts/" class="hub-card bg-white p-8 rounded-xl block"
+                <a href="/gbs-prompts/" class="card-hub p-8 block"
                     data-keywords="gbs ai prompts library comprehensive searchable expert prompts daily tasks professionals">
                     <h3 class="google-sans text-2xl font-bold mb-2">GBS AI Prompts Library</h3>
                     <p class="text-gray-600">A comprehensive and searchable library of expert prompts designed to
                         accelerate daily tasks for GBS professionals.</p>
                 </a>
 
-                <a href="/knowledge-content/" class="hub-card bg-white p-8 rounded-xl block"
-                    data-keywords="knowledge content wealth resources information learning materials documentation">
+                <a href="/knowledge-content/" class="card-hub p-8 block"
+                    data-keywords="knowledge content wealth resources information learning materials documentation best practices guides tutorials">
                     <h3 class="google-sans text-2xl font-bold mb-2">Knowledge Content</h3>
-                    <p class="text-gray-600">Access a wealth of knowledge content here.</p>
+                    <p class="text-gray-600">Essential guides, best practices, and tutorials covering AI fundamentals,
+                        implementation strategies, and troubleshooting common challenges.</p>
                 </a>
 
-                <a href="/ai-sme/" class="hub-card bg-white p-8 rounded-xl block"
-                    data-keywords="ai sme subject matter expert knowledge resources artificial intelligence expertise">
+                <a href="/ai-sme/" class="card-hub p-8 block"
+                    data-keywords="ai sme subject matter expert knowledge resources artificial intelligence expertise advanced techniques deep dive">
                     <h3 class="google-sans text-2xl font-bold mb-2">AI SME</h3>
-                    <p class="text-gray-600">Explore expert AI knowledge and resources.</p>
+                    <p class="text-gray-600">Advanced AI techniques, expert insights, and deep-dive resources for power
+                        users looking to maximize their AI capabilities and become team champions.</p>
                 </a>
 
-                <a href="/use-cases/" class="hub-card bg-white p-8 rounded-xl block"
+                <a href="/use-cases/" class="card-hub p-8 block"
                     data-keywords="ai success stories real-world examples case studies transforms daily work randstad gbs impact">
                     <h3 class="google-sans text-2xl font-bold mb-2">AI Success Stories</h3>
                     <p class="text-gray-600">Real-world examples and case studies showcasing how AI transforms daily
                         work at Randstad GBS. See the impact firsthand.</p>
                 </a>
 
-                <a href="/sourcing-workshop/" class="hub-card bg-white p-8 rounded-xl block"
+                <a href="/sourcing-workshop/" class="card-hub p-8 block"
                     data-keywords="sourcing workshop advanced techniques market intelligence candidate engagement coming soon">
                     <h3 class="google-sans text-2xl font-bold mb-2">Sourcing Workshop</h3>
                     <p class="text-gray-600">An in-depth workshop dedicated to advanced sourcing techniques, market
@@ -608,7 +581,7 @@
                     <h3 class="text-lg font-medium text-gray-900 mb-2">No results found</h3>
                     <p class="text-gray-500 mb-4">Try adjusting your search terms or browse our available modules above.
                     </p>
-                    <button class="font-medium" style="color: #4A90E2;" onmouseover="this.style.color='#357ABD'" onmouseout="this.style.color='#4A90E2'" onclick="clearSearch()">Clear
+                    <button class="text-blue-600 hover:text-blue-800 font-medium" onclick="clearSearch()">Clear
                         search</button>
                 </div>
             </div>
@@ -617,6 +590,7 @@
 
     <div id="footer-placeholder"></div>
     <script src="shared/scripts/footer.js" defer></script>
+    <script src="shared/scripts/scroll-to-top.js" defer></script>
 
     <script>
         // Global Search Functionality with Site-wide Content Search
@@ -628,7 +602,7 @@
                 this.searchResultsContent = document.getElementById('search-results-content');
                 this.modulesGrid = document.getElementById('modules-grid');
                 this.noResults = document.getElementById('no-results');
-                this.cards = document.querySelectorAll('.hub-card');
+                this.cards = document.querySelectorAll('.card-hub');
 
                 this.searchData = [];
                 this.cardData = [];
@@ -921,9 +895,9 @@
                     ${sectionDisplay}
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
                         <span class="search-result-category">${result.category || this.getCategoryFromUrl(result.url)}</span>
-                        ${result.type === 'lesson' ? '<span style="font-size: 11px; color: #9ca3af;">Lesson</span>' : ''}
-                        ${result.type === 'prompt-category' ? '<span style="font-size: 11px; color: #9ca3af;">Prompts</span>' : ''}
-                        ${result.type === 'use-case' ? '<span style="font-size: 11px; color: #9ca3af;">Case Study</span>' : ''}
+                        ${result.type === 'lesson' ? '<span style="font-size: 11px; color: #9ca3af;">📚 Lesson</span>' : ''}
+                        ${result.type === 'prompt-category' ? '<span style="font-size: 11px; color: #9ca3af;">🎯 Prompts</span>' : ''}
+                        ${result.type === 'use-case' ? '<span style="font-size: 11px; color: #9ca3af;">📈 Case Study</span>' : ''}
                     </div>
                 `;
 
@@ -1248,9 +1222,9 @@
                 `;
 
                 message.innerHTML = `
-                    <h3 style="color: #1967d2; font-size: 18px; font-weight: 700; margin-bottom: 8px; font-family: 'Google Sans', sans-serif;">🎉 You're all set!</h3>
+                    <h3 style="color: var(--btn-primary, #4A90E2); font-size: 18px; font-weight: 700; margin-bottom: 8px; font-family: 'Google Sans', sans-serif;">🎉 You're all set!</h3>
                     <p style="color: #5f6368; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Start exploring the GBS Learning Hub and discover how AI can transform your daily work.</p>
-                    <button onclick="this.parentElement.remove()" style="background: #1967d2; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer;">Got it!</button>
+                    <button onclick="this.parentElement.remove()" class="btn-primary btn-sm">Got it!</button>
                 `;
 
                 document.body.appendChild(message);

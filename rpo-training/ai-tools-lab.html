@@ -71,7 +71,7 @@
             <!-- AI Prompt Builder -->
             <div class="tool-card" onclick="openTool('prompt-builder')">
                 <div class="text-3xl mb-3">🎯</div>
-                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Prompt Builder</h2>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Prompt Builder</h3>
                 <p class="text-gray-600 text-sm mb-3">Create effective prompts with templates for job descriptions, interview questions, and more.</p>
                 <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
             </div>
@@ -79,7 +79,7 @@
             <!-- Email Enhancement Tool -->
             <div class="tool-card" onclick="openTool('email-enhancer')">
                 <div class="text-3xl mb-3">📧</div>
-                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Email Enhancement</h2>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Email Enhancement</h3>
                 <p class="text-gray-600 text-sm mb-3">Transform your recruitment emails with AI assistance and before/after examples.</p>
                 <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
             </div>
@@ -87,7 +87,7 @@
             <!-- Boolean Search Constructor -->
             <div class="tool-card" onclick="openTool('boolean-search')">
                 <div class="text-3xl mb-3">🔍</div>
-                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Boolean Search Builder</h2>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Boolean Search Builder</h3>
                 <p class="text-gray-600 text-sm mb-3">Build complex search queries for LinkedIn and job boards with AI assistance.</p>
                 <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
             </div>
@@ -95,7 +95,7 @@
             <!-- Resume Optimizer -->
             <div class="tool-card" onclick="openTool('resume-optimizer')">
                 <div class="text-3xl mb-3">📄</div>
-                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Resume Optimizer</h2>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Resume Optimizer</h3>
                 <p class="text-gray-600 text-sm mb-3">Analyze and improve resumes with AI-powered suggestions and formatting tips.</p>
                 <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
             </div>
@@ -103,7 +103,7 @@
             <!-- Meeting Summary Generator -->
             <div class="tool-card premium" onclick="openTool('meeting-summary')">
                 <div class="text-3xl mb-3">📝</div>
-                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Meeting Summary Generator</h2>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Meeting Summary Generator</h3>
                 <p class="text-gray-600 text-sm mb-3">Convert interview notes into structured summaries and action items.</p>
                 <div class="text-amber-700 font-semibold text-sm">Premium Tool →</div>
             </div>
@@ -111,7 +111,7 @@
             <!-- Document Analyzer -->
             <div class="tool-card premium" onclick="openTool('document-analyzer')">
                 <div class="text-3xl mb-3">📊</div>
-                <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Document Analyzer</h2>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Document Analyzer</h3>
                 <p class="text-gray-600 text-sm mb-3">Analyze job descriptions, resumes, and other documents for AI improvement suggestions.</p>
                 <div class="text-amber-700 font-semibold text-sm">Premium Tool →</div>
             </div>
@@ -131,25 +131,25 @@
             
             <!-- Template Selection -->
             <div class="mb-6">
-                <h2 class="font-bold text-gray-900 mb-3">Choose a Template:</h2>
+                <h3 class="font-bold text-gray-900 mb-3">Choose a Template:</h3>
                 <div class="grid md:grid-cols-2 gap-3">
                     <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('job-description')">
-                        <h3 class="font-semibold text-gray-900">📝 Job Description</h3>
+                        <h4 class="font-semibold text-gray-900">📝 Job Description</h4>
                         <p class="text-sm text-gray-600">Create compelling job postings</p>
                     </div>
                     
                     <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('interview-questions')">
-                        <h3 class="font-semibold text-gray-900">❓ Interview Questions</h3>
+                        <h4 class="font-semibold text-gray-900">❓ Interview Questions</h4>
                         <p class="text-sm text-gray-600">Generate role-specific questions</p>
                     </div>
                     
                     <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('candidate-email')">
-                        <h3 class="font-semibold text-gray-900">📧 Candidate Email</h3>
+                        <h4 class="font-semibold text-gray-900">📧 Candidate Email</h4>
                         <p class="text-sm text-gray-600">Write professional outreach</p>
                     </div>
                     
                     <div class="prompt-template bg-white border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-blue-500" onclick="selectTemplate('boolean-search')">
-                        <h3 class="font-semibold text-gray-900">🔍 Boolean Search</h3>
+                        <h4 class="font-semibold text-gray-900">🔍 Boolean Search</h4>
                         <p class="text-sm text-gray-600">Build complex search queries</p>
                     </div>
                 </div>
@@ -256,7 +256,7 @@
                     </div>
                     
                     <div class="mt-4">
-                        <h3 class="font-semibold text-gray-700 mb-2">Platform-Specific Versions:</h3>
+                        <h4 class="font-semibold text-gray-700 mb-2">Platform-Specific Versions:</h4>
                         <div class="space-y-2">
                             <button onclick="generateForPlatform('linkedin')" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm">
                                 LinkedIn Search

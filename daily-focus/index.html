@@ -6,10 +6,12 @@
     <title>Daily Sourcing Focus</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
         #card-of-the-day-container, .card-container {
@@ -23,16 +25,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            animation: fadeIn 0.4s ease-in-out;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        /* Card animation now handled by shared/card-animations.css */
         .filter-button.active {
-            background-color: #4f46e5; /* indigo-600 */
+            background-color: var(--btn-primary, #4A90E2); /* Randstad Blue */
             color: white;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            box-shadow: 0 4px 6px -1px rgba(74, 144, 226, 0.3);
         }
         /* Progress Bar */
         .progress-bar-inner {
@@ -64,7 +62,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-50 text-gray-800">
 
     <a href="../index.html" class="hub-button">Back To Hub</a>
 
@@ -76,7 +74,7 @@
 
         <!-- Card of the Day Section -->
         <section id="card-of-the-day-section" class="mb-10">
-            <h2 class="text-2xl font-bold text-center text-indigo-700 mb-4">Today's Focus</h2>
+            <h2 class="text-2xl font-bold text-center mb-4" style="color: var(--btn-primary, #4A90E2);">Today's Focus</h2>
             <div id="card-of-the-day-container">
                 <!-- The specific card for the day will be injected here -->
             </div>
@@ -114,6 +112,7 @@
 
     <div id="footer-placeholder"></div>
     <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
 
     <script>
         // --- App State ---
@@ -169,7 +168,8 @@
                     <li class="action-item rounded-lg ${isChecked ? 'completed' : ''}">
                         <label for="action-${pointId}-${index}" class="flex items-center p-3 cursor-pointer">
                             <input id="action-${pointId}-${index}" type="checkbox"
-                                   class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                   class="h-5 w-5 rounded border-gray-300"
+                                   style="color: var(--btn-primary, #4A90E2); --tw-ring-color: rgba(74, 144, 226, 0.5);"
                                    ${isChecked ? 'checked' : ''}
                                    onchange="handleCheckboxChange(this, '${pointId}', ${index})">
                             <span class="ml-3 text-gray-700">${action}</span>
@@ -181,7 +181,7 @@
             cardElement.innerHTML = `
                 <div>
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-sm font-semibold text-indigo-600">${point.category}</span>
+                        <span class="text-sm font-semibold" style="color: var(--btn-primary, #4A90E2);">${point.category}</span>
                         <span class="progress-text text-sm font-medium text-gray-500"></span>
                     </div>
                     <div class="progress-bar w-full bg-gray-200 rounded-full h-2.5 mb-4">

@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Practice Simulation - Beginner Module 3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
-        .google-sans { font-family: 'Google Sans', sans-serif; }
-        body { font-family: 'Roboto', sans-serif; }
-        
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .simulation-chat {
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             border: 2px solid #e2e8f0;
@@ -21,7 +29,7 @@
             max-height: 500px;
             overflow-y: auto;
         }
-        
+
         .user-message {
             background: #3b82f6;
             color: white;
@@ -31,7 +39,7 @@
             max-width: 80%;
             margin-left: auto;
         }
-        
+
         .ai-message {
             background: #f1f5f9;
             color: #1e293b;
@@ -41,7 +49,7 @@
             max-width: 80%;
             border: 1px solid #e2e8f0;
         }
-        
+
         .scenario-card {
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border: 2px solid #f59e0b;
@@ -49,7 +57,7 @@
             padding: 1.5rem;
             margin: 1rem 0;
         }
-        
+
         .input-area {
             background: white;
             border: 2px solid #e2e8f0;
@@ -57,7 +65,7 @@
             padding: 1rem;
             margin-top: 1rem;
         }
-        
+
         .hint-box {
             background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
             border: 1px solid #0ea5e9;
@@ -65,7 +73,7 @@
             padding: 1rem;
             margin: 1rem 0;
         }
-        
+
         .feedback-good {
             background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
             border: 2px solid #22c55e;
@@ -73,7 +81,7 @@
             padding: 1rem;
             margin: 1rem 0;
         }
-        
+
         .feedback-improve {
             background: linear-gradient(135deg, #fef7f0 0%, #fed7aa 100%);
             border: 2px solid #f97316;
@@ -81,7 +89,7 @@
             padding: 1rem;
             margin: 1rem 0;
         }
-        
+
         .progress-indicator {
             position: fixed;
             top: 80px;
@@ -94,16 +102,17 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Back to Hub Button -->
     <a href="../../../index.html" class="hub-button">Back To Hub</a>
-    
+
     <!-- Progress Indicator -->
     <div class="progress-indicator">
         <div class="text-sm font-semibold text-gray-700">Module 3 of 5</div>
         <div class="text-xs text-gray-500">Interactive Practice</div>
     </div>
-    
+
     <div class="container mx-auto px-4 py-8 max-w-4xl">
         <!-- Header -->
         <div class="text-center mb-8">
@@ -114,19 +123,23 @@
 
         <!-- Main Content -->
         <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
-            
+
             <!-- Current Scenario -->
             <div id="scenario-container">
                 <div class="scenario-card">
                     <div class="flex items-start">
                         <div class="text-2xl mr-3">📧</div>
                         <div>
-                            <h2 class="google-sans font-bold text-amber-800 mb-2">Practice Scenario 1: Writing a Follow-up Email</h2>
+                            <h3 class="google-sans font-bold text-amber-800 mb-2">Practice Scenario 1: Writing a
+                                Follow-up Email</h3>
                             <p class="text-amber-700 mb-3">
-                                You interviewed a candidate named Alex Johnson for a Marketing Coordinator position last week. You want to send a follow-up email to let them know they've moved to the next round and schedule a second interview.
+                                You interviewed a candidate named Alex Johnson for a Marketing Coordinator position last
+                                week. You want to send a follow-up email to let them know they've moved to the next
+                                round and schedule a second interview.
                             </p>
                             <div class="text-sm text-amber-600">
-                                <strong>Your task:</strong> Write a prompt that will help AI create this follow-up email.
+                                <strong>Your task:</strong> Write a prompt that will help AI create this follow-up
+                                email.
                             </div>
                         </div>
                     </div>
@@ -136,9 +149,10 @@
             <!-- Simulation Chat Area -->
             <div class="simulation-chat" id="chat-area">
                 <div class="ai-message">
-                    👋 Hi! I'm your AI practice assistant. I'm here to help you practice writing good prompts. 
+                    👋 Hi! I'm your AI practice assistant. I'm here to help you practice writing good prompts.
                     <br><br>
-                    Look at the scenario above, then type your prompt in the box below. I'll give you feedback and help you improve!
+                    Look at the scenario above, then type your prompt in the box below. I'll give you feedback and help
+                    you improve!
                     <br><br>
                     <em>Remember: Be specific about what you want, who it's for, and what tone to use.</em>
                 </div>
@@ -149,17 +163,15 @@
                 <label for="user-prompt" class="block text-sm font-semibold text-gray-700 mb-2">
                     Type your AI prompt here:
                 </label>
-                <textarea 
-                    id="user-prompt" 
-                    rows="4" 
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                    placeholder="Example: Write an email to Alex Johnson about..."
-                ></textarea>
+                <textarea id="user-prompt" rows="4"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Example: Write an email to Alex Johnson about..."></textarea>
                 <div class="flex justify-between items-center mt-3">
                     <button onclick="showHint()" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
                         💡 Need a hint?
                     </button>
-                    <button onclick="submitPrompt()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                    <button onclick="submitPrompt()"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
                         Submit Prompt
                     </button>
                 </div>
@@ -170,9 +182,11 @@
                 <div class="flex items-start">
                     <div class="text-xl mr-3">💡</div>
                     <div>
-                        <h3 class="font-bold text-blue-800 mb-2">Hint for this scenario:</h3>
+                        <h4 class="font-bold text-blue-800 mb-2">Hint for this scenario:</h4>
                         <p class="text-blue-700 text-sm">
-                            Think about: What type of document (email), who it's to (Alex Johnson), what the purpose is (follow-up about moving to next round), what information to include (scheduling second interview), and what tone (professional but encouraging).
+                            Think about: What type of document (email), who it's to (Alex Johnson), what the purpose is
+                            (follow-up about moving to next round), what information to include (scheduling second
+                            interview), and what tone (professional but encouraging).
                         </p>
                     </div>
                 </div>
@@ -187,8 +201,9 @@
             <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
                 ← Back to Beginner Path
             </a>
-            
-            <button id="complete-btn" onclick="completeModule()" class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed" disabled>
+
+            <button id="complete-btn" onclick="completeModule()"
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed" disabled>
                 Complete Practice Session
             </button>
         </div>
@@ -197,7 +212,7 @@
     <script>
         let currentScenario = 1;
         let practiceCompleted = false;
-        
+
         const scenarios = [
             {
                 icon: "📧",
@@ -228,32 +243,32 @@
                 hint: "Consider: What type of content (interview questions), for what role (Customer Service Rep), what skills to assess (communication, problem-solving), and what question types (behavioral, situational)."
             }
         ];
-        
+
         function showHint() {
             const hintBox = document.getElementById('hint-box');
             hintBox.classList.remove('hidden');
         }
-        
+
         function submitPrompt() {
             const userPrompt = document.getElementById('user-prompt').value.trim();
-            
+
             if (!userPrompt) {
                 alert('Please enter a prompt first!');
                 return;
             }
-            
+
             // Add user message to chat
             addMessageToChat(userPrompt, 'user');
-            
+
             // Analyze the prompt and provide feedback
             setTimeout(() => {
                 const feedback = analyzePrompt(userPrompt, currentScenario - 1);
                 addMessageToChat(feedback.message, 'ai');
                 showFeedback(feedback);
-                
+
                 // Clear input
                 document.getElementById('user-prompt').value = '';
-                
+
                 // If good prompt, enable next scenario or completion
                 if (feedback.score >= 3) {
                     if (currentScenario < scenarios.length) {
@@ -266,20 +281,20 @@
                 }
             }, 1000);
         }
-        
+
         function analyzePrompt(prompt, scenarioIndex) {
             const scenario = scenarios[scenarioIndex];
             const promptLower = prompt.toLowerCase();
             let score = 0;
             let feedback = [];
-            
+
             // Check for key elements
             scenario.goodPrompts.forEach(element => {
                 if (promptLower.includes(element)) {
                     score++;
                 }
             });
-            
+
             // Generate feedback based on score
             if (score >= 4) {
                 return {
@@ -301,7 +316,7 @@
                 };
             }
         }
-        
+
         function addMessageToChat(message, sender) {
             const chatArea = document.getElementById('chat-area');
             const messageDiv = document.createElement('div');
@@ -310,23 +325,23 @@
             chatArea.appendChild(messageDiv);
             chatArea.scrollTop = chatArea.scrollHeight;
         }
-        
+
         function showFeedback(feedback) {
             const feedbackArea = document.getElementById('feedback-area');
             const feedbackClass = feedback.type === 'excellent' || feedback.type === 'good' ? 'feedback-good' : 'feedback-improve';
-            
+
             feedbackArea.innerHTML = `
                 <div class="${feedbackClass}">
-                    <h3 class="font-bold mb-2">Feedback on your prompt:</h3>
+                    <h4 class="font-bold mb-2">Feedback on your prompt:</h4>
                     <p class="text-sm">${feedback.message}</p>
                 </div>
             `;
         }
-        
+
         function nextScenario() {
             currentScenario++;
             const scenario = scenarios[currentScenario - 1];
-            
+
             document.getElementById('scenario-container').innerHTML = `
                 <div class="scenario-card">
                     <div class="flex items-start">
@@ -341,48 +356,275 @@
                     </div>
                 </div>
             `;
-            
+
             // Update hint
             document.getElementById('hint-box').innerHTML = `
                 <div class="flex items-start">
                     <div class="text-xl mr-3">💡</div>
                     <div>
-                        <h3 class="font-bold text-blue-800 mb-2">Hint for this scenario:</h3>
+                        <h4 class="font-bold text-blue-800 mb-2">Hint for this scenario:</h4>
                         <p class="text-blue-700 text-sm">${scenario.hint}</p>
                     </div>
                 </div>
             `;
             document.getElementById('hint-box').classList.add('hidden');
-            
+
             addMessageToChat(`Great job! Let's try scenario ${currentScenario}. Look at the new scenario above and write your prompt.`, 'ai');
         }
-        
+
         function enableCompletion() {
             practiceCompleted = true;
             const completeBtn = document.getElementById('complete-btn');
             completeBtn.disabled = false;
             completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
             completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-            
+
             addMessageToChat(`🎉 Fantastic! You've completed both practice scenarios. You're getting really good at writing AI prompts. Click "Complete Practice Session" when you're ready to move on.`, 'ai');
         }
-        
+
         function completeModule() {
             if (!practiceCompleted) {
                 alert('Please complete the practice scenarios first!');
                 return;
             }
-            
+
             // Mark module as completed
             let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
             if (!completedModules.includes(3)) {
                 completedModules.push(3);
                 localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
             }
-            
-            alert('🎉 Practice session completed! You now have hands-on experience with AI prompting. Ready for Module 4?');
-            window.location.href = '../beginner.html';
+
+            showCompletionModal();
         }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../beginner.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            53%,
+            80%,
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            40%,
+            43% {
+                transform: translate3d(0, -15px, 0);
+            }
+
+            70% {
+                transform: translate3d(0, -7px, 0);
+            }
+
+            90% {
+                transform: translate3d(0, -2px, 0);
+            }
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-next-step {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🎯</div>
+                <h2 class="modal-title google-sans">Practice Session Completed!</h2>
+                <p class="modal-subtitle">Hands-on experience gained</p>
+            </div>
+
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now have hands-on experience with AI prompting and real-world practice scenarios.
+                </p>
+
+                <div class="modal-next-step">
+                    <strong>🚀 Next Up:</strong> Module 4 - Apply AI to your daily work tasks
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                    <div class="text-blue-800 font-semibold text-sm mb-1">✨ What You've Practiced:</div>
+                    <ul class="text-blue-700 text-sm space-y-1 text-left">
+                        <li>• Real AI conversation scenarios</li>
+                        <li>• Prompt refinement techniques</li>
+                        <li>• Problem-solving with AI</li>
+                        <li>• Practical application skills</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 4 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Practice More
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

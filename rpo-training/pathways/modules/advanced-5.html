@@ -438,11 +438,250 @@
             // Mark as AI Strategy Leader
             localStorage.setItem('ai-leadership-certified', 'true');
             
-            alert('🎉🎉🎉 CONGRATULATIONS! You have successfully completed the Advanced AI Learning Path and earned AI Strategy Leader certification! You now possess the strategic knowledge and leadership skills to drive AI transformation at the highest organizational levels. You are ready to lead the future of work!');
-            
-            // Redirect to main hub to celebrate achievement
-            window.location.href = '../../../index.html';
+            showCompletionModal();
         }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToHub() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../../../index.html';
+            }, 300);
+        }
+
+        function shareAchievement() {
+            // Future: Add social sharing functionality
+            alert('🎉 Share your AI Strategy Leader certification on LinkedIn!');
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 650px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 4rem;
+            animation: bounce 0.6s ease-out;
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.3rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-certification {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        .modal-btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .modal-btn-tertiary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-tertiary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">👑</div>
+                <h2 class="modal-title google-sans">CONGRATULATIONS!</h2>
+                <p class="modal-subtitle">Advanced AI Learning Path Completed</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You have successfully completed the Advanced AI Learning Path and earned AI Strategy Leader certification! You now possess the strategic knowledge and leadership skills to drive AI transformation at the highest organizational levels.
+                </p>
+                
+                <div class="modal-certification">
+                    <strong>🏆 CERTIFICATION EARNED:</strong><br>
+                    AI Strategy Leader - Executive Level
+                </div>
+                
+                <div class="bg-gradient-to-r from-purple-50 to-yellow-50 border border-purple-200 rounded-lg p-4 mb-4">
+                    <div class="text-purple-800 font-semibold text-sm mb-2">✨ Your Executive Skill Set:</div>
+                    <div class="grid md:grid-cols-2 gap-2 text-left">
+                        <ul class="text-purple-700 text-sm space-y-1">
+                            <li>• Strategic AI leadership</li>
+                            <li>• Custom solution development</li>
+                            <li>• Enterprise integration</li>
+                        </ul>
+                        <ul class="text-yellow-700 text-sm space-y-1">
+                            <li>• Team implementation</li>
+                            <li>• Organizational transformation</li>
+                            <li>• Executive communication</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p class="text-lg font-semibold text-gray-800">🚀 You are ready to lead the future of work!</p>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="shareAchievement()" class="modal-btn modal-btn-primary">
+                    📢 Share Achievement
+                </button>
+                <button onclick="continueToHub()" class="modal-btn modal-btn-secondary">
+                    🏠 Return to Hub
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-tertiary">
+                    📋 Review Path
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

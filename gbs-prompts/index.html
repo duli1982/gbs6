@@ -7,15 +7,16 @@
     <title>Gemini Prompt Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
         body {
-            font-family: 'Inter', sans-serif;
             background-color: #f8f9fa;
-            /* Consistent with main site background */
-            color: #374151;
-            /* Consistent with main site text color */
+            /* Standardized background */
+            color: #4A4A4A;
+            /* Dark gray text used across the site */
         }
 
         /* --- Custom Scrollbar for lists --- */
@@ -37,19 +38,7 @@
             background: #94a3b8;
         }
 
-        /* --- General Card Style with Hover Animation --- */
-        .prompt-block {
-            border: 1px solid #e5e7eb;
-            border-radius: 0.75rem;
-            background-color: #FFFFFF;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .prompt-block:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
+        /* Prompt card styles now handled by shared/card-animations.css */
 
         /* --- Homepage Category Card --- */
         .category-card-list {
@@ -415,7 +404,7 @@
         .quick-start-section.white .quick-start-tips,
         .quick-start-section.white .quick-start-steps li,
         .quick-start-section.white .quick-start-steps li::before {
-            color: #374151 !important;
+            color: #4A4A4A !important;
             /* site body color */
         }
 
@@ -430,7 +419,7 @@
         .quick-start-section .quick-start-steps li::before {
             background: transparent !important;
             /* remove green fill */
-            color: #374151 !important;
+            color: #4A4A4A !important;
             /* number uses page text color */
             border: 1px solid #E5E7EB !important;
             /* soft outline so circle remains visible */
@@ -454,7 +443,7 @@
         .quick-start-section .difficulty-badge,
         .quick-start-section .time-badge {
             background: transparent !important;
-            color: #374151 !important;
+            color: #4A4A4A !important;
             border-color: #E5E7EB !important;
             box-shadow: none !important;
         }
@@ -764,7 +753,7 @@
             if (!quickStart || !quickStart.steps || quickStart.steps.length === 0) return '';
             const stepsHTML = quickStart.steps.map(step => `<li>${step}</li>`).join('');
             const tipsHTML = quickStart.tips && quickStart.tips.length
-                ? `<div class="quick-start-tips"><h3>Pro Tips</h3><ul>${quickStart.tips.map(t => `<li>${t}</li>`).join('')}</ul></div>`
+                ? `<div class="quick-start-tips"><h4>Pro Tips</h4><ul>${quickStart.tips.map(t => `<li>${t}</li>`).join('')}</ul></div>`
                 : '';
             const skin = (quickStart.skin === 'white' || quickStart.skin === 'plain') ? quickStart.skin : 'plain';
             return `
@@ -902,7 +891,7 @@
                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2z" />
                     </svg>
-                    <h2 class="mt-2 text-sm font-semibold text-gray-900">No prompts found</h2>
+                    <h3 class="mt-2 text-sm font-semibold text-gray-900">No prompts found</h3>
                     <p class="mt-1 text-sm text-gray-500">We couldn’t find anything with that search term. Please try again.</p>
                     <div class="mt-6">
                         <button type="button" id="clear-search-suggestions-btn" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -1235,7 +1224,7 @@ copyGemBtn.addEventListener('click', () => {
             <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mb-4">
                 <span class="text-white text-2xl">💎</span>
             </div>
-            <h2 class="text-2xl font-bold text-gray-900">Create Custom Gem</h2>
+            <h3 class="text-2xl font-bold text-gray-900">Create Custom Gem</h3>
             <p class="text-gray-600 mt-2">Transform your prompt into a structured, reusable Gemini Gem</p>
         </div>
         
@@ -1301,7 +1290,7 @@ copyGemBtn.addEventListener('click', () => {
                     ✨ Generated Gem
                 </label>
                 <button id="copy-gem-btn"
-                    class="px-4 py-2 text-white text-sm font-medium rounded-lg transition-colors" style="background-color: #4A90E2;" onmouseover="this.style.backgroundColor='#357ABD'" onmouseout="this.style.backgroundColor='#4A90E2'">
+                    class="px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors">
                     📋 Copy Gem
                 </button>
             </div>
@@ -1323,6 +1312,7 @@ copyGemBtn.addEventListener('click', () => {
 </div>
     </div>
     <script src="../shared/scripts/smooth-scroll.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
 </body>
 
 </html>

@@ -6,10 +6,11 @@
     <title>AI Skills Assessment - Randstad GBS Learning Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
-        .google-sans { font-family: 'Google Sans', sans-serif; }
-        body { font-family: 'Roboto', sans-serif; }
+        /* Font styles now handled by shared/fonts.css */
         
         .question-card {
             transition: all 0.3s ease;
@@ -37,20 +38,7 @@
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
         }
         
-        .continue-btn {
-            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .continue-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
-        }
-        
-        .continue-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
+        /* Continue button styles now handled by shared/buttons.css */
         
         .progress-bar {
             transition: width 0.5s ease;
@@ -97,7 +85,7 @@
             <div class="space-y-8">
                 <!-- Question 1 -->
                 <div class="question-card rounded-xl p-6" id="question-1">
-                    <h2 class="google-sans text-lg font-bold text-gray-900 mb-4">1. How familiar are you with AI tools?</h2>
+                    <h3 class="google-sans text-lg font-bold text-gray-900 mb-4">1. How familiar are you with AI tools?</h3>
                     <div class="space-y-3">
                         <label class="radio-option flex items-start p-4 rounded-lg">
                             <input type="radio" name="ai-familiarity" value="beginner" class="mt-1 mr-4">
@@ -125,7 +113,7 @@
                 
                 <!-- Question 2 -->
                 <div class="question-card rounded-xl p-6" id="question-2">
-                    <h2 class="google-sans text-lg font-bold text-gray-900 mb-4">2. What's your biggest time challenge?</h2>
+                    <h3 class="google-sans text-lg font-bold text-gray-900 mb-4">2. What's your biggest time challenge?</h3>
                     <div class="space-y-3">
                         <label class="radio-option flex items-start p-4 rounded-lg">
                             <input type="radio" name="time-challenge" value="sourcing" class="mt-1 mr-4">
@@ -160,7 +148,7 @@
            
                 <!-- Question 3 -->
                 <div class="question-card rounded-xl p-6" id="question-3">
-                    <h2 class="google-sans text-lg font-bold text-gray-900 mb-4">3. What would you like to achieve first?</h2>
+                    <h3 class="google-sans text-lg font-bold text-gray-900 mb-4">3. What would you like to achieve first?</h3>
                     <div class="space-y-3">
                         <label class="radio-option flex items-start p-4 rounded-lg">
                             <input type="radio" name="goal" value="efficiency" class="mt-1 mr-4">
@@ -200,7 +188,7 @@
                     ← Back
                 </a>
                 
-                <button id="continue-btn" class="continue-btn text-white px-8 py-3 rounded-lg font-semibold" disabled>
+                <button id="continue-btn" class="btn-primary" disabled>
                     Get My Recommendations →
                 </button>
             </div>

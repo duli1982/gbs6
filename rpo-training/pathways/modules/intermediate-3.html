@@ -148,11 +148,11 @@
                 
                 <!-- Candidate Sourcing Workflow -->
                 <div class="workflow-card mb-6">
-                    <h2 class="google-sans text-xl font-bold text-blue-800 mb-4">🔍 Candidate Sourcing Workflow</h2>
+                    <h3 class="google-sans text-xl font-bold text-blue-800 mb-4">🔍 Candidate Sourcing Workflow</h3>
                     
                     <div class="before-after-workflow">
                         <div class="workflow-before">
-                            <h3 class="font-semibold text-red-800 mb-3">❌ Traditional Process (4+ hours):</h3>
+                            <h4 class="font-semibold text-red-800 mb-3">❌ Traditional Process (4+ hours):</h4>
                             <div class="space-y-2 text-sm text-red-700">
                                 <div class="flex items-center">
                                     <span class="w-6 h-6 bg-red-200 rounded-full flex items-center justify-center text-xs mr-2">1</span>
@@ -178,7 +178,7 @@
                         </div>
                         
                         <div class="workflow-after">
-                            <h3 class="font-semibold text-green-800 mb-3">✅ AI-Integrated Process (45 min):</h3>
+                            <h4 class="font-semibold text-green-800 mb-3">✅ AI-Integrated Process (45 min):</h4>
                             <div class="space-y-2 text-sm text-green-700">
                                 <div class="flex items-center">
                                     <span class="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-xs mr-2">1</span>
@@ -211,7 +211,7 @@
                     
                     <div class="before-after-workflow">
                         <div class="workflow-before">
-                            <h3 class="font-semibold text-red-800 mb-3">❌ Manual Process (2+ hours):</h3>
+                            <h4 class="font-semibold text-red-800 mb-3">❌ Manual Process (2+ hours):</h4>
                             <div class="space-y-1 text-sm text-red-700">
                                 <div>• Research role requirements (30 min)</div>
                                 <div>• Write job description (45 min)</div>
@@ -222,7 +222,7 @@
                         </div>
                         
                         <div class="workflow-after">
-                            <h3 class="font-semibold text-green-800 mb-3">✅ AI-Integrated Process (20 min):</h3>
+                            <h4 class="font-semibold text-green-800 mb-3">✅ AI-Integrated Process (20 min):</h4>
                             <div class="space-y-1 text-sm text-green-700">
                                 <div>• AI researches role requirements (3 min)</div>
                                 <div>• AI creates optimized job description (5 min)</div>
@@ -314,7 +314,7 @@
                     </p>
                     
                     <div class="bg-white rounded-lg p-4 mb-4">
-                        <h3 class="font-semibold text-purple-800 mb-3">Step-by-Step Integration:</h3>
+                        <h4 class="font-semibold text-purple-800 mb-3">Step-by-Step Integration:</h4>
                         
                         <div class="space-y-3 text-sm">
                             <div class="flex items-start">
@@ -408,7 +408,7 @@
                     
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <h3 class="font-semibold text-green-800 mb-3">This Week:</h3>
+                            <h4 class="font-semibold text-green-800 mb-3">This Week:</h4>
                             <div class="space-y-2 text-sm text-green-700">
                                 <label class="flex items-center">
                                     <input type="checkbox" class="mr-2">
@@ -430,7 +430,7 @@
                         </div>
                         
                         <div>
-                            <h3 class="font-semibold text-green-800 mb-3">Next Week:</h3>
+                            <h4 class="font-semibold text-green-800 mb-3">Next Week:</h4>
                             <div class="space-y-2 text-sm text-green-700">
                                 <label class="flex items-center">
                                     <input type="checkbox" class="mr-2">
@@ -482,9 +482,218 @@
                 localStorage.setItem('intermediate-path-progress', JSON.stringify(completedModules));
             }
             
-            alert('🎉 Module 3 completed! You now know how to integrate AI into seamless workflows. Ready to learn about measuring AI impact and ROI?');
-            window.location.href = '../intermediate.html';
+            showCompletionModal();
         }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../intermediate.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-next-step {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🔄</div>
+                <h2 class="modal-title google-sans">Module 3 Completed!</h2>
+                <p class="modal-subtitle">Workflow integration mastered</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now know how to integrate AI into seamless workflows and optimize your daily processes.
+                </p>
+                
+                <div class="modal-next-step">
+                    <strong>📊 Next Up:</strong> Module 4 - Measuring AI impact and ROI
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                    <div class="text-blue-800 font-semibold text-sm mb-1">✨ Workflow Skills Gained:</div>
+                    <ul class="text-blue-700 text-sm space-y-1 text-left">
+                        <li>• AI workflow integration</li>
+                        <li>• Process automation</li>
+                        <li>• Efficiency optimization</li>
+                        <li>• Seamless tool connections</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 4 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Review Module
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -6,48 +6,15 @@
     <title>Select Your Role - Randstad GBS Learning Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
-        .google-sans { font-family: 'Google Sans', sans-serif; }
-        body { font-family: 'Roboto', sans-serif; }
+        /* Font styles now handled by shared/fonts.css */
         
-        .role-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid #e5e7eb;
-        }
+        /* Role card styles now handled by shared/card-animations.css */
         
-        .role-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-color: #4A90E2;
-        }
-        
-        .role-card.selected {
-            border-color: #4A90E2;
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
-        }
-        
-        .role-card.selected .role-icon {
-            transform: scale(1.1);
-        }
-        
-        .continue-btn {
-            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .continue-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
-        }
-        
-        .continue-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
+        /* Continue button styles now handled by shared/buttons.css */
         
         .progress-bar {
             transition: width 0.5s ease;
@@ -81,36 +48,36 @@
     
             <!-- Role Selection Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="role-card rounded-xl p-6" data-role="recruiter">
-                    <div class="role-icon text-4xl mb-4 transition-transform duration-300">👥</div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Recruiter/Sourcer</h2>
+                <div class="card-interactive p-6" data-role="recruiter">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">👥</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Recruiter/Sourcer</h3>
                     <p class="text-gray-600 mb-4">Finding and engaging candidates, building talent pipelines</p>
                     <div class="text-sm text-gray-500">
                         <strong>AI tools for:</strong> Boolean search generation, candidate outreach, resume screening
                     </div>
                 </div>
                 
-                <div class="role-card rounded-xl p-6" data-role="manager">
-                    <div class="role-icon text-4xl mb-4 transition-transform duration-300">📊</div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Team Manager</h2>
+                <div class="card-interactive p-6" data-role="manager">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">📊</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Team Manager</h3>
                     <p class="text-gray-600 mb-4">Leading teams, strategy planning, performance management</p>
                     <div class="text-sm text-gray-500">
                         <strong>AI tools for:</strong> Team analytics, strategic planning, performance insights
                     </div>
                 </div>
                 
-                <div class="role-card rounded-xl p-6" data-role="analyst">
-                    <div class="role-icon text-4xl mb-4 transition-transform duration-300">📈</div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Business Analyst</h2>
+                <div class="card-interactive p-6" data-role="analyst">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">📈</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Business Analyst</h3>
                     <p class="text-gray-600 mb-4">Data analysis, reporting, market research, insights</p>
                     <div class="text-sm text-gray-500">
                         <strong>AI tools for:</strong> Data analysis, report generation, trend identification
                     </div>
                 </div>
                 
-                <div class="role-card rounded-xl p-6" data-role="coordinator">
-                    <div class="role-icon text-4xl mb-4 transition-transform duration-300">⚙️</div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-2">Coordinator</h2>
+                <div class="card-interactive p-6" data-role="coordinator">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">⚙️</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Coordinator</h3>
                     <p class="text-gray-600 mb-4">Process management, administrative support, coordination</p>
                     <div class="text-sm text-gray-500">
                         <strong>AI tools for:</strong> Process automation, scheduling, communication templates
@@ -124,7 +91,7 @@
                     ← Back
                 </a>
                 
-                <button id="continue-btn" class="continue-btn text-white px-8 py-3 rounded-lg font-semibold" disabled>
+                <button id="continue-btn" class="btn-primary" disabled>
                     Continue to Assessment →
                 </button>
             </div>
@@ -138,10 +105,10 @@
         let selectedRole = '';
         
         // Role selection logic
-        document.querySelectorAll('.role-card').forEach(card => {
+        document.querySelectorAll('.card-interactive').forEach(card => {
             card.addEventListener('click', function() {
                 // Remove selection from all cards
-                document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+                document.querySelectorAll('.card-interactive').forEach(c => c.classList.remove('selected'));
                 
                 // Add selection to clicked card
                 this.classList.add('selected');

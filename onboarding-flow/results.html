@@ -6,21 +6,13 @@
     <title>Your AI Recommendations - Randstad GBS Learning Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
-        .google-sans { font-family: 'Google Sans', sans-serif; }
-        body { font-family: 'Roboto', sans-serif; }
+        /* Font styles now handled by shared/fonts.css */
         
-        .recommendation-card {
-            transition: all 0.3s ease;
-            border: 2px solid #e5e7eb;
-        }
-        
-        .recommendation-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-color: #4A90E2;
-        }
+        /* Recommendation card styles now handled by shared/card-animations.css */
         
         .priority-badge {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -30,15 +22,7 @@
             background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
         }
         
-        .start-btn {
-            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .start-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
-        }
+        /* Start button styles now handled by shared/buttons.css */
         
         .celebration-animation {
             animation: bounce 1s ease-in-out;
@@ -120,7 +104,7 @@
             
             <!-- CTA -->
             <div class="text-center">
-                <a href="../" class="start-btn text-white px-10 py-4 rounded-lg font-semibold text-lg inline-block mb-4">
+                <a href="../" class="btn-cta inline-block mb-4">
                     Start Your AI Journey! →
                 </a>
                 <div class="text-sm text-gray-500">
@@ -330,7 +314,7 @@
             const allRecs = [...recs.primary, ...recs.secondary];
             
             const recommendationsHtml = allRecs.map((rec, index) => `
-                <div class="recommendation-card rounded-xl p-6">
+                <div class="card-recommendation p-6">
                     <div class="flex items-start justify-between mb-4">
                         <div class="flex items-center">
                             <div class="text-2xl mr-3">${rec.icon}</div>

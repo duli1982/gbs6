@@ -18,17 +18,17 @@
     <h1>Google Form Entry ID Extractor</h1>
 
     <div class="container">
-        <h2>Step 1: Enter your Google Form URL</h2>
+        <h3>Step 1: Enter your Google Form URL</h3>
         <p>Paste the URL of your Google Form (the one that ends with /viewform)</p>
         <input type="url" id="formUrl" placeholder="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform">
         <button onclick="extractEntryIds()">Extract Entry IDs</button>
     </div>
 
     <div id="results" class="container" style="display: none;">
-        <h2>Step 2: Copy these values to your feedback form</h2>
+        <h3>Step 2: Copy these values to your feedback form</h3>
         <div id="entryIds"></div>
 
-        <h2>Step 3: Update your form action URL</h2>
+        <h3>Step 3: Update your form action URL</h3>
         <p>Replace <code>YOUR_GOOGLE_FORM_ACTION_URL</code> in your feedback/index.html with:</p>
         <div id="actionUrl" class="code"></div>
     </div>

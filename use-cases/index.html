@@ -6,47 +6,18 @@
     <title>AI Success Stories - Randstad GBS Learning Hub (Fixed)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
-        .google-sans { font-family: 'Google Sans', sans-serif; }
-        body { font-family: 'Roboto', sans-serif; }
-        .use-case-card { border: 1px solid #dadce0; transition: transform 0.2s ease, box-shadow 0.2s ease; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); }
-        .use-case-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        /* Font styles now handled by shared/fonts.css */
+        /* Use case card styles now handled by shared/card-animations.css */
         .impact-stat { background: linear-gradient(135deg, #1967d2 0%, #4285f4 100%); color: white; }
         .category-badge { background: #e8f0fe; color: #1967d2; }
         .before-after { background: linear-gradient(90deg, #fef7f0 0%, #f0f9ff 100%); }
         .demo-section { background: linear-gradient(135deg, #f8f9fa 0%, #e8f0fe 100%); }
-        /* Scroll to Top Button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: #4A90E2;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 1000;
-        }
-        .scroll-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .scroll-to-top:hover {
-            background-color: #3A7BC8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
-        }
+        /* Scroll to Top Button styles now handled by shared/scroll-to-top.css */
         
         /* Carousel Styles */
         .carousel-container {
@@ -84,10 +55,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Scroll to Top Button -->
-    <button id="scroll-to-top" class="scroll-to-top" title="Scroll to top">
-        ↑
-    </button>
+    <!-- Scroll to Top Button will be added by shared script -->
 
     <!-- Navigation -->
     <nav class="bg-white border-b border-gray-200">
@@ -251,11 +219,11 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Talent Sourcing</span>
                         <span class="text-green-600 font-semibold">75% Time Saved</span>
                     </div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Powered Boolean Search Generation</h2>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Powered Boolean Search Generation</h3>
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <h3 class="font-semibold text-red-700 mb-2">❌ Before AI</h3>
+                                <h4 class="font-semibold text-red-700 mb-2">❌ Before AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 45 minutes to craft complex searches</li>
                                     <li>• Manual keyword research</li>
@@ -264,7 +232,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-green-700 mb-2">✅ After AI</h3>
+                                <h4 class="font-semibold text-green-700 mb-2">✅ After AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 10 minutes for comprehensive searches</li>
                                     <li>• AI suggests relevant keywords</li>
@@ -275,7 +243,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">Real Example:</h3>
+                        <h4 class="font-semibold text-gray-900 mb-2">Real Example:</h4>
                         <div class="bg-gray-50 p-3 rounded text-sm">
                             <strong>Input:</strong> "Senior Java Developer with microservices experience"<br>
                             <strong>AI Output:</strong> (Java OR "Java Developer") AND (Senior OR "Sr." OR Lead) AND (microservices OR "micro services" OR "service oriented") AND -junior -intern
@@ -290,11 +258,11 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Content Creation</span>
                         <span class="text-green-600 font-semibold">80% Faster</span>
                     </div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-3">Intelligent Job Description Creation</h2>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Intelligent Job Description Creation</h3>
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <h3 class="font-semibold text-red-700 mb-2">❌ Before AI</h3>
+                                <h4 class="font-semibold text-red-700 mb-2">❌ Before AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 2 hours per job description</li>
                                     <li>• Copy-paste from old JDs</li>
@@ -303,7 +271,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-green-700 mb-2">✅ After AI</h3>
+                                <h4 class="font-semibold text-green-700 mb-2">✅ After AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 25 minutes for complete JD</li>
                                     <li>• Tailored, engaging content</li>
@@ -314,7 +282,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">Success Metrics:</h3>
+                        <h4 class="font-semibold text-gray-900 mb-2">Success Metrics:</h4>
                         <div class="grid grid-cols-2 gap-4 text-center">
                             <div class="bg-green-50 p-3 rounded">
                                 <div class="text-2xl font-bold text-green-600">+40%</div>
@@ -335,11 +303,11 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Communication</span>
                         <span class="text-green-600 font-semibold">3x Response Rate</span>
                     </div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-3">Personalized Candidate Outreach</h2>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Personalized Candidate Outreach</h3>
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <h3 class="font-semibold text-red-700 mb-2">❌ Before AI</h3>
+                                <h4 class="font-semibold text-red-700 mb-2">❌ Before AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Generic template messages</li>
                                     <li>• 15% response rate</li>
@@ -348,7 +316,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-green-700 mb-2">✅ After AI</h3>
+                                <h4 class="font-semibold text-green-700 mb-2">✅ After AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Highly personalized messages</li>
                                     <li>• 45% response rate</li>
@@ -359,7 +327,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">Personalization Elements:</h3>
+                        <h4 class="font-semibold text-gray-900 mb-2">Personalization Elements:</h4>
                         <div class="flex flex-wrap gap-2">
                             <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Company Research</span>
                             <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Role Relevance</span>
@@ -376,11 +344,11 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Data Analysis</span>
                         <span class="text-green-600 font-semibold">90% Accuracy</span>
                     </div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-3">Automated Market Intelligence</h2>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Automated Market Intelligence</h3>
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <h3 class="font-semibold text-red-700 mb-2">❌ Before AI</h3>
+                                <h4 class="font-semibold text-red-700 mb-2">❌ Before AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 4 hours for market research</li>
                                     <li>• Manual data compilation</li>
@@ -389,7 +357,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-green-700 mb-2">✅ After AI</h3>
+                                <h4 class="font-semibold text-green-700 mb-2">✅ After AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 30 minutes for comprehensive report</li>
                                     <li>• Real-time data aggregation</li>
@@ -400,7 +368,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">Analysis Includes:</h3>
+                        <h4 class="font-semibold text-gray-900 mb-2">Analysis Includes:</h4>
                         <div class="grid grid-cols-2 gap-2 text-sm">
                             <div>• Salary benchmarking</div>
                             <div>• Skill demand trends</div>
@@ -417,11 +385,11 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Content Creation</span>
                         <span class="text-green-600 font-semibold">85% Better Prep</span>
                     </div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Generated Interview Questions</h2>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Generated Interview Questions</h3>
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <h3 class="font-semibold text-red-700 mb-2">❌ Before AI</h3>
+                                <h4 class="font-semibold text-red-700 mb-2">❌ Before AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Generic interview questions</li>
                                     <li>• 1 hour prep per interview</li>
@@ -430,7 +398,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-green-700 mb-2">✅ After AI</h3>
+                                <h4 class="font-semibold text-green-700 mb-2">✅ After AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Role-specific questions</li>
                                     <li>• 15 minutes prep time</li>
@@ -441,7 +409,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">Question Categories:</h3>
+                        <h4 class="font-semibold text-gray-900 mb-2">Question Categories:</h4>
                         <div class="flex flex-wrap gap-2">
                             <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">Technical Skills</span>
                             <span class="bg-pink-100 text-pink-800 px-2 py-1 rounded text-xs">Behavioral</span>
@@ -458,11 +426,11 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Data Analysis</span>
                         <span class="text-green-600 font-semibold">70% Time Saved</span>
                     </div>
-                    <h2 class="google-sans text-xl font-bold text-gray-900 mb-3">Automated Performance Reporting</h2>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Automated Performance Reporting</h3>
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <h3 class="font-semibold text-red-700 mb-2">❌ Before AI</h3>
+                                <h4 class="font-semibold text-red-700 mb-2">❌ Before AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 3 hours for monthly reports</li>
                                     <li>• Manual data entry</li>
@@ -471,7 +439,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-green-700 mb-2">✅ After AI</h3>
+                                <h4 class="font-semibold text-green-700 mb-2">✅ After AI</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• 45 minutes for comprehensive reports</li>
                                     <li>• Automated data processing</li>
@@ -482,7 +450,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">Report Features:</h3>
+                        <h4 class="font-semibold text-gray-900 mb-2">Report Features:</h4>
                         <div class="grid grid-cols-2 gap-2 text-sm">
                             <div>• KPI tracking</div>
                             <div>• Trend analysis</div>
@@ -616,7 +584,7 @@
                         <button id="copySearchBtn" class="bg-gray-100 px-4 py-2 rounded-lg">Copy</button>
                     </div>
                     <div id="searchResult" class="mt-4 p-4 bg-gray-50 rounded-lg hidden">
-                        <h3 class="font-semibold mb-2">Generated Search String:</h3>
+                        <h4 class="font-semibold mb-2">Generated Search String:</h4>
                         <pre id="searchStringOutput" class="bg-white p-3 rounded border font-mono text-sm whitespace-pre-wrap"></pre>
                     </div>
                 `;
@@ -641,7 +609,7 @@
                         <button id="copyJDBtn" class="bg-gray-100 px-4 py-2 rounded-lg">Copy</button>
                     </div>
                     <div id="jdResult" class="mt-4 p-4 bg-gray-50 rounded-lg hidden">
-                        <h3 class="font-semibold mb-2">Generated Job Description Preview:</h3>
+                        <h4 class="font-semibold mb-2">Generated Job Description Preview:</h4>
                         <div id="jdOutput" class="bg-white p-4 rounded border text-sm whitespace-pre-wrap"></div>
                     </div>
                 `;
@@ -765,25 +733,7 @@ Requirements:
             });
         }
 
-        // Scroll to Top Functionality
-        const scrollToTopBtn = document.getElementById('scroll-to-top');
-
-        // Show/hide scroll to top button based on scroll position
-        function toggleScrollToTopButton() {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
-            }
-        }
-
-        // Smooth scroll to top
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
+        // Scroll to Top Functionality now handled by shared/scripts/scroll-to-top.js
 
         // DOM ready
         document.addEventListener('DOMContentLoaded', function() {
@@ -819,11 +769,10 @@ Requirements:
             const demoClose = document.getElementById('demo-close');
             if (demoClose) demoClose.addEventListener('click', hideDemo);
 
-            // Wire scroll to top functionality
-            window.addEventListener('scroll', toggleScrollToTopButton);
-            scrollToTopBtn.addEventListener('click', scrollToTop);
+            // Scroll to top functionality handled by shared script
         });
     </script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
 
 </body>
 </html>

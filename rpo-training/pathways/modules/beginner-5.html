@@ -273,7 +273,7 @@
                     
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="bg-white rounded-lg p-4 border border-purple-200">
-                            <h3 class="font-semibold text-purple-800 mb-2">Week 1-2: Practice</h3>
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 1-2: Practice</h4>
                             <ul class="text-purple-700 text-sm space-y-1">
                                 <li>• Use AI for 3 emails daily</li>
                                 <li>• Try 1 new AI task each day</li>
@@ -283,7 +283,7 @@
                         </div>
                         
                         <div class="bg-white rounded-lg p-4 border border-purple-200">
-                            <h3 class="font-semibold text-purple-800 mb-2">Week 3-4: Expand</h3>
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 3-4: Expand</h4>
                             <ul class="text-purple-700 text-sm space-y-1">
                                 <li>• Explore the prompts library</li>
                                 <li>• Try advanced techniques</li>
@@ -293,7 +293,7 @@
                         </div>
                         
                         <div class="bg-white rounded-lg p-4 border border-purple-200">
-                            <h3 class="font-semibold text-purple-800 mb-2">Month 2+: Lead</h3>
+                            <h4 class="font-semibold text-purple-800 mb-2">Month 2+: Lead</h4>
                             <ul class="text-purple-700 text-sm space-y-1">
                                 <li>• Become team AI champion</li>
                                 <li>• Share best practices</li>
@@ -373,7 +373,7 @@
             localStorage.setItem('beginner-completion-date', new Date().toISOString());
             
             // Show completion celebration
-            alert('🎉🎉🎉 CONGRATULATIONS! You have successfully completed the Beginner AI Learning Path! You are now equipped with fundamental AI skills that will transform your daily work. Ready to explore intermediate techniques or start using your new skills right away!');
+            showCompletionModal();
             
             // Redirect to main hub to show all available options
             window.location.href = '../../../index.html';
@@ -386,6 +386,244 @@
                 setConfidence(parseInt(savedConfidence));
             }
         });
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToHub() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../../index.html';
+            }, 300);
+        }
+
+        function exploreIntermediate() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../intermediate.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 3rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.2rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-achievement {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .modal-btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .modal-btn-tertiary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-tertiary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🏆</div>
+                <h2 class="modal-title google-sans">CONGRATULATIONS!</h2>
+                <p class="modal-subtitle">Beginner AI Learning Path Completed</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You have successfully completed the Beginner AI Learning Path! You are now equipped with fundamental AI skills that will transform your daily work.
+                </p>
+                
+                <div class="modal-achievement">
+                    <strong>🎓 Achievement Unlocked:</strong> AI Fundamentals Certified
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-4 mb-4">
+                    <div class="text-green-800 font-semibold text-sm mb-2">✨ Your Complete Skill Set:</div>
+                    <div class="grid md:grid-cols-2 gap-2 text-left">
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• AI basics and fundamentals</li>
+                            <li>• Effective AI communication</li>
+                            <li>• Prompt engineering skills</li>
+                        </ul>
+                        <ul class="text-blue-700 text-sm space-y-1">
+                            <li>• Daily task automation</li>
+                            <li>• Email enhancement tools</li>
+                            <li>• Practical AI applications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="exploreIntermediate()" class="modal-btn modal-btn-primary">
+                    🚀 Explore Intermediate Path
+                </button>
+                <button onclick="continueToHub()" class="modal-btn modal-btn-secondary">
+                    🏠 Return to Hub
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-tertiary">
+                    📋 Review Path
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
