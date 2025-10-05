@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A New Way of Thinking | GBS AI Initiative</title>
   <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="../shared/breadcrumb-nav.css">
 	<link rel="stylesheet" href="../shared/hub-button.css">
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -45,7 +46,41 @@
  </head>
  <body class="antialiased">
 
-	<a href="index.html" class="hub-button">Back to Prompt Library</a>
+	<!-- Enhanced Breadcrumb Navigation -->
+	<nav class="breadcrumb-container" aria-label="Breadcrumb">
+		<div class="breadcrumb-wrapper">
+			<div class="breadcrumb-nav">
+				<ol>
+					<li class="breadcrumb-item">
+						<a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+							<span class="breadcrumb-icon icon-home"></span>
+							<span>Home</span>
+						</a>
+					</li>
+					<li class="breadcrumb-separator" aria-hidden="true">›</li>
+					<li class="breadcrumb-item">
+						<a href="index.html" class="breadcrumb-link" aria-label="Go to GBS Prompts">
+							<span class="breadcrumb-icon icon-folder"></span>
+							<span>GBS Prompts</span>
+						</a>
+					</li>
+					<li class="breadcrumb-separator" aria-hidden="true">›</li>
+					<li class="breadcrumb-item">
+						<span class="breadcrumb-current" aria-current="page">
+							<span class="breadcrumb-icon icon-file"></span>
+							<span>A New Way of Thinking</span>
+						</span>
+					</li>
+				</ol>
+			</div>
+			<div class="breadcrumb-actions">
+				<a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+					<span class="icon-home"></span>
+					<span>Hub</span>
+				</a>
+			</div>
+		</div>
+	</nav>
 
 	<!-- =========== MAIN CONTENT =========== -->
 	<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 fade-in">
@@ -132,5 +167,6 @@
 
     <div id="footer-placeholder"></div>
     <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
  </body>
  </html>

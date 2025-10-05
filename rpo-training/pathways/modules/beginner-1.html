@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What is AI? - Beginner Module 1</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../../../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
-        .google-sans { font-family: 'Google Sans', sans-serif; }
-        body { font-family: 'Roboto', sans-serif; }
-        
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .content-section {
             transition: all 0.3s ease;
         }
-        
+
         .analogy-box {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             border: 2px solid #0ea5e9;
@@ -22,14 +31,14 @@
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
-        
+
         .key-point {
             background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
             border-left: 4px solid #22c55e;
             padding: 1rem;
             margin: 1rem 0;
         }
-        
+
         .myth-buster {
             background: linear-gradient(135deg, #fef7f0 0%, #fed7aa 100%);
             border: 2px solid #f97316;
@@ -37,7 +46,7 @@
             padding: 1rem;
             margin: 1rem 0;
         }
-        
+
         .progress-indicator {
             position: fixed;
             top: 80px;
@@ -50,17 +59,58 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
-    <!-- Back to Hub Button -->
-    <a href="../../../index.html" class="hub-button">Back To Hub</a>
-    
-    <!-- Progress Indicator -->
-    <div class="progress-indicator">
-        <div class="text-sm font-semibold text-gray-700">Module 1 of 5</div>
-        <div class="text-xs text-gray-500">5 min read</div>
-    </div>
-    
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../beginner.html" class="breadcrumb-link" aria-label="Go to Beginner Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Beginner Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>What is AI?</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 1/5</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 20%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl" style="margin-top: 1rem;">
         <!-- Header -->
         <div class="text-center mb-8">
             <div class="text-6xl mb-4">🤖</div>
@@ -70,21 +120,25 @@
 
         <!-- Main Content -->
         <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
-            
+
             <!-- Introduction -->
             <section class="content-section mb-8">
                 <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Let's Start Simple</h2>
                 <p class="text-lg text-gray-700 mb-4">
-                    Imagine you have a really smart assistant who never gets tired, can read thousands of books in seconds, and is always ready to help. That's essentially what AI is - a computer program that can think and help solve problems, just like a human would, but much faster.
+                    Imagine you have a really smart assistant who never gets tired, can read thousands of books in
+                    seconds, and is always ready to help. That's essentially what AI is - a computer program that can
+                    think and help solve problems, just like a human would, but much faster.
                 </p>
-                
+
                 <div class="analogy-box">
                     <div class="flex items-start">
                         <div class="text-2xl mr-3">💡</div>
                         <div>
                             <h3 class="font-bold text-blue-800 mb-2">Think of AI Like a Super-Smart Calculator</h3>
                             <p class="text-blue-700">
-                                A calculator helps you with math. AI helps you with thinking tasks - like writing emails, finding information, or making decisions. Just like you type numbers into a calculator, you type questions or requests into AI.
+                                A calculator helps you with math. AI helps you with thinking tasks - like writing
+                                emails, finding information, or making decisions. Just like you type numbers into a
+                                calculator, you type questions or requests into AI.
                             </p>
                         </div>
                     </div>
@@ -94,7 +148,7 @@
             <!-- What AI Actually Does -->
             <section class="content-section mb-8">
                 <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">What Can AI Actually Do?</h2>
-                
+
                 <div class="grid md:grid-cols-2 gap-6 mb-6">
                     <div class="bg-green-50 rounded-lg p-4 border border-green-200">
                         <div class="text-2xl mb-2">✍️</div>
@@ -106,7 +160,7 @@
                             <li>• Translate languages</li>
                         </ul>
                     </div>
-                    
+
                     <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
                         <div class="text-2xl mb-2">🔍</div>
                         <h3 class="font-bold text-blue-800 mb-2">Research & Analysis</h3>
@@ -117,7 +171,7 @@
                             <li>• Generate ideas</li>
                         </ul>
                     </div>
-                    
+
                     <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
                         <div class="text-2xl mb-2">🎯</div>
                         <h3 class="font-bold text-purple-800 mb-2">Problem Solving</h3>
@@ -128,7 +182,7 @@
                             <li>• Plan projects</li>
                         </ul>
                     </div>
-                    
+
                     <div class="bg-orange-50 rounded-lg p-4 border border-orange-200">
                         <div class="text-2xl mb-2">⚡</div>
                         <h3 class="font-bold text-orange-800 mb-2">Automation</h3>
@@ -145,33 +199,36 @@
             <!-- Key Points -->
             <section class="content-section mb-8">
                 <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Key Things to Remember</h2>
-                
+
                 <div class="key-point">
                     <div class="flex items-start">
                         <div class="text-xl mr-3">✅</div>
                         <div>
                             <h3 class="font-bold text-green-800 mb-1">AI is a Tool, Not Magic</h3>
-                            <p class="text-green-700">Just like a hammer helps you build things, AI helps you think and work faster. It's not mysterious - it's just very advanced software.</p>
+                            <p class="text-green-700">Just like a hammer helps you build things, AI helps you think and
+                                work faster. It's not mysterious - it's just very advanced software.</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="key-point">
                     <div class="flex items-start">
                         <div class="text-xl mr-3">✅</div>
                         <div>
                             <h3 class="font-bold text-green-800 mb-1">You're Still in Control</h3>
-                            <p class="text-green-700">AI gives you suggestions and help, but you decide what to use. Think of it as a very smart colleague who gives advice.</p>
+                            <p class="text-green-700">AI gives you suggestions and help, but you decide what to use.
+                                Think of it as a very smart colleague who gives advice.</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="key-point">
                     <div class="flex items-start">
                         <div class="text-xl mr-3">✅</div>
                         <div>
                             <h3 class="font-bold text-green-800 mb-1">It Gets Better With Practice</h3>
-                            <p class="text-green-700">The more you use AI and learn how to ask it questions, the more helpful it becomes. It's like learning to use any new tool.</p>
+                            <p class="text-green-700">The more you use AI and learn how to ask it questions, the more
+                                helpful it becomes. It's like learning to use any new tool.</p>
                         </div>
                     </div>
                 </div>
@@ -180,46 +237,50 @@
             <!-- Myth Busting -->
             <section class="content-section mb-8">
                 <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Let's Clear Up Some Myths</h2>
-                
+
                 <div class="myth-buster">
                     <div class="flex items-start">
                         <div class="text-xl mr-3">❌</div>
                         <div>
                             <h3 class="font-bold text-orange-800 mb-1">Myth: "AI will replace my job"</h3>
-                            <p class="text-orange-700"><strong>Reality:</strong> AI is designed to help you do your job better and faster, not replace you. Think of it as getting a super-powered assistant.</p>
+                            <p class="text-orange-700"><strong>Reality:</strong> AI is designed to help you do your job
+                                better and faster, not replace you. Think of it as getting a super-powered assistant.
+                            </p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="myth-buster">
                     <div class="flex items-start">
                         <div class="text-xl mr-3">❌</div>
                         <div>
                             <h3 class="font-bold text-orange-800 mb-1">Myth: "You need to be technical to use AI"</h3>
-                            <p class="text-orange-700"><strong>Reality:</strong> Using AI is as simple as having a conversation. If you can send a text message, you can use AI.</p>
+                            <p class="text-orange-700"><strong>Reality:</strong> Using AI is as simple as having a
+                                conversation. If you can send a text message, you can use AI.</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="myth-buster">
                     <div class="flex items-start">
                         <div class="text-xl mr-3">❌</div>
                         <div>
                             <div>
-                            <h3 class="font-bold text-orange-800 mb-1">Myth: "AI is always right"</h3>
-                            <p class="text-orange-700"><strong>Reality:</strong> AI makes mistakes just like humans do. Always double-check important information and use your judgment.</p>
+                                <h3 class="font-bold text-orange-800 mb-1">Myth: "AI is always right"</h3>
+                                <p class="text-orange-700"><strong>Reality:</strong> AI makes mistakes just like humans
+                                    do. Always double-check important information and use your judgment.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
             </section>
 
             <!-- Real-World Example -->
             <section class="content-section mb-8">
                 <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">A Real Example from Your Work</h2>
-                
+
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
                     <h3 class="google-sans font-bold text-blue-800 mb-3">📧 Writing a Professional Email</h3>
-                    
+
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <h4 class="font-semibold text-gray-800 mb-2">❌ Without AI (Old Way):</h4>
@@ -231,7 +292,7 @@
                                 <li>• Total time: 30+ minutes</li>
                             </ul>
                         </div>
-                        
+
                         <div>
                             <h4 class="font-semibold text-gray-800 mb-2">✅ With AI (New Way):</h4>
                             <ul class="text-gray-700 text-sm space-y-1">
@@ -249,12 +310,15 @@
             <!-- What's Next -->
             <section class="content-section">
                 <div class="bg-green-50 rounded-xl p-6 border border-green-200">
-                    <h2 class="google-sans text-xl font-bold text-green-800 mb-3">🎉 Great Job! You Now Understand AI Basics</h2>
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-3">🎉 Great Job! You Now Understand AI
+                        Basics</h2>
                     <p class="text-green-700 mb-4">
-                        You've learned that AI is simply a powerful tool that can help you work smarter and faster. It's not scary or complicated - it's just like having a really smart assistant.
+                        You've learned that AI is simply a powerful tool that can help you work smarter and faster. It's
+                        not scary or complicated - it's just like having a really smart assistant.
                     </p>
                     <div class="text-sm text-green-600">
-                        <strong>Next up:</strong> In Module 2, you'll learn how to actually "talk" to AI and get great results. We'll show you the basics of writing good prompts.
+                        <strong>Next up:</strong> In Module 2, you'll learn how to actually "talk" to AI and get great
+                        results. We'll show you the basics of writing good prompts.
                     </div>
                 </div>
             </section>
@@ -265,8 +329,9 @@
             <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
                 ← Back to Beginner Path
             </a>
-            
-            <button onclick="completeModule()" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+
+            <button onclick="completeModule()"
+                class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
                 Complete Module 1 →
             </button>
         </div>
@@ -280,13 +345,13 @@
                 completedModules.push(1);
                 localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
             }
-            
+
             // Show completion message and redirect
             showCompletionModal();
         }
-        
+
         // Add scroll progress indicator
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
             // You could add a progress bar here if desired
         });
@@ -310,14 +375,14 @@
         }
 
         // Close modal when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.target.classList.contains('modal-overlay')) {
                 closeModal();
             }
         });
 
         // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeModal();
             }
@@ -342,12 +407,12 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
-        
+
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-        
+
         .modal-content {
             background: white;
             border-radius: 20px;
@@ -361,16 +426,16 @@
             transition: all 0.3s ease;
             position: relative;
         }
-        
+
         .modal-overlay.active .modal-content {
             transform: scale(1) translateY(0);
         }
-        
+
         .modal-header {
             text-align: center;
             margin-bottom: 1.5rem;
         }
-        
+
         .modal-icon {
             width: 80px;
             height: 80px;
@@ -383,38 +448,55 @@
             font-size: 2.5rem;
             animation: bounce 0.6s ease-out;
         }
-        
+
         @keyframes bounce {
-            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
-            40%, 43% { transform: translate3d(0,-15px,0); }
-            70% { transform: translate3d(0,-7px,0); }
-            90% { transform: translate3d(0,-2px,0); }
+
+            0%,
+            20%,
+            53%,
+            80%,
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            40%,
+            43% {
+                transform: translate3d(0, -15px, 0);
+            }
+
+            70% {
+                transform: translate3d(0, -7px, 0);
+            }
+
+            90% {
+                transform: translate3d(0, -2px, 0);
+            }
         }
-        
+
         .modal-title {
             font-size: 1.5rem;
             font-weight: bold;
             color: #1f2937;
             margin-bottom: 0.5rem;
         }
-        
+
         .modal-subtitle {
             color: #6b7280;
             margin-bottom: 1.5rem;
         }
-        
+
         .modal-body {
             text-align: center;
             margin-bottom: 2rem;
         }
-        
+
         .modal-message {
             font-size: 1.1rem;
             color: #374151;
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
+
         .modal-next-step {
             background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             color: white;
@@ -424,13 +506,13 @@
             margin-bottom: 1rem;
             border: none;
         }
-        
+
         .modal-actions {
             display: flex;
             gap: 1rem;
             justify-content: center;
         }
-        
+
         .modal-btn {
             padding: 0.75rem 2rem;
             border-radius: 12px;
@@ -440,23 +522,23 @@
             transition: all 0.2s ease;
             font-size: 1rem;
         }
-        
+
         .modal-btn-primary {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
         }
-        
+
         .modal-btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
-        
+
         .modal-btn-secondary {
             background: #f3f4f6;
             color: #374151;
             border: 2px solid #e5e7eb;
         }
-        
+
         .modal-btn-secondary:hover {
             background: #e5e7eb;
         }
@@ -470,16 +552,16 @@
                 <h2 class="modal-title google-sans">Module 1 Completed!</h2>
                 <p class="modal-subtitle">Great start on your AI journey</p>
             </div>
-            
+
             <div class="modal-body">
                 <p class="modal-message">
-                    You now understand what AI is and how it can help you in your daily work. 
+                    You now understand what AI is and how it can help you in your daily work.
                 </p>
-                
+
                 <div class="modal-next-step">
                     <strong>🚀 Next Up:</strong> Module 2 - Learn how to have your first AI conversation
                 </div>
-                
+
                 <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
                     <div class="text-green-800 font-semibold text-sm mb-1">✨ What You've Learned:</div>
                     <ul class="text-green-700 text-sm space-y-1 text-left">
@@ -490,7 +572,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="modal-actions">
                 <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
                     Continue to Module 2 →
@@ -501,5 +583,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
 </body>
+
 </html>

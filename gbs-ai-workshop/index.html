@@ -10,6 +10,7 @@
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../shared/hub-button.css">
     <link rel="stylesheet" href="../shared/fonts.css">
@@ -77,17 +78,45 @@
         }
     </style>
 </head>
-<body class="antialiased pt-16">
+<body class="antialiased">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>GBS AI Workshop</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Header (Nav) -->
-    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <span class="text-xl font-bold text-[#4A90E2]">Randstad GBS</span>
                     <span class="ml-2 text-xl font-light text-gray-600">| Gemini for Leaders</span>
                 </div>
-                <a href="../index.html" class="hub-button">Back To Hub</a>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-4">
                         <a href="#why" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">The Why</a>
@@ -2175,8 +2204,7 @@
         });
 
     </script>
-</body>
-</html>
     <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
 </body>
 </html>

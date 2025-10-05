@@ -1,4 +1,39 @@
-<button onclick="navigateTo('main-page')" class="google-sans my-6 text-blue-600 font-semibold hover:underline">&larr; Back to Training Overview</button>
+<link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+<nav class="breadcrumb-container" aria-label="Breadcrumb">
+    <div class="breadcrumb-wrapper">
+        <div class="breadcrumb-nav">
+            <ol>
+                <li class="breadcrumb-item">
+                    <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                        <span class="breadcrumb-icon icon-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                        <span class="breadcrumb-icon icon-folder"></span>
+                        <span>RPO Training</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current" aria-current="page">
+                        <span class="breadcrumb-icon icon-file"></span>
+                        <span>Session 1.3</span>
+                    </span>
+                </li>
+            </ol>
+        </div>
+        <div class="breadcrumb-actions">
+            <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                <span class="icon-home"></span>
+                <span>Hub</span>
+            </a>
+        </div>
+    </div>
+</nav>
 
 <!-- Content from google_site_training_1_3 (updated to C.R.E.A.T.E.) -->
 <div class="content-section text-center">
@@ -97,3 +132,4 @@
 </div>
 <div id="footer-placeholder"></div>
 <script src="../../shared/scripts/footer.js" defer></script>
+<script src="../../shared/scripts/breadcrumb-nav.js"></script>

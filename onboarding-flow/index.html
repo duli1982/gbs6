@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Onboarding Flow - Randstad GBS Learning Hub</title>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
     <script>
         // Redirect to welcome page for better UX
         window.location.href = 'welcome.html';
@@ -12,7 +13,34 @@
 </head>
 
 <body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            Home
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current">Onboarding</span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn">
+                    Back to Hub
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <p>Redirecting to onboarding welcome page...</p>
+
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
 </body>
 
 </html>

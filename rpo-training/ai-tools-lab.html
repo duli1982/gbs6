@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Tools Lab - RPO Training Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../shared/hub-button.css">
     <link rel="stylesheet" href="../shared/fonts.css">
     <link rel="stylesheet" href="../shared/scroll-to-top.css">
@@ -52,14 +53,46 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Back to Hub Button -->
-    <a href="../index.html" class="hub-button">Back To Hub</a>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>AI Tools Lab</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Header -->
-    <header class="bg-white site-header sticky top-0 z-10">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <header class="bg-white site-header">
+        <div class="max-w-6xl mx-auto px-6 py-4">
             <h1 class="google-sans text-2xl text-gray-700">RPO AI Acceleration Program</h1>
-            <a href="index.html" class="text-blue-600 hover:text-blue-800 font-medium transition-colors">← Back to Training</a>
         </div>
     </header>
 
@@ -446,6 +479,7 @@ Example:
     <div id="footer-placeholder"></div>
     <script src="../shared/scripts/footer.js" defer></script>
     <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
 
     <script>
         // Tool management

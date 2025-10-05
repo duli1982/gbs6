@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Sourcing Focus</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../shared/hub-button.css">
     <link rel="stylesheet" href="../shared/fonts.css">
     <link rel="stylesheet" href="../shared/scroll-to-top.css">
@@ -64,7 +65,34 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <a href="../index.html" class="hub-button">Back To Hub</a>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Daily Focus</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <div class="container mx-auto p-4 md:p-6 max-w-2xl">
 
@@ -113,6 +141,7 @@
     <div id="footer-placeholder"></div>
     <script src="../shared/scripts/footer.js" defer></script>
     <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
 
     <script>
         // --- App State ---

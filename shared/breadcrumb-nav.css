@@ -1,0 +1,311 @@
+/* Enhanced Breadcrumb Navigation System */
+/* Randstad GBS Learning Hub */
+
+.breadcrumb-container {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.breadcrumb-container.scrolled {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.breadcrumb-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.breadcrumb-nav ol {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: #4A90E2;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+    background-color: #f0f9ff;
+    color: #357ABD;
+}
+
+.breadcrumb-link:focus {
+    outline: 2px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+/* Breadcrumb icon */
+.breadcrumb-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Current page (not clickable) */
+.breadcrumb-current {
+    color: #1f2937;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Separator */
+.breadcrumb-separator {
+    color: #d1d5db;
+    user-select: none;
+    font-size: 1rem;
+}
+
+/* Mobile Quick Actions */
+.breadcrumb-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.breadcrumb-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+}
+
+.breadcrumb-back-btn:hover {
+    background: #357ABD;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.breadcrumb-back-btn:focus {
+    outline: 2px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+.breadcrumb-back-btn:active {
+    transform: translateY(0);
+}
+
+/* Hub Button (Primary) */
+.breadcrumb-hub-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.25);
+}
+
+.breadcrumb-hub-btn:hover {
+    background: linear-gradient(135deg, #357ABD 0%, #2A5F8F 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.4);
+}
+
+.breadcrumb-hub-btn:focus {
+    outline: 2px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+/* Icons using Unicode/Emoji (can be replaced with SVG icons) */
+.icon-home::before {
+    content: "🏠";
+    font-size: 14px;
+}
+
+.icon-folder::before {
+    content: "📁";
+    font-size: 14px;
+}
+
+.icon-book::before {
+    content: "📚";
+    font-size: 14px;
+}
+
+.icon-file::before {
+    content: "📄";
+    font-size: 14px;
+}
+
+.icon-arrow-left::before {
+    content: "←";
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Progress Indicator (optional add-on) */
+.breadcrumb-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    padding: 0.25rem 0.75rem;
+    background: #f3f4f6;
+    border-radius: 50px;
+    white-space: nowrap;
+}
+
+.breadcrumb-progress-bar {
+    width: 60px;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.breadcrumb-progress-fill {
+    height: 100%;
+    background: #10b981;
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .breadcrumb-wrapper {
+        padding: 0.5rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .breadcrumb-nav {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .breadcrumb-nav::-webkit-scrollbar {
+        height: 3px;
+    }
+
+    .breadcrumb-nav::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 3px;
+    }
+
+    .breadcrumb-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Hide middle breadcrumb items on very small screens */
+    .breadcrumb-item:not(:first-child):not(:last-child) {
+        display: none;
+    }
+
+    /* Show ellipsis */
+    .breadcrumb-nav.has-hidden-items::after {
+        content: "...";
+        color: #9ca3af;
+        padding: 0 0.25rem;
+    }
+}
+
+/* Animation on load */
+@keyframes breadcrumbFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.breadcrumb-container {
+    animation: breadcrumbFadeIn 0.4s ease-out;
+}
+
+/* Accessibility improvements */
+.breadcrumb-link:focus-visible,
+.breadcrumb-back-btn:focus-visible,
+.breadcrumb-hub-btn:focus-visible {
+    outline: 3px solid #4A90E2;
+    outline-offset: 3px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .breadcrumb-link {
+        border: 1px solid currentColor;
+    }
+
+    .breadcrumb-separator {
+        font-weight: bold;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .breadcrumb-container,
+    .breadcrumb-link,
+    .breadcrumb-back-btn,
+    .breadcrumb-hub-btn {
+        transition: none;
+        animation: none;
+    }
+}

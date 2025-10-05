@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gemini Prompt Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../shared/hub-button.css">
     <link rel="stylesheet" href="../shared/fonts.css">
     <link rel="stylesheet" href="../shared/scroll-to-top.css">
@@ -452,6 +453,35 @@
 
 <body class="antialiased">
 
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>GBS Prompts</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Scroll to Top Button -->
     <button id="scroll-to-top" class="scroll-to-top" title="Scroll to top">
         ↑
@@ -459,7 +489,6 @@
 
     <!-- =========== HOMEPAGE VIEW =========== -->
     <div id="homepage-view" class="fade-in">
-        <a href="../index.html" class="hub-button">Back To Hub</a>
         <a href="waywethink.html" class="hub-button hub-button-right">Way We Think</a>
         <header class="text-center py-12 px-4">
             <h1 class="text-4xl md:text-5xl font-bold tracking-tight main-heading">Gemini Prompt Library</h1>
@@ -1313,6 +1342,7 @@ copyGemBtn.addEventListener('click', () => {
     </div>
     <script src="../shared/scripts/smooth-scroll.js" defer></script>
     <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
 </body>
 
 </html>
