@@ -6,7 +6,10 @@
     <title>AI Tools Lab - RPO Training Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
         .google-sans { font-family: 'Google Sans', sans-serif; }
         body { font-family: 'Roboto', sans-serif; }
@@ -26,9 +29,9 @@
             border-color: #3b82f6;
         }
         
-        .tool-card.premium {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-color: #f59e0b;
+        .site-header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .tool-section {
@@ -51,6 +54,14 @@
 <body class="bg-gray-50">
     <!-- Back to Hub Button -->
     <a href="../index.html" class="hub-button">Back To Hub</a>
+
+    <!-- Header -->
+    <header class="bg-white site-header sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="google-sans text-2xl text-gray-700">RPO AI Acceleration Program</h1>
+            <a href="index.html" class="text-blue-600 hover:text-blue-800 font-medium transition-colors">← Back to Training</a>
+        </div>
+    </header>
 
     <div class="container mx-auto px-4 py-8 max-w-6xl">
         <!-- Header -->
@@ -101,19 +112,19 @@
             </div>
 
             <!-- Meeting Summary Generator -->
-            <div class="tool-card premium" onclick="openTool('meeting-summary')">
+            <div class="tool-card" onclick="openTool('meeting-summary')">
                 <div class="text-3xl mb-3">📝</div>
                 <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Meeting Summary Generator</h3>
                 <p class="text-gray-600 text-sm mb-3">Convert interview notes into structured summaries and action items.</p>
-                <div class="text-amber-700 font-semibold text-sm">Premium Tool →</div>
+                <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
             </div>
 
             <!-- Document Analyzer -->
-            <div class="tool-card premium" onclick="openTool('document-analyzer')">
+            <div class="tool-card" onclick="openTool('document-analyzer')">
                 <div class="text-3xl mb-3">📊</div>
                 <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Document Analyzer</h3>
                 <p class="text-gray-600 text-sm mb-3">Analyze job descriptions, resumes, and other documents for AI improvement suggestions.</p>
-                <div class="text-amber-700 font-semibold text-sm">Premium Tool →</div>
+                <div class="text-blue-600 font-semibold text-sm">Click to use →</div>
             </div>
         </div>
 
@@ -273,7 +284,7 @@
             </div>
         </div>
 
-        <!-- Coming Soon Tools -->
+        <!-- Resume Optimizer Tool -->
         <div id="resume-optimizer" class="tool-section hidden-tool">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
@@ -282,10 +293,46 @@
                 </div>
                 <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
             </div>
-            <div class="text-center py-12">
-                <div class="text-6xl mb-4">🚧</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Coming Soon!</h3>
-                <p class="text-gray-600">This tool is currently in development. Check back soon!</p>
+
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Target Role:</label>
+                <input type="text" id="target-role" class="w-full p-3 border border-gray-300 rounded-lg mb-4" placeholder="e.g., Senior Software Engineer, Marketing Manager">
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Paste Resume Content:</label>
+                    <textarea id="resume-input" class="w-full p-3 border border-gray-300 rounded-lg" rows="15" placeholder="Paste the resume content here...
+
+Include:
+- Work experience
+- Skills and technologies
+- Education
+- Achievements"></textarea>
+
+                    <button onclick="optimizeResume()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mt-3 transition-colors">
+                        🚀 Optimize Resume
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Optimization Report:</label>
+                    <div id="resume-output" class="bg-gray-50 border border-gray-300 rounded-lg p-3 min-h-[350px] text-sm overflow-y-auto max-h-[500px]">
+                        Your optimization report will include:
+                        <ul class="list-disc ml-5 mt-2 text-gray-600">
+                            <li>ATS compatibility score</li>
+                            <li>Keyword optimization suggestions</li>
+                            <li>Format and structure improvements</li>
+                            <li>Achievement quantification tips</li>
+                            <li>Missing sections alert</li>
+                            <li>Industry-specific recommendations</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="copyResumeReport()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mt-3 transition-colors">
+                        📋 Copy Report
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -297,13 +344,42 @@
                 </div>
                 <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
             </div>
-            <div class="text-center py-12">
-                <div class="text-6xl mb-4">⭐</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Premium Feature</h3>
-                <p class="text-gray-600 mb-4">This advanced tool is available in our premium tier.</p>
-                <button class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-6 rounded-lg">
-                    Learn More About Premium
-                </button>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Your Interview/Meeting Notes:</label>
+                    <textarea id="meeting-notes" class="w-full p-3 border border-gray-300 rounded-lg" rows="15" placeholder="Paste your interview notes, key points, or meeting transcript here...
+
+Example:
+- Candidate has 5 years experience in React
+- Strong communication skills
+- Currently working at TechCorp
+- Looking for remote opportunities
+- Salary expectation: $120k
+- Available to start in 2 weeks"></textarea>
+
+                    <button onclick="generateMeetingSummary()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mt-3 transition-colors">
+                        📝 Generate Summary
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Structured Summary:</label>
+                    <div id="meeting-output" class="bg-gray-50 border border-gray-300 rounded-lg p-3 min-h-[350px] text-sm">
+                        Your structured summary will appear here with:
+                        <ul class="list-disc ml-5 mt-2 text-gray-600">
+                            <li>Key highlights</li>
+                            <li>Candidate strengths</li>
+                            <li>Areas of concern</li>
+                            <li>Action items</li>
+                            <li>Next steps</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="copySummary()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mt-3 transition-colors">
+                        📋 Copy Summary
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -315,16 +391,61 @@
                 </div>
                 <button onclick="closeTool()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
             </div>
-            <div class="text-center py-12">
-                <div class="text-6xl mb-4">⭐</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Premium Feature</h3>
-                <p class="text-gray-600 mb-4">This advanced tool is available in our premium tier.</p>
-                <button class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-6 rounded-lg">
-                    Learn More About Premium
-                </button>
+
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Document Type:</label>
+                <select id="doc-type" class="w-full p-3 border border-gray-300 rounded-lg mb-4">
+                    <option value="job-description">Job Description</option>
+                    <option value="resume">Resume/CV</option>
+                    <option value="email">Email</option>
+                    <option value="linkedin">LinkedIn Profile</option>
+                </select>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Paste Your Document:</label>
+                    <textarea id="document-input" class="w-full p-3 border border-gray-300 rounded-lg" rows="15" placeholder="Paste the job description, resume, email, or LinkedIn profile content here..."></textarea>
+
+                    <button onclick="analyzeDocument()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mt-3 transition-colors">
+                        🔍 Analyze Document
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">AI Analysis & Suggestions:</label>
+                    <div id="analysis-output" class="bg-gray-50 border border-gray-300 rounded-lg p-3 min-h-[350px] text-sm">
+                        Analysis will include:
+                        <ul class="list-disc ml-5 mt-2 text-gray-600">
+                            <li>Clarity and readability score</li>
+                            <li>Key strengths identified</li>
+                            <li>Areas for improvement</li>
+                            <li>Missing elements</li>
+                            <li>Actionable suggestions</li>
+                            <li>Best practice recommendations</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="copyAnalysis()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mt-3 transition-colors">
+                        📋 Copy Analysis
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
 
     <script>
         // Tool management
@@ -563,6 +684,325 @@ Format the searches clearly with explanations of each component.`
             setTimeout(() => {
                 button.textContent = originalText;
             }, 2000);
+        }
+
+        // Meeting Summary Generator Functions
+        function generateMeetingSummary() {
+            const notes = document.getElementById('meeting-notes').value;
+            if (!notes.trim()) {
+                alert('Please enter your meeting notes first!');
+                return;
+            }
+
+            const summary = createStructuredSummary(notes);
+            document.getElementById('meeting-output').innerHTML = summary;
+        }
+
+        function createStructuredSummary(notes) {
+            const lines = notes.split('\n').filter(line => line.trim());
+
+            let summary = '<div class="space-y-4">';
+
+            // Header
+            summary += '<div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">';
+            summary += '<h3 class="font-bold text-blue-900 mb-2">📋 Interview/Meeting Summary</h3>';
+            summary += '<p class="text-sm text-blue-700">Generated: ' + new Date().toLocaleDateString() + '</p>';
+            summary += '</div>';
+
+            // Key Highlights
+            summary += '<div class="bg-white border border-gray-200 p-3 rounded">';
+            summary += '<h4 class="font-bold text-gray-900 mb-2">🌟 Key Highlights:</h4>';
+            summary += '<ul class="list-disc ml-5 text-gray-700 space-y-1">';
+            lines.slice(0, 3).forEach(line => {
+                summary += `<li>${line.replace(/^[-•*]\s*/, '')}</li>`;
+            });
+            summary += '</ul></div>';
+
+            // Strengths
+            summary += '<div class="bg-green-50 border border-green-200 p-3 rounded">';
+            summary += '<h4 class="font-bold text-green-900 mb-2">✅ Strengths:</h4>';
+            summary += '<ul class="list-disc ml-5 text-green-700 space-y-1">';
+            const strengths = lines.filter(l =>
+                l.toLowerCase().includes('strong') ||
+                l.toLowerCase().includes('experience') ||
+                l.toLowerCase().includes('years')
+            );
+            if (strengths.length > 0) {
+                strengths.forEach(line => summary += `<li>${line.replace(/^[-•*]\s*/, '')}</li>`);
+            } else {
+                summary += '<li>Review notes for candidate strengths</li>';
+            }
+            summary += '</ul></div>';
+
+            // Action Items
+            summary += '<div class="bg-yellow-50 border border-yellow-200 p-3 rounded">';
+            summary += '<h4 class="font-bold text-yellow-900 mb-2">📌 Action Items:</h4>';
+            summary += '<ul class="list-disc ml-5 text-yellow-700 space-y-1">';
+            summary += '<li>Follow up with candidate within 48 hours</li>';
+            summary += '<li>Verify references and credentials</li>';
+            summary += '<li>Schedule next interview round (if applicable)</li>';
+            summary += '<li>Share feedback with hiring team</li>';
+            summary += '</ul></div>';
+
+            // Next Steps
+            summary += '<div class="bg-purple-50 border border-purple-200 p-3 rounded">';
+            summary += '<h4 class="font-bold text-purple-900 mb-2">🚀 Next Steps:</h4>';
+            const availability = lines.find(l => l.toLowerCase().includes('available') || l.toLowerCase().includes('start'));
+            const salary = lines.find(l => l.toLowerCase().includes('salary') || l.toLowerCase().includes('$'));
+            summary += '<ul class="list-disc ml-5 text-purple-700 space-y-1">';
+            if (availability) summary += `<li>${availability.replace(/^[-•*]\s*/, '')}</li>`;
+            if (salary) summary += `<li>${salary.replace(/^[-•*]\s*/, '')}</li>`;
+            summary += '<li>Prepare offer details or schedule next steps</li>';
+            summary += '</ul></div>';
+
+            summary += '</div>';
+            return summary;
+        }
+
+        function copySummary() {
+            const output = document.getElementById('meeting-output').innerText;
+            navigator.clipboard.writeText(output);
+            showCopyFeedback(event.target);
+        }
+
+        // Document Analyzer Functions
+        function analyzeDocument() {
+            const docType = document.getElementById('doc-type').value;
+            const document = document.getElementById('document-input').value;
+
+            if (!document.trim()) {
+                alert('Please paste a document to analyze!');
+                return;
+            }
+
+            const analysis = performDocumentAnalysis(document, docType);
+            document.getElementById('analysis-output').innerHTML = analysis;
+        }
+
+        function performDocumentAnalysis(doc, type) {
+            const wordCount = doc.split(/\s+/).length;
+            const hasContactInfo = /email|phone|@|linkedin/i.test(doc);
+            const hasBulletPoints = /[•\-*]/.test(doc);
+
+            let analysis = '<div class="space-y-3">';
+
+            // Readability Score
+            const readabilityScore = Math.min(95, 60 + (hasBulletPoints ? 15 : 0) + (wordCount > 100 && wordCount < 500 ? 20 : 0));
+            analysis += `<div class="bg-blue-50 border border-blue-200 rounded p-3">`;
+            analysis += `<h4 class="font-bold text-blue-900 mb-1">📊 Readability Score: ${readabilityScore}%</h4>`;
+            analysis += `<p class="text-sm text-blue-700">Word count: ${wordCount} | Format: ${hasBulletPoints ? 'Well-structured' : 'Needs improvement'}</p>`;
+            analysis += '</div>';
+
+            // Strengths
+            analysis += '<div class="bg-green-50 border border-green-200 rounded p-3">';
+            analysis += '<h4 class="font-bold text-green-900 mb-2">✅ Strengths:</h4>';
+            analysis += '<ul class="list-disc ml-5 text-green-700 text-sm">';
+            if (wordCount >= 100) analysis += '<li>Adequate length and detail</li>';
+            if (hasBulletPoints) analysis += '<li>Good use of bullet points for readability</li>';
+            if (hasContactInfo) analysis += '<li>Contact information included</li>';
+            analysis += '</ul></div>';
+
+            // Improvements (specific to document type)
+            analysis += '<div class="bg-orange-50 border border-orange-200 rounded p-3">';
+            analysis += '<h4 class="font-bold text-orange-900 mb-2">🔧 Suggested Improvements:</h4>';
+            analysis += '<ul class="list-disc ml-5 text-orange-700 text-sm">';
+
+            if (type === 'job-description') {
+                if (!doc.toLowerCase().includes('responsibility') && !doc.toLowerCase().includes('responsibilities')) {
+                    analysis += '<li>Add clear responsibilities section</li>';
+                }
+                if (!doc.toLowerCase().includes('benefit')) {
+                    analysis += '<li>Include company benefits and perks</li>';
+                }
+                if (!doc.toLowerCase().includes('qualification') && !doc.toLowerCase().includes('requirement')) {
+                    analysis += '<li>Specify qualifications and requirements</li>';
+                }
+            } else if (type === 'resume') {
+                if (!doc.toLowerCase().includes('achievement') && !doc.toLowerCase().includes('result')) {
+                    analysis += '<li>Add quantifiable achievements and results</li>';
+                }
+                if (wordCount > 600) {
+                    analysis += '<li>Consider condensing content (currently ' + wordCount + ' words)</li>';
+                }
+            } else if (type === 'email') {
+                if (wordCount > 200) {
+                    analysis += '<li>Consider making the email more concise</li>';
+                }
+                if (!doc.includes('?')) {
+                    analysis += '<li>Consider adding a question to encourage response</li>';
+                }
+            }
+
+            if (!hasBulletPoints && wordCount > 150) {
+                analysis += '<li>Use bullet points to improve scannability</li>';
+            }
+            analysis += '</ul></div>';
+
+            // Best Practices
+            analysis += '<div class="bg-purple-50 border border-purple-200 rounded p-3">';
+            analysis += '<h4 class="font-bold text-purple-900 mb-2">💡 Best Practice Recommendations:</h4>';
+            analysis += '<ul class="list-disc ml-5 text-purple-700 text-sm">';
+            analysis += '<li>Use active voice and action verbs</li>';
+            analysis += '<li>Keep paragraphs short (2-3 sentences max)</li>';
+            analysis += '<li>Use specific numbers and metrics where possible</li>';
+            analysis += '<li>Proofread for grammar and spelling</li>';
+            analysis += '<li>Ensure consistent formatting throughout</li>';
+            analysis += '</ul></div>';
+
+            analysis += '</div>';
+            return analysis;
+        }
+
+        function copyAnalysis() {
+            const output = document.getElementById('analysis-output').innerText;
+            navigator.clipboard.writeText(output);
+            showCopyFeedback(event.target);
+        }
+
+        // Resume Optimizer Functions
+        function optimizeResume() {
+            const targetRole = document.getElementById('target-role').value;
+            const resume = document.getElementById('resume-input').value;
+
+            if (!resume.trim()) {
+                alert('Please paste your resume content first!');
+                return;
+            }
+
+            const report = generateResumeReport(resume, targetRole);
+            document.getElementById('resume-output').innerHTML = report;
+        }
+
+        function generateResumeReport(resume, targetRole) {
+            const wordCount = resume.split(/\s+/).length;
+            const lines = resume.split('\n').filter(l => l.trim());
+
+            // Analysis metrics
+            const hasContactInfo = /email|phone|@|linkedin/i.test(resume);
+            const hasSkills = /skill|technolog|proficient|expert/i.test(resume);
+            const hasEducation = /education|degree|university|college|bachelor|master/i.test(resume);
+            const hasExperience = /experience|work history|employment/i.test(resume);
+            const hasAchievements = /achieved|improved|increased|decreased|developed|led|managed/i.test(resume);
+            const hasQuantifiableResults = /\d+%|\$\d+|[0-9]+ (users|customers|projects|people|teams)/i.test(resume);
+            const hasBulletPoints = /[•\-*]/.test(resume);
+
+            // Calculate ATS score
+            let atsScore = 0;
+            if (hasContactInfo) atsScore += 15;
+            if (hasSkills) atsScore += 20;
+            if (hasEducation) atsScore += 15;
+            if (hasExperience) atsScore += 20;
+            if (hasBulletPoints) atsScore += 10;
+            if (hasQuantifiableResults) atsScore += 20;
+
+            let report = '<div class="space-y-3">';
+
+            // ATS Score
+            const scoreColor = atsScore >= 80 ? 'green' : atsScore >= 60 ? 'yellow' : 'red';
+            report += `<div class="bg-${scoreColor}-50 border border-${scoreColor}-200 rounded p-3">`;
+            report += `<h4 class="font-bold text-${scoreColor}-900 mb-1">🎯 ATS Compatibility Score: ${atsScore}%</h4>`;
+            report += `<p class="text-sm text-${scoreColor}-700">`;
+            if (atsScore >= 80) report += 'Excellent! Your resume is well-optimized for ATS systems.';
+            else if (atsScore >= 60) report += 'Good, but there\'s room for improvement.';
+            else report += 'Needs significant improvements to pass ATS screening.';
+            report += `</p></div>`;
+
+            // Strengths
+            report += '<div class="bg-green-50 border border-green-200 rounded p-3">';
+            report += '<h4 class="font-bold text-green-900 mb-2">✅ Strengths Identified:</h4>';
+            report += '<ul class="list-disc ml-5 text-green-700 text-sm space-y-1">';
+            if (hasContactInfo) report += '<li>Contact information present</li>';
+            if (hasSkills) report += '<li>Skills section included</li>';
+            if (hasEducation) report += '<li>Education details provided</li>';
+            if (hasExperience) report += '<li>Work experience documented</li>';
+            if (hasQuantifiableResults) report += '<li>Quantifiable achievements found</li>';
+            if (hasBulletPoints) report += '<li>Uses bullet points for readability</li>';
+            if (report.includes('</li>') === false) report += '<li>Resume content detected</li>';
+            report += '</ul></div>';
+
+            // Missing Sections
+            const missingSections = [];
+            if (!hasContactInfo) missingSections.push('Contact information');
+            if (!hasSkills) missingSections.push('Skills section');
+            if (!hasEducation) missingSections.push('Education');
+            if (!hasExperience) missingSections.push('Work experience');
+
+            if (missingSections.length > 0) {
+                report += '<div class="bg-red-50 border border-red-200 rounded p-3">';
+                report += '<h4 class="font-bold text-red-900 mb-2">⚠️ Missing Critical Sections:</h4>';
+                report += '<ul class="list-disc ml-5 text-red-700 text-sm">';
+                missingSections.forEach(section => {
+                    report += `<li>${section}</li>`;
+                });
+                report += '</ul></div>';
+            }
+
+            // Keyword Optimization
+            report += '<div class="bg-blue-50 border border-blue-200 rounded p-3">';
+            report += '<h4 class="font-bold text-blue-900 mb-2">🔑 Keyword Optimization:</h4>';
+            report += '<ul class="list-disc ml-5 text-blue-700 text-sm">';
+            if (targetRole) {
+                report += `<li>Target Role: <strong>${targetRole}</strong> - Include this exact phrase</li>`;
+                report += `<li>Add industry-specific keywords related to ${targetRole}</li>`;
+            } else {
+                report += '<li>Specify a target role for personalized keyword suggestions</li>';
+            }
+            report += '<li>Use action verbs: Led, Developed, Managed, Achieved, Improved</li>';
+            report += '<li>Include technical skills and tools mentioned in job descriptions</li>';
+            report += '<li>Add certifications and qualifications relevant to your field</li>';
+            report += '</ul></div>';
+
+            // Achievement Quantification
+            report += '<div class="bg-purple-50 border border-purple-200 rounded p-3">';
+            report += '<h4 class="font-bold text-purple-900 mb-2">📊 Achievement Quantification:</h4>';
+            if (hasQuantifiableResults) {
+                report += '<p class="text-sm text-purple-700 mb-2">Great! You have quantifiable results. Consider adding more:</p>';
+            } else {
+                report += '<p class="text-sm text-purple-700 mb-2">Add numbers and metrics to demonstrate impact:</p>';
+            }
+            report += '<ul class="list-disc ml-5 text-purple-700 text-sm">';
+            report += '<li>"Increased sales by 25%" instead of "Improved sales"</li>';
+            report += '<li>"Managed team of 10 developers" instead of "Managed team"</li>';
+            report += '<li>"Reduced costs by $50K annually" instead of "Cut costs"</li>';
+            report += '<li>"Delivered 15 projects on time" instead of "Managed projects"</li>';
+            report += '</ul></div>';
+
+            // Format & Structure
+            report += '<div class="bg-orange-50 border border-orange-200 rounded p-3">';
+            report += '<h4 class="font-bold text-orange-900 mb-2">📝 Format & Structure Tips:</h4>';
+            report += '<ul class="list-disc ml-5 text-orange-700 text-sm">';
+            if (wordCount > 600) {
+                report += `<li>Consider condensing (current: ${wordCount} words, ideal: 400-600)</li>`;
+            } else if (wordCount < 300) {
+                report += `<li>Add more detail (current: ${wordCount} words, ideal: 400-600)</li>`;
+            }
+            if (!hasBulletPoints) report += '<li>Use bullet points for better scannability</li>';
+            report += '<li>Use consistent formatting for dates and job titles</li>';
+            report += '<li>Start each bullet with an action verb</li>';
+            report += '<li>Maintain reverse chronological order (newest first)</li>';
+            report += '<li>Keep margins at 0.5-1 inch for ATS compatibility</li>';
+            report += '</ul></div>';
+
+            // Final Recommendations
+            report += '<div class="bg-indigo-50 border border-indigo-200 rounded p-3">';
+            report += '<h4 class="font-bold text-indigo-900 mb-2">💡 Next Steps:</h4>';
+            report += '<ol class="list-decimal ml-5 text-indigo-700 text-sm space-y-1">';
+            report += '<li>Add missing sections identified above</li>';
+            report += '<li>Quantify at least 3-5 major achievements</li>';
+            report += '<li>Tailor keywords to match target job descriptions</li>';
+            report += '<li>Ensure consistent formatting throughout</li>';
+            report += '<li>Proofread for grammar and spelling errors</li>';
+            report += '<li>Save in both PDF and Word format</li>';
+            report += '</ol></div>';
+
+            report += '</div>';
+            return report;
+        }
+
+        function copyResumeReport() {
+            const output = document.getElementById('resume-output').innerText;
+            navigator.clipboard.writeText(output);
+            showCopyFeedback(event.target);
         }
     </script>
 </body>

@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced AI Learning Path - RPO Training</title>
+    <title>Advanced AI Learning Path - RPO Training | Randstad GBS</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Master strategic AI implementation and leadership with our advanced learning path. Expert-level content covering AI strategy, custom solutions, and enterprise integration. 125 minutes total, 5 modules.">
+    <meta name="keywords" content="advanced AI training, AI strategy, AI leadership, enterprise AI, custom AI solutions, AI transformation, strategic AI implementation">
+    <meta name="author" content="Randstad GBS">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Advanced AI Learning Path - RPO Training">
+    <meta property="og:description" content="Master strategic AI implementation and leadership with expert-level training">
+    <meta property="og:site_name" content="Randstad GBS Learning Hub">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Advanced AI Learning Path">
+    <meta name="twitter:description" content="Expert-level AI strategy and implementation training">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../shared/hub-button.css">
     <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
     <style>
         /* Font styles now handled by shared/fonts.css */
         
@@ -38,7 +58,7 @@
             border-radius: 12px;
             font-weight: 600;
         }
-        
+
         .strategy-highlight {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             color: white;
@@ -48,23 +68,57 @@
             text-align: center;
             margin: 1rem 0;
         }
+
+        .site-header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb {
+            color: #6b7280;
+        }
+
+        .breadcrumb a:hover {
+            color: #4b5563;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Back to Hub Button -->
     <a href="../../index.html" class="hub-button">Back To Hub</a>
-    
+
+    <!-- Sticky Header with Breadcrumbs -->
+    <header class="bg-white site-header sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <nav class="breadcrumb text-sm mb-1" aria-label="Breadcrumb">
+                        <a href="../../index.html" class="hover:underline">Home</a>
+                        <span class="mx-2">›</span>
+                        <a href="../index.html" class="hover:underline">RPO Training</a>
+                        <span class="mx-2">›</span>
+                        <span class="text-gray-900 font-semibold">Advanced Path</span>
+                    </nav>
+                    <h1 class="google-sans text-xl text-gray-700">Advanced AI Learning Path</h1>
+                </div>
+                <div class="text-sm text-gray-600">
+                    <span id="header-progress">0 of 5 completed</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <div class="text-center mb-8">
-            <div class="text-6xl mb-4">⚡</div>
-            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Advanced AI Learning Path</h1>
-            <p class="text-lg text-gray-600 mb-4">Master strategic AI implementation, leadership, and cutting-edge applications.</p>
+            <div class="text-6xl mb-4" aria-hidden="true">⚡</div>
+            <h2 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Advanced AI Learning Path</h2>
+            <p class="text-lg text-gray-600 mb-4">Master strategic AI implementation, leadership, and cutting-edge applications. <strong>Total time: ~125 minutes</strong></p>
             <div class="expert-badge inline-block mb-6">🎯 Expert Level Content</div>
-            
+
             <!-- Progress Bar -->
-            <div class="max-w-md mx-auto">
-                <div class="bg-gray-200 rounded-full h-3">
+            <div class="max-w-md mx-auto" role="region" aria-label="Learning progress">
+                <div class="bg-gray-200 rounded-full h-3" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Overall completion progress">
                     <div id="progress-bar" class="progress-bar bg-purple-500 h-3 rounded-full" style="width: 0%"></div>
                 </div>
                 <div class="text-sm text-gray-600 mt-2">
@@ -90,14 +144,14 @@
         <div class="max-w-3xl mx-auto space-y-6">
             
             <!-- Module 1: AI Strategy & Leadership -->
-            <div class="module-card bg-white rounded-xl p-6" data-module="1">
+            <div class="module-card bg-white rounded-xl p-6" data-module="1" role="article" aria-labelledby="module-1-title">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
                         <div class="flex items-center mb-3">
                             <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-purple-600 font-bold">1</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">AI Strategy & Leadership</h3>
+                            <h3 id="module-1-title" class="google-sans text-xl font-bold text-gray-900">AI Strategy & Leadership</h3>
                             <span class="ml-3 text-sm text-gray-500">⏱ 25 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Develop comprehensive AI strategies for your organization and lead AI transformation initiatives.</p>
@@ -113,24 +167,25 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <button onclick="startModule(1)" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                            <button onclick="startModule(1)" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                                aria-label="Start Module 1: AI Strategy & Leadership">
                                 Start Module
                             </button>
                         </div>
                     </div>
-                    <div class="text-3xl ml-4">🎯</div>
+                    <div class="text-3xl ml-4" aria-hidden="true">🎯</div>
                 </div>
             </div>
 
             <!-- Module 2: Custom AI Solutions -->
-            <div class="module-card bg-white rounded-xl p-6" data-module="2">
+            <div class="module-card bg-white rounded-xl p-6" data-module="2" role="article" aria-labelledby="module-2-title">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
                         <div class="flex items-center mb-3">
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">2</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">Custom AI Solutions Development</h3>
+                            <h3 id="module-2-title" class="google-sans text-xl font-bold text-gray-900">Custom AI Solutions Development</h3>
                             <span class="ml-3 text-sm text-gray-500">⏱ 30 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Design and implement custom AI solutions tailored to your organization's unique challenges.</p>
@@ -143,60 +198,62 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <button onclick="startModule(2)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                            <button onclick="startModule(2)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled
+                                aria-label="Module 2: Custom AI Solutions Development - Complete Module 1 first">
                                 Complete Module 1 First
                             </button>
                         </div>
                     </div>
-                    <div class="text-3xl ml-4">🛠️</div>
+                    <div class="text-3xl ml-4" aria-hidden="true">🛠️</div>
                 </div>
             </div>
 
             <!-- Module 3: AI Integration & Automation -->
-            <div class="module-card bg-white rounded-xl p-6" data-module="3">
+            <div class="module-card bg-white rounded-xl p-6" data-module="3" role="article" aria-labelledby="module-3-title">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
                         <div class="flex items-center mb-3">
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">3</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">Enterprise AI Integration</h3>
+                            <h3 id="module-3-title" class="google-sans text-xl font-bold text-gray-900">Enterprise AI Integration</h3>
                             <span class="ml-3 text-sm text-gray-500">⏱ 28 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Master advanced integration techniques, API usage, and automation workflows for enterprise-scale AI deployment.</p>
                         <div class="grid md:grid-cols-3 gap-3 mb-4">
                             <div class="bg-blue-50 rounded p-3 text-center">
-                                <div class="text-lg mb-1">🔗</div>
+                                <div class="text-lg mb-1" aria-hidden="true">🔗</div>
                                 <div class="text-xs font-semibold text-blue-800">API Integration</div>
                             </div>
                             <div class="bg-green-50 rounded p-3 text-center">
-                                <div class="text-lg mb-1">⚙️</div>
+                                <div class="text-lg mb-1" aria-hidden="true">⚙️</div>
                                 <div class="text-xs font-semibold text-green-800">Automation</div>
                             </div>
                             <div class="bg-purple-50 rounded p-3 text-center">
-                                <div class="text-lg mb-1">📊</div>
+                                <div class="text-lg mb-1" aria-hidden="true">📊</div>
                                 <div class="text-xs font-semibold text-purple-800">Analytics</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <button onclick="startModule(3)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                            <button onclick="startModule(3)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled
+                                aria-label="Module 3: Enterprise AI Integration - Complete previous modules first">
                                 Complete Previous Modules
                             </button>
                         </div>
                     </div>
-                    <div class="text-3xl ml-4">🔄</div>
+                    <div class="text-3xl ml-4" aria-hidden="true">🔄</div>
                 </div>
             </div>
 
             <!-- Module 4: Team Implementation & Scaling -->
-            <div class="module-card bg-white rounded-xl p-6" data-module="4">
+            <div class="module-card bg-white rounded-xl p-6" data-module="4" role="article" aria-labelledby="module-4-title">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
                         <div class="flex items-center mb-3">
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">4</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">Team Implementation & Scaling</h3>
+                            <h3 id="module-4-title" class="google-sans text-xl font-bold text-gray-900">Team Implementation & Scaling</h3>
                             <span class="ml-3 text-sm text-gray-500">⏱ 20 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Lead successful AI adoption across teams, manage change resistance, and scale AI initiatives organization-wide.</p>
@@ -210,24 +267,25 @@
                             </ul>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <button onclick="startModule(4)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                            <button onclick="startModule(4)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled
+                                aria-label="Module 4: Team Implementation & Scaling - Complete previous modules first">
                                 Complete Previous Modules
                             </button>
                         </div>
                     </div>
-                    <div class="text-3xl ml-4">👥</div>
+                    <div class="text-3xl ml-4" aria-hidden="true">👥</div>
                 </div>
             </div>
 
             <!-- Module 5: Future-Proofing & Innovation -->
-            <div class="module-card bg-white rounded-xl p-6" data-module="5">
+            <div class="module-card bg-white rounded-xl p-6" data-module="5" role="article" aria-labelledby="module-5-title">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
                         <div class="flex items-center mb-3">
                             <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
                                 <span class="text-gray-400 font-bold">5</span>
                             </div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900">Future-Proofing & Innovation</h3>
+                            <h3 id="module-5-title" class="google-sans text-xl font-bold text-gray-900">Future-Proofing & Innovation</h3>
                             <span class="ml-3 text-sm text-gray-500">⏱ 22 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Stay ahead of AI trends, prepare for emerging technologies, and build innovation frameworks for continuous AI evolution.</p>
@@ -238,12 +296,13 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <button onclick="startModule(5)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                            <button onclick="startModule(5)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled
+                                aria-label="Module 5: Future-Proofing & Innovation - Complete previous modules first">
                                 Complete Previous Modules
                             </button>
                         </div>
                     </div>
-                    <div class="text-3xl ml-4">🚀</div>
+                    <div class="text-3xl ml-4" aria-hidden="true">🚀</div>
                 </div>
             </div>
         </div>
@@ -304,6 +363,19 @@
         </div>
     </div>
 
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
     <script>
         let completedModules = JSON.parse(localStorage.getItem('advanced-path-progress') || '[]');
         
@@ -340,14 +412,22 @@
             alert('🏆 Starting AI Leadership Certification process! This includes capstone project submission and peer review. You will design a complete AI implementation strategy for your team and present it to fellow advanced learners.');
         }
         
-        function startCertification() {
-            alert('🏆 Congratulations! Starting AI Leadership Certification process. This would include capstone project submission and peer review.');
-        }
-        
         function updateProgress() {
             const progress = (completedModules.length / 5) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-bar').setAttribute('aria-valuenow', progress);
             document.getElementById('progress-text').textContent = `${completedModules.length} of 5 modules completed`;
+            const headerProgress = document.getElementById('header-progress');
+            if (headerProgress) {
+                headerProgress.textContent = `${completedModules.length} of 5 completed`;
+            }
+
+            // Enable certification button when all modules complete
+            if (completedModules.length === 5) {
+                const certBtn = document.getElementById('certification-btn');
+                certBtn.disabled = false;
+                certBtn.classList.remove('cursor-not-allowed', 'opacity-50');
+            }
         }
         
         function updateModuleStates() {

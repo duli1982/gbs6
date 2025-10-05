@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beginner AI Learning Path - RPO Training</title>
+    <title>Beginner AI Learning Path - RPO Training | Randstad GBS</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Start your AI journey with our beginner-friendly learning path. Learn AI basics, write effective prompts, and apply AI to daily recruitment tasks. 40 minutes total, 5 modules.">
+    <meta name="keywords" content="beginner AI training, AI basics, AI prompts for beginners, recruitment AI introduction, AI learning path, AI for recruiters">
+    <meta name="author" content="Randstad GBS">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Beginner AI Learning Path - RPO Training">
+    <meta property="og:description" content="Your gentle introduction to AI - no technical jargon, just practical skills you can use today">
+    <meta property="og:site_name" content="Randstad GBS Learning Hub">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Beginner AI Learning Path">
+    <meta name="twitter:description" content="Start your AI journey with 5 practical modules designed for recruitment professionals">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../shared/hub-button.css">
     <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
     <style>
         /* Font styles now handled by shared/fonts.css */
         
@@ -39,55 +59,89 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
         }
+
+        .site-header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb {
+            color: #6b7280;
+        }
+
+        .breadcrumb a:hover {
+            color: #4b5563;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Back to Hub Button -->
     <a href="../../index.html" class="hub-button">Back To Hub</a>
-    
+
+    <!-- Sticky Header with Breadcrumbs -->
+    <header class="bg-white site-header sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <nav class="breadcrumb text-sm mb-1" aria-label="Breadcrumb">
+                        <a href="../../index.html" class="hover:underline">Home</a>
+                        <span class="mx-2">›</span>
+                        <a href="../index.html" class="hover:underline">RPO Training</a>
+                        <span class="mx-2">›</span>
+                        <span class="text-gray-900 font-semibold">Beginner Path</span>
+                    </nav>
+                    <h1 class="google-sans text-xl text-gray-700">Beginner AI Learning Path</h1>
+                </div>
+                <div class="text-sm text-gray-600">
+                    <span id="header-progress">0 of 5 completed</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <div class="text-center mb-8">
-            <div class="text-6xl mb-4">🌱</div>
-            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Beginner AI Learning Path</h1>
-            <p class="text-lg text-gray-600 mb-6">Your gentle introduction to AI - no technical jargon, just practical skills you can use today.</p>
-            
+            <div class="text-6xl mb-4" aria-hidden="true">🌱</div>
+            <h2 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Beginner AI Learning Path</h2>
+            <p class="text-lg text-gray-600 mb-6">Your gentle introduction to AI - no technical jargon, just practical skills you can use today. <strong>Total time: ~40 minutes</strong></p>
+
             <!-- Progress Bar -->
-            <div class="max-w-md mx-auto">
-                <div class="bg-gray-200 rounded-full h-3">
+            <div class="max-w-md mx-auto" role="region" aria-label="Learning progress">
+                <div class="bg-gray-200 rounded-full h-3" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Overall completion progress">
                     <div id="progress-bar" class="progress-bar bg-green-500 h-3 rounded-full" style="width: 0%"></div>
                 </div>
                 <div class="text-sm text-gray-600 mt-2">
-                    <span id="progress-text">0 of 5 modules completed</span>
+                    <span id="progress-text" aria-live="polite">0 of 5 modules completed</span>
                 </div>
             </div>
         </div>
 
         <!-- Learning Modules -->
-        <div class="max-w-3xl mx-auto space-y-6">
+        <div class="max-w-3xl mx-auto space-y-6" role="list" aria-label="Learning modules">
             
             <!-- Module 1: What is AI? -->
-            <div class="module-card bg-white rounded-xl p-6" data-module="1">
+            <div class="module-card bg-white rounded-xl p-6" data-module="1" role="listitem">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
                         <div class="flex items-center mb-3">
-                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3" aria-label="Module 1">
                                 <span class="text-green-600 font-bold">1</span>
                             </div>
                             <h3 class="google-sans text-xl font-bold text-gray-900">What is AI? (Simple Explanation)</h3>
-                            <span class="ml-3 text-sm text-gray-500">⏱ 5 min</span>
+                            <span class="ml-3 text-sm text-gray-500" aria-label="Duration 5 minutes">⏱ 5 min</span>
                         </div>
                         <p class="text-gray-600 mb-4">Understand AI in plain English - what it is, what it isn't, and why it matters for your daily work.</p>
                         <div class="flex items-center space-x-4">
-                            <button onclick="startModule(1)" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                            <button onclick="startModule(1)" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors" aria-label="Start Module 1: What is AI">
                                 Start Module
                             </button>
                             <div class="completion-status hidden">
-                                <span class="text-green-600 font-semibold">✓ Completed</span>
+                                <span class="text-green-600 font-semibold" role="status">✓ Completed</span>
                             </div>
                         </div>
                     </div>
-                    <div class="text-3xl ml-4">🤖</div>
+                    <div class="text-3xl ml-4" aria-hidden="true">🤖</div>
                 </div>
             </div>
 
@@ -192,6 +246,13 @@
             </div>
         </div>
 
+        <!-- Completion Badge Callout -->
+        <div class="max-w-3xl mx-auto mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6 text-center" id="completion-badge-notice">
+            <div class="text-3xl mb-3">🏆</div>
+            <h3 class="google-sans text-lg font-bold text-green-900 mb-2">Earn Your Beginner Badge</h3>
+            <p class="text-green-700 text-sm">Complete all 5 modules to earn your AI Foundations certificate and unlock the Intermediate path!</p>
+        </div>
+
         <!-- Navigation -->
         <div class="text-center mt-12">
             <a href="../index.html" class="text-gray-500 hover:text-gray-700 font-medium">
@@ -199,6 +260,19 @@
             </a>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
 
     <script>
         let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
@@ -243,6 +317,11 @@
             const progress = (completedModules.length / 5) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
             document.getElementById('progress-text').textContent = `${completedModules.length} of 5 modules completed`;
+            // Update header progress
+            const headerProgress = document.getElementById('header-progress');
+            if (headerProgress) {
+                headerProgress.textContent = `${completedModules.length} of 5 completed`;
+            }
         }
         
         function updateModuleStates() {
