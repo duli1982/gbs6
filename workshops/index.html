@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Workshops - Randstad GBS Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #4A4A4A;
+            scroll-behavior: smooth;
+        }
+        
+        .workshop-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .workshop-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-btn {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+        }
+        
+        .workshop-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Interactive Workshops</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="google-sans text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Interactive Workshops</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Join live sessions with experts to enhance your skills. Seats are limited!</p>
+        </header>
+
+        <!-- Workshops Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            
+            <!-- AI-Powered Sourcing Masterclass -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-orange-100">
+                        🤖
+                    </div>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Powered Sourcing Masterclass</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Dive deep into advanced sourcing techniques using AI tools to find top-tier candidates faster.</p>
+                
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Date:</strong> July 15, 2024 - 10:00 AM EST</div>
+                    <div><strong>Instructor:</strong> Jane Doe, Lead Sourcing SME</div>
+                </div>
+                
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+            <!-- Prompt Engineering for Recruiters -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-yellow-100">
+                        ✨
+                    </div>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Prompt Engineering for Recruiters</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Learn the CREATE framework and craft powerful prompts that deliver precise results for any GBS task.</p>
+                
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Date:</strong> July 22, 2024 - 1:00 PM EST</div>
+                    <div><strong>Instructor:</strong> John Smith, AI Integration Specialist</div>
+                </div>
+                
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+            <!-- Leadership in the AI Era -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-blue-100">
+                        👔
+                    </div>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Leadership in the AI Era</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">A strategic workshop for GBS leaders on implementing AI, managing change, and driving team adoption.</p>
+                
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Date:</strong> August 5, 2024 - 11:00 AM EST</div>
+                    <div><strong>Instructor:</strong> Emily White, GBS Director</div>
+                </div>
+                
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+            <!-- Automating Your Workflow -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-purple-100">
+                        🔧
+                    </div>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Automating Your Workflow</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Identify and automate repetitive tasks in your daily workflow to save time and boost productivity.</p>
+                
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Date:</strong> August 12, 2024 - 2:00 PM EST</div>
+                    <div><strong>Instructor:</strong> Michael Brown, Process Automation Expert</div>
+                </div>
+                
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Additional Information Section -->
+        <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Workshop Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">What to Expect</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Interactive live sessions with industry experts
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Hands-on exercises and real-world examples
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Q&A sessions and peer networking
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Downloadable resources and templates
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Registration Details</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Limited seats available (first-come, first-served)
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            All workshops are free for GBS employees
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Calendar invites sent upon registration
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Recordings available for registered attendees
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Add click handlers for register buttons
+        document.querySelectorAll('.register-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Placeholder for registration functionality
+                alert('Registration functionality coming soon! Please contact your manager for early access.');
+            });
+        });
+    </script>
+
+</body>
+</html>

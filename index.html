@@ -424,17 +424,8 @@
 
     <!-- Sticky Header -->
     <header class="bg-white site-header sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-6 py-4">
             <h1 class="google-sans text-2xl text-gray-700">Randstad GBS Learning Hub</h1>
-            <nav class="flex items-center space-x-4">
-                <button id="search-trigger" class="text-gray-600 hover:text-blue-600 transition-colors"
-                    aria-label="Search">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </button>
-            </nav>
         </div>
     </header>
 
@@ -551,83 +542,206 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto" id="modules-grid"
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" id="modules-grid"
                 role="navigation" aria-label="Main learning modules">
 
-                <a href="onboarding-flow/index.html" class="card-hub card-gradient-green p-8 block"
+                <!-- Get Started with AI -->
+                <a href="onboarding-flow/index.html"
+                    class="block bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="onboarding get started new user orientation role-based personalized assessment quiz quick start"
                     aria-label="Get Started with AI - Personalized onboarding for new users">
-                    <div class="flex items-center mb-2">
-                        <span class="text-2xl mr-2" aria-hidden="true">🌟</span>
-                        <h3 class="google-sans text-2xl font-bold text-green-800">Get Started with AI</h3>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            🌟
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Get Started with AI</h3>
+                        </div>
                     </div>
-                    <p class="text-green-700">New to AI? Start here! Personalized onboarding based on your role, skill
-                        assessment, and immediate tools you can use today.</p>
-                    <div class="mt-4 text-sm text-green-600 font-medium">✓ Role-based recommendations ✓ Skill assessment
-                        ✓ Quick wins</div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">New to AI? Start here! Personalized onboarding
+                        based on your role, skill assessment, and immediate tools you can use today.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Role-based
+                            recommendations</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Skill assessment</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Quick wins</span>
+                    </div>
                 </a>
 
-                <a href="rpo-training/index.html" class="card-hub p-8 block"
+                <!-- RPO AI Acceleration Program -->
+                <a href="rpo-training/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="rpo ai acceleration program training curriculum foundations leadership strategy modules phases">
-                    <h3 class="google-sans text-2xl font-bold mb-2">RPO AI Acceleration Program</h3>
-                    <p class="text-gray-600">The complete, multi-phase training curriculum for all RPO team members,
-                        from AI foundations to leadership strategy.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            🎓
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">RPO AI Acceleration Program
+                            </h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">The complete, multi-phase training curriculum for
+                        all RPO team members, from AI foundations to leadership strategy.</p>
                 </a>
 
-                <a href="gbs-ai-workshop/index.html" class="card-hub p-8 block"
+                <!-- Guide for GBS Leaders -->
+                <a href="gbs-ai-workshop/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="gbs leaders guide interactive training prompt libraries simulators case studies workshop">
-                    <h3 class="google-sans text-2xl font-bold mb-2">Guide for GBS Leaders</h3>
-                    <p class="text-gray-600">An interactive training for GBS leaders, complete with prompt libraries,
-                        simulators, and case studies.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            👔
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Guide for GBS Leaders</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">An interactive training for GBS leaders, complete
+                        with prompt libraries, simulators, and case studies.</p>
                 </a>
 
-                <a href="daily-focus/index.html" class="card-hub p-8 block"
+                <!-- Daily Sourcing Focus -->
+                <a href="daily-focus/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="daily sourcing focus micro-coaching tool actionable cards talent sourcers skills">
-                    <h3 class="google-sans text-2xl font-bold mb-2">Daily Sourcing Focus</h3>
-                    <p class="text-gray-600">A daily micro-coaching tool with actionable focus cards designed to sharpen
-                        the skills of our talent sourcers.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            🎯
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Daily Sourcing Focus</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">A daily micro-coaching tool with actionable focus
+                        cards designed to sharpen the skills of our talent sourcers.</p>
                 </a>
 
-                <a href="gbs-prompts/index.html" class="card-hub p-8 block"
+                <!-- GBS AI Prompts Library -->
+                <a href="gbs-prompts/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="gbs ai prompts library comprehensive searchable expert prompts daily tasks professionals">
-                    <h3 class="google-sans text-2xl font-bold mb-2">GBS AI Prompts Library</h3>
-                    <p class="text-gray-600">A comprehensive and searchable library of expert prompts designed to
-                        accelerate daily tasks for GBS professionals.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            ✨
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">GBS AI Prompts Library</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">A comprehensive and searchable library of expert
+                        prompts designed to accelerate daily tasks for GBS professionals.</p>
                 </a>
 
-                <a href="knowledge-content/index.html" class="card-hub p-8 block"
+                <!-- Knowledge Content -->
+                <a href="knowledge-content/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="knowledge content wealth resources information learning materials documentation best practices guides tutorials">
-                    <h3 class="google-sans text-2xl font-bold mb-2">Knowledge Content</h3>
-                    <p class="text-gray-600">Essential guides, best practices, and tutorials covering AI fundamentals,
-                        implementation strategies, and troubleshooting common challenges.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            📚
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Knowledge Content</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">Essential guides, best practices, and tutorials
+                        covering AI fundamentals, implementation strategies, and troubleshooting common challenges.</p>
                 </a>
 
-                <a href="ai-sme/index.html" class="card-hub p-8 block"
+                <!-- AI SME -->
+                <a href="ai-sme/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="ai sme subject matter expert knowledge resources artificial intelligence expertise advanced techniques deep dive">
-                    <h3 class="google-sans text-2xl font-bold mb-2">AI SME</h3>
-                    <p class="text-gray-600">Advanced AI techniques, expert insights, and deep-dive resources for power
-                        users looking to maximize their AI capabilities and become team champions.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            🧠
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI SME</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">Advanced AI techniques, expert insights, and
+                        deep-dive resources for power users looking to maximize their AI capabilities and become team
+                        champions.</p>
                 </a>
 
-                <a href="use-cases/index.html" class="card-hub p-8 block"
+                <!-- AI Success Stories -->
+                <a href="use-cases/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="ai success stories real-world examples case studies transforms daily work randstad gbs impact">
-                    <h3 class="google-sans text-2xl font-bold mb-2">AI Success Stories</h3>
-                    <p class="text-gray-600">Real-world examples and case studies showcasing how AI transforms daily
-                        work at Randstad GBS. See the impact firsthand.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            💡
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Success Stories</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">Real-world examples and case studies showcasing how
+                        AI transforms daily work at Randstad GBS. See the impact firsthand.</p>
                 </a>
 
-                <a href="ai-simulations/index.html" class="card-hub p-8 block"
+                <!-- AI Simulations -->
+                <a href="ai-simulations/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     data-keywords="ai simulations reading between lines interactive training evaluate ai content hidden gems resume analysis">
-                    <h3 class="google-sans text-2xl font-bold mb-2">AI Simulations - Reading Between the Lines</h3>
-                    <p class="text-gray-600">Interactive training to sharpen your ability to evaluate AI-generated
-                        content and identify what it might miss in candidate assessments.</p>
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            🔍
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Simulations - Reading
+                                Between the Lines</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">Interactive training to sharpen your ability to
+                        evaluate AI-generated content and identify what it might miss in candidate assessments.</p>
                 </a>
 
-                <a href="sourcing-workshop/index.html" class="card-hub p-8 block"
-                    data-keywords="sourcing workshop advanced techniques market intelligence candidate engagement coming soon">
-                    <h3 class="google-sans text-2xl font-bold mb-2">Sourcing Workshop</h3>
-                    <p class="text-gray-600">An in-depth workshop dedicated to advanced sourcing techniques, market
-                        intelligence, and candidate engagement. (Coming Soon)</p>
+                <!-- Interactive Workshops -->
+                <a href="workshops/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                    data-keywords="interactive workshops live sessions experts skills sourcing masterclass prompt engineering leadership automation workflow">
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            🎪
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Interactive Workshops</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">Join live sessions with experts to enhance your
+                        skills. Interactive workshops covering AI sourcing, prompt engineering, leadership, and workflow
+                        automation.</p>
+                </a>
+
+                <!-- AppScript Idea Bank -->
+                <a href="appscript-bank/index.html"
+                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                    data-keywords="appscript idea bank automation google apps script drive sheets forms calendar gmail innovation ideas submit">
+                    <div class="flex items-start mb-4">
+                        <div
+                            class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            🔧
+                        </div>
+                        <div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AppScript Idea Bank</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">A central knowledge bank for innovative automation
+                        ideas using Google Apps Script. Submit your ideas and discover powerful automation solutions.
+                    </p>
                 </a>
 
             </div>

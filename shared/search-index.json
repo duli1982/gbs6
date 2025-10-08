@@ -313,16 +313,64 @@
       "sectionTitle": ""
     },
     {
-      "id": "sourcing-workshop",
-      "title": "Sourcing Workshop",
-      "description": "An in-depth workshop dedicated to advanced sourcing techniques, market intelligence, and candidate engagement.",
-      "url": "/sourcing-workshop/",
+      "id": "interactive-workshops",
+      "title": "Interactive Workshops",
+      "description": "Join live sessions with experts to enhance your skills. Interactive workshops covering AI sourcing, prompt engineering, leadership, and workflow automation.",
+      "url": "/workshops/",
       "category": "Workshop",
       "type": "module",
-      "keywords": "sourcing workshop advanced techniques market intelligence candidate engagement coming soon",
-      "content": "Sourcing Workshop advanced techniques market intelligence candidate engagement recruitment strategies",
+      "keywords": "interactive workshops live sessions experts skills sourcing masterclass prompt engineering leadership automation workflow registration",
+      "content": "Interactive Workshops live sessions experts enhance skills AI sourcing masterclass prompt engineering leadership automation workflow registration limited seats",
       "anchor": "",
       "sectionTitle": ""
+    },
+    {
+      "id": "ai-sourcing-masterclass",
+      "title": "AI-Powered Sourcing Masterclass",
+      "description": "Dive deep into advanced sourcing techniques using AI tools to find top-tier candidates faster.",
+      "url": "/workshops/",
+      "category": "Workshop",
+      "type": "workshop",
+      "keywords": "ai powered sourcing masterclass advanced techniques ai tools top-tier candidates faster jane doe lead sourcing sme",
+      "content": "AI-Powered Sourcing Masterclass advanced sourcing techniques AI tools top-tier candidates faster Jane Doe Lead Sourcing SME July 15 2024",
+      "anchor": "",
+      "sectionTitle": "AI-Powered Sourcing Masterclass"
+    },
+    {
+      "id": "prompt-engineering-workshop",
+      "title": "Prompt Engineering for Recruiters",
+      "description": "Learn the CREATE framework and craft powerful prompts that deliver precise results for any GBS task.",
+      "url": "/workshops/",
+      "category": "Workshop",
+      "type": "workshop",
+      "keywords": "prompt engineering recruiters create framework powerful prompts precise results gbs task john smith ai integration specialist",
+      "content": "Prompt Engineering Recruiters CREATE framework powerful prompts precise results GBS task John Smith AI Integration Specialist July 22 2024",
+      "anchor": "",
+      "sectionTitle": "Prompt Engineering for Recruiters"
+    },
+    {
+      "id": "leadership-ai-era",
+      "title": "Leadership in the AI Era",
+      "description": "A strategic workshop for GBS leaders on implementing AI, managing change, and driving team adoption.",
+      "url": "/workshops/",
+      "category": "Workshop",
+      "type": "workshop",
+      "keywords": "leadership ai era strategic workshop gbs leaders implementing ai managing change driving team adoption emily white gbs director",
+      "content": "Leadership AI Era strategic workshop GBS leaders implementing AI managing change driving team adoption Emily White GBS Director August 5 2024",
+      "anchor": "",
+      "sectionTitle": "Leadership in the AI Era"
+    },
+    {
+      "id": "automating-workflow",
+      "title": "Automating Your Workflow",
+      "description": "Identify and automate repetitive tasks in your daily workflow to save time and boost productivity.",
+      "url": "/workshops/",
+      "category": "Workshop",
+      "type": "workshop",
+      "keywords": "automating workflow identify automate repetitive tasks daily workflow save time boost productivity michael brown process automation expert",
+      "content": "Automating Workflow identify automate repetitive tasks daily workflow save time boost productivity Michael Brown Process Automation Expert August 12 2024",
+      "anchor": "",
+      "sectionTitle": "Automating Your Workflow"
     },
     {
       "id": "feedback",
@@ -491,6 +539,54 @@
       "content": "ROI AI Recruiting success metrics business case AI projects measuring impact analytics performance tracking return on investment",
       "anchor": "session-7-1-page",
       "sectionTitle": "Session 7.1: The ROI of AI in Recruiting"
+    },
+    {
+      "id": "appscript-bank",
+      "title": "AppScript Idea Bank",
+      "description": "A central knowledge bank for innovative automation ideas using Google Apps Script. Submit your ideas and discover powerful automation solutions.",
+      "url": "/appscript-bank/",
+      "category": "Automation Tools",
+      "type": "module",
+      "keywords": "appscript idea bank automation google apps script drive sheets forms calendar gmail innovation ideas submit automation solutions workspace productivity",
+      "content": "AppScript Idea Bank automation Google Apps Script Drive Sheets Forms Calendar Gmail innovation ideas submit automation solutions workspace productivity powerful hidden features AI Gemini automation workflows",
+      "anchor": "",
+      "sectionTitle": ""
+    },
+    {
+      "id": "appscript-form-submission",
+      "title": "Submit Automation Ideas",
+      "description": "Share your innovative automation ideas for Google Workspace using Apps Script.",
+      "url": "/appscript-bank/",
+      "category": "Automation Tools",
+      "type": "feature",
+      "keywords": "submit automation ideas google workspace apps script innovation share collaboration idea submission form",
+      "content": "Submit automation ideas Google Workspace Apps Script innovation share collaboration idea submission form business unit RPO MSP Admin Compliance Interview Scheduling",
+      "anchor": "submission",
+      "sectionTitle": "Have an Idea? Share it here!"
+    },
+    {
+      "id": "appscript-idea-board",
+      "title": "Automation Idea Board",
+      "description": "Browse approved automation ideas and solutions from the GBS community.",
+      "url": "/appscript-bank/",
+      "category": "Automation Tools",
+      "type": "feature",
+      "keywords": "automation idea board approved solutions gbs community browse filter RPO MSP Admin Compliance sheets automation onboarding checklist GDPR",
+      "content": "Automation Idea Board approved solutions GBS community browse filter RPO MSP Admin Compliance sheets automation onboarding checklist GDPR data deletion Google Form creation",
+      "anchor": "idea-board",
+      "sectionTitle": "Idea Board"
+    },
+    {
+      "id": "appscript-hidden-features",
+      "title": "Google Workspace Hidden Features",
+      "description": "Discover powerful and hidden features in Google Workspace to inspire your next automation idea.",
+      "url": "/appscript-bank/",
+      "category": "Automation Tools",
+      "type": "feature",
+      "keywords": "google workspace hidden features powerful AI Gemini sheets docs slides apps script automation inspiration advanced features",
+      "content": "Google Workspace hidden features powerful AI Gemini Sheets Docs Slides Apps Script automation inspiration advanced features sparklines heatmaps filter views QUERY function IMPORTRANGE smart chips",
+      "anchor": "hidden-features",
+      "sectionTitle": "Powerful & Hidden Features in Google Workspace"
     }
   ]
 }
