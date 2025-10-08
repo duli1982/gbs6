@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Help - Leveraging AI in Your Daily Work | Randstad GBS Learning Hub</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Discover how AI transforms your workday through real stories. Learn about AI Co-Pilot, Co-Thinker, and Co-Creator tools with practical examples and scenarios.">
+    <meta name="keywords"
+        content="AI help, AI co-pilot, AI co-thinker, AI co-creator, daily work transformation, AI tools, workplace productivity, AI assistance">
+    <meta name="author" content="Randstad GBS">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI Help - Leveraging AI in Your Daily Work">
+    <meta property="og:description"
+        content="Showing how AI transforms your workday through Co-Pilot, Co-Thinker, and Co-Creator tools">
+    <meta property="og:site_name" content="Randstad GBS Learning Hub">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Help - Leveraging AI in Your Daily Work">
+    <meta name="twitter:description" content="Discover how AI transforms your workday through real stories and practical examples">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>AI Help</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="google-sans text-xl font-bold text-gray-900">Randstad GBS Learning Hub</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="text-center mb-8">
+                <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                    Leveraging AI in Your Daily Work
+                </h1>
+                <p class="text-base text-gray-600 max-w-2xl mx-auto">
+                    Discover how AI transforms your workday through real stories and practical examples
+                </p>
+            </header>
+
+            <!-- Main Layout: Sidebar + Content -->
+            <main class="flex flex-col lg:flex-row gap-6">
+                <!-- Left Sidebar: Tool Navigation -->
+                <aside class="lg:w-80 flex-shrink-0">
+                    <div class="lg:sticky lg:top-4">
+                        <!-- Progress Card -->
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 mb-4 border border-blue-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-semibold text-gray-900">Your Progress</span>
+                                <span class="text-sm font-bold text-blue-600" id="tools-progress">1 / 3</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                                <div id="tools-progress-bar" class="bg-gradient-to-r from-blue-500 to-blue-700 h-2 rounded-full transition-all duration-500" style="width: 33%"></div>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">Explore all 3 AI tools to complete</p>
+                        </div>
+
+                        <!-- Tool Cards Navigation -->
+                        <div class="space-y-3">
+                            <button onclick="setActiveTab('copilot')" id="nav-copilot" class="tool-nav-card w-full text-left p-4 rounded-xl transition-all duration-300 bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg border-2 border-blue-600">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-shrink-0 w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-bold text-base mb-1">AI Co-Pilot</h3>
+                                        <p class="text-xs text-white/90 truncate">Daily tasks assistant</p>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-5 h-5 opacity-0" id="check-copilot" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <button onclick="setActiveTab('thinker')" id="nav-thinker" class="tool-nav-card w-full text-left p-4 rounded-xl transition-all duration-300 bg-white text-gray-700 hover:shadow-md border-2 border-gray-200 hover:border-indigo-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-shrink-0 w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-indigo-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-bold text-base mb-1">AI Co-Thinker</h3>
+                                        <p class="text-xs text-gray-500 truncate">Problem-solving partner</p>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-5 h-5 text-green-600 opacity-0" id="check-thinker" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <button onclick="setActiveTab('creator')" id="nav-creator" class="tool-nav-card w-full text-left p-4 rounded-xl transition-all duration-300 bg-white text-gray-700 hover:shadow-md border-2 border-gray-200 hover:border-purple-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-shrink-0 w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="font-bold text-base mb-1">AI Co-Creator</h3>
+                                        <p class="text-xs text-gray-500 truncate">Content creation collaborator</p>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-5 h-5 text-green-600 opacity-0" id="check-creator" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <!-- Keyboard Shortcuts Hint -->
+                        <div class="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                            <p class="text-xs text-gray-600 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                </svg>
+                                Use <kbd class="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs">←</kbd> <kbd class="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs">→</kbd> to navigate
+                            </p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Content Area -->
+                <div class="flex-1 min-w-0">
+                    <div id="story-content" class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+                        <!-- Story content will be dynamically inserted here -->
+                    </div>
+                </div>
+            </main>
+
+            <!-- Call to Action -->
+            <div id="cta-section" class="text-center mt-12 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-8 md:p-12 rounded-2xl border-2 border-blue-200 shadow-lg">
+                <div class="max-w-3xl mx-auto">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-6">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                    </div>
+                    <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                        <span id="cta-title">Ready to Transform Your Workday?</span>
+                    </h2>
+                    <p class="text-base text-gray-600 mb-8">
+                        <span id="cta-description">Explore all three AI tools and discover how they can help you work smarter, think deeper, and create better.</span>
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="cta-buttons">
+                        <button onclick="setActiveTab('copilot')" class="group relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-700 text-white px-6 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
+                            <span class="relative z-10">AI Co-Pilot</span>
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </button>
+                        <button onclick="setActiveTab('thinker')" class="group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-700 text-white px-6 py-4 rounded-xl font-semibold hover:from-indigo-600 hover:to-indigo-800 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
+                            <span class="relative z-10">AI Co-Thinker</span>
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </button>
+                        <button onclick="setActiveTab('creator')" class="group relative overflow-hidden bg-gradient-to-br from-purple-500 to-purple-700 text-white px-6 py-4 rounded-xl font-semibold hover:from-purple-600 hover:to-purple-800 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
+                            <span class="relative z-10">AI Co-Creator</span>
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../shared/scripts/smooth-scroll.js" defer></script>
+
+    <script>
+        const tools = {
+            copilot: {
+                title: 'AI Co-Pilot',
+                tagline: 'Your assistant for daily tasks',
+                color: 'from-blue-500 to-blue-700',
+                story: {
+                    scenario: "Meet Sarah, a Talent Acquisition Specialist",
+                    situation: "It's Monday morning, and Sarah has 15 candidate emails to respond to, a screening call in 30 minutes, and she needs to prepare interview questions for an afternoon session.",
+                    challenge: "She's overwhelmed with repetitive tasks and worried about missing important details.",
+                    solution: "Sarah activates her AI Gemini Co-Pilot..."
+                },
+                howItHelps: [
+                    {
+                        title: "Drafts Email Responses",
+                        description: "Gemini Co-Pilot analyzes each candidate's profile and generates personalized, professional responses in seconds, maintaining Sarah's tone and company voice."
+                    },
+                    {
+                        title: "Prepares Interview Materials",
+                        description: "Based on the job description, Gemini Co-Pilot creates tailored interview questions, evaluation criteria, and a structured interview guide."
+                    },
+                    {
+                        title: "Organizes Daily Priorities",
+                        description: "Reviews Sarah's calendar and tasks, suggesting the most efficient order to complete everything before end of day."
+                    }
+                ],
+                outcome: "Result: Sarah completes her morning emails in 20 minutes instead of 2 hours, feels prepared and confident for her interviews, and has time for a proper lunch break.",
+                examples: [
+                    "Draft candidate rejection emails",
+                    "Create interview question sets",
+                    "Summarize meeting notes",
+                    "Schedule optimization"
+                ]
+            },
+            thinker: {
+                title: 'AI Co-Thinker',
+                tagline: 'Your partner for problem-solving',
+                color: 'from-indigo-500 to-indigo-700',
+                story: {
+                    scenario: "Meet Marcus, a Learning & Development Manager",
+                    situation: "Marcus notices that only 35% of employees complete their mandatory compliance training, despite multiple reminders. His team is frustrated, and leadership is asking for solutions.",
+                    challenge: "He knows traditional approaches aren't working, but he's not sure what's causing the low engagement or what alternatives to try.",
+                    solution: "Marcus engages his AI Gemini Co-Thinker..."
+                },
+                howItHelps: [
+                    {
+                        title: "Analyzes Root Causes",
+                        description: "Gemini Co-Thinker helps Marcus explore multiple angles: Is it timing? Content format? Relevance? Access issues? They map out all possible factors together."
+                    },
+                    {
+                        title: "Generates Alternative Solutions",
+                        description: "Together they brainstorm: microlearning modules, gamification, manager-led sessions, mobile-first design, incentive programs, and integration with workflow."
+                    },
+                    {
+                        title: "Evaluates Feasibility",
+                        description: "Gemini Co-Thinker helps weigh each solution against budget, timeline, technical capabilities, and potential impact, creating a decision matrix."
+                    }
+                ],
+                outcome: "Result: Marcus presents leadership with 3 well-analyzed options, each with pros/cons and implementation plans. He feels confident in his strategic thinking and has data-driven recommendations.",
+                examples: [
+                    "Why is team engagement declining?",
+                    "How to improve retention rates?",
+                    "Solve recruitment bottlenecks",
+                    "Strategic planning challenges"
+                ]
+            },
+            creator: {
+                title: 'AI Co-Creator',
+                tagline: 'Your collaborator for content creation',
+                color: 'from-purple-500 to-purple-700',
+                story: {
+                    scenario: "Meet Lisa, an Employer Branding Specialist",
+                    situation: "Lisa needs to create an engaging onboarding experience for 50 new hires starting next month. She wants something fresh, interactive, and memorable - not the usual PowerPoint deck.",
+                    challenge: "She has great ideas but limited design skills, tight deadlines, and needs content in multiple formats (videos, guides, interactive modules).",
+                    solution: "Lisa collaborates with her AI Gemini Co-Creator..."
+                },
+                howItHelps: [
+                    {
+                        title: "Develops Creative Concepts",
+                        description: "Gemini Co-Creator helps Lisa brainstorm a 'Journey Map' theme where new hires navigate their first 90 days through interactive storytelling and gamified checkpoints."
+                    },
+                    {
+                        title: "Generates Multi-Format Content",
+                        description: "Creates welcome video scripts, interactive quiz questions, day-by-day email sequences, manager conversation guides, and visual infographics - all cohesive."
+                    },
+                    {
+                        title: "Designs Engaging Materials",
+                        description: "Helps draft compelling copy, suggests visual layouts, creates activity templates, and develops interactive elements that make learning stick."
+                    }
+                ],
+                outcome: "Result: Lisa launches an innovative onboarding program that receives 95% positive feedback. New hires feel excited and engaged, and the program becomes a template for future cohorts.",
+                examples: [
+                    "Design training module outline",
+                    "Create recruitment campaign",
+                    "Develop employee newsletter",
+                    "Build interactive workshops"
+                ]
+            }
+        };
+
+        let activeTab = 'copilot';
+
+        function setActiveTab(tab) {
+            activeTab = tab;
+            updateUI();
+        }
+
+        // Track which tools have been viewed
+        let viewedTools = new Set(['copilot']); // Start with copilot as viewed
+
+        function updateUI() {
+            // Mark current tool as viewed
+            viewedTools.add(activeTab);
+
+            // Update navigation cards
+            const navCards = {
+                'copilot': document.getElementById('nav-copilot'),
+                'thinker': document.getElementById('nav-thinker'),
+                'creator': document.getElementById('nav-creator')
+            };
+
+            Object.keys(navCards).forEach(tool => {
+                const card = navCards[tool];
+                const checkmark = document.getElementById(`check-${tool}`);
+
+                if (tool === activeTab) {
+                    // Active state
+                    card.className = `tool-nav-card w-full text-left p-4 rounded-xl transition-all duration-300 bg-gradient-to-br ${tools[tool].color} text-white shadow-lg border-2 border-${tool === 'copilot' ? 'blue' : tool === 'thinker' ? 'indigo' : 'purple'}-600 transform scale-105`;
+                } else {
+                    // Inactive state
+                    const bgColor = tool === 'copilot' ? 'bg-blue-50' : tool === 'thinker' ? 'bg-indigo-50' : 'bg-purple-50';
+                    const hoverBorder = tool === 'copilot' ? 'hover:border-blue-300' : tool === 'thinker' ? 'hover:border-indigo-300' : 'hover:border-purple-300';
+                    card.className = `tool-nav-card w-full text-left p-4 rounded-xl transition-all duration-300 bg-white text-gray-700 hover:shadow-md border-2 border-gray-200 ${hoverBorder}`;
+                }
+
+                // Show checkmark if tool has been viewed
+                if (viewedTools.has(tool)) {
+                    checkmark.style.opacity = '1';
+                } else {
+                    checkmark.style.opacity = '0';
+                }
+            });
+
+            // Update progress
+            updateProgress();
+
+            // Update story content
+            const currentTool = tools[activeTab];
+            const storyContent = document.getElementById('story-content');
+
+            // Add fade transition
+            storyContent.style.opacity = '0';
+            setTimeout(() => {
+                storyContent.innerHTML = generateStoryHTML(currentTool);
+                storyContent.style.opacity = '1';
+            }, 150);
+        }
+
+        function updateProgress() {
+            const viewed = viewedTools.size;
+            const total = 3;
+            const percentage = Math.round((viewed / total) * 100);
+
+            document.getElementById('tools-progress').textContent = `${viewed} / ${total}`;
+            document.getElementById('tools-progress-bar').style.width = `${percentage}%`;
+        }
+
+        function generateStoryHTML(currentTool) {
+            return `
+                <!-- Story Header -->
+                <div class="bg-gradient-to-r ${currentTool.color} text-white p-6 md:p-8">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                ${activeTab === 'copilot' ? '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>' :
+                                  activeTab === 'thinker' ? '<path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/>' :
+                                  '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>'}
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h2 class="google-sans text-2xl md:text-3xl font-bold mb-2">${currentTool.title}</h2>
+                            <p class="text-white/90 text-base md:text-lg">${currentTool.tagline}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Content -->
+                <div class="p-6 md:p-8">
+                    <div class="mb-8">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-1 h-8 bg-gradient-to-b ${currentTool.color} rounded-full"></div>
+                            <h3 class="google-sans text-xl md:text-2xl font-bold text-gray-900">A Day in the Life</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="relative bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-500 p-5 rounded-r-xl shadow-sm">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">1</div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-base text-gray-900 mb-2">📍 The Scenario</h4>
+                                        <p class="text-gray-700 leading-relaxed">${currentTool.story.scenario}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative bg-gradient-to-br from-amber-50 to-orange-50 border-l-4 border-amber-500 p-5 rounded-r-xl shadow-sm">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">2</div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-base text-gray-900 mb-2">⚡ The Situation</h4>
+                                        <p class="text-gray-700 leading-relaxed">${currentTool.story.situation}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative bg-gradient-to-br from-red-50 to-pink-50 border-l-4 border-red-500 p-5 rounded-r-xl shadow-sm">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">3</div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-base text-gray-900 mb-2">⚠️ The Challenge</h4>
+                                        <p class="text-gray-700 leading-relaxed">${currentTool.story.challenge}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-green-500 p-5 rounded-r-xl shadow-sm">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">✓</div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-base text-gray-900 mb-2">💡 The Solution</h4>
+                                        <p class="text-gray-700 leading-relaxed font-semibold">${currentTool.story.solution}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How It Helps -->
+                    <div class="mb-8">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-1 h-8 bg-gradient-to-b ${currentTool.color} rounded-full"></div>
+                            <h3 class="google-sans text-xl md:text-2xl font-bold text-gray-900">How It Helps</h3>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            ${currentTool.howItHelps.map((help, idx) => `
+                                <div class="group bg-gradient-to-br from-gray-50 to-gray-100 p-5 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300">
+                                    <div class="bg-gradient-to-br ${currentTool.color} text-white w-10 h-10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <span class="font-bold text-lg">${idx + 1}</span>
+                                    </div>
+                                    <h4 class="font-bold text-base text-gray-900 mb-2">${help.title}</h4>
+                                    <p class="text-gray-600 text-sm leading-relaxed">${help.description}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <!-- Outcome -->
+                    <div class="relative bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 border-2 border-green-400 rounded-xl p-6 mb-8 overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-green-200/30 rounded-full blur-3xl"></div>
+                        <div class="relative">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-bold text-green-900">The Outcome</h3>
+                            </div>
+                            <p class="text-gray-800 leading-relaxed">${currentTool.outcome}</p>
+                        </div>
+                    </div>
+
+                    <!-- Try It Examples -->
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                        <div class="flex items-center gap-2 mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"/>
+                            </svg>
+                            <h3 class="google-sans text-lg font-bold text-gray-900">Try It For Your Work</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Here are some ways you can use ${currentTool.title}:</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${currentTool.examples.map(example => `
+                                <span class="inline-flex items-center gap-1 bg-white text-blue-700 px-3 py-2 rounded-lg text-sm font-medium border border-blue-300 hover:bg-blue-50 transition-colors duration-200">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    ${example}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Keyboard navigation
+        function handleKeyboardNav(event) {
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
+
+            const toolsArray = ['copilot', 'thinker', 'creator'];
+            const currentIndex = toolsArray.indexOf(activeTab);
+
+            if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                event.preventDefault();
+                setActiveTab(toolsArray[currentIndex - 1]);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (event.key === 'ArrowRight' && currentIndex < toolsArray.length - 1) {
+                event.preventDefault();
+                setActiveTab(toolsArray[currentIndex + 1]);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyboardNav);
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('story-content').style.transition = 'opacity 0.3s ease-in-out';
+            updateUI();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

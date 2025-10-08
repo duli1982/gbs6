@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Simulations - Reading Between the Lines | Randstad GBS Learning Hub</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Interactive AI training simulation to sharpen your ability to evaluate AI-generated content and identify hidden gems in candidate assessments. Practice reading between the lines.">
+    <meta name="keywords"
+        content="AI simulations, reading between lines, candidate assessment, resume analysis, AI training, interactive learning, hidden gems, recruitment skills">
+    <meta name="author" content="Randstad GBS">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI Simulations - Reading Between the Lines">
+    <meta property="og:description"
+        content="Interactive training to sharpen your ability to evaluate AI-generated content and identify what it might miss in candidate assessments">
+    <meta property="og:site_name" content="Randstad GBS Learning Hub">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Simulations - Reading Between the Lines">
+    <meta name="twitter:description" content="Interactive AI training simulation for better candidate assessment skills">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            /* gray-100 */
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #94a3b8;
+            /* gray-400 */
+            border-radius: 20px;
+            border: 3px solid #f1f5f9;
+            /* gray-100 */
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>AI Simulations</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="google-sans text-xl font-bold text-gray-900">Randstad GBS Learning Hub</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="app" class="flex flex-col md:flex-row bg-gray-50">
+
+        <!-- Left Sidebar: Candidate List -->
+        <aside class="w-full md:w-1/4 lg:w-1/5 bg-white p-6 border-r border-gray-200 flex flex-col">
+            <div class="mb-6 pb-4 border-b border-gray-200">
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-1">AI Simulations</h2>
+                <p class="text-sm text-gray-600">Reading Between the Lines</p>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="mb-4 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-semibold text-gray-900">Progress</span>
+                    <span class="text-sm font-bold text-blue-600" id="progress-text">0 / 15</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                    <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-blue-700 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                <p class="text-xs text-gray-600 text-center" id="progress-percentage">0% Complete</p>
+            </div>
+
+            <!-- Next Unevaluated Button -->
+            <button id="next-unevaluated-btn" onclick="goToNextUnevaluated()" class="w-full mb-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                <span>Next Unevaluated</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+            </button>
+
+            <div class="mb-4">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-md font-semibold text-gray-900">All Candidates</h3>
+                    <span class="text-xs text-gray-500">Use ↑↓ keys</span>
+                </div>
+                <div class="overflow-y-auto custom-scrollbar pr-2" style="max-height: 420px;">
+                    <ul id="candidate-list" class="space-y-2">
+                        <!-- Candidate items will be injected here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-200">
+                <h3 class="text-md font-semibold text-gray-900 mb-2">Your Score</h3>
+                <div class="mt-2 text-4xl font-bold text-center bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-lg py-3" id="score-display">0</div>
+                <p class="text-xs text-center text-gray-500 mt-2">Points for correct evaluations</p>
+            </div>
+        </aside>
+
+        <!-- Main Content: Simulator -->
+        <main class="w-full md:w-3/4 lg:w-4/5 p-6 md:p-8 overflow-y-auto custom-scrollbar" style="max-height: calc(100vh - 120px);">
+            <header class="mb-8">
+                <div class="flex items-start justify-between gap-4 mb-4">
+                    <div class="flex-1">
+                        <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Reading Between the Lines</h1>
+                        <p class="text-lg text-gray-600 max-w-3xl">Review the AI summary against the full resume, then make your call. Can you identify the hidden gems?</p>
+                    </div>
+                    <button id="shortcuts-toggle" class="flex-shrink-0 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors" title="Keyboard Shortcuts">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Keyboard Shortcuts Tooltip -->
+                <div id="shortcuts-panel" class="hidden mb-4 p-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-300">
+                    <h3 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        Keyboard Shortcuts
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div class="flex items-center gap-2">
+                            <kbd class="px-2 py-1 bg-white border border-gray-300 rounded shadow-sm font-mono text-xs">↑</kbd>
+                            <kbd class="px-2 py-1 bg-white border border-gray-300 rounded shadow-sm font-mono text-xs">↓</kbd>
+                            <span class="text-gray-700">Navigate candidates</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <kbd class="px-2 py-1 bg-white border border-gray-300 rounded shadow-sm font-mono text-xs">Enter</kbd>
+                            <span class="text-gray-700">Focus evaluation buttons</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <kbd class="px-2 py-1 bg-white border border-gray-300 rounded shadow-sm font-mono text-xs">Esc</kbd>
+                            <span class="text-gray-700">Close feedback modal</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <kbd class="px-2 py-1 bg-green-100 border border-green-300 rounded shadow-sm font-mono text-xs">Next Button</kbd>
+                            <span class="text-gray-700">Jump to unevaluated</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div id="simulator-content" class="fade-in">
+                <!-- Content will be injected here based on selected candidate -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Feedback -->
+    <div id="feedback-modal"
+        class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div id="modal-content"
+            class="bg-white border border-gray-200 rounded-lg shadow-2xl p-8 max-w-2xl w-full transform transition-all scale-95 opacity-0">
+            <!-- Modal content will be injected here -->
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../shared/scripts/smooth-scroll.js" defer></script>
+
+    <script>
+        const candidates = [
+            {
+                id: 1,
+                name: 'Aria Chen',
+                role: 'Senior Product Manager',
+                resume: {
+                    summary: 'Dynamic and results-driven Product Manager with over 5 years of experience leading cross-functional teams to conceptualize, build, and launch innovative products. Proven ability to translate complex user needs into actionable product roadmaps.',
+                    experience: [
+                        { title: 'Product Manager, Innovate Inc.', duration: '2020 - Present', description: 'Led the launch of three major B2B SaaS features, resulting in a 25% increase in user engagement. Mentored two junior PMs and improved team velocity by 15% through new agile processes.' },
+                        { title: 'Junior Product Manager, Solutions Co.', duration: '2018 - 2020', description: 'Assisted in market research and requirements gathering for a new mobile application. Coordinated with engineering teams to ensure timely delivery of sprints.' },
+                        { title: 'Business Analyst, DataDriven LLC', duration: '2016 - 2018', description: 'Analyzed market trends to provide insights for strategic planning.' }
+                    ],
+                    skills: ['Agile Methodologies', 'Product Roadmapping', 'JIRA', 'SQL', 'User Research', 'A/B Testing'],
+                    education: 'B.S. in Business Administration, University of Innovation'
+                },
+                aiSummary: 'Aria Chen is a Product Manager with 5+ years of experience in Agile environments. Proficient in JIRA and SQL. Has experience launching several features at Innovate Inc.',
+                actualCategory: 'gem',
+                explanation: "Aria is a hidden gem. The AI summary is factually correct but misses the clear and rapid career progression from Analyst to Junior PM to a leadership PM role. Her resume also explicitly mentions mentoring, indicating strong soft skills and leadership potential which the AI completely overlooked."
+            },
+            {
+                id: 2,
+                name: 'Ben Carter',
+                role: 'Lead Software Engineer',
+                resume: {
+                    summary: 'Highly skilled software engineer with 10 years of experience in building scalable web applications. Expertise in JavaScript frameworks and cloud infrastructure.',
+                    experience: [
+                        { title: 'Software Engineer, Tech Solutions', duration: '2020 - Present', description: 'Developed and maintained key features for the main application using React and Node.js.' },
+                        { title: 'Software Engineer, Web Widgets', duration: '2018 - 2020', description: 'Worked on the front-end of the company\'s marketing site using Angular.' },
+                        { title: 'Software Engineer, Code Crafters', duration: '2016 - 2018', description: 'Implemented UI components with jQuery and vanilla JavaScript.' }
+                    ],
+                    skills: ['React', 'Node.js', 'Angular', 'jQuery', 'AWS', 'Docker', 'CI/CD'],
+                    education: 'M.S. in Computer Science, Institute of Technology'
+                },
+                aiSummary: 'Ben Carter is a software engineer with extensive experience in JavaScript, including React, Angular, and Node.js. Skilled in cloud technologies like AWS and Docker.',
+                actualCategory: 'paper',
+                explanation: "Ben looks good on paper, but his career shows a lack of progression. Despite 10 years of experience, his roles and responsibilities seem to be very similar across different companies, with no clear step into leadership or architecture. The AI highlights his skills but misses the stagnant career trajectory."
+            },
+            {
+                id: 3,
+                name: 'Chloe Davis',
+                role: 'UX/UI Designer',
+                resume: {
+                    summary: 'Creative and detail-oriented UX/UI Designer with a passion for creating intuitive and beautiful user experiences. Portfolio available upon request.',
+                    experience: [
+                        { title: 'UX/UI Designer, Designify', duration: '2021 - Present', description: 'Redesigned the onboarding flow for a mobile app, increasing user retention by 20%. Conducted user testing sessions and created wireframes and prototypes.' },
+                        { title: 'Freelance Graphic Designer', duration: '2019 - 2021', description: 'Created branding materials and websites for various small businesses. Focused on visual identity and web design.' },
+                    ],
+                    skills: ['Figma', 'Sketch', 'Adobe XD', 'User Research', 'Prototyping', 'Wireframing', 'Design Systems'],
+                    education: 'B.A. in Graphic Design, Arts University'
+                },
+                aiSummary: 'Chloe Davis is a UX/UI Designer proficient in Figma, Sketch, and Adobe XD. She has experience in redesigning mobile app flows and conducting user research.',
+                actualCategory: 'gem',
+                explanation: "Chloe is a hidden gem. The AI misses the crucial transition from freelance Graphic Designer to a full-time UX/UI role at a product company. This shows initiative, adaptability, and a proactive effort to upskill into a more specialized field. Her quantifiable success (20% retention increase) is also a strong signal of her effectiveness."
+            },
+            {
+                id: 4,
+                name: 'David Evans',
+                role: 'Data Scientist',
+                resume: {
+                    summary: 'Data Scientist with a strong background in machine learning and statistical analysis. Experienced in building predictive models and deriving insights from large datasets.',
+                    experience: [
+                        { title: 'Data Scientist, Alpha Analytics', duration: '2019 - Present', description: 'Built and deployed a recommendation engine using Python and TensorFlow. Performed data analysis to identify customer behavior patterns.' },
+                        { title: 'Research Assistant, Quantum University', duration: '2017 - 2019', description: 'Assisted with research projects in computational linguistics, publishing two papers as a co-author.' },
+                    ],
+                    skills: ['Python', 'R', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'SQL', 'BigQuery'],
+                    education: 'Ph.D. in Computer Science, Quantum University'
+                },
+                aiSummary: 'David Evans is a Data Scientist with a Ph.D. and experience in machine learning, Python, and TensorFlow. Published two papers during his academic research.',
+                actualCategory: 'gem',
+                explanation: "David is a hidden gem. The AI notes his Ph.D. and papers but fails to connect the dots. His academic work in computational linguistics directly applies to cutting-edge NLP problems in the industry. This signals deep, specialized expertise that is highly valuable but not immediately obvious from a simple skill summary."
+            },
+            {
+                id: 5,
+                name: 'Eva Rodriguez',
+                role: 'Marketing Manager',
+                resume: {
+                    summary: 'Results-oriented Marketing Manager with a track record of executing successful campaigns across multiple channels.',
+                    experience: [
+                        { title: 'Marketing Specialist, Growth Co.', duration: '2021 - Present', description: 'Managed social media accounts and email newsletters.' },
+                        { title: 'Marketing Coordinator, Ads Inc.', duration: '2020 - 2021', description: 'Assisted with campaign setup and reporting.' },
+                        { title: 'Marketing Intern, Brand Builders', duration: '2019 - 2020', description: 'Supported the marketing team with daily tasks.' }
+                    ],
+                    skills: ['SEO', 'Content Marketing', 'Social Media', 'Email Marketing', 'Google Analytics', 'HubSpot'],
+                    education: 'B.A. in Marketing, State College'
+                },
+                aiSummary: 'Eva Rodriguez is a marketing professional skilled in SEO, Social Media, and HubSpot. She has experience managing social media accounts and email campaigns.',
+                actualCategory: 'paper',
+                explanation: "Eva looks good on paper. She has relevant skills and experience. However, her resume lacks any quantifiable achievements or metrics of success (e.g., increased leads by X%, grew follower count by Y). The AI picks up on her skills but doesn't notice the absence of impact, which is a crucial red flag for a results-driven role like marketing."
+            },
+            {
+                id: 6,
+                name: 'Dr. Lena Hanson',
+                role: 'Clinical Trial Manager',
+                resume: {
+                    summary: 'Dedicated and detail-oriented clinical research professional with 8 years of experience managing Phase II and III oncology trials.',
+                    experience: [
+                        { title: 'Clinical Trial Manager, OncoTherapeutics', duration: '2022 - Present', description: 'Oversaw a multi-center, international trial for a novel immunotherapy drug. Managed a team of 5 CRAs and exceeded patient enrollment targets by 20%.' },
+                        { title: 'Senior Clinical Research Associate, PharmaGen', duration: '2019 - 2022', description: 'Monitored clinical sites for protocol compliance and data integrity. Trained junior CRAs.' },
+                        { title: 'Clinical Research Associate, BioStart', duration: '2017 - 2019', description: 'Conducted site initiation visits and routine monitoring.' }
+                    ],
+                    skills: ['GCP', 'Oncology', 'Immunotherapy', 'EDC Systems', 'Project Management', 'Team Leadership'],
+                    education: 'Ph.D. in Molecular Biology, Crestwood University'
+                },
+                aiSummary: 'Dr. Lena Hanson is a clinical research professional with a Ph.D. and experience in oncology trials. Skilled in GCP and EDC systems.',
+                actualCategory: 'gem',
+                explanation: "Lena is a hidden gem. The AI summary is accurate but flat. It completely misses her clear career progression from a CRA to a full Trial Manager, her specific leadership experience (managing a team), and the impressive, quantifiable result of exceeding enrollment targets by 20%."
+            },
+            {
+                id: 7,
+                name: 'Marcus Bell',
+                role: 'Quality Assurance Specialist',
+                resume: {
+                    summary: 'Experienced Quality Assurance professional with over 12 years in the pharmaceutical industry, ensuring compliance with cGMP, FDA, and EMA regulations.',
+                    experience: [
+                        { title: 'Senior QA Specialist, PureForm Labs', duration: '2018 - Present', description: 'Responsible for batch record review, deviation investigations, and CAPA management. Participated in regulatory audits.' },
+                        { title: 'QA Specialist, MedChem Corp.', duration: '2012 - 2018', description: 'Performed quality checks on manufacturing processes and documentation to ensure compliance.' }
+                    ],
+                    skills: ['cGMP', 'FDA 21 CFR', 'EMA Guidelines', 'CAPA', 'Auditing', 'Batch Record Review'],
+                    education: 'B.S. in Chemistry, State University'
+                },
+                aiSummary: 'Marcus Bell is a QA Specialist with 12+ years of experience. He is knowledgeable in cGMP, FDA, and EMA regulations and skilled in CAPA and auditing.',
+                actualCategory: 'paper',
+                explanation: "Marcus looks good on paper due to his extensive experience. However, his resume lacks any mention of specific achievements, process improvements, or leadership. The descriptions are passive ('Responsible for', 'Performed'). The AI sees keywords and years of experience but misses the lack of demonstrated impact."
+            },
+            {
+                id: 8,
+                name: 'Isabelle Rossi',
+                role: 'Medical Science Liaison',
+                resume: {
+                    summary: 'PhD-trained scientist with a passion for translating complex clinical data into actionable insights for healthcare professionals.',
+                    experience: [
+                        { title: 'Medical Science Liaison, NeuroGen', duration: '2021 - Present', description: 'Established and maintained relationships with Key Opinion Leaders (KOLs) in the neurology space. Presented complex trial data at scientific conferences and advisory boards.' },
+                        { title: 'Postdoctoral Research Fellow, Institute for Brain Science', duration: '2018 - 2021', description: 'Led a research project on Alzheimer\'s disease pathology, resulting in three first-author publications in peer-reviewed journals.' }
+                    ],
+                    skills: ['Neurology', 'KOL Engagement', 'Clinical Data Analysis', 'Scientific Communication', 'Public Speaking'],
+                    education: 'Ph.D. in Neuroscience, Summit University'
+                },
+                aiSummary: 'Isabelle Rossi has a Ph.D. in Neuroscience and three publications. Her experience includes working with Key Opinion Leaders and analyzing clinical data.',
+                actualCategory: 'gem',
+                explanation: 'Isabelle is a hidden gem. The AI notes her academic achievements but fails to grasp the significance of her successful pivot from pure academia to a commercial-facing MSL role. This transition demonstrates excellent communication skills, business acumen, and an ability to apply deep scientific knowledge in a practical, impactful way.'
+            },
+            {
+                id: 9,
+                name: 'Kevin Grant',
+                role: 'Pharmaceutical Sales Rep',
+                resume: {
+                    summary: 'Driven sales professional with experience in launching and promoting specialty drugs in competitive therapeutic areas.',
+                    experience: [
+                        { title: 'Sales Specialist, CardioCare Pharma', duration: '2023 - Present', description: 'Responsible for sales of a new hypertension drug to cardiologists.' },
+                        { title: 'Sales Representative, PulmoMeds', duration: '2022 - 2023', description: 'Promoted a portfolio of asthma and COPD medications.' },
+                        { title: 'Associate Sales Rep, HealthFirst Inc.', duration: '2020 - 2022', description: 'Supported senior sales staff and learned territory management.' }
+                    ],
+                    skills: ['Cardiology', 'Pulmonology', 'Territory Management', 'Sales Strategy', 'Veeva CRM'],
+                    education: 'B.S. in Biology, Riverside College'
+                },
+                aiSummary: 'Kevin Grant is a pharmaceutical sales representative with experience in cardiology and pulmonology. Proficient with Veeva CRM.',
+                actualCategory: 'paper',
+                explanation: 'Kevin looks good on paper because he has experience with multiple products. However, the AI misses the red flag of his job-hopping, with only a year at his last two roles. The resume also lacks any sales metrics (e.g., % to quota, market share growth), making it impossible to gauge his actual performance.'
+            },
+            {
+                id: 10,
+                name: 'Sofia Patel',
+                role: 'Regulatory Affairs Manager',
+                resume: {
+                    summary: 'Strategic regulatory affairs professional with a proven track record of successful submissions to global health authorities.',
+                    experience: [
+                        { title: 'Regulatory Affairs Manager, GeneVance Therapeutics', duration: '2019 - Present', description: 'Led the cross-functional team for a successful New Drug Application (NDA) for a breakthrough-designated orphan drug. Acted as the primary FDA contact during the review process.' },
+                        { title: 'Regulatory Affairs Specialist, BioReg Solutions', duration: '2016 - 2019', description: 'Prepared and submitted INDs and annual reports. Supported global submission activities.' }
+                    ],
+                    skills: ['FDA Regulations', 'NDA/BLA Submissions', 'Orphan Drugs', 'Breakthrough Therapy', 'eCTD', 'Regulatory Strategy'],
+                    education: 'M.S. in Regulatory Science, Prentiss University'
+                },
+                aiSummary: 'Sofia Patel is a Regulatory Affairs Manager with experience in FDA regulations and NDA submissions. She has worked with orphan drugs.',
+                actualCategory: 'gem',
+                explanation: 'Sofia is a clear hidden gem. The AI summary is dangerously understated. It mentions "NDA submissions" but fails to highlight the immense significance of leading a submission for a "breakthrough-designated" drug. This specific experience is rare and signals expertise in navigating complex, high-priority regulatory pathways.'
+            },
+            {
+                id: 11,
+                name: 'Tom Webb',
+                role: 'Senior Network Engineer',
+                resume: {
+                    summary: 'Certified and experienced Network Engineer with over 15 years of experience in enterprise network design, implementation, and support.',
+                    experience: [
+                        { title: 'Senior Network Engineer, Global Connect Inc.', duration: '2010 - Present', description: 'Maintained and administered the corporate network infrastructure, including routers, switches, and firewalls. Responded to network outages and performance issues.' }
+                    ],
+                    skills: ['Cisco Routing & Switching', 'BGP', 'OSPF', 'Firewall Management', 'VPN', 'Network Monitoring'],
+                    education: 'Certifications: CCIE, JNCIP'
+                },
+                aiSummary: 'Tom Webb is a Senior Network Engineer with 15+ years of experience and CCIE certification. He is skilled in Cisco technologies, BGP, and firewall management.',
+                actualCategory: 'paper',
+                explanation: 'Tom looks good on paper, especially with his CCIE certification. However, the AI misses that his job description for the last 15 years is purely maintenance-focused. There is no mention of leading projects, designing new systems, implementing cost-saving measures, or mentoring junior engineers. It signals career stagnation.'
+            },
+            {
+                id: 12,
+                name: 'Priya Singh',
+                role: 'IoT Product Manager',
+                resume: {
+                    summary: 'Innovative Product Manager focused on bridging the gap between technical possibilities and market needs in the telecommunications sector.',
+                    experience: [
+                        { title: 'Product Manager, 5G Innovations', duration: '2020 - Present', description: 'Led the end-to-end lifecycle of a new 5G-enabled fleet management IoT solution, from market research to launch. The product acquired 50+ enterprise clients in its first year.' },
+                        { title: 'Systems Engineer, OmniTel', duration: '2017 - 2020', description: 'Worked on the technical design and implementation of cellular network solutions for large enterprise customers.' }
+                    ],
+                    skills: ['Product Management', 'IoT', '5G Technology', 'Agile Development', 'Roadmapping', 'Market Research'],
+                    education: 'B.E. in Electrical Engineering, Tech Institute'
+                },
+                aiSummary: 'Priya Singh is a Product Manager with experience in 5G and IoT. Previously worked as a Systems Engineer.',
+                actualCategory: 'gem',
+                explanation: 'Priya is a hidden gem. The AI misses the critical context of her career path: she successfully transitioned from a deep technical role (Systems Engineer) to a strategic business role (Product Manager). It also fails to highlight her quantifiable success—launching a new product from scratch and securing 50+ clients in a year—which demonstrates exceptional execution and market understanding.'
+            },
+            {
+                id: 13,
+                name: 'George Miller',
+                role: 'Lead Field Technician',
+                resume: {
+                    summary: 'Dependable and experienced field technician with over 20 years of hands-on experience in telecommunications infrastructure installation and repair.',
+                    experience: [
+                        { title: 'Lead Field Technician, Legacy Telco', duration: '2002 - Present', description: 'Installed and maintained DSL and POTS services for residential and business customers. Troubleshot issues with copper-pair cabling and junction boxes.' }
+                    ],
+                    skills: ['DSL Installation', 'POTS Repair', 'Copper Cabling', 'Customer Service', 'Troubleshooting'],
+                    education: 'Associate Degree in Electronics, Community College'
+                },
+                aiSummary: 'George Miller is a Lead Field Technician with 20 years of experience in installing and repairing DSL and POTS services. Skilled in troubleshooting copper cabling.',
+                actualCategory: 'paper',
+                explanation: 'George looks good on paper due to his extensive experience and loyalty. However, the AI is unable to recognize that his entire skillset is based on legacy and rapidly declining technologies (DSL, copper lines). The lack of experience with fiber optics, modern Ethernet, or wireless systems makes him a poor fit for a forward-looking telecom company.'
+            },
+            {
+                id: 14,
+                name: 'Jasmine Lee',
+                role: 'Cybersecurity Analyst',
+                resume: {
+                    summary: 'Proactive cybersecurity professional specializing in threat intelligence and incident response for critical network infrastructure.',
+                    experience: [
+                        { title: 'Cybersecurity Analyst II, SecureNet Comms', duration: '2021 - Present', description: 'Detected and led the response to a sophisticated zero-day vulnerability targeting our core routers. The mitigation strategy I developed was adopted company-wide and prevented an estimated $5M in potential damages.' },
+                        { title: 'SOC Analyst I, SecureNet Comms', duration: '2019 - 2021', description: 'Monitored network traffic for suspicious activity using SIEM tools and responded to initial security alerts.' }
+                    ],
+                    skills: ['Incident Response', 'Threat Intelligence', 'SIEM', 'Penetration Testing', 'Firewall Configuration', 'CISSP'],
+                    education: 'B.S. in Cybersecurity, Digital University'
+                },
+                aiSummary: 'Jasmine Lee is a CISSP-certified Cybersecurity Analyst. She has experience with SIEM tools, threat intelligence, and incident response.',
+                actualCategory: 'gem',
+                explanation: 'Jasmine is an exceptional hidden gem. The AI gives a generic summary of her skills but completely misses the most critical piece of information: she led the response to a zero-day attack and quantified the massive impact of her work ($5M in savings). This single bullet point demonstrates initiative, leadership under pressure, and high-level technical skill that a simple skills list cannot convey.'
+            },
+            {
+                id: 15,
+                name: 'David Kim',
+                role: 'Customer Success Manager',
+                resume: {
+                    summary: 'Customer-centric manager dedicated to increasing client retention and lifetime value for B2B SaaS in the telecom space.',
+                    experience: [
+                        { title: 'Customer Success Manager, ConnectUp SaaS', duration: '2020 - Present', description: 'Designed and implemented a proactive customer health monitoring system that reduced annual logo churn from 15% to 8%. Grew expansion revenue from my portfolio by 25% year-over-year.' },
+                        { title: 'Account Executive, ConnectUp SaaS', duration: '2018 - 2020', description: 'Exceeded sales quota for two consecutive years, selling unified communications solutions.' }
+                    ],
+                    skills: ['Customer Success', 'Churn Reduction', 'SaaS', 'Account Management', 'Salesforce', 'Gainsight'],
+                    education: 'B.A. in Communications, Metro University'
+                },
+                aiSummary: 'David Kim is a Customer Success Manager with a background in sales. He has experience with churn reduction and Salesforce.',
+                actualCategory: 'gem',
+                explanation: 'David is a hidden gem. The AI notes his experience but fails to recognize the story his resume tells. He was a top-performing salesperson who moved into customer success, indicating a deep understanding of the full customer lifecycle. More importantly, the AI misses the highly impressive and specific metrics (slashing churn nearly in half, 25% YoY growth) that prove his effectiveness.'
+            }
+        ];
+
+        let state = {
+            selectedCandidateId: 1,
+            score: 0,
+            evaluatedCandidates: new Set()
+        };
+
+        const app = document.getElementById('app');
+        const candidateList = document.getElementById('candidate-list');
+        const scoreDisplay = document.getElementById('score-display');
+        const simulatorContent = document.getElementById('simulator-content');
+        const feedbackModal = document.getElementById('feedback-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function renderCandidates() {
+            candidateList.innerHTML = '';
+            candidates.forEach(c => {
+                const isSelected = c.id === state.selectedCandidateId;
+                const isEvaluated = state.evaluatedCandidates.has(c.id);
+
+                const li = document.createElement('li');
+                li.setAttribute('data-candidate-id', c.id);
+                li.innerHTML = `
+                    <button class="w-full text-left p-3 rounded-lg transition-all duration-200 ${isSelected ? 'bg-blue-50 border-2 border-blue-500 shadow-sm' : 'hover:bg-gray-50 border border-gray-200 hover:border-blue-300'}"
+                        <div class="flex items-center gap-2">
+                            <div class="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                                ${isSelected && !isEvaluated ?
+                        `<div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>` :
+                        isEvaluated ?
+                            `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>` :
+                            `<div class="w-2 h-2 bg-gray-300 rounded-full"></div>`
+                    }
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-semibold text-gray-900 text-sm truncate">${c.name}</h4>
+                                <p class="text-xs text-gray-500 mt-1 truncate">${c.role}</p>
+                            </div>
+                            ${isSelected ?
+                        `<svg class="w-4 h-4 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>` :
+                        ''
+                    }
+                        </div>
+                    </button>
+                `;
+                li.querySelector('button').addEventListener('click', () => selectCandidate(c.id));
+                candidateList.appendChild(li);
+            });
+        }
+
+        function selectCandidate(id) {
+            state.selectedCandidateId = id;
+            renderAll();
+            scrollToSelectedCandidate();
+        }
+
+        function scrollToSelectedCandidate() {
+            const selectedElement = document.querySelector(`li[data-candidate-id="${state.selectedCandidateId}"]`);
+            if (selectedElement) {
+                selectedElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function goToNextUnevaluated() {
+            const nextCandidate = candidates.find(c => !state.evaluatedCandidates.has(c.id));
+            if (nextCandidate) {
+                selectCandidate(nextCandidate.id);
+            }
+        }
+
+        function updateProgress() {
+            const total = candidates.length;
+            const evaluated = state.evaluatedCandidates.size;
+            const percentage = Math.round((evaluated / total) * 100);
+
+            document.getElementById('progress-text').textContent = `${evaluated} / ${total}`;
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-percentage').textContent = `${percentage}% Complete`;
+
+            // Update or hide Next Unevaluated button
+            const nextBtn = document.getElementById('next-unevaluated-btn');
+            const hasUnevaluated = candidates.some(c => !state.evaluatedCandidates.has(c.id));
+
+            if (!hasUnevaluated) {
+                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                nextBtn.disabled = true;
+                nextBtn.querySelector('span').textContent = 'All Evaluated ✓';
+            } else {
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                nextBtn.disabled = false;
+                nextBtn.querySelector('span').textContent = 'Next Unevaluated';
+            }
+        }
+
+        // Keyboard navigation
+        function handleKeyboardNavigation(event) {
+            // Don't interfere when modal is open or typing in inputs
+            if (!feedbackModal.classList.contains('hidden') ||
+                event.target.tagName === 'INPUT' ||
+                event.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            const currentIndex = candidates.findIndex(c => c.id === state.selectedCandidateId);
+
+            switch(event.key) {
+                case 'ArrowDown':
+                    event.preventDefault();
+                    if (currentIndex < candidates.length - 1) {
+                        selectCandidate(candidates[currentIndex + 1].id);
+                    }
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    if (currentIndex > 0) {
+                        selectCandidate(candidates[currentIndex - 1].id);
+                    }
+                    break;
+                case 'Enter':
+                    event.preventDefault();
+                    // Focus on the first evaluation button if candidate is not evaluated
+                    if (!state.evaluatedCandidates.has(state.selectedCandidateId)) {
+                        const gemBtn = document.querySelector('button[onclick*="gem"]');
+                        if (gemBtn && !gemBtn.disabled) {
+                            gemBtn.focus();
+                        }
+                    }
+                    break;
+                case 'Escape':
+                    // Close modal if open
+                    if (!feedbackModal.classList.contains('hidden')) {
+                        closeModalAndFindNext();
+                    }
+                    break;
+            }
+        }
+
+        // Add keyboard event listener
+        document.addEventListener('keydown', handleKeyboardNavigation);
+
+        function renderResumeSection(title, content) {
+            if (!content || content.length === 0) return '';
+            return `
+                <div class="mb-5">
+                    <h4 class="font-semibold text-blue-700 mb-3 border-b-2 border-blue-200 pb-2">${title}</h4>
+                    ${Array.isArray(content) ?
+                    `<ul class="space-y-4">${content.map(item => `<li><p class="font-semibold text-gray-900">${item.title} <span class="text-sm font-normal text-gray-500 ml-2">${item.duration}</span></p><p class="text-gray-600 text-sm mt-1 leading-relaxed">${item.description}</p></li>`).join('')}</ul>` :
+                    `<p class="text-gray-700 text-sm leading-relaxed">${content}</p>`
+                }
+                </div>
+            `;
+        }
+
+        function renderCandidateDetails() {
+            const candidate = candidates.find(c => c.id === state.selectedCandidateId);
+            if (!candidate) return;
+
+            const isEvaluated = state.evaluatedCandidates.has(candidate.id);
+
+            simulatorContent.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Column 1: Full Resume -->
+                    <div class="lg:col-span-1 bg-white p-6 rounded-xl border border-gray-200 shadow-md">
+                        <div class="mb-4 pb-4 border-b-2 border-blue-500">
+                            <h3 class="text-xl font-bold text-gray-900">${candidate.name}</h3>
+                            <p class="text-blue-600 font-semibold mt-1">${candidate.role}</p>
+                        </div>
+                        <div class="h-[60vh] overflow-y-auto custom-scrollbar pr-2">
+                            ${renderResumeSection('Summary', candidate.resume.summary)}
+                            ${renderResumeSection('Experience', candidate.resume.experience)}
+                            <div>
+                                <h4 class="font-semibold text-blue-700 mb-3 border-b-2 border-blue-200 pb-2">Skills</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    ${candidate.resume.skills.map(skill => `<span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-200">${skill}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 & 3: AI Summary & Your Evaluation -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-300 shadow-md">
+                            <div class="flex items-start gap-3 mb-3">
+                                <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">AI-Generated Summary</h3>
+                                    <p class="text-gray-700 italic leading-relaxed">"${candidate.aiSummary}"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl border-2 border-gray-300 shadow-lg">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Your Evaluation</h3>
+                            <p class="text-gray-600 mb-6 text-base">Compare the AI summary to the full resume and make your call. Is this candidate a hidden gem, or just good on paper?</p>
+
+                            <div class="mt-6 pt-6 border-t-2 border-gray-200">
+                                <p class="text-gray-900 font-semibold mb-4 text-lg text-center">Make your decision:</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <button onclick="submitEvaluation('gem')" class="bg-green-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${isEvaluated ? 'opacity-50 cursor-not-allowed' : ''}" ${isEvaluated ? 'disabled' : ''}>
+                                        💎 Hidden Gem
+                                    </button>
+                                    <button onclick="submitEvaluation('paper')" class="bg-orange-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${isEvaluated ? 'opacity-50 cursor-not-allowed' : ''}" ${isEvaluated ? 'disabled' : ''}>
+                                        📄 Good on Paper
+                                    </button>
+                                </div>
+                                ${isEvaluated ? `<div class="mt-4 p-3 bg-yellow-50 border border-yellow-300 rounded-lg"><p class="text-center text-yellow-800 text-sm font-medium">✓ You have already evaluated this candidate.</p></div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.submitEvaluation = function (userChoice) {
+            const candidate = candidates.find(c => c.id === state.selectedCandidateId);
+            if (!candidate || state.evaluatedCandidates.has(candidate.id)) return;
+
+            const isCorrect = userChoice === candidate.actualCategory;
+            let points = 0;
+
+            if (isCorrect) {
+                points = candidate.actualCategory === 'gem' ? 20 : 10;
+                state.score += points;
+            } else {
+                points = -5;
+                state.score = Math.max(0, state.score + points);
+            }
+
+            state.evaluatedCandidates.add(candidate.id);
+
+            showFeedbackModal(candidate, userChoice, isCorrect, points);
+            renderAll();
+        }
+
+        function showFeedbackModal(candidate, userChoice, isCorrect, points) {
+            const resultText = isCorrect ? "✓ Correct Evaluation!" : "✗ Evaluation Mismatch";
+            const pointsText = points > 0 ? `+${points} Points` : `${points} Points`;
+            const choiceMap = { gem: '💎 Hidden Gem', paper: '📄 Good on Paper' };
+
+            modalContent.innerHTML = `
+                <div class="mb-6 pb-4 border-b-2 ${isCorrect ? 'border-green-500' : 'border-red-500'}">
+                    <h2 class="text-3xl font-bold ${isCorrect ? 'text-green-600' : 'text-red-600'} mb-2">${resultText}</h2>
+                    <p class="text-2xl font-bold text-gray-900">${pointsText}</p>
+                </div>
+                <p class="text-gray-700 mb-6 text-lg">You classified <span class="font-bold text-blue-600">${candidate.name}</span> as <span class="font-semibold ${isCorrect ? 'text-green-600' : 'text-orange-600'}">"${choiceMap[userChoice]}"</span>.</p>
+
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-300 mb-6">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2 text-lg">Expert Analysis:</h3>
+                            <p class="text-gray-700 leading-relaxed">${candidate.explanation}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3">
+                    <button onclick="closeModalAndFindNext()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 shadow-md">
+                        ${state.evaluatedCandidates.size === candidates.length ? '🎉 Finish Simulation' : 'Next Candidate →'}
+                    </button>
+                </div>
+            `;
+
+            feedbackModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.add('scale-100', 'opacity-100');
+                modalContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+
+        window.closeModalAndFindNext = function () {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                feedbackModal.classList.add('hidden');
+            }, 200);
+
+            if (state.evaluatedCandidates.size === candidates.length) {
+                // All candidates evaluated
+                return;
+            }
+
+            // Find the next unevaluated candidate
+            let nextCandidate = candidates.find(c => !state.evaluatedCandidates.has(c.id));
+            if (nextCandidate) {
+                selectCandidate(nextCandidate.id);
+            }
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = state.score;
+        }
+
+        function renderAll() {
+            renderCandidates();
+            renderCandidateDetails();
+            updateScore();
+            updateProgress();
+        }
+
+        // Toggle keyboard shortcuts panel
+        document.getElementById('shortcuts-toggle')?.addEventListener('click', function() {
+            const panel = document.getElementById('shortcuts-panel');
+            panel.classList.toggle('hidden');
+        });
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', renderAll);
+    </script>
+</body>
+
+</html>

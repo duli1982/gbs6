@@ -253,6 +253,66 @@
       "sectionTitle": "Personalized Candidate Outreach"
     },
     {
+      "id": "ai-help",
+      "title": "AI Help - Leveraging AI in Your Daily Work",
+      "description": "Discover how AI transforms your workday through real stories. Learn about AI Co-Pilot, Co-Thinker, and Co-Creator tools with practical examples.",
+      "url": "/ai-help/",
+      "category": "Quick Tools",
+      "type": "module",
+      "keywords": "ai help co-pilot co-thinker co-creator daily work transformation ai tools workplace productivity assistance real stories examples",
+      "content": "AI Help Leveraging AI Daily Work Co-Pilot Co-Thinker Co-Creator tools practical examples real stories workplace productivity transformation",
+      "anchor": "",
+      "sectionTitle": ""
+    },
+    {
+      "id": "ai-copilot",
+      "title": "AI Co-Pilot - Your Assistant for Daily Tasks",
+      "description": "Learn how AI Co-Pilot helps with email responses, interview preparation, and daily task organization through Sarah's story.",
+      "url": "/ai-help/",
+      "category": "AI Tools",
+      "type": "tool",
+      "keywords": "ai co-pilot assistant daily tasks email responses interview preparation task organization automation efficiency",
+      "content": "AI Co-Pilot assistant daily tasks email responses interview preparation task organization automation efficiency Sarah talent acquisition specialist",
+      "anchor": "copilot",
+      "sectionTitle": "AI Co-Pilot"
+    },
+    {
+      "id": "ai-cothinker",
+      "title": "AI Co-Thinker - Your Partner for Problem-Solving",
+      "description": "Discover how AI Co-Thinker helps analyze root causes, generate solutions, and evaluate feasibility through Marcus's story.",
+      "url": "/ai-help/",
+      "category": "AI Tools",
+      "type": "tool",
+      "keywords": "ai co-thinker problem solving root cause analysis solution generation feasibility evaluation strategic thinking",
+      "content": "AI Co-Thinker problem solving root cause analysis solution generation feasibility evaluation strategic thinking Marcus learning development manager",
+      "anchor": "thinker",
+      "sectionTitle": "AI Co-Thinker"
+    },
+    {
+      "id": "ai-cocreator",
+      "title": "AI Co-Creator - Your Collaborator for Content Creation",
+      "description": "See how AI Co-Creator helps develop creative concepts, generate multi-format content, and design engaging materials through Lisa's story.",
+      "url": "/ai-help/",
+      "category": "AI Tools",
+      "type": "tool",
+      "keywords": "ai co-creator content creation creative concepts multi-format content design engaging materials collaboration",
+      "content": "AI Co-Creator content creation creative concepts multi-format content design engaging materials collaboration Lisa employer branding specialist",
+      "anchor": "creator",
+      "sectionTitle": "AI Co-Creator"
+    },
+    {
+      "id": "ai-simulations",
+      "title": "AI Simulations - Reading Between the Lines",
+      "description": "Interactive training to sharpen your ability to evaluate AI-generated content and identify what it might miss in candidate assessments.",
+      "url": "/ai-simulations/",
+      "category": "Interactive Training",
+      "type": "module",
+      "keywords": "ai simulations reading between lines interactive training evaluate ai content hidden gems resume analysis candidate assessment",
+      "content": "AI Simulations Reading Between the Lines interactive training evaluate AI-generated content identify hidden gems candidate assessment resume analysis skills development",
+      "anchor": "",
+      "sectionTitle": ""
+    },
+    {
       "id": "sourcing-workshop",
       "title": "Sourcing Workshop",
       "description": "An in-depth workshop dedicated to advanced sourcing techniques, market intelligence, and candidate engagement.",
