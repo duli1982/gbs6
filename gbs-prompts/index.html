@@ -46,21 +46,6 @@
             height: 200px;
         }
 
-        .category-card-list a:hover {
-            color: #4A90E2;
-        }
-
-        .see-all-btn {
-            border: 1px solid #4A90E2;
-            color: #4A90E2;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .see-all-btn:hover {
-            background-color: #4A90E2;
-            color: white;
-        }
-
         /* --- Detail Page Prompt Display --- */
         .prompt-display-item {
             border: 1px solid #e5e7eb;
@@ -503,17 +488,17 @@
                 </a>
             </div>
 
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight main-heading">Gemini Prompt Library</h1>
-            <p id="hero-subtitle" class="max-w-2xl mx-auto text-lg text-gray-500 mt-4">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight main-heading">Gemini Prompt Library</h1>
+            <p id="hero-subtitle" class="max-w-2xl mx-auto text-base md:text-lg text-gray-500 mt-3 md:mt-4 leading-relaxed">
                 Discover a curated collection of prompts to help you unlock the full potential of Gemini.
             </p>
-            <div class="max-w-2xl mx-auto text-lg text-gray-500 mt-4">
+            <div class="max-w-2xl mx-auto text-base md:text-lg text-gray-500 mt-3 md:mt-4">
                 How To Use:
                 <span id="animated-subtitle" class="font-semibold text-[#4A90E2] inline-block"></span>
             </div>
-            <div class="mt-8 max-w-xl mx-auto relative">
+            <div class="mt-6 md:mt-8 max-w-xl mx-auto relative">
                 <input type="text" id="homepage-search" placeholder="🔍 Search for prompts..."
-                    class="w-full p-3 border border-gray-300 rounded-lg text-lg pr-10">
+                    class="w-full p-3 border border-gray-300 rounded-lg text-base md:text-lg pr-10 min-h-[48px]">
                 <button id="clear-search-btn"
                     class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700">
                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -597,7 +582,8 @@
                 <p class="mt-4 text-gray-600">Loading prompts...</p>
             </div>
             <!-- Category cards will be injected here by JavaScript -->
-            <div id="category-cards-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div>
+            <div id="category-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+            </div>
         </main>
     </div>
 
@@ -817,9 +803,23 @@
         }
 
         // --- RENDER FUNCTIONS ---
+        function getCategoryIcon(categoryName) {
+            const icons = {
+                'Sourcing Strategy': '🎯',
+                'Recruitment': '👥',
+                'AI-Powered Recruitment': '🤖',
+                'Communication': '💬',
+                'Data Analysis': '📊',
+                'Content Creation': '✍️',
+                'Leadership': '👔',
+                'Process Optimization': '⚡'
+            };
+            return icons[categoryName] || '📝';
+        }
+
         function renderHomepage() {
             categoryCardsContainer.innerHTML = '';
-            categoryCardsContainer.className = 'grid md:grid-cols-2 lg:grid-cols-3 gap-8';
+            categoryCardsContainer.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
             for (const categoryName in promptData) {
                 const category = promptData[categoryName];
                 const subCategories = Object.keys(category);
@@ -831,22 +831,27 @@
                 }
 
                 const card = document.createElement('div');
-                card.className = 'prompt-block flex flex-col';
+                card.className = 'bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col';
 
                 let subCategoryLinks = subCategories.map(subName =>
-                    `<li><a href="#" class="block py-1.5 text-gray-500" data-category="${categoryName}" data-subcategory="${subName}">→ ${subName}</a></li>`
+                    `<li><a href="#" class="block py-2 px-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200" data-category="${categoryName}" data-subcategory="${subName}">→ ${subName}</a></li>`
                 ).join('');
 
                 card.innerHTML = `
-                    <div class="p-6 text-center">
-                        <h2 class="text-xl font-bold main-heading accent-text">${categoryName}</h2>
-                        <p class="text-gray-500 text-sm mt-2">${totalPrompts} prompts available</p>
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                            ${getCategoryIcon(categoryName)}
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900 mb-2">${categoryName}</h2>
+                            <p class="text-gray-600 text-sm">${totalPrompts} prompts available</p>
+                        </div>
                     </div>
-                    <div class="flex-grow px-6 category-card-list scrollable-list overflow-y-auto">
-                        <ul>${subCategoryLinks}</ul>
+                    <div class="flex-grow category-card-list scrollable-list overflow-y-auto mb-4">
+                        <ul class="space-y-1">${subCategoryLinks}</ul>
                     </div>
-                    <div class="p-6 mt-auto">
-                        <button class="see-all-btn w-full py-2.5 rounded-md font-semibold" data-category="${categoryName}">Explore ${categoryName} →</button>
+                    <div class="mt-auto">
+                        <button class="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-200 shadow-sm hover:shadow-md" data-category="${categoryName}">Explore ${categoryName} →</button>
                     </div>
                 `;
                 categoryCardsContainer.appendChild(card);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +13,17 @@
     <link rel="stylesheet" href="../shared/card-animations.css">
     <style>
         /* Font styles now handled by shared/fonts.css */
-        
+
         /* Role card styles now handled by shared/card-animations.css */
-        
+
         /* Continue button styles now handled by shared/buttons.css */
-        
+
         .progress-bar {
             transition: width 0.5s ease;
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Breadcrumb Navigation -->
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
@@ -29,27 +31,31 @@
             <div class="breadcrumb-nav">
                 <ol>
                     <li class="breadcrumb-item">
-                        <a href="../index.html" class="breadcrumb-link">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
                             <span class="breadcrumb-icon icon-home"></span>
-                            Home
+                            <span>Home</span>
                         </a>
-                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
                     </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
                     <li class="breadcrumb-item">
-                        <a href="index.html" class="breadcrumb-link">
+                        <a href="index.html" class="breadcrumb-link" aria-label="Go to Onboarding">
                             <span class="breadcrumb-icon icon-folder"></span>
-                            Onboarding
+                            <span>Onboarding</span>
                         </a>
-                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
                     </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
                     <li class="breadcrumb-item">
-                        <span class="breadcrumb-current">Role Selection</span>
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Role Selection</span>
+                        </span>
                     </li>
                 </ol>
             </div>
             <div class="breadcrumb-actions">
-                <a href="../index.html" class="breadcrumb-hub-btn">
-                    Back to Hub
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
                 </a>
             </div>
         </div>
@@ -74,8 +80,8 @@
             <div class="text-center mb-8">
                 <h1 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-3">What's Your Role?</h1>
                 <p class="text-gray-600">This helps us recommend the most relevant AI tools and training for you.</p>
-            </div>        
-    
+            </div>
+
             <!-- Role Selection Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="card-interactive p-6" data-role="recruiter">
@@ -86,7 +92,7 @@
                         <strong>AI tools for:</strong> Boolean search generation, candidate outreach, resume screening
                     </div>
                 </div>
-                
+
                 <div class="card-interactive p-6" data-role="manager">
                     <div class="card-icon text-4xl mb-4 transition-transform duration-300">📊</div>
                     <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Team Manager</h3>
@@ -95,7 +101,7 @@
                         <strong>AI tools for:</strong> Team analytics, strategic planning, performance insights
                     </div>
                 </div>
-                
+
                 <div class="card-interactive p-6" data-role="analyst">
                     <div class="card-icon text-4xl mb-4 transition-transform duration-300">📈</div>
                     <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Business Analyst</h3>
@@ -104,7 +110,7 @@
                         <strong>AI tools for:</strong> Data analysis, report generation, trend identification
                     </div>
                 </div>
-                
+
                 <div class="card-interactive p-6" data-role="coordinator">
                     <div class="card-icon text-4xl mb-4 transition-transform duration-300">⚙️</div>
                     <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Coordinator</h3>
@@ -114,13 +120,13 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Navigation -->
             <div class="flex justify-between items-center">
                 <a href="welcome.html" class="text-gray-500 hover:text-gray-700 font-medium">
                     ← Back
                 </a>
-                
+
                 <button id="continue-btn" class="btn-primary" disabled>
                     Continue to Assessment →
                 </button>
@@ -134,17 +140,17 @@
 
     <script>
         let selectedRole = '';
-        
+
         // Role selection logic
         document.querySelectorAll('.card-interactive').forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
                 // Remove selection from all cards
                 document.querySelectorAll('.card-interactive').forEach(c => c.classList.remove('selected'));
-                
+
                 // Add selection to clicked card
                 this.classList.add('selected');
                 selectedRole = this.dataset.role;
-                
+
                 // Enable continue button
                 const continueBtn = document.getElementById('continue-btn');
                 continueBtn.disabled = false;
@@ -155,7 +161,7 @@
                 };
             });
         });
-        
+
         // Load previously selected role if returning
         const savedRole = localStorage.getItem('selectedRole');
         if (savedRole) {
@@ -168,4 +174,5 @@
         }
     </script>
 </body>
+
 </html>
