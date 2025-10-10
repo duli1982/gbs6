@@ -25,37 +25,10 @@
     <meta name="twitter:title" content="Randstad GBS - AI Hub">
     <meta name="twitter:description" content="Central portal for AI training programs, workshops, and tools">
 
-    <!-- Performance optimizations -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-
-    <!-- Critical CSS inline -->
-    <style>
-        /* Critical above-the-fold styles */
-        body {
-            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #f9fafb;
-            color: #374151;
-        }
-
-        .google-sans {
-            font-family: 'Google Sans', sans-serif;
-        }
-
-        .site-header {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Prevent layout shift */
-        .search-container {
-            min-height: 80px;
-        }
-
-        .modules-grid {
-            min-height: 400px;
-        }
-    </style>
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="shared/hub-button.css">
@@ -90,17 +63,15 @@
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            min-height: 48px;
-            /* Better touch target */
+            min-height: 48px; /* Better touch target */
         }
 
         @media (max-width: 768px) {
             .search-input {
                 padding: 14px 18px 14px 45px;
-                font-size: 16px;
-                /* Prevents zoom on iOS */
+                font-size: 16px; /* Prevents zoom on iOS */
             }
-
+            
             .search-icon {
                 left: 15px;
             }
@@ -502,10 +473,8 @@
     <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
 
         <header class="text-center mb-8 md:mb-12 px-4">
-            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Randstad GBS Learning Hub
-            </h1>
-            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">A central
-                portal for our AI training programs,
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Randstad GBS Learning Hub</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">A central portal for our AI training programs,
                 sourcing tools, and interactive workshops.</p>
         </header>
 
@@ -553,8 +522,7 @@
             <div
                 class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-4 md:p-8 mb-8 md:mb-12 max-w-5xl mx-auto border border-amber-200 mx-4">
                 <div class="text-center mb-4 md:mb-6">
-                    <h3 class="google-sans text-xl md:text-2xl font-bold text-amber-800 mb-2">⚡ Need Something Right
-                        Now?</h3>
+                    <h3 class="google-sans text-xl md:text-2xl font-bold text-amber-800 mb-2">⚡ Need Something Right Now?</h3>
                     <p class="text-amber-700 text-sm md:text-base">Immediate tools you can use today to save time</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -823,32 +791,12 @@
     </button>
 
     <div id="footer-placeholder"></div>
-    <script src="shared/scripts/footer.js" defer async></script>
-    <script src="shared/scripts/scroll-to-top.js" defer async></script>
-    <script src="shared/scripts/lazy-loading.js" defer async></script>
 
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
+    <!-- Security Utilities -->
+    <script src="shared/scripts/utils/security.js"></script>
 
-        // Performance monitoring
-        window.addEventListener('load', () => {
-            if ('performance' in window) {
-                const perfData = performance.getEntriesByType('navigation')[0];
-                console.log('Page load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-            }
-        });
-    </script>
+    <script src="shared/scripts/footer.js" defer></script>
+    <script src="shared/scripts/scroll-to-top.js" defer></script>
 
     <script>
         // Global Search Functionality with Site-wide Content Search
@@ -947,7 +895,20 @@
             }
 
             handleSearch(query) {
-                const trimmedQuery = query.trim();
+                // Sanitize search query for security
+                const safeQuery = typeof SecurityUtils !== 'undefined'
+                    ? SecurityUtils.sanitizeSearchQuery(query)
+                    : query.trim();
+
+                const trimmedQuery = safeQuery.trim();
+
+                // Rate limiting: max 20 searches per minute
+                if (trimmedQuery && typeof SecurityUtils !== 'undefined') {
+                    if (!SecurityUtils.checkRateLimit('hub-search', 20, 60000)) {
+                        alert('Too many searches. Please wait a moment.');
+                        return;
+                    }
+                }
 
                 // Show/hide clear button
                 if (trimmedQuery) {
@@ -1147,7 +1108,8 @@
                     ? `<div class="search-result-section" style="font-size: 12px; color: #1967d2; font-weight: 500; margin-top: 4px;">↳ In: ${this.highlightText(result.sectionTitle, query)}</div>`
                     : '';
 
-                div.innerHTML = `
+                // Use safe HTML injection with SecurityUtils
+                const htmlContent = `
                     <div class="search-result-title">${highlightedTitle}</div>
                     <div class="search-result-description">${highlightedDescription}</div>
                     ${sectionDisplay}
@@ -1159,6 +1121,13 @@
                     </div>
                 `;
 
+                // Safe HTML injection
+                if (typeof SecurityUtils !== 'undefined') {
+                    SecurityUtils.safeSetInnerHTML(div, htmlContent);
+                } else {
+                    div.innerHTML = htmlContent;
+                }
+
                 div.addEventListener('click', () => {
                     this.handleResultClick(result);
                 });
@@ -1167,10 +1136,20 @@
             }
 
             handleResultClick(result) {
-                // The full implementation with smooth scrolling will be in the next step.
-                // For now, this just navigates to the URL with anchor.
+                // Safe URL handling
                 const targetUrl = result.anchor ? `${result.url}#${result.anchor}` : result.url;
-                window.location.href = targetUrl;
+
+                // Validate URL before navigation
+                if (typeof SecurityUtils !== 'undefined') {
+                    const safeUrl = SecurityUtils.sanitizeURL(targetUrl);
+                    if (safeUrl) {
+                        window.location.href = safeUrl;
+                    } else {
+                        console.error('Invalid URL:', targetUrl);
+                    }
+                } else {
+                    window.location.href = targetUrl;
+                }
             }
 
             highlightText(text, query) {
