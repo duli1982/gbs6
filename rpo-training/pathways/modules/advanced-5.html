@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Future-Proofing & Innovation - Advanced Module 5</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../shared/hub-button.css">
     <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         .google-sans { font-family: 'Google Sans', sans-serif; }
@@ -459,13 +466,18 @@
             </section>
         </div>
 
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
         <!-- Navigation -->
         <div class="flex justify-between items-center">
             <a href="../advanced.html" class="text-gray-500 hover:text-gray-700 font-medium">
                 ← Back to Advanced Path
             </a>
-            
-            <button onclick="completeModule()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
                 🏆 Complete Advanced Path!
             </button>
         </div>
@@ -734,5 +746,106 @@
     </div>
 
     <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Advanced Module 5 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'advanced-5',
+                passingScore: 85,
+                showReview: true,
+                questions: [
+                    {
+                        question: "According to the AI Evolution Timeline, when are multimodal AI systems (text, images, audio, video) expected to become mainstream?",
+                        options: [
+                            "2026-2027",
+                            "2024-2025",
+                            "2028-2030",
+                            "2027-2028"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The module indicates that 2024-2025 is when multimodal AI systems that seamlessly work with text, images, audio, and video become standard. This will impact resume screening with photo analysis, video interview AI, and voice-to-text automation.",
+                        hint: "Check the AI Evolution Timeline section for the earliest transformation."
+                    },
+                    {
+                        question: "What is Federated Learning and why is it important for recruitment?",
+                        options: [
+                            "A method to train AI models faster using multiple computers",
+                            "AI models that learn from distributed data without centralizing sensitive information",
+                            "A technique for organizing AI training schedules across teams",
+                            "A system for federating multiple AI tools into one platform"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Federated Learning allows AI models to learn from distributed data without centralizing sensitive information. This is crucial for privacy-preserving AI, cross-organization learning, and enhanced security - particularly important when handling candidate data.",
+                        hint: "Review the Emerging Technologies section, focusing on privacy and security benefits."
+                    },
+                    {
+                        question: "What are the five steps in the Innovation Process outlined in the AI Innovation Lab framework?",
+                        options: [
+                            "Plan, Execute, Test, Deploy, Monitor",
+                            "Research, Design, Build, Launch, Scale",
+                            "Trend monitoring, Rapid prototyping, Business case development, Pilot implementation, Scale or pivot decision",
+                            "Ideate, Validate, Develop, Implement, Measure"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "The module's Innovation Process follows these five steps: (1) Trend monitoring and evaluation, (2) Rapid prototyping and testing, (3) Business case development, (4) Pilot implementation, and (5) Scale or pivot decision. This systematic approach helps organizations experiment with and adopt new AI technologies.",
+                        hint: "Look at the Innovation Lab section for the systematic approach to AI adoption."
+                    },
+                    {
+                        question: "Which future-proofing strategy involves modular system design, API-first approach, and microservices architecture?",
+                        options: [
+                            "Strategic Partnerships",
+                            "Continuous Learning",
+                            "Adaptive Architecture",
+                            "Ethical AI Framework"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Adaptive Architecture is the future-proofing strategy that includes modular system design for easy updates, API-first approach for flexibility, cloud-native infrastructure, microservices architecture, and containerized deployments. This ensures systems can evolve with new technologies.",
+                        hint: "Review the Future-Proofing Strategies section for technical infrastructure approaches."
+                    },
+                    {
+                        question: "Based on the module, what timeframe is predicted for Predictive AI Ecosystems that can predict needs and proactively optimize entire business processes?",
+                        options: [
+                            "2024-2025",
+                            "2025-2026",
+                            "2027-2028",
+                            "2028-2030"
+                        ],
+                        correctAnswer: 3,
+                        explanation: "The module's AI Evolution Timeline indicates that 2028-2030 is when Predictive AI Ecosystems will emerge - AI systems that predict needs and proactively optimize entire business processes. This will enable predictive talent needs, proactive candidate engagement, and self-optimizing recruitment strategies.",
+                        hint: "Look at the final timeline entry in the AI Evolution Timeline section."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 85) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-pink-600', 'hover:from-purple-700', 'hover:to-pink-700');
+                        completeBtn.title = 'Excellent work! Click to complete the Advanced Path';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
 </body>
 </html>

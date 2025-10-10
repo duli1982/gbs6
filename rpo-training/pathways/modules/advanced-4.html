@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Implementation & Scaling - Advanced Module 4</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../shared/hub-button.css">
     <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         .google-sans { font-family: 'Google Sans', sans-serif; }
@@ -446,6 +453,107 @@
     </div>
 
     <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Advanced Module 4 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'advanced-4',
+                passingScore: 80,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What does the 'A' in the ADAPT Change Management Framework stand for?",
+                        options: [
+                            "Accelerate Adoption & Action",
+                            "Assess Readiness & Resistance",
+                            "Allocate Resources & Assets",
+                            "Announce Plans & Priorities"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The 'A' in ADAPT stands for 'Assess Readiness & Resistance.' This crucial first step helps you understand your organization's current state, readiness indicators (like leadership commitment and technical infrastructure), and potential barriers to change (like fear of job displacement or resource constraints).",
+                        hint: "Review the ADAPT Change Management Framework section."
+                    },
+                    {
+                        question: "What is the most effective response strategy when team members express fear that 'AI will replace my job'?",
+                        options: [
+                            "Tell them their concerns are unfounded and to embrace change",
+                            "Share specific examples of AI augmentation, highlight new opportunities, and provide retraining programs",
+                            "Avoid discussing the topic to prevent further anxiety",
+                            "Promise that no jobs will be eliminated under any circumstances"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The most effective approach is to address fears directly with evidence and support. Share specific examples showing AI augmentation vs replacement, highlight new skills and opportunities AI creates, provide retraining and upskilling programs, and show career advancement paths with AI skills. This combines transparency with concrete support.",
+                        hint: "Look at the resistance pattern about job displacement fears."
+                    },
+                    {
+                        question: "In the Pilot → Department → Organization scaling model, what is the recommended duration for Phase 1 (Pilot)?",
+                        options: [
+                            "1-2 days with quick testing",
+                            "2-4 weeks with 5-10 early adopters",
+                            "3-6 months with full department participation",
+                            "1 year with organization-wide rollout"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Phase 1 (Pilot) should run for 2-4 weeks with 5-10 early adopters, focusing on a single use case with intensive support and rapid iteration. This allows you to gather meaningful feedback and refine your approach before broader rollout, while keeping the pilot focused and manageable.",
+                        hint: "Review the AI Scaling Models section and the three phases."
+                    },
+                    {
+                        question: "What is the key advantage of using a Wave-Based Rollout approach?",
+                        options: [
+                            "Everyone gets access to AI tools at the same time",
+                            "It allows systematic adoption starting with champions and progressively including more resistant users",
+                            "It requires less planning than other rollout methods",
+                            "It eliminates the need for training and support"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Wave-Based Rollout's key advantage is systematic, strategic phasing: Wave 1 targets Champions & Early Adopters, Wave 2 includes Willing Participants, Wave 3 brings in Neutral Users, and Wave 4 addresses Skeptics & Laggards. This builds momentum and allows success stories from early waves to influence later adopters.",
+                        hint: "Consider how the four waves build upon each other strategically."
+                    },
+                    {
+                        question: "According to the 90-Day Implementation Plan, what are the primary activities during Days 31-60 (Pilot Launch)?",
+                        options: [
+                            "Assess organizational readiness and identify champions",
+                            "Launch pilot with champions, provide intensive support, gather feedback, and document success stories",
+                            "Roll out to broader team and measure overall success",
+                            "Develop long-term strategy and secure executive buy-in"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Days 31-60 (Pilot Launch) focuses on launching the pilot with champions, providing intensive support, gathering feedback and iterating, documenting success stories, and preparing for scaling. This phase is about execution, learning, and building evidence of success before broader deployment.",
+                        hint: "Look at the 90-Day Implementation Plan's middle phase activities."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 80) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
 </body>
 </html>
          <!-- Resistance Management -->
@@ -677,13 +785,18 @@
             </section>
         </div>
 
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
         <!-- Navigation -->
         <div class="flex justify-between items-center">
             <a href="../advanced.html" class="text-gray-500 hover:text-gray-700 font-medium">
                 ← Back to Advanced Path
             </a>
             
-            <button onclick="completeModule()" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
                 Complete Module 4 →
             </button>
         </div>

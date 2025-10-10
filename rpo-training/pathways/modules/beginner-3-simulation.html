@@ -5,9 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Practice Simulation - Beginner Module 3</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
@@ -242,6 +249,9 @@
             <!-- Feedback Area -->
             <div id="feedback-area"></div>
         </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
 
         <!-- Navigation -->
         <div class="flex justify-between items-center">
@@ -675,6 +685,130 @@
 
     <!-- Enhanced Breadcrumb Navigation Script -->
     <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Module 3 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+        let quizCompleted = false;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'beginner-3',
+                passingScore: 70,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What is the most important element to include when writing an AI prompt?",
+                        options: [
+                            "Politeness and formal greetings",
+                            "Being specific about what you want",
+                            "Using complex technical language",
+                            "Making the prompt as long as possible"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Being specific about what you want is the most important element. AI works best when you clearly state your needs, requirements, and desired outcomes.",
+                        hint: "Think about what the practice scenarios emphasized most."
+                    },
+                    {
+                        question: "When asking AI to write an email, which information should you include in your prompt?",
+                        options: [
+                            "Only the recipient's name",
+                            "Just the general topic",
+                            "The recipient, purpose, key information, and desired tone",
+                            "The email should write itself"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "A complete email prompt should include who it's for (recipient), why you're writing (purpose), what information to include, and what tone to use (professional, casual, friendly, etc.).",
+                        hint: "Review the follow-up email scenario practice."
+                    },
+                    {
+                        question: "If AI's first response isn't quite what you need, what should you do?",
+                        options: [
+                            "Give up and start completely over",
+                            "Refine your prompt with more specific details",
+                            "Accept it as is - you can't improve it",
+                            "Switch to a completely different AI tool"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "If the first response isn't perfect, refine your prompt by adding more specific details, context, or examples. AI conversations are iterative - you can guide it to better results.",
+                        hint: "Remember: AI practice is about iteration and refinement."
+                    },
+                    {
+                        question: "What should you include when asking AI to create interview questions?",
+                        options: [
+                            "Just say 'give me interview questions'",
+                            "The job role, skills to assess, and question types needed",
+                            "Only the company name",
+                            "Generic questions work for all roles"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Good interview question prompts should specify the role (Customer Service Rep), what skills to assess (communication, problem-solving), and what types of questions you need (behavioral, situational, technical).",
+                        hint: "Think about scenario 2 in the practice session."
+                    },
+                    {
+                        question: "Why is providing context important when working with AI?",
+                        options: [
+                            "It's not important - AI knows everything",
+                            "It makes your prompt look more professional",
+                            "Context helps AI understand your specific needs and give relevant responses",
+                            "Context is only needed for technical questions"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Providing context (your role, the audience, the situation, constraints) helps AI understand your specific needs and tailor responses accordingly. Without context, AI has to guess your intent.",
+                        hint: "Consider why the practice scenarios included detailed background information."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    if (percentage >= 70) {
+                        quizCompleted = true;
+                        checkCompletionRequirements();
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+
+        // Update the enableCompletion function to check quiz status
+        function checkCompletionRequirements() {
+            if (practiceCompleted && quizCompleted) {
+                const completeBtn = document.getElementById('complete-btn');
+                completeBtn.disabled = false;
+                completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+
+                // Scroll to button smoothly
+                setTimeout(() => {
+                    completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }
+        }
+
+        // Override the original enableCompletion to integrate with quiz
+        const originalEnableCompletion = enableCompletion;
+        enableCompletion = function() {
+            practiceCompleted = true;
+            checkCompletionRequirements();
+
+            if (!quizCompleted) {
+                addMessageToChat(`🎉 Great job completing the practice scenarios! Now please complete the Knowledge Check Quiz below to finish this module.`, 'ai');
+
+                // Scroll to quiz
+                setTimeout(() => {
+                    document.getElementById('module-quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 1000);
+            }
+        };
+    </script>
 </body>
 
 </html>

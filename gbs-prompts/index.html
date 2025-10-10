@@ -5,10 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gemini Prompt Library</title>
-    <!-- Performance optimizations -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../shared/hub-button.css">
@@ -1139,6 +1135,13 @@
             if (target.closest('.copy-btn')) { handleCopyClick(e); return; }
             if (target.classList.contains('create-gem-btn')) { const content = target.dataset.promptContent; showGemModal(content); return; }
             if (target.classList.contains('see-all-btn')) { const categoryName = target.dataset.category; showAllCategoryView(categoryName); return; }
+            // Handle "Explore Category" button clicks
+            if (target.tagName === 'BUTTON' && target.dataset.category) {
+                e.preventDefault();
+                const categoryName = target.dataset.category;
+                showAllCategoryView(categoryName);
+                return;
+            }
             if (target.tagName === 'A' && target.dataset.subcategory) { e.preventDefault(); showDetailView(target.dataset.category, target.dataset.subcategory); }
         });
 

@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI for Your Daily Tasks - Beginner Module 4</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         .google-sans { font-family: 'Google Sans', sans-serif; }
@@ -483,13 +490,18 @@
             </div>
         </div>
 
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
         <!-- Navigation -->
         <div class="flex justify-between items-center">
             <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
                 ← Back to Beginner Path
             </a>
-            
-            <button onclick="completeModule()" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
                 Complete Module 4 →
             </button>
         </div>
@@ -956,5 +968,106 @@ P.S. If you're open to it, I'd be happy to provide any feedback from the intervi
 
     <!-- Enhanced Breadcrumb Navigation Script -->
     <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Module 4 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'beginner-4',
+                passingScore: 70,
+                showReview: true,
+                questions: [
+                    {
+                        question: "According to the module, how much time can colleagues save per day by using AI for routine tasks?",
+                        options: [
+                            "30 minutes to 1 hour",
+                            "1-2 hours",
+                            "2-4 hours",
+                            "5-6 hours"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "The module states that colleagues report saving 2-4 hours per day by using AI for routine tasks. That's 10-20 hours per week you could spend on more strategic, creative work!",
+                        hint: "Look at 'The Time-Saving Reality' section."
+                    },
+                    {
+                        question: "What is one of the key improvements when using AI for email writing compared to traditional methods?",
+                        options: [
+                            "Emails become much longer and detailed",
+                            "You need multiple drafts and revisions",
+                            "Perfect tone every time with first draft usually final",
+                            "It takes the same amount of time but feels easier"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "With AI, you can achieve perfect tone every time and the first draft is usually final, compared to the 15-30 minutes and multiple drafts typically needed without AI.",
+                        hint: "Review the 'Email & Communication' section's before/after comparison."
+                    },
+                    {
+                        question: "When asking AI to research a company, what information should you request?",
+                        options: [
+                            "Just the company name and location",
+                            "Company overview, culture, leadership, hiring trends, and challenges",
+                            "Only recent news articles",
+                            "Just the CEO's name and company size"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Pro Tip Research Prompt Template suggests requesting: 1) Company overview and recent news, 2) Company culture and values, 3) Key leadership team, 4) Recent hiring trends, 5) Any challenges they might be facing.",
+                        hint: "Check the 'Research & Information Gathering' section's Pro Tip."
+                    },
+                    {
+                        question: "What is a major benefit of using AI for job postings?",
+                        options: [
+                            "They become shorter and simpler",
+                            "They result in 3x more qualified applications",
+                            "They don't require any editing",
+                            "They automatically post to job boards"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The module shows that AI-enhanced job postings result in 3x more qualified applications compared to traditional generic postings, due to better engagement, clear value propositions, and professional formatting.",
+                        hint: "Look at the 'Content Creation' before/after comparison."
+                    },
+                    {
+                        question: "What are some recommended 'Quick Wins' to start with when using AI?",
+                        options: [
+                            "Build complex automation systems immediately",
+                            "Write emails, create job descriptions, research companies, and generate interview questions",
+                            "Replace all human communication with AI",
+                            "Only use AI for data analysis tasks"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The 'AI Quick Wins Checklist' recommends starting with high-impact, low-effort applications like writing professional emails, creating job descriptions, researching companies, and generating interview questions - building skills gradually.",
+                        hint: "Review the 'Your AI Quick Wins Checklist' section."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 70) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
 </body>
 </html>

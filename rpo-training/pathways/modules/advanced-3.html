@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise AI Integration - Advanced Module 3</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../shared/hub-button.css">
     <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         .google-sans { font-family: 'Google Sans', sans-serif; }
@@ -620,13 +627,18 @@ def route_to_resume_service(request):
             </section>
         </div>
 
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
         <!-- Navigation -->
         <div class="flex justify-between items-center">
             <a href="../advanced.html" class="text-gray-500 hover:text-gray-700 font-medium">
                 ← Back to Advanced Path
             </a>
-            
-            <button onclick="completeModule()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
                 Complete Module 3 →
             </button>
         </div>
@@ -856,5 +868,106 @@ def route_to_resume_service(request):
     </div>
 
     <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Advanced Module 3 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'advanced-3',
+                passingScore: 80,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What is the primary benefit of the Hub-and-Spoke architectural model for enterprise AI?",
+                        options: [
+                            "It allows each department to use completely different AI tools",
+                            "It provides centralized governance and consistent quality across the organization",
+                            "It eliminates the need for security measures",
+                            "It only works for small organizations"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Hub-and-Spoke model features a central AI hub serving multiple business units with standardized interfaces. This provides centralized governance, consistent quality, and cost efficiency, making it ideal for large organizations with diverse departments.",
+                        hint: "Review the Enterprise AI Architecture Patterns section for architectural models."
+                    },
+                    {
+                        question: "Which authentication method is recommended for high-security enterprise environments?",
+                        options: [
+                            "Simple passwords",
+                            "API keys only",
+                            "mTLS (mutual TLS)",
+                            "No authentication needed"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "mTLS (mutual TLS) is recommended for high-security environments as it provides two-way authentication where both client and server verify each other's identity. This is more secure than API keys or OAuth for critical enterprise systems.",
+                        hint: "Check the Authentication & Security section for authentication methods."
+                    },
+                    {
+                        question: "What is Event-Driven Automation in enterprise AI integration?",
+                        options: [
+                            "Manually triggering AI processes each time they're needed",
+                            "Automatically triggering AI processes based on business events",
+                            "Scheduling AI processes only at night",
+                            "Using AI only for special company events"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Event-Driven Automation automatically triggers AI processes based on business events (like a resume upload triggering analysis, scoring, and notifications). This eliminates manual intervention and enables real-time, scalable workflows.",
+                        hint: "Look at the Enterprise Automation Patterns section for event-driven examples."
+                    },
+                    {
+                        question: "What should be included in enterprise API error responses?",
+                        options: [
+                            "Only an error message",
+                            "Error code, message, details, request_id, timestamp, and documentation URL",
+                            "Just the HTTP status code",
+                            "Internal system details and database queries"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Enterprise API error responses should include structured information: error code, clear message, specific details, request_id for tracking, timestamp, and documentation URL. This helps developers debug issues without exposing sensitive internal system details.",
+                        hint: "Review the Error Handling & Resilience section for proper error response format."
+                    },
+                    {
+                        question: "Why is exponential backoff important in API retry logic?",
+                        options: [
+                            "To make the system faster",
+                            "To prevent overwhelming the service with repeated requests and allow recovery time",
+                            "To reduce data accuracy",
+                            "It's only needed for small applications"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Exponential backoff gradually increases wait time between retries (1s, 2s, 4s, etc.), preventing the system from overwhelming a struggling service with immediate repeated requests. This gives the service time to recover and prevents cascading failures in enterprise systems.",
+                        hint: "Check the retry logic example in the Error Handling & Resilience section."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 80) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                        completeBtn.title = 'Excellent! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
 </body>
 </html>

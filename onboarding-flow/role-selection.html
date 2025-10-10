@@ -154,11 +154,9 @@
                 // Enable continue button
                 const continueBtn = document.getElementById('continue-btn');
                 continueBtn.disabled = false;
-                continueBtn.textContent = `Continue as ${this.querySelector('h3').textContent} →`;
                 continueBtn.onclick = () => {
                     // Store role in localStorage for next step
                     localStorage.setItem('selectedRole', selectedRole);
-                    console.log('Role selected:', selectedRole); // Debug
                     window.location.href = 'assessment.html';
                 };
             });

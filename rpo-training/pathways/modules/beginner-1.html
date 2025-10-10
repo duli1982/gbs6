@@ -5,9 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What is AI? - Beginner Module 1</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
     <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
@@ -324,14 +331,18 @@
             </section>
         </div>
 
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
         <!-- Navigation -->
         <div class="flex justify-between items-center">
             <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
                 ← Back to Beginner Path
             </a>
 
-            <button onclick="completeModule()"
-                class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
                 Complete Module 1 →
             </button>
         </div>
@@ -584,8 +595,126 @@
         </div>
     </div>
 
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
     <!-- Enhanced Breadcrumb Navigation Script -->
     <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Quiz Initialization -->
+    <script>
+        // Quiz data for Module 1: What is AI?
+        const quizData = {
+            moduleId: 'beginner-1',
+            passingScore: 70,
+            showReview: true,
+            questions: [
+                {
+                    question: "What is the best way to think about AI?",
+                    options: [
+                        "AI is magic that can do anything",
+                        "AI is a tool that helps you work smarter and faster",
+                        "AI is a replacement for human workers",
+                        "AI is too complicated for most people to use"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "AI is a tool that augments human capabilities. It helps you work smarter and faster, just like how a calculator helps with math. It's designed to assist, not replace humans.",
+                    hint: "Think about the calculator analogy from the module."
+                },
+                {
+                    question: "Which of these tasks can AI help with in recruitment?",
+                    options: [
+                        "Writing professional emails",
+                        "Making final hiring decisions",
+                        "Replacing human judgment completely",
+                        "Eliminating the need for interviews"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "AI excels at helping with tasks like writing emails, summarizing documents, and analyzing data. However, humans should always make final hiring decisions and conduct interviews.",
+                    hint: "Review the 'What Can AI Actually Do?' section."
+                },
+                {
+                    question: "True or False: You need to be technical to use AI.",
+                    options: [
+                        "True - you need coding skills",
+                        "False - using AI is as simple as having a conversation"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Using AI is as simple as having a conversation. If you can send a text message or email, you can use AI. No technical or coding skills are required!",
+                    hint: "Check the 'Myth Busting' section."
+                },
+                {
+                    question: "According to the module, what should you always do with AI-generated content?",
+                    options: [
+                        "Use it exactly as provided without changes",
+                        "Share it immediately with clients",
+                        "Double-check and use your judgment",
+                        "Ignore it completely"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "AI can make mistakes just like humans do. Always double-check important information and use your professional judgment before using AI-generated content.",
+                    hint: "Remember the key point: 'You're still in control'."
+                },
+                {
+                    question: "What was the main benefit shown in the email writing example?",
+                    options: [
+                        "AI eliminates the need for email",
+                        "AI reduces email writing time from 30+ minutes to 3-5 minutes",
+                        "AI writes better emails than humans",
+                        "AI can send emails automatically"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "The example showed that AI can dramatically reduce the time spent on tasks. Writing a professional email went from 30+ minutes to just 3-5 minutes, allowing you to be more productive.",
+                    hint: "Look at the real-world example comparing 'Old Way' vs 'New Way'."
+                }
+            ],
+            onComplete: function(percentage, timeTaken) {
+                console.log('Quiz completed!', { percentage, timeTaken, passed: percentage >= 70 });
+
+                // Enable the complete module button when quiz is passed
+                const completeBtn = document.getElementById('complete-module-btn');
+                console.log('Complete button found:', completeBtn);
+
+                if (completeBtn && percentage >= 70) {
+                    console.log('Enabling complete button...');
+                    completeBtn.disabled = false;
+                    completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    completeBtn.classList.add('bg-green-600', 'hover:bg-green-700', 'cursor-pointer');
+                    completeBtn.title = 'Proceed to complete the module';
+
+                    // Scroll to the button smoothly
+                    setTimeout(() => {
+                        completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        console.log('Scrolled to button');
+                    }, 500);
+                } else if (percentage < 70) {
+                    console.log('Score too low. Need 70% to pass. Current:', percentage);
+                }
+            }
+        };
+
+        // Initialize quiz when page loads
+        let quiz;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Debug logging
+            console.log('DOM loaded, initializing quiz...');
+            console.log('DOMPurify available:', typeof DOMPurify);
+            console.log('SecurityUtils available:', typeof SecurityUtils);
+            console.log('QuizComponent available:', typeof QuizComponent);
+            console.log('Quiz container found:', document.getElementById('module-quiz'));
+
+            // Initialize quiz
+            try {
+                quiz = new QuizComponent('module-quiz', quizData);
+                console.log('Quiz initialized successfully!');
+            } catch (error) {
+                console.error('Error initializing quiz:', error);
+            }
+        });
+    </script>
 </body>
 
 </html>
