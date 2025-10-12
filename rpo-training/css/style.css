@@ -9,23 +9,40 @@ body {
             border-bottom: 1px solid #dadce0;
         }
         .content-section {
-            padding-top: 2.5rem;
+            padding-top: 2rem;
             padding-bottom: 2.5rem;
             border-bottom: 1px solid #e0e0e0;
         }
+        /* First section after breadcrumbs should start a bit tighter */
+        .content-section:first-of-type {
+            padding-top: 1.25rem;
+        }
         .content-section:last-child {
             border-bottom: none;
+        }
+        /* Consistent heading spacing */
+        .content-section h2,
+        .content-section h3,
+        .content-section h4 {
+            margin-bottom: 0.5rem;
         }
         .prompt-box {
             background-color: #f1f3f4;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1rem 1.25rem; /* tighter by default */
             font-family: 'Courier New', Courier, monospace;
             white-space: pre-wrap;
             word-wrap: break-word;
             font-size: 0.9rem;
         }
+        @media (min-width: 768px) {
+            .prompt-box { padding: 1.25rem 1.5rem; }
+        }
+        /* Details/Summary blocks */
+        details { border-radius: 0.5rem; }
+        details > summary { padding: 1rem; }
+        details > div { padding: 1rem; }
         .step-box, .session-card, .module-card {
             background-color: #ffffff;
             border: 1px solid #dadce0;
@@ -114,6 +131,10 @@ body {
 
 /* Mobile adjustments for back to top button */
 @media (max-width: 768px) {
+    .content-section {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
     .back-to-top {
         bottom: 20px;
         right: 20px;

@@ -1,0 +1,43 @@
+﻿*** Begin Patch
+*** Update File: shared/scripts/breadcrumb-nav.js
+@@
+         addLoadingStates();
+         normalizeLinks();
+         setupModuleContext();
+         insertModuleBreadcrumb();
++        enhanceStandaloneLayout(breadcrumbContainer);
+@@
+     }
+@@
+     }
++
++    // For standalone session pages (no global layout), apply body classes
++    // and wrap main content in a centered container for consistent spacing
++    function enhanceStandaloneLayout(breadcrumbContainer) {
++        try {
++            // If the main hub already provides layout wrappers, skip
++            if (document.querySelector('.site-header') || document.querySelector('main[role]')) return;
++
++            // Body baseline styles
++            document.body.classList.add('bg-gray-50', 'text-gray-800');
++
++            // Create a wrapper and move following siblings into it
++            const wrapper = document.createElement('div');
++            wrapper.className = 'max-w-6xl mx-auto px-4 py-8';
++
++            let node = breadcrumbContainer.nextSibling;
++            const toMove = [];
++            while (node) {
++                const next = node.nextSibling;
++                if (!(node.nodeType === 3 && !node.textContent.trim())) {
++                    toMove.push(node);
++                }
++                node = next;
++            }
++            if (!toMove.length) return;
++            breadcrumbContainer.parentNode.insertBefore(wrapper, toMove[0]);
++            toMove.forEach(n => wrapper.appendChild(n));
++        } catch (_) { /* no-op */ }
++    }
+*** End Patch
+

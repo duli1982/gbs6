@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyrightYear = document.getElementById('copyright-year');
 
     const moduleTitles = {
-        'module-1': 'Module 1: Prompting & Writing — The C.R.E.A.T.E. Framework',
+        'module-1': 'Module 1: Prompting & Writing - The C.R.E.A.T.E. Framework',
         'module-2': 'Module 2: Sourcing & Research',
         'module-3': 'Module 3: Data & Knowledge',
         'module-4': 'Module 4: Automation',
@@ -30,6 +30,59 @@ document.addEventListener('DOMContentLoaded', () => {
         'session-6-1-page': 'Session 6.1: Developing an AI Roadmap',
         'session-7-1-page': 'Session 7.1: The ROI of AI in Recruiting'
     };
+
+    // Allow direct linking to module views using hash (e.g., #module-1)
+    Object.entries(moduleTitles).forEach(([id, title]) => {
+        pageTitles[id] = title;
+    });
+
+    function setRpoBreadcrumb(moduleId) {
+        const ol = document.querySelector('.breadcrumb-nav ol');
+        if (!ol) return;
+
+        if (!moduleId) {
+            ol.innerHTML = `
+                <li class="breadcrumb-item">
+                    <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                        <span class="breadcrumb-icon icon-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-separator" aria-hidden="true">></li>
+                <li class="breadcrumb-item">
+                    <span class="breadcrumb-current" aria-current="page">
+                        <span class="breadcrumb-icon icon-folder"></span>
+                        <span>RPO Training</span>
+                    </span>
+                </li>`;
+            return;
+        }
+
+        const full = moduleTitles[moduleId] || moduleId;
+        const short = (full.split(':')[0] || full).trim();
+
+        ol.innerHTML = `
+            <li class="breadcrumb-item">
+                <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                    <span class="breadcrumb-icon icon-home"></span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="breadcrumb-separator" aria-hidden="true">></li>
+            <li class="breadcrumb-item">
+                <a href="/rpo-training/index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                    <span class="breadcrumb-icon icon-folder"></span>
+                    <span>RPO Training</span>
+                </a>
+            </li>
+            <li class="breadcrumb-separator" aria-hidden="true">></li>
+            <li class="breadcrumb-item">
+                <span class="breadcrumb-current" aria-current="page">
+                    <span class="breadcrumb-icon icon-book"></span>
+                    <span>${short}</span>
+                </span>
+            </li>`;
+    }
 
     // Session descriptions for enhanced preview
     const sessionDescriptions = {
@@ -692,9 +745,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sessions.forEach(session => {
             const desc = session.description;
+            const file = session.id.replace('session-', '').replace('-page', '');
+            const url = `/rpo-training/sessions/${file}.html`;
             menuHtml += `
                 <li>
-                    <a href="#" onclick="event.preventDefault(); navigateTo('${session.id}')" class="block bg-white p-6 rounded-lg shadow-md hover:bg-gray-50 transition border-l-4 border-blue-500">
+                    <a href="${url}" class="block bg-white p-6 rounded-lg shadow-md hover:bg-gray-50 transition border-l-4 border-blue-500" aria-label="Open ${session.title}">
                         <div class="flex justify-between items-start mb-3">
                             <h3 class="google-sans text-xl font-bold text-blue-700">${session.title}</h3>
                             ${desc ? `<span class="text-sm font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded">${desc.duration}</span>` : ''}
@@ -737,6 +792,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pageId === 'main-page') {
             mainPage.classList.add('active');
             sessionContainer.innerHTML = '';
+            setRpoBreadcrumb(null);
             // Restore scroll position if returning to the main page
             const savedPosition = sessionStorage.getItem('mainPageScrollPosition');
             if (savedPosition) {
@@ -745,6 +801,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else if (pageId.startsWith('module-')) {
             showSessionMenu(pageId);
+            setRpoBreadcrumb(pageId);
         } else {
             const sessionPath = pageId.replace('session-', '').replace('-page', '');
             const filePath = `sessions/${sessionPath}.html`;

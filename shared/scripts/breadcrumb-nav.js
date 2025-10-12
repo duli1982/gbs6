@@ -21,6 +21,9 @@
     }
 
     function init() {
+        // Ensure required styles are present for standalone session pages
+        ensureStyles();
+
         // De-duplicate any breadcrumb containers that might be rendered twice
         const breadcrumbContainer = dedupeBreadcrumbs();
         if (!breadcrumbContainer) return;
@@ -40,6 +43,43 @@
             observer.observe(document.body, { childList: true, subtree: true });
             // Run again after full load in case of late templates
             window.addEventListener('load', dedupeBreadcrumbs, { once: true });
+        } catch (_) { /* no-op */ }
+    }
+
+    // Inject Tailwind and shared CSS if missing (for standalone session pages)
+    function ensureStyles() {
+        try {
+            const hasTailwind = !!document.querySelector('script[src*="tailwindcss.com"]');
+            const needFonts = !document.querySelector('link[href*="/shared/fonts.css"]');
+            const needButtons = !document.querySelector('link[href*="/shared/buttons.css"]');
+            const needHubBtn = !document.querySelector('link[href*="/shared/hub-button.css"]');
+
+            const head = document.head || document.getElementsByTagName('head')[0];
+            if (!head) return;
+
+            if (!hasTailwind) {
+                const s = document.createElement('script');
+                s.src = 'https://cdn.tailwindcss.com';
+                head.appendChild(s);
+            }
+            if (needFonts) {
+                const l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = '../../shared/fonts.css';
+                head.appendChild(l);
+            }
+            if (needButtons) {
+                const l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = '../../shared/buttons.css';
+                head.appendChild(l);
+            }
+            if (needHubBtn) {
+                const l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = '../../shared/hub-button.css';
+                head.appendChild(l);
+            }
         } catch (_) { /* no-op */ }
     }
 
@@ -95,89 +135,42 @@
         return new URL('/rpo-training/index.html', href).toString();
     }
 
-    // Module context: remember the module page a user came from
-    // and provide a Back to Module button on session pages
+    // Session pages: always provide a generic Back to RPO Training button
     function setupModuleContext() {
         try {
-            const KEY = 'rpo:lastModule';
             const path = (window.location.pathname || '').toLowerCase();
-
-            // Helper to store module context
-            const saveModule = (url, name) => {
-                if (!url) return;
-                const data = { url, name: name || 'Module', ts: Date.now() };
-                sessionStorage.setItem(KEY, JSON.stringify(data));
-            };
-
-            // 1) If we are on a module/hub page, cache it for subsequent clicks
-            const isModulePage = (path.includes('/rpo-training/') && !path.includes('/rpo-training/sessions/'));
-            if (isModulePage) {
-                // Derive a friendly name
-                const h1 = document.querySelector('h1,h2');
-                const name = (h1 && h1.textContent) ? h1.textContent.trim() : 'RPO Training';
-                saveModule(window.location.href, name);
-            }
-
-            // 2) If we landed here from a module page, store that referrer
-            const ref = document.referrer || '';
-            if (ref.includes('/rpo-training/pathways/') || ref.includes('/rpo-training/modules/')) {
-                // Try to read the title from the current document (best effort)
-                const name = 'Module';
-                saveModule(ref, name);
-            }
-
-            // 3) On a session page, inject Back to Module if cached
             const isSessionPage = path.includes('/rpo-training/sessions/');
-            if (isSessionPage) {
-                const raw = sessionStorage.getItem(KEY);
-                let data = raw ? JSON.parse(raw) : null;
+            if (!isSessionPage) return;
 
-                // If no stored module, but referrer is within rpo-training, use it
-                if (!data && (ref && ref.includes('/rpo-training/'))) {
-                    data = { url: ref, name: 'RPO Training' };
-                }
+            // Determine module number from the session path
+            const match = path.match(/\/rpo-training\/sessions\/(\d+)-/);
+            if (!match) return;
+            const moduleNum = match[1];
+            const moduleUrl = `/rpo-training/index.html#module-${moduleNum}`;
+            const moduleLabel = `Back to Module ${moduleNum}`;
 
-                if (data) {
-                    const actions = document.querySelector('.breadcrumb-actions');
-                    if (actions) {
-                        const back = document.createElement('a');
-                        back.className = 'breadcrumb-back-btn';
-                        back.href = data.url;
-                        back.setAttribute('aria-label', 'Back to Module');
-                        const label = (data.name && data.name.length < 60) ? data.name : 'Module';
-                        back.innerHTML = '<span class="icon-arrow-left"></span><span>Back to ' + label + '</span>';
-                        actions.prepend(back);
-                    } else {
-                        // If actions block is missing for some reason, append near breadcrumb nav
-                        const nav = document.querySelector('.breadcrumb-container .breadcrumb-wrapper');
-                        if (nav) {
-                            const fallback = document.createElement('div');
-                            fallback.className = 'breadcrumb-actions';
-                            const back2 = document.createElement('a');
-                            back2.className = 'breadcrumb-back-btn';
-                            back2.href = data.url;
-                            back2.setAttribute('aria-label', 'Back to Module');
-                            const label2 = (data.name && data.name.length < 60) ? data.name : 'Module';
-                            back2.innerHTML = '<span class=\"icon-arrow-left\"></span><span>Back to ' + label2 + '</span>';
-                            fallback.appendChild(back2);
-                            nav.appendChild(fallback);
-                        }
-                    }
-                }
-                // If still no data, provide a generic back to RPO hub
-                if (!data) {
-                    const actions = document.querySelector('.breadcrumb-actions');
-                    if (actions) {
-                        const back = document.createElement('a');
-                        back.className = 'breadcrumb-back-btn';
-                        const target = getRpoHubURL();
-                        back.href = target;
-                        back.setAttribute('aria-label', 'Back to RPO Training');
-                        back.innerHTML = '<span class="icon-arrow-left"></span><span>Back to RPO Training</span>';
-                        actions.prepend(back);
-                    }
-                }
+            const actions = document.querySelector('.breadcrumb-actions');
+            if (!actions) return;
+
+            // If there's already any back button, retarget and relabel it
+            const existingBack = Array.from(actions.querySelectorAll('a')).find(a => {
+                const t = (a.textContent || '').trim();
+                return t.startsWith('Back to');
+            });
+            if (existingBack) {
+                existingBack.href = moduleUrl;
+                existingBack.setAttribute('aria-label', moduleLabel);
+                existingBack.innerHTML = '<span class="icon-arrow-left"></span><span>' + moduleLabel + '</span>';
+                return;
             }
+
+            // Otherwise, insert a module-specific back button
+            const back = document.createElement('a');
+            back.className = 'breadcrumb-back-btn';
+            back.href = moduleUrl;
+            back.setAttribute('aria-label', moduleLabel);
+            back.innerHTML = '<span class="icon-arrow-left"></span><span>' + moduleLabel + '</span>';
+            actions.prepend(back);
         } catch (_) { /* no-op */ }
     }
 
@@ -187,9 +180,21 @@
             const path = (window.location.pathname || '').toLowerCase();
             if (!path.includes('/rpo-training/sessions/')) return;
 
-            const raw = sessionStorage.getItem('rpo:lastModule');
-            const data = raw ? JSON.parse(raw) : null;
-            if (!data || !data.url) return;
+            let raw = sessionStorage.getItem('rpo:lastModule');
+            let data = raw ? JSON.parse(raw) : null;
+            if (!data || !data.url) {
+                // Fallback: infer module from session filename
+                const match = path.match(/\/rpo-training\/sessions\/(\d+)-/);
+                if (match) {
+                    const num = match[1];
+                    data = {
+                        url: `/rpo-training/index.html#module-${num}`,
+                        name: `Module ${num}`
+                    };
+                } else {
+                    return;
+                }
+            }
 
             const ol = document.querySelector('.breadcrumb-nav ol');
             if (!ol) return;
