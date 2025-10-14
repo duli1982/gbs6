@@ -30,6 +30,9 @@ const securityHeaders = {
         // Images: Allow self, data URIs, and common image CDNs
         "img-src 'self' data: https:",
 
+        // Frames: Allow self and Google Drive/Docs for video embedding
+        "frame-src 'self' https://drive.google.com https://docs.google.com",
+
         // Connect (AJAX/fetch): Allow self and API endpoints
         "connect-src 'self' https://generativelanguage.googleapis.com",
 
