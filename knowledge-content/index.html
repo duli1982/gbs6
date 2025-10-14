@@ -24,6 +24,11 @@
             display: none;
         }
 
+        details>summary:focus-visible {
+            outline: 3px solid #4f46e5;
+            outline-offset: 4px;
+        }
+
         .chevron {
             transition: transform 0.2s ease-in-out;
         }
@@ -148,7 +153,7 @@
                 </div>
                 <div class="space-y-2">
                     <!-- Video accordions -->
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Schedule Action With Gemini <span
@@ -158,13 +163,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1Kc2V6UCrV9K5w9ziziRsAwP6xJTKyfB4/embed"
-                                    width="640" height="480" allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Schedule Action With Gemini"
+                                    data-src="https://drive.google.com/file/d/1Kc2V6UCrV9K5w9ziziRsAwP6xJTKyfB4/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1Kc2V6UCrV9K5w9ziziRsAwP6xJTKyfB4/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Start With Google Flows Using Gemini <span
@@ -174,13 +186,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1gjiWFxBg08WymUPNH2sRq6S9gk5xloLE/embed"
-                                    width="640" height="480" allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Start With Google Flows Using Gemini"
+                                    data-src="https://drive.google.com/file/d/1gjiWFxBg08WymUPNH2sRq6S9gk5xloLE/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1gjiWFxBg08WymUPNH2sRq6S9gk5xloLE/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Start using Gemini and general prompting <span
@@ -190,13 +209,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1mfJbDJcXYyEQuZHm4CYMVuZrhKbGsbEo/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Start using Gemini and general prompting"
+                                    data-src="https://drive.google.com/file/d/1mfJbDJcXYyEQuZHm4CYMVuZrhKbGsbEo/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1mfJbDJcXYyEQuZHm4CYMVuZrhKbGsbEo/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Using Gemini App <span
@@ -206,13 +232,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1TKwELbbQBWF8Famt6fbAUQma6POdw2Yz/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Using Gemini App"
+                                    data-src="https://drive.google.com/file/d/1TKwELbbQBWF8Famt6fbAUQma6POdw2Yz/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1TKwELbbQBWF8Famt6fbAUQma6POdw2Yz/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Gemini in Gmail and Google Chat <span
@@ -222,13 +255,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/10H_fL0bKVsB-cObFUD5ObETnWJdEMMNY/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Gemini in Gmail and Google Chat"
+                                    data-src="https://drive.google.com/file/d/10H_fL0bKVsB-cObFUD5ObETnWJdEMMNY/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/10H_fL0bKVsB-cObFUD5ObETnWJdEMMNY/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Gemini in Google Docs <span
@@ -238,13 +278,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1pz_vjiJtunaRGHt0BloQEZVkM_g6zFmk/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Gemini in Google Docs"
+                                    data-src="https://drive.google.com/file/d/1pz_vjiJtunaRGHt0BloQEZVkM_g6zFmk/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1pz_vjiJtunaRGHt0BloQEZVkM_g6zFmk/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Gemini in Google Sheets <span
@@ -254,13 +301,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1CQglvTtEdKphRetUT2WHJ8p2K1XHY4DX/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Gemini in Google Sheets"
+                                    data-src="https://drive.google.com/file/d/1CQglvTtEdKphRetUT2WHJ8p2K1XHY4DX/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1CQglvTtEdKphRetUT2WHJ8p2K1XHY4DX/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Gemini in Google Drive <span
@@ -270,13 +324,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1FDDA532EYydnecDmxbM7w49_w5vmSkOJ/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Gemini in Google Drive"
+                                    data-src="https://drive.google.com/file/d/1FDDA532EYydnecDmxbM7w49_w5vmSkOJ/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1FDDA532EYydnecDmxbM7w49_w5vmSkOJ/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>NotebookLM Plus <span
@@ -286,13 +347,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1_7rdXgRGveGDPImEZfAbZh3DL-pTUl1Y/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="NotebookLM Plus"
+                                    data-src="https://drive.google.com/file/d/1_7rdXgRGveGDPImEZfAbZh3DL-pTUl1Y/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1_7rdXgRGveGDPImEZfAbZh3DL-pTUl1Y/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
-                    <details class="group">
+                    <details class="group" data-video-accordion>
                         <summary
                             class="flex items-center justify-between p-3 font-semibold text-gray-700 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors">
                             <span>Convert RandstadGPT Genies to Gemini Gems <span
@@ -302,10 +370,17 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg></summary>
-                        <div class="p-4 mt-2">
-                            <div class="iframe-container rounded-lg"><iframe
-                                    src="https://drive.google.com/file/d/1iUCn1lbI4-evB_GvkVWK9QU2Wz_A16IM/embed"
-                                    allow="autoplay"></iframe></div>
+                        <div class="p-4 mt-2 space-y-3">
+                            <div class="iframe-container rounded-lg bg-black shadow-inner"><iframe
+                                    title="Convert RandstadGPT Genies to Gemini Gems"
+                                    data-src="https://drive.google.com/file/d/1iUCn1lbI4-evB_GvkVWK9QU2Wz_A16IM/preview"
+                                    allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                            <p class="text-sm text-gray-500">If the embedded player doesn't load, <a
+                                    href="https://drive.google.com/file/d/1iUCn1lbI4-evB_GvkVWK9QU2Wz_A16IM/preview"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-600 hover:text-indigo-500 underline">watch this video on Google
+                                    Drive</a>.</p>
                         </div>
                     </details>
                 </div>
@@ -624,6 +699,37 @@
 
     <script src="../shared/scripts/scroll-to-top.js" defer></script>
     <script src="../shared/scripts/breadcrumb-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('[data-video-accordion]');
+
+            accordions.forEach((accordion) => {
+                const iframe = accordion.querySelector('iframe[data-src]');
+
+                if (!iframe) {
+                    return;
+                }
+
+                const ensureLoaded = () => {
+                    if (!iframe.src) {
+                        iframe.src = iframe.dataset.src;
+                    }
+                };
+
+                if (accordion.open) {
+                    ensureLoaded();
+                }
+
+                accordion.addEventListener('toggle', () => {
+                    if (accordion.open) {
+                        ensureLoaded();
+                    } else if (iframe.src) {
+                        iframe.removeAttribute('src');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
