@@ -135,36 +135,54 @@
                         <span class="text-lg font-medium text-indigo-600 hidden group-open:inline">Click to collapse</span>
                     </summary>
                     <div id="form-container" class="mt-6 border-t pt-6">
-                        <!-- Hidden iframe to handle form submission -->
-                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-                        
-                        <form id="ideaForm" class="space-y-4" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse" method="POST" target="hidden_iframe">
-                            <div>
-                                <label for="ideaTitle" class="block text-sm font-medium text-gray-700 mb-1">Idea Title</label>
-                                <input type="text" id="ideaTitle" name="entry.1078896178" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Automate Weekly Compliance Reports">
-                            </div>
-                            <div>
-                                <label for="ideaDescription" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                                <textarea id="ideaDescription" name="entry.1763728616" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Explain the problem this idea solves, how it would work, and its potential benefits."></textarea>
-                            </div>
-                            <div>
-                                <label for="businessUnit" class="block text-sm font-medium text-gray-700 mb-1">Business Unit</label>
-                                <select id="businessUnit" name="entry.1453672440" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-white">
-                                    <option value="">Select your business unit...</option>
-                                    <option value="RPO">RPO</option>
-                                    <option value="MSP">MSP</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Compliance">Compliance</option>
-                                    <option value="Interview Scheduling">Interview Scheduling</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div class="text-right">
-                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Submit Idea
-                                </button>
-                            </div>
-                        </form>
+                        <!-- Hidden iframe kept elsewhere on page -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessMessage();}"></iframe>
+
+<form id="ideaForm"
+      class="space-y-4"
+      action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse"
+      method="POST"
+      target="hidden_iframe">
+
+  <div>
+    <label for="ideaTitle" class="block text-sm font-medium text-gray-700 mb-1">Idea Title</label>
+    <input type="text"
+           id="ideaTitle"
+           name="entry.1078896178"
+           required
+           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+           placeholder="e.g., Automate Weekly Compliance Reports">
+  </div>
+
+  <div>
+    <label for="ideaDescription" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+    <textarea id="ideaDescription"
+              name="entry.1763728616"
+              rows="4"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              placeholder="Explain the problem this idea solves, how it would work, and its potential benefits."></textarea>
+  </div>
+
+  <div>
+    <label for="businessUnit" class="block text-sm font-medium text-gray-700 mb-1">Business Unit</label>
+    <select id="businessUnit" name="entry.1453672440" required class="w-full px-3 py-2 border rounded-md bg-white">
+      <option value="">Select your business unit...</option>
+      <option value="RPO">RPO</option>
+      <option value="MSP">MSP</option>
+      <option value="Admin">Admin</option>
+      <option value="Compliance">Compliance</option>
+      <option value="Interview Scheduling">Interview Scheduling</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <div class="text-right">
+    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+      Submit Idea
+    </button>
+  </div>
+</form>
 
                         <!-- Success Message (Hidden by default) -->
                         <div id="successMessage" class="hidden mt-6 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
@@ -570,3 +588,4 @@
 </body>
 
 </html>
+
