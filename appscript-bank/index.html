@@ -135,10 +135,8 @@
                         <span class="text-lg font-medium text-indigo-600 hidden group-open:inline">Click to collapse</span>
                     </summary>
                     <div id="form-container" class="mt-6 border-t pt-6">
-                        <!-- Hidden iframe to handle form submission -->
-                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessMessage();}"></iframe>
                         
-                        <form id="ideaForm" class="space-y-4" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse" method="POST" target="hidden_iframe">
+                        <form id="ideaForm" class="space-y-4" action="#" method="POST">
                             <div>
                                 <label for="ideaTitle" class="block text-sm font-medium text-gray-700 mb-1">Idea Title</label>
                                 <input type="text" id="ideaTitle" name="entry.651560204" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Automate Weekly Compliance Reports">
@@ -160,7 +158,7 @@
                                 </select>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button type="submit" id="submitBtn" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Submit Idea
                                 </button>
                             </div>
@@ -448,15 +446,39 @@
             document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Make showSuccessMessage available globally for the iframe onload
+        // Make showSuccessMessage available globally
         window.showSuccessMessage = showSuccessMessage;
         
-        // Handle form submission
+        // Handle form submission with fetch (CSP-safe)
         if (ideaForm) {
-            ideaForm.addEventListener('submit', function(e) {
-                window.submitted = true;
-                // Form will submit to Google Forms automatically
-                // Success message will show when iframe loads
+            ideaForm.addEventListener('submit', async function(e) {
+                e.preventDefault();  // Prevent default form submit (bypasses CSP)
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+
+                const formData = new FormData(ideaForm);
+                const googleFormUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse';
+
+                try {
+                    const response = await fetch(googleFormUrl, {
+                        method: 'POST',
+                        body: formData,
+                        credentials: 'include'  // Sends cookies/auth for Google sign-in
+                    });
+
+                    if (response.ok || response.redirected) {  // Google often redirects on success
+                        showSuccessMessage();
+                    } else {
+                        throw new Error('Submission failed');
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    alert('Submission failed. Please ensure you\'re signed in to Google and try again. (Check console for details)');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
             });
         }
 
@@ -557,11 +579,7 @@
     });
 </script>
 
-    <div id="footer-placeholder"></div>
-    <script src="../shared/scripts/footer.js" defer></script>
     <script src="../shared/scripts/breadcrumb-nav.js"></script>
 </body>
 
 </html>
-
-
