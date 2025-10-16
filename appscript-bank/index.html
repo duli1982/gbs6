@@ -135,8 +135,10 @@
                         <span class="text-lg font-medium text-indigo-600 hidden group-open:inline">Click to collapse</span>
                     </summary>
                     <div id="form-container" class="mt-6 border-t pt-6">
+                        <!-- Hidden iframe to handle form submission -->
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
                         
-                        <form id="ideaForm" class="space-y-4" action="#" method="POST">
+                        <form id="ideaForm" class="space-y-4" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse" method="POST" target="hidden_iframe">
                             <div>
                                 <label for="ideaTitle" class="block text-sm font-medium text-gray-700 mb-1">Idea Title</label>
                                 <input type="text" id="ideaTitle" name="entry.651560204" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Automate Weekly Compliance Reports">
@@ -427,157 +429,126 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const ideaForm = document.getElementById('ideaForm');
-        const container = document.getElementById('idea-cards-container');
-        const filterContainer = document.getElementById('filter-container');
-        const noIdeasMessage = document.getElementById('no-ideas-message');
-        
-        // Modal elements
-        const videoModal = document.getElementById('video-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const modalVideoContainer = document.getElementById('modal-video-container');
-        const modalTitle = document.getElementById('modal-title');
-        
-        // --- Form Submission Logic ---
-        function showSuccessMessage() {
-            document.getElementById('ideaForm').style.display = 'none';
-            document.getElementById('successMessage').classList.remove('hidden');
-            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Make showSuccessMessage available globally
-        window.showSuccessMessage = showSuccessMessage;
-        
-        // Handle form submission with fetch (CSP-safe)
-        if (ideaForm) {
-            ideaForm.addEventListener('submit', async function(e) {
-                e.preventDefault();  // Prevent default form submit (bypasses CSP)
-                const submitBtn = document.getElementById('submitBtn');
-                const originalText = submitBtn.textContent;
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Submitting...';
-
-                const formData = new FormData(ideaForm);
-                const googleFormUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse';
-
-                try {
-                    const response = await fetch(googleFormUrl, {
-                        method: 'POST',
-                        body: formData,
-                        credentials: 'include'  // Sends cookies/auth for Google sign-in
-                    });
-
-                    if (response.ok || response.redirected) {  // Google often redirects on success
-                        showSuccessMessage();
-                    } else {
-                        throw new Error('Submission failed');
-                    }
-                } catch (error) {
-                    console.error('Form submission error:', error);
-                    alert('Submission failed. Please ensure you\'re signed in to Google and try again. (Check console for details)');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                }
-            });
-        }
-
-        const checkNoIdeas = () => {
-            const visibleCards = container.querySelectorAll('.idea-card:not(.hidden)');
-            const totalCards = container.querySelectorAll('.idea-card').length;
-
-            if (totalCards === 0) {
-                noIdeasMessage.classList.remove('hidden');
-                noIdeasMessage.querySelector('h3').textContent = "No ideas yet";
-                noIdeasMessage.querySelector('p').textContent = "Submit an idea to get started!";
-            } else if (visibleCards.length === 0) {
-                noIdeasMessage.classList.remove('hidden');
-                noIdeasMessage.querySelector('h3').textContent = "No ideas match this filter";
-                noIdeasMessage.querySelector('p').textContent = "Try selecting another category or 'All'.";
-            } else {
-                noIdeasMessage.classList.add('hidden');
-            }
-        };
-        
-        if (filterContainer) {
-            filterContainer.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'BUTTON') return;
-                
-                const filter = e.target.dataset.filter;
-
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('bg-indigo-600', 'text-white');
-                    btn.classList.add('bg-white', 'text-gray-700');
-                });
-                e.target.classList.add('bg-indigo-600', 'text-white');
-                e.target.classList.remove('bg-white', 'text-gray-700');
-
-                document.querySelectorAll('.idea-card').forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
-                checkNoIdeas();
-            });
-        }
-
-        // --- Modal Logic ---
-        function openModal(videoSrc, title) {
-            modalVideoContainer.innerHTML = '';
-            const iframe = document.createElement('iframe');
-            iframe.src = videoSrc;
-            iframe.setAttribute('allow', 'autoplay');
-            iframe.setAttribute('frameborder', '0');
-            iframe.setAttribute('allowfullscreen', '');
-            modalVideoContainer.appendChild(iframe);
+        document.addEventListener('DOMContentLoaded', () => {
+            const ideaForm = document.getElementById('ideaForm');
+            const container = document.getElementById('idea-cards-container');
+            const filterContainer = document.getElementById('filter-container');
+            const noIdeasMessage = document.getElementById('no-ideas-message');
             
-            modalTitle.textContent = title;
-            videoModal.classList.remove('hidden');
-            setTimeout(() => {
-                videoModal.classList.remove('opacity-0');
-                videoModal.querySelector('.modal-content').classList.remove('-translate-y-10');
-            }, 10);
-        }
+            // Modal elements
+            const videoModal = document.getElementById('video-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const modalVideoContainer = document.getElementById('modal-video-container');
+            const modalTitle = document.getElementById('modal-title');
+            
+            // --- Form Submission Logic ---
+            if (ideaForm) {
+                ideaForm.addEventListener('submit', function(e) {
+                    // Set a timeout to show success message after form submits
+                    setTimeout(() => {
+                        document.getElementById('ideaForm').style.display = 'none';
+                        document.getElementById('successMessage').classList.remove('hidden');
+                        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                    }, 1000);
+                });
+            }
 
-        function closeModal() {
-            videoModal.classList.add('opacity-0');
-            videoModal.querySelector('.modal-content').classList.add('-translate-y-10');
-            setTimeout(() => {
-                videoModal.classList.add('hidden');
+            const checkNoIdeas = () => {
+                const visibleCards = container.querySelectorAll('.idea-card:not(.hidden)');
+                const totalCards = container.querySelectorAll('.idea-card').length;
+
+                if (totalCards === 0) {
+                    noIdeasMessage.classList.remove('hidden');
+                    noIdeasMessage.querySelector('h3').textContent = "No ideas yet";
+                    noIdeasMessage.querySelector('p').textContent = "Submit an idea to get started!";
+                } else if (visibleCards.length === 0) {
+                    noIdeasMessage.classList.remove('hidden');
+                    noIdeasMessage.querySelector('h3').textContent = "No ideas match this filter";
+                    noIdeasMessage.querySelector('p').textContent = "Try selecting another category or 'All'.";
+                } else {
+                    noIdeasMessage.classList.add('hidden');
+                }
+            };
+            
+            if (filterContainer) {
+                filterContainer.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'BUTTON') return;
+                    
+                    const filter = e.target.dataset.filter;
+
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-white', 'text-gray-700');
+                    });
+                    e.target.classList.add('bg-indigo-600', 'text-white');
+                    e.target.classList.remove('bg-white', 'text-gray-700');
+
+                    document.querySelectorAll('.idea-card').forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                    checkNoIdeas();
+                });
+            }
+
+            // --- Modal Logic ---
+            function openModal(videoSrc, title) {
                 modalVideoContainer.innerHTML = '';
-            }, 200);
-        }
+                const iframe = document.createElement('iframe');
+                iframe.src = videoSrc;
+                iframe.setAttribute('allow', 'autoplay');
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allowfullscreen', '');
+                modalVideoContainer.appendChild(iframe);
+                
+                modalTitle.textContent = title;
+                videoModal.classList.remove('hidden');
+                setTimeout(() => {
+                    videoModal.classList.remove('opacity-0');
+                    videoModal.querySelector('.modal-content').classList.remove('-translate-y-10');
+                }, 10);
+            }
 
-        if (container) {
-            container.addEventListener('click', (e) => {
-                const button = e.target.closest('.watch-demo-btn');
-                if (button) {
-                    const videoSrc = button.dataset.videoSrc;
-                    const card = button.closest('.idea-card');
-                    const title = card.querySelector('h3').textContent;
-                    openModal(videoSrc, title);
-                }
-            });
-        }
+            function closeModal() {
+                videoModal.classList.add('opacity-0');
+                videoModal.querySelector('.modal-content').classList.add('-translate-y-10');
+                setTimeout(() => {
+                    videoModal.classList.add('hidden');
+                    modalVideoContainer.innerHTML = '';
+                }, 200);
+            }
 
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', closeModal);
-        }
-        if (videoModal) {
-            videoModal.addEventListener('click', (e) => {
-                if (e.target === videoModal) {
-                    closeModal();
-                }
-            });
-        }
-        
-        if (noIdeasMessage) {
-            checkNoIdeas();
-        }
-    });
-</script>
+            if (container) {
+                container.addEventListener('click', (e) => {
+                    const button = e.target.closest('.watch-demo-btn');
+                    if (button) {
+                        const videoSrc = button.dataset.videoSrc;
+                        const card = button.closest('.idea-card');
+                        const title = card.querySelector('h3').textContent;
+                        openModal(videoSrc, title);
+                    }
+                });
+            }
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            if (videoModal) {
+                videoModal.addEventListener('click', (e) => {
+                    if (e.target === videoModal) {
+                        closeModal();
+                    }
+                });
+            }
+            
+            if (noIdeasMessage) {
+                checkNoIdeas();
+            }
+        });
+    </script>
 
     <script src="../shared/scripts/breadcrumb-nav.js"></script>
 </body>
