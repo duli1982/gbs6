@@ -17,10 +17,9 @@
       font-src 'self' https://fonts.gstatic.com;
       img-src 'self' data: https:;
       connect-src 'self' https://generativelanguage.googleapis.com;
-      frame-src 'self' https://drive.google.com;
       frame-ancestors 'none';
       base-uri 'self';
-      form-action 'self' https://docs.google.com/forms/u/0/d/e/1FAIpQLSelwbgIYE0mtrU9m2HUKAOyy3-Nt4HrHAoLzLoEFGDCfaZ5MA/formResponse https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse;
+      form-action 'self';
       upgrade-insecure-requests;
     '''
 
