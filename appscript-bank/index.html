@@ -157,8 +157,8 @@
                             collapse</span>
                     </summary>
                     <div id="form-container" class="mt-6 border-t pt-6">
-                        <!-- Hidden iframe to handle form submission -->
-                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                        <!-- Hidden iframe to handle form submission - FIXED: Added onload attribute -->
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessMessage();}"></iframe>
 
                         <form id="ideaForm" class="space-y-4"
                             action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse"
@@ -632,9 +632,20 @@
     </div>
 
     <script>
+        // FIXED: Moved submitted variable to global scope
+        var submitted = false;
+
+        // Function to show success message after form submission
+        function showSuccessMessage() {
+            if (submitted) {
+                document.getElementById('ideaForm').style.display = 'none';
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const ideaForm = document.getElementById('ideaForm');
-            const hiddenIframe = document.getElementById('hidden_iframe');
             const container = document.getElementById('idea-cards-container');
             const filterContainer = document.getElementById('filter-container');
             const noIdeasMessage = document.getElementById('no-ideas-message');
@@ -646,30 +657,16 @@
             const modalTitle = document.getElementById('modal-title');
 
             // --- Form Submission Logic ---
-            var submitted = false;
-
-            // Function to show success message after form submission
-            function showSuccessMessage() {
-                if (submitted) {
-                    document.getElementById('ideaForm').style.display = 'none';
-                    document.getElementById('successMessage').classList.remove('hidden');
-                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-
-            // Handle form submission
+            // Handle form submission - FIXED: Simplified and moved callback to iframe onload attribute
             if (ideaForm) {
                 ideaForm.addEventListener('submit', function () {
                     submitted = true;
                     // Form will submit to Google Forms automatically
-                    // Success message will show when iframe loads
+                    // Success message will show when iframe loads (via onload attribute)
                 });
             }
 
-            if (hiddenIframe) {
-                hiddenIframe.addEventListener('load', showSuccessMessage);
-            }
-
+            // --- Check for No Ideas ---
             const checkNoIdeas = () => {
                 const visibleCards = container.querySelectorAll('.idea-card:not(.hidden)');
                 const totalCards = container.querySelectorAll('.idea-card').length;
@@ -687,6 +684,7 @@
                 }
             };
 
+            // --- Filter Logic ---
             if (filterContainer) {
                 filterContainer.addEventListener('click', (e) => {
                     if (e.target.tagName !== 'BUTTON') return;
