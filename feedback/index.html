@@ -53,7 +53,6 @@
 
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Breadcrumb Navigation -->
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <div class="breadcrumb-wrapper">
             <div class="breadcrumb-nav">
@@ -82,7 +81,6 @@
         </div>
     </nav>
 
-    <!-- Navigation -->
     <nav class="bg-white border-b border-gray-200">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
@@ -101,12 +99,10 @@
 
         <main class="max-w-3xl mx-auto">
             <div class="feedback-form p-8">
-                <!-- Hidden iframe to handle form submission -->
-                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessMessage();}"></iframe>
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
                 <form id="feedbackForm" class="space-y-6" action="https://docs.google.com/forms/d/e/1FAIpQLSelwbgIYE0mtrU9m2HUKAOyy3-Nt4HrHAoLzLoEFGDCfaZ5MA/formResponse" method="POST" target="hidden_iframe">
 
-                    <!-- Feedback Type -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Feedback Type</label>
                         <select name="entry.1374134785" class="form-input w-full px-4 py-3 text-gray-700" required>
@@ -120,7 +116,6 @@
                         </select>
                     </div>
 
-                    <!-- Related Page/Section -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Related Page/Section
                             (Optional)</label>
@@ -137,33 +132,29 @@
                         </select>
                     </div>
 
-                    <!-- Name -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Your Name</label>
                         <input type="text" name="entry.367209013" class="form-input w-full px-4 py-3 text-gray-700"
                             placeholder="Enter your name" required>
                     </div>
 
-                    <!-- Email -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
                         <input type="email" name="entry.1285442051" class="form-input w-full px-4 py-3 text-gray-700"
                             placeholder="your.email@randstad.com" required>
                     </div>
 
-                    <!-- Department/Role -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Department/Role (Optional)</label>
                         <input type="text" name="entry.183746620" class="form-input w-full px-4 py-3 text-gray-700"
                             placeholder="e.g., RPO, GBS Leadership, Sourcing">
                     </div>
 
-                    <!-- Rating -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Overall Experience Rating</label>
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center space-x-1">
-                                <input type="radio" name="entry.851188432" value="Excellent" id="rating5" class="text-blue-600">
+                                <input type="radio" name="entry.851188432" value="Excellent" id="rating5" class="text-blue-600" **required**>
                                 <label for="rating5" class="text-sm text-gray-700">Excellent</label>
                             </div>
                             <div class="flex items-center space-x-1">
@@ -185,7 +176,6 @@
                         </div>
                     </div>
 
-                    <!-- Feedback Message -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Your Feedback</label>
                         <textarea name="entry.2131644124" rows="6"
@@ -194,7 +184,6 @@
                             required></textarea>
                     </div>
 
-                    <!-- Suggestions for Improvement -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Suggestions for Improvement
                             (Optional)</label>
@@ -203,7 +192,6 @@
                             placeholder="What specific improvements would you like to see?"></textarea>
                     </div>
 
-                    <!-- Submit Button -->
                     <div class="pt-4">
                         <button type="submit" class="submit-btn w-full py-4 px-6 text-white font-semibold rounded-lg">
                             Submit Feedback
@@ -212,7 +200,6 @@
 
                 </form>
 
-                <!-- Success Message (Hidden by default) -->
                 <div id="successMessage" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                     <div class="flex items-center">
                         <span class="text-green-600 mr-2">✓</span>
@@ -222,7 +209,6 @@
                 </div>
             </div>
 
-            <!-- Additional Information -->
             <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-lg border border-gray-200">
                     <h3 class="google-sans text-lg font-bold text-gray-900 mb-3">Quick Response</h3>
@@ -251,23 +237,32 @@
     <script src="../shared/scripts/footer.js" defer></script>
 
     <script>
-        var submitted = false;
+        // The submitted flag is now managed within the event listeners for better control
+        let submitted = false;
+        const feedbackForm = document.getElementById('feedbackForm');
+        const hiddenIframe = document.getElementById('hidden_iframe');
+        const successMessage = document.getElementById('successMessage');
 
-        // Function to show success message after form submission
+        // Function to show success message and hide the form
         function showSuccessMessage() {
+            // Check the flag to ensure it's a post-submission load, not an initial load
             if (submitted) {
-                document.getElementById('feedbackForm').style.display = 'none';
-                document.getElementById('successMessage').classList.remove('hidden');
-                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                feedbackForm.style.display = 'none';
+                successMessage.classList.remove('hidden');
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                // Reset flag in case you want to allow a later form reset/display
+                submitted = false;
             }
         }
 
-        // Handle form submission
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        // 1. Mark the form as submitted when the user clicks submit
+        feedbackForm.addEventListener('submit', function(e) {
             submitted = true;
-            // Form will submit to Google Forms automatically
-            // Success message will show when iframe loads
+            // The form will now submit to Google Forms via the hidden_iframe target
         });
+
+        // 2. Listen for the iframe to load its content (which happens after Google Forms replies)
+        hiddenIframe.addEventListener('load', showSuccessMessage);
     </script>
 
 </body>
