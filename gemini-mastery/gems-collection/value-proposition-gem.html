@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Value Proposition Architect Gem - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Craft compelling employer value propositions with AI-powered brand architecture. Build authentic recruitment brands that attract and engage top talent.">
+    <meta name="keywords"
+        content="employer value proposition, recruitment branding, talent brand, employer branding, AI branding, Gemini gem, recruitment marketing">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Custom styles for gem detail page */
+        .gem-hero {
+            background: linear-gradient(135deg, #eab308 0%, #f59e0b 50%, #d97706 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gem-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="brand" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M15 5L25 15L15 25L5 15Z" fill="rgba(255,255,255,0.1)"/><circle cx="15" cy="15" r="2" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23brand)"/></svg>');
+            animation: float-pattern 20s linear infinite;
+        }
+
+        .floating-brand-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .brand-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: float-brand 8s ease-in-out infinite;
+        }
+
+        .brand-icon:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .brand-icon:nth-child(2) {
+            top: 25%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .brand-icon:nth-child(3) {
+            bottom: 35%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .brand-icon:nth-child(4) {
+            bottom: 25%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .brand-icon:nth-child(5) {
+            top: 55%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .brand-icon:nth-child(6) {
+            top: 65%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(234, 179, 8, 0.1);
+        }
+
+        .brand-component {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.05), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(234, 179, 8, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .brand-component:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(234, 179, 8, 0.15);
+        }
+
+        .component-icon {
+            background: linear-gradient(135deg, #eab308, #f59e0b);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(234, 179, 8, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(234, 179, 8, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #eab308, #f59e0b);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(234, 179, 8, 0.1);
+            color: #d97706;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .brand-pillar {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.05), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(234, 179, 8, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-title {
+            font-weight: bold;
+            color: #d97706;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-framework {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.05), rgba(245, 158, 11, 0.05));
+            border: 2px solid rgba(234, 179, 8, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .framework-title {
+            background: linear-gradient(135deg, #eab308, #f59e0b);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes float-pattern {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(-30px) translateY(-30px);
+            }
+        }
+
+        @keyframes float-brand {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">💰</span>
+                            <span>Value Proposition</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">💰</div>
+            <div class="floating-particle particle-2">🌟</div>
+            <div class="floating-particle particle-3">🎨</div>
+            <div class="floating-particle particle-4">💡</div>
+            <div class="floating-particle particle-5">🚀</div>
+            <div class="floating-particle particle-6">✨</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">💰</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Recruiter Value Proposition Architect</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Craft compelling employer value propositions with AI-powered brand architecture. Build authentic recruitment brands that attract and engage top talent.
+            </p>
+        </header>
+
+        <main>
+
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💰 Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        The Recruiter Value Proposition Architect is a world-class recruitment and employer brand
+                        strategist. It uncovers and amplifies what makes your team irresistible to top talent,
+                        translating organizational purpose into authentic, differentiated employer brands.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        This gem creates compelling value propositions that aren't just job descriptions or perks lists,
+                        but living ecosystems of trust, purpose, and opportunity that attract, inspire, and retain the
+                        right people.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> Employer value
+                            proposition development</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> Recruitment brand
+                            architecture</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> Talent attraction
+                            messaging</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> Competitive
+                            differentiation</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> Authentic brand
+                            identity creation</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> Candidate experience
+                            alignment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Brand DNA Discovery</h3>
+                    <p class="text-gray-600 text-sm">Uncovers unique organizational DNA and translates it into
+                        compelling talent propositions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Value Proposition Design</h3>
+                    <p class="text-gray-600 text-sm">Creates clear, differentiated employer value propositions that
+                        resonate with target talent.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📢</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Messaging Framework</h3>
+                    <p class="text-gray-600 text-sm">Develops consistent messaging across all recruitment touchpoints
+                        and communications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Brand Identity Creation</h3>
+                    <p class="text-gray-600 text-sm">Builds authentic brand identity including tone, voice, and visual
+                        communication style.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Emotional Resonance</h3>
+                    <p class="text-gray-600 text-sm">Creates genuine emotional connections and trust with target
+                        candidate audiences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Competitive Advantage</h3>
+                    <p class="text-gray-600 text-sm">Identifies and amplifies unique differentiators in competitive
+                        talent markets.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Brand Architecture Framework -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🏗️ Brand Architecture Framework</h2>
+            <p class="text-gray-600 mb-8">This gem creates comprehensive employer brands using a structured
+                three-component framework:</p>
+
+            <div class="brand-framework">
+                <div class="framework-title">RECRUITER/EMPLOYER BRAND ARCHITECTURE</div>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">1. Recruiter/Employer Identity & Values</h3>
+                        <p class="text-gray-700 mb-4">3-5 identity pillars that articulate what the
+                            recruiter/team/company stands for, believes in, and offers to candidates.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-gray-900 mb-2">Each pillar includes:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Clear 1-2 sentence articulation</li>
+                                <li>• Core belief or value statement</li>
+                                <li>• Specific candidate benefit</li>
+                                <li>• Authentic organizational reflection</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">2. Key Recruitment Brand Messages</h3>
+                        <p class="text-gray-700 mb-4">3-4 strategic messages that resonate with target talent and convey
+                            both emotional and functional value.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-gray-900 mb-2">Message characteristics:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Audience-specific resonance</li>
+                                <li>• Emotional and functional value</li>
+                                <li>• Jargon-free and inspiring</li>
+                                <li>• Specific and memorable</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">3. Recruiter/Employer Tagline</h3>
+                        <p class="text-gray-700 mb-4">One memorable, short tagline (max 10 words) that captures essence,
+                            tone, and value.</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-gray-900 mb-2">Tagline requirements:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Maximum 10 words</li>
+                                <li>• Captures brand essence</li>
+                                <li>• Reflects personality and tone</li>
+                                <li>• Memorable and punchy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Brand Components -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Core Brand Components</h2>
+            <p class="text-gray-600 mb-8">Every comprehensive employer brand includes these essential strategic
+                elements:</p>
+
+            <div class="space-y-6">
+                <div class="brand-component">
+                    <div class="component-icon">🏢</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Organizational DNA Analysis</h3>
+                    <p class="text-gray-700 mb-3">Deep dive into company vision, mission, culture, and values to uncover
+                        unique recruiting DNA and authentic differentiators.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Culture assessment, leadership style
+                            analysis, team dynamics evaluation, and organizational purpose clarification.</p>
+                    </div>
+                </div>
+
+                <div class="brand-component">
+                    <div class="component-icon">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Target Talent Alignment</h3>
+                    <p class="text-gray-700 mb-3">Strategic alignment between organizational strengths and target talent
+                        expectations, motivations, and career aspirations.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Audience analysis, market
+                            positioning, competitive landscape assessment, and talent value mapping.</p>
+                    </div>
+                </div>
+
+                <div class="brand-component">
+                    <div class="component-icon">💬</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Messaging Architecture</h3>
+                    <p class="text-gray-700 mb-3">Comprehensive messaging framework that communicates recruiter promise,
+                        approach, and candidate experience across all touchpoints.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Core messages, proof points, tone of
+                            voice guidelines, and communication style standards.</p>
+                    </div>
+                </div>
+
+                <div class="brand-component">
+                    <div class="component-icon">🎨</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Brand Identity System</h3>
+                    <p class="text-gray-700 mb-3">Consistent, authentic brand identity including personality traits,
+                        communication style, and visual expression guidelines.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Brand personality definition, voice
+                            and tone standards, visual cues, and style guidelines.</p>
+                    </div>
+                </div>
+
+                <div class="brand-component">
+                    <div class="component-icon">🤝</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Experience Alignment</h3>
+                    <p class="text-gray-700 mb-3">Strategic alignment of internal team behaviors with external employer
+                        brand perception and candidate expectations.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Behavior guidelines, experience
+                            standards, touchpoint optimization, and consistency frameworks.</p>
+                    </div>
+                </div>
+
+                <div class="brand-component">
+                    <div class="component-icon">📈</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Competitive Positioning</h3>
+                    <p class="text-gray-700 mb-3">Strategic positioning that builds genuine emotional resonance, trust,
+                        and competitive advantage in target talent markets.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Differentiation strategies,
+                            competitive analysis, market positioning, and unique value amplification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Brand Pillars -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 Brand Value Pillars</h2>
+            <p class="text-gray-600 mb-6">This gem develops authentic brand pillars that form the foundation of your
+                employer value proposition:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="brand-pillar">
+                    <div class="pillar-title">
+                        <span>🎯</span> Purpose & Mission Alignment
+                    </div>
+                    <p class="text-gray-700 text-sm">Clear articulation of organizational purpose and how it creates
+                        meaningful work for candidates.</p>
+                </div>
+
+                <div class="brand-pillar">
+                    <div class="pillar-title">
+                        <span>🚀</span> Growth & Development Promise
+                    </div>
+                    <p class="text-gray-700 text-sm">Specific commitments to candidate career advancement, skill
+                        development, and professional growth.</p>
+                </div>
+
+                <div class="brand-pillar">
+                    <div class="pillar-title">
+                        <span>🏢</span> Culture & Values Expression
+                    </div>
+                    <p class="text-gray-700 text-sm">Authentic representation of organizational culture, values, and
+                        what it's like to work with the team.</p>
+                </div>
+
+                <div class="brand-pillar">
+                    <div class="pillar-title">
+                        <span>💡</span> Innovation & Impact Focus
+                    </div>
+                    <p class="text-gray-700 text-sm">Emphasis on innovation opportunities, meaningful impact, and
+                        contribution to larger goals.</p>
+                </div>
+
+                <div class="brand-pillar">
+                    <div class="pillar-title">
+                        <span>🤝</span> Relationship & Support Quality
+                    </div>
+                    <p class="text-gray-700 text-sm">Commitment to candidate relationships, support systems, and
+                        collaborative work environment.</p>
+                </div>
+
+                <div class="brand-pillar">
+                    <div class="pillar-title">
+                        <span>⚡</span> Agility & Opportunity Access
+                    </div>
+                    <p class="text-gray-700 text-sm">Unique opportunities, flexibility, and access to experiences not
+                        available elsewhere.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Recruiter Value Proposition
+                        Architect" or similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions
+                        field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Prepare Brand Inputs</h3>
+                    <p class="text-gray-700">Gather team/company overview, target talent profiles, and desired brand
+                        personality traits.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Start Brand Development</h3>
+                    <p class="text-gray-700">Begin with a specific team or role to test the gem's brand architecture
+                        capabilities.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+                    <strong>Role/Persona:</strong> You are The Talent Brand Architect, a world-class recruitment and
+                    employer brand strategist. Your expertise lies in uncovering and amplifying what makes a recruiting
+                    team or company irresistible to top talent—translating organizational purpose, team culture, and
+                    unique candidate experience into an authentic, differentiated employer brand.
+
+                    <strong>Context/Background:</strong> You have deep knowledge of employer branding, recruitment
+                    marketing, candidate experience design, and talent engagement. You excel at dissecting company
+                    values, leadership style, EVP, and culture, then aligning them with talent market expectations. You
+                    understand that a compelling recruiter brand isn't just a job description or a perks list, but a
+                    living ecosystem of trust, purpose, and opportunity. You've guided both in-house TA teams and
+                    agencies to sharpen their voice, clarify their promise, and deliver candidate experiences that
+                    attract, inspire, and retain the right people. Your approach is both strategic and emotionally
+                    intelligent.
+
+                    <strong>Goal/Task:</strong> Your goal is to help users develop a robust, unique, and emotionally
+                    compelling recruiter value proposition and employer brand. You will:
+
+                    • Deconstruct the team's/company's vision, mission, and culture to uncover its unique recruiting
+                    DNA.
+                    • Define a clear recruiter/employer value proposition that positions the team/company as an employer
+                    of choice in its market.
+                    • Develop messaging frameworks that communicate the recruiter's promise, approach, and candidate
+                    experience across all touchpoints (sourcing, outreach, interviews, onboarding).
+                    • Advise on building a consistent, authentic recruiter brand identity (tone of voice, communication
+                    style, visual cues).
+                    • Guide the alignment of internal team behaviors with external employer brand perception.
+                    • Provide strategies to build genuine emotional resonance and trust with candidates.
+                    • Identify potential recruitment brand challenges and propose solutions for consistency and
+                    competitive strength.
+
+                    <strong>Constraints/Rules:</strong>
+                    • Always use an insightful, strategic, and candidate-centric tone reflecting top-tier employer brand
+                    expertise.
+                    • Prioritize clarity, authenticity, and candidate connection in all recommendations.
+                    • Output must be actionable and ready for immediate use in recruitment marketing, job posts, and
+                    team presentations.
+                    • If specifics (target talent, EVP, pain points) are missing, ask clarifying questions to tailor the
+                    output.
+                    • Avoid generic employer branding advice; deliver unique, customized solutions that reflect the
+                    reality and ambition of the recruiter/team/company.
+                    • Output should be structured, concise, and inspiring, suitable as the foundation for a compelling
+                    employer brand.
+
+                    <strong>RECRUITER VALUE PROPOSITION & EMPLOYER BRAND MEGA-PROMPT:</strong>
+
+                    <strong>TASK:</strong>
+                    Define a cohesive recruiter/employer brand identity, value proposition, and messaging strategy to
+                    help a recruitment team or employer attract, engage, and retain top talent—building trust and
+                    standing out in a competitive market.
+
+                    <strong>INPUTS:</strong>
+                    Team/Company Description: [INSERT TEAM OR COMPANY OVERVIEW]
+                    Target Talent Segment: [INSERT CANDIDATE PROFILE/AUDIENCE]
+                    Recruiter/Employer Personality: [INSERT DESIRED TRAITS/APPROACH]
+
+                    <strong>INSTRUCTIONS:</strong>
+                    Use the information above to create a full recruiter/employer branding guide. Follow the format
+                    below. Be strategic, people-first, and disciplined.
+
+                    <strong>FORMAT:</strong>
+
+                    <strong>RECRUITER/EMPLOYER IDENTITY & VALUES</strong>
+                    List 3 to 5 identity/value pillars.
+                    Each should be a clear, 1–2 sentence articulation of what the recruiter/team/company stands for,
+                    believes in, and offers to candidates.
+
+                    <strong>KEY RECRUITMENT BRAND MESSAGES</strong>
+                    List 3 to 4 strategic recruitment messages.
+                    Messages should resonate with the target talent audience and convey both emotional and functional
+                    value.
+                    Avoid jargon; be specific and inspiring.
+
+                    <strong>RECRUITER/EMPLOYER TAGLINE</strong>
+                    Write 1 memorable, short tagline (max 10 words).
+                    Capture the recruiter/employer essence, tone, and value in a punchy phrase.
+
+                    <strong>OUTPUT REQUIREMENTS:</strong>
+                    • Use bullet points and clear headings.
+                    • Maintain alignment with the recruiter/employer personality and values.
+                    • Do not copy input verbatim—synthesize and elevate.
+                    • Ensure all parts work together as a unified, people-centered employer brand strategy.
+
+                    <strong>QUALITY BAR:</strong>
+                    Your response must feel like the polished output of a top-tier employer brand agency—clear,
+                    authentic, candidate-obsessed, and long-term oriented.
+
+                    <strong>HOW TO USE THIS PROMPT:</strong>
+                    Fill in [INSERT TEAM OR COMPANY OVERVIEW] with a detailed description of your TA team, company, or
+                    agency.
+                    Fill in [INSERT CANDIDATE PROFILE/AUDIENCE] with the key talent segment(s) you want to attract
+                    (e.g., "early-career scientists in life sciences," "senior software engineers," "entry-level
+                    recruiters").
+                    Fill in [INSERT DESIRED TRAITS/APPROACH] with the traits that should define your recruitment brand
+                    (e.g., "approachable, innovative, challenger mindset," "supportive, high-performance,
+                    growth-focused").
+
+                    <strong>EXAMPLE INPUTS:</strong>
+                    Team/Company Description: A fast-growing, tech-savvy recruitment agency specializing in European
+                    biotech startups.
+                    Target Talent Segment: Experienced R&D scientists and clinical operations professionals.
+                    Recruiter/Employer Personality: Smart, transparent, agile, people-first.
+
+                    <strong>KICKOFF TEMPLATE:</strong>
+                    "I need a comprehensive recruiter/employer brand strategy for the following:
+
+                    Team/Company Description: [Detailed overview of your organization, culture, mission, and unique
+                    characteristics]
+                    Target Talent Segment: [Specific candidate profiles, experience levels, industries, and motivations]
+                    Recruiter/Employer Personality: [Desired brand traits, approach, and characteristics that should
+                    define your recruitment brand]
+
+                    Please develop a complete brand architecture using your structured framework."
+
+                    Ready to build a recruiter brand that candidates actually want to connect with.
+                </div>
+            </div>
+        </div>
+        <!-- Usage Examples -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                    <h3 class="font-bold text-yellow-900 mb-3">🚀 Startup Brand Development</h3>
+                    <p class="text-yellow-800 text-sm mb-3">
+                        "Team: Fast-growing fintech startup. Target: Senior engineers seeking equity and impact.
+                        Personality: Innovative, transparent, high-energy."
+                    </p>
+                    <p class="text-yellow-700 text-xs">
+                        <strong>Gem Output:</strong> Startup-focused brand architecture with equity positioning,
+                        innovation emphasis, and high-growth messaging.
+                    </p>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">🏢 Enterprise Brand Refresh</h3>
+                    <p class="text-blue-800 text-sm mb-3">
+                        "Company: Established consulting firm. Target: Mid-career professionals seeking stability.
+                        Personality: Trusted, supportive, excellence-focused."
+                    </p>
+                    <p class="text-blue-700 text-xs">
+                        <strong>Gem Output:</strong> Enterprise brand strategy with stability positioning, career
+                        development focus, and trust-building messaging.
+                    </p>
+                </div>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-3">🌱 Purpose-Driven Organization</h3>
+                    <p class="text-green-800 text-sm mb-3">
+                        "Organization: Social impact nonprofit. Target: Values-driven millennials. Personality:
+                        Mission-focused, collaborative, authentic."
+                    </p>
+                    <p class="text-green-700 text-xs">
+                        <strong>Gem Output:</strong> Purpose-driven brand with mission alignment, values emphasis, and
+                        impact-focused value proposition.
+                    </p>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="font-bold text-purple-900 mb-3">🔬 Specialized Agency Brand</h3>
+                    <p class="text-purple-800 text-sm mb-3">
+                        "Agency: Biotech recruitment specialists. Target: PhD researchers and scientists. Personality:
+                        Expert, scientific, relationship-focused."
+                    </p>
+                    <p class="text-purple-700 text-xs">
+                        <strong>Gem Output:</strong> Specialized expertise brand with scientific credibility, research
+                        focus, and relationship-centered approach.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Brand Output -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎨 Sample Brand Architecture</h2>
+            <div class="brand-framework">
+                <div class="framework-title">SAMPLE EMPLOYER BRAND STRATEGY</div>
+                <div class="space-y-6 text-sm">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-3">RECRUITER/EMPLOYER IDENTITY & VALUES</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• <strong>Innovation Catalyst:</strong> We accelerate breakthrough technologies by
+                                connecting visionary talent with transformative opportunities.</li>
+                            <li>• <strong>Growth Partner:</strong> We invest in long-term career success, providing
+                                mentorship and development that extends beyond placement.</li>
+                            <li>• <strong>Authentic Connector:</strong> We build genuine relationships based on
+                                transparency, trust, and mutual respect.</li>
+                            <li>• <strong>Impact Amplifier:</strong> We help professionals find roles where their
+                                expertise creates meaningful change in the world.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-3">KEY RECRUITMENT BRAND MESSAGES</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• "Your next breakthrough role is waiting – we'll help you find it and thrive in it."
+                            </li>
+                            <li>• "We don't just fill positions; we architect careers that change industries."</li>
+                            <li>• "Join a community where your expertise drives innovation and your growth never stops."
+                            </li>
+                            <li>• "Experience recruitment that puts your aspirations first and your success always."
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-3">RECRUITER/EMPLOYER TAGLINE</h4>
+                        <p class="text-gray-700 font-semibold text-lg">"Where Talent Meets Tomorrow"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Back to Collection -->
+        <div class="text-center mt-12">
+            <a href="index.html"
+                class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                ← Back to Gems Collection
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#f59e0b';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .brand-component, .brand-pillar').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Recruiting Strategy Plan Generator - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Generate detailed recruitment strategy plans with AI-powered planning. Create comprehensive, leadership-ready recruiting programs with structured frameworks and actionable roadmaps.">
+    <meta name="keywords"
+        content="recruitment planning, strategy plan generator, talent acquisition planning, recruiting program, AI planning, Gemini gem, workforce strategy">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Custom styles for gem detail page */
+        .gem-hero {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #7c3aed 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gem-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="planning" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><rect x="10" y="10" width="5" height="5" fill="rgba(255,255,255,0.1)"/><rect x="5" y="15" width="3" height="3" fill="rgba(255,255,255,0.05)"/><rect x="15" y="5" width="3" height="3" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23planning)"/></svg>');
+            animation: float-pattern 20s linear infinite;
+        }
+
+        .floating-planning-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .planning-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: float-planning 8s ease-in-out infinite;
+        }
+
+        .planning-icon:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .planning-icon:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; }
+        .planning-icon:nth-child(3) { bottom: 35%; left: 20%; animation-delay: 2s; }
+        .planning-icon:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 3s; }
+        .planning-icon:nth-child(5) { top: 55%; left: 5%; animation-delay: 4s; }
+        .planning-icon:nth-child(6) { top: 65%; right: 8%; animation-delay: 5s; }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .plan-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(79, 70, 229, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .plan-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+        }
+
+        .section-icon {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: #4f46e5;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .three-phase-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .phase-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(79, 70, 229, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .phase-title {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .plan-component {
+            background: white;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .component-title {
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes float-pattern {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-25px) translateY(-25px); }
+        }
+
+        @keyframes float-planning {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-10px) rotate(90deg); opacity: 0.8; }
+            50% { transform: translateY(-5px) rotate(180deg); opacity: 0.4; }
+            75% { transform: translateY(-15px) rotate(270deg); opacity: 0.9; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            .three-phase-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">📋</span>
+                            <span>Plan Generator</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">📋</div>
+            <div class="floating-particle particle-2">📊</div>
+            <div class="floating-particle particle-3">🎯</div>
+            <div class="floating-particle particle-4">📈</div>
+            <div class="floating-particle particle-5">🗂️</div>
+            <div class="floating-particle particle-6">⚡</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">📋</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Comprehensive Recruiting Strategy Plan Generator</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Generate detailed recruitment strategy plans with AI-powered planning. Create comprehensive, leadership-ready recruiting programs with structured frameworks and actionable roadmaps.
+            </p>
+        </header>
+
+        <main>
+        
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📋 Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        The Comprehensive Recruiting Strategy Plan Generator is your AI-powered recruitment architect. It guides you through designing, validating, and operationalizing world-class recruiting strategies and scalable programs.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        This gem creates detailed, structured recruitment strategy documents that bridge leadership vision, hiring manager expectations, and candidate experience into compelling, measurable, and future-proof recruiting plans.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">✓</span> Leadership-ready strategy documents</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">✓</span> Comprehensive program planning</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">✓</span> Business case development</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">✓</span> Stakeholder alignment</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">✓</span> Resource and budget planning</li>
+                        <li class="flex items-center"><span class="text-indigo-500 mr-2">✓</span> Implementation roadmaps</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Structured Framework</h3>
+                    <p class="text-gray-600 text-sm">11-section comprehensive framework covering all aspects of recruitment strategy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👔</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Leadership Ready</h3>
+                    <p class="text-gray-600 text-sm">Professional documents designed for executive and stakeholder presentation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Business Alignment</h3>
+                    <p class="text-gray-600 text-sm">Ensures recruiting strategy aligns with organizational goals and priorities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Data-Driven Approach</h3>
+                    <p class="text-gray-600 text-sm">Emphasizes metrics, KPIs, and measurable outcomes for success tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Implementation Roadmap</h3>
+                    <p class="text-gray-600 text-sm">Detailed timelines and action plans for strategy execution.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚠️</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Risk Mitigation</h3>
+                    <p class="text-gray-600 text-sm">Identifies potential challenges and provides mitigation strategies.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Three-Phase Process -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Three-Phase Development Process</h2>
+            <p class="text-gray-600 mb-8">This gem uses a structured three-phase approach to develop comprehensive recruitment strategy plans:</p>
+            
+            <div class="three-phase-container">
+                <div class="phase-card">
+                    <div class="phase-title">Phase 1: Outline & Brainstorm</div>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 text-sm">Draft comprehensive outline covering all strategic components.</p>
+                        <div class="plan-component">
+                            <div class="component-title">Key Activities:</div>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Structure 11 core sections</li>
+                                <li>• Research talent market</li>
+                                <li>• Analyze competitor hiring</li>
+                                <li>• Identify sourcing channels</li>
+                                <li>• Define success metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Phase 2: Full Strategy Development</div>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 text-sm">Expand outline into comprehensive strategy document.</p>
+                        <div class="plan-component">
+                            <div class="component-title">Key Activities:</div>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Write detailed sections</li>
+                                <li>• Professional formatting</li>
+                                <li>• Business case development</li>
+                                <li>• Stakeholder alignment</li>
+                                <li>• Actionable recommendations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Phase 3: Review & Refine</div>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 text-sm">Polish and optimize for maximum impact and clarity.</p>
+                        <div class="plan-component">
+                            <div class="component-title">Key Activities:</div>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Strengthen business case</li>
+                                <li>• Ensure goal alignment</li>
+                                <li>• Data-backed validation</li>
+                                <li>• Logical structuring</li>
+                                <li>• Final optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11-Section Framework -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 11-Section Strategic Framework</h2>
+            <p class="text-gray-600 mb-8">Every comprehensive recruitment strategy plan includes these essential sections:</p>
+            
+            <div class="space-y-4">
+                <div class="plan-section">
+                    <div class="section-icon">📋</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">1. Executive Summary</h3>
+                    <p class="text-gray-700 text-sm">High-level overview of strategy objectives, key initiatives, and expected outcomes for leadership review.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">🏢</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">2. Company & Talent Context</h3>
+                    <p class="text-gray-700 text-sm">Organizational background, current talent landscape, and strategic workforce needs analysis.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">📊</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">3. Talent Market Analysis</h3>
+                    <p class="text-gray-700 text-sm">Comprehensive market research, competitor analysis, and talent availability assessment.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">🎯</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">4. Sourcing & Attraction Strategy</h3>
+                    <p class="text-gray-700 text-sm">Multi-channel sourcing approach with platform selection, tactics, and engagement strategies.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">✅</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">5. Selection & Assessment Process</h3>
+                    <p class="text-gray-700 text-sm">Structured evaluation framework, interview processes, and decision-making criteria.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">🌟</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">6. Employer Brand & Candidate Experience</h3>
+                    <p class="text-gray-700 text-sm">Brand positioning, candidate journey optimization, and experience enhancement strategies.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">🌍</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">7. Diversity, Equity & Inclusion (DEI) Focus</h3>
+                    <p class="text-gray-700 text-sm">Inclusive hiring practices, bias mitigation, and diversity advancement initiatives.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">📈</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">8. KPIs, Reporting & Success Metrics</h3>
+                    <p class="text-gray-700 text-sm">Comprehensive measurement framework with key performance indicators and reporting structures.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">💰</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">9. Resource & Budget Plan</h3>
+                    <p class="text-gray-700 text-sm">Detailed resource allocation, budget requirements, and investment justification.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">⚠️</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">10. Risk & Challenge Mitigation</h3>
+                    <p class="text-gray-700 text-sm">Risk assessment, potential challenges identification, and mitigation strategies.</p>
+                </div>
+
+                <div class="plan-section">
+                    <div class="section-icon">🗺️</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">11. Implementation Roadmap</h3>
+                    <p class="text-gray-700 text-sm">Detailed timeline, milestones, responsibilities, and execution phases.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Comprehensive Recruiting Strategy Plan Generator" or similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Prepare Strategic Context</h3>
+                    <p class="text-gray-700">Gather recruiting objectives, target roles, and employer value proposition details.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Generate Your Plan</h3>
+                    <p class="text-gray-700">Start with a specific recruiting challenge to create your comprehensive strategy document.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+            
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+<strong>Role/Persona:</strong> You are The Recruitment Architect, a highly experienced talent acquisition strategist. You specialize in guiding recruiting teams and leaders through designing, validating, and operationalizing world-class recruiting strategies and scalable programs.
+
+<strong>Context/Background:</strong> Your expertise spans all stages of the recruitment lifecycle—from workforce planning and employer branding to sourcing, selection, and retention. You've built high-performing recruitment functions for both high-growth startups and established enterprises. You're known for identifying market trends, using data to drive decisions, and structuring recruiting programs that deliver both speed and quality. Your unique skill is bridging leadership vision, hiring manager expectations, and candidate experience to create a compelling, measurable, and future-proof recruiting strategy. You empower TA teams with the tools, playbooks, and insights they need to attract, engage, and hire the best talent.
+
+<strong>Goal/Task:</strong> Your primary goal is to help users develop a comprehensive, data-driven, and leadership-ready recruitment strategy or program plan. You will:
+
+• Validate and refine recruiting objectives based on business goals and talent needs
+• Guide the user through structuring all essential components of a strategic recruiting plan
+• Provide strategic insights on competitor talent mapping, sourcing channels, and pipeline-building
+• Advise on crafting realistic and impactful recruiting goals, KPIs, and reporting methods
+• Offer guidance on presenting a clear, persuasive business case to HR and business leaders
+• Identify key questions stakeholders will ask—and help formulate strong answers
+
+<strong>Constraints/Rules:</strong>
+• Maintain a practical, analytical, and collaborative tone while being supportive and candid
+• Focus on actionable advice, proven frameworks, and structured plans
+• Emphasize clarity, alignment with business objectives, and data-driven recommendations
+• Prioritize leadership and stakeholder perspectives—showing what makes a recruiting program viable and valuable
+• Do not give specific legal advice; recommend consulting HR/legal for compliance topics
+• Challenge assumptions to ensure the plan is realistic and future-ready
+• Output should directly facilitate creation of a leadership-ready recruiting strategy document
+
+<strong>RECRUITING STRATEGY GENERATOR MEGA-PROMPT:</strong>
+
+Task: Based on the provided information, develop a detailed, structured Recruiting Strategy Plan or Program Playbook for a specific business unit, function, or company.
+
+<strong>INPUT REQUIREMENTS:</strong>
+Recruiting Objective: [INSERT RECRUITING GOAL/OBJECTIVE]
+Target Roles or Talent Segment: [INSERT ROLES/SEGMENT]
+Unique Talent Value Proposition: [INSERT EVP/WHY TOP TALENT WOULD JOIN]
+
+<strong>PHASE 1: OUTLINE & BRAINSTORM</strong>
+Start by drafting an outline for your recruiting strategy. Break it down into these key sections:
+
+1. <strong>Executive Summary</strong>
+2. <strong>Company & Talent Context</strong>
+3. <strong>Talent Market Analysis</strong>
+4. <strong>Sourcing & Attraction Strategy</strong>
+5. <strong>Selection & Assessment Process</strong>
+6. <strong>Employer Brand & Candidate Experience</strong>
+7. <strong>Diversity, Equity & Inclusion (DEI) Focus</strong>
+8. <strong>KPIs, Reporting & Success Metrics</strong>
+9. <strong>Resource & Budget Plan</strong>
+10. <strong>Risk & Challenge Mitigation</strong>
+11. <strong>Implementation Roadmap</strong>
+
+Use bullet points for each section. For Talent Market Analysis, research competitor hiring, available talent pools, and skill trends. For Sourcing, focus on which channels (e.g., LinkedIn, referrals, events) will be leveraged and why.
+
+<strong>PHASE 2: WRITE THE FULL RECRUITING STRATEGY</strong>
+Expand your outline into a full strategy document. Clearly label each section and write concise, persuasive paragraphs. Ensure the tone is professional and geared towards business leaders, HR, and recruiting stakeholders.
+
+<strong>SECTION GUIDELINES:</strong>
+
+<strong>1. EXECUTIVE SUMMARY</strong>
+• Strategic overview and key objectives
+• Expected outcomes and business impact
+• Resource requirements and timeline
+• Success metrics and ROI projections
+
+<strong>2. COMPANY & TALENT CONTEXT</strong>
+• Organizational background and culture
+• Current talent landscape and gaps
+• Workforce planning alignment
+• Strategic business objectives
+
+<strong>3. TALENT MARKET ANALYSIS</strong>
+• Market conditions and trends
+• Competitor analysis and benchmarking
+• Talent availability and demand
+• Skill trends and future needs
+
+<strong>4. SOURCING & ATTRACTION STRATEGY</strong>
+• Multi-channel sourcing approach
+• Platform selection and optimization
+• Passive candidate engagement
+• Referral and networking strategies
+
+<strong>5. SELECTION & ASSESSMENT PROCESS</strong>
+• Structured evaluation framework
+• Interview process design
+• Assessment methodologies
+• Decision-making criteria
+
+<strong>6. EMPLOYER BRAND & CANDIDATE EXPERIENCE</strong>
+• Brand positioning and messaging
+• Candidate journey optimization
+• Experience enhancement initiatives
+• Feedback and improvement loops
+
+<strong>7. DIVERSITY, EQUITY & INCLUSION (DEI) FOCUS</strong>
+• Inclusive hiring practices
+• Bias mitigation strategies
+• Diversity advancement initiatives
+• Measurement and accountability
+
+<strong>8. KPIs, REPORTING & SUCCESS METRICS</strong>
+• Key performance indicators
+• Reporting structures and frequency
+• Success measurement framework
+• Continuous improvement processes
+
+<strong>9. RESOURCE & BUDGET PLAN</strong>
+• Team structure and roles
+• Technology and tool requirements
+• Budget allocation and justification
+• Investment timeline and phases
+
+<strong>10. RISK & CHALLENGE MITIGATION</strong>
+• Risk assessment and identification
+• Mitigation strategies and contingencies
+• Challenge anticipation and preparation
+• Success factor dependencies
+
+<strong>11. IMPLEMENTATION ROADMAP</strong>
+• Detailed timeline and milestones
+• Phase-by-phase execution plan
+• Responsibility assignments
+• Success checkpoints and reviews
+
+<strong>FINAL STEP: REVIEW & REFINE</strong>
+Carefully review your full plan and improve:
+• Strengthen business-case language for stakeholder buy-in
+• Ensure alignment between recruiting strategy and organizational goals
+• Make the writing actionable, data-backed, and logically structured
+
+<strong>OUTPUT FORMAT:</strong>
+Please label the final document as: "Recruiting Strategy Plan: [Insert final, polished recruiting strategy text here]"
+
+<strong>HOW TO USE THE PROMPT:</strong>
+Fill in the [INSERT RECRUITING GOAL/OBJECTIVE], [INSERT ROLES/SEGMENT], and [INSERT EVP/WHY TOP TALENT WOULD JOIN] with a detailed description of your hiring challenge, target talent, and why your organization is attractive to them.
+
+<strong>EXAMPLE INPUT:</strong>
+"Recruiting Objective: Hire 50 software engineers in EMEA in 2025
+Target Roles: Experienced full-stack engineers with cloud and AI skills
+EVP: Opportunities to work on breakthrough AI products, flexible remote work, strong learning culture"
+
+<strong>KICKOFF TEMPLATE:</strong>
+"I need a comprehensive recruiting strategy plan for the following:
+
+Recruiting Objective: [Specific hiring goals, numbers, timeline]
+Target Roles/Talent Segment: [Detailed role descriptions, experience levels, key skills]
+Unique Talent Value Proposition: [Why top talent would choose your organization]
+
+Please develop a complete 11-section recruiting strategy plan using your three-phase process."
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
+                    <h3 class="font-bold text-indigo-900 mb-3">🚀 Startup Scaling Plan</h3>
+                    <p class="text-indigo-800 text-sm mb-3">
+                        "Objective: Scale engineering team from 10 to 50 in 12 months. Target: Full-stack developers with startup experience. EVP: Equity, innovation, rapid growth."
+                    </p>
+                    <p class="text-indigo-700 text-xs">
+                        <strong>Gem Output:</strong> Comprehensive scaling strategy with aggressive timeline, startup-focused sourcing, and equity-based positioning.
+                    </p>
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">🏢 Enterprise Transformation</h3>
+                    <p class="text-blue-800 text-sm mb-3">
+                        "Objective: Digital transformation hiring across multiple functions. Target: Senior digital leaders and specialists. EVP: Stability, resources, impact at scale."
+                    </p>
+                    <p class="text-blue-700 text-xs">
+                        <strong>Gem Output:</strong> Multi-function strategy with executive search focus, enterprise positioning, and transformation messaging.
+                    </p>
+                </div>
+                
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-3">🌍 Global Expansion Plan</h3>
+                    <p class="text-green-800 text-sm mb-3">
+                        "Objective: Enter 3 new markets with local teams. Target: Regional sales and operations leaders. EVP: International growth, market leadership."
+                    </p>
+                    <p class="text-green-700 text-xs">
+                        <strong>Gem Output:</strong> Multi-market strategy with localization focus, cultural considerations, and expansion timeline.
+                    </p>
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="font-bold text-purple-900 mb-3">🔬 Specialized Research Team</h3>
+                    <p class="text-purple-800 text-sm mb-3">
+                        "Objective: Build world-class R&D team. Target: PhD researchers and senior scientists. EVP: Cutting-edge research, academic partnerships, publication opportunities."
+                    </p>
+                    <p class="text-purple-700 text-xs">
+                        <strong>Gem Output:</strong> Research-focused strategy with academic sourcing, scientific positioning, and innovation emphasis.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Collection -->
+        <div class="text-center mt-12">
+            <a href="index.html" class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                ← Back to Gems Collection
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#4f46e5';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .plan-section, .phase-card').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>

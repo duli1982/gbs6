@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Prompt Engineering Mini-Course - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master prompt engineering for Gemini AI with our comprehensive mini-course. Learn advanced techniques, multimodal reasoning, and Gemini-specific features.">
+    <meta name="keywords"
+        content="Gemini prompt engineering, AI prompting course, multimodal prompts, advanced prompting techniques, Gemini training">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Course-specific styling */
+        .course-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .course-card:hover::before {
+            left: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25), 0 0 0 1px rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .chapter-icon {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.3));
+            }
+
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
+            }
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.2);
+            border-left-color: #10b981;
+        }
+
+        .chapter-number {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+
+        .chapter-status {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .chapter-status.available {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .chapter-status.coming-soon {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .course-progress {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.3), transparent);
+            height: 1px;
+            margin: 3rem 0;
+        }
+
+        .floating-course {
+            animation: float-course 4s ease-in-out infinite;
+        }
+
+        @keyframes float-course {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-12px) rotate(2deg);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-18px) rotate(-2deg);
+            }
+        }
+
+        .course-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #10b981;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .gemini-highlight {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .course-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #10b981;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Prompt Engineering Course</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Hero Section -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="floating-course text-6xl mb-6">🎓</div>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Gemini Prompt Engineering Mini-Course
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                A comprehensive mini-course covering the fundamentals of effective prompt engineering specifically for
+                Gemini AI.
+                Master advanced techniques, multimodal reasoning, and Gemini-specific features.
+            </p>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Course Overview -->
+            <section class="mb-16">
+                <div class="gemini-highlight">
+                    <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                        📚 About This Course
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        If you've read the other Mastery Guides, you'll find this prompt engineering mini-course
+                        familiar.
+                        That's because the <strong>core skills apply across different LLMs</strong>, including Gemini.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        That said, it's still worth reviewing - this version includes a few updates tailored to
+                        highlight
+                        <strong>Gemini's unique strengths</strong>, particularly in multimodal reasoning.
+                    </p>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                        <p class="text-blue-800 font-medium">
+                            💡 <strong>Pro Tip:</strong> Feel free to skip ahead to the sections on Gemini's unique
+                            integrations
+                            as well as the parts covering Flow and Veo 3, which are specific to this guide.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Stats -->
+            <section class="mb-16">
+                <div class="course-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Chapters</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">~2h</div>
+                        <div class="stat-label">Total Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Practice Opportunities</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">🎯</div>
+                        <div class="stat-label">Hands-on Learning</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Progress -->
+            <section class="mb-16">
+                <div class="course-progress">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="google-sans text-xl font-bold text-gray-900">Course Progress</h3>
+                        <span class="text-sm text-gray-600">0% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Start with Chapter 1 to begin your prompt engineering journey with Gemini AI.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Course Features -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    🌟 What You'll Learn
+                </h2>
+
+                <div class="course-features">
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Prompt Fundamentals</h3>
+                        <p class="text-gray-600 text-sm">Master the core principles of effective prompt engineering and
+                            understand how Gemini processes instructions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">🎨</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Multimodal Prompting</h3>
+                        <p class="text-gray-600 text-sm">Learn to work with text, images, audio, and video inputs for
+                            rich, context-aware AI interactions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">📐</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Context Management</h3>
+                        <p class="text-gray-600 text-sm">Understand how to provide effective context and background
+                            information for accurate responses.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">⚡</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Advanced Techniques</h3>
+                        <p class="text-gray-600 text-sm">Explore sophisticated prompting strategies including
+                            chain-of-thought and structured reasoning.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">📏</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Output Control</h3>
+                        <p class="text-gray-600 text-sm">Master techniques for controlling response length, format, and
+                            style to meet your specific needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">🔬</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Gemini-Specific Features</h3>
+                        <p class="text-gray-600 text-sm">Leverage unique Gemini capabilities including Flow, Veo 3, and
+                            deep Workspace integration.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Chapters -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    📖 Course Chapters
+                </h2>
+
+                <div class="chapter-grid">
+
+                    <!-- Chapter 1 -->
+                    <div class="chapter-card" onclick="navigateToChapter(1)">
+                        <div class="chapter-status available">Available Now</div>
+                        <div class="chapter-number">1</div>
+                        <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">
+                            Introduction to Gemini and Prompt Engineering
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Get started with the fundamentals of prompt engineering and understand what makes Gemini
+                            unique.
+                            Learn the basic principles that will guide your entire prompting journey.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4">⏱️ ~20 min</span>
+                            <span class="mr-4">📚 Beginner</span>
+                            <span>🎯 Fundamentals</span>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 2 -->
+                    <div class="chapter-card" onclick="navigateToChapter(2)">
+                        <div class="chapter-status available">Available Now</div>
+                        <div class="chapter-number">2</div>
+                        <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">
+                            Introduction to Crafting Prompts for Different Outputs
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Discover how to tailor your prompts for specific types of outputs. Learn to guide Gemini
+                            toward
+                            creative writing, analytical responses, code generation, and more.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4">⏱️ ~25 min</span>
+                            <span class="mr-4">📚 Beginner</span>
+                            <span>🎨 Output Types</span>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 3 -->
+                    <div class="chapter-card" onclick="navigateToChapter(3)">
+                        <div class="chapter-status available">Available Now</div>
+                        <div class="chapter-number">3</div>
+                        <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">
+                            Exploring the Importance of Context
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Master the art of providing context to Gemini. Understand how background information,
+                            examples,
+                            and situational details dramatically improve response quality and relevance.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4">⏱️ ~20 min</span>
+                            <span class="mr-4">📊 Intermediate</span>
+                            <span>📐 Context</span>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 4 -->
+                    <div class="chapter-card" onclick="navigateToChapter(4)">
+                        <div class="chapter-status available">Available Now</div>
+                        <div class="chapter-number">4</div>
+                        <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">
+                            Improving Prompts for Enhanced Outputs
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Learn iterative prompt refinement techniques. Discover how to analyze responses, identify
+                            areas
+                            for improvement, and systematically enhance your prompting skills.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4">⏱️ ~25 min</span>
+                            <span class="mr-4">📊 Intermediate</span>
+                            <span>⚡ Enhancement</span>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 5 -->
+                    <div class="chapter-card" onclick="navigateToChapter(5)">
+                        <div class="chapter-status available">Available Now</div>
+                        <div class="chapter-number">5</div>
+                        <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">
+                            Managing Gemini's Output Length and Format
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Take control of response formatting and length. Learn to specify exact output requirements,
+                            structure responses, and ensure consistency across different types of requests.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4">⏱️ ~20 min</span>
+                            <span class="mr-4">📊 Intermediate</span>
+                            <span>📏 Formatting</span>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 6 -->
+                    <div class="chapter-card" onclick="navigateToChapter(6)">
+                        <div class="chapter-status available">Available Now</div>
+                        <div class="chapter-number">6</div>
+                        <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">
+                            Getting Started with Advanced Prompt Design Techniques
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Explore sophisticated prompting strategies including chain-of-thought reasoning, multi-step
+                            processes,
+                            and Gemini's unique multimodal capabilities including Flow and Veo 3.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span class="mr-4">⏱️ ~30 min</span>
+                            <span class="mr-4">🎓 Advanced</span>
+                            <span>🔬 Advanced</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Prerequisites & Recommendations -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    📋 Before You Start
+                </h2>
+
+                <div class="course-features">
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">✅</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Prerequisites</h3>
+                        <ul class="text-gray-600 text-sm space-y-1">
+                            <li>• Basic understanding of AI/LLMs</li>
+                            <li>• Access to Gemini (free or paid)</li>
+                            <li>• Curiosity and willingness to experiment</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">💡</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Recommendations</h3>
+                        <ul class="text-gray-600 text-sm space-y-1">
+                            <li>• Complete chapters in order</li>
+                            <li>• Practice with real examples</li>
+                            <li>• Take notes on what works</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Learning Approach</h3>
+                        <ul class="text-gray-600 text-sm space-y-1">
+                            <li>• Hands-on practice</li>
+                            <li>• Real-world examples</li>
+                            <li>• Iterative improvement</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="mb-16">
+                <div class="course-card rounded-2xl p-8 text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🚀 Ready to Begin?</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Start your journey to mastering prompt engineering with Gemini AI. Each chapter builds on the
+                        previous one,
+                        so we recommend following the sequence for the best learning experience.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="nav-button-secondary" onclick="navigateToChapter(1)">
+                            🎓 Start Chapter 1
+                        </button>
+                        <a href="../key-principles/index.html" class="nav-button-secondary">
+                            🔑 View Key Principles
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Navigate to chapter
+        function navigateToChapter(chapterNumber) {
+            if (chapterNumber >= 1 && chapterNumber <= 6) {
+                window.location.href = `chapter-${chapterNumber}/index.html`;
+            } else {
+                // For other chapters, show a coming soon message
+                alert(`Chapter ${chapterNumber} is coming soon! Content will be added progressively.`);
+            }
+        }
+
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add intersection observer for chapter cards
+            const chapterCards = document.querySelectorAll('.chapter-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            chapterCards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Add fadeInUp animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Update progress bar animation
+            const progressFill = document.querySelector('.progress-fill');
+            if (progressFill) {
+                setTimeout(() => {
+                    progressFill.style.width = '0%'; // Will be updated as chapters are completed
+                }, 1000);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

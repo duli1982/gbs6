@@ -73,6 +73,18 @@
   ],
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/gbs-prompts/prompts.json",
+      "destination": "/gbs-prompts/prompts.json"
+    },
+    {
+      "source": "/prompts/prompts.json",
+      "destination": "/gbs-prompts/prompts.json"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

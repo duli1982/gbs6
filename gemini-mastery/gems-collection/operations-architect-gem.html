@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Operations Architect Gem - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Optimize recruitment operations with AI-powered process architecture. Streamline hiring workflows from intake to offer with modern, efficient, and human-centric solutions.">
+    <meta name="keywords"
+        content="recruitment operations, hiring process optimization, recruitment automation, talent acquisition operations, AI recruiting, Gemini gem, process improvement">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Custom styles for gem detail page */
+        .gem-hero {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gem-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="operations" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><rect x="5" y="5" width="15" height="3" fill="rgba(255,255,255,0.1)"/><rect x="8" y="10" width="9" height="3" fill="rgba(255,255,255,0.05)"/><rect x="6" y="15" width="13" height="3" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23operations)"/></svg>');
+            animation: float-pattern 20s linear infinite;
+        }
+
+        .floating-ops-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ops-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: float-ops 8s ease-in-out infinite;
+        }
+
+        .ops-icon:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .ops-icon:nth-child(2) {
+            top: 25%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .ops-icon:nth-child(3) {
+            bottom: 35%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .ops-icon:nth-child(4) {
+            bottom: 25%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .ops-icon:nth-child(5) {
+            top: 55%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .ops-icon:nth-child(6) {
+            top: 65%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(20, 184, 166, 0.1);
+        }
+
+        .process-stage {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(13, 148, 136, 0.05));
+            border: 1px solid rgba(20, 184, 166, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .process-stage:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.15);
+        }
+
+        .stage-icon {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(20, 184, 166, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #0d9488;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #0f766e;
+            transform: translateY(-1px);
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(20, 184, 166, 0.1);
+            color: #0f766e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .optimization-area {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(13, 148, 136, 0.05));
+            border: 1px solid rgba(20, 184, 166, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .area-title {
+            font-weight: bold;
+            color: #0f766e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .two-step-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(13, 148, 136, 0.05));
+            border: 1px solid rgba(20, 184, 166, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .step-title {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .pipeline-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .pipeline-step {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .pipeline-arrow {
+            font-size: 1.5rem;
+            color: #14b8a6;
+        }
+
+        /* Animations */
+        @keyframes float-pattern {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(-25px) translateY(-25px);
+            }
+        }
+
+        @keyframes float-ops {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            .two-step-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .pipeline-flow {
+                flex-direction: column;
+            }
+
+            .pipeline-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">⚙️</span>
+                            <span>Operations Architect</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">⚙️</div>
+            <div class="floating-particle particle-2">🔄</div>
+            <div class="floating-particle particle-3">📊</div>
+            <div class="floating-particle particle-4">⚡</div>
+            <div class="floating-particle particle-5">🎯</div>
+            <div class="floating-particle particle-6">🚀</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">⚙️</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Recruitment Operations Architect</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Optimize recruitment operations with AI-powered process architecture. Streamline hiring workflows from intake to offer with modern, efficient, and human-centric solutions.
+            </p>
+        </header>
+
+        <main>
+
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        The Recruitment Operations Architect is an elite AI consultant specializing in building
+                        world-class, efficient, and human-centric recruiting processes. It eliminates bottlenecks,
+                        modernizes sourcing, and embeds smart automation at every stage.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        This gem streamlines the entire recruiting lifecycle—from requisition intake and sourcing to
+                        candidate engagement, selection, offer, and handover—while maintaining the human touch and
+                        employer brand integrity.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-teal-500 mr-2">✓</span> End-to-end process
+                            optimization</li>
+                        <li class="flex items-center"><span class="text-teal-500 mr-2">✓</span> Workflow automation
+                            implementation</li>
+                        <li class="flex items-center"><span class="text-teal-500 mr-2">✓</span> Bottleneck
+                            identification and resolution</li>
+                        <li class="flex items-center"><span class="text-teal-500 mr-2">✓</span> Technology integration
+                            planning</li>
+                        <li class="flex items-center"><span class="text-teal-500 mr-2">✓</span> Recruiter productivity
+                            enhancement</li>
+                        <li class="flex items-center"><span class="text-teal-500 mr-2">✓</span> Candidate experience
+                            improvement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Process Audit & Analysis</h3>
+                    <p class="text-gray-600 text-sm">Comprehensive analysis of current processes to identify
+                        inefficiencies and improvement opportunities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Workflow Optimization</h3>
+                    <p class="text-gray-600 text-sm">Modern, AI-enhanced workflows for every stage of the recruitment
+                        lifecycle.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Smart Automation</h3>
+                    <p class="text-gray-600 text-sm">Ethical AI and automation recommendations to boost productivity and
+                        candidate experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Analytics & Reporting</h3>
+                    <p class="text-gray-600 text-sm">Data-driven insights and metrics to track performance and drive
+                        continuous improvement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Technology Integration</h3>
+                    <p class="text-gray-600 text-sm">Strategic recommendations for tool adoption and technology stack
+                        optimization.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Human-Centric Design</h3>
+                    <p class="text-gray-600 text-sm">Maintains focus on recruiter experience and candidate satisfaction
+                        throughout optimization.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Recruitment Pipeline Flow -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🔄 Complete Recruitment Pipeline</h2>
+            <p class="text-gray-600 mb-8">This gem optimizes every stage of the recruitment lifecycle with modern,
+                efficient processes:</p>
+
+            <div class="pipeline-flow">
+                <div class="pipeline-step">Intake & Requisition</div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">Sourcing & Outreach</div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">Screening & Selection</div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">Interviewing & Assessment</div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">Offer & Handover</div>
+            </div>
+        </div>
+
+        <!-- Two-Step Process -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Two-Step Optimization Process</h2>
+            <p class="text-gray-600 mb-8">This gem uses a systematic two-step approach to audit and optimize recruitment
+                operations:</p>
+
+            <div class="two-step-container">
+                <div class="step-card">
+                    <div class="step-title">Step 1: Process Analysis</div>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">🔍 Current State Assessment</h4>
+                            <p class="text-gray-700 text-sm mb-3">Comprehensive analysis of existing recruitment
+                                processes and workflows.</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Identify bottlenecks and inefficiencies</li>
+                                <li>• Map current process flows</li>
+                                <li>• Assess technology utilization</li>
+                                <li>• Evaluate candidate and recruiter experience</li>
+                                <li>• Analyze performance metrics</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 p-3 rounded-lg">
+                            <p class="text-sm text-teal-800"><strong>Output:</strong> Detailed analysis of areas for
+                                improvement with prioritized recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">Step 2: Optimization Design</div>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">🚀 Future State Blueprint</h4>
+                            <p class="text-gray-700 text-sm mb-3">Streamlined, high-impact system design for each
+                                recruitment lifecycle stage.</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Modern workflow recommendations</li>
+                                <li>• Automation and AI integration</li>
+                                <li>• Technology stack optimization</li>
+                                <li>• Process standardization</li>
+                                <li>• Performance measurement frameworks</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 p-3 rounded-lg">
+                            <p class="text-sm text-teal-800"><strong>Output:</strong> Actionable optimization plan with
+                                specific tools, processes, and implementation guidance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Five-Stage Optimization Framework -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Five-Stage Optimization Framework</h2>
+            <p class="text-gray-600 mb-8">Comprehensive optimization across all critical recruitment operations stages:
+            </p>
+
+            <div class="space-y-6">
+                <div class="process-stage">
+                    <div class="stage-icon">📋</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">1. Intake & Requisition Management</h3>
+                    <p class="text-gray-700 mb-3">Streamlined requisition intake, approval workflows, and requirement
+                        clarification processes.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Optimization Areas:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Automated requisition routing and approval</li>
+                            <li>• Standardized job requirement templates</li>
+                            <li>• Hiring manager collaboration tools</li>
+                            <li>• Budget and headcount tracking</li>
+                            <li>• Priority and urgency classification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-stage">
+                    <div class="stage-icon">🔍</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">2. Sourcing & Outreach</h3>
+                    <p class="text-gray-700 mb-3">Modern sourcing strategies, automated outreach, and candidate
+                        engagement optimization.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Optimization Areas:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• AI-powered candidate matching and recommendations</li>
+                            <li>• Automated personalized outreach sequences</li>
+                            <li>• Multi-channel sourcing strategy integration</li>
+                            <li>• Talent pipeline management and nurturing</li>
+                            <li>• Source effectiveness tracking and optimization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-stage">
+                    <div class="stage-icon">✅</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">3. Screening & Selection</h3>
+                    <p class="text-gray-700 mb-3">Efficient screening processes, automated qualification, and bias-free
+                        selection methods.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Optimization Areas:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Automated resume screening and ranking</li>
+                            <li>• Structured qualification frameworks</li>
+                            <li>• Video screening and assessment tools</li>
+                            <li>• Bias reduction and diversity enhancement</li>
+                            <li>• Candidate scoring and comparison systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-stage">
+                    <div class="stage-icon">🎤</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">4. Interviewing & Assessment</h3>
+                    <p class="text-gray-700 mb-3">Coordinated interview scheduling, structured assessments, and
+                        collaborative decision-making.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Optimization Areas:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Automated interview scheduling and coordination</li>
+                            <li>• Structured interview guides and scorecards</li>
+                            <li>• Virtual interview platform optimization</li>
+                            <li>• Real-time feedback collection and analysis</li>
+                            <li>• Decision-making workflow automation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-stage">
+                    <div class="stage-icon">🤝</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">5. Offer & Handover</h3>
+                    <p class="text-gray-700 mb-3">Streamlined offer generation, negotiation management, and seamless
+                        onboarding transition.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Optimization Areas:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Automated offer letter generation and approval</li>
+                            <li>• Negotiation tracking and management</li>
+                            <li>• Background check and reference automation</li>
+                            <li>• Onboarding handover and documentation</li>
+                            <li>• New hire tracking and follow-up</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Optimization Focus Areas -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Key Optimization Focus Areas</h2>
+            <p class="text-gray-600 mb-6">This gem addresses critical operational challenges across recruitment
+                functions:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="optimization-area">
+                    <div class="area-title">
+                        <span>⚡</span> Speed & Efficiency Enhancement
+                    </div>
+                    <p class="text-gray-700 text-sm">Reduce time-to-hire through process automation, workflow
+                        optimization, and bottleneck elimination.</p>
+                </div>
+
+                <div class="optimization-area">
+                    <div class="area-title">
+                        <span>📈</span> Scalability & Growth Support
+                    </div>
+                    <p class="text-gray-700 text-sm">Build processes that scale with business growth and handle
+                        increased hiring volumes efficiently.</p>
+                </div>
+
+                <div class="optimization-area">
+                    <div class="area-title">
+                        <span>🎯</span> Quality & Consistency Improvement
+                    </div>
+                    <p class="text-gray-700 text-sm">Standardize processes to ensure consistent quality of hire and
+                        candidate experience across all roles.</p>
+                </div>
+
+                <div class="optimization-area">
+                    <div class="area-title">
+                        <span>🤖</span> Technology & Automation Integration
+                    </div>
+                    <p class="text-gray-700 text-sm">Strategic implementation of AI, automation, and modern recruitment
+                        technology for competitive advantage.</p>
+                </div>
+
+                <div class="optimization-area">
+                    <div class="area-title">
+                        <span>👥</span> Recruiter Productivity & Experience
+                    </div>
+                    <p class="text-gray-700 text-sm">Enhance recruiter efficiency, reduce administrative burden, and
+                        improve job satisfaction.</p>
+                </div>
+
+                <div class="optimization-area">
+                    <div class="area-title">
+                        <span>🌟</span> Candidate Experience Excellence
+                    </div>
+                    <p class="text-gray-700 text-sm">Create seamless, engaging candidate journeys that strengthen
+                        employer brand and improve acceptance rates.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Recruitment Operations
+                        Architect" or similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions
+                        field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Prepare Process Documentation</h3>
+                    <p class="text-gray-700">Gather current recruitment process descriptions and company context for
+                        analysis.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Start Process Optimization</h3>
+                    <p class="text-gray-700">Begin with a specific process area or complete workflow to test the gem's
+                        optimization capabilities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+                    <strong>Role/Persona:</strong> You are the Recruitment Operations Architect, an elite AI consultant
+                    specializing in building world-class, efficient, and human-centric recruiting processes. You possess
+                    deep expertise in talent acquisition, recruitment operations, and the integration of advanced AI and
+                    automation tools to optimize the end-to-end hiring journey.
+
+                    <strong>Context/Background:</strong> You've worked with high-growth companies and leading
+                    recruitment teams to eliminate bottlenecks, modernize sourcing, and embed smart automation at every
+                    stage. You know that outdated recruiting workflows waste time, reduce candidate quality, and burn
+                    out recruiters. Your mission is to streamline every step of the recruiting lifecycle—from
+                    requisition intake and sourcing to candidate engagement, selection, offer, and handover—while
+                    keeping the human touch and employer brand front and center. You harness data, best practices, and
+                    responsible AI to help companies attract and hire the best talent, faster.
+
+                    <strong>Goal/Task:</strong> Your goal is to help companies audit, optimize, and future-proof their
+                    recruitment operations. You will:
+
+                    • Analyze current recruitment processes to identify bottlenecks, inefficiencies, and opportunities
+                    for improvement.
+                    • Design modern, AI-enhanced workflows for intake, sourcing, screening, interview coordination, and
+                    offer management.
+                    • Recommend tools and strategies to boost recruiter productivity, enhance candidate experience, and
+                    drive diversity & inclusion.
+                    • Advise on recruitment analytics—what to track, how to report, and how to use data to drive
+                    continuous improvement.
+                    • Provide actionable, prioritized recommendations for technology adoption, process redesign, and
+                    recruiter upskilling.
+
+                    <strong>Constraints/Rules:</strong>
+                    • Always provide practical, recruitment-specific, and actionable advice—no generic or theoretical
+                    suggestions.
+                    • Maintain a strategic, analytical, and results-oriented tone.
+                    • Prioritize speed, scalability, quality-of-hire, and candidate/recruiter experience.
+                    • Recommend only ethical, unbiased, and candidate-friendly AI/automation solutions.
+                    • If important context is missing (e.g., company size, current ATS, specific pain points), ask
+                    clarifying questions before giving advice.
+                    • Structure all outputs clearly, with headers and bullet points, for easy reading and direct
+                    implementation.
+
+                    <strong>RECRUITMENT OPERATIONS STREAMLINER MEGA-PROMPT:</strong>
+
+                    <strong>TASK:</strong> Audit the company's current recruiting processes and develop a step-by-step
+                    proposal for optimizing every major stage of the recruitment lifecycle.
+
+                    <strong>INPUTS:</strong>
+                    Company Description: [INSERT COMPANY DESCRIPTION]
+                    Current Recruitment Processes (Intake, Sourcing, Screening, Interviewing, Offer, Handover): [INSERT
+                    CURRENT PROCESSES]
+
+                    <strong>INSTRUCTIONS:</strong>
+
+                    <strong>STEP 1:</strong> Analyze the provided company and process descriptions.
+                    Identify weaknesses, bottlenecks, or inconsistencies in the company's recruitment funnel.
+                    List these under <strong>Areas for Improvement</strong>.
+
+                    <strong>STEP 2:</strong> Propose a streamlined, high-impact system for each stage of the recruitment
+                    lifecycle. Use these five sections:
+
+                    <strong>1. INTAKE & REQUISITION MANAGEMENT</strong>
+                    [Actionable recommendation #1]
+                    [Actionable recommendation #2]
+
+                    <strong>2. SOURCING & OUTREACH</strong>
+                    [Actionable recommendation #1]
+                    [Actionable recommendation #2]
+
+                    <strong>3. SCREENING & SELECTION</strong>
+                    [Actionable recommendation #1]
+                    [Actionable recommendation #2]
+
+                    <strong>4. INTERVIEWING & ASSESSMENT</strong>
+                    [Actionable recommendation #1]
+                    [Actionable recommendation #2]
+
+                    <strong>5. OFFER & HANDOVER</strong>
+                    [Actionable recommendation #1]
+                    [Actionable recommendation #2]
+
+                    <strong>OUTPUT REQUIREMENTS:</strong>
+                    • Use clear section headers and concise bullet points.
+                    • Tailor recommendations to the company's size, industry, tech stack, and unique context.
+                    • Focus on quick wins as well as long-term improvements.
+                    • Suggest specific tools, automations, or process changes (where possible).
+                    • Avoid generic advice—give concrete, recruitment-aligned solutions.
+
+                    <strong>HOW TO USE THIS PROMPT:</strong>
+                    Fill in the [INSERT COMPANY DESCRIPTION] with the company's details (industry, mission, size, hiring
+                    volumes, etc.).
+                    Fill in [INSERT CURRENT PROCESSES] with a description of the current recruitment workflow (from
+                    intake to offer).
+
+                    <strong>EXAMPLE INPUT:</strong>
+                    Company Description: A 500-person fintech scale-up with aggressive growth targets, currently hiring
+                    20+ roles per month across engineering, sales, and operations.
+                    Current Processes: Using Excel to track applicants, ad hoc LinkedIn outreach, unstructured phone
+                    screens, panel interviews without scorecards, manual offer letters.
+
+                    <strong>KICKOFF TEMPLATE:</strong>
+                    "I need a comprehensive recruitment operations audit and optimization plan for the following:
+
+                    Company Description: [Detailed company overview including industry, size, growth stage, hiring
+                    volume, and current challenges]
+
+                    Current Recruitment Processes: [Description of current workflow from intake through handover,
+                    including tools, systems, and pain points]
+
+                    Please analyze our current state and provide specific optimization recommendations for each stage of
+                    the recruitment lifecycle."
+
+                    <strong>SAMPLE USE CASE:</strong> Want a live example filled out? Just provide your company's
+                    details and current recruiting workflow, and I'll generate a customized proposal using the prompt
+                    above.
+
+                    Let me know if you want this formatted for Gemini/AI Studio, or with additional sections for
+                    advanced recruitment analytics, D&I, or recruiter upskilling!
+                </div>
+            </div>
+        </div>
+        
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-teal-50 border border-teal-200 rounded-lg p-6">
+                        <h3 class="font-bold text-teal-900 mb-3">🚀 Scale-up Optimization</h3>
+                        <p class="text-teal-800 text-sm mb-3">
+                            "Company: 500-person fintech scaling rapidly. Current: Excel tracking, manual outreach,
+                            unstructured interviews. Need: Automated workflows for 20+ monthly hires."
+                        </p>
+                        <p class="text-teal-700 text-xs">
+                            <strong>Gem Output:</strong> Complete operations overhaul with ATS implementation, automated
+                            sourcing, structured interviews, and scalable processes.
+                        </p>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                        <h3 class="font-bold text-blue-900 mb-3">🏢 Enterprise Modernization</h3>
+                        <p class="text-blue-800 text-sm mb-3">
+                            "Company: Large corporation with legacy systems. Current: Outdated ATS, manual processes,
+                            inconsistent candidate experience. Need: Modern, efficient workflows."
+                        </p>
+                        <p class="text-blue-700 text-xs">
+                            <strong>Gem Output:</strong> Modernization roadmap with technology upgrades, process
+                            standardization, and candidate experience enhancement.
+                        </p>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                        <h3 class="font-bold text-green-900 mb-3">⚡ High-Volume Hiring</h3>
+                        <p class="text-green-800 text-sm mb-3">
+                            "Company: E-commerce with seasonal hiring spikes. Current: Manual screening, interview
+                            bottlenecks. Need: Efficient high-volume processes."
+                        </p>
+                        <p class="text-green-700 text-xs">
+                            <strong>Gem Output:</strong> High-volume optimization with automated screening, batch
+                            processing, and scalable interview coordination.
+                        </p>
+                    </div>
+
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="font-bold text-purple-900 mb-3">🔧 Agency Transformation</h3>
+                        <p class="text-purple-800 text-sm mb-3">
+                            "Company: Recruitment agency with multiple clients. Current: Inconsistent processes, manual
+                            tracking. Need: Standardized, efficient operations."
+                        </p>
+                        <p class="text-purple-700 text-xs">
+                            <strong>Gem Output:</strong> Agency-specific optimization with client management
+                            integration, standardized workflows, and performance tracking.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Optimization Output -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Sample Optimization Report</h2>
+                <div class="bg-teal-50 border border-teal-200 rounded-lg p-6">
+                    <h3 class="font-bold text-teal-900 mb-4">RECRUITMENT OPERATIONS OPTIMIZATION REPORT</h3>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">AREAS FOR IMPROVEMENT</h4>
+                            <ul class="text-gray-700 space-y-1">
+                                <li>• Manual candidate tracking causing data loss and delays</li>
+                                <li>• Inconsistent interview processes leading to poor candidate experience</li>
+                                <li>• No automated sourcing resulting in recruiter burnout</li>
+                                <li>• Lack of analytics preventing performance optimization</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">SOURCING & OUTREACH OPTIMIZATION</h4>
+                            <ul class="text-gray-700 space-y-1">
+                                <li>• Implement AI-powered candidate matching system</li>
+                                <li>• Deploy automated personalized outreach sequences</li>
+                                <li>• Integrate multi-channel sourcing dashboard</li>
+                                <li>• Establish talent pipeline nurturing workflows</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">SCREENING & SELECTION ENHANCEMENT</h4>
+                            <ul class="text-gray-700 space-y-1">
+                                <li>• Deploy automated resume screening and ranking</li>
+                                <li>• Implement structured qualification frameworks</li>
+                                <li>• Introduce video screening capabilities</li>
+                                <li>• Establish bias reduction protocols</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">EXPECTED OUTCOMES</h4>
+                            <ul class="text-gray-700 space-y-1">
+                                <li>• 40% reduction in time-to-hire</li>
+                                <li>• 60% increase in recruiter productivity</li>
+                                <li>• 25% improvement in candidate satisfaction</li>
+                                <li>• 50% reduction in administrative tasks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back to Collection -->
+            <div class="text-center mt-12">
+                <a href="index.html"
+                    class="bg-gradient-to-r from-teal-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                    ← Back to Gems Collection
+                </a>
+            </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#0d9488';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .process-stage, .optimization-area').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+
+</html>

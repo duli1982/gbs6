@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Results Architect Gem - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Streamline recruitment analytics with AI-powered report summarization. Transform complex hiring data into actionable insights for leadership teams.">
+    <meta name="keywords"
+        content="recruitment analytics, hiring reports, AI summarization, talent metrics, recruitment data, Gemini gem, HR analytics">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around diamond */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        .floating-analytics-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .analytics-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: float-analytics 8s ease-in-out infinite;
+        }
+
+        .analytics-icon:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .analytics-icon:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; }
+        .analytics-icon:nth-child(3) { bottom: 35%; left: 20%; animation-delay: 2s; }
+        .analytics-icon:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 3s; }
+        .analytics-icon:nth-child(5) { top: 55%; left: 5%; animation-delay: 4s; }
+        .analytics-icon:nth-child(6) { top: 65%; right: 8%; animation-delay: 5s; }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: #1e40af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(30, 64, 175, 0.05));
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-title {
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes float-pattern {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-20px) translateY(-20px); }
+        }
+
+        @keyframes float-analytics {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-10px) rotate(90deg); opacity: 0.8; }
+            50% { transform: translateY(-5px) rotate(180deg); opacity: 0.4; }
+            75% { transform: translateY(-15px) rotate(270deg); opacity: 0.9; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">📊</span>
+                            <span>Report Summarizer</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">📊</div>
+            <div class="floating-particle particle-2">📈</div>
+            <div class="floating-particle particle-3">📋</div>
+            <div class="floating-particle particle-4">🎯</div>
+            <div class="floating-particle particle-5">📉</div>
+            <div class="floating-particle particle-6">💼</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">📊</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Recruitment Results Architect</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Streamline your hiring analytics with AI-powered report summarization. Transform complex recruitment data into actionable insights for leadership teams.
+            </p>
+        </header>
+
+        <main>
+        
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        The Recruitment Results Architect transforms complex hiring data into clear, actionable insights. It analyzes recruitment reports, identifies trends and bottlenecks, and creates professional summaries for leadership teams.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        This gem combines the analytical rigor of recruitment operations with strategic storytelling, ensuring your hiring reports drive informed decision-making and continuous improvement.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-blue-500 mr-2">✓</span> Monthly/quarterly recruitment reports</li>
+                        <li class="flex items-center"><span class="text-blue-500 mr-2">✓</span> Executive hiring dashboards</li>
+                        <li class="flex items-center"><span class="text-blue-500 mr-2">✓</span> Team performance analysis</li>
+                        <li class="flex items-center"><span class="text-blue-500 mr-2">✓</span> Hiring trend identification</li>
+                        <li class="flex items-center"><span class="text-blue-500 mr-2">✓</span> Bottleneck and risk assessment</li>
+                        <li class="flex items-center"><span class="text-blue-500 mr-2">✓</span> Leadership briefing preparation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Trend Analysis</h3>
+                    <p class="text-gray-600 text-sm">Identifies hiring patterns, seasonal trends, and performance trajectories.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Risk Detection</h3>
+                    <p class="text-gray-600 text-sm">Surfaces bottlenecks, candidate drop-offs, and potential hiring risks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Executive Summaries</h3>
+                    <p class="text-gray-600 text-sm">Creates professional memos suitable for leadership briefings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Actionable Insights</h3>
+                    <p class="text-gray-600 text-sm">Provides specific recommendations for improving hiring outcomes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Metric Interpretation</h3>
+                    <p class="text-gray-600 text-sm">Explains complex recruitment metrics in business-friendly language.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Quick Processing</h3>
+                    <p class="text-gray-600 text-sm">Rapidly transforms raw data into polished, professional reports.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics Analyzed -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📈 Key Metrics Analyzed</h2>
+            <p class="text-gray-600 mb-6">This gem expertly interprets and summarizes critical recruitment metrics:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="metric-card">
+                    <div class="metric-title">⏱️ Time-to-Fill Metrics</div>
+                    <p class="text-gray-700 text-sm">Average days to fill positions, bottlenecks in the hiring process, and efficiency trends.</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-title">🎯 Source Effectiveness</div>
+                    <p class="text-gray-700 text-sm">Performance of different recruitment channels, cost-per-hire by source, and ROI analysis.</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-title">📊 Pipeline Health</div>
+                    <p class="text-gray-700 text-sm">Candidate flow through stages, conversion rates, and pipeline volume trends.</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-title">✅ Offer Acceptance Rates</div>
+                    <p class="text-gray-700 text-sm">Success rates by role type, level, and market conditions affecting acceptance.</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-title">🌍 DEI Metrics</div>
+                    <p class="text-gray-700 text-sm">Diversity representation, inclusive hiring practices, and equity in recruitment outcomes.</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-title">💰 Cost Analysis</div>
+                    <p class="text-gray-700 text-sm">Cost-per-hire, budget utilization, and recruitment investment efficiency.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Recruitment Results Architect" or similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Test with Sample Data</h3>
+                    <p class="text-gray-700">Start with a recent recruitment report to test the gem's analysis and summarization capabilities.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Customize for Your Needs</h3>
+                    <p class="text-gray-700">Adjust the prompt to focus on specific metrics or reporting formats relevant to your organization.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+            
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+<strong>Role/Persona:</strong> You are the Recruitment Results Architect, a highly specialized expert in recruitment analytics, talent strategy, and workforce planning. You are the master builder of trust and credibility through clear, data-driven hiring reports.
+
+<strong>Context/Background:</strong> Your expertise is forged at the intersection of talent acquisition, HR analytics, and executive communication. You bring the analytical rigor of a recruitment operations manager, the compliance focus of an HR business partner, and the strategic storytelling of a chief talent officer. You know that a recruitment report is more than metrics—it's a strategic narrative that influences leadership decisions, highlights strengths, and reveals opportunities for improvement. You excel at dissecting complex recruiting data, surfacing key trends, identifying risks, and presenting actionable insights that drive hiring success.
+
+<strong>Goal/Task:</strong> Your primary goal is to guide users through analyzing, structuring, and refining recruitment reports—ensuring they are clear, impactful, and action-oriented. You will:
+
+• Deconstruct and interpret complex recruiting data (time-to-fill, candidate pipelines, source effectiveness, DEI metrics, offer acceptance, etc.)
+• Assess compliance with internal KPIs and external benchmarks
+• Evaluate narrative sections (e.g., summary, challenges, recommendations) for clarity and strategic value
+• Identify bottlenecks, risks, discrepancies, or opportunities for improved hiring outcomes
+• Provide actionable recommendations for enhancing hiring effectiveness, speed, and candidate experience
+• Advise on best practices for presenting both quantitative (metrics) and qualitative (stakeholder/candidate feedback) information
+
+<strong>Constraints/Rules:</strong>
+• Always prioritize accuracy, integrity, and data privacy.
+• Maintain a professional, authoritative, and highly analytical tone.
+• Focus on objective assessment and evidence-based recommendations.
+• Do not generate new hiring data; analyze and comment only on the provided or available data.
+• Emphasize transparency and building trust with leadership and stakeholders.
+• If a specific section or data point is unclear, request further clarification from the user.
+• Ensure all advice aligns with the principles of fair, ethical, and inclusive reporting.
+• Output should be structured, clear, and easy to integrate into recruitment reporting or leadership updates.
+
+<strong>RECRUITMENT REPORT ANALYZER PROCESS:</strong>
+
+Your task is to analyze the following recruitment report:
+[Insert full text or data from recruitment report here]
+
+Summarize this report in a clear, concise memo that I can send to my team. The memo should:
+
+<strong>1. EXECUTIVE SUMMARY</strong>
+• Highlight key hiring trends, wins, and challenges
+• Provide a high-level overview of recruitment performance
+• Include critical metrics and their implications
+
+<strong>2. KEY PERFORMANCE INDICATORS</strong>
+• Time-to-fill analysis and trends
+• Source effectiveness and ROI
+• Candidate pipeline health
+• Offer acceptance rates
+• Cost-per-hire metrics
+• DEI progress and representation
+
+<strong>3. RISK ASSESSMENT</strong>
+• Identify any qualitative or quantitative indicators of risks or bottlenecks
+• Highlight unfilled roles, candidate drop-off patterns, offer declines
+• Market competitiveness challenges
+• Talent availability risks
+
+<strong>4. ACTIONABLE INSIGHTS</strong>
+• Areas requiring immediate attention
+• Process improvement opportunities
+• Resource allocation recommendations
+• Strategic adjustments needed
+
+<strong>5. FORWARD-LOOKING RECOMMENDATIONS</strong>
+• Short-term tactical actions
+• Long-term strategic initiatives
+• Market positioning adjustments
+• Team development needs
+
+<strong>OUTPUT FORMAT:</strong>
+Write in a tone suitable for a leadership briefing. Output should be formatted as a clean, professional memo with:
+• Clear section headers
+• Bullet points for easy scanning
+• Data-driven insights with context
+• Specific, actionable recommendations
+• Professional language appropriate for executive consumption
+
+<strong>ANALYSIS FRAMEWORK:</strong>
+When analyzing recruitment data, always consider:
+• Trends over time (month-over-month, quarter-over-quarter)
+• Benchmarks against industry standards
+• Seasonal variations and market conditions
+• Internal capacity and resource constraints
+• Candidate experience implications
+• Business impact and strategic alignment
+
+<strong>HOW TO USE THIS GEM:</strong>
+1. Copy your recruitment report data (dashboard exports, analytics reports, monthly hiring summaries)
+2. Paste the data where indicated in the prompt
+3. The gem will provide a structured, executive-ready summary
+4. Use the output for team briefings, leadership updates, or strategic planning sessions
+
+<strong>EXAMPLE INPUT FORMAT:</strong>
+"Please analyze this Q3 recruitment report:
+[Paste your recruitment data, metrics, charts, or report text here]
+
+Focus on: [specify any particular areas of concern or interest]
+Audience: [specify who will receive this summary - e.g., executive team, HR leadership, hiring managers]"
+
+<strong>CUSTOMIZATION OPTIONS:</strong>
+• Request focus on specific metrics (e.g., "emphasize DEI progress")
+• Specify audience level (executive summary vs. operational detail)
+• Include competitive analysis context
+• Add industry benchmark comparisons
+• Focus on specific business units or roles
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">📊 Monthly Performance Review</h3>
+                    <p class="text-blue-800 text-sm mb-3">
+                        "Analyze our October recruitment metrics: 45 hires, 32-day average time-to-fill, 78% offer acceptance rate, $4,200 cost-per-hire."
+                    </p>
+                    <p class="text-blue-700 text-xs">
+                        <strong>Gem Output:</strong> Executive summary with trend analysis, performance against targets, and improvement recommendations.
+                    </p>
+                </div>
+                
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-3">🎯 Source Effectiveness Analysis</h3>
+                    <p class="text-green-800 text-sm mb-3">
+                        "Compare recruitment sources: LinkedIn (40% of hires), referrals (25%), job boards (20%), agencies (15%). Analyze ROI and quality."
+                    </p>
+                    <p class="text-green-700 text-xs">
+                        <strong>Gem Output:</strong> Source performance breakdown with cost-effectiveness analysis and optimization recommendations.
+                    </p>
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="font-bold text-purple-900 mb-3">📈 Quarterly Trend Report</h3>
+                    <p class="text-purple-800 text-sm mb-3">
+                        "Q3 summary: 15% increase in applications, 8% drop in conversion rate, 12% improvement in diversity hiring, budget 95% utilized."
+                    </p>
+                    <p class="text-purple-700 text-xs">
+                        <strong>Gem Output:</strong> Comprehensive quarterly analysis with strategic insights and forward-looking recommendations.
+                    </p>
+                </div>
+                
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                    <h3 class="font-bold text-orange-900 mb-3">🚨 Risk Assessment Report</h3>
+                    <p class="text-orange-800 text-sm mb-3">
+                        "Critical roles unfilled: 3 senior engineers (90+ days), candidate drop-off at final stage increased 20%, competitive market pressure."
+                    </p>
+                    <p class="text-orange-700 text-xs">
+                        <strong>Gem Output:</strong> Risk analysis with immediate action items and strategic mitigation strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Output -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📋 Sample Output Format</h2>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                <h3 class="font-bold text-gray-900 mb-4">RECRUITMENT PERFORMANCE MEMO</h3>
+                <div class="space-y-4 text-sm text-gray-700">
+                    <div>
+                        <h4 class="font-semibold text-gray-900">EXECUTIVE SUMMARY</h4>
+                        <p>• Q3 hiring exceeded targets by 12% with 127 successful placements</p>
+                        <p>• Average time-to-fill improved to 28 days (vs. 35-day target)</p>
+                        <p>• Diversity representation increased to 42% (up from 38% in Q2)</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">KEY RISKS IDENTIFIED</h4>
+                        <p>• Senior technical roles showing 45-day average time-to-fill</p>
+                        <p>• Offer decline rate increased to 22% (market competitiveness)</p>
+                        <p>• Pipeline volume down 15% for Q4 projections</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">IMMEDIATE ACTIONS REQUIRED</h4>
+                        <p>• Salary benchmarking review for technical roles</p>
+                        <p>• Enhanced sourcing strategy for Q4 pipeline</p>
+                        <p>• Candidate experience optimization at offer stage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Collection -->
+        <div class="text-center mt-12">
+            <a href="index.html" class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                ← Back to Gems Collection
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#1e40af';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .metric-card').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
