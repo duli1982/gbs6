@@ -141,7 +141,7 @@
                                     <a href="#reverse-prompt" class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Reverse Prompt</a>
                                     <a href="#my-library" class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Library</a>
                                     <a href="#simulator" class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Scenario Simulator</a>
-                                    <a href="#my-day" class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Day with AI</a>
+                                    `<a href="#my-day" class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Day with AI</a>`n                                    <a href="../recruiter-ai-skill-audit/index.html" class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">AI Skill Audit</a>
                                 </div>
                             </div>
                         </div>
@@ -1093,6 +1093,20 @@
                         <h4 class="text-xl font-semibold text-gray-800 mb-4">Why this prompt is effective:</h4>
                         <div id="reverse-prompt-explanation" class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800"></div>
                     </div>
+                    <div class="mt-6">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Optimization Tips</h4>
+                        <ul id="reverse-prompt-tips" class="list-disc list-inside text-gray-700 space-y-1"></ul>
+                    </div>
+                    <div class="mt-6 grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2">Examples</h4>
+                            <ul id="reverse-prompt-examples" class="list-disc list-inside text-gray-700 space-y-1"></ul>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2">Use Cases</h4>
+                            <ul id="reverse-prompt-usecases" class="list-disc list-inside text-gray-700 space-y-1"></ul>
+                        </div>
+                    </div>
                 </div>
                  <div id="reverse-prompt-error" class="hidden mt-8 p-4 bg-red-100 text-red-700 rounded-lg"></div>
             </div>
@@ -1187,9 +1201,10 @@
 
     <script src="../shared/scripts/smooth-scroll.js" defer></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // Note: Use dynamic imports for Firebase so navigation and UI work even if network blocks CDN.
+        let initializeApp;
+        let getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged;
+        let getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs;
 
         // --- GLOBAL STATE ---
         let db, auth, userId, userPromptsUnsubscribe, appId;
@@ -1461,6 +1476,19 @@
                 return;
             }
 
+            try {
+                const appMod = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
+                const authMod = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js');
+                const dbMod = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js');
+
+                initializeApp = appMod.initializeApp;
+                ({ getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } = authMod);
+                ({ getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } = dbMod);
+            } catch (e) {
+                console.warn('Firebase libraries failed to load; proceeding without database/auth.', e);
+                return; // Skip DB-dependent features but don't block the app
+            }
+
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             auth = getAuth(app);
@@ -1711,7 +1739,8 @@
         if (toolsDropdown) {
             const btn = document.getElementById('tools-dropdown-btn');
             const menu = document.getElementById('tools-dropdown-menu');
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const isHidden = menu.classList.contains('hidden');
                 if (isHidden) {
                     menu.classList.remove('hidden', 'opacity-0', 'scale-95');
@@ -1897,39 +1926,49 @@
                 outputContainer.classList.add('hidden');
                 errorContainer.classList.add('hidden');
 
-                const meta_prompt = `You are an expert in prompt engineering. Analyze the following text and generate a high-quality, effective prompt that could have been used to create it. Break down your reasoning, explaining why the prompt you created is effective. The prompt should be structured to include: 1. A clear persona (e.g., 'Act as a...'). 2. A specific task or goal. 3. Instructions on tone and format if they can be inferred from the text. Return your response as a JSON object with two keys: "generated_prompt" and "explanation".\n\nText to analyze:\n---\n${input_text}\n---`;
-
                 try {
-                    const apiKey = ""; // TODO: Add your Google AI API key here
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-                    const payload = { contents: [{ role: "user", parts: [{ text: meta_prompt }] }] };
-
-                    const response = await fetch(apiUrl, {
+                    const response = await fetch('/api/reverse-prompt', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify({ text: input_text })
                     });
 
                     if (!response.ok) {
                         throw new Error(`API request failed with status ${response.status}`);
                     }
 
-                    const result = await response.json();
+                    const parsed = await response.json();
 
-                    if (result.candidates && result.candidates[0].content.parts[0].text) {
-                        const responseText = result.candidates[0].content.parts[0].text;
-                        const cleanedText = responseText.replace(/```json|```/g, '').trim();
-                        const parsedJson = JSON.parse(cleanedText);
+                    document.getElementById('reverse-prompt-output').textContent = parsed.generated_prompt || '';
+                    document.getElementById('reverse-prompt-explanation').textContent = parsed.reasoning || '';
 
-                        document.getElementById('reverse-prompt-output').textContent = parsedJson.generated_prompt;
-                        document.getElementById('reverse-prompt-explanation').textContent = parsedJson.explanation;
-                        outputContainer.classList.remove('hidden');
-                    } else {
-                        throw new Error("Invalid response structure from API.");
-                    }
+                    const tipsEl = document.getElementById('reverse-prompt-tips');
+                    const exEl = document.getElementById('reverse-prompt-examples');
+                    const ucEl = document.getElementById('reverse-prompt-usecases');
+                    if (tipsEl) tipsEl.innerHTML = '';
+                    if (exEl) exEl.innerHTML = '';
+                    if (ucEl) ucEl.innerHTML = '';
+
+                    (parsed.optimization_tips || []).forEach(t => {
+                        const li = document.createElement('li');
+                        li.textContent = t;
+                        tipsEl?.appendChild(li);
+                    });
+                    (parsed.examples || []).forEach(t => {
+                        const li = document.createElement('li');
+                        li.textContent = t;
+                        exEl?.appendChild(li);
+                    });
+                    (parsed.use_cases || []).forEach(t => {
+                        const li = document.createElement('li');
+                        li.textContent = t;
+                        ucEl?.appendChild(li);
+                    });
+
+                    outputContainer.classList.remove('hidden');
                 } catch (error) {
-                    console.error("Reverse prompt generation failed:", error);
-                    errorContainer.textContent = "Sorry, something went wrong while generating the prompt. Please try again.";
+                    console.error('Reverse prompt generation failed:', error);
+                    errorContainer.textContent = 'Sorry, something went wrong while generating the prompt. Please try again.';
                     errorContainer.classList.remove('hidden');
                 } finally {
                     spinner.classList.add('hidden');

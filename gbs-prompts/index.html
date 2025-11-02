@@ -673,7 +673,8 @@
             loadingIndicator.classList.remove('hidden');
 
             try {
-                const response = await fetch('./prompts.json');
+                // Use root-relative path so it works under /gbs-prompts and the /prompts redirect
+                const response = await fetch('/gbs-prompts/prompts.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -1164,7 +1165,7 @@
         backToHomeBtn.addEventListener('click', showHomepage);
         closeGemModalBtn.addEventListener('click', hideGemModal);
 
-        generateGemBtn.addEventListener('click', () => {
+        generateGemBtn.addEventListener('click', async () => {
             const persona = document.getElementById('gem-persona').value.trim();
             const task = document.getElementById('gem-task').value.trim();
             const context = document.getElementById('gem-context').value.trim();
@@ -1199,11 +1200,28 @@
                 gemString += `Format: – "${format}"`;
             }
 
+            // Default local output
             generatedGemTextarea.value = gemString;
             generatedGemContainer.classList.remove('hidden');
-
-            // Scroll the modal to show the generated gem
             generatedGemContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Attempt server-side enhancement via Gemini (no UI change if it fails)
+            try {
+                const resp = await fetch('/api/generate-gem', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ persona, task, context, audience, tone, format, seed: gemString })
+                });
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data && data.gem) {
+                        generatedGemTextarea.value = data.gem;
+                    }
+                }
+            } catch (e) {
+                // Silently ignore; keep local gemString
+                console.error('Gemini enhancement failed', e);
+            }
         });
 
         copyGemBtn.addEventListener('click', () => {

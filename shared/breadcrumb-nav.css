@@ -200,6 +200,11 @@
     font-weight: bold;
 }
 
+.icon-key::before {
+    content: "🔑";
+    font-size: 14px;
+}
+
 /* Progress Indicator (optional add-on) */
 .breadcrumb-progress {
     display: flex;
