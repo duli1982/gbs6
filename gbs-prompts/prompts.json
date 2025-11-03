@@ -529,13 +529,13 @@
           "id": "candidate-engagement-1",
           "title": "Craft Personalized Outreach Messages",
           "description": "Create compelling, psychology-backed outreach messages that build genuine connections with passive candidates without immediately mentioning job opportunities.",
-          "content": "Act as an expert in candidate engagement using psychology and neuroscience. Craft 3 versions of an outreach message for a senior software engineer from Georgia Tech who has led open-source projects and mentors junior developers. Use relevant humor, spark curiosity without mentioning a job, and end with a compelling call to action."
+          "content": "Act as an expert in candidate engagement using psychology and neuroscience. Craft [NUMBER_OF_VERSIONS] versions of an outreach message for a [CANDIDATE_ROLE] from [UNIVERSITY] who has [ACHIEVEMENTS_AND_SKILLS]. Use relevant humor, spark curiosity without mentioning a job, and end with a compelling call to action."
         },
         {
           "id": "candidate-engagement-2",
           "title": "Generate Engaging Subject Lines",
           "description": "Create attention-grabbing email subject lines that stand out in crowded inboxes and intrigue passive candidates to open your message.",
-          "content": "Generate 10 subject lines that stand out in an inbox, tailored for an AI/ML expert with research in computer vision. Each should include a single emoji and intrigue someone who isn't actively job searching."
+          "content": "Act as an expert in candidate engagement using psychology and neuroscience. Craft [NUMBER_OF_VERSIONS] versions of an outreach message for a [CANDIDATE_ROLE] from [UNIVERSITY] who has [ACHIEVEMENTS_AND_SKILLS]. Use relevant humor, spark curiosity without mentioning a job, and end with a compelling call to action."
         },
         {
           "id": "candidate-engagement-3",
@@ -617,13 +617,13 @@
           "id": "sourcing-strategy-1",
           "title": "Analyze Target Employers",
           "description": "Research and identify companies that employ your target talent, including job title variations, certifications, and educational backgrounds for strategic sourcing.",
-          "content": "As a talent acquisition expert specializing in cybersecurity, use the job description below and current industry trends to analyze employers of cybersecurity engineers with cloud security specialization in Washington, D.C. Include job title variations, professional certifications, and educational backgrounds."
+          "content": "As a talent acquisition expert specializing in [SPECIALIZATION], use the [JOB_DESCRIPTION] and current industry trends to analyze employers of [ROLE] with [SUB_SPECIALIZATION] specialization in [LOCATION]. Include job title variations, professional certifications, and educational backgrounds."
         },
         {
           "id": "sourcing-strategy-2",
           "title": "Identify Niche Sourcing Channels",
           "description": "Discover specialized professional communities, conferences, associations, and thought leaders where your ideal candidates are most active and engaged.",
-          "content": "Identify professional associations, key conferences, online communities, and thought leaders relevant to cybersecurity engineers specializing in cloud security."
+          "content": "Act as an expert in cybersecurity and professional networking using industry insights and trends. Identify [NUMBER_OF_ITEMS] professional associations, key conferences, online communities, and thought leaders relevant to [ROLE] specializing in [SPECIALIZATION]. Provide detailed descriptions for each, focusing on their relevance to cloud security without promoting any specific products."
         },
         {
           "id": "sourcing-strategy-3",
@@ -635,7 +635,7 @@
           "id": "sourcing-strategy-4",
           "title": "Create a Sourcing Strategy Plan",
           "description": "Develop comprehensive sourcing strategies with ranked channels, targeted outreach content, and execution steps based on probability of success.",
-          "content": "Based on previous analysis, create a sourcing strategy for cybersecurity engineers in Washington, D.C. Include primary and niche sourcing channels, outreach content recommendations, and execution steps ranked by probability of success."
+          "content": "Act as an expert in talent sourcing and recruitment strategies. Based on previous analysis, create a sourcing strategy for [ROLE] in [LOCATION]. Include primary and niche sourcing channels, outreach content recommendations, and execution steps ranked by probability of success."
         }
       ],
       "Hiring Manager Collaboration": [
@@ -643,7 +643,7 @@
           "id": "sourcing-strategy-5",
           "title": "Develop Hiring Manager Alignment Guide",
           "description": "Create structured intake processes that align hiring managers and recruiters on role requirements, success metrics, and team dynamics.",
-          "content": "Help me develop a hiring manager alignment guide for ML engineer roles in Amsterdam. Include key intake questions covering role responsibilities, required vs. preferred skills, success metrics, team dynamics, and business impact."
+          "content": "Act as an expert in talent acquisition and HR strategy. Develop a hiring manager alignment guide for [ROLE] roles in [LOCATION]. Include key intake questions covering role responsibilities, required vs. preferred skills, success metrics, team dynamics, and business impact."
         },
         {
           "id": "sourcing-strategy-6",
@@ -675,7 +675,7 @@
           "id": "sourcing-strategy-10",
           "title": "Generate Inclusive Boolean Search String",
           "description": "Create comprehensive Boolean search strings that include variations, alternative terms, and implicit indicators to maximize candidate discovery.",
-          "content": "Act as an expert-level sourcer and generate a maximally inclusive Boolean search string for forklift operators. Ensure variations of key terms, verb forms, alternative job titles, and implicit search terms are included."
+          "content": "Act as an expert-level sourcer and generate a maximally inclusive Boolean search string for [JOB_TITLE]. Ensure variations of key terms, verb forms, alternative job titles, and implicit search terms are included."
         },
         {
           "id": "sourcing-strategy-11",
@@ -687,7 +687,7 @@
           "id": "sourcing-strategy-12",
           "title": "Create a GitHub Sourcing Guide",
           "description": "Master technical sourcing techniques using GitHub's native search and Google X-Ray methods to find software developers efficiently.",
-          "content": "Provide step-by-step instructions for sourcing software developers on GitHub using both GitHub search functionality and Google X-Ray search."
+          "content": "Act as an expert in talent sourcing and recruitment strategies. Provide step-by-step instructions for sourcing [ROLE] on [PLATFORM] using both [PLATFORM] search functionality and Google X-Ray search."
         },
         {
           "id": "sourcing-strategy-13",
@@ -699,7 +699,7 @@
           "id": "sourcing-strategy-14",
           "title": "Identify Non-Obvious Talent Pools",
           "description": "Discover hidden talent sources by analyzing adjacent roles, transferable skills, career transition patterns, and alternative qualification paths.",
-          "content": "Help me identify non-obvious talent pools for data analyst roles by analyzing: 1) Adjacent roles with transferable skills, 2) Industries with similar technical requirements, 3) Academic or certification paths that develop relevant capabilities, 4) Career transition patterns into this role. Explain how each pool connects to the required skills."
+          "content": "Act as an expert in talent acquisition and recruitment strategies using industry insights and career analytics. Help me identify non-obvious talent pools for [ROLE] by analyzing: 1) Adjacent roles with transferable skills, 2) Industries with similar technical requirements, 3) Academic or certification paths that develop relevant capabilities, 4) Career transition patterns into this role. Explain how each pool connects to the required skills."
         }
       ],
       "Candidate-Job Matching": [
@@ -707,7 +707,7 @@
           "id": "sourcing-strategy-15",
           "title": "Create a Skills-Based Evaluation Matrix",
           "description": "Build objective evaluation frameworks that assess technical competencies, project experience, and transferable skills for consistent candidate assessment.",
-          "content": "Using the attached job description, create an objective skills-based evaluation matrix for ML engineers. Include technical competencies, project experience criteria, and transferable skills considerations."
+          "content": "Act as an expert in talent assessment and HR evaluation methodologies. Using the [JOB_DESCRIPTION_SOURCE], create an objective skills-based evaluation matrix for [ROLE]. Include [COMPETENCY_CATEGORY1], [COMPETENCY_CATEGORY2], and [COMPETENCY_CATEGORY3]."
         },
         {
           "id": "sourcing-strategy-16",
@@ -725,7 +725,7 @@
           "id": "sourcing-strategy-18",
           "title": "Identify Alternative Candidate Qualifications",
           "description": "Recognize non-traditional pathways and alternative experiences that demonstrate competency, expanding your qualified candidate pool beyond conventional backgrounds.",
-          "content": "Identify alternative experiences or skill combinations that could demonstrate capability in ML engineering. Consider adjacent skills, relevant projects, and non-traditional learning paths."
+          "content": "Act as an expert in machine learning and career development using insights from education and industry trends. Identify [NUMBER_OF_ALTERNATIVES] alternative experiences or skill combinations that could demonstrate capability in [ROLE]. Consider adjacent skills, relevant projects, and non-traditional learning paths."
         },
         {
           "id": "sourcing-strategy-19",
