@@ -34,7 +34,7 @@ class AISkillsAudit {
     async loadQuestions() {
         try {
             console.log('Loading questions from:', window.location.href);
-            const response = await fetch('./questions.json');
+            const response = await fetch('./questions-fixed.json');
             console.log('Response status:', response.status);
             
             if (!response.ok) {
@@ -92,21 +92,21 @@ class AISkillsAudit {
 
         this.aiTools = {
             sourcing: [
-                { name: 'Profile Review & Screening', tools: ['LinkedIn Recruiter AI', 'SeekOut AI Matching', 'HireEZ Smart Sourcing'], priority: 'high' },
-                { name: 'Boolean Search & Query Building', tools: ['ChatGPT for Boolean strings', 'GitHub Copilot', 'Sourcing.io'], priority: 'high' }
+                { name: 'Profile Review & Screening', tools: ['LinkedIn Recruiter AI', 'Gemini for profile analysis', 'Microsoft Copilot for candidate evaluation'], priority: 'high' },
+                { name: 'Boolean Search & Query Building', tools: ['Gemini for Boolean strings', 'Microsoft Copilot for search queries', 'Google Search AI operators'], priority: 'high' }
             ],
             admin: [
-                { name: 'Document Creation & Formatting', tools: ['ChatGPT for JD writing', 'Grammarly Business', 'Notion AI'], priority: 'high' },
-                { name: 'Data Cleanup & Hygiene', tools: ['Excel/Sheets AI functions', 'OpenRefine', 'Zapier data formatter'], priority: 'high' }
+                { name: 'Document Creation & Formatting', tools: ['Gemini for JD writing', 'Microsoft Copilot in Word', 'Google Docs AI writing'], priority: 'high' },
+                { name: 'Data Cleanup & Hygiene', tools: ['Excel Copilot functions', 'Google Sheets AI features', 'Microsoft Power Query'], priority: 'high' }
             ],
             scheduling: [
-                { name: 'Interview Scheduling Automation', tools: ['Calendly', 'GoodTime', 'Cronofy', 'Microsoft Bookings'], priority: 'critical' }
+                { name: 'Interview Scheduling Automation', tools: ['Microsoft Bookings', 'Google Calendar appointment slots', 'Microsoft Outlook scheduling assistant'], priority: 'critical' }
             ],
             compliance: [
-                { name: 'Compliance Task Automation', tools: ['Workday AI compliance', 'ServiceNow AI', 'Compliance.ai'], priority: 'critical' }
+                { name: 'Compliance Task Automation', tools: ['Microsoft Compliance Manager', 'Google Workspace compliance tools', 'Microsoft Purview compliance'], priority: 'critical' }
             ],
             contracts: [
-                { name: 'Contract Generation & Templates', tools: ['LawGeex', 'Kira Systems', 'ContractPodAi', 'Ironclad'], priority: 'critical' }
+                { name: 'Contract Generation & Templates', tools: ['Microsoft Word AI templates', 'Google Docs AI writing', 'Gemini for contract drafting'], priority: 'critical' }
             ]
         };
 
