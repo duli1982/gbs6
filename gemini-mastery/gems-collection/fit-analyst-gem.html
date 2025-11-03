@@ -40,55 +40,7 @@
             animation: float-pattern 20s linear infinite;
         }
 
-        .floating-fit-icons {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
 
-        .fit-icon {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0.6;
-            animation: float-fit 8s ease-in-out infinite;
-        }
-
-        .fit-icon:nth-child(1) {
-            top: 15%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .fit-icon:nth-child(2) {
-            top: 25%;
-            right: 15%;
-            animation-delay: 1s;
-        }
-
-        .fit-icon:nth-child(3) {
-            bottom: 35%;
-            left: 20%;
-            animation-delay: 2s;
-        }
-
-        .fit-icon:nth-child(4) {
-            bottom: 25%;
-            right: 10%;
-            animation-delay: 3s;
-        }
-
-        .fit-icon:nth-child(5) {
-            top: 55%;
-            left: 5%;
-            animation-delay: 4s;
-        }
-
-        .fit-icon:nth-child(6) {
-            top: 65%;
-            right: 8%;
-            animation-delay: 5s;
-        }
 
         .content-section {
             background: white;
@@ -284,34 +236,48 @@
         }
 
         /* Animations */
-        @keyframes float-pattern {
-            0% {
-                transform: translateX(0) translateY(0);
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
             }
-
-            100% {
-                transform: translateX(-20px) translateY(-20px);
+            50% {
+                transform: scale(1.05);
             }
         }
 
-        @keyframes float-fit {
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
 
-            0%,
-            100% {
+        @keyframes line-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
                 transform: translateY(0px) rotate(0deg);
                 opacity: 0.6;
             }
-
             25% {
                 transform: translateY(-10px) rotate(90deg);
                 opacity: 0.8;
             }
-
             50% {
                 transform: translateY(-5px) rotate(180deg);
                 opacity: 0.4;
             }
-
             75% {
                 transform: translateY(-15px) rotate(270deg);
                 opacity: 0.9;
@@ -414,7 +380,7 @@
                 <div class="constellation-line line-3"></div>
             </div>
 
-            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Candidate-Role Fit Analyst</h1>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Recruitment Fit Analyst</h1>
             <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Optimize candidate-role alignment with AI-powered fit analysis. Evaluate job opportunities against target talent pools to maximize recruitment success and candidate satisfaction.
             </p>

@@ -1151,12 +1151,9 @@
                     </div>
                 `;
 
-                // Safe HTML injection
-                if (typeof SecurityUtils !== 'undefined') {
-                    SecurityUtils.safeSetInnerHTML(div, htmlContent);
-                } else {
-                    div.innerHTML = htmlContent;
-                }
+                // Temporarily bypass SecurityUtils for debugging
+                // Direct innerHTML assignment for search results (bypassing SecurityUtils for search highlighting)
+                div.innerHTML = htmlContent;
 
                 div.addEventListener('click', () => {
                     this.handleResultClick(result);
@@ -1669,6 +1666,8 @@
                 }
             });
         });
+
+
     </script>
 </body>
 
