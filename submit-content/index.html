@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Content - Randstad GBS Learning Hub</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Share your AI prompts and success stories with the Randstad GBS community. Help others learn from your experiences.">
+    <meta name="keywords" content="AI prompts, success stories, community, sharing, Randstad GBS, AI learning">
+    <meta name="author" content="Randstad GBS">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../shared/scripts/analytics.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .submit-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .submit-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .form-label .required {
+            color: #ef4444;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-help {
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #357ABD;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: #4A90E2;
+            color: white;
+            border-color: #4A90E2;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .community-guidelines {
+            background: #fef3c7;
+            border: 2px solid #fbbf24;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-option:hover {
+            border-color: #4A90E2;
+            background: #eff6ff;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+        }
+
+        /* Header styles */
+        .site-header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Submit Content</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white site-header py-8 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-4">Share with the Community 🌟</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Help others learn and grow by sharing your best AI prompts and success stories. Your contributions make
+                our community stronger.
+            </p>
+        </div>
+    </header>
+
+    <div class="submit-container">
+        <!-- Tab Buttons -->
+        <div id="tab-container" class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('prompt', this)">📝 Submit Prompt</button>
+            <button class="tab-btn" onclick="switchTab('story', this)">🎯 Share Success Story</button>
+        </div>
+
+        <!-- Hidden iframes for submission -->
+        <iframe name="prompt_iframe" id="prompt_iframe" style="display:none;"></iframe>
+        <iframe name="story_iframe" id="story_iframe" style="display:none;"></iframe>
+
+        <!-- Prompt Submission -->
+        <div id="prompt-tab" class="tab-content active">
+            <div class="submit-card">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Share Your Best AI Prompt</h2>
+                <p class="text-gray-600 mb-6">Help others by sharing prompts that worked well for you</p>
+
+                <div class="community-guidelines">
+                    <strong>📋 Guidelines:</strong>
+                    <ul class="text-sm mt-2 space-y-1">
+                        <li>• Share clear, reusable prompts that solved real problems</li>
+                        <li>• Remove any confidential or personal information</li>
+                        <li>• Explain the context and expected outcome</li>
+                    </ul>
+                </div>
+
+                <form id="prompt-form"
+                    action="https://docs.google.com/forms/d/1DHaf-6sK8YK_Tp25knCpcNMU4hHD8-3xRd2UKghy_h8/formResponse"
+                    method="POST" target="prompt_iframe">
+                    <div class="form-group">
+                        <label class="form-label">Your Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="entry.259232852" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Prompt Title <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="entry.1227222597" required
+                            placeholder="e.g., Professional Interview Invitation Email">
+                        <div class="form-help">A short, descriptive title for your prompt</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Category <span class="required">*</span></label>
+                        <select class="form-select" name="entry.1379089267" required>
+                            <option value="">Select a category...</option>
+                            <option value="Emails & Communication">Emails & Communication</option>
+                            <option value="Candidate Sourcing">Candidate Sourcing</option>
+                            <option value="Job Descriptions">Job Descriptions</option>
+                            <option value="Interview Prep">Interview Prep</option>
+                            <option value="Data Analysis">Data Analysis</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">The Prompt <span class="required">*</span></label>
+                        <textarea class="form-textarea" name="entry.305523983" required
+                            placeholder="Write a professional email to..."></textarea>
+                        <div class="form-help">The actual prompt you used with AI</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Why This Works</label>
+                        <textarea class="form-textarea" name="entry.318296798" style="min-height: 100px;"
+                            placeholder="Explain what makes this prompt effective..."></textarea>
+                        <div class="form-help">Optional: Share tips on why this prompt is effective</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Time Saved (Estimate)</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="entry.942267689" value="5-15 minutes per use">
+                                <span>5-15 minutes per use</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="entry.942267689" value="30+ minutes per use">
+                                <span>30+ minutes per use</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="entry.942267689" value="1+ hours per use">
+                                <span>1+ hours per use</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Prompt for Review →</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Success Story Submission -->
+        <div id="story-tab" class="tab-content">
+            <div class="submit-card">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Share Your Success Story</h2>
+                <p class="text-gray-600 mb-6">Inspire others by sharing how AI improved your work</p>
+
+                <div class="community-guidelines">
+                    <strong>📋 What Makes a Great Story:</strong>
+                    <ul class="text-sm mt-2 space-y-1">
+                        <li>• Specific results (time saved, quality improved, etc.)</li>
+                        <li>• Real examples from your work</li>
+                        <li>• Challenges overcome and lessons learned</li>
+                    </ul>
+                </div>
+
+                <form id="story-form"
+                    action="https://docs.google.com/forms/d/1A63Tq04IFjRoVBaqZZQdXHHBUigPdtshF-VKsi8IcoY/formResponse"
+                    method="POST" target="story_iframe">
+                    <div class="form-group">
+                        <label class="form-label">Your Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="entry.1262074241" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Story Title <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="entry.1783981915" required
+                            placeholder="e.g., How AI Reduced My Screening Time by 50%">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Role</label>
+                        <select class="form-select" name="entry.595168390">
+                            <option value="">Select your role...</option>
+                            <option value="Recruiter">Recruiter</option>
+                            <option value="Coordinator">Coordinator</option>
+                            <option value="Analyst">Analyst</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Story <span class="required">*</span></label>
+                        <textarea class="form-textarea" name="entry.1543444309" required style="min-height: 250px;"
+                            placeholder="Share your story: What was the challenge? How did AI help? What were the results?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Quantifiable Impact</label>
+                        <input type="text" class="form-input" name="entry.336652742"
+                            placeholder="e.g., Saved 10 hours per week, Increased response rate by 30%">
+                        <div class="form-help">Optional: Numbers that demonstrate your success</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Story for Review →</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success-message">
+            <div style="font-size: 64px; margin-bottom: 16px;">🎉</div>
+            <h3 style="font-size: 24px; font-weight: 700; color: #065f46; margin-bottom: 12px;">Thank You!</h3>
+            <p style="color: #047857; margin-bottom: 20px;">Your submission has been received and will be reviewed by
+                our team.</p>
+            <button onclick="resetForm()" class="action-btn btn-primary"
+                style="display: inline-block; padding: 12px 24px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer;">Submit
+                Another</button>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        let promptSubmitted = false;
+        let storySubmitted = false;
+
+        function switchTab(tab, btnElement) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tab + '-tab').classList.add('active');
+        }
+
+        // --- Form Submission Logic ---
+        document.getElementById('prompt-form').addEventListener('submit', function (e) {
+            promptSubmitted = true;
+            // The form will submit to the iframe target
+        });
+
+        document.getElementById('story-form').addEventListener('submit', function (e) {
+            storySubmitted = true;
+            // The form will submit to the iframe target
+        });
+
+        document.getElementById('prompt_iframe').addEventListener('load', function () {
+            if (promptSubmitted) {
+                showSuccessMessage();
+                document.getElementById('prompt-form').reset();
+                promptSubmitted = false; // Reset flag
+            }
+        });
+
+        document.getElementById('story_iframe').addEventListener('load', function () {
+            if (storySubmitted) {
+                showSuccessMessage();
+                document.getElementById('story-form').reset();
+                storySubmitted = false; // Reset flag
+            }
+        });
+
+        function showSuccessMessage() {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.getElementById('tab-container').style.display = 'none';
+            document.getElementById('success-message').classList.add('show');
+
+            // Track submission if progress tracker available
+            if (window.progressTracker) {
+                window.progressTracker.setPreference('hasSubmittedContent', true);
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('success-message').classList.remove('show');
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'block');
+            document.getElementById('tab-container').style.display = 'flex';
+
+            // Show the first tab by default
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('prompt-tab').classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.tab-btn[onclick*="prompt"]').classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>
