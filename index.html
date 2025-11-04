@@ -51,6 +51,84 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
+        /* Hero Banner Styles */
+        .hero-banner {
+            position: relative;
+            background: transparent;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hero-pattern" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="rgba(59,130,246,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23hero-pattern)"/></svg>');
+            animation: hero-bg-move 20s linear infinite;
+            pointer-events: none;
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+
+        /* Ensure animated background elements stay within bounds */
+        .hero-banner .absolute {
+            border-radius: 1.5rem;
+        }
+
+        @keyframes hero-bg-move {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-20px, -20px);
+            }
+        }
+
+        /* Enhanced search input in hero */
+        .hero-banner .search-input {
+            font-size: 18px;
+            padding: 20px 24px 20px 56px;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+        }
+
+        .hero-banner .search-input:focus {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), 0 8px 32px rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-banner .search-icon {
+            left: 20px;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Primary cards enhanced styling */
+        .primary-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Floating animation for hero elements */
+        @keyframes float-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-banner .animate-float {
+            animation: float-gentle 6s ease-in-out infinite;
+        }
+
         /* Search functionality styles */
         .search-container {
             position: relative;
@@ -136,7 +214,7 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             max-height: 400px;
             overflow-y: auto;
-            z-index: 50;
+            z-index: 9999;
             margin-top: 8px;
             opacity: 0;
             visibility: hidden;
@@ -478,324 +556,409 @@
 
     <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
 
-        <header class="text-center mb-8 md:mb-12 px-4">
-            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Randstad GBS Learning Hub
-            </h1>
-            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">A central
-                portal for our AI training programs,
-                sourcing tools, and interactive workshops.</p>
-        </header>
+        <!-- Hero Banner Section -->
+        <section class="hero-banner rounded-3xl p-8 md:p-12 mb-12 mx-4 relative">
+            <!-- Animated Background Elements -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-20 h-20 bg-blue-400 rounded-full animate-pulse"></div>
+                <div class="absolute top-32 right-20 w-16 h-16 bg-purple-400 rounded-full animate-bounce"
+                    style="animation-delay: 0.5s;"></div>
+                <div class="absolute bottom-20 left-32 w-12 h-12 bg-indigo-400 rounded-full animate-pulse"
+                    style="animation-delay: 1s;"></div>
+            </div>
 
-        <!-- Global Search Bar -->
-        <div class="search-container mb-8 md:mb-12 px-4" role="search">
-            <div class="relative">
-                <svg class="search-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-                <input type="text" id="global-search" class="search-input"
-                    placeholder="Search modules, content, and resources..." autocomplete="off"
-                    aria-label="Search all learning modules and content" role="searchbox">
-                <button class="clear-search" id="clear-search" title="Clear search" aria-label="Clear search input">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
+            <div class="relative z-10 text-center max-w-4xl mx-auto">
+                <h1 class="google-sans text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Transform Your Work with <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">AI</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
+                    Your central hub for AI training, tools, and success stories. Start saving hours today.
+                </p>
 
-                <!-- Search Results Dropdown -->
-                <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
-                    <div class="search-suggestions">
-                        <div class="search-suggestions-title">Popular Searches</div>
-                        <span class="search-suggestion-tag" data-search="AI training">AI Training</span>
-                        <span class="search-suggestion-tag" data-search="prompts">Prompts</span>
-                        <span class="search-suggestion-tag" data-search="resume">Resume</span>
-                        <span class="search-suggestion-tag" data-search="sourcing">Sourcing</span>
-                        <span class="search-suggestion-tag" data-search="boolean">Boolean</span>
-                        <span class="search-suggestion-tag" data-search="leadership">Leadership</span>
-                        <span class="search-suggestion-tag" data-search="create framework">CREATE Framework</span>
-                        <span class="search-suggestion-tag" data-search="automation">Automation</span>
-                        <span class="search-suggestion-tag" data-search="success stories">Success Stories</span>
-                    </div>
-                    <div id="search-results-content">
-                        <!-- Dynamic search results will appear here -->
+                <!-- Global Search Bar -->
+                <div class="search-container mb-8 max-w-2xl mx-auto" role="search">
+                    <div class="relative">
+                        <svg class="search-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="global-search" class="search-input text-lg py-4 px-6 pl-14"
+                            placeholder="Search for AI tools, training, and resources..." autocomplete="off"
+                            aria-label="Search all learning modules and content" role="searchbox">
+                        <button class="clear-search" id="clear-search" title="Clear search"
+                            aria-label="Clear search input">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+
+                        <!-- Search Results Dropdown -->
+                        <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
+                            <div class="search-suggestions">
+                                <div class="search-suggestions-title">Popular Searches</div>
+                                <span class="search-suggestion-tag" data-search="AI training">AI Training</span>
+                                <span class="search-suggestion-tag" data-search="prompts">Prompts</span>
+                                <span class="search-suggestion-tag" data-search="resume">Resume</span>
+                                <span class="search-suggestion-tag" data-search="sourcing">Sourcing</span>
+                                <span class="search-suggestion-tag" data-search="boolean">Boolean</span>
+                                <span class="search-suggestion-tag" data-search="leadership">Leadership</span>
+                                <span class="search-suggestion-tag" data-search="create framework">CREATE
+                                    Framework</span>
+                                <span class="search-suggestion-tag" data-search="automation">Automation</span>
+                                <span class="search-suggestion-tag" data-search="success stories">Success Stories</span>
+                            </div>
+                            <div id="search-results-content">
+                                <!-- Dynamic search results will appear here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Hero CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="onboarding-flow/index.html"
+                        class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                        🚀 Get Started with AI
+                    </a>
+                    <a href="gbs-prompts/index.html"
+                        class="bg-white text-gray-700 px-8 py-4 rounded-full font-semibold text-lg border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                        ✨ Browse AI Prompts
+                    </a>
+                </div>
             </div>
-        </div>
+        </section>
 
         <main>
-            <!-- Quick Tools Section -->
-            <div
-                class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-4 md:p-8 mb-8 md:mb-12 max-w-5xl mx-auto border border-amber-200 mx-4">
-                <div class="text-center mb-4 md:mb-6">
-                    <h3 class="google-sans text-xl md:text-2xl font-bold text-amber-800 mb-2">⚡ Need Something Right
-                        Now?</h3>
-                    <p class="text-amber-700 text-sm md:text-base">Immediate tools you can use today to save time</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+            <!-- Primary Cards Section -->
+            <section class="mb-12">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 text-center mb-8">Most Popular</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+                    <!-- Gemini Mastery Guide -->
+                    <a href="gemini-mastery/index.html"
+                        class="block bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-200 rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                💎</div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-3">Gemini Mastery Guide</h3>
+                            <p class="text-gray-600 leading-relaxed mb-4">Master Google's most powerful AI with
+                                comprehensive training and advanced techniques.</p>
+                            <span
+                                class="inline-block bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full text-sm font-medium">🔥
+                                Most Popular</span>
+                        </div>
+                    </a>
+
+                    <!-- GBS AI Prompts Library -->
                     <a href="gbs-prompts/index.html"
-                        class="bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group">
-                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">✨</div>
-                        <h4 class="font-semibold text-gray-900 mb-1">AI Prompts</h4>
-                        <p class="text-sm text-gray-600">Ready-to-use prompts for emails, sourcing, and more</p>
+                        class="block bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                ✨</div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-3">AI Prompts Library</h3>
+                            <p class="text-gray-600 leading-relaxed mb-4">Ready-to-use expert prompts for emails,
+                                sourcing, and daily tasks.</p>
+                            <span
+                                class="inline-block bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">⚡
+                                Instant Results</span>
+                        </div>
                     </a>
-                    <a href="ai-help/index.html"
-                        class="bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group">
-                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🤖</div>
-                        <h4 class="font-semibold text-gray-900 mb-1">AI in Action</h4>
-                        <p class="text-sm text-gray-600">See examples of AI transforming daily work</p>
-                    </a>
-                    <a href="daily-focus/index.html"
-                        class="bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group">
-                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
-                        <h4 class="font-semibold text-gray-900 mb-1">Daily Focus</h4>
-                        <p class="text-sm text-gray-600">Micro-coaching cards for skill improvement</p>
-                    </a>
-                    <a href="use-cases/index.html"
-                        class="bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group">
-                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">�</div>
-                        <h4 class="font-semibold text-gray-900 mb-1">Success Stories</h4>
-                        <p class="text-sm text-gray-600">See how colleagues save hours daily</p>
-                    </a>
-                    <a href="knowledge-content/index.html"
-                        class="bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group">
-                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">📚</div>
-                        <h4 class="font-semibold text-gray-900 mb-1">Knowledge Base</h4>
-                        <p class="text-sm text-gray-600">Guides, tutorials, and best practices</p>
-                    </a>
-                    <a href="recruiter-ai-skill-audit/index.html"
-                        class="bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group">
-                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
-                        <h4 class="font-semibold text-gray-900 mb-1">AI Skill Audit</h4>
-                        <p class="text-sm text-gray-600">Find your biggest time-savers and a 30-day plan</p>
+
+                    <!-- GBS AI Workshop -->
+                    <a href="gbs-ai-workshop/index.html"
+                        class="block bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                👔</div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-3">GBS Leaders Workshop</h3>
+                            <p class="text-gray-600 leading-relaxed mb-4">Interactive training with prompt libraries,
+                                simulators, and case studies.</p>
+                            <span
+                                class="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">🎯
+                                Interactive</span>
+                        </div>
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" id="modules-grid"
-                role="navigation" aria-label="Main learning modules">
-
-                <!-- Get Started with AI -->
-                <a href="onboarding-flow/index.html"
-                    class="block bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="onboarding get started new user orientation role-based personalized assessment quiz quick start"
-                    aria-label="Get Started with AI - Personalized onboarding for new users">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            🌟
-                        </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Get Started with AI</h3>
-                        </div>
+            <!-- Quick Actions Bar -->
+            <section class="mb-12">
+                <div
+                    class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 md:p-8 max-w-6xl mx-auto border border-amber-200 mx-4">
+                    <div class="text-center mb-6">
+                        <h3 class="google-sans text-xl md:text-2xl font-bold text-amber-800 mb-2">⚡ Quick Actions</h3>
+                        <p class="text-amber-700">Jump straight to what you need</p>
                     </div>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">New to AI? Start here! Personalized onboarding
-                        based on your role, skill assessment, and immediate tools you can use today.</p>
-                    <div class="flex flex-wrap gap-2 text-xs">
-                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Role-based
-                            recommendations</span>
-                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Skill assessment</span>
-                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Quick wins</span>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="recruiter-ai-skill-audit/index.html"
+                            class="bg-white p-4 rounded-xl border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">AI Skill Audit</h4>
+                        </a>
+                        <a href="use-cases/index.html"
+                            class="bg-white p-4 rounded-xl border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">💡</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Success Stories</h4>
+                        </a>
+                        <a href="daily-focus/index.html"
+                            class="bg-white p-4 rounded-xl border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Daily Focus</h4>
+                        </a>
+                        <a href="knowledge-content/index.html"
+                            class="bg-white p-4 rounded-xl border border-amber-200 hover:border-amber-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">📚</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Knowledge Base</h4>
+                        </a>
                     </div>
-                </a>
+                </div>
+            </section>
 
-                <!-- RPO AI Acceleration Program -->
-                <a href="rpo-training/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="rpo ai acceleration program training curriculum foundations leadership strategy modules phases">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            🎓
-                        </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">RPO AI Acceleration Program
-                            </h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">The complete, multi-phase training curriculum for
-                        all RPO team members, from AI foundations to leadership strategy.</p>
-                </a>
+            <!-- All Learning Modules -->
+            <section>
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 text-center mb-8">All Learning
+                    Modules</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4"
+                    id="modules-grid" role="navigation" aria-label="All learning modules">
 
-                <!-- Guide for GBS Leaders -->
-                <a href="gbs-ai-workshop/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="gbs leaders guide interactive training prompt libraries simulators case studies workshop">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            👔
+                    <!-- Get Started with AI -->
+                    <a href="onboarding-flow/index.html"
+                        class="block bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="onboarding get started new user orientation role-based personalized assessment quiz quick start"
+                        aria-label="Get Started with AI - Personalized onboarding for new users">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🌟
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Get Started with AI</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Guide for GBS Leaders</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">New to AI? Start here! Personalized
+                            onboarding
+                            based on your role, skill assessment, and immediate tools you can use today.</p>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Role-based
+                                recommendations</span>
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Skill assessment</span>
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full">✓ Quick wins</span>
                         </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">An interactive training for GBS leaders, complete
-                        with prompt libraries, simulators, and case studies.</p>
-                </a>
+                    </a>
 
-                <!-- Daily Sourcing Focus -->
-                <a href="daily-focus/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="daily sourcing focus micro-coaching tool actionable cards talent sourcers skills">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            🎯
+                    <!-- RPO AI Acceleration Program -->
+                    <a href="rpo-training/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="rpo ai acceleration program training curriculum foundations leadership strategy modules phases">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🎓
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">RPO AI Acceleration Program
+                                </h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Daily Sourcing Focus</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">A daily micro-coaching tool with actionable focus
-                        cards designed to sharpen the skills of our talent sourcers.</p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">The complete, multi-phase training curriculum
+                            for
+                            all RPO team members, from AI foundations to leadership strategy.</p>
+                    </a>
 
-                <!-- GBS AI Prompts Library -->
-                <a href="gbs-prompts/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="gbs ai prompts library comprehensive searchable expert prompts daily tasks professionals">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            ✨
+                    <!-- Guide for GBS Leaders -->
+                    <a href="gbs-ai-workshop/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="gbs leaders guide interactive training prompt libraries simulators case studies workshop">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                👔
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Guide for GBS Leaders</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">GBS AI Prompts Library</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">A comprehensive and searchable library of expert
-                        prompts designed to accelerate daily tasks for GBS professionals.</p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">An interactive training for GBS leaders,
+                            complete
+                            with prompt libraries, simulators, and case studies.</p>
+                    </a>
 
-                <!-- Knowledge Content -->
-                <a href="knowledge-content/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="knowledge content wealth resources information learning materials documentation best practices guides tutorials">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            📚
+                    <!-- Daily Sourcing Focus -->
+                    <a href="daily-focus/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="daily sourcing focus micro-coaching tool actionable cards talent sourcers skills">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🎯
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Daily Sourcing Focus</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Knowledge Content</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">Essential guides, best practices, and tutorials
-                        covering AI fundamentals, implementation strategies, and troubleshooting common challenges.</p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">A daily micro-coaching tool with actionable
+                            focus
+                            cards designed to sharpen the skills of our talent sourcers.</p>
+                    </a>
 
-                <!-- AI SME -->
-                <a href="ai-sme/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="ai sme subject matter expert knowledge resources artificial intelligence expertise advanced techniques deep dive">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            🧠
+                    <!-- GBS AI Prompts Library -->
+                    <a href="gbs-prompts/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="gbs ai prompts library comprehensive searchable expert prompts daily tasks professionals">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                ✨
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">GBS AI Prompts Library</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI SME</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">Advanced AI techniques, expert insights, and
-                        deep-dive resources for power users looking to maximize their AI capabilities and become team
-                        champions.</p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">A comprehensive and searchable library of
+                            expert
+                            prompts designed to accelerate daily tasks for GBS professionals.</p>
+                    </a>
 
-                <!-- AI Success Stories -->
-                <a href="use-cases/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="ai success stories real-world examples case studies transforms daily work randstad gbs impact">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            💡
+                    <!-- Knowledge Content -->
+                    <a href="knowledge-content/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="knowledge content wealth resources information learning materials documentation best practices guides tutorials">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                📚
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Knowledge Content</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Success Stories</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">Real-world examples and case studies showcasing how
-                        AI transforms daily work at Randstad GBS. See the impact firsthand.</p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">Essential guides, best practices, and tutorials
+                            covering AI fundamentals, implementation strategies, and troubleshooting common challenges.
+                        </p>
+                    </a>
 
-                <!-- AI Simulations -->
-                <a href="ai-simulations/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="ai simulations reading between lines interactive training evaluate ai content hidden gems resume analysis">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            🔍
+                    <!-- AI SME -->
+                    <a href="ai-sme/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai sme subject matter expert knowledge resources artificial intelligence expertise advanced techniques deep dive">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🧠
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI SME</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Simulations - Reading
-                                Between the Lines</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">Interactive training to sharpen your ability to
-                        evaluate AI-generated content and identify what it might miss in candidate assessments.</p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">Advanced AI techniques, expert insights, and
+                            deep-dive resources for power users looking to maximize their AI capabilities and become
+                            team
+                            champions.</p>
+                    </a>
 
-                <!-- Interactive Workshops -->
-                <a href="workshops/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="interactive workshops live sessions experts skills sourcing masterclass prompt engineering leadership automation workflow">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            🎪
+                    <!-- AI Success Stories -->
+                    <a href="use-cases/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai success stories real-world examples case studies transforms daily work randstad gbs impact">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                💡
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Success Stories</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Interactive Workshops</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">Join live sessions with experts to enhance your
-                        skills. Interactive workshops covering AI sourcing, prompt engineering, leadership, and workflow
-                        automation.</p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">Real-world examples and case studies showcasing
+                            how
+                            AI transforms daily work at Randstad GBS. See the impact firsthand.</p>
+                    </a>
 
-                <!-- AppScript Idea Bank -->
-                <a href="appscript-bank/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="appscript idea bank automation google apps script drive sheets forms calendar gmail innovation ideas submit">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            🔧
+                    <!-- AI Simulations -->
+                    <a href="ai-simulations/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai simulations reading between lines interactive training evaluate ai content hidden gems resume analysis">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🔍
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Simulations - Reading
+                                    Between the Lines</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AppScript Idea Bank</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">A central knowledge bank for innovative automation
-                        ideas using Google Apps Script. Submit your ideas and discover powerful automation solutions.
-                    </p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">Interactive training to sharpen your ability to
+                            evaluate AI-generated content and identify what it might miss in candidate assessments.</p>
+                    </a>
 
-                <!-- Gemini Mastery Guide -->
-                <a href="gemini-mastery/index.html"
-                    class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                    data-keywords="gemini mastery guide google ai advanced techniques expert training comprehensive tutorial">
-                    <div class="flex items-start mb-4">
-                        <div
-                            class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
-                            💎
+                    <!-- Interactive Workshops -->
+                    <a href="workshops/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="interactive workshops live sessions experts skills sourcing masterclass prompt engineering leadership automation workflow">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🎪
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Interactive Workshops</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Gemini Mastery Guide</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm leading-relaxed">Comprehensive training and advanced techniques for
-                        mastering Google's Gemini AI. Expert-level guidance for maximizing productivity and
-                        capabilities.
-                    </p>
-                </a>
+                        <p class="text-gray-600 text-sm leading-relaxed">Join live sessions with experts to enhance your
+                            skills. Interactive workshops covering AI sourcing, prompt engineering, leadership, and
+                            workflow
+                            automation.</p>
+                    </a>
 
-            </div>
+                    <!-- AppScript Idea Bank -->
+                    <a href="appscript-bank/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="appscript idea bank automation google apps script drive sheets forms calendar gmail innovation ideas submit">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🔧
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AppScript Idea Bank</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">A central knowledge bank for innovative
+                            automation
+                            ideas using Google Apps Script. Submit your ideas and discover powerful automation
+                            solutions.
+                        </p>
+                    </a>
+
+                    <!-- Gemini Mastery Guide -->
+                    <a href="gemini-mastery/index.html"
+                        class="block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="gemini mastery guide google ai advanced techniques expert training comprehensive tutorial">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                💎
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Gemini Mastery Guide</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Comprehensive training and advanced techniques
+                            for
+                            mastering Google's Gemini AI. Expert-level guidance for maximizing productivity and
+                            capabilities.
+                        </p>
+                    </a>
+
+                </div>
+            </section>
 
             <!-- No Results Message -->
             <div class="no-results hidden" id="no-results">
@@ -853,15 +1016,17 @@
 
             async loadSearchIndex() {
                 try {
-                    const response = await fetch('/shared/search-index.json');
+                    const response = await fetch('shared/search-index.json');
                     const data = await response.json();
                     this.searchData = data.searchIndex.map(item => ({
                         ...item,
-                        searchText: `${item.title} ${item.description} ${item.keywords} ${item.content}`.toLowerCase()
+                        searchText: `${item.title} ${item.description} ${item.keywords} ${item.content || ''}`.toLowerCase()
                     }));
 
                     // Also build card data for local filtering
                     this.cardData = this.buildCardIndex();
+
+                    console.log(`Loaded ${this.searchData.length} items from search index`);
                 } catch (error) {
                     console.warn('Could not load search index, falling back to local search:', error);
                     this.searchData = this.buildCardIndex();
