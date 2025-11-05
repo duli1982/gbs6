@@ -26,189 +26,39 @@
     <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
 
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .google-sans {
-            font-family: 'Google Sans', sans-serif;
-        }
-
-        .submit-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .submit-card {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-
-        .form-label .required {
-            color: #ef4444;
-        }
-
-        .form-input,
-        .form-textarea,
-        .form-select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.2s ease;
-            font-family: 'Google Sans', sans-serif;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: #4A90E2;
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-        }
-
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .form-help {
-            font-size: 13px;
-            color: #6b7280;
-            margin-top: 4px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: #4A90E2;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            background: #357ABD;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
-        }
-
-        .submit-btn:disabled {
-            background: #d1d5db;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 14px;
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn.active {
-            background: #4A90E2;
-            color: white;
-            border-color: #4A90E2;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .success-message {
-            background: #d1fae5;
-            border: 2px solid #10b981;
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        .community-guidelines {
-            background: #fef3c7;
-            border: 2px solid #fbbf24;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 24px;
-        }
-
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .radio-option {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            background: #f9fafb;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .radio-option:hover {
-            border-color: #4A90E2;
-            background: #eff6ff;
-        }
-
-        .radio-option input[type="radio"] {
-            margin-right: 12px;
-        }
-
-        /* Header styles */
-        .site-header {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
+        body {font-family: 'Roboto', sans-serif;}
+        .google-sans {font-family: 'Google Sans', sans-serif;}
+        .submit-container {max-width: 800px;margin: 0 auto;padding: 40px 20px;}
+        .submit-card {background: white;border-radius: 16px;padding: 40px;box-shadow: 0 4px 12px rgba(0,0,0,0.08);margin-bottom: 30px;}
+        .form-group {margin-bottom: 24px;}
+        .form-label {display: block;font-weight: 600;color: #374151;margin-bottom: 8px;font-size: 15px;}
+        .form-label .required {color: #ef4444;}
+        .form-input,.form-textarea,.form-select {width: 100%;padding: 12px 16px;border: 2px solid #e5e7eb;border-radius: 8px;font-size: 15px;transition: all .2s ease;font-family: 'Google Sans', sans-serif;}
+        .form-input:focus,.form-textarea:focus,.form-select:focus {outline:none;border-color:#4A90E2;box-shadow:0 0 0 3px rgba(74,144,226,.1);}
+        .form-textarea {min-height:150px;resize:vertical;}
+        .form-help {font-size:13px;color:#6b7280;margin-top:4px;}
+        .submit-btn {width:100%;padding:16px;background:#4A90E2;color:white;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s ease;}
+        .submit-btn:hover {background:#357ABD;transform:translateY(-1px);box-shadow:0 4px 12px rgba(74,144,226,.3);}
+        .submit-btn:disabled {background:#d1d5db;cursor:not-allowed;transform:none;}
+        .tab-buttons {display:flex;gap:12px;margin-bottom:30px;}
+        .tab-btn {flex:1;padding:14px;background:white;border:2px solid #e5e7eb;border-radius:10px;font-weight:600;cursor:pointer;transition:all .2s ease;}
+        .tab-btn.active {background:#4A90E2;color:white;border-color:#4A90E2;}
+        .tab-content {display:none;}
+        .tab-content.active {display:block;}
+        .success-message {background:#d1fae5;border:2px solid #10b981;border-radius:12px;padding:24px;text-align:center;display:none;}
+        .success-message.show {display:block;}
+        .community-guidelines {background:#fef3c7;border:2px solid #fbbf24;border-radius:8px;padding:16px;margin-bottom:24px;}
+        .radio-group {display:flex;flex-direction:column;gap:12px;}
+        .radio-option {display:flex;align-items:center;padding:12px;background:#f9fafb;border:2px solid #e5e7eb;border-radius:8px;cursor:pointer;transition:all .2s ease;}
+        .radio-option:hover {border-color:#4A90E2;background:#eff6ff;}
+        .radio-option input[type="radio"] {margin-right:12px;}
+        .site-header {background:white;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
     </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Enhanced Breadcrumb Navigation -->
+    <!-- Breadcrumb Navigation -->
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <div class="breadcrumb-wrapper">
             <div class="breadcrumb-nav">
@@ -240,7 +90,7 @@
     <!-- Header -->
     <header class="bg-white site-header py-8 px-4 text-center">
         <div class="max-w-4xl mx-auto">
-            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-4">Share with the Community 🌟</h1>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-4">Share with the Community</h1>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Help others learn and grow by sharing your best AI prompts and success stories. Your contributions make
                 our community stronger.
@@ -251,11 +101,11 @@
     <div class="submit-container">
         <!-- Tab Buttons -->
         <div id="tab-container" class="tab-buttons">
-            <button class="tab-btn active" onclick="switchTab('prompt', this)">📝 Submit Prompt</button>
-            <button class="tab-btn" onclick="switchTab('story', this)">🎯 Share Success Story</button>
+            <button class="tab-btn active" onclick="switchTab('prompt', this)">Submit Prompt</button>
+            <button class="tab-btn" onclick="switchTab('story', this)">Share Success Story</button>
         </div>
 
-        <!-- Hidden iframes for submission -->
+        <!-- Hidden iframes -->
         <iframe name="prompt_iframe" id="prompt_iframe" style="display:none;"></iframe>
         <iframe name="story_iframe" id="story_iframe" style="display:none;"></iframe>
 
@@ -266,7 +116,7 @@
                 <p class="text-gray-600 mb-6">Help others by sharing prompts that worked well for you</p>
 
                 <div class="community-guidelines">
-                    <strong>📋 Guidelines:</strong>
+                    <strong>Guidelines:</strong>
                     <ul class="text-sm mt-2 space-y-1">
                         <li>• Share clear, reusable prompts that solved real problems</li>
                         <li>• Remove any confidential or personal information</li>
@@ -334,14 +184,7 @@
                         </div>
                     </div>
 
-                    <!-- 
-                        REMOVED FIELDS that were causing the problem:
-                        <input type="hidden" name="fvv" value="1">
-                        <input type="hidden" name="draftResponse" value="">
-                        <input type="hidden" name="pageHistory" value="0">
-                        <input type="hidden" name="fbzx" value="">
-                    -->
-                    <button type="submit" class="submit-btn">Submit Prompt for Review →</button>
+                    <button type="submit" class="submit-btn">Submit Prompt for Review</button>
                 </form>
             </div>
         </div>
@@ -353,7 +196,7 @@
                 <p class="text-gray-600 mb-6">Inspire others by sharing how AI improved your work</p>
 
                 <div class="community-guidelines">
-                    <strong>📋 What Makes a Great Story:</strong>
+                    <strong>What Makes a Great Story:</strong>
                     <ul class="text-sm mt-2 space-y-1">
                         <li>• Specific results (time saved, quality improved, etc.)</li>
                         <li>• Real examples from your work</li>
@@ -400,27 +243,18 @@
                         <div class="form-help">Optional: Numbers that demonstrate your success</div>
                     </div>
 
-                    <!-- 
-                        REMOVED FIELDS that were causing the problem:
-                        <input type="hidden" name="fvv" value="1">
-                        <input type="hidden" name="draftResponse" value="">
-                        <input type="hidden" name="pageHistory" value="0">
-                        <input type="hidden" name="fbzx" value="">
-                    -->
-                    <button type="submit" class="submit-btn">Submit Story for Review →</button>
+                    <button type="submit" class="submit-btn">Submit Story for Review</button>
                 </form>
             </div>
         </div>
 
         <!-- Success Message -->
         <div id="success-message" class="success-message">
-            <div style="font-size: 64px; margin-bottom: 16px;">🎉</div>
+            <div style="font-size: 64px; margin-bottom: 16px;">Thank You!</div>
             <h3 style="font-size: 24px; font-weight: 700; color: #065f46; margin-bottom: 12px;">Thank You!</h3>
-            <p style="color: #047857; margin-bottom: 20px;">Your submission has been received and will be reviewed by
-                our team.</p>
+            <p style="color: #047857; margin-bottom: 20px;">Your submission has been received and will be reviewed by our team.</p>
             <button onclick="resetForm()" class="action-btn btn-primary"
-                style="display: inline-block; padding: 12px 24px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer;">Submit
-                Another</button>
+                style="display: inline-block; padding: 12px 24px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer;">Submit Another</button>
         </div>
     </div>
 
@@ -434,63 +268,85 @@
 
     <div id="footer-placeholder"></div>
 
-    <!-- Scripts -->
+    <!-- Shared scripts -->
     <script src="../shared/scripts/breadcrumb-nav.js" defer></script>
     <script src="../shared/scripts/footer.js" defer></script>
     <script src="../shared/scripts/scroll-to-top.js" defer></script>
 
+    <!-- ====  NEW SUBMISSION LOGIC  ==== -->
     <script>
-        let promptSubmitted = false;
-        let storySubmitted = false;
+        /* ----------  STATE  ---------- */
+        const submitted = { prompt: false, story: false };
 
-        function switchTab(tab, btnElement) {
-            // Update tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+        /* ----------  TOKEN POPULATION  ---------- */
+        function populateGoogleFormTokens(form) {
+            const now = Date.now();
+            const rand = Math.floor(Math.random() * 1000);
+            const fbzx = `-${now}${rand}`;
 
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            // fbzx
+            let el = form.querySelector('input[name="fbzx"]');
+            if (!el) { el = document.createElement('input'); el.type = 'hidden'; el.name = 'fbzx'; form.appendChild(el); }
+            el.value = fbzx;
+
+            // draftResponse
+            el = form.querySelector('input[name="draftResponse"]');
+            if (!el) { el = document.createElement('input'); el.type = 'hidden'; el.name = 'draftResponse'; form.appendChild(el); }
+            el.value = JSON.stringify([null, null, null, fbzx]);
+
+            // pageHistory
+            el = form.querySelector('input[name="pageHistory"]');
+            if (!el) { el = document.createElement('input'); el.type = 'hidden'; el.name = 'pageHistory'; form.appendChild(el); }
+            el.value = '0';
+
+            // fvv
+            el = form.querySelector('input[name="fvv"]');
+            if (!el) { el = document.createElement('input'); el.type = 'hidden'; el.name = 'fvv'; form.appendChild(el); }
+            el.value = '1';
+        }
+
+        /* ----------  TAB SWITCHING  ---------- */
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById(tab + '-tab').classList.add('active');
         }
 
-        // --- Form Submission Logic ---
-
-        // REMOVED the 'populateGoogleFormTokens' function that was causing the issue.
-
-        document.getElementById('prompt-form').addEventListener('submit', function (e) {
-            // REMOVED: populateGoogleFormTokens(this);
-            promptSubmitted = true;
-            // The form will now submit clean data to the iframe target
+        /* ----------  FORM SUBMIT  ---------- */
+        document.getElementById('prompt-form').addEventListener('submit', function () {
+            populateGoogleFormTokens(this);
+            submitted.prompt = true;
         });
 
-        document.getElementById('story-form').addEventListener('submit', function (e) {
-            // REMOVED: populateGoogleFormTokens(this);
-            storySubmitted = true;
-            // The form will now submit clean data to the iframe target
+        document.getElementById('story-form').addEventListener('submit', function () {
+            populateGoogleFormTokens(this);
+            submitted.story = true;
         });
 
+        /* ----------  IFRAME LOAD  ---------- */
         document.getElementById('prompt_iframe').addEventListener('load', function () {
-            if (promptSubmitted) {
+            if (submitted.prompt) {
                 showSuccessMessage();
                 document.getElementById('prompt-form').reset();
-                promptSubmitted = false; // Reset flag
+                submitted.prompt = false;
             }
         });
 
         document.getElementById('story_iframe').addEventListener('load', function () {
-            if (storySubmitted) {
+            if (submitted.story) {
                 showSuccessMessage();
                 document.getElementById('story-form').reset();
-                storySubmitted = false; // Reset flag
+                submitted.story = false;
             }
         });
 
+        /* ----------  SUCCESS UI  ---------- */
         function showSuccessMessage() {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
             document.getElementById('tab-container').style.display = 'none';
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
             document.getElementById('success-message').classList.add('show');
 
-            // Track submission if progress tracker available
             if (window.progressTracker) {
                 window.progressTracker.setPreference('hasSubmittedContent', true);
             }
@@ -498,18 +354,12 @@
 
         function resetForm() {
             document.getElementById('success-message').classList.remove('show');
-            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'block');
             document.getElementById('tab-container').style.display = 'flex';
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'block');
 
-            // Show the first tab by default
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById('prompt-tab').classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.tab-btn[onclick*="prompt"]').classList.add('active');
+            // default to Prompt tab
+            switchTab('prompt', document.querySelector('.tab-btn[onclick*="prompt"]'));
         }
     </script>
-
 </body>
-
-
 </html>
