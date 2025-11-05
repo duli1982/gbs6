@@ -334,10 +334,13 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="fvv" value="1">
-                    <input type="hidden" name="draftResponse" value="">
-                    <input type="hidden" name="pageHistory" value="0">
-                    <input type="hidden" name="fbzx" value="">
+                    <!-- 
+                        REMOVED FIELDS that were causing the problem:
+                        <input type="hidden" name="fvv" value="1">
+                        <input type="hidden" name="draftResponse" value="">
+                        <input type="hidden" name="pageHistory" value="0">
+                        <input type="hidden" name="fbzx" value="">
+                    -->
                     <button type="submit" class="submit-btn">Submit Prompt for Review →</button>
                 </form>
             </div>
@@ -397,10 +400,13 @@
                         <div class="form-help">Optional: Numbers that demonstrate your success</div>
                     </div>
 
-                    <input type="hidden" name="fvv" value="1">
-                    <input type="hidden" name="draftResponse" value="">
-                    <input type="hidden" name="pageHistory" value="0">
-                    <input type="hidden" name="fbzx" value="">
+                    <!-- 
+                        REMOVED FIELDS that were causing the problem:
+                        <input type="hidden" name="fvv" value="1">
+                        <input type="hidden" name="draftResponse" value="">
+                        <input type="hidden" name="pageHistory" value="0">
+                        <input type="hidden" name="fbzx" value="">
+                    -->
                     <button type="submit" class="submit-btn">Submit Story for Review →</button>
                 </form>
             </div>
@@ -448,41 +454,19 @@
         }
 
         // --- Form Submission Logic ---
-        function populateGoogleFormTokens(form) {
-            const fbzxField = form.querySelector('input[name="fbzx"]');
-            const draftField = form.querySelector('input[name="draftResponse"]');
-            const pageHistoryField = form.querySelector('input[name="pageHistory"]');
-            const fvvField = form.querySelector('input[name="fvv"]');
 
-            const fbzxValue = `-${Date.now()}${Math.floor(Math.random() * 1000)}`;
-
-            if (fbzxField) {
-                fbzxField.value = fbzxValue;
-            }
-
-            if (draftField) {
-                draftField.value = JSON.stringify([null, null, null, fbzxValue]);
-            }
-
-            if (pageHistoryField) {
-                pageHistoryField.value = '0';
-            }
-
-            if (fvvField) {
-                fvvField.value = '1';
-            }
-        }
+        // REMOVED the 'populateGoogleFormTokens' function that was causing the issue.
 
         document.getElementById('prompt-form').addEventListener('submit', function (e) {
-            populateGoogleFormTokens(this);
+            // REMOVED: populateGoogleFormTokens(this);
             promptSubmitted = true;
-            // The form will submit to the iframe target
+            // The form will now submit clean data to the iframe target
         });
 
         document.getElementById('story-form').addEventListener('submit', function (e) {
-            populateGoogleFormTokens(this);
+            // REMOVED: populateGoogleFormTokens(this);
             storySubmitted = true;
-            // The form will submit to the iframe target
+            // The form will now submit clean data to the iframe target
         });
 
         document.getElementById('prompt_iframe').addEventListener('load', function () {
@@ -529,4 +513,3 @@
 
 
 </html>
-
