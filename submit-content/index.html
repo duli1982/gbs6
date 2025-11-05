@@ -208,10 +208,6 @@
 
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Hidden iframes for form submission -->
-    <iframe name="prompt_iframe" id="prompt_iframe" style="display:none;"></iframe>
-    <iframe name="story_iframe" id="story_iframe" style="display:none;"></iframe>
-
     <!-- Enhanced Breadcrumb Navigation -->
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <div class="breadcrumb-wrapper">
@@ -242,65 +238,65 @@
     </nav>
 
     <!-- Header -->
-    <header class="site-header py-4 mb-8">
-        <div class="container mx-auto px-4">
-            <h1 class="google-sans text-3xl font-bold text-gray-900">Submit Your Content</h1>
-            <p class="text-gray-600 mt-2">Share your AI prompts and success stories with the GBS community</p>
+    <header class="bg-white site-header py-8 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-4">Share with the Community 🌟</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Help others learn and grow by sharing your best AI prompts and success stories. Your contributions make
+                our community stronger.
+            </p>
         </div>
     </header>
 
     <div class="submit-container">
-        <!-- Tab Selection -->
+        <!-- Tab Buttons -->
         <div id="tab-container" class="tab-buttons">
-            <button class="tab-btn active" onclick="switchTab('prompt', this)">
-                💡 Submit a Prompt
-            </button>
-            <button class="tab-btn" onclick="switchTab('story', this)">
-                🎯 Share Success Story
-            </button>
+            <button class="tab-btn active" onclick="switchTab('prompt', this)">📝 Submit Prompt</button>
+            <button class="tab-btn" onclick="switchTab('story', this)">🎯 Share Success Story</button>
         </div>
+
+        <!-- Hidden iframes for submission -->
+        <iframe name="prompt_iframe" id="prompt_iframe" style="display:none;"></iframe>
+        <iframe name="story_iframe" id="story_iframe" style="display:none;"></iframe>
 
         <!-- Prompt Submission -->
         <div id="prompt-tab" class="tab-content active">
             <div class="submit-card">
-                <h2 class="text-2xl font-bold text-gray-900 mb-2">Submit Your AI Prompt</h2>
-                <p class="text-gray-600 mb-6">Help others by sharing your effective AI prompts</p>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Share Your Best AI Prompt</h2>
+                <p class="text-gray-600 mb-6">Help others by sharing prompts that worked well for you</p>
 
                 <div class="community-guidelines">
-                    <strong>📋 Submission Guidelines:</strong>
+                    <strong>📋 Guidelines:</strong>
                     <ul class="text-sm mt-2 space-y-1">
-                        <li>• Provide clear context and use cases</li>
-                        <li>• Include specific examples when possible</li>
-                        <li>• Test your prompt before submitting</li>
-                        <li>• All submissions are reviewed before publication</li>
+                        <li>• Share clear, reusable prompts that solved real problems</li>
+                        <li>• Remove any confidential or personal information</li>
+                        <li>• Explain the context and expected outcome</li>
                     </ul>
                 </div>
 
                 <form id="prompt-form"
-                    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe9abdnzEKVHAfO2l6DKq1NRwIkXipVCAzE6yPTsOOHZDti-w/formResponse"
+                    action="https://docs.google.com/forms/d/e/1FAIpQLSe7Hvfw04rMcCf5t3K3qu4YYZsz09IONUJod7j8HBCeqimLOw/formResponse"
                     method="POST" target="prompt_iframe">
                     <div class="form-group">
                         <label class="form-label">Your Name <span class="required">*</span></label>
-                        <input type="text" class="form-input" name="entry.759821030" required placeholder="John Doe">
+                        <input type="text" class="form-input" name="entry.259232852" required placeholder="John Doe">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Prompt Title <span class="required">*</span></label>
-                        <input type="text" class="form-input" name="entry.888851272" required
-                            placeholder="e.g., Boolean Search String Generator">
-                        <div class="form-help">Give your prompt a clear, descriptive title</div>
+                        <input type="text" class="form-input" name="entry.1227222597" required
+                            placeholder="e.g., Professional Interview Invitation Email">
+                        <div class="form-help">A short, descriptive title for your prompt</div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Category <span class="required">*</span></label>
-                        <select class="form-select" name="entry.2146986536" required>
+                        <select class="form-select" name="entry.1379089267" required>
                             <option value="">Select a category...</option>
-                            <option value="Boolean Search">Boolean Search</option>
-                            <option value="Candidate Engagement">Candidate Engagement</option>
-                            <option value="Job Description">Job Description</option>
+                            <option value="Emails & Communication">Emails & Communication</option>
+                            <option value="Candidate Sourcing">Candidate Sourcing</option>
+                            <option value="Job Descriptions">Job Descriptions</option>
                             <option value="Interview Prep">Interview Prep</option>
-                            <option value="Market Research">Market Research</option>
-                            <option value="Email Writing">Email Writing</option>
                             <option value="Data Analysis">Data Analysis</option>
                             <option value="Other">Other</option>
                         </select>
@@ -308,37 +304,31 @@
 
                     <div class="form-group">
                         <label class="form-label">The Prompt <span class="required">*</span></label>
-                        <textarea class="form-textarea" name="entry.743525035" required
-                            placeholder="Paste your full prompt here..."></textarea>
-                        <div class="form-help">Include any specific instructions or variables</div>
+                        <textarea class="form-textarea" name="entry.305523983" required
+                            placeholder="Write a professional email to..."></textarea>
+                        <div class="form-help">The actual prompt you used with AI</div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Use Case / Context <span class="required">*</span></label>
-                        <textarea class="form-textarea" name="entry.1151995026" required
-                            placeholder="Describe when and how to use this prompt effectively..."></textarea>
+                        <label class="form-label">Why This Works</label>
+                        <textarea class="form-textarea" name="entry.318296798" style="min-height: 100px;"
+                            placeholder="Explain what makes this prompt effective..."></textarea>
+                        <div class="form-help">Optional: Share tips on why this prompt is effective</div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Example Output (Optional)</label>
-                        <textarea class="form-textarea" name="entry.1543444309"
-                            placeholder="Show an example of what this prompt generates..."></textarea>
-                        <div class="form-help">Helps others understand the expected results</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Estimated Time Saved <span class="required">*</span></label>
+                        <label class="form-label">Time Saved (Estimate)</label>
                         <div class="radio-group">
                             <label class="radio-option">
-                                <input type="radio" name="entry.976028675" value="5-15 minutes per use" required>
+                                <input type="radio" name="entry.942267689" value="5-15 minutes per use">
                                 <span>5-15 minutes per use</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" name="entry.976028675" value="30+ minutes per use">
+                                <input type="radio" name="entry.942267689" value="30+ minutes per use">
                                 <span>30+ minutes per use</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" name="entry.976028675" value="1+ hours per use">
+                                <input type="radio" name="entry.942267689" value="1+ hours per use">
                                 <span>1+ hours per use</span>
                             </label>
                         </div>
@@ -449,31 +439,30 @@
             document.getElementById(tab + '-tab').classList.add('active');
         }
 
-        // Handle Prompt Form Submission
+        // --- Form Submission Logic ---
         document.getElementById('prompt-form').addEventListener('submit', function (e) {
             promptSubmitted = true;
+            // The form will submit to the iframe target
         });
 
-        // Handle Story Form Submission
         document.getElementById('story-form').addEventListener('submit', function (e) {
             storySubmitted = true;
+            // The form will submit to the iframe target
         });
 
-        // Listen for iframe load - Prompt Form
         document.getElementById('prompt_iframe').addEventListener('load', function () {
             if (promptSubmitted) {
                 showSuccessMessage();
                 document.getElementById('prompt-form').reset();
-                promptSubmitted = false;
+                promptSubmitted = false; // Reset flag
             }
         });
 
-        // Listen for iframe load - Story Form
         document.getElementById('story_iframe').addEventListener('load', function () {
             if (storySubmitted) {
                 showSuccessMessage();
                 document.getElementById('story-form').reset();
-                storySubmitted = false;
+                storySubmitted = false; // Reset flag
             }
         });
 
@@ -504,4 +493,3 @@
 </body>
 
 </html>
-
