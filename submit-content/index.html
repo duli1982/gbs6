@@ -228,7 +228,6 @@
                     </li>
                 </ol>
             </div>
-.
             <div class="breadcrumb-actions">
                 <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
                     <span class="icon-home"></span>
@@ -257,8 +256,8 @@
         </div>
 
         <!-- Hidden iframes for submission -->
-        <iframe name="prompt_iframe" id="prompt_iframe" style="display:none;" onload="if(promptSubmitted) {showSuccessMessage(); document.getElementById('prompt-form').reset(); promptSubmitted = false;}"></iframe>
-        <iframe name="story_iframe" id="story_iframe" style="display:none;" onload="if(storySubmitted) {showSuccessMessage(); document.getElementById('story-form').reset(); storySubmitted = false;}"></iframe>
+        <iframe name="prompt_iframe" id="prompt_iframe" style="display:none;" onload="if(promptSubmitted) {showSuccessMessage('prompt');}"></iframe>
+        <iframe name="story_iframe" id="story_iframe" style="display:none;" onload="if(storySubmitted) {showSuccessMessage('story');}"></iframe>
 
         <!-- Prompt Submission -->
         <div id="prompt-tab" class="tab-content active">
@@ -413,7 +412,7 @@
 
     <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
-        <svg width="20" height="20" viewBox="0_ 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
             <path d="m18 15-6-6-6 6" />
         </svg>
@@ -451,9 +450,17 @@
             // The form will submit to the iframe target
         });
 
-        function showSuccessMessage() {
+        function showSuccessMessage(formType) {
+            if (formType === 'prompt') {
+                document.getElementById('prompt-form').reset();
+                promptSubmitted = false; // Reset flag
+            } else if (formType === 'story') {
+                document.getElementById('story-form').reset();
+                storySubmitted = false; // Reset flag
+            }
+
             document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
-            document.getElementById('tab-container').style.display = 'none');
+            document.getElementById('tab-container').style.display = 'none';
             document.getElementById('success-message').classList.add('show');
 
             // Track submission if progress tracker available
