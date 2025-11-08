@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini AI Glossary - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Comprehensive glossary of AI and Gemini terminology. Learn key concepts, prompt engineering terms, and technical definitions for mastering Google's AI.">
+    <meta name="keywords"
+        content="AI glossary, Gemini terms, prompt engineering, artificial intelligence definitions, machine learning vocabulary">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Search and filter styles */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 16px;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        /* Category filters */
+        .category-filter {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 4px;
+            background: #f3f4f6;
+            color: #374151;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .category-filter:hover {
+            background: #e5e7eb;
+        }
+
+        .category-filter.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Glossary term styles */
+        .glossary-term {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .glossary-term:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-left-color: #667eea;
+        }
+
+        .term-title {
+            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .term-category {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            color: #667eea;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .term-definition {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        /* Alphabet navigation */
+        .alphabet-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 24px 0;
+        }
+
+        .alphabet-letter {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            color: #6b7280;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .alphabet-letter:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .alphabet-letter.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .alphabet-letter.disabled {
+            background: #f9fafb;
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        .alphabet-letter.disabled:hover {
+            background: #f9fafb;
+            color: #d1d5db;
+            transform: none;
+        }
+
+        .category-filter.disabled {
+            background: #f9fafb;
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        .category-filter.disabled:hover {
+            background: #f9fafb;
+            color: #d1d5db;
+        }
+
+        /* Stats display */
+        .stats-display {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            padding: 48px 24px;
+            color: #6b7280;
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        /* Floating scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator.show {
+            opacity: 1;
+        }
+
+        .scroll-letter {
+            display: block;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            margin: 2px 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .alphabet-nav {
+                gap: 4px;
+            }
+
+            .alphabet-letter {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .category-filter {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+
+            .glossary-term {
+                padding: 16px;
+            }
+        }
+
+        /* Highlight search matches */
+        .highlight {
+            background-color: #fef08a;
+            padding: 1px 2px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Clear filters button */
+        .clear-filters-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+        }
+
+        .clear-filters-btn:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>AI Glossary</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Hero Section -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="text-6xl mb-6">📜</div>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Gemini AI Glossary
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Essential AI and Gemini terminology explained in simple terms. Build your vocabulary and understanding
+                of key concepts
+                for mastering artificial intelligence and prompt engineering.
+            </p>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Search and Filter Section -->
+            <section class="mb-12">
+                <!-- Search Bar -->
+                <div class="search-container mb-8">
+                    <div class="relative">
+                        <svg class="search-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="glossary-search" class="search-input"
+                            placeholder="Search terms and definitions..." autocomplete="off">
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="text-center mb-8">
+                    <h3 class="google-sans text-lg font-semibold text-gray-700 mb-4">Filter by Category</h3>
+                    <div class="flex flex-wrap justify-center" id="category-filters">
+                        <!-- Will be populated dynamically with only categories that have terms -->
+                    </div>
+                </div>
+
+                <!-- Alphabet Navigation -->
+                <div class="alphabet-nav" id="alphabet-nav">
+                    <!-- Will be populated dynamically with only letters that have terms -->
+                </div>
+
+                <!-- Stats Display -->
+                <div class="stats-display">
+                    <p class="text-sm text-gray-600">
+                        Showing <span id="visible-count">0</span> of <span id="total-count">0</span> terms
+                    </p>
+                </div>
+            </section>
+
+            <!-- Glossary Terms -->
+            <section id="glossary-terms">
+
+                <!-- A Terms -->
+                <div class="glossary-term" data-category="core-ai" data-letter="A"
+                    data-term="ai artificial intelligence">
+                    <div class="term-title">
+                        <span>AI (Artificial Intelligence)</span>
+                        <span class="term-category">Core AI</span>
+                    </div>
+                    <div class="term-definition">
+                        The simulation of human intelligence in machines that can perform tasks and learn from
+                        experience.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="A" data-term="activities">
+                    <div class="term-title">
+                        <span>Activities</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Engaging tasks or exercises designed to reinforce learning and apply knowledge in practical
+                        ways.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="ethics" data-letter="A" data-term="accountability">
+                    <div class="term-title">
+                        <span>Accountability</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        The responsibility and ownership of the outcomes and impact of AI prompts and their resulting
+                        outputs.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="A" data-term="actionable advice">
+                    <div class="term-title">
+                        <span>Actionable Advice</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Practical recommendations or suggestions that can be implemented to achieve specific goals or
+                        outcomes.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="A" data-term="adaptation">
+                    <div class="term-title">
+                        <span>Adaptation</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The ability to adjust and modify prompts and strategies based on new information, changes in
+                        circumstances, or evolving requirements.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="technical" data-letter="A" data-term="ai response analysis">
+                    <div class="term-title">
+                        <span>AI Response Analysis</span>
+                        <span class="term-category">Technical</span>
+                    </div>
+                    <div class="term-definition">
+                        The examination and evaluation of the outputs generated by an AI model in response to different
+                        prompts.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="ethics" data-letter="A" data-term="ai misuse">
+                    <div class="term-title">
+                        <span>AI Misuse</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        The harmful or unintended consequences that can occur when AI prompts are used inappropriately
+                        or maliciously.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="technical" data-letter="A" data-term="android">
+                    <div class="term-title">
+                        <span>Android</span>
+                        <span class="term-category">Technical</span>
+                    </div>
+                    <div class="term-definition">
+                        A mobile operating system developed by Google, based on a modified version of the Linux kernel
+                        and other open-source software, primarily designed for touchscreen-based mobile devices like
+                        smartphones and tablets.
+                    </div>
+                </div>
+
+                <!-- B Terms -->
+                <div class="glossary-term" data-category="learning" data-letter="B" data-term="backwards design">
+                    <div class="term-title">
+                        <span>Backwards Design</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        An approach to instructional design that starts with the desired learning outcomes and works
+                        backward to create activities and modules.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="technical" data-letter="B" data-term="best practices">
+                    <div class="term-title">
+                        <span>Best Practices</span>
+                        <span class="term-category">Technical</span>
+                    </div>
+                    <div class="term-definition">
+                        Established methods or approaches that have been proven to be effective and produce high-quality
+                        results in prompt engineering.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="ethics" data-letter="B" data-term="bias">
+                    <div class="term-title">
+                        <span>Bias</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        Prejudice or favoritism that can be unintentionally introduced into AI prompts, leading to
+                        biased outputs or discriminatory behavior.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="B" data-term="burstiness">
+                    <div class="term-title">
+                        <span>Burstiness</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        A mix of short and long sentences that adds rhythm and emphasis to written or spoken
+                        communication.
+                    </div>
+                </div>
+
+                <!-- C Terms -->
+                <div class="glossary-term" data-category="learning" data-letter="C" data-term="capstone project">
+                    <div class="term-title">
+                        <span>Capstone Project</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The final project that integrates the knowledge and skills acquired throughout the course,
+                        applying prompt engineering to a real-world scenario.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="C"
+                    data-term="chain-of-thought prompting cot">
+                    <div class="term-title">
+                        <span>Chain-of-thought Prompting (CoT)</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        In chain-of-thought prompting, the input question is followed by a series of intermediate
+                        natural language reasoning steps that lead to the final answer. Think of this as breaking down a
+                        complicated task into bite-sized, logical chunks.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="C" data-term="complexity">
+                    <div class="term-title">
+                        <span>Complexity</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The level of intricacy, difficulty, or sophistication in the content or tasks presented to
+                        learners.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="core-ai" data-letter="C" data-term="context tokens">
+                    <div class="term-title">
+                        <span>Context Tokens</span>
+                        <span class="term-category">Core AI</span>
+                    </div>
+                    <div class="term-definition">
+                        A unit of text that the AI uses to understand the conversation so far, including previous
+                        messages, instructions, or references.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="C" data-term="continuous learning">
+                    <div class="term-title">
+                        <span>Continuous Learning</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The ongoing pursuit of knowledge and skill development beyond the scope of the course, staying
+                        updated on advancements in prompt engineering.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="C" data-term="conversational depth">
+                    <div class="term-title">
+                        <span>Conversational Depth</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        The level of engagement and back-and-forth interaction achieved through multi-turn prompts.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="C" data-term="core material">
+                    <div class="term-title">
+                        <span>Core Material</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The fundamental content and concepts covered in the course, forming the foundation for learning
+                        and skill development.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="C" data-term="creative prompts">
+                    <div class="term-title">
+                        <span>Creative Prompts</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        Prompts designed to stimulate imaginative and artistic AI outputs, such as storytelling, poetry,
+                        or music.
+                    </div>
+                </div>
+
+                <!-- D Terms -->
+                <div class="glossary-term" data-category="learning" data-letter="D" data-term="discussion questions">
+                    <div class="term-title">
+                        <span>Discussion Questions</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Thought-provoking inquiries that prompt learners to engage in critical thinking, reflection, and
+                        discussion.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="D" data-term="documentation">
+                    <div class="term-title">
+                        <span>Documentation</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The process of recording and maintaining records of project activities, observations, insights,
+                        and results.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="D"
+                    data-term="domain-specific prompts">
+                    <div class="term-title">
+                        <span>Domain-Specific Prompts</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        Prompts tailored to specific industries, fields, or subject areas to generate contextually
+                        relevant outputs.
+                    </div>
+                </div>
+
+                <!-- E Terms -->
+                <div class="glossary-term" data-category="ethics" data-letter="E" data-term="ethical considerations">
+                    <div class="term-title">
+                        <span>Ethical Considerations</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        The ethical principles and implications that arise in the design and use of AI prompts.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="E" data-term="evaluation methods">
+                    <div class="term-title">
+                        <span>Evaluation Methods</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Techniques and criteria used to assess the effectiveness, quality, or impact of prompts and AI
+                        responses.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="E" data-term="expand learning">
+                    <div class="term-title">
+                        <span>Expand Learning</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Suggestions or opportunities for learners to explore additional resources or extend their
+                        understanding beyond the core material.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="E" data-term="expert project manager">
+                    <div class="term-title">
+                        <span>Expert Project Manager</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        An individual who oversees the planning, execution, and delivery of a project, ensuring its
+                        success and adherence to timelines.
+                    </div>
+                </div>
+
+                <!-- F Terms -->
+                <div class="glossary-term" data-category="ethics" data-letter="F" data-term="fairness">
+                    <div class="term-title">
+                        <span>Fairness</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        Ensuring that AI prompts and responses are free from bias and treat all individuals equitably.
+                    </div>
+                </div>
+
+                <!-- G Terms -->
+                <div class="glossary-term" data-category="gemini" data-letter="G" data-term="gemini">
+                    <div class="term-title">
+                        <span>Gemini</span>
+                        <span class="term-category">Gemini Specific</span>
+                    </div>
+                    <div class="term-definition">
+                        Google DeepMind's cutting‑edge AI model family that understands and generates text, images,
+                        audio, video, and code in one framework.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="technical" data-letter="G" data-term="google">
+                    <div class="term-title">
+                        <span>Google</span>
+                        <span class="term-category">Technical</span>
+                    </div>
+                    <div class="term-definition">
+                        An American multinational technology corporation primarily known for its search engine, which
+                        aims to organize the world's information and make it universally accessible and useful.
+                    </div>
+                </div>
+
+                <!-- I Terms -->
+                <div class="glossary-term" data-category="gemini" data-letter="I" data-term="imagen">
+                    <div class="term-title">
+                        <span>Imagen</span>
+                        <span class="term-category">Gemini Specific</span>
+                    </div>
+                    <div class="term-definition">
+                        A series of text-to-image models developed by Google DeepMind that generate high-quality,
+                        photorealistic images from natural language text prompts.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="ethics" data-letter="I" data-term="inclusivity">
+                    <div class="term-title">
+                        <span>Inclusivity</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        Ensuring that AI prompts and responses are accessible and inclusive for individuals from diverse
+                        backgrounds and abilities.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="core-ai" data-letter="I" data-term="instruction tokens">
+                    <div class="term-title">
+                        <span>Instruction Tokens</span>
+                        <span class="term-category">Core AI</span>
+                    </div>
+                    <div class="term-definition">
+                        A piece of text that tells an AI model what to do or how to respond.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="I" data-term="iteration">
+                    <div class="term-title">
+                        <span>Iteration</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Each cycle or round of refining and improving prompts and AI responses based on feedback and
+                        evaluation.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="I" data-term="iterative process">
+                    <div class="term-title">
+                        <span>Iterative Process</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        A cyclical approach where improvements and adjustments are made through repeated cycles of
+                        evaluation and refinement.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="I" data-term="iterative refinement">
+                    <div class="term-title">
+                        <span>Iterative Refinement</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        A process of continuously improving or adjusting prompts based on feedback and evaluation.
+                    </div>
+                </div>
+
+                <!-- L Terms -->
+                <div class="glossary-term" data-category="core-ai" data-letter="L" data-term="large language model llm">
+                    <div class="term-title">
+                        <span>Large Language Model</span>
+                        <span class="term-category">Core AI</span>
+                    </div>
+                    <div class="term-definition">
+                        An AI system trained on massive amounts of text data to generate human-like language and
+                        understand complex instructions.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="L" data-term="learning objectives">
+                    <div class="term-title">
+                        <span>Learning Objectives</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Clear and measurable statements that describe what learners should be able to do or understand
+                        after completing a lesson or module.
+                    </div>
+                </div>
+
+                <!-- M Terms -->
+                <div class="glossary-term" data-category="learning" data-letter="M" data-term="module">
+                    <div class="term-title">
+                        <span>Module</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        A self-contained unit within a course that focuses on a specific topic or set of related topics.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="M" data-term="multi-modal prompting">
+                    <div class="term-title">
+                        <span>Multi-Modal Prompting</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        The process of interacting with an AI model using multiple types of input—such as text, images,
+                        audio, or video—in a single prompt to receive a cohesive, context-aware response.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="M"
+                    data-term="multimodal chain-of-thought cot prompting">
+                    <div class="term-title">
+                        <span>Multimodal Chain-of-Thought (CoT) Prompting</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        An advanced prompting technique where an AI model is guided to reason step-by-step across
+                        multiple types of input—such as text, images, audio, or video—to solve complex problems or
+                        generate richer, more context-aware responses.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="M" data-term="multi-turn prompts">
+                    <div class="term-title">
+                        <span>Multi-turn Prompts</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        Prompts that involve multiple interactions or exchanges with an AI model, creating a
+                        conversational experience.
+                    </div>
+                </div>
+
+                <!-- O Terms -->
+                <div class="glossary-term" data-category="learning" data-letter="O" data-term="outcome">
+                    <div class="term-title">
+                        <span>Outcome</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The desired result or goal of a learning experience or project.
+                    </div>
+                </div>
+
+                <!-- P Terms -->
+                <div class="glossary-term" data-category="ethics" data-letter="P" data-term="privacy">
+                    <div class="term-title">
+                        <span>Privacy</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        The protection of personal information and data in AI interactions, ensuring user
+                        confidentiality.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="P" data-term="project-based learning">
+                    <div class="term-title">
+                        <span>Project-Based Learning</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        An educational approach where students learn through real-world projects, promoting critical
+                        thinking and problem-solving skills.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="P" data-term="project guidelines">
+                    <div class="term-title">
+                        <span>Project Guidelines</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Specific instructions and requirements for the capstone project, providing a framework for
+                        implementation.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="P" data-term="project plan">
+                    <div class="term-title">
+                        <span>Project Plan</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        A detailed document that outlines the objectives, tasks, timelines, and resources required for a
+                        project's successful execution.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="core-ai" data-letter="P" data-term="prompt">
+                    <div class="term-title">
+                        <span>Prompt</span>
+                        <span class="term-category">Core AI</span>
+                    </div>
+                    <div class="term-definition">
+                        A statement or question given to an AI model to guide its response or behavior.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="P" data-term="prompt crafting">
+                    <div class="term-title">
+                        <span>Prompt Crafting</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        The skill of carefully formulating prompts to elicit specific responses or guide the behavior of
+                        AI models.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="P" data-term="prompt debugging">
+                    <div class="term-title">
+                        <span>Prompt Debugging</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        The process of analyzing and refining a prompt to get clearer, more accurate, or more useful
+                        responses from an AI.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="P" data-term="prompt engineer">
+                    <div class="term-title">
+                        <span>Prompt Engineer</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        A professional specializing in the design, development, and refinement of prompts for AI models.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="P" data-term="prompt engineering">
+                    <div class="term-title">
+                        <span>Prompt Engineering</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        The process of designing, refining, and optimizing prompts to elicit desired outputs from AI
+                        models.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="prompting" data-letter="P" data-term="prompt solution">
+                    <div class="term-title">
+                        <span>Prompt Solution</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        The complete set of prompts designed to address a specific problem or achieve a desired outcome.
+                    </div>
+                </div>
+
+                <!-- R Terms -->
+                <div class="glossary-term" data-category="learning" data-letter="R" data-term="real world examples">
+                    <div class="term-title">
+                        <span>Real World Examples</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Instances or scenarios from everyday life that illustrate the application of concepts or
+                        principles.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="R" data-term="review">
+                    <div class="term-title">
+                        <span>Review</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        A comprehensive assessment or recap of the course material, reinforcing key concepts and
+                        summarizing the learning journey.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="R" data-term="roadmap">
+                    <div class="term-title">
+                        <span>Roadmap</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        A visual or written guide that outlines the sequential steps and milestones of a project or
+                        learning journey.
+                    </div>
+                </div>
+
+                <!-- S Terms -->
+                <div class="glossary-term" data-category="ethics" data-letter="S" data-term="safe outputs">
+                    <div class="term-title">
+                        <span>Safe Outputs</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        AI responses that adhere to ethical guidelines and do not pose harm or risk to users or society.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="S" data-term="sentence variety">
+                    <div class="term-title">
+                        <span>Sentence Variety</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        The use of different sentence structures, lengths, and styles to add variety and interest to
+                        written or spoken content.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="ethics" data-letter="S" data-term="societal impact">
+                    <div class="term-title">
+                        <span>Societal Impact</span>
+                        <span class="term-category">Ethics & Safety</span>
+                    </div>
+                    <div class="term-definition">
+                        The broader influence and consequences of AI prompts on society, including social, economic, and
+                        cultural aspects.
+                    </div>
+                </div>
+
+                <div class="glossary-term" data-category="learning" data-letter="S" data-term="step-by-step directions">
+                    <div class="term-title">
+                        <span>Step-by-step Directions</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        Clear and sequential instructions that guide learners through an activity or process.
+                    </div>
+                </div>
+
+                <!-- T Terms -->
+                <div class="glossary-term" data-category="prompting" data-letter="T"
+                    data-term="tree of thought prompting tot">
+                    <div class="term-title">
+                        <span>Tree of Thought Prompting (ToT)</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        The effectiveness of CoT prompting comes from its ability to break a complex problem solution
+                        into a sequence of smaller and simpler steps. Tree of thoughts (ToT) prompting similarly breaks
+                        a problem into a sequence of smaller steps—or thoughts—that are solved individually. However,
+                        the approach does not constrain the model to output these steps all at once. Rather, each
+                        thought is generated or solved independently and passed to the next step for solving the
+                        problem, which allows the model to: Explore multiple choices for each problem-solving thought.
+                        Evaluate whether certain thoughts bring the model closer to a final solution. Perform
+                        backtracking when certain thoughts are found to be a dead end. Search over a combinatorial space
+                        of possible problem-solving steps to find the best final solution.
+                    </div>
+                </div>
+
+                <!-- U Terms -->
+                <div class="glossary-term" data-category="technical" data-letter="U" data-term="user experience">
+                    <div class="term-title">
+                        <span>User Experience</span>
+                        <span class="term-category">Technical</span>
+                    </div>
+                    <div class="term-definition">
+                        The overall experience and satisfaction of users when interacting with AI prompts and the
+                        resulting outputs.
+                    </div>
+                </div>
+
+                <!-- V Terms -->
+                <div class="glossary-term" data-category="learning" data-letter="V" data-term="video script">
+                    <div class="term-title">
+                        <span>Video Script</span>
+                        <span class="term-category">Learning Design</span>
+                    </div>
+                    <div class="term-definition">
+                        A written document that outlines the content and structure of a video lesson, ensuring a clear
+                        and organized delivery.
+                    </div>
+                </div>
+
+                <!-- Z Terms -->
+                <div class="glossary-term" data-category="prompting" data-letter="Z" data-term="zero-shot prompting">
+                    <div class="term-title">
+                        <span>Zero-shot Prompting</span>
+                        <span class="term-category">Prompt Engineering</span>
+                    </div>
+                    <div class="term-definition">
+                        Direct prompting (also known as Zero-shot) is the simplest type of prompt. It provides no
+                        examples to the model, just the instruction. You can also phrase the instruction as a question,
+                        or give the model a "role," as seen in the second example below.
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="no-results">
+                <div class="text-6xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold text-gray-700 mb-2">No terms found</h3>
+                <p class="text-gray-500 mb-4">No terms match your current search and filter criteria.</p>
+                <div class="space-y-2">
+                    <p class="text-sm text-gray-400">Try:</p>
+                    <ul class="text-sm text-gray-500 list-disc list-inside space-y-1">
+                        <li>Using different search keywords</li>
+                        <li>Selecting a different category</li>
+                        <li>Clearing the alphabet filter</li>
+                        <li>Resetting all filters</li>
+                    </ul>
+                </div>
+                <button class="clear-filters-btn" onclick="clearAllFilters()">🔄 Clear All Filters</button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scroll-indicator">
+        <!-- Will be populated dynamically with available letters -->
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Glossary functionality
+        class GlossaryManager {
+            constructor() {
+                this.searchInput = document.getElementById('glossary-search');
+                this.categoryFiltersContainer = document.getElementById('category-filters');
+                this.alphabetNavContainer = document.getElementById('alphabet-nav');
+                this.glossaryTerms = document.querySelectorAll('.glossary-term');
+                this.noResults = document.getElementById('no-results');
+                this.visibleCount = document.getElementById('visible-count');
+                this.totalCount = document.getElementById('total-count');
+                this.scrollIndicator = document.getElementById('scroll-indicator');
+
+                this.currentCategory = 'all';
+                this.currentLetter = '';
+                this.currentSearch = '';
+
+                this.availableLetters = new Set();
+                this.availableCategories = new Map();
+
+                this.buildNavigationElements();
+                this.initializeEventListeners();
+                this.updateStats();
+            }
+
+            buildNavigationElements() {
+                // Collect available letters and categories
+                this.glossaryTerms.forEach(term => {
+                    const letter = term.dataset.letter;
+                    const category = term.dataset.category;
+
+                    if (letter) {
+                        this.availableLetters.add(letter);
+                    }
+
+                    if (category) {
+                        if (this.availableCategories.has(category)) {
+                            this.availableCategories.set(category, this.availableCategories.get(category) + 1);
+                        } else {
+                            this.availableCategories.set(category, 1);
+                        }
+                    }
+                });
+
+                // Build alphabet navigation
+                this.buildAlphabetNav();
+
+                // Build category filters
+                this.buildCategoryFilters();
+
+                // Build scroll indicator
+                this.buildScrollIndicator();
+            }
+
+            buildAlphabetNav() {
+                const sortedLetters = Array.from(this.availableLetters).sort();
+
+                sortedLetters.forEach(letter => {
+                    const letterElement = document.createElement('div');
+                    letterElement.className = 'alphabet-letter';
+                    letterElement.dataset.letter = letter;
+                    letterElement.textContent = letter;
+                    this.alphabetNavContainer.appendChild(letterElement);
+                });
+
+                // Update alphabet letters reference
+                this.alphabetLetters = document.querySelectorAll('.alphabet-letter');
+            }
+
+            buildCategoryFilters() {
+                // Category display names and icons
+                const categoryInfo = {
+                    'all': { name: 'All Terms', icon: '📚' },
+                    'core-ai': { name: 'Core AI', icon: '🤖' },
+                    'gemini': { name: 'Gemini Specific', icon: '💎' },
+                    'prompting': { name: 'Prompt Engineering', icon: '⚡' },
+                    'learning': { name: 'Learning Design', icon: '🎓' },
+                    'ethics': { name: 'Ethics & Safety', icon: '🛡️' },
+                    'technical': { name: 'Technical', icon: '⚙️' }
+                };
+
+                // Always add "All Terms" first
+                const allFilter = document.createElement('span');
+                allFilter.className = 'category-filter active';
+                allFilter.dataset.category = 'all';
+                allFilter.innerHTML = `${categoryInfo.all.icon} ${categoryInfo.all.name} (${this.glossaryTerms.length})`;
+                this.categoryFiltersContainer.appendChild(allFilter);
+
+                // Add categories that have terms
+                const sortedCategories = Array.from(this.availableCategories.entries())
+                    .sort(([a], [b]) => {
+                        const order = ['core-ai', 'gemini', 'prompting', 'learning', 'ethics', 'technical'];
+                        return order.indexOf(a) - order.indexOf(b);
+                    });
+
+                sortedCategories.forEach(([category, count]) => {
+                    if (categoryInfo[category]) {
+                        const filterElement = document.createElement('span');
+                        filterElement.className = 'category-filter';
+                        filterElement.dataset.category = category;
+                        filterElement.innerHTML = `${categoryInfo[category].icon} ${categoryInfo[category].name} (${count})`;
+                        this.categoryFiltersContainer.appendChild(filterElement);
+                    }
+                });
+
+                // Update category filters reference
+                this.categoryFilters = document.querySelectorAll('.category-filter');
+            }
+
+            initializeEventListeners() {
+                // Search functionality
+                this.searchInput.addEventListener('input', (e) => {
+                    this.currentSearch = e.target.value.toLowerCase();
+                    this.filterTerms();
+                });
+
+                // Category filters
+                this.categoryFilters.forEach(filter => {
+                    filter.addEventListener('click', (e) => {
+                        this.categoryFilters.forEach(f => f.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.currentCategory = e.target.dataset.category;
+                        this.filterTerms();
+                    });
+                });
+
+                // Alphabet navigation
+                this.alphabetLetters.forEach(letter => {
+                    letter.addEventListener('click', (e) => {
+                        this.alphabetLetters.forEach(l => l.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.currentLetter = e.target.dataset.letter;
+                        this.filterTerms();
+                        this.scrollToLetter(this.currentLetter);
+                    });
+                });
+
+                // Scroll indicator
+                window.addEventListener('scroll', () => {
+                    this.updateScrollIndicator();
+                });
+            }
+
+            filterTerms() {
+                let visibleCount = 0;
+
+                this.glossaryTerms.forEach(term => {
+                    let show = true;
+
+                    // Category filter
+                    if (this.currentCategory !== 'all') {
+                        if (term.dataset.category !== this.currentCategory) {
+                            show = false;
+                        }
+                    }
+
+                    // Letter filter
+                    if (this.currentLetter) {
+                        if (term.dataset.letter !== this.currentLetter) {
+                            show = false;
+                        }
+                    }
+
+                    // Search filter
+                    if (this.currentSearch) {
+                        const termText = term.dataset.term + ' ' + term.textContent.toLowerCase();
+                        if (!termText.includes(this.currentSearch)) {
+                            show = false;
+                        } else {
+                            // Highlight search matches
+                            this.highlightSearchTerm(term, this.currentSearch);
+                        }
+                    } else {
+                        // Remove highlights when no search
+                        this.removeHighlights(term);
+                    }
+
+                    if (show) {
+                        term.style.display = 'block';
+                        term.style.animation = 'fadeIn 0.3s ease-in';
+                        visibleCount++;
+                    } else {
+                        term.style.display = 'none';
+                    }
+                });
+
+                this.updateStats(visibleCount);
+                this.toggleNoResults(visibleCount === 0);
+                this.updateFilterStates();
+            }
+
+            updateFilterStates() {
+                // Update alphabet letters based on current filters
+                this.alphabetLetters.forEach(letter => {
+                    const letterValue = letter.dataset.letter;
+                    let hasVisibleTerms = false;
+
+                    this.glossaryTerms.forEach(term => {
+                        if (term.dataset.letter === letterValue && term.style.display !== 'none') {
+                            hasVisibleTerms = true;
+                        }
+                    });
+
+                    if (hasVisibleTerms) {
+                        letter.classList.remove('disabled');
+                    } else {
+                        letter.classList.add('disabled');
+                    }
+                });
+
+                // Update category filters with current counts
+                this.categoryFilters.forEach(filter => {
+                    const category = filter.dataset.category;
+                    let count = 0;
+
+                    if (category === 'all') {
+                        this.glossaryTerms.forEach(term => {
+                            if (term.style.display !== 'none') count++;
+                        });
+                    } else {
+                        this.glossaryTerms.forEach(term => {
+                            if (term.dataset.category === category && term.style.display !== 'none') {
+                                count++;
+                            }
+                        });
+                    }
+
+                    // Update the count in the filter text
+                    const filterText = filter.innerHTML.replace(/\(\d+\)/, `(${count})`);
+                    filter.innerHTML = filterText;
+
+                    // Disable if no terms
+                    if (count === 0 && category !== 'all') {
+                        filter.classList.add('disabled');
+                    } else {
+                        filter.classList.remove('disabled');
+                    }
+                });
+            }
+
+            highlightSearchTerm(term, searchTerm) {
+                const titleElement = term.querySelector('.term-title span:first-child');
+                const definitionElement = term.querySelector('.term-definition');
+
+                [titleElement, definitionElement].forEach(element => {
+                    if (element) {
+                        const text = element.textContent;
+                        const regex = new RegExp(`(${searchTerm})`, 'gi');
+                        element.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
+                    }
+                });
+            }
+
+            removeHighlights(term) {
+                const highlights = term.querySelectorAll('.highlight');
+                highlights.forEach(highlight => {
+                    highlight.outerHTML = highlight.textContent;
+                });
+            }
+
+            scrollToLetter(letter) {
+                const firstTermWithLetter = document.querySelector(`[data-letter="${letter}"]`);
+                if (firstTermWithLetter) {
+                    firstTermWithLetter.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            updateStats(visible = null) {
+                const total = this.glossaryTerms.length;
+                const visibleTerms = visible !== null ? visible : document.querySelectorAll('.glossary-term[style*="block"], .glossary-term:not([style*="none"])').length;
+
+                this.totalCount.textContent = total;
+                this.visibleCount.textContent = visibleTerms;
+            }
+
+            toggleNoResults(show) {
+                if (show) {
+                    this.noResults.classList.add('show');
+                } else {
+                    this.noResults.classList.remove('show');
+                }
+            }
+
+            buildScrollIndicator() {
+                // Clear existing scroll indicator
+                this.scrollIndicator.innerHTML = '';
+
+                // Add letters that have terms
+                const sortedLetters = Array.from(this.availableLetters).sort();
+                sortedLetters.forEach(letter => {
+                    const letterElement = document.createElement('div');
+                    letterElement.className = 'scroll-letter';
+                    letterElement.textContent = letter;
+                    this.scrollIndicator.appendChild(letterElement);
+                });
+            }
+
+            updateScrollIndicator() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollTop / docHeight;
+
+                if (scrollPercent > 0.1) {
+                    this.scrollIndicator.classList.add('show');
+                } else {
+                    this.scrollIndicator.classList.remove('show');
+                }
+            }
+        }
+
+        // Global function for clearing filters
+        function clearAllFilters() {
+            // Clear search
+            document.getElementById('glossary-search').value = '';
+
+            // Reset category to "All Terms"
+            document.querySelectorAll('.category-filter').forEach(f => f.classList.remove('active'));
+            document.querySelector('.category-filter[data-category="all"]').classList.add('active');
+
+            // Clear alphabet selection
+            document.querySelectorAll('.alphabet-letter').forEach(l => l.classList.remove('active'));
+
+            // Trigger a new glossary manager to reset everything
+            window.glossaryManager.currentSearch = '';
+            window.glossaryManager.currentLetter = '';
+            window.glossaryManager.currentCategory = 'all';
+            window.glossaryManager.filterTerms();
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.glossaryManager = new GlossaryManager();
+        });
+    </script>
+
+</body>
+
+</html>

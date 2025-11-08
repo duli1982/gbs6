@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Role - Randstad GBS Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <style>
+        /* Font styles now handled by shared/fonts.css */
+
+        /* Role card styles now handled by shared/card-animations.css */
+
+        /* Continue button styles now handled by shared/buttons.css */
+
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link" aria-label="Go to Onboarding">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Onboarding</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Role Selection</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Progress Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="bg-gray-200 rounded-full h-2">
+                <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 50%"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span>Welcome</span>
+                <span class="font-semibold text-blue-600">Role</span>
+                <span>Assessment</span>
+                <span>Ready!</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-3xl mx-auto bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center mb-8">
+                <h1 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-3">What's Your Role?</h1>
+                <p class="text-gray-600">This helps us recommend the most relevant AI tools and training for you.</p>
+            </div>
+
+            <!-- Role Selection Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="card-interactive p-6" data-role="recruiter">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">👥</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Recruiter/Sourcer</h3>
+                    <p class="text-gray-600 mb-4">Finding and engaging candidates, building talent pipelines</p>
+                    <div class="text-sm text-gray-500">
+                        <strong>AI tools for:</strong> Boolean search generation, candidate outreach, resume screening
+                    </div>
+                </div>
+
+                <div class="card-interactive p-6" data-role="manager">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">📊</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Team Manager</h3>
+                    <p class="text-gray-600 mb-4">Leading teams, strategy planning, performance management</p>
+                    <div class="text-sm text-gray-500">
+                        <strong>AI tools for:</strong> Team analytics, strategic planning, performance insights
+                    </div>
+                </div>
+
+                <div class="card-interactive p-6" data-role="analyst">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">📈</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Business Analyst</h3>
+                    <p class="text-gray-600 mb-4">Data analysis, reporting, market research, insights</p>
+                    <div class="text-sm text-gray-500">
+                        <strong>AI tools for:</strong> Data analysis, report generation, trend identification
+                    </div>
+                </div>
+
+                <div class="card-interactive p-6" data-role="coordinator">
+                    <div class="card-icon text-4xl mb-4 transition-transform duration-300">⚙️</div>
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Coordinator</h3>
+                    <p class="text-gray-600 mb-4">Process management, administrative support, coordination</p>
+                    <div class="text-sm text-gray-500">
+                        <strong>AI tools for:</strong> Process automation, scheduling, communication templates
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex justify-between items-center">
+                <a href="welcome.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                    ← Back
+                </a>
+
+                <button id="continue-btn" class="btn-primary" disabled>
+                    Continue to Assessment →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        let selectedRole = '';
+
+        // Role selection logic
+        document.querySelectorAll('.card-interactive').forEach(card => {
+            card.addEventListener('click', function () {
+                // Remove selection from all cards
+                document.querySelectorAll('.card-interactive').forEach(c => c.classList.remove('selected'));
+
+                // Add selection to clicked card
+                this.classList.add('selected');
+                selectedRole = this.dataset.role;
+
+                // Enable continue button
+                const continueBtn = document.getElementById('continue-btn');
+                continueBtn.disabled = false;
+                continueBtn.onclick = () => {
+                    // Store role in localStorage for next step
+                    localStorage.setItem('selectedRole', selectedRole);
+                    window.location.href = 'assessment.html';
+                };
+            });
+        });
+
+        // Load previously selected role if returning
+        const savedRole = localStorage.getItem('selectedRole');
+        if (savedRole) {
+            const roleCard = document.querySelector(`[data-role="${savedRole}"]`);
+            if (roleCard) {
+                roleCard.classList.add('selected');
+                selectedRole = savedRole;
+                document.getElementById('continue-btn').disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

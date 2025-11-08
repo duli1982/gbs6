@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measuring AI Impact & ROI - Intermediate Module 4</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .metrics-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .metrics-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .roi-calculator {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .metric-example {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.2s ease;
+        }
+        
+        .metric-example:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .kpi-dashboard {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .case-study {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .calculation-input {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            width: 100px;
+            text-align: center;
+        }
+        
+        .calculation-result {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../intermediate.html" class="breadcrumb-link" aria-label="Go to Intermediate Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Intermediate Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Measuring AI Impact & ROI</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 4/4</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 4 of 4</div>
+        <div class="text-xs text-gray-500">12 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">📊</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Measuring AI Impact & ROI</h1>
+            <p class="text-lg text-gray-600">Track your AI success with metrics, KPIs, and ROI measurement techniques</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Why Measuring AI Impact Matters</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    You've implemented AI tools and workflows—now it's time to prove their value. Measuring AI impact helps you optimize your approach, justify investments, and demonstrate success to stakeholders.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-center">
+                        <div class="text-2xl mb-2">📈</div>
+                        <h3 class="font-bold text-blue-800">Optimize Performance</h3>
+                        <p class="text-blue-700 text-sm">Identify what works best and improve continuously</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200 text-center">
+                        <div class="text-2xl mb-2">💰</div>
+                        <h3 class="font-bold text-green-800">Justify Investment</h3>
+                        <p class="text-green-700 text-sm">Show clear ROI to secure resources and support</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200 text-center">
+                        <div class="text-2xl mb-2">🏆</div>
+                        <h3 class="font-bold text-purple-800">Demonstrate Value</h3>
+                        <p class="text-purple-700 text-sm">Prove impact to leadership and colleagues</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Metrics Framework -->
+            <section class="content-section mb-8">
+                <div class="metrics-card">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">The IMPACT Metrics Framework</h2>
+                    <p class="text-blue-700 mb-6">
+                        Use these six categories to comprehensively measure your AI success:
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="metric-example">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-2">⏱️</span> I - Time Savings
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-2">Measure time reduction in specific tasks and workflows.</p>
+                            <div class="bg-gray-50 rounded p-2 text-xs">
+                                <strong>Examples:</strong> Email writing: 15 min → 3 min | Job posting: 2 hours → 20 min
+                            </div>
+                        </div>
+                        
+                        <div class="metric-example">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-2">📊</span> M - Quality Metrics
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-2">Track improvements in output quality and consistency.</p>
+                            <div class="bg-gray-50 rounded p-2 text-xs">
+                                <strong>Examples:</strong> Response rates ↑40% | Error reduction ↓60% | Consistency ↑85%
+                            </div>
+                        </div>
+                        
+                        <div class="metric-example">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-2">🎯</span> P - Productivity Gains
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-2">Measure increased output and throughput.</p>
+                            <div class="bg-gray-50 rounded p-2 text-xs">
+                                <strong>Examples:</strong> Candidates sourced: +150% | Reports generated: +200%
+                            </div>
+                        </div>
+                        
+                        <div class="metric-example">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-2">💰</span> A - Cost Reduction
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-2">Calculate direct and indirect cost savings.</p>
+                            <div class="bg-gray-50 rounded p-2 text-xs">
+                                <strong>Examples:</strong> Reduced overtime | Lower outsourcing costs | Faster hiring
+                            </div>
+                        </div>
+                        
+                        <div class="metric-example">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-2">😊</span> C - Satisfaction Scores
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-2">Track employee and stakeholder satisfaction.</p>
+                            <div class="bg-gray-50 rounded p-2 text-xs">
+                                <strong>Examples:</strong> Job satisfaction ↑25% | Candidate experience ↑30%
+                            </div>
+                        </div>
+                        
+                        <div class="metric-example">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-2">🚀</span> T - Strategic Impact
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-2">Measure contribution to business objectives.</p>
+                            <div class="bg-gray-50 rounded p-2 text-xs">
+                                <strong>Examples:</strong> Faster time-to-hire | Improved candidate quality | Market expansion
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROI Calculator -->
+            <section class="content-section mb-8">
+                <div class="roi-calculator">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-4">🧮 Interactive ROI Calculator</h2>
+                    <p class="text-green-700 mb-4">
+                        Calculate your AI ROI using real numbers from your workflows:
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h4 class="font-semibold text-green-800 mb-3">Time Savings Calculation:</h4>
+                            
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-center justify-between">
+                                    <label>Hours saved per day:</label>
+                                    <input type="number" id="hours-saved" class="calculation-input" placeholder="4" min="0" step="0.5">
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <label>Working days per month:</label>
+                                    <input type="number" id="working-days" class="calculation-input" placeholder="22" min="1" step="1">
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <label>Your hourly rate ($):</label>
+                                    <input type="number" id="hourly-rate" class="calculation-input" placeholder="35" min="0" step="1">
+                                </div>
+                                
+                                <button onclick="calculateROI()" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors">
+                                    Calculate Monthly Savings
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h4 class="font-semibold text-green-800 mb-3">Your ROI Results:</h4>
+                            
+                            <div id="roi-results" class="space-y-2 text-sm text-green-700">
+                                <div>Enter your numbers to see personalized ROI calculations</div>
+                            </div>
+                            
+                            <div id="roi-total" class="calculation-result hidden">
+                                Monthly Value: $<span id="monthly-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KPI Dashboard -->
+            <section class="content-section mb-8">
+                <div class="kpi-dashboard">
+                    <h2 class="google-sans text-xl font-bold text-amber-800 mb-4">📋 Your AI KPI Dashboard Template</h2>
+                    <p class="text-amber-700 mb-4">
+                        Track these key performance indicators weekly to monitor your AI success:
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-amber-200">
+                            <h4 class="font-semibold text-amber-800 mb-2">⏱️ Efficiency Metrics</h4>
+                            <ul class="text-amber-700 text-sm space-y-1">
+                                <li>• Time saved per task</li>
+                                <li>• Tasks completed per day</li>
+                                <li>• Workflow completion time</li>
+                                <li>• Automation percentage</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-amber-200">
+                            <h4 class="font-semibold text-amber-800 mb-2">🎯 Quality Metrics</h4>
+                            <ul class="text-amber-700 text-sm space-y-1">
+                                <li>• Error rate reduction</li>
+                                <li>• Consistency scores</li>
+                                <li>• Stakeholder satisfaction</li>
+                                <li>• Output quality ratings</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-amber-200">
+                            <h4 class="font-semibold text-amber-800 mb-2">💰 Business Metrics</h4>
+                            <ul class="text-amber-700 text-sm space-y-1">
+                                <li>• Cost savings achieved</li>
+                                <li>• Revenue impact</li>
+                                <li>• Resource optimization</li>
+                                <li>• Strategic goal progress</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real Case Study -->
+            <section class="content-section mb-8">
+                <div class="case-study">
+                    <h2 class="google-sans text-xl font-bold text-purple-800 mb-4">📈 Real Success Story: Sarah's Recruitment Team</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-purple-800 mb-3">The Challenge:</h4>
+                            <p class="text-purple-700 text-sm mb-4">
+                                Sarah's 5-person recruitment team was struggling with high workload, inconsistent messaging, and long time-to-fill metrics. They needed to improve efficiency without compromising quality.
+                            </p>
+                            
+                            <h4 class="font-semibold text-purple-800 mb-3">AI Implementation:</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• Integrated AI into sourcing workflows</li>
+                                <li>• Automated job description creation</li>
+                                <li>• AI-powered candidate outreach</li>
+                                <li>• Standardized interview processes</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-purple-800 mb-3">Measured Results (6 months):</h4>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-white rounded p-3 border border-purple-200">
+                                    <div class="font-bold text-purple-800">Time Savings: 18 hours/week per person</div>
+                                    <div class="text-purple-600 text-xs">90 hours total team savings weekly</div>
+                                </div>
+                                
+                                <div class="bg-white rounded p-3 border border-purple-200">
+                                    <div class="font-bold text-purple-800">Quality Improvement: +45% response rates</div>
+                                    <div class="text-purple-600 text-xs">More qualified candidates per role</div>
+                                </div>
+                                
+                                <div class="bg-white rounded p-3 border border-purple-200">
+                                    <div class="font-bold text-purple-800">Cost Savings: $156,000 annually</div>
+                                    <div class="text-purple-600 text-xs">Reduced overtime and outsourcing</div>
+                                </div>
+                                
+                                <div class="bg-white rounded p-3 border border-purple-200">
+                                    <div class="font-bold text-purple-800">Business Impact: 35% faster hiring</div>
+                                    <div class="text-purple-600 text-xs">Reduced time-to-fill from 45 to 29 days</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reporting Templates -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">📊 Reporting Your AI Success</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="metric-example">
+                        <h3 class="font-bold text-gray-800 mb-3">📈 Weekly Team Report Template</h3>
+                        <div class="bg-gray-50 rounded p-3 text-sm">
+                            <strong>AI Impact Summary - Week of [DATE]</strong><br><br>
+                            
+                            <strong>Time Savings:</strong><br>
+                            • Total hours saved: [X] hours<br>
+                            • Most impactful workflow: [WORKFLOW]<br><br>
+                            
+                            <strong>Quality Improvements:</strong><br>
+                            • Response rate: [X]% (↑[X]%)<br>
+                            • Error reduction: [X]%<br><br>
+                            
+                            <strong>Key Wins:</strong><br>
+                            • [Specific achievement]<br>
+                            • [Process improvement]<br><br>
+                            
+                            <strong>Next Week Focus:</strong><br>
+                            • [Optimization goal]
+                        </div>
+                    </div>
+                    
+                    <div class="metric-example">
+                        <h3 class="font-bold text-gray-800 mb-3">📊 Monthly Executive Summary</h3>
+                        <div class="bg-gray-50 rounded p-3 text-sm">
+                            <strong>AI ROI Report - [MONTH] [YEAR]</strong><br><br>
+                            
+                            <strong>Financial Impact:</strong><br>
+                            • Cost savings: $[X]<br>
+                            • Productivity gain: [X]%<br>
+                            • ROI: [X]%<br><br>
+                            
+                            <strong>Operational Improvements:</strong><br>
+                            • Time-to-completion: -[X]%<br>
+                            • Quality scores: +[X]%<br>
+                            • Team satisfaction: [X]/10<br><br>
+                            
+                            <strong>Strategic Outcomes:</strong><br>
+                            • [Business objective impact]<br>
+                            • [Competitive advantage gained]
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Plan -->
+            <section class="content-section">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                    <h2 class="google-sans text-xl font-bold text-blue-800 mb-4">🎯 Your Measurement Action Plan</h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h4 class="font-semibold text-blue-800 mb-2">Week 1:</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• Establish baseline metrics</li>
+                                <li>• Set up tracking system</li>
+                                <li>• Calculate current ROI</li>
+                                <li>• Create KPI dashboard</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h4 class="font-semibold text-blue-800 mb-2">Week 2-4:</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• Track daily metrics</li>
+                                <li>• Weekly progress reports</li>
+                                <li>• Optimize based on data</li>
+                                <li>• Share early wins</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h4 class="font-semibold text-blue-800 mb-2">Month 2+:</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• Monthly executive reports</li>
+                                <li>• ROI trend analysis</li>
+                                <li>• Stakeholder presentations</li>
+                                <li>• Scale successful practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <p class="text-blue-600 text-sm font-semibold">
+                            🎉 Congratulations! You've completed the Intermediate AI Learning Path and are now equipped with advanced AI skills for professional success!
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../intermediate.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Intermediate Path
+            </a>
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
+                🎉 Complete Intermediate Path!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function calculateROI() {
+            const hoursSaved = parseFloat(document.getElementById('hours-saved').value) || 0;
+            const workingDays = parseFloat(document.getElementById('working-days').value) || 22;
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 35;
+            
+            if (hoursSaved > 0 && workingDays > 0 && hourlyRate > 0) {
+                const monthlyHoursSaved = hoursSaved * workingDays;
+                const monthlyValue = monthlyHoursSaved * hourlyRate;
+                const annualValue = monthlyValue * 12;
+                
+                document.getElementById('roi-results').innerHTML = `
+                    <div><strong>Hours saved per month:</strong> ${monthlyHoursSaved} hours</div>
+                    <div><strong>Annual time savings:</strong> ${monthlyHoursSaved * 12} hours</div>
+                    <div><strong>Annual value:</strong> $${annualValue.toLocaleString()}</div>
+                    <div><strong>ROI per hour invested:</strong> $${hourlyRate}/hour saved</div>
+                `;
+                
+                document.getElementById('monthly-value').textContent = monthlyValue.toLocaleString();
+                document.getElementById('roi-total').classList.remove('hidden');
+            } else {
+                alert('Please fill in all fields with valid numbers');
+            }
+        }
+        
+        function completeModule() {
+            // Mark module and entire intermediate path as completed
+            let completedModules = JSON.parse(localStorage.getItem('intermediate-path-progress') || '[]');
+            if (!completedModules.includes(4)) {
+                completedModules.push(4);
+                localStorage.setItem('intermediate-path-progress', JSON.stringify(completedModules));
+            }
+            
+            // Mark intermediate path as fully completed
+            localStorage.setItem('intermediate-path-completed', 'true');
+            localStorage.setItem('intermediate-completion-date', new Date().toISOString());
+            
+            showCompletionModal();
+        }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToHub() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../../../index.html';
+            }, 300);
+        }
+
+        function exploreAdvanced() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../advanced.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 3rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.2rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-achievement {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        .modal-btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .modal-btn-tertiary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-tertiary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🚀</div>
+                <h2 class="modal-title google-sans">CONGRATULATIONS!</h2>
+                <p class="modal-subtitle">Intermediate AI Learning Path Completed</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You have successfully completed the Intermediate AI Learning Path! You now have advanced AI skills including sophisticated prompting, role-specific applications, workflow integration, and ROI measurement.
+                </p>
+                
+                <div class="modal-achievement">
+                    <strong>🎓 Achievement Unlocked:</strong> Advanced AI Practitioner Certified
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <div class="text-blue-800 font-semibold text-sm mb-2">✨ Your Advanced Skill Set:</div>
+                    <div class="grid md:grid-cols-2 gap-2 text-left">
+                        <ul class="text-blue-700 text-sm space-y-1">
+                            <li>• Advanced prompting techniques</li>
+                            <li>• Role-specific AI applications</li>
+                            <li>• Workflow integration mastery</li>
+                        </ul>
+                        <ul class="text-purple-700 text-sm space-y-1">
+                            <li>• ROI measurement & analytics</li>
+                            <li>• Process optimization</li>
+                            <li>• Strategic AI implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="exploreAdvanced()" class="modal-btn modal-btn-primary">
+                    🎯 Explore Advanced Path
+                </button>
+                <button onclick="continueToHub()" class="modal-btn modal-btn-secondary">
+                    🏠 Return to Hub
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-tertiary">
+                    📋 Review Path
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Intermediate Module 4 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'intermediate-4',
+                passingScore: 75,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What does the 'I' stand for in the IMPACT Metrics Framework?",
+                        options: [
+                            "Innovation",
+                            "Time Savings",
+                            "Implementation",
+                            "Investment"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The 'I' in IMPACT stands for Time Savings (measured in hours/minutes saved). The framework uses: I-Time Savings, M-Quality Metrics, P-Productivity Gains, A-Cost Reduction, C-Satisfaction Scores, T-Strategic Impact.",
+                        hint: "Review the IMPACT Metrics Framework section with the six categories."
+                    },
+                    {
+                        question: "In Sarah's recruitment team case study, what was the measured time savings per person per week?",
+                        options: [
+                            "10 hours per week",
+                            "18 hours per week",
+                            "25 hours per week",
+                            "30 hours per week"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Sarah's team achieved 18 hours per week savings per person, which totaled 90 hours of team savings weekly across her 5-person recruitment team. This was measured over a 6-month period.",
+                        hint: "Look at the Real Success Story section for specific numbers."
+                    },
+                    {
+                        question: "Which metric category focuses on improvements in output quality and consistency?",
+                        options: [
+                            "Time Savings",
+                            "Quality Metrics",
+                            "Productivity Gains",
+                            "Cost Reduction"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Quality Metrics (the 'M' in IMPACT) track improvements in output quality and consistency. This includes response rates, error reduction, and consistency scores - measuring how much better the work becomes, not just how much faster.",
+                        hint: "Think about measuring 'how well' rather than 'how fast' or 'how much'."
+                    },
+                    {
+                        question: "What should be included in a Weekly Team Report according to the reporting templates?",
+                        options: [
+                            "Only financial data and ROI percentages",
+                            "Time saved, quality improvements, key wins, and next week focus",
+                            "Employee names and their individual performance scores",
+                            "Technical AI configuration details"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Weekly Team Report template includes: Time Savings (hours saved, most impactful workflow), Quality Improvements (response rates, error reduction), Key Wins (specific achievements), and Next Week Focus (optimization goals). This provides a balanced view of progress.",
+                        hint: "Review the Weekly Team Report Template in the Reporting section."
+                    },
+                    {
+                        question: "According to the Measurement Action Plan, what should you do in Week 1?",
+                        options: [
+                            "Share results with leadership and scale practices",
+                            "Establish baseline metrics, set up tracking, calculate ROI, create KPI dashboard",
+                            "Track daily metrics and create weekly reports",
+                            "Conduct monthly executive presentations"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Week 1 focuses on establishing the foundation: baseline metrics (where you are now), tracking system setup, current ROI calculation, and KPI dashboard creation. This groundwork enables accurate measurement of future improvements.",
+                        hint: "Look at the Your Measurement Action Plan section - what comes first?"
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 75) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        completeBtn.title = 'Great job! Click to complete the Intermediate Path';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>

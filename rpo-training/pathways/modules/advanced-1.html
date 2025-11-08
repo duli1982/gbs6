@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Strategy & Leadership - Advanced Module 1</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .strategy-framework {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .leadership-principle {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .case-study {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .strategic-tool {
+            background: linear-gradient(135deg, #fef7f0 0%, #fed7aa 100%);
+            border: 2px solid #f97316;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .governance-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .maturity-model {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .maturity-stage {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .maturity-stage:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../advanced.html" class="breadcrumb-link" aria-label="Go to Advanced Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Advanced Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>AI Strategy & Leadership</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 1/5</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 20%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 1 of 5</div>
+        <div class="text-xs text-gray-500">25 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🎯</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">AI Strategy & Leadership</h1>
+            <p class="text-lg text-gray-600">Develop comprehensive AI strategies and lead transformation initiatives</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Leading AI Transformation</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    As an AI leader, you're not just using AI tools—you're architecting the future of work for your organization. This module will equip you with frameworks, strategies, and leadership principles to drive successful AI adoption at scale.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200 text-center">
+                        <div class="text-2xl mb-2">🏗️</div>
+                        <h3 class="font-bold text-purple-800">Strategic Planning</h3>
+                        <p class="text-purple-700 text-sm">Build comprehensive AI roadmaps</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-center">
+                        <div class="text-2xl mb-2">👥</div>
+                        <h3 class="font-bold text-blue-800">Change Leadership</h3>
+                        <p class="text-blue-700 text-sm">Guide teams through transformation</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200 text-center">
+                        <div class="text-2xl mb-2">📊</div>
+                        <h3 class="font-bold text-green-800">Governance & Ethics</h3>
+                        <p class="text-green-700 text-sm">Ensure responsible AI deployment</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Maturity Model -->
+            <section class="content-section mb-8">
+                <div class="strategy-framework">
+                    <h2 class="google-sans text-2xl font-bold text-purple-800 mb-4">🏆 AI Maturity Model</h2>
+                    <p class="text-purple-700 mb-6">
+                        Understanding where your organization stands is crucial for strategic planning. Use this model to assess current state and plan your journey.
+                    </p>
+                    
+                    <div class="maturity-model">
+                        <div class="maturity-stage">
+                            <div class="text-2xl mb-2">🌱</div>
+                            <h4 class="font-bold text-gray-800 mb-2">Level 1: Awareness</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• Basic AI understanding</li>
+                                <li>• Individual experimentation</li>
+                                <li>• No formal strategy</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="maturity-stage">
+                            <div class="text-2xl mb-2">🚀</div>
+                            <h4 class="font-bold text-gray-800 mb-2">Level 2: Adoption</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• Tool-specific usage</li>
+                                <li>• Basic training programs</li>
+                                <li>• Informal governance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="maturity-stage">
+                            <div class="text-2xl mb-2">⚡</div>
+                            <h4 class="font-bold text-gray-800 mb-2">Level 3: Integration</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• Workflow integration</li>
+                                <li>• Structured training</li>
+                                <li>• Basic governance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="maturity-stage">
+                            <div class="text-2xl mb-2">🎯</div>
+                            <h4 class="font-bold text-gray-800 mb-2">Level 4: Optimization</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• Strategic deployment</li>
+                                <li>• Advanced capabilities</li>
+                                <li>• Comprehensive governance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="maturity-stage">
+                            <div class="text-2xl mb-2">🏆</div>
+                            <h4 class="font-bold text-gray-800 mb-2">Level 5: Innovation</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• AI-first culture</li>
+                                <li>• Custom solutions</li>
+                                <li>• Continuous innovation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Strategic Framework -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">The SCALE Framework for AI Strategy</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="leadership-principle">
+                        <h3 class="font-bold text-blue-800 mb-2 flex items-center">
+                            <span class="text-xl mr-2">🎯</span> S - Strategic Alignment
+                        </h3>
+                        <p class="text-blue-700 text-sm mb-3">Ensure AI initiatives align with business objectives and create measurable value.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Key Questions:</strong> How does AI support our core business goals? What metrics will define success?
+                        </div>
+                    </div>
+                    
+                    <div class="leadership-principle">
+                        <h3 class="font-bold text-blue-800 mb-2 flex items-center">
+                            <span class="text-xl mr-2">🏗️</span> C - Capability Building
+                        </h3>
+                        <p class="text-blue-700 text-sm mb-3">Develop organizational capabilities through training, tools, and processes.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Key Actions:</strong> Skills assessment, training programs, tool selection, process redesign.
+                        </div>
+                    </div>
+                    
+                    <div class="leadership-principle">
+                        <h3 class="font-bold text-blue-800 mb-2 flex items-center">
+                            <span class="text-xl mr-2">🔄</span> A - Agile Implementation
+                        </h3>
+                        <p class="text-blue-700 text-sm mb-3">Start small, learn fast, and scale successful initiatives.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Approach:</strong> Pilot projects, rapid iteration, continuous feedback, gradual scaling.
+                        </div>
+                    </div>
+                    
+                    <div class="leadership-principle">
+                        <h3 class="font-bold text-blue-800 mb-2 flex items-center">
+                            <span class="text-xl mr-2">👥</span> L - Leadership & Culture
+                        </h3>
+                        <p class="text-blue-700 text-sm mb-3">Foster an AI-ready culture with strong leadership commitment.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Elements:</strong> Executive sponsorship, change champions, communication strategy.
+                        </div>
+                    </div>
+                    
+                    <div class="leadership-principle">
+                        <h3 class="font-bold text-blue-800 mb-2 flex items-center">
+                            <span class="text-xl mr-2">⚖️</span> E - Ethics & Governance
+                        </h3>
+                        <p class="text-blue-700 text-sm mb-3">Establish responsible AI practices and governance frameworks.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Components:</strong> AI ethics policy, risk management, compliance monitoring.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Case Study -->
+            <section class="content-section mb-8">
+                <div class="case-study">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-4">📊 Case Study: Global Tech Company AI Transformation</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">The Challenge:</h4>
+                            <p class="text-green-700 text-sm mb-4">
+                                A 5,000-employee tech company wanted to integrate AI across all departments but faced resistance, inconsistent adoption, and no clear ROI measurement.
+                            </p>
+                            
+                            <h4 class="font-semibold text-green-800 mb-2">The SCALE Approach:</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• <strong>Strategic:</strong> Aligned AI with 3-year growth plan</li>
+                                <li>• <strong>Capability:</strong> 90-day training program for all staff</li>
+                                <li>• <strong>Agile:</strong> Started with 3 pilot departments</li>
+                                <li>• <strong>Leadership:</strong> CEO became chief AI advocate</li>
+                                <li>• <strong>Ethics:</strong> Established AI governance committee</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">Results After 12 Months:</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white rounded p-3 border border-green-200">
+                                    <div class="font-bold text-green-800">40% Productivity Increase</div>
+                                    <div class="text-green-600 text-xs">Average across pilot departments</div>
+                                </div>
+                                <div class="bg-white rounded p-3 border border-green-200">
+                                    <div class="font-bold text-green-800">85% Employee Adoption</div>
+                                    <div class="text-green-600 text-xs">Regular AI tool usage</div>
+                                </div>
+                                <div class="bg-white rounded p-3 border border-green-200">
+                                    <div class="font-bold text-green-800">$2.3M Cost Savings</div>
+                                    <div class="text-green-600 text-xs">Through process automation</div>
+                                </div>
+                                <div class="bg-white rounded p-3 border border-green-200">
+                                    <div class="font-bold text-green-800">Zero Compliance Issues</div>
+                                    <div class="text-green-600 text-xs">Strong governance framework</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Governance Framework -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">AI Governance Essentials</h2>
+                
+                <div class="governance-box">
+                    <h3 class="font-bold text-red-800 mb-3 flex items-center">
+                        <span class="text-xl mr-2">⚖️</span> Critical Governance Areas
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-red-800 mb-2">Data & Privacy:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• Data classification and handling</li>
+                                <li>• Privacy protection measures</li>
+                                <li>• Consent management</li>
+                                <li>• Cross-border data considerations</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-red-800 mb-2">Risk Management:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• Bias detection and mitigation</li>
+                                <li>• Security vulnerability assessment</li>
+                                <li>• Business continuity planning</li>
+                                <li>• Regulatory compliance monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Strategic Tools -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Leadership Toolkit</h2>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="strategic-tool">
+                        <h3 class="font-bold text-orange-800 mb-2">🎯 AI Readiness Assessment</h3>
+                        <p class="text-orange-700 text-sm mb-3">Evaluate your organization's readiness across 5 dimensions:</p>
+                        <ul class="text-orange-700 text-xs space-y-1">
+                            <li>• Technology infrastructure</li>
+                            <li>• Data quality and accessibility</li>
+                            <li>• Skills and capabilities</li>
+                            <li>• Cultural readiness</li>
+                            <li>• Leadership commitment</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategic-tool">
+                        <h3 class="font-bold text-orange-800 mb-2">📊 ROI Measurement Framework</h3>
+                        <p class="text-orange-700 text-sm mb-3">Track AI impact with these key metrics:</p>
+                        <ul class="text-orange-700 text-xs space-y-1">
+                            <li>• Time savings per employee</li>
+                            <li>• Quality improvement scores</li>
+                            <li>• Cost reduction percentages</li>
+                            <li>• Employee satisfaction ratings</li>
+                            <li>• Innovation index scores</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategic-tool">
+                        <h3 class="font-bold text-orange-800 mb-2">🗺️ Implementation Roadmap</h3>
+                        <p class="text-orange-700 text-sm mb-3">90-day sprint planning template:</p>
+                        <ul class="text-orange-700 text-xs space-y-1">
+                            <li>• Days 1-30: Assessment & planning</li>
+                            <li>• Days 31-60: Pilot implementation</li>
+                            <li>• Days 61-90: Evaluation & scaling</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategic-tool">
+                        <h3 class="font-bold text-orange-800 mb-2">💬 Communication Playbook</h3>
+                        <p class="text-orange-700 text-sm mb-3">Stakeholder engagement strategies:</p>
+                        <ul class="text-orange-700 text-xs space-y-1">
+                            <li>• Executive briefing templates</li>
+                            <li>• Employee town hall scripts</li>
+                            <li>• Success story formats</li>
+                            <li>• FAQ response guides</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Planning -->
+            <section class="content-section">
+                <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+                    <h2 class="google-sans text-xl font-bold text-purple-800 mb-3">🎯 Your Strategic Action Plan</h2>
+                    <p class="text-purple-700 mb-4">
+                        Based on this module, you're ready to develop your AI strategy. Use the frameworks and tools provided to create a comprehensive plan for your organization.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-white rounded-lg p-3 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 1-2:</h4>
+                            <ul class="text-purple-700 space-y-1">
+                                <li>• Complete maturity assessment</li>
+                                <li>• Identify key stakeholders</li>
+                                <li>• Define success metrics</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-3 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 3-4:</h4>
+                            <ul class="text-purple-700 space-y-1">
+                                <li>• Develop governance framework</li>
+                                <li>• Plan pilot projects</li>
+                                <li>• Create communication strategy</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-3 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 5-6:</h4>
+                            <ul class="text-purple-700 space-y-1">
+                                <li>• Launch first pilot</li>
+                                <li>• Begin training programs</li>
+                                <li>• Establish feedback loops</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <p class="text-purple-600 text-sm">
+                            <strong>Next:</strong> Module 2 will show you how to build custom AI solutions tailored to your organization's unique needs.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../advanced.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Advanced Path
+            </a>
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
+                Complete Module 1 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('advanced-path-progress') || '[]');
+            if (!completedModules.includes(1)) {
+                completedModules.push(1);
+                localStorage.setItem('advanced-path-progress', JSON.stringify(completedModules));
+            }
+            
+            showCompletionModal();
+        }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../advanced.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-next-step {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🎯</div>
+                <h2 class="modal-title google-sans">Module 1 Completed!</h2>
+                <p class="modal-subtitle">AI strategy & leadership framework mastered</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now have a comprehensive framework for AI strategy and leadership at the organizational level.
+                </p>
+                
+                <div class="modal-next-step">
+                    <strong>🛠️ Next Up:</strong> Module 2 - Building custom AI solutions
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
+                    <div class="text-purple-800 font-semibold text-sm mb-1">✨ Strategic Skills Gained:</div>
+                    <ul class="text-purple-700 text-sm space-y-1 text-left">
+                        <li>• AI strategy development</li>
+                        <li>• Leadership frameworks</li>
+                        <li>• Organizational transformation</li>
+                        <li>• Strategic decision making</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 2 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Review Module
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Advanced Module 1 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'advanced-1',
+                passingScore: 80,
+                showReview: true,
+                questions: [
+                    {
+                        question: "According to the AI Maturity Model, what characterizes Level 5: Innovation?",
+                        options: [
+                            "Basic AI understanding with individual experimentation",
+                            "Workflow integration with structured training",
+                            "AI-first culture with custom solutions and continuous innovation",
+                            "Tool-specific usage with basic training programs"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Level 5: Innovation represents the highest maturity level where organizations have an AI-first culture, develop custom solutions, and continuously innovate. This is the ultimate goal for organizations pursuing AI transformation.",
+                        hint: "Review the AI Maturity Model section showing all five levels."
+                    },
+                    {
+                        question: "In the SCALE Framework, what does the 'C' stand for and what is its purpose?",
+                        options: [
+                            "Communication - Building stakeholder relationships",
+                            "Capability Building - Developing organizational capabilities through training, tools, and processes",
+                            "Compliance - Ensuring regulatory adherence",
+                            "Cost Management - Controlling AI implementation expenses"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The 'C' in SCALE stands for Capability Building, which focuses on developing organizational capabilities through training programs, tool selection, skills assessment, and process redesign. This is essential for sustainable AI transformation.",
+                        hint: "Look at the SCALE Framework section explaining each component."
+                    },
+                    {
+                        question: "What was the key result achieved by the Global Tech Company in the case study after 12 months?",
+                        options: [
+                            "20% productivity increase and 50% adoption rate",
+                            "40% productivity increase, 85% adoption, $2.3M cost savings, zero compliance issues",
+                            "60% productivity increase but high compliance issues",
+                            "100% adoption but negative ROI"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The case study showed impressive results: 40% productivity increase, 85% employee adoption, $2.3M in cost savings, and zero compliance issues. These results demonstrate the effectiveness of the SCALE framework when properly implemented.",
+                        hint: "Review the case study results showing measurable outcomes after 12 months."
+                    },
+                    {
+                        question: "Which two critical governance areas are highlighted in the AI Governance Essentials section?",
+                        options: [
+                            "Marketing and Sales",
+                            "Data & Privacy and Risk Management",
+                            "Finance and Operations",
+                            "HR and Legal"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The module emphasizes Data & Privacy (including data classification, privacy protection, consent management) and Risk Management (covering bias detection, security assessment, business continuity, and compliance monitoring) as the two critical governance areas.",
+                        hint: "Check the AI Governance Essentials section with the Critical Governance Areas."
+                    },
+                    {
+                        question: "According to the ROI Measurement Framework in the Leadership Toolkit, which metrics should be tracked?",
+                        options: [
+                            "Only financial metrics like cost reduction",
+                            "Time savings, quality improvement, cost reduction, satisfaction ratings, and innovation scores",
+                            "Just employee satisfaction ratings",
+                            "Only technology infrastructure metrics"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The ROI Measurement Framework recommends tracking comprehensive metrics: time savings per employee, quality improvement scores, cost reduction percentages, employee satisfaction ratings, and innovation index scores. This holistic approach captures the full impact of AI initiatives.",
+                        hint: "Review the Leadership Toolkit section showing the ROI Measurement Framework."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 80) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-purple-600', 'hover:bg-purple-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Recommendations - Randstad GBS Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .recommendation-card {
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #4A90E2;
+        }
+        
+        .priority-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .skill-level-badge {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+        
+        .start-btn {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+        }
+        
+        .celebration-animation {
+            animation: bounce 1s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .quick-action {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transition: all 0.2s ease;
+        }
+        
+        .quick-action:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            Home
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            Onboarding
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current">Results</span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn">
+                    Back to Hub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Progress Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="bg-gray-200 rounded-full h-2">
+                <div class="progress-bar bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span>Welcome</span>
+                <span>Role</span>
+                <span>Assessment</span>
+                <span class="font-semibold text-green-600">Ready!</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-3xl mx-auto">
+            <!-- Celebration Header -->
+            <div class="text-center mb-10">
+                <div class="celebration-animation text-6xl mb-4">🎉</div>
+                <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">You're All Set!</h1>
+                <p class="text-lg text-gray-600 mb-2">Based on your responses, here's your personalized AI learning path:</p>
+                <div id="user-summary" class="text-sm text-gray-500 bg-gray-100 rounded-lg p-3 inline-block">
+                    <!-- Dynamic user summary will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-6 mb-8 border border-orange-200">
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-4 text-center">🚀 Start Using AI Right Now</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="quick-actions">
+                    <!-- Dynamic quick actions will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Personalized Recommendations -->
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">Your Recommended Learning Path</h2>
+                <div id="recommendations" class="space-y-6">
+                    <!-- Dynamic recommendations will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Success Stories -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-8 border border-blue-200">
+                <h2 class="google-sans text-xl font-bold text-gray-900 mb-4">👥 Colleagues Like You Are Seeing Results</h2>
+                <div id="relevant-stories" class="space-y-4">
+                    <!-- Dynamic success stories will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="text-center">
+                <a href="../" class="start-btn text-white px-10 py-4 rounded-lg font-semibold text-lg inline-block mb-4">
+                    Start Your AI Journey! →
+                </a>
+                <div class="text-sm text-gray-500">
+                    <p>Your preferences have been saved. You can always retake this assessment from your profile.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        // Load user data
+        const selectedRole = localStorage.getItem('selectedRole') || 'recruiter';
+        const assessmentData = JSON.parse(localStorage.getItem('assessmentData') || '{}');
+        
+        // Role-based recommendations
+        const roleRecommendations = {
+            'recruiter': {
+                primary: [
+                    { 
+                        title: 'AI Prompts Library', 
+                        desc: 'Boolean search strings and candidate outreach templates specifically for recruiters', 
+                        link: '/gbs-prompts/',
+                        priority: 'High',
+                        timeToValue: '5 minutes',
+                        icon: '✨'
+                    },
+                    { 
+                        title: 'Daily Sourcing Focus', 
+                        desc: 'Micro-coaching cards to sharpen your sourcing skills with AI techniques', 
+                        link: '/daily-focus/',
+                        priority: 'High',
+                        timeToValue: '10 minutes',
+                        icon: '🎯'
+                    }
+                ],
+                secondary: [
+                    { 
+                        title: 'AI Success Stories', 
+                        desc: 'See how other recruiters are saving 75% of their sourcing time', 
+                        link: '/use-cases/',
+                        priority: 'Medium',
+                        timeToValue: '15 minutes',
+                        icon: '💡'
+                    }
+                ],
+                quickActions: [
+                    { title: 'Generate Boolean Search', desc: 'Create search strings instantly', link: '/gbs-prompts/' },
+                    { title: 'Write Outreach Email', desc: 'Personalized candidate messages', link: '/gbs-prompts/' },
+                    { title: 'Screen Resume', desc: 'AI-powered candidate evaluation', link: '/daily-focus/' }
+                ],
+                stories: [
+                    { name: 'Sarah M.', role: 'Senior Recruiter', impact: '75% time reduction in sourcing', story: 'AI-powered Boolean search generation cut my sourcing time from 4 hours to 1 hour per role.' }
+                ]
+            },
+            'manager': {
+                primary: [
+                    { 
+                        title: 'GBS Leaders Guide', 
+                        desc: 'Strategic AI implementation framework for team managers', 
+                        link: '/gbs-ai-workshop/',
+                        priority: 'High',
+                        timeToValue: '30 minutes',
+                        icon: '📊'
+                    },
+                    { 
+                        title: 'AI Success Stories', 
+                        desc: 'ROI examples and case studies from other managers', 
+                        link: '/use-cases/',
+                        priority: 'High',
+                        timeToValue: '20 minutes',
+                        icon: '💡'
+                    }
+                ],
+                secondary: [
+                    { 
+                        title: 'RPO AI Training', 
+                        desc: 'Comprehensive training program for team implementation', 
+                        link: '/rpo-training/',
+                        priority: 'Medium',
+                        timeToValue: '2 hours',
+                        icon: '🎓'
+                    }
+                ],
+                quickActions: [
+                    { title: 'Team Performance Analysis', desc: 'AI insights on team metrics', link: '/gbs-ai-workshop/' },
+                    { title: 'Strategic Planning', desc: 'AI-assisted strategy development', link: '/gbs-ai-workshop/' },
+                    { title: 'ROI Calculator', desc: 'Measure AI impact on your team', link: '/use-cases/' }
+                ],
+                stories: [
+                    { name: 'Mark T.', role: 'Talent Acquisition Manager', impact: '60% improvement in team efficiency', story: 'Implementing AI tools across my team increased our placement rate by 60% while reducing time-to-fill.' }
+                ]
+            },
+            'analyst': {
+                primary: [
+                    { 
+                        title: 'AI Prompts Library', 
+                        desc: 'Data analysis and reporting prompts for business analysts', 
+                        link: '/gbs-prompts/',
+                        priority: 'High',
+                        timeToValue: '10 minutes',
+                        icon: '✨'
+                    },
+                    { 
+                        title: 'RPO AI Training', 
+                        desc: 'Advanced AI techniques for data analysis and insights', 
+                        link: '/rpo-training/',
+                        priority: 'High',
+                        timeToValue: '1 hour',
+                        icon: '🎓'
+                    }
+                ],
+                secondary: [
+                    { 
+                        title: 'AI Success Stories', 
+                        desc: 'See how analysts are transforming data workflows', 
+                        link: '/use-cases/',
+                        priority: 'Medium',
+                        timeToValue: '15 minutes',
+                        icon: '💡'
+                    }
+                ],
+                quickActions: [
+                    { title: 'Data Analysis', desc: 'AI-powered insights generation', link: '/gbs-prompts/' },
+                    { title: 'Report Creation', desc: 'Automated report generation', link: '/gbs-prompts/' },
+                    { title: 'Trend Analysis', desc: 'Identify patterns in data', link: '/rpo-training/' }
+                ],
+                stories: [
+                    { name: 'Lisa K.', role: 'Business Analyst', impact: '70% faster analysis', story: 'AI transforms my data analysis. What used to take days now takes hours, and insights are clearer than ever.' }
+                ]
+            },
+            'coordinator': {
+                primary: [
+                    { 
+                        title: 'Daily Focus', 
+                        desc: 'Process optimization and coordination techniques', 
+                        link: '/daily-focus/',
+                        priority: 'High',
+                        timeToValue: '15 minutes',
+                        icon: '🎯'
+                    },
+                    { 
+                        title: 'AI Prompts Library', 
+                        desc: 'Administrative task automation and communication templates', 
+                        link: '/gbs-prompts/',
+                        priority: 'High',
+                        timeToValue: '5 minutes',
+                        icon: '✨'
+                    }
+                ],
+                secondary: [
+                    { 
+                        title: 'AI Success Stories', 
+                        desc: 'Process improvement examples from other coordinators', 
+                        link: '/use-cases/',
+                        priority: 'Medium',
+                        timeToValue: '15 minutes',
+                        icon: '💡'
+                    }
+                ],
+                quickActions: [
+                    { title: 'Schedule Optimization', desc: 'AI-powered scheduling', link: '/daily-focus/' },
+                    { title: 'Email Templates', desc: 'Professional communication', link: '/gbs-prompts/' },
+                    { title: 'Process Automation', desc: 'Streamline workflows', link: '/daily-focus/' }
+                ],
+                stories: [
+                    { name: 'Jennifer R.', role: 'Operations Coordinator', impact: '50% reduction in admin time', story: 'AI helps me automate scheduling and communication, freeing up time for strategic coordination work.' }
+                ]
+            }
+        };
+        
+        // Generate user summary
+        function generateUserSummary() {
+            const roleNames = {
+                'recruiter': 'Recruiter/Sourcer',
+                'manager': 'Team Manager', 
+                'analyst': 'Business Analyst',
+                'coordinator': 'Coordinator'
+            };
+            
+            const experienceLevel = assessmentData['ai-familiarity'] || 'beginner';
+            const challenge = assessmentData['time-challenge'] || 'sourcing';
+            const goal = assessmentData['goal'] || 'efficiency';
+            
+            const summary = `${roleNames[selectedRole]} • ${experienceLevel.charAt(0).toUpperCase() + experienceLevel.slice(1)} level • Focus: ${challenge} • Goal: ${goal}`;
+            document.getElementById('user-summary').textContent = summary;
+        }
+        
+        // Generate quick actions
+        function generateQuickActions() {
+            const actions = roleRecommendations[selectedRole].quickActions;
+            const quickActionsHtml = actions.map(action => `
+                <a href="${action.link}" class="quick-action text-white p-4 rounded-lg text-center block">
+                    <div class="font-semibold mb-1">${action.title}</div>
+                    <div class="text-sm opacity-90">${action.desc}</div>
+                </a>
+            `).join('');
+            
+            document.getElementById('quick-actions').innerHTML = quickActionsHtml;
+        }
+        
+        // Generate recommendations
+        function generateRecommendations() {
+            const recs = roleRecommendations[selectedRole];
+            const allRecs = [...recs.primary, ...recs.secondary];
+            
+            const recommendationsHtml = allRecs.map((rec, index) => `
+                <div class="recommendation-card rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="text-2xl mr-3">${rec.icon}</div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900">${rec.title}</h3>
+                                <div class="flex items-center mt-1 space-x-2">
+                                    <span class="priority-badge text-white text-xs px-2 py-1 rounded-full">${rec.priority} Priority</span>
+                                    <span class="text-xs text-gray-500">⏱ ${rec.timeToValue}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-2xl font-bold text-gray-300">${index + 1}</div>
+                    </div>
+                    <p class="text-gray-600 mb-4">${rec.desc}</p>
+                    <a href="${rec.link}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+                        Start Learning →
+                    </a>
+                </div>
+            `).join('');
+            
+            document.getElementById('recommendations').innerHTML = recommendationsHtml;
+        }
+        
+        // Generate relevant stories
+        function generateRelevantStories() {
+            const stories = roleRecommendations[selectedRole].stories;
+            const storiesHtml = stories.map(story => `
+                <div class="bg-white rounded-lg p-4 border border-blue-200">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">👤</div>
+                        <div>
+                            <div class="font-semibold text-gray-900">${story.name} - ${story.role}</div>
+                            <div class="text-sm text-green-600 font-medium mb-2">${story.impact}</div>
+                            <div class="text-sm text-gray-600">"${story.story}"</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('relevant-stories').innerHTML = storiesHtml;
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            generateUserSummary();
+            generateQuickActions();
+            generateRecommendations();
+            generateRelevantStories();
+            
+            // Save completion status
+            localStorage.setItem('onboardingCompleted', 'true');
+            localStorage.setItem('onboardingDate', new Date().toISOString());
+        });
+    </script>
+</body>
+</html>

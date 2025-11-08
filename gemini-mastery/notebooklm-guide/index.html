@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google NotebookLM - Your AI Research & Synthesis Partner</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master Google NotebookLM for AI-powered research, document analysis, and content synthesis. Generate Audio Overviews, Video Overviews, mind maps, and citations from your sources.">
+    <meta name="keywords"
+        content="Google NotebookLM, AI research assistant, document synthesis, audio overviews, video overviews, mind maps, citations, briefings, study guides">
+    <meta name="author" content="Randstad GBS">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Google NotebookLM - Your AI Research & Synthesis Partner">
+    <meta property="og:description"
+        content="Upload docs, slides, PDFs, YouTube links and generate insights, citations, Audio/Video Overviews">
+    <meta property="og:site_name" content="Gemini Mastery Guide">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Google NotebookLM Guide">
+    <meta name="twitter:description" content="AI-powered research and synthesis partner">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../../shared/scripts/analytics.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around diamond */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }        
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }       
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.05));
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+
+        .prompt-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.05));
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .prompt-box:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.1));
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .faq-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            border-left: 4px solid #1a73e8;
+        }
+
+        .faq-item h4 {
+            color: #1a73e8;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .gemini-diamond {
+                font-size: 3rem;
+            }
+
+            .constellation-dot {
+                width: 3px;
+                height: 3px;
+            }
+
+            .floating-particle {
+                font-size: 0.8rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .gemini-diamond,
+            .constellation-dot,
+            .constellation-line,
+            .floating-particle {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">📚</span>
+                            <span>NotebookLM Guide</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20" style="margin-top: 1rem;">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">📚</div>
+            <div class="floating-particle particle-2">🔍</div>
+            <div class="floating-particle particle-3">📝</div>
+            <div class="floating-particle particle-4">🧠</div>
+            <div class="floating-particle particle-5">📊</div>
+            <div class="floating-particle particle-6">⚡</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">📚</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Google NotebookLM</h1>
+            <p class="mt-2 text-lg text-blue-600 font-medium">Your AI research & synthesis partner</p>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Upload docs, slides, PDFs, YouTube links or Drive files and chat to extract insights, citations, mind maps—and even generate podcast-style Audio Overviews or narrated Video Overviews from your sources. Great for briefings, study guides, and report drafts.
+            </p>
+        </header>
+
+        <main>
+
+            <!-- What is NotebookLM Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📚 What is NotebookLM?</h2>
+                <p class="text-gray-700 mb-4 leading-relaxed text-lg">
+                    NotebookLM is Google's AI research and thinking companion. It works on your sources (Drive files, PDFs, slides, links), answering questions, summarizing, citing passages, and transforming material into formats like study guides, briefing docs, mind maps, Audio Overviews (AI-hosted conversations) and Video Overviews (narrated slide stories).
+                </p>
+            </div>
+
+            <!-- Why Teams Use It Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Why teams use it</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="feature-card">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-3">⚡</span>
+                            <h3 class="text-xl font-bold text-gray-900">Deep dives, fast</h3>
+                        </div>
+                        <p class="text-gray-700">Large context handling for long reports, books, and multi-file projects; improved memory for ongoing threads.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-3">🎨</span>
+                            <h3 class="text-xl font-bold text-gray-900">Rich outputs</h3>
+                        </div>
+                        <p class="text-gray-700">One-click Audio/Video Overviews, mind maps, and multilingual output for study guides or briefs.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-3">🔗</span>
+                            <h3 class="text-xl font-bold text-gray-900">Grounded citations</h3>
+                        </div>
+                        <p class="text-gray-700">Answers link back to exact passages in your sources for verification.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-3">🔒</span>
+                            <h3 class="text-xl font-bold text-gray-900">Privacy-first</h3>
+                        </div>
+                        <p class="text-gray-700">Designed to work on your materials; see Google's privacy statement on the official page.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What It's Great For Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💼 What it's great for (GBS & recruiting examples)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="feature-card">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-3">📋</span>
+                            <h3 class="text-xl font-bold text-gray-900">Role brief packs</h3>
+                        </div>
+                        <p class="text-gray-700">Turn JDs + hiring manager notes + market slides into a one-page brief, Q&A, and Audio Overview for the team.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-3">📊</span>
+                            <h3 class="text-xl font-bold text-gray-900">Competitor digests</h3>
+                        </div>
+                        <p class="text-gray-700">Upload last week's news & PDFs and generate a weekly briefing with citations + mind map.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-3">🎓</span>
+                            <h3 class="text-xl font-bold text-gray-900">Training kits</h3>
+                        </div>
+                        <p class="text-gray-700">Convert SOPs into a multilingual study guide and a narrated Video Overview for new joiners.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Start Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Quick start (3 steps)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="feature-card text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">1️⃣</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Create a notebook → add sources</h3>
+                        <p class="text-gray-700">Drive, PDFs, Slides, links</p>
+                    </div>
+
+                    <div class="feature-card text-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">2️⃣</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Ask & verify</h3>
+                        <p class="text-gray-700">"Summarize the hiring implications—cite sources." (follow the citations)</p>
+                    </div>
+
+                    <div class="feature-card text-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">3️⃣</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Publish an output</h3>
+                        <p class="text-gray-700">Generate Study Guide, Briefing Doc, Mind Map, Audio or Video Overview and share</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NotebookLM vs Gemini Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🤔 NotebookLM vs Gemini (when to use which)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-blue-900 mb-3">📚 Use NotebookLM when</h3>
+                        <p class="text-gray-700">You need secure, document-grounded analysis with citations, mind maps, and media overviews.</p>
+                    </div>
+
+                    <div class="bg-purple-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-purple-900 mb-3">✨ Use Gemini for</h3>
+                        <p class="text-gray-700">Open-ended ideation and general assistance—both tools complement each other.</p>
+                    </div>
+                </div>
+                
+                
+
+            <!-- Mini-FAQ Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">❓ Mini-FAQ</h2>
+                
+                <div class="faq-item">
+                    <h4>Does it browse the web?</h4>
+                    <p class="text-gray-700">NotebookLM focuses on your uploaded sources. For open web research, pair with Gemini.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Can it create audio/video from my files?</h4>
+                    <p class="text-gray-700">Yes—Audio Overviews (AI hosts) and Video Overviews (narrated slideshows) built from your sources.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Will it cite where answers came from?</h4>
+                    <p class="text-gray-700">Yes—citations can point to exact passages in your PDFs.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Is there an enterprise option?</h4>
+                    <p class="text-gray-700">NotebookLM Plus is available via Google One AI Premium; org features and limits vary by plan/region.</p>
+                </div>
+            </div>
+
+            <!-- Try It Now Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 "Try it now" prompt ideas (copy/paste)</h2>
+                
+                <div class="prompt-box" onclick="copyToClipboard(this)">
+                    <button class="copy-btn">Copy</button>
+                    "Create a 1-page briefing on these PDFs for the Merck KGaA EMEA hiring meeting. Include 5 bullet insights and source citations."
+                </div>
+                
+                <div class="prompt-box" onclick="copyToClipboard(this)">
+                    <button class="copy-btn">Copy</button>
+                    "Build a study guide from these SOPs with a 10-question quiz. Output in Hungarian." (Workspace Updates Blog)
+                </div>
+                
+                <div class="prompt-box" onclick="copyToClipboard(this)">
+                    <button class="copy-btn">Copy</button>
+                    "Generate an Audio Overview that debates the pros/cons of our three sourcing strategies using the attached slides."
+                </div>
+                
+                <div class="prompt-box" onclick="copyToClipboard(this)">
+                    <button class="copy-btn">Copy</button>
+                    "Make a Video Overview explaining this competitor report for non-technical stakeholders (≤90s)." (The Verge)
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="content-section text-center bg-gradient-to-r from-blue-50 to-purple-50">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
+                <p class="text-gray-700 mb-6 text-lg">Transform your documents into actionable insights with Google NotebookLM</p>
+                <a href="https://notebooklm.google.com" target="_blank" 
+                   class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 text-lg">
+                    Explore NotebookLM
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <span class="scroll-icon">↑</span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js"></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+    
+    <script>
+        // Copy to clipboard functionality
+        function copyToClipboard(element) {
+            const text = element.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(text).then(() => {
+                const copyBtn = element.querySelector('.copy-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.style.background = 'rgba(34, 197, 94, 0.2)';
+                copyBtn.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+                
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = 'rgba(59, 130, 246, 0.1)';
+                    copyBtn.style.borderColor = 'rgba(59, 130, 246, 0.2)';
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>

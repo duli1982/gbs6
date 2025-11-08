@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Content & Analytics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/buttons.css">
+  <style>
+    .card{ background:#fff; border-radius:0.75rem; box-shadow:0 1px 2px rgba(0,0,0,.06); padding:1rem }
+  </style>
+</head>
+<body class="antialiased bg-gray-50">
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl font-bold mb-6">Admin — Content Generation & Analytics</h1>
+
+    <div id="login" class="card max-w-md">
+      <h2 class="text-xl font-semibold mb-2">Sign in</h2>
+      <p class="text-sm text-gray-600 mb-4">Enter the admin password to continue.</p>
+      <input id="pw" type="password" class="w-full border rounded p-2 mb-3" placeholder="Admin password" />
+      <button id="signin" class="bg-[#4A90E2] text-white px-4 py-2 rounded">Sign in</button>
+      <div id="err" class="text-red-600 text-sm mt-2 hidden"></div>
+    </div>
+
+    <div id="app" class="hidden">
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="card">
+          <h3 class="font-semibold">API Calls (7d)</h3>
+          <div id="m-api" class="text-3xl font-bold mt-2">—</div>
+        </div>
+        <div class="card">
+          <h3 class="font-semibold">Active Users (7d)</h3>
+          <div id="m-users" class="text-3xl font-bold mt-2">—</div>
+        </div>
+        <div class="card">
+          <h3 class="font-semibold">Est. Cost (7d)</h3>
+          <div id="m-cost" class="text-3xl font-bold mt-2">—</div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card">
+          <h2 class="text-xl font-semibold mb-3">Content Generation Assistant</h2>
+          <label class="block text-sm font-medium mb-1">Task</label>
+          <select id="task" class="border rounded p-2 w-full mb-3">
+            <option value="generateModule">Generate training module</option>
+            <option value="createQuiz">Create quiz questions</option>
+            <option value="writePrompts">Write example prompts</option>
+            <option value="summarize">Summarize long content</option>
+            <option value="translateLevel">Translate for different skill levels</option>
+            <option value="batch">Batch operations</option>
+          </select>
+          <label class="block text-sm font-medium mb-1">Parameters (JSON)</label>
+          <textarea id="params" class="border rounded p-2 w-full h-40" placeholder='{"topic":"AI in Hiring","learningObjectives":["..."],"count":5}'></textarea>
+          <div class="flex flex-wrap gap-2 mb-2">
+            <button class="px-3 py-1.5 bg-gray-100 border rounded" onclick="preset('generateModule', {topic:'Onboarding for Data Analysts', learningObjectives:['First-week readiness','Tooling setup','Shadowing plan']})">Preset: Onboarding Module</button>
+            <button class="px-3 py-1.5 bg-gray-100 border rounded" onclick="preset('createQuiz', {topic:'AI Foundations for RPO', count:8, difficulty:'mixed'})">Preset: Quiz (RPO)</button>
+            <button class="px-3 py-1.5 bg-gray-100 border rounded" onclick="preset('summarize', {content:'Paste long content here...', target:'executive brief'})">Preset: Executive Summary</button>
+            <button class="px-3 py-1.5 bg-gray-100 border rounded" onclick="preset('translateLevel', {content:'Paste content...', level:'beginner'})">Preset: Translate → Beginner</button>
+          </div>
+          <button id="run" class="mt-1 bg-[#4A90E2] text-white px-4 py-2 rounded">Run</button>
+          <pre id="out" class="mt-3 whitespace-pre-wrap text-sm"></pre>
+        </div>
+
+        <div class="card">
+          <h2 class="text-xl font-semibold mb-3">Usage Analytics</h2>
+          <button id="refresh" class="bg-gray-800 text-white px-3 py-2 rounded">Refresh Summary</button>
+          <pre id="summary" class="mt-3 text-sm"></pre>
+          <p class="text-xs text-gray-500 mt-2">To enable persistent analytics, wire /api/analytics/log to a database and update /api/analytics/summary.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const LS_KEY = 'admin_token';
+    const login = document.getElementById('login');
+    const app = document.getElementById('app');
+    const err = document.getElementById('err');
+    const signin = document.getElementById('signin');
+    const pw = document.getElementById('pw');
+    const run = document.getElementById('run');
+    const out = document.getElementById('out');
+    const task = document.getElementById('task');
+    const params = document.getElementById('params');
+    const refresh = document.getElementById('refresh');
+    const mApi = document.getElementById('m-api');
+    const mUsers = document.getElementById('m-users');
+    const mCost = document.getElementById('m-cost');
+    const summary = document.getElementById('summary');
+
+    function showApp() { login.classList.add('hidden'); app.classList.remove('hidden'); loadSummary(); }
+
+    signin.addEventListener('click', async () => {
+      err.classList.add('hidden');
+      try {
+        const resp = await fetch('/api/admin-auth', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ password: pw.value })});
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data?.error || 'Auth failed');
+        localStorage.setItem(LS_KEY, data.token);
+        showApp();
+      } catch (e) {
+        err.textContent = String(e.message || e);
+        err.classList.remove('hidden');
+      }
+    });
+
+    async function loadSummary() {
+      try {
+        const resp = await fetch('/api/analytics/summary');
+        const data = await resp.json();
+        summary.textContent = JSON.stringify(data, null, 2);
+        mApi.textContent = data?.totals?.apiCalls ?? '—';
+        mUsers.textContent = data?.totals?.usersActive ?? '—';
+        mCost.textContent = data?.totals?.estimatedCostUsd ?? '—';
+      } catch { summary.textContent = 'Failed to load summary.'; }
+    }
+
+    refresh.addEventListener('click', loadSummary);
+
+    run.addEventListener('click', async () => {
+      out.textContent = 'Running...';
+      try {
+        const p = params.value ? JSON.parse(params.value) : {};
+        const token = localStorage.getItem(LS_KEY) || '';
+        const resp = await fetch('/api/admin-generate', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'x-admin-token': token },
+          body: JSON.stringify({ type: task.value, params: p })
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data?.error || 'Request failed');
+        out.textContent = data.result || '(empty)';
+      } catch (e) {
+        out.textContent = 'Error: ' + (e.message || String(e));
+      }
+    });
+
+    // Auto-load if token exists
+    (function(){ if (localStorage.getItem(LS_KEY)) showApp(); })();
+  </script>
+</body>
+</html>
+ 
+    function preset(t, p){
+      task.value = t;
+      params.value = JSON.stringify(p, null, 2);
+      out.textContent = '';
+    }

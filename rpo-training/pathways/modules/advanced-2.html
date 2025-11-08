@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom AI Solutions Development - Advanced Module 2</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .solution-framework {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .development-phase {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .development-phase:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .development-phase::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1rem;
+            height: 1rem;
+            background: #8b5cf6;
+            border-radius: 50%;
+        }
+        
+        .hands-on-project {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .code-example {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #8b5cf6;
+            overflow-x: auto;
+        }
+        
+        .solution-architecture {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .optimization-tip {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .project-milestone {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .project-milestone:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-milestone.completed {
+            border-color: #22c55e;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../advanced.html" class="breadcrumb-link" aria-label="Go to Advanced Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Advanced Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Custom AI Solutions Development</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 2/5</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 40%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 2 of 5</div>
+        <div class="text-xs text-gray-500">30 min hands-on</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🛠️</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Custom AI Solutions Development</h1>
+            <p class="text-lg text-gray-600">Design and implement custom AI solutions tailored to your organization's unique challenges</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Beyond Off-the-Shelf Solutions</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    While general AI tools are powerful, the real competitive advantage comes from custom solutions designed specifically for your organization's unique processes, data, and challenges. This module teaches you how to architect, build, and deploy custom AI workflows.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200 text-center">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <h3 class="font-bold text-purple-800">Tailored Solutions</h3>
+                        <p class="text-purple-700 text-sm">Built for your specific needs and processes</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-center">
+                        <div class="text-2xl mb-2">🚀</div>
+                        <h3 class="font-bold text-blue-800">Competitive Advantage</h3>
+                        <p class="text-blue-700 text-sm">Unique capabilities your competitors don't have</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200 text-center">
+                        <div class="text-2xl mb-2">📈</div>
+                        <h3 class="font-bold text-green-800">Scalable Impact</h3>
+                        <p class="text-green-700 text-sm">Solutions that grow with your organization</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Solution Development Framework -->
+            <section class="content-section mb-8">
+                <div class="solution-framework">
+                    <h2 class="google-sans text-2xl font-bold text-purple-800 mb-4">The BUILD Framework for Custom AI Solutions</h2>
+                    <p class="text-purple-700 mb-6">
+                        Follow this systematic approach to develop robust, scalable AI solutions:
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="development-phase">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-3">🔍</span> B - Business Analysis & Requirements
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Deep dive into business processes, pain points, and success criteria.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Key Activities:</strong><br>
+                                    • Stakeholder interviews<br>
+                                    • Process mapping<br>
+                                    • Pain point analysis<br>
+                                    • Success metrics definition
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Deliverables:</strong><br>
+                                    • Requirements document<br>
+                                    • Process flow diagrams<br>
+                                    • Success criteria<br>
+                                    • ROI projections
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="development-phase">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-3">🏗️</span> U - User Experience Design
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Design intuitive interfaces and workflows that users will actually adopt.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Design Principles:</strong><br>
+                                    • Simplicity first<br>
+                                    • Minimal learning curve<br>
+                                    • Clear feedback loops<br>
+                                    • Error prevention
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>User Research:</strong><br>
+                                    • User personas<br>
+                                    • Journey mapping<br>
+                                    • Usability testing<br>
+                                    • Feedback integration
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="development-phase">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-3">🔧</span> I - Implementation & Integration
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Build the solution using proven AI techniques and integrate with existing systems.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Technical Stack:</strong><br>
+                                    • AI model selection<br>
+                                    • Prompt engineering<br>
+                                    • API integrations<br>
+                                    • Data pipelines
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Integration Points:</strong><br>
+                                    • Existing workflows<br>
+                                    • Data sources<br>
+                                    • User interfaces<br>
+                                    • Reporting systems
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="development-phase">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-3">🧪</span> L - Launch & Learning
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Deploy with careful monitoring and continuous improvement based on real usage.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Launch Strategy:</strong><br>
+                                    • Pilot user group<br>
+                                    • Phased rollout<br>
+                                    • Training programs<br>
+                                    • Support systems
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Learning Loop:</strong><br>
+                                    • Usage analytics<br>
+                                    • User feedback<br>
+                                    • Performance metrics<br>
+                                    • Iterative improvements
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="development-phase">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-3">📊</span> D - Data-Driven Optimization
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Use data and feedback to continuously refine and enhance the solution.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Optimization Areas:</strong><br>
+                                    • Prompt refinement<br>
+                                    • Workflow efficiency<br>
+                                    • User experience<br>
+                                    • Performance tuning
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Success Metrics:</strong><br>
+                                    • Adoption rates<br>
+                                    • Time savings<br>
+                                    • Quality improvements<br>
+                                    • User satisfaction
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hands-On Project -->
+            <section class="content-section mb-8">
+                <div class="hands-on-project">
+                    <h2 class="google-sans text-xl font-bold text-amber-800 mb-4">🎯 Hands-On Project: Build Your Own AI Workflow</h2>
+                    <p class="text-amber-700 mb-4">
+                        Let's build a complete custom AI solution from concept to implementation. We'll create an "Intelligent Candidate Assessment System" that automates resume screening and interview preparation.
+                    </p>
+                    
+                    <div class="bg-white rounded-lg p-4 mb-4 border border-amber-200">
+                        <h4 class="font-semibold text-amber-800 mb-3">Project Overview:</h4>
+                        <div class="grid md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <strong class="text-amber-800">Business Challenge:</strong><br>
+                                <span class="text-amber-700">Manual resume screening takes 2+ hours per role, inconsistent evaluation criteria, and delayed interview preparation.</span>
+                            </div>
+                            <div>
+                                <strong class="text-amber-800">Solution Goal:</strong><br>
+                                <span class="text-amber-700">Automated screening system that evaluates candidates consistently and prepares customized interview guides in under 10 minutes.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4" id="project-milestones">
+                        <div class="project-milestone" onclick="toggleMilestone(1)" data-milestone="1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-semibold text-amber-800">Milestone 1: Requirements Analysis</h4>
+                                <span class="text-amber-600 text-sm">Click to complete</span>
+                            </div>
+                            <div class="milestone-content hidden mt-3 text-sm text-amber-700">
+                                <strong>Completed:</strong> Stakeholder interviews with 3 recruiters, mapped current screening process (2.5 hours average), identified key evaluation criteria (skills match, experience level, cultural fit), defined success metrics (90% accuracy, <10 min processing time).
+                            </div>
+                        </div>
+                        
+                        <div class="project-milestone" onclick="toggleMilestone(2)" data-milestone="2">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-semibold text-amber-800">Milestone 2: Solution Architecture</h4>
+                                <span class="text-amber-600 text-sm">Click to complete</span>
+                            </div>
+                            <div class="milestone-content hidden mt-3 text-sm text-amber-700">
+                                <strong>Designed:</strong> 3-stage pipeline: Resume parsing → Skills analysis → Interview guide generation. Created data flow diagrams and identified integration points with existing ATS system.
+                            </div>
+                        </div>
+                        
+                        <div class="project-milestone" onclick="toggleMilestone(3)" data-milestone="3">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-semibold text-amber-800">Milestone 3: Prompt Engineering</h4>
+                                <span class="text-amber-600 text-sm">Click to complete</span>
+                            </div>
+                            <div class="milestone-content hidden mt-3">
+                                <div class="code-example">
+# Resume Analysis Prompt Template
+Analyze this resume for the {role_title} position:
+
+RESUME: {resume_text}
+JOB REQUIREMENTS: {job_requirements}
+
+Provide analysis in this format:
+1. SKILLS MATCH (0-100%): Rate how well candidate skills match requirements
+2. EXPERIENCE LEVEL: Entry/Mid/Senior based on years and complexity
+3. KEY STRENGTHS: Top 3 relevant strengths with evidence
+4. POTENTIAL CONCERNS: Areas that need clarification in interview
+5. CULTURAL FIT INDICATORS: Communication style, values alignment
+6. RECOMMENDATION: Strong Match/Good Match/Weak Match with reasoning
+7. INTERVIEW FOCUS AREAS: 3 specific topics to explore
+
+Be objective and evidence-based in your assessment.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="project-milestone" onclick="toggleMilestone(4)" data-milestone="4">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-semibold text-amber-800">Milestone 4: Workflow Integration</h4>
+                                <span class="text-amber-600 text-sm">Click to complete</span>
+                            </div>
+                            <div class="milestone-content hidden mt-3 text-sm text-amber-700">
+                                <strong>Integrated:</strong> Connected with ATS API for resume import, created automated email notifications for hiring managers, built dashboard for tracking screening results and interview preparation status.
+                            </div>
+                        </div>
+                        
+                        <div class="project-milestone" onclick="toggleMilestone(5)" data-milestone="5">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-semibold text-amber-800">Milestone 5: Testing & Optimization</h4>
+                                <span class="text-amber-600 text-sm">Click to complete</span>
+                            </div>
+                            <div class="milestone-content hidden mt-3 text-sm text-amber-700">
+                                <strong>Results:</strong> Tested with 50 historical resumes, achieved 94% accuracy vs. human screening, reduced processing time to 8 minutes average. Optimized prompts based on edge cases and recruiter feedback.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="project-completion" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h4 class="font-bold text-green-800 mb-2">🎉 Project Complete!</h4>
+                        <p class="text-green-700 text-sm">
+                            You've successfully built a custom AI solution that reduces screening time by 85% while improving consistency. This project demonstrates the complete BUILD framework in action.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Solution Architecture Patterns -->
+            <section class="content-section mb-8">
+                <div class="solution-architecture">
+                    <h2 class="google-sans text-xl font-bold text-blue-800 mb-4">🏗️ Common Solution Architecture Patterns</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h3 class="font-bold text-blue-800 mb-2">📊 Data Processing Pipeline</h3>
+                            <p class="text-blue-700 text-sm mb-3">For solutions that analyze large volumes of structured data.</p>
+                            <div class="text-xs text-blue-600">
+                                <strong>Pattern:</strong> Data Ingestion → AI Analysis → Results Aggregation → Reporting<br>
+                                <strong>Use Cases:</strong> Performance analytics, market research, compliance monitoring
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h3 class="font-bold text-blue-800 mb-2">🔄 Interactive Workflow Engine</h3>
+                            <p class="text-blue-700 text-sm mb-3">For solutions that guide users through complex processes.</p>
+                            <div class="text-xs text-blue-600">
+                                <strong>Pattern:</strong> User Input → AI Guidance → Decision Points → Action Execution<br>
+                                <strong>Use Cases:</strong> Interview processes, onboarding workflows, decision support
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h3 class="font-bold text-blue-800 mb-2">🎯 Intelligent Automation</h3>
+                            <p class="text-blue-700 text-sm mb-3">For solutions that automate repetitive cognitive tasks.</p>
+                            <div class="text-xs text-blue-600">
+                                <strong>Pattern:</strong> Trigger Event → AI Processing → Quality Check → Automated Action<br>
+                                <strong>Use Cases:</strong> Content generation, email responses, data entry
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h3 class="font-bold text-blue-800 mb-2">🧠 Knowledge Management System</h3>
+                            <p class="text-blue-700 text-sm mb-3">For solutions that capture and share organizational knowledge.</p>
+                            <div class="text-xs text-blue-600">
+                                <strong>Pattern:</strong> Knowledge Capture → AI Organization → Smart Retrieval → Contextual Delivery<br>
+                                <strong>Use Cases:</strong> FAQ systems, training materials, best practices
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Optimization Strategies -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">⚡ Performance Optimization Strategies</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="optimization-tip">
+                        <h3 class="font-bold text-green-800 mb-2">🎯 Prompt Optimization</h3>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• A/B test different prompt variations</li>
+                            <li>• Use specific examples and constraints</li>
+                            <li>• Implement error handling and fallbacks</li>
+                            <li>• Monitor output quality continuously</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="optimization-tip">
+                        <h3 class="font-bold text-green-800 mb-2">⚡ Performance Tuning</h3>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• Cache frequently used results</li>
+                            <li>• Batch process similar requests</li>
+                            <li>• Implement progressive loading</li>
+                            <li>• Optimize for mobile devices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="optimization-tip">
+                        <h3 class="font-bold text-green-800 mb-2">🔄 Workflow Efficiency</h3>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• Minimize user input requirements</li>
+                            <li>• Provide smart defaults and suggestions</li>
+                            <li>• Enable bulk operations</li>
+                            <li>• Implement keyboard shortcuts</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="optimization-tip">
+                        <h3 class="font-bold text-green-800 mb-2">📊 Quality Assurance</h3>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• Implement confidence scoring</li>
+                            <li>• Add human review checkpoints</li>
+                            <li>• Track accuracy metrics</li>
+                            <li>• Enable user feedback loops</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section class="content-section">
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
+                    <h2 class="google-sans text-xl font-bold text-purple-800 mb-4">🚀 Your Custom Solution Development Plan</h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 1-2:</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• Identify high-impact use case</li>
+                                <li>• Conduct stakeholder interviews</li>
+                                <li>• Map current process flows</li>
+                                <li>• Define success criteria</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 3-4:</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• Design solution architecture</li>
+                                <li>• Build initial prototype</li>
+                                <li>• Test with sample data</li>
+                                <li>• Gather early feedback</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 5-6:</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• Refine and optimize</li>
+                                <li>• Integrate with existing systems</li>
+                                <li>• Pilot with select users</li>
+                                <li>• Plan full deployment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <p class="text-purple-600 text-sm">
+                            <strong>Next:</strong> Module 3 will teach you enterprise-scale AI integration techniques and API management.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../advanced.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Advanced Path
+            </a>
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
+                Complete Module 2 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let completedMilestones = 0;
+        
+        function toggleMilestone(milestoneNumber) {
+            const milestone = document.querySelector(`[data-milestone="${milestoneNumber}"]`);
+            const content = milestone.querySelector('.milestone-content');
+            
+            if (!milestone.classList.contains('completed')) {
+                milestone.classList.add('completed');
+                content.classList.remove('hidden');
+                completedMilestones++;
+                
+                if (completedMilestones === 5) {
+                    document.getElementById('project-completion').classList.remove('hidden');
+                }
+            }
+        }
+        
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('advanced-path-progress') || '[]');
+            if (!completedModules.includes(2)) {
+                completedModules.push(2);
+                localStorage.setItem('advanced-path-progress', JSON.stringify(completedModules));
+            }
+            
+            showCompletionModal();
+        }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../advanced.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-next-step {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🛠️</div>
+                <h2 class="modal-title google-sans">Module 2 Completed!</h2>
+                <p class="modal-subtitle">Custom AI solutions mastered</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now know how to build custom AI solutions from concept to deployment.
+                </p>
+                
+                <div class="modal-next-step">
+                    <strong>🏢 Next Up:</strong> Module 3 - Enterprise integration techniques
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
+                    <div class="text-purple-800 font-semibold text-sm mb-1">✨ Development Skills Gained:</div>
+                    <ul class="text-purple-700 text-sm space-y-1 text-left">
+                        <li>• Custom solution architecture</li>
+                        <li>• AI model integration</li>
+                        <li>• Deployment strategies</li>
+                        <li>• Solution optimization</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 3 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Review Module
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Advanced Module 2 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'advanced-2',
+                passingScore: 80,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What does the BUILD Framework stand for in custom AI solutions development?",
+                        options: [
+                            "Basic Understanding, Integration, Learning, Deployment",
+                            "Business Analysis, User Experience Design, Implementation & Integration, Launch & Learning, Data-Driven Optimization",
+                            "Building, Understanding, Implementing, Launching, Deploying",
+                            "Business Intelligence, User Interface, Logic Design, Database"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The BUILD Framework consists of: Business Analysis & Requirements, User Experience Design, Implementation & Integration, Launch & Learning, and Data-Driven Optimization. This systematic approach ensures robust, scalable AI solutions.",
+                        hint: "Review the BUILD Framework section with the 5 development phases."
+                    },
+                    {
+                        question: "In the Intelligent Candidate Assessment System project, what was the target processing time goal?",
+                        options: [
+                            "Under 30 minutes",
+                            "Under 10 minutes",
+                            "Under 1 hour",
+                            "Under 5 minutes"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The solution goal was to complete automated screening and customized interview guide preparation in under 10 minutes, compared to the 2+ hours manual screening took previously.",
+                        hint: "Look at the Project Overview section in the Hands-On Project."
+                    },
+                    {
+                        question: "Which solution architecture pattern is best for guiding users through complex processes?",
+                        options: [
+                            "Data Processing Pipeline",
+                            "Interactive Workflow Engine",
+                            "Intelligent Automation",
+                            "Knowledge Management System"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Interactive Workflow Engine pattern (User Input → AI Guidance → Decision Points → Action Execution) is designed for solutions that guide users through complex processes like interviews, onboarding workflows, and decision support.",
+                        hint: "Review the Common Solution Architecture Patterns section."
+                    },
+                    {
+                        question: "What was the achieved accuracy rate in the Candidate Assessment System after testing with 50 historical resumes?",
+                        options: [
+                            "85%",
+                            "90%",
+                            "94%",
+                            "98%"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "The system achieved 94% accuracy compared to human screening, exceeding the 90% target accuracy defined in the success metrics, while reducing processing time to 8 minutes average.",
+                        hint: "Check Milestone 5: Testing & Optimization in the project."
+                    },
+                    {
+                        question: "Which optimization strategy involves testing different versions to improve AI output?",
+                        options: [
+                            "Batch processing similar requests",
+                            "A/B testing different prompt variations",
+                            "Implementing keyboard shortcuts",
+                            "Enabling bulk operations"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "A/B testing different prompt variations is a key Prompt Optimization strategy. It allows you to systematically compare different approaches and identify which prompts produce the best results for your specific use case.",
+                        hint: "Look at the Prompt Optimization tips in the Performance Optimization Strategies section."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 80) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-purple-600', 'hover:bg-purple-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>

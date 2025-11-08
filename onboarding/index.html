@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started with AI - Randstad GBS Learning Hub</title>
+    <script>
+        // Redirect to welcome page for better UX
+        window.location.href = 'welcome.html';
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .step-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .step-card.active {
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .role-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .role-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .role-card.selected {
+            border-color: #4A90E2;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            Home
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current">Onboarding</span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn">
+                    Back to Hub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Progress Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 25%"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span>Welcome</span>
+                <span>Role</span>
+                <span>Assessment</span>
+                <span>Ready!</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Welcome -->
+        <div id="step-1" class="step-card max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🚀</div>
+                <h1 class="google-sans text-3xl font-bold text-gray-900 mb-4">Welcome to Your AI Journey!</h1>
+                <p class="text-lg text-gray-600 mb-8">Let's personalize your learning experience. This quick 2-minute setup will help us recommend the best AI tools and training for your role.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <h3 class="font-semibold text-gray-900">Personalized</h3>
+                        <p class="text-sm text-gray-600">Content tailored to your role</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">⚡</div>
+                        <h3 class="font-semibold text-gray-900">Quick Wins</h3>
+                        <p class="text-sm text-gray-600">Immediate tools you can use</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">📈</div>
+                        <h3 class="font-semibold text-gray-900">Track Progress</h3>
+                        <p class="text-sm text-gray-600">See your AI skill growth</p>
+                    </div>
+                </div>
+                
+                <button onclick="nextStep()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Let's Get Started!
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Role Selection -->
+        <div id="step-2" class="step-card max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-lg hidden">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2 text-center">What's Your Role?</h2>
+            <p class="text-gray-600 mb-6 text-center">This helps us recommend the most relevant AI tools and training for you.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="role-card border-2 border-gray-200 rounded-lg p-4" data-role="recruiter">
+                    <div class="text-2xl mb-2">👥</div>
+                    <h3 class="font-semibold text-gray-900">Recruiter/Sourcer</h3>
+                    <p class="text-sm text-gray-600">Finding and engaging candidates</p>
+                </div>
+                <div class="role-card border-2 border-gray-200 rounded-lg p-4" data-role="manager">
+                    <div class="text-2xl mb-2">📊</div>
+                    <h3 class="font-semibold text-gray-900">Team Manager</h3>
+                    <p class="text-sm text-gray-600">Leading teams and strategy</p>
+                </div>
+                <div class="role-card border-2 border-gray-200 rounded-lg p-4" data-role="analyst">
+                    <div class="text-2xl mb-2">📈</div>
+                    <h3 class="font-semibold text-gray-900">Analyst</h3>
+                    <p class="text-sm text-gray-600">Data analysis and reporting</p>
+                </div>
+                <div class="role-card border-2 border-gray-200 rounded-lg p-4" data-role="coordinator">
+                    <div class="text-2xl mb-2">⚙️</div>
+                    <h3 class="font-semibold text-gray-900">Coordinator</h3>
+                    <p class="text-sm text-gray-600">Process management and support</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button id="role-next" onclick="nextStep()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors opacity-50 cursor-not-allowed" disabled>
+                    Continue
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Quick Assessment -->
+        <div id="step-3" class="step-card max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-lg hidden">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2 text-center">Quick AI Skills Check</h2>
+            <p class="text-gray-600 mb-6 text-center">Just 3 quick questions to personalize your experience.</p>
+            
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">1. How familiar are you with AI tools?</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="ai-familiarity" value="beginner" class="mr-3">
+                            <span>Complete beginner - I've heard about AI but never used it</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="ai-familiarity" value="some" class="mr-3">
+                            <span>Some experience - I've tried ChatGPT or similar tools</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="ai-familiarity" value="experienced" class="mr-3">
+                            <span>Experienced - I regularly use AI tools in my work</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">2. What's your biggest time challenge?</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="time-challenge" value="sourcing" class="mr-3">
+                            <span>Finding and sourcing candidates</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="time-challenge" value="communication" class="mr-3">
+                            <span>Writing emails and messages</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="time-challenge" value="reporting" class="mr-3">
+                            <span>Creating reports and documentation</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="time-challenge" value="admin" class="mr-3">
+                            <span>Administrative tasks</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">3. What would you like to achieve first?</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="efficiency" class="mr-3">
+                            <span>Save time on daily tasks</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="quality" class="mr-3">
+                            <span>Improve quality of my work</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="learning" class="mr-3">
+                            <span>Learn new AI skills</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="innovation" class="mr-3">
+                            <span>Innovate and try new approaches</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button id="assessment-next" onclick="nextStep()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors opacity-50 cursor-not-allowed" disabled>
+                    Get My Recommendations
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 4: Personalized Results -->
+        <div id="step-4" class="step-card max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-lg hidden">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">🎉</div>
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-2">You're All Set!</h2>
+                <p class="text-gray-600">Based on your responses, here are your personalized recommendations:</p>
+            </div>
+            
+            <div id="recommendations" class="space-y-4 mb-8">
+                <!-- Dynamic recommendations will be inserted here -->
+            </div>
+            
+            <div class="text-center">
+                <a href="../" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-block">
+                    Start Learning!
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let selectedRole = '';
+        let assessmentData = {};
+
+        function nextStep() {
+            document.getElementById(`step-${currentStep}`).classList.add('hidden');
+            currentStep++;
+            document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+            
+            // Update progress bar
+            const progress = (currentStep / 4) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            
+            if (currentStep === 4) {
+                generateRecommendations();
+            }
+        }
+
+        // Role selection logic
+        document.querySelectorAll('.role-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedRole = this.dataset.role;
+                
+                const nextBtn = document.getElementById('role-next');
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            });
+        });
+
+        // Assessment validation
+        function validateAssessment() {
+            const questions = ['ai-familiarity', 'time-challenge', 'goal'];
+            let allAnswered = true;
+            
+            questions.forEach(question => {
+                const answer = document.querySelector(`input[name="${question}"]:checked`);
+                if (answer) {
+                    assessmentData[question] = answer.value;
+                } else {
+                    allAnswered = false;
+                }
+            });
+            
+            const nextBtn = document.getElementById('assessment-next');
+            if (allAnswered) {
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // Add event listeners to radio buttons
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', validateAssessment);
+        });
+
+        function generateRecommendations() {
+            const recommendations = document.getElementById('recommendations');
+            let content = '';
+            
+            // Role-based recommendations
+            const roleRecommendations = {
+                'recruiter': [
+                    { title: 'AI Prompts Library', desc: 'Boolean search strings and candidate outreach templates', link: '/gbs-prompts/' },
+                    { title: 'Daily Sourcing Focus', desc: 'Micro-coaching cards for sourcing skills', link: '/daily-focus/' }
+                ],
+                'manager': [
+                    { title: 'GBS Leaders Guide', desc: 'Strategic AI implementation for teams', link: '/gbs-ai-workshop/' },
+                    { title: 'Success Stories', desc: 'ROI examples from other managers', link: '/use-cases/' }
+                ],
+                'analyst': [
+                    { title: 'AI Prompts Library', desc: 'Data analysis and reporting prompts', link: '/gbs-prompts/' },
+                    { title: 'RPO Training', desc: 'Advanced AI techniques', link: '/rpo-training/' }
+                ],
+                'coordinator': [
+                    { title: 'Daily Focus', desc: 'Process optimization techniques', link: '/daily-focus/' },
+                    { title: 'AI Prompts Library', desc: 'Administrative task automation', link: '/gbs-prompts/' }
+                ]
+            };
+            
+            const userRecs = roleRecommendations[selectedRole] || roleRecommendations['recruiter'];
+            
+            userRecs.forEach(rec => {
+                content += `
+                    <a href="${rec.link}" class="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors">
+                        <h3 class="font-semibold text-gray-900 mb-1">${rec.title}</h3>
+                        <p class="text-sm text-gray-600">${rec.desc}</p>
+                    </a>
+                `;
+            });
+            
+            recommendations.innerHTML = content;
+        }
+    </script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+</body>
+</html>
