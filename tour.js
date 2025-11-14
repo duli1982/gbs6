@@ -34,7 +34,7 @@ class Tour {
             {
                 selector: 'a[href="/use-cases/"]',
                 title: 'AI Success Stories',
-                description: 'Real-world examples and case studies showcasing how AI transforms daily work at Randstad GBS. See the impact firsthand.',
+                description: 'Real-world examples and case studies showcasing how AI transforms daily work at GBS EMEA. See the impact firsthand.',
                 placement: 'top'
             },
             {

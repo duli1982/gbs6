@@ -1,8 +1,8 @@
-# Randstad GBS Learning Hub
+# GBS EMEA Learning Hub
 
 **AI Training & Learning Platform**
 
-A comprehensive learning platform designed to help Randstad GBS employees learn and adopt AI tools in their daily work, with a focus on recruitment and RPO operations.
+A comprehensive learning platform designed to help GBS EMEA employees learn and adopt AI tools in their daily work, with a focus on recruitment and RPO operations.
 
 ---
 
@@ -395,13 +395,13 @@ if (SecurityUtils.isValidURL(url)) {
 
 ## 📄 License
 
-Internal use only - Randstad GBS
+Internal use only - GBS EMEA
 
 ---
 
 ## 👥 Contributors
 
-- **Development:** Randstad GBS Team
+- **Development:** GBS EMEA Team
 - **Security Hardening:** Claude Code Assistant (October 2025)
 
 ---

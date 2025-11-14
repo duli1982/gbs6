@@ -1,6 +1,6 @@
 # Enterprise Readiness Checklist
 
-**Project:** Randstad GBS Learning Hub - AI Training Platform
+**Project:** GBS EMEA Learning Hub - AI Training Platform
 **Last Updated:** October 7, 2025
 **Overall Status:** 🔴 NOT READY FOR PRODUCTION
 **Readiness Score:** 5.5/10

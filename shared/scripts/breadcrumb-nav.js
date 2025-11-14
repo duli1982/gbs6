@@ -1,5 +1,5 @@
 /**
- * Enhanced Breadcrumb Navigation - Randstad GBS Learning Hub
+ * Enhanced Breadcrumb Navigation - GBS EMEA Learning Hub
  * Handles scroll behavior, mobile responsiveness, and accessibility
  */
 

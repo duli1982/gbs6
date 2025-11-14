@@ -3,7 +3,7 @@
 ## Step 1: Create Google Form
 
 1. Go to [forms.google.com](https://forms.google.com)
-2. Create new form: "Randstad GBS - AppScript Idea Bank"
+2. Create new form: "GBS EMEA - AppScript Idea Bank"
 3. Add these questions in exact order:
 
 ### Question 1: Idea Title (Short answer, Required)

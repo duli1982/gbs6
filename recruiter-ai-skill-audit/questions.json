@@ -30,7 +30,7 @@
   "questions": [
     {
       "id": "businessUnit",
-      "question": "Which Randstad GBS business function best describes your role?",
+      "question": "Which GBS EMEA business function best describes your role?",
       "type": "single",
       "showIf": null,
       "options": [

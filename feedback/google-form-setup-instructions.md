@@ -6,7 +6,7 @@
 
 1\. Go to \[forms.google.com](https://forms.google.com)
 
-2\. Create new form: "Randstad GBS Learning Hub - Feedback"
+2\. Create new form: "GBS EMEA Learning Hub - Feedback"
 
 3\. Add these questions in exact order:
 

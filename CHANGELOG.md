@@ -1,7 +1,7 @@
 # RPO Training Website - Comprehensive Audit & Updates
 
 ## Project Overview
-Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically the RPO Training section. All pages have been systematically reviewed and updated to ensure consistency, accessibility, SEO optimization, and production readiness.
+Complete audit and enhancement of the GBS EMEA AI Learning Hub, specifically the RPO Training section. All pages have been systematically reviewed and updated to ensure consistency, accessibility, SEO optimization, and production readiness.
 
 ---
 
@@ -36,8 +36,8 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
   - Before: `/feedback/` → After: `feedback/index.html`
   - Before: `/gbs-ai-workshop/` → After: `gbs-ai-workshop/index.html`
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Randstad GBS - AI Hub | Your Central Portal for AI Tools & Training"
-  - Description: "Central portal for Randstad GBS AI training programs..."
+  - Title: "GBS EMEA - AI Hub | Your Central Portal for AI Tools & Training"
+  - Description: "Central portal for GBS EMEA AI training programs..."
   - Open Graph tags for social sharing
   - Twitter Card meta tags
 - ✅ Added sticky header with navigation
@@ -62,7 +62,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "RPO Training - AI Skills Development | Randstad GBS"
+  - Title: "RPO Training - AI Skills Development | GBS EMEA"
   - Description focused on recruitment AI training
   - Open Graph and Twitter Card tags
 - ✅ Fixed duplicate script loading issue
@@ -125,7 +125,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Beginner AI Learning Path - RPO Training | Randstad GBS"
+  - Title: "Beginner AI Learning Path - RPO Training | GBS EMEA"
   - Description: "Start your AI journey with our beginner-friendly learning path..."
   - Keywords: beginner AI training, AI fundamentals, prompt basics, etc.
 - ✅ Added sticky header with breadcrumbs
@@ -172,7 +172,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Intermediate AI Learning Path - RPO Training | Randstad GBS"
+  - Title: "Intermediate AI Learning Path - RPO Training | GBS EMEA"
   - Description: "Level up your AI skills with our intermediate learning path..."
   - Keywords: intermediate AI training, advanced AI prompts, workflow automation, etc.
 - ✅ Added sticky header with breadcrumbs
@@ -213,7 +213,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Advanced AI Learning Path - RPO Training | Randstad GBS"
+  - Title: "Advanced AI Learning Path - RPO Training | GBS EMEA"
   - Description: "Master strategic AI implementation and leadership..."
   - Keywords: advanced AI training, AI strategy, AI leadership, enterprise AI, etc.
 - ✅ Added sticky header with breadcrumbs
@@ -259,7 +259,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Recruiter Learning Track - RPO Training Hub | Randstad GBS"
+  - Title: "Recruiter Learning Track - RPO Training Hub | GBS EMEA"
   - Description: "Specialized AI training for recruitment professionals..."
   - Keywords: recruiter AI training, candidate sourcing AI, recruitment automation, etc.
 - ✅ Added ARIA labels throughout
@@ -289,7 +289,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Manager Learning Track - RPO Training Hub | Randstad GBS"
+  - Title: "Manager Learning Track - RPO Training Hub | GBS EMEA"
   - Description: "Strategic AI leadership training for recruitment managers..."
   - Keywords: manager AI training, recruitment leadership, AI strategy, team performance, etc.
 - ✅ Added ARIA labels throughout
@@ -314,7 +314,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Analyst Learning Track - RPO Training Hub | Randstad GBS"
+  - Title: "Analyst Learning Track - RPO Training Hub | GBS EMEA"
   - Description: "Data-driven AI training for recruitment analysts..."
   - Keywords: analyst AI training, recruitment analytics, data analysis AI, predictive analytics, etc.
 - ✅ Added ARIA labels throughout
@@ -338,7 +338,7 @@ Complete audit and enhancement of the Randstad GBS AI Learning Hub, specifically
 
 **Changes Made:**
 - ✅ Added comprehensive SEO meta tags
-  - Title: "Coordinator Learning Track - RPO Training Hub | Randstad GBS"
+  - Title: "Coordinator Learning Track - RPO Training Hub | GBS EMEA"
   - Description: "Practical AI training for recruitment coordinators..."
   - Keywords: coordinator AI training, recruitment coordination, scheduling automation, etc.
 - ✅ Added ARIA labels throughout
@@ -574,7 +574,7 @@ The following files are referenced but may need to be created:
 ## Contact & Support
 
 For questions about these changes or future updates:
-- **Project:** Randstad GBS AI Learning Hub
+- **Project:** GBS EMEA AI Learning Hub
 - **Section:** RPO Training
 - **Documentation Date:** September 30, 2025
 - **Changes Applied By:** Claude Code Assistant
@@ -588,18 +588,18 @@ For questions about these changes or future updates:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title | Randstad GBS</title>
+    <title>Page Title | GBS EMEA</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="150-160 character description">
     <meta name="keywords" content="keyword1, keyword2, keyword3">
-    <meta name="author" content="Randstad GBS">
+    <meta name="author" content="GBS EMEA">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Page Title">
     <meta property="og:description" content="Description">
-    <meta property="og:site_name" content="Randstad GBS Learning Hub">
+    <meta property="og:site_name" content="GBS EMEA Learning Hub">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
