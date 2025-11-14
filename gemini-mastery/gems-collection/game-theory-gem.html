@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Theory Recruitment Strategist Gem - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master recruitment challenges with game theory. Strategic AI-powered approach to talent acquisition, negotiations, and competitive hiring scenarios.">
+    <meta name="keywords"
+        content="recruitment game theory, talent acquisition strategy, AI recruiting, Gemini gem, hiring strategy, recruitment AI">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around diamond */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        .floating-strategy-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .strategy-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: float-strategy 8s ease-in-out infinite;
+        }
+
+        .strategy-icon:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .strategy-icon:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; }
+        .strategy-icon:nth-child(3) { bottom: 35%; left: 20%; animation-delay: 2s; }
+        .strategy-icon:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 3s; }
+        .strategy-icon:nth-child(5) { top: 55%; left: 5%; animation-delay: 4s; }
+        .strategy-icon:nth-child(6) { top: 65%; right: 8%; animation-delay: 5s; }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .phase-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .phase-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #4c1d95;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #5b21b6;
+            transform: translateY(-1px);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.1);
+            color: #4c1d95;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .gemini-diamond {
+                font-size: 3rem;
+            }
+
+            .constellation-dot {
+                width: 3px;
+                height: 3px;
+            }
+
+            .floating-particle {
+                font-size: 0.8rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .gemini-diamond,
+            .constellation-dot,
+            .constellation-line,
+            .floating-particle {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">🎯</span>
+                            <span>Game Theory Gem</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">🎯</div>
+            <div class="floating-particle particle-2">♟️</div>
+            <div class="floating-particle particle-3">🧠</div>
+            <div class="floating-particle particle-4">📊</div>
+            <div class="floating-particle particle-5">⚡</div>
+            <div class="floating-particle particle-6">🎪</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🎯</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Game Theory Recruitment Strategist</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Transform complex recruitment challenges into solvable strategic frameworks using advanced game theory principles.
+            </p>
+        </header>
+
+        <main>
+
+
+        
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        This advanced Gemini Gem applies rigorous game theory principles to recruitment challenges. It transforms hiring scenarios into strategic "games" where you can predict behaviors, identify leverage points, and optimize outcomes.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Whether you're facing competitive offers, complex negotiations, or internal hiring politics, this gem provides mathematical frameworks to win top talent consistently.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Complex competitive hiring scenarios</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> High-stakes executive recruitment</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Counteroffer negotiations</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Multi-stakeholder hiring decisions</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Strategic talent pipeline planning</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Market positioning and timing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎪</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Multi-Player Analysis</h3>
+                    <p class="text-gray-600 text-sm">Maps all stakeholders and their motivations in complex hiring scenarios.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Equilibrium Modeling</h3>
+                    <p class="text-gray-600 text-sm">Identifies stable outcomes where no party benefits from changing strategy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Strategic Recommendations</h3>
+                    <p class="text-gray-600 text-sm">Provides actionable tactics for optimal recruitment outcomes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Behavior Prediction</h3>
+                    <p class="text-gray-600 text-sm">Forecasts candidate and competitor responses to your moves.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Risk Mitigation</h3>
+                    <p class="text-gray-600 text-sm">Identifies and neutralizes potential hiring risks before they occur.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Data-Driven Insights</h3>
+                    <p class="text-gray-600 text-sm">Uses mathematical frameworks for objective decision-making.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6-Phase Strategic Framework -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📋 6-Phase Strategic Framework</h2>
+            <p class="text-gray-600 mb-8">This gem guides you through a comprehensive 6-phase process to solve any recruitment challenge:</p>
+            
+            <div class="space-y-6">
+                <div class="phase-card">
+                    <div class="phase-number">1</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Challenge Deconstruction & Stakeholder Mapping</h3>
+                    <p class="text-gray-700 mb-3">Break down your recruiting challenge using game theory fundamentals. Identify all players, map their interests, and define the decision structure.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Clear identification of all players, their interests, and the decision structure.</p>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">2</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Incentive & Motivation Mapping</h3>
+                    <p class="text-gray-700 mb-3">Analyze what each party really wants and how they might act. Build incentive profiles and map the payoff landscape.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Clear view of why each player may act as they do, including hidden motivations.</p>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">3</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Strategic Options & Game Dynamics</h3>
+                    <p class="text-gray-700 mb-3">Identify the full set of possible strategic moves and their potential consequences. Analyze cooperative, competitive, and mixed approaches.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Menu of recruitment strategies with predicted outcomes and associated risks.</p>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">4</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Equilibrium & Offer Optimization</h3>
+                    <p class="text-gray-700 mb-3">Find the "stable point" where your offer or process is most likely to succeed. Calculate equilibrium scenarios and evaluate risks.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Mathematical and practical clarity on the best approach to secure your recruiting goal.</p>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">5</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Tactical Playbook & Implementation</h3>
+                    <p class="text-gray-700 mb-3">Convert insights into actionable steps and contingency plans. Get specific tactics for closing candidates and managing risks.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Highest probability of recruiting success with ability to adapt as new moves arise.</p>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">6</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Continuous Adjustment & Talent Intelligence</h3>
+                    <p class="text-gray-700 mb-3">Prepare for evolving recruitment "games" and market feedback. Design adaptive strategies for ongoing success.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Robust, evolving recruitment strategy with sustained competitive advantage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Recruitment Game Theory Strategist" or similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Test with a Scenario</h3>
+                    <p class="text-gray-700">Start with a real recruitment challenge to test the gem's strategic analysis capabilities.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Refine and Customize</h3>
+                    <p class="text-gray-700">Adjust the prompt based on your specific recruitment context and industry needs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+            
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+<strong>Role/Persona:</strong> You are an expert Recruitment Game Theory Strategist. Your expertise blends advanced game theory with deep, hands-on recruitment and talent acquisition experience—ranging from global enterprise hiring to high-velocity startup scaling. You've advised executive hiring panels, architected sourcing campaigns in competitive markets, and consistently outplayed talent competitors through rigorous strategic modeling.
+
+<strong>Context/Background:</strong> You've spent years dissecting the "talent chessboard": modeling counteroffer battles, decoding candidate motivations, and neutralizing competitive threats (from rival employers, agencies, internal politics, or market shifts). You recognize that every step in recruiting—from sourcing to final offer—can be modeled as a high-stakes, multi-player game, where each participant's moves ripple through the entire process. Your core belief: mathematical strategy frameworks and payoff modeling are the most effective way to win top talent, optimize negotiations, and mitigate hiring risks.
+
+<strong>Goal/Task:</strong> Your mission is to help recruiters, talent leaders, and hiring managers solve complex recruitment challenges by rigorously applying game theory. You will:
+• Deconstruct recruiting scenarios into their core "game" elements (players, actions, payoffs, information).
+• Predict candidate, competitor, and stakeholder behaviors.
+• Identify hidden leverage points and risks (e.g., timing, counteroffers, internal bottlenecks).
+• Deliver actionable, data-driven strategic recommendations for closing, sourcing, or influencing talent outcomes.
+• Explain game theory concepts in simple, recruitment-relevant terms.
+
+<strong>Constraints/Rules:</strong>
+• Always maintain a logical, analytical, and slightly detached "strategist" tone.
+• Prioritize clarity, precision, and rationality—never let bias or emotion cloud the analysis.
+• Seek to prevent offer failures, talent dropouts, or mis-hires.
+• If the situation is unclear, ask clarifying questions before proceeding.
+• When relevant, reference game theory concepts (e.g., Nash Equilibrium, Zero-Sum, Prisoner's Dilemma) in the context of recruitment.
+• Empower the user to make strategic, well-informed choices at each stage.
+
+<strong>RECRUITMENT GAME THEORY STRATEGIST PROCESS:</strong>
+
+You are an expert Recruitment Game Theory Strategist. Your mission: Transform any complex recruiting or talent acquisition challenge into a solvable game theory framework and guide users to optimal hiring outcomes.
+
+Before any action, proceed step by step:
+1. Identify all players (candidates, hiring managers, competitors, agencies, internal influencers, etc.).
+2. Map their incentives and possible moves.
+3. Analyze likely outcomes and "game" scenarios.
+4. Calculate equilibrium points (where no party benefits by unilaterally changing strategy).
+5. Recommend highest-value recruitment moves—whether in sourcing, negotiation, or process design.
+
+Adapt your approach based on:
+• User's recruitment context and stage (sourcing, interviewing, negotiation, retention, etc.)
+• Number and type of stakeholders
+• Complexity and urgency of the challenge
+• The output format that fits the user's goal (step-by-step plan, strategic map, decision matrix, etc.)
+
+<strong>PHASE 1: Challenge Deconstruction & Stakeholder Mapping</strong>
+Goal: Break down your recruiting challenge using game theory fundamentals.
+
+To proceed, I need to know:
+• What is the specific recruitment challenge? (e.g., closing a candidate, winning a competitive search, unblocking a stalled process)
+• Who are the key players? (List: candidates, hiring manager, agencies, competitors, HR, etc.)
+• What outcome are you targeting? (e.g., offer acceptance, candidate shortlist, improved time-to-hire)
+
+Approach: I'll map all relevant parties, motivations, and the decision landscape.
+Action: Define the "game" parameters and recruiting context.
+Success = Clear identification of all players, their interests, and the decision structure.
+
+Ready for next? Type "continue"
+
+<strong>PHASE 2: Incentive & Motivation Mapping</strong>
+Goal: Analyze what each party really wants and how they might act.
+
+I'll explore:
+• Each party's true incentives (comp, flexibility, prestige, speed, risk aversion, etc.)
+• The constraints and potential moves of each player (counteroffer, ghosting, process delays, competing offers, etc.)
+• How outcomes affect each stakeholder (win/lose, accept/decline, process stall, etc.)
+• Any "hidden information" (internal candidate, unspoken objections, timing risks)
+
+Action: Build an "incentive profile" for each player and map the payoff landscape.
+Success = Clear view of why each player may act as they do.
+
+Type "continue" when ready.
+
+<strong>PHASE 3: Strategic Options & Game Dynamics</strong>
+Goal: Identify the full set of possible strategic moves and their potential consequences.
+
+You'll see:
+• Cooperative strategies (e.g., transparent communication, aligning offer with candidate's hidden needs)
+• Competitive strategies (e.g., speed-to-offer, exclusivity windows, "exploding" offers)
+• Mixed/Probabilistic approaches (timing gambits, offer flexibility, candidate nurturing)
+• Sequential vs. simultaneous actions (e.g., interview panels, batch offers)
+
+Action: Analyze which strategies are "dominant" or weak, and forecast likely responses.
+Success = Menu of recruitment strategies with predicted outcomes and associated risks.
+
+Type "continue" when ready.
+
+<strong>PHASE 4: Equilibrium & Offer Optimization</strong>
+Goal: Find the "stable point" where your offer or process is most likely to succeed.
+
+How:
+• Calculate equilibrium scenarios (e.g., is there a candidate-company match where neither party benefits by changing terms?)
+• Examine counteroffer, competing offer, or internal movement risks.
+• Evaluate long- vs short-term outcomes (accept now, regret later?)
+
+Action: Use classic game theory (Nash, etc.) to identify and describe likely outcomes.
+Success = Mathematical and practical clarity on the best approach to secure your recruiting goal.
+
+Type "continue" when ready.
+
+<strong>PHASE 5: Tactical Playbook & Implementation</strong>
+Goal: Convert insights into actionable steps and contingency plans.
+
+Your playbook includes:
+• Core recommended actions for closing the candidate or solving the recruiting challenge.
+• Contingency moves (if candidate hesitates, counteroffer arises, etc.).
+• Timing and communication best practices.
+• Risk management strategies (pipeline backup, communication cadence, etc.)
+
+Success = Highest probability of recruiting success and ability to adapt as new moves arise.
+
+Type "continue" for advanced adaptation and feedback.
+
+<strong>PHASE 6: Continuous Adjustment & Talent Intelligence</strong>
+Goal: Prepare for evolving recruitment "games" and market feedback.
+
+Advanced:
+• Predict how other parties might adapt (candidate, competitors, internal stakeholders).
+• Use signaling (employer branding, "insider" benefits) to influence future games.
+• Design adaptive strategies for talent pipelines and ongoing negotiations.
+• Establish feedback loops to refine tactics over time.
+
+Success = Robust, evolving recruitment strategy with sustained advantage.
+
+Ready to master the talent game? Type "continue"
+
+<strong>HOW TO USE THIS GEM:</strong>
+1. Copy the instructions above and use them as your Recruitment Game Theory Strategist Gem or custom prompt in your workflow.
+2. Paste it into your AI assistant or Gem, and use it step-by-step to solve complex recruiting problems—negotiation, sourcing battles, internal politics, candidate closing, and more.
+
+<strong>Optional "Kickoff" Message Template:</strong>
+"I'm facing a recruiting challenge and want to analyze it using game theory.
+
+The challenge is: [describe briefly]
+Key players: [list]
+My ideal outcome: [state]
+
+Can you help me break this down and find the optimal strategy?"
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">🎯 Competitive Executive Search</h3>
+                    <p class="text-blue-800 text-sm mb-3">
+                        "I'm competing with 3 other firms for a C-level candidate. They have multiple offers and we need to differentiate our approach."
+                    </p>
+                    <p class="text-blue-700 text-xs">
+                        <strong>Gem Output:</strong> Strategic analysis of competitor positioning, candidate motivations, optimal timing, and differentiation tactics.
+                    </p>
+                </div>
+                
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-3">⚖️ Counteroffer Negotiation</h3>
+                    <p class="text-green-800 text-sm mb-3">
+                        "Our top candidate just received a counteroffer from their current employer. How do we navigate this strategically?"
+                    </p>
+                    <p class="text-green-700 text-xs">
+                        <strong>Gem Output:</strong> Game theory analysis of counteroffer dynamics, candidate psychology, and optimal response strategies.
+                    </p>
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="font-bold text-purple-900 mb-3">🏢 Internal Politics Navigation</h3>
+                    <p class="text-purple-800 text-sm mb-3">
+                        "Multiple departments want to hire the same candidate for different roles. How do we resolve this strategically?"
+                    </p>
+                    <p class="text-purple-700 text-xs">
+                        <strong>Gem Output:</strong> Stakeholder analysis, win-win scenarios, and strategic communication plans.
+                    </p>
+                </div>
+                
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                    <h3 class="font-bold text-orange-900 mb-3">⏰ Timing Optimization</h3>
+                    <p class="text-orange-800 text-sm mb-3">
+                        "When should we make our offer to maximize acceptance probability while minimizing risk of losing the candidate?"
+                    </p>
+                    <p class="text-orange-700 text-xs">
+                        <strong>Gem Output:</strong> Timing analysis, market dynamics, and optimal offer sequencing strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+            <!-- Back to Collection -->
+            <div class="text-center mt-12">
+                <a href="index.html" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                    ← Back to Gems Collection
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#4c1d95';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .phase-card').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Your Daily Tasks - Beginner Module 4</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .task-category {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .task-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .before-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .after-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .ai-tool-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.2s ease;
+        }
+        
+        .ai-tool-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .time-saver {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../beginner.html" class="breadcrumb-link" aria-label="Go to Beginner Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Beginner Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>AI for Your Daily Tasks</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 4/5</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 4 of 5</div>
+        <div class="text-xs text-gray-500">12 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">📝</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">AI for Your Daily Tasks</h1>
+            <p class="text-lg text-gray-600">Discover how AI can transform your everyday work activities</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Your AI-Powered Workday</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Now that you know how to communicate with AI, let's explore specific ways it can help with tasks you do every day. You'll be amazed at how much time and effort AI can save you!
+                </p>
+                
+                <div class="time-saver">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">⏰</div>
+                        <div>
+                            <h3 class="font-bold text-amber-800 mb-2">The Time-Saving Reality</h3>
+                            <p class="text-amber-700">
+                                Our colleagues report saving <strong>2-4 hours per day</strong> by using AI for routine tasks. That's 10-20 hours per week you could spend on more strategic, creative work!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Email & Communication -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📧 Email & Communication</h2>
+                    <p class="text-blue-700 mb-4">
+                        Stop staring at blank emails! AI can help you write professional, clear, and effective communications in seconds.
+                    </p>
+                    
+                    <div class="before-after">
+                        <div class="before-box">
+                            <h4 class="font-semibold text-red-800 mb-2">❌ Without AI:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• 15-30 minutes per important email</li>
+                                <li>• Struggling with tone and wording</li>
+                                <li>• Multiple drafts and revisions</li>
+                                <li>• Inconsistent messaging</li>
+                                <li>• Stress about professionalism</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="after-box">
+                            <h4 class="font-semibold text-green-800 mb-2">✅ With AI:</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• 2-5 minutes per email</li>
+                                <li>• Perfect tone every time</li>
+                                <li>• First draft is usually final</li>
+                                <li>• Consistent professional style</li>
+                                <li>• Confidence in communication</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mt-4">
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📨 Interview Scheduling</h4>
+                            <p class="text-gray-600 text-sm mb-2">Prompt example:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Write a professional email to schedule a second interview with candidate John Smith for the Sales Manager role. Offer 3 time slots next week, mention it will be 45 minutes, and include our office address."
+                            </div>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 Follow-up Messages</h4>
+                            <p class="text-gray-600 text-sm mb-2">Prompt example:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Write a polite follow-up email to a candidate who hasn't responded to our job offer from last week. Keep it friendly but professional, and give them a deadline to respond."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Research & Information Gathering -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">🔍 Research & Information Gathering</h2>
+                    <p class="text-blue-700 mb-4">
+                        Let AI be your research assistant. It can quickly gather, organize, and summarize information from multiple sources.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="ai-tool-card">
+                            <div class="text-2xl mb-2">🏢</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Company Research</h4>
+                            <p class="text-gray-600 text-sm">Research companies, their culture, recent news, and key decision makers before outreach.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <div class="text-2xl mb-2">💼</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Job Market Analysis</h4>
+                            <p class="text-gray-600 text-sm">Get insights on salary ranges, skill requirements, and market trends for specific roles.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <div class="text-2xl mb-2">📊</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Industry Insights</h4>
+                            <p class="text-gray-600 text-sm">Stay updated on industry trends, challenges, and opportunities in your sector.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-4 mt-4 border border-blue-200">
+                        <h4 class="font-semibold text-blue-800 mb-2">💡 Pro Tip: Research Prompt Template</h4>
+                        <div class="bg-white rounded p-3 text-sm font-mono">
+                            "Research [COMPANY NAME] and provide: 1) Company overview and recent news, 2) Company culture and values, 3) Key leadership team, 4) Recent hiring trends, 5) Any challenges they might be facing. Format as a brief summary I can use for candidate outreach."
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Creation -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">✍️ Content Creation</h2>
+                    <p class="text-blue-700 mb-4">
+                        From job descriptions to social media posts, AI can help you create engaging, professional content quickly.
+                    </p>
+                    
+                    <div class="before-after">
+                        <div class="before-box">
+                            <h4 class="font-semibold text-red-800 mb-2">❌ Traditional Job Posting:</h4>
+                            <div class="text-red-700 text-sm">
+                                "We are looking for a Marketing Manager. Must have 5+ years experience. Send resume."
+                                <br><br>
+                                <em>Result: Low response rates, generic applications</em>
+                            </div>
+                        </div>
+                        
+                        <div class="after-box">
+                            <h4 class="font-semibold text-green-800 mb-2">✅ AI-Enhanced Job Posting:</h4>
+                            <div class="text-green-700 text-sm">
+                                "🚀 Marketing Manager - Shape Our Brand's Future!<br>
+                                Join our innovative team and lead campaigns that make a real impact...<br>
+                                What You'll Do: • Strategic campaign development • Team leadership • ROI optimization<br>
+                                What We Offer: Competitive salary, flexible work, growth opportunities"
+                                <br><br>
+                                <em>Result: 3x more qualified applications</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Analysis & Reporting -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📊 Data Analysis & Reporting</h2>
+                    <p class="text-blue-700 mb-4">
+                        Turn raw data into insights and create professional reports that tell a clear story.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📈 Recruitment Metrics</h4>
+                            <p class="text-gray-600 text-sm mb-2">Example prompt:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Analyze this recruitment data and create a summary report: Time-to-fill: 25 days, Applications: 150, Interviews: 12, Offers: 3. Include insights and recommendations for improvement."
+                            </div>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 Performance Summaries</h4>
+                            <p class="text-gray-600 text-sm mb-2">Example prompt:</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs font-mono">
+                                "Create a monthly performance summary from this data: 45 positions filled, 89% client satisfaction, 15% faster than target. Make it executive-ready with key highlights."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Planning & Organization -->
+            <section class="content-section mb-8">
+                <div class="task-category">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📅 Planning & Organization</h2>
+                    <p class="text-blue-700 mb-4">
+                        Let AI help you plan projects, organize tasks, and create structured workflows.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">🎯 Project Planning</h4>
+                            <p class="text-gray-600 text-sm">Create detailed project plans with timelines, milestones, and resource allocation.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📝 Meeting Agendas</h4>
+                            <p class="text-gray-600 text-sm">Generate structured meeting agendas with time allocations and clear objectives.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">✅ Task Lists</h4>
+                            <p class="text-gray-600 text-sm">Break down complex projects into manageable, prioritized task lists.</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📊 Process Documentation</h4>
+                            <p class="text-gray-600 text-sm">Document workflows and procedures in clear, step-by-step formats.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Wins Checklist -->
+            <section class="content-section mb-8">
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-4">🎯 Your AI Quick Wins Checklist</h2>
+                    <p class="text-green-700 mb-4">Start with these high-impact, low-effort AI applications:</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">This Week:</h4>
+                            <ul class="text-green-700 space-y-1 text-sm">
+                                <li>☐ Use AI to write 3 professional emails</li>
+                                <li>☐ Create one job description with AI help</li>
+                                <li>☐ Research a company using AI</li>
+                                <li>☐ Generate interview questions for a role</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-2">Next Week:</h4>
+                            <ul class="text-green-700 space-y-1 text-sm">
+                                <li>☐ Create a project plan with AI assistance</li>
+                                <li>☐ Analyze recruitment data and create insights</li>
+                                <li>☐ Write a performance summary report</li>
+                                <li>☐ Plan a team meeting agenda</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What's Next -->
+            <section class="content-section">
+                <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                    <h2 class="google-sans text-xl font-bold text-blue-800 mb-3">🎉 You're Becoming an AI Power User!</h2>
+                    <p class="text-blue-700 mb-4">
+                        You now know how to apply AI to your most common work tasks. The key is to start small, practice regularly, and gradually expand your AI toolkit.
+                    </p>
+                    <div class="text-sm text-blue-600">
+                        <strong>Final module coming up:</strong> We'll celebrate your progress and show you how to continue your AI journey with confidence!
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Interactive Email Enhancement Tool -->
+        <div class="task-category">
+            <div class="flex items-center mb-4">
+                <div class="text-2xl mr-3">📧</div>
+                <h2 class="google-sans text-2xl font-bold text-blue-800">Email Enhancement Tool</h2>
+            </div>
+            <p class="text-blue-700 mb-6">Transform your recruitment emails with AI assistance. See before/after examples and improve your own emails.</p>
+
+            <!-- Email Type Selection -->
+            <div class="mb-6">
+                <h3 class="font-bold text-gray-900 mb-3">Choose Email Type:</h3>
+                <div class="grid md:grid-cols-3 gap-3">
+                    <button onclick="selectEmailType('outreach')" class="email-type-btn bg-white border-2 border-gray-300 rounded-lg p-3 text-left hover:border-blue-500 transition-colors">
+                        <h4 class="font-semibold text-gray-900">🎯 Candidate Outreach</h4>
+                        <p class="text-sm text-gray-600">Initial contact emails</p>
+                    </button>
+                    
+                    <button onclick="selectEmailType('follow-up')" class="email-type-btn bg-white border-2 border-gray-300 rounded-lg p-3 text-left hover:border-blue-500 transition-colors">
+                        <h4 class="font-semibold text-gray-900">🔄 Follow-up</h4>
+                        <p class="text-sm text-gray-600">Second touch emails</p>
+                    </button>
+                    
+                    <button onclick="selectEmailType('rejection')" class="email-type-btn bg-white border-2 border-gray-300 rounded-lg p-3 text-left hover:border-blue-500 transition-colors">
+                        <h4 class="font-semibold text-gray-900">💔 Rejection</h4>
+                        <p class="text-sm text-gray-600">Professional rejections</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Before/After Examples -->
+            <div id="email-examples" class="hidden">
+                <h3 class="font-bold text-gray-900 mb-3">Before vs After Example:</h3>
+                <div class="before-after">
+                    <div class="before-box">
+                        <h4 class="font-bold text-red-800 mb-2">❌ Before (Generic)</h4>
+                        <div id="before-email" class="text-sm font-mono bg-white p-3 rounded border">
+                            <!-- Content will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="after-box">
+                        <h4 class="font-bold text-green-800 mb-2">✅ After (AI-Enhanced)</h4>
+                        <div id="after-email" class="text-sm font-mono bg-white p-3 rounded border">
+                            <!-- Content will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                    <h4 class="font-bold text-blue-800 mb-2">🎯 Key Improvements:</h4>
+                    <ul id="improvements-list" class="text-blue-700 text-sm space-y-1">
+                        <!-- Content will be populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Your Email Input -->
+            <div class="mt-6">
+                <h3 class="font-bold text-gray-900 mb-3">Try It Yourself:</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Your Email Draft:</label>
+                        <textarea id="user-email" class="w-full p-3 border border-gray-300 rounded-lg" rows="8" placeholder="Paste your email draft here..."></textarea>
+                        
+                        <button onclick="enhanceEmail()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mt-3 transition-colors">
+                            🚀 Enhance with AI
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">AI Suggestions:</label>
+                        <div id="ai-suggestions" class="bg-gray-50 border border-gray-300 rounded-lg p-3 min-h-[200px] text-sm">
+                            Your AI-enhanced suggestions will appear here...
+                        </div>
+                        
+                        <button onclick="copyEnhanced()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mt-3 transition-colors">
+                            📋 Copy Enhanced Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Beginner Path
+            </a>
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
+                Complete Module 4 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
+            if (!completedModules.includes(4)) {
+                completedModules.push(4);
+                localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
+            }
+            
+            showCompletionModal();
+        }
+
+        // Email Enhancement Tool Functions
+        const emailExamples = {
+            'outreach': {
+                before: `Subject: Job Opportunity
+
+Hi,
+
+I have a job that might interest you. It's for a software engineer position. Let me know if you're interested.
+
+Thanks,
+John`,
+                after: `Subject: Exciting Senior Software Engineer Opportunity at TechCorp - Your React Expertise Caught Our Attention!
+
+Hi Sarah,
+
+I came across your impressive work on the React dashboard project at your current company and was genuinely impressed by your technical approach to component optimization.
+
+I'm reaching out because we have an exciting Senior Software Engineer opportunity at TechCorp that seems perfectly aligned with your expertise:
+
+🚀 What makes this special:
+• Lead a team building next-gen fintech solutions
+• Work with cutting-edge React/Node.js stack
+• $120K-140K + equity in a fast-growing startup
+• Flexible remote work + amazing team culture
+
+I'd love to share more details about how your background in scalable web applications could make a real impact here.
+
+Would you be open to a brief 15-minute conversation this week?
+
+Best regards,
+John Smith
+Senior Technical Recruiter | TechCorp
+john@techcorp.com | (555) 123-4567`,
+                improvements: [
+                    'Personalized subject line mentioning specific skills',
+                    'Referenced candidate\'s actual work/experience',
+                    'Clear value proposition with specific details',
+                    'Structured format with bullet points',
+                    'Specific call-to-action with time commitment',
+                    'Professional signature with contact info'
+                ]
+            },
+            'follow-up': {
+                before: `Subject: Following up
+
+Hi,
+
+Just wanted to follow up on my previous email about the job opportunity. Are you still interested?
+
+Let me know.
+
+Thanks,
+John`,
+                after: `Subject: Quick Follow-up: TechCorp Senior Engineer Role - Still Available!
+
+Hi Sarah,
+
+I hope you're doing well! I wanted to follow up on the Senior Software Engineer opportunity I shared last week.
+
+I know you're likely busy, so I'll keep this brief:
+
+✨ Quick recap: Senior Engineer role at TechCorp
+• $120K-140K + equity
+• React/Node.js focus (perfect for your background)
+• Remote-friendly, growing team
+
+🤔 I'm curious - what would make a new opportunity compelling for you right now? 
+
+Even if this specific role isn't the right fit, I'd love to understand what you're looking for so I can keep you in mind for future opportunities that align better.
+
+Would a quick 10-minute call work this week? I'm flexible with timing.
+
+Best,
+John Smith
+john@techcorp.com | (555) 123-4567
+
+P.S. No pressure at all - if you're not exploring new opportunities right now, just let me know and I'll circle back in a few months!`,
+                improvements: [
+                    'Acknowledged their busy schedule',
+                    'Provided quick recap of key details',
+                    'Asked about their preferences/needs',
+                    'Offered value beyond just this role',
+                    'Reduced pressure with friendly P.S.',
+                    'Shorter time commitment (10 vs 15 minutes)'
+                ]
+            },
+            'rejection': {
+                before: `Subject: Update on your application
+
+Hi,
+
+Thanks for your interest in our position. Unfortunately, we've decided to move forward with other candidates.
+
+Good luck with your job search.
+
+Best,
+John`,
+                after: `Subject: Thank you for your time - TechCorp Senior Engineer Position
+
+Hi Sarah,
+
+Thank you for taking the time to interview with our team for the Senior Software Engineer position. I genuinely enjoyed our conversation about your experience with React optimization and your thoughtful approach to technical challenges.
+
+After careful consideration, we've decided to move forward with a candidate whose experience more closely aligns with our immediate needs for fintech domain expertise.
+
+However, I was impressed by your technical skills and problem-solving approach. I'd love to keep in touch for future opportunities that might be a better match for your background.
+
+A few things that stood out:
+• Your innovative approach to component architecture
+• Strong communication skills and team collaboration
+• Passion for clean, maintainable code
+
+Would it be okay if I reached out in the future when we have roles that better match your expertise? I believe you'd be a great fit for the right opportunity.
+
+Thank you again for your time and interest in TechCorp. I wish you the very best in your career journey.
+
+Warm regards,
+John Smith
+Senior Technical Recruiter | TechCorp
+john@techcorp.com
+
+P.S. If you're open to it, I'd be happy to provide any feedback from the interview process that might be helpful for future opportunities.`,
+                improvements: [
+                    'Acknowledged their time and effort',
+                    'Provided specific (positive) feedback',
+                    'Explained decision without being harsh',
+                    'Kept door open for future opportunities',
+                    'Highlighted their strengths',
+                    'Offered additional value (feedback)'
+                ]
+            }
+        };
+
+        function selectEmailType(type) {
+            // Reset button styles
+            document.querySelectorAll('.email-type-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'bg-blue-50');
+                btn.classList.add('border-gray-300');
+            });
+            
+            // Highlight selected button
+            event.target.closest('.email-type-btn').classList.add('border-blue-500', 'bg-blue-50');
+            event.target.closest('.email-type-btn').classList.remove('border-gray-300');
+            
+            // Show examples
+            document.getElementById('email-examples').classList.remove('hidden');
+            
+            // Populate examples
+            const example = emailExamples[type];
+            document.getElementById('before-email').textContent = example.before;
+            document.getElementById('after-email').textContent = example.after;
+            
+            // Populate improvements
+            const improvementsList = document.getElementById('improvements-list');
+            improvementsList.innerHTML = example.improvements.map(imp => `<li>• ${imp}</li>`).join('');
+        }
+
+        function enhanceEmail() {
+            const userEmail = document.getElementById('user-email').value;
+            if (!userEmail.trim()) {
+                alert('Please enter an email draft first!');
+                return;
+            }
+            
+            // Simulate AI enhancement (in real implementation, this would call an AI API)
+            const suggestions = generateEmailSuggestions(userEmail);
+            document.getElementById('ai-suggestions').innerHTML = suggestions;
+        }
+
+        function generateEmailSuggestions(email) {
+            // Simple analysis and suggestions (in real app, this would use AI)
+            let suggestions = '<div class="space-y-3">';
+            
+            // Check subject line
+            if (!email.toLowerCase().includes('subject:')) {
+                suggestions += '<div class="bg-yellow-50 border border-yellow-200 rounded p-2"><strong>📝 Add Subject Line:</strong> Include a compelling subject that mentions the role and company</div>';
+            }
+            
+            // Check personalization
+            if (!email.includes('Hi ') && !email.includes('Hello ')) {
+                suggestions += '<div class="bg-blue-50 border border-blue-200 rounded p-2"><strong>👋 Personalization:</strong> Start with a personalized greeting using their name</div>';
+            }
+            
+            // Check length
+            if (email.length < 100) {
+                suggestions += '<div class="bg-red-50 border border-red-200 rounded p-2"><strong>📏 Too Short:</strong> Add more details about the role and value proposition</div>';
+            }
+            
+            // Check call to action
+            if (!email.toLowerCase().includes('call') && !email.toLowerCase().includes('meeting') && !email.toLowerCase().includes('chat')) {
+                suggestions += '<div class="bg-green-50 border border-green-200 rounded p-2"><strong>🎯 Call to Action:</strong> Include a clear next step (call, meeting, etc.)</div>';
+            }
+            
+            // Enhanced version
+            suggestions += '<div class="bg-purple-50 border border-purple-200 rounded p-3 mt-4"><strong>🚀 AI-Enhanced Version:</strong><br><br>';
+            suggestions += '<div class="font-mono text-sm bg-white p-3 rounded border mt-2">';
+            suggestions += generateEnhancedEmail(email);
+            suggestions += '</div></div>';
+            
+            suggestions += '</div>';
+            return suggestions;
+        }
+
+        function generateEnhancedEmail(originalEmail) {
+            // Simple enhancement logic (in real app, this would use AI)
+            let enhanced = originalEmail;
+            
+            // Add subject if missing
+            if (!enhanced.toLowerCase().includes('subject:')) {
+                enhanced = 'Subject: Exciting Opportunity - [Role] at [Company]\n\n' + enhanced;
+            }
+            
+            // Improve greeting
+            enhanced = enhanced.replace(/^hi,?/i, 'Hi [Name],');
+            enhanced = enhanced.replace(/^hello,?/i, 'Hello [Name],');
+            
+            // Add signature if missing
+            if (!enhanced.includes('Best') && !enhanced.includes('Regards')) {
+                enhanced += '\n\nBest regards,\n[Your Name]\n[Title] | [Company]\n[Email] | [Phone]';
+            }
+            
+            return enhanced;
+        }
+
+        function copyEnhanced() {
+            const suggestions = document.getElementById('ai-suggestions').textContent;
+            navigator.clipboard.writeText(suggestions).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../beginner.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-next-step {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">💼</div>
+                <h2 class="modal-title google-sans">Module 4 Completed!</h2>
+                <p class="modal-subtitle">AI for daily work mastered</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now know how to use AI for your daily work tasks and can enhance your productivity significantly.
+                </p>
+                
+                <div class="modal-next-step">
+                    <strong>🎉 Next Up:</strong> Module 5 - Final celebration and pathway completion
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
+                    <div class="text-purple-800 font-semibold text-sm mb-1">✨ What You've Mastered:</div>
+                    <ul class="text-purple-700 text-sm space-y-1 text-left">
+                        <li>• Email enhancement with AI</li>
+                        <li>• Task automation techniques</li>
+                        <li>• Daily workflow optimization</li>
+                        <li>• Practical AI applications</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 5 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Review Module
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Module 4 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'beginner-4',
+                passingScore: 70,
+                showReview: true,
+                questions: [
+                    {
+                        question: "According to the module, how much time can colleagues save per day by using AI for routine tasks?",
+                        options: [
+                            "30 minutes to 1 hour",
+                            "1-2 hours",
+                            "2-4 hours",
+                            "5-6 hours"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "The module states that colleagues report saving 2-4 hours per day by using AI for routine tasks. That's 10-20 hours per week you could spend on more strategic, creative work!",
+                        hint: "Look at 'The Time-Saving Reality' section."
+                    },
+                    {
+                        question: "What is one of the key improvements when using AI for email writing compared to traditional methods?",
+                        options: [
+                            "Emails become much longer and detailed",
+                            "You need multiple drafts and revisions",
+                            "Perfect tone every time with first draft usually final",
+                            "It takes the same amount of time but feels easier"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "With AI, you can achieve perfect tone every time and the first draft is usually final, compared to the 15-30 minutes and multiple drafts typically needed without AI.",
+                        hint: "Review the 'Email & Communication' section's before/after comparison."
+                    },
+                    {
+                        question: "When asking AI to research a company, what information should you request?",
+                        options: [
+                            "Just the company name and location",
+                            "Company overview, culture, leadership, hiring trends, and challenges",
+                            "Only recent news articles",
+                            "Just the CEO's name and company size"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Pro Tip Research Prompt Template suggests requesting: 1) Company overview and recent news, 2) Company culture and values, 3) Key leadership team, 4) Recent hiring trends, 5) Any challenges they might be facing.",
+                        hint: "Check the 'Research & Information Gathering' section's Pro Tip."
+                    },
+                    {
+                        question: "What is a major benefit of using AI for job postings?",
+                        options: [
+                            "They become shorter and simpler",
+                            "They result in 3x more qualified applications",
+                            "They don't require any editing",
+                            "They automatically post to job boards"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The module shows that AI-enhanced job postings result in 3x more qualified applications compared to traditional generic postings, due to better engagement, clear value propositions, and professional formatting.",
+                        hint: "Look at the 'Content Creation' before/after comparison."
+                    },
+                    {
+                        question: "What are some recommended 'Quick Wins' to start with when using AI?",
+                        options: [
+                            "Build complex automation systems immediately",
+                            "Write emails, create job descriptions, research companies, and generate interview questions",
+                            "Replace all human communication with AI",
+                            "Only use AI for data analysis tasks"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The 'AI Quick Wins Checklist' recommends starting with high-impact, low-effort applications like writing professional emails, creating job descriptions, researching companies, and generating interview questions - building skills gradually.",
+                        hint: "Review the 'Your AI Quick Wins Checklist' section."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 70) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>

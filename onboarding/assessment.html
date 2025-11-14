@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Skills Assessment - Randstad GBS Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .question-card {
+            transition: all 0.3s ease;
+            border: 2px solid #f3f4f6;
+        }
+        
+        .question-card.answered {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        }
+        
+        .radio-option {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .radio-option:hover {
+            border-color: #4A90E2;
+            background-color: #f8fafc;
+        }
+        
+        .radio-option.selected {
+            border-color: #4A90E2;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+        }
+        
+        .continue-btn {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .continue-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+        }
+        
+        .continue-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .progress-indicator {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            Home
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            Onboarding
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current">Assessment</span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn">
+                    Back to Hub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Progress Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="bg-gray-200 rounded-full h-2">
+                <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 75%"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span>Welcome</span>
+                <span>Role</span>
+                <span class="font-semibold text-blue-600">Assessment</span>
+                <span>Ready!</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-2xl mx-auto bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center mb-8">
+                <h1 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-3">Quick AI Skills Check</h1>
+                <p class="text-gray-600">Just 3 quick questions to personalize your experience.</p>
+                
+                <!-- Progress Indicator -->
+                <div class="flex justify-center mt-6 space-x-2">
+                    <div class="progress-indicator w-3 h-3 rounded-full bg-blue-500" id="q1-indicator"></div>
+                    <div class="progress-indicator w-3 h-3 rounded-full bg-gray-300" id="q2-indicator"></div>
+                    <div class="progress-indicator w-3 h-3 rounded-full bg-gray-300" id="q3-indicator"></div>
+                </div>
+            </div>
+            
+            <!-- Questions -->
+            <div class="space-y-8">
+                <!-- Question 1 -->
+                <div class="question-card rounded-xl p-6" id="question-1">
+                    <h3 class="google-sans text-lg font-bold text-gray-900 mb-4">1. How familiar are you with AI tools?</h3>
+                    <div class="space-y-3">
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="ai-familiarity" value="beginner" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Complete beginner</div>
+                                <div class="text-sm text-gray-600">I've heard about AI but never used it for work</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="ai-familiarity" value="some" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Some experience</div>
+                                <div class="text-sm text-gray-600">I've tried ChatGPT or similar tools occasionally</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="ai-familiarity" value="experienced" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Experienced</div>
+                                <div class="text-sm text-gray-600">I regularly use AI tools in my daily work</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="question-card rounded-xl p-6" id="question-2">
+                    <h3 class="google-sans text-lg font-bold text-gray-900 mb-4">2. What's your biggest time challenge?</h3>
+                    <div class="space-y-3">
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="time-challenge" value="sourcing" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Finding and sourcing candidates</div>
+                                <div class="text-sm text-gray-600">Boolean searches, candidate research, pipeline building</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="time-challenge" value="communication" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Writing emails and messages</div>
+                                <div class="text-sm text-gray-600">Candidate outreach, follow-ups, job descriptions</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="time-challenge" value="reporting" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Creating reports and documentation</div>
+                                <div class="text-sm text-gray-600">Data analysis, presentations, status updates</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="time-challenge" value="admin" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Administrative tasks</div>
+                                <div class="text-sm text-gray-600">Scheduling, data entry, process coordination</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="question-card rounded-xl p-6" id="question-3">
+                    <h3 class="google-sans text-lg font-bold text-gray-900 mb-4">3. What would you like to achieve first?</h3>
+                    <div class="space-y-3">
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="goal" value="efficiency" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Save time on daily tasks</div>
+                                <div class="text-sm text-gray-600">Automate repetitive work, work faster</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="goal" value="quality" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Improve quality of my work</div>
+                                <div class="text-sm text-gray-600">Better content, more accurate analysis</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="goal" value="learning" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Learn new AI skills</div>
+                                <div class="text-sm text-gray-600">Understand AI capabilities, stay current</div>
+                            </div>
+                        </label>
+                        <label class="radio-option flex items-start p-4 rounded-lg">
+                            <input type="radio" name="goal" value="innovation" class="mt-1 mr-4">
+                            <div>
+                                <div class="font-medium text-gray-900">Innovate and try new approaches</div>
+                                <div class="text-sm text-gray-600">Experiment with cutting-edge tools</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="flex justify-between items-center mt-8">
+                <a href="role-selection.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                    ← Back
+                </a>
+                
+                <button id="continue-btn" class="continue-btn text-white px-8 py-3 rounded-lg font-semibold" disabled>
+                    Get My Recommendations →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        let assessmentData = {};
+        const questions = ['ai-familiarity', 'time-challenge', 'goal'];
+        
+        // Add event listeners to all radio buttons
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Update assessment data
+                assessmentData[this.name] = this.value;
+                
+                // Update visual feedback
+                updateQuestionStatus(this.name);
+                updateProgressIndicators();
+                validateForm();
+                
+                // Update radio option styling
+                updateRadioStyling(this);
+            });
+        });
+        
+        function updateQuestionStatus(questionName) {
+            const questionCard = document.getElementById(`question-${questions.indexOf(questionName) + 1}`);
+            questionCard.classList.add('answered');
+        }
+        
+        function updateProgressIndicators() {
+            questions.forEach((question, index) => {
+                const indicator = document.getElementById(`q${index + 1}-indicator`);
+                if (assessmentData[question]) {
+                    indicator.classList.remove('bg-gray-300');
+                    indicator.classList.add('bg-blue-500');
+                } else {
+                    indicator.classList.remove('bg-blue-500');
+                    indicator.classList.add('bg-gray-300');
+                }
+            });
+        }
+        
+        function updateRadioStyling(selectedRadio) {
+            // Remove selected class from all options in this question
+            const questionName = selectedRadio.name;
+            document.querySelectorAll(`input[name="${questionName}"]`).forEach(radio => {
+                radio.closest('.radio-option').classList.remove('selected');
+            });
+            
+            // Add selected class to chosen option
+            selectedRadio.closest('.radio-option').classList.add('selected');
+        }
+        
+        function validateForm() {
+            const allAnswered = questions.every(question => assessmentData[question]);
+            const continueBtn = document.getElementById('continue-btn');
+            
+            if (allAnswered) {
+                continueBtn.disabled = false;
+                continueBtn.onclick = () => {
+                    // Store assessment data
+                    localStorage.setItem('assessmentData', JSON.stringify(assessmentData));
+                    window.location.href = 'results.html';
+                };
+            } else {
+                continueBtn.disabled = true;
+            }
+        }
+        
+        // Load previously saved answers if returning
+        const savedAssessment = localStorage.getItem('assessmentData');
+        if (savedAssessment) {
+            assessmentData = JSON.parse(savedAssessment);
+            
+            // Restore selections
+            Object.entries(assessmentData).forEach(([question, answer]) => {
+                const radio = document.querySelector(`input[name="${question}"][value="${answer}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    updateRadioStyling(radio);
+                    updateQuestionStatus(question);
+                }
+            });
+            
+            updateProgressIndicators();
+            validateForm();
+        }
+    </script>
+</body>
+</html>

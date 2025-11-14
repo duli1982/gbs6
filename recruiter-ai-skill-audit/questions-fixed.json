@@ -1,0 +1,1738 @@
+{
+  "businessUnits": [
+    {
+      "id": "sourcing",
+      "label": "🔍 Talent Sourcing",
+      "description": "Finding and identifying potential candidates"
+    },
+    {
+      "id": "admin",
+      "label": "📋 Administrative Support",
+      "description": "Data entry, documentation, and process support"
+    },
+    {
+      "id": "scheduling",
+      "label": "📅 Interview Scheduling",
+      "description": "Coordinating interviews and calendar management"
+    },
+    {
+      "id": "compliance",
+      "label": "⚖️ Compliance & Legal",
+      "description": "Ensuring regulatory compliance and legal requirements"
+    },
+    {
+      "id": "contracts",
+      "label": "📄 Contract Creation",
+      "description": "Drafting and managing employment contracts"
+    }
+  ],
+  "questions": [
+    {
+      "id": "businessUnit",
+      "question": "Which Randstad GBS business function best describes your role?",
+      "type": "single",
+      "showIf": null,
+      "options": [
+        {
+          "value": "sourcing",
+          "label": "🔍 Talent Sourcing",
+          "description": "Finding and identifying potential candidates"
+        },
+        {
+          "value": "admin",
+          "label": "📋 Administrative Support",
+          "description": "Data entry, documentation, and process support"
+        },
+        {
+          "value": "scheduling",
+          "label": "📅 Interview Scheduling",
+          "description": "Coordinating interviews and calendar management"
+        },
+        {
+          "value": "compliance",
+          "label": "⚖️ Compliance & Legal",
+          "description": "Ensuring regulatory compliance and legal requirements"
+        },
+        {
+          "value": "contracts",
+          "label": "📄 Contract Creation",
+          "description": "Drafting and managing employment contracts"
+        }
+      ]
+    },
+    {
+      "id": "sourcing_active_roles",
+      "question": "How many active roles do you source per week?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "1-5",
+          "label": "1-5 roles",
+          "multiplier": 1.0
+        },
+        {
+          "value": "6-10",
+          "label": "6-10 roles",
+          "multiplier": 1.2
+        },
+        {
+          "value": "11-20",
+          "label": "11-20 roles",
+          "multiplier": 1.5
+        },
+        {
+          "value": "20+",
+          "label": "20+ roles",
+          "multiplier": 2.0
+        }
+      ]
+    },
+    {
+      "id": "sourcing_profiles_per_role",
+      "question": "Average candidate profiles reviewed per role?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "10-25",
+          "label": "10-25 profiles",
+          "hours": 2,
+          "savingsPct": 50
+        },
+        {
+          "value": "26-50",
+          "label": "26-50 profiles",
+          "hours": 4,
+          "savingsPct": 60
+        },
+        {
+          "value": "51-100",
+          "label": "51-100 profiles",
+          "hours": 7,
+          "savingsPct": 70
+        },
+        {
+          "value": "100+",
+          "label": "100+ profiles",
+          "hours": 12,
+          "savingsPct": 75
+        }
+      ]
+    },
+    {
+      "id": "sourcing_role_seniority",
+      "question": "Typical seniority/rarity of roles you source?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "high-volume",
+          "label": "High-volume/Entry-level",
+          "difficulty": 1,
+          "savingsPct": 60
+        },
+        {
+          "value": "specialist",
+          "label": "Specialist/Mid-level",
+          "difficulty": 1.3,
+          "savingsPct": 65
+        },
+        {
+          "value": "niche",
+          "label": "Niche/Technical",
+          "difficulty": 1.6,
+          "savingsPct": 70
+        },
+        {
+          "value": "executive",
+          "label": "Executive/C-level",
+          "difficulty": 2.0,
+          "savingsPct": 50
+        }
+      ]
+    },
+    {
+      "id": "sourcing_channels",
+      "question": "Primary channels used weekly? (Select all that apply)",
+      "type": "checkbox",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "linkedin",
+          "label": "LinkedIn Recruiter",
+          "aiPotential": "high"
+        },
+        {
+          "value": "ats_crm",
+          "label": "Internal CRM/ATS",
+          "aiPotential": "high"
+        },
+        {
+          "value": "cv_databases",
+          "label": "CV Databases",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "referrals",
+          "label": "Employee Referrals",
+          "aiPotential": "low"
+        },
+        {
+          "value": "github",
+          "label": "GitHub/Stack/Scholar",
+          "aiPotential": "high"
+        },
+        {
+          "value": "events",
+          "label": "Events/Networking",
+          "aiPotential": "low"
+        }
+      ]
+    },
+    {
+      "id": "sourcing_boolean_usage",
+      "question": "How often do you use advanced Boolean/NL queries & X-ray?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "1",
+          "label": "Never (1)",
+          "hours": 0,
+          "savingsPct": 80
+        },
+        {
+          "value": "2",
+          "label": "Rarely (2)",
+          "hours": 1,
+          "savingsPct": 75
+        },
+        {
+          "value": "3",
+          "label": "Sometimes (3)",
+          "hours": 3,
+          "savingsPct": 70
+        },
+        {
+          "value": "4",
+          "label": "Often (4)",
+          "hours": 6,
+          "savingsPct": 65
+        },
+        {
+          "value": "5",
+          "label": "Always (5)",
+          "hours": 10,
+          "savingsPct": 60
+        }
+      ]
+    },
+    {
+      "id": "sourcing_market_maps",
+      "question": "Do you use market maps / target company lists?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "never",
+          "label": "Never",
+          "hours": 0,
+          "savingsPct": 90
+        },
+        {
+          "value": "ad-hoc",
+          "label": "Ad-hoc basis",
+          "hours": 2,
+          "savingsPct": 80
+        },
+        {
+          "value": "always",
+          "label": "Always with refresh",
+          "hours": 5,
+          "savingsPct": 70
+        }
+      ]
+    },
+    {
+      "id": "sourcing_outreach_time",
+      "question": "Time spent per role on outreach personalization weekly?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "0-1h",
+          "label": "0-1 hours",
+          "hours": 0.5,
+          "savingsPct": 40
+        },
+        {
+          "value": "1-3h",
+          "label": "1-3 hours",
+          "hours": 2,
+          "savingsPct": 50
+        },
+        {
+          "value": "3-5h",
+          "label": "3-5 hours",
+          "hours": 4,
+          "savingsPct": 60
+        },
+        {
+          "value": "5h+",
+          "label": "5+ hours",
+          "hours": 7,
+          "savingsPct": 70
+        }
+      ]
+    },
+    {
+      "id": "sourcing_reply_rate",
+      "question": "Current reply rate to first-touch outreach?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "0-10",
+          "label": "0-10%",
+          "improvement": "high"
+        },
+        {
+          "value": "11-20",
+          "label": "11-20%",
+          "improvement": "medium"
+        },
+        {
+          "value": "21-30",
+          "label": "21-30%",
+          "improvement": "low"
+        },
+        {
+          "value": "30+",
+          "label": "30%+",
+          "improvement": "minimal"
+        }
+      ]
+    },
+    {
+      "id": "sourcing_ab_testing",
+      "question": "Do you A/B test subject lines/sequences?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes, regularly",
+          "savingsPct": 30
+        },
+        {
+          "value": "no",
+          "label": "No, never",
+          "savingsPct": 70
+        }
+      ]
+    },
+    {
+      "id": "sourcing_qualified_submit",
+      "question": "% of sourced candidates that reach \"qualified submit\"?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "0-20",
+          "label": "0-20%",
+          "quality": "low",
+          "savingsPct": 80
+        },
+        {
+          "value": "21-40",
+          "label": "21-40%",
+          "quality": "medium",
+          "savingsPct": 60
+        },
+        {
+          "value": "41-60",
+          "label": "41-60%",
+          "quality": "good",
+          "savingsPct": 40
+        },
+        {
+          "value": "60+",
+          "label": "60%+",
+          "quality": "excellent",
+          "savingsPct": 20
+        }
+      ]
+    },
+    {
+      "id": "sourcing_ats_backfill",
+      "question": "How often do you backfill structured tags/skills into ATS/CRM?",
+      "type": "single",
+      "showIf": "sourcing",
+      "options": [
+        {
+          "value": "1",
+          "label": "Never (1)",
+          "hours": 0,
+          "savingsPct": 90
+        },
+        {
+          "value": "2",
+          "label": "Rarely (2)",
+          "hours": 1,
+          "savingsPct": 85
+        },
+        {
+          "value": "3",
+          "label": "Sometimes (3)",
+          "hours": 3,
+          "savingsPct": 80
+        },
+        {
+          "value": "4",
+          "label": "Often (4)",
+          "hours": 6,
+          "savingsPct": 75
+        },
+        {
+          "value": "5",
+          "label": "Always (5)",
+          "hours": 10,
+          "savingsPct": 70
+        }
+      ]
+    },    {
+
+      "id": "admin_doc_creation_time",
+      "question": "Weekly time creating/formatting JDs, interview packs, scorecards?",
+      "type": "single",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "0-1h",
+          "label": "0-1 hours",
+          "hours": 0.5,
+          "savingsPct": 70
+        },
+        {
+          "value": "1-3h",
+          "label": "1-3 hours",
+          "hours": 2,
+          "savingsPct": 75
+        },
+        {
+          "value": "3-5h",
+          "label": "3-5 hours",
+          "hours": 4,
+          "savingsPct": 80
+        },
+        {
+          "value": "5h+",
+          "label": "5+ hours",
+          "hours": 7,
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "admin_template_usage",
+      "question": "% of docs using templates vs from scratch?",
+      "type": "single",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "0-25",
+          "label": "0-25% templates",
+          "efficiency": "low",
+          "savingsPct": 90
+        },
+        {
+          "value": "26-50",
+          "label": "26-50% templates",
+          "efficiency": "medium-low",
+          "savingsPct": 70
+        },
+        {
+          "value": "51-75",
+          "label": "51-75% templates",
+          "efficiency": "medium-high",
+          "savingsPct": 50
+        },
+        {
+          "value": "76-100",
+          "label": "76-100% templates",
+          "efficiency": "high",
+          "savingsPct": 30
+        }
+      ]
+    },
+    {
+      "id": "admin_data_cleanup_frequency",
+      "question": "Frequency of data clean-up across ATS/Sheets/trackers?",
+      "type": "single",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "daily",
+          "label": "Daily",
+          "hours": 1,
+          "savingsPct": 60
+        },
+        {
+          "value": "weekly",
+          "label": "Weekly",
+          "hours": 3,
+          "savingsPct": 70
+        },
+        {
+          "value": "monthly",
+          "label": "Monthly",
+          "hours": 8,
+          "savingsPct": 80
+        },
+        {
+          "value": "rarely",
+          "label": "Rarely",
+          "hours": 2,
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "admin_error_sources",
+      "question": "Typical error sources? (Select all that apply)",
+      "type": "checkbox",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "duplicates",
+          "label": "Duplicate records",
+          "aiPotential": "high"
+        },
+        {
+          "value": "missing_fields",
+          "label": "Missing fields",
+          "aiPotential": "high"
+        },
+        {
+          "value": "broken_formulas",
+          "label": "Broken formulas",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "inconsistent_status",
+          "label": "Inconsistent status codes",
+          "aiPotential": "high"
+        },
+        {
+          "value": "formatting",
+          "label": "Formatting issues",
+          "aiPotential": "high"
+        },
+        {
+          "value": "data_entry",
+          "label": "Manual data entry errors",
+          "aiPotential": "high"
+        }
+      ]
+    },
+    {
+      "id": "admin_comms_time",
+      "question": "Time spent weekly on status emails/meeting notes?",
+      "type": "single",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "0-1h",
+          "label": "0-1 hours",
+          "hours": 0.5,
+          "savingsPct": 60
+        },
+        {
+          "value": "1-3h",
+          "label": "1-3 hours",
+          "hours": 2,
+          "savingsPct": 70
+        },
+        {
+          "value": "3-5h",
+          "label": "3-5 hours",
+          "hours": 4,
+          "savingsPct": 75
+        },
+        {
+          "value": "5h+",
+          "label": "5+ hours",
+          "hours": 7,
+          "savingsPct": 80
+        }
+      ]
+    },
+    {
+      "id": "admin_weekly_summaries",
+      "question": "Do you generate weekly summaries for hiring leaders?",
+      "type": "single",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "yes_manual",
+          "label": "Yes, manually created",
+          "hours": 2,
+          "savingsPct": 80
+        },
+        {
+          "value": "yes_semi",
+          "label": "Yes, semi-automated",
+          "hours": 1,
+          "savingsPct": 60
+        },
+        {
+          "value": "yes_auto",
+          "label": "Yes, fully automated",
+          "hours": 0.2,
+          "savingsPct": 20
+        },
+        {
+          "value": "no",
+          "label": "No, not required",
+          "hours": 0,
+          "savingsPct": 0
+        }
+      ]
+    },
+    {
+      "id": "admin_tools_in_use",
+      "question": "Which tools are in play? (Select all that apply)",
+      "type": "checkbox",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "successfactors",
+          "label": "SuccessFactors",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "workday",
+          "label": "Workday",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "greenhouse",
+          "label": "Greenhouse",
+          "aiPotential": "high"
+        },
+        {
+          "value": "tux",
+          "label": "TUX",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "google_workspace",
+          "label": "Google Workspace",
+          "aiPotential": "high"
+        },
+        {
+          "value": "microsoft_365",
+          "label": "Microsoft 365",
+          "aiPotential": "high"
+        },
+        {
+          "value": "powerbi",
+          "label": "PowerBI/Looker",
+          "aiPotential": "high"
+        },
+        {
+          "value": "email_calendar",
+          "label": "Email/Calendar systems",
+          "aiPotential": "high"
+        }
+      ]
+    },
+    {
+      "id": "admin_manual_transfers",
+      "question": "Any manual exports/imports between systems?",
+      "type": "single",
+      "showIf": "admin",
+      "options": [
+        {
+          "value": "yes_daily",
+          "label": "Yes, daily transfers",
+          "hours": 1,
+          "savingsPct": 90
+        },
+        {
+          "value": "yes_weekly",
+          "label": "Yes, weekly transfers",
+          "hours": 2,
+          "savingsPct": 85
+        },
+        {
+          "value": "yes_monthly",
+          "label": "Yes, monthly transfers",
+          "hours": 4,
+          "savingsPct": 80
+        },
+        {
+          "value": "no",
+          "label": "No manual transfers",
+          "hours": 0,
+          "savingsPct": 0
+        }
+      ]
+    },
+    {
+      "id": "scheduling_interviews_per_week",
+      "question": "How many interviews do you schedule per week?",
+      "type": "single",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "1-10",
+          "label": "1-10 interviews",
+          "complexity": 1.0,
+          "hours": 3
+        },
+        {
+          "value": "11-25",
+          "label": "11-25 interviews",
+          "complexity": 1.3,
+          "hours": 6
+        },
+        {
+          "value": "26-50",
+          "label": "26-50 interviews",
+          "complexity": 1.6,
+          "hours": 12
+        },
+        {
+          "value": "50+",
+          "label": "50+ interviews",
+          "complexity": 2.0,
+          "hours": 20
+        }
+      ]
+    },
+    {
+      "id": "scheduling_multi_panel_timezone",
+      "question": "% of interviews that are multi-panel or multi-timezone?",
+      "type": "single",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "<25",
+          "label": "Less than 25%",
+          "complexity": 1.0,
+          "savingsPct": 60
+        },
+        {
+          "value": "25-50",
+          "label": "25-50%",
+          "complexity": 1.3,
+          "savingsPct": 70
+        },
+        {
+          "value": "51-75",
+          "label": "51-75%",
+          "complexity": 1.6,
+          "savingsPct": 80
+        },
+        {
+          "value": ">75",
+          "label": "More than 75%",
+          "complexity": 2.0,
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "scheduling_reschedules_per_week",
+      "question": "Average reschedules per week?",
+      "type": "single",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "0-2",
+          "label": "0-2 reschedules",
+          "hours": 0.5,
+          "savingsPct": 70
+        },
+        {
+          "value": "3-5",
+          "label": "3-5 reschedules",
+          "hours": 2,
+          "savingsPct": 75
+        },
+        {
+          "value": "6-10",
+          "label": "6-10 reschedules",
+          "hours": 4,
+          "savingsPct": 80
+        },
+        {
+          "value": "10+",
+          "label": "10+ reschedules",
+          "hours": 8,
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "scheduling_availability_collection",
+      "question": "How do you collect availability?",
+      "type": "single",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "email_pingpong",
+          "label": "Email ping-pong",
+          "hours": 5,
+          "savingsPct": 90
+        },
+        {
+          "value": "calendar_overlay",
+          "label": "Calendar overlay tools",
+          "hours": 3,
+          "savingsPct": 70
+        },
+        {
+          "value": "microsoft_bookings",
+          "label": "Microsoft Bookings",
+          "hours": 1,
+          "savingsPct": 40
+        },
+        {
+          "value": "google_calendar_scheduling",
+          "label": "Google Calendar appointment slots",
+          "hours": 1,
+          "savingsPct": 40
+        },
+        {
+          "value": "ats_assistant",
+          "label": "ATS scheduling assistant",
+          "hours": 2,
+          "savingsPct": 60
+        }
+      ]
+    },
+    {
+      "id": "scheduling_calendar_integration",
+      "question": "Which calendars are integrated? (Select all that apply)",
+      "type": "checkbox",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "google",
+          "label": "Google Calendar",
+          "aiPotential": "high"
+        },
+        {
+          "value": "outlook",
+          "label": "Microsoft Outlook",
+          "aiPotential": "high"
+        },
+        {
+          "value": "mixed",
+          "label": "Mixed calendar systems",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "none",
+          "label": "No calendar integration",
+          "aiPotential": "critical"
+        }
+      ]
+    },
+    {
+      "id": "scheduling_auto_communications",
+      "question": "Do you auto-send confirmations/prep packs/reminders?",
+      "type": "single",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "yes_full",
+          "label": "Yes, 100% automated",
+          "hours": 0.5,
+          "savingsPct": 20
+        },
+        {
+          "value": "yes_partial",
+          "label": "Yes, 50-75% automated",
+          "hours": 2,
+          "savingsPct": 50
+        },
+        {
+          "value": "yes_minimal",
+          "label": "Yes, 25-50% automated",
+          "hours": 4,
+          "savingsPct": 70
+        },
+        {
+          "value": "no",
+          "label": "No, all manual",
+          "hours": 8,
+          "savingsPct": 85
+        }
+      ]
+    }, 
+   {
+      "id": "scheduling_time_to_schedule",
+      "question": "Time-to-schedule (request → confirmed) average hours?",
+      "type": "single",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "0-4",
+          "label": "0-4 hours (same day)",
+          "efficiency": "excellent",
+          "savingsPct": 30
+        },
+        {
+          "value": "4-24",
+          "label": "4-24 hours (next day)",
+          "efficiency": "good",
+          "savingsPct": 50
+        },
+        {
+          "value": "24-48",
+          "label": "24-48 hours (2 days)",
+          "efficiency": "average",
+          "savingsPct": 70
+        },
+        {
+          "value": "48+",
+          "label": "48+ hours (3+ days)",
+          "efficiency": "poor",
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "scheduling_noshow_rate",
+      "question": "No-show rate in last 90 days?",
+      "type": "single",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "0-5",
+          "label": "0-5%",
+          "quality": "excellent"
+        },
+        {
+          "value": "6-10",
+          "label": "6-10%",
+          "quality": "good"
+        },
+        {
+          "value": "11-20",
+          "label": "11-20%",
+          "quality": "average"
+        },
+        {
+          "value": "20+",
+          "label": "20%+",
+          "quality": "poor"
+        }
+      ]
+    },
+    {
+      "id": "scheduling_top_blockers",
+      "question": "Top scheduling blockers? (Select all that apply)",
+      "type": "checkbox",
+      "showIf": "scheduling",
+      "options": [
+        {
+          "value": "timezones",
+          "label": "Timezone coordination",
+          "aiPotential": "high"
+        },
+        {
+          "value": "panel_conflicts",
+          "label": "Panel availability conflicts",
+          "aiPotential": "high"
+        },
+        {
+          "value": "last_minute_changes",
+          "label": "Last-minute changes",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "missing_links",
+          "label": "Missing links/prep materials",
+          "aiPotential": "high"
+        },
+        {
+          "value": "candidate_availability",
+          "label": "Limited candidate availability",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "system_issues",
+          "label": "Calendar/system integration issues",
+          "aiPotential": "high"
+        }
+      ]
+    },
+    {
+      "id": "compliance_weekly_time",
+      "question": "Weekly time on RTW/background checks/data privacy tasks?",
+      "type": "single",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "0-1h",
+          "label": "0-1 hours",
+          "hours": 0.5,
+          "savingsPct": 60
+        },
+        {
+          "value": "1-3h",
+          "label": "1-3 hours",
+          "hours": 2,
+          "savingsPct": 70
+        },
+        {
+          "value": "3-5h",
+          "label": "3-5 hours",
+          "hours": 4,
+          "savingsPct": 75
+        },
+        {
+          "value": "5h+",
+          "label": "5+ hours",
+          "hours": 7,
+          "savingsPct": 80
+        }
+      ]
+    },
+    {
+      "id": "compliance_policy_digest_frequency",
+      "question": "How often do you digest policy changes or client-specific rules?",
+      "type": "single",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "rarely",
+          "label": "Rarely",
+          "hours": 0.5,
+          "savingsPct": 85
+        },
+        {
+          "value": "quarterly",
+          "label": "Quarterly",
+          "hours": 2,
+          "savingsPct": 80
+        },
+        {
+          "value": "monthly",
+          "label": "Monthly",
+          "hours": 4,
+          "savingsPct": 75
+        },
+        {
+          "value": "weekly",
+          "label": "Weekly",
+          "hours": 8,
+          "savingsPct": 70
+        }
+      ]
+    },
+    {
+      "id": "compliance_standardized_checklists",
+      "question": "Do you use standardized checklists per country/client?",
+      "type": "single",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes, standardized checklists",
+          "efficiency": "high",
+          "savingsPct": 40
+        },
+        {
+          "value": "no",
+          "label": "No, manual process each time",
+          "efficiency": "low",
+          "savingsPct": 80
+        }
+      ]
+    },
+    {
+      "id": "compliance_audit_trail_storage",
+      "question": "Where is the audit trail stored?",
+      "type": "single",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "ats",
+          "label": "ATS system",
+          "organization": "excellent",
+          "savingsPct": 30
+        },
+        {
+          "value": "sharepoint_drive",
+          "label": "SharePoint/Google Drive",
+          "organization": "good",
+          "savingsPct": 50
+        },
+        {
+          "value": "email_threads",
+          "label": "Email threads",
+          "organization": "poor",
+          "savingsPct": 85
+        },
+        {
+          "value": "mixed",
+          "label": "Mixed locations",
+          "organization": "poor",
+          "savingsPct": 75
+        }
+      ]
+    },
+    {
+      "id": "compliance_evidence_completeness",
+      "question": "% of cases with complete evidence attached to the req/offer?",
+      "type": "single",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "<50",
+          "label": "Less than 50%",
+          "quality": "poor",
+          "savingsPct": 85
+        },
+        {
+          "value": "50-75",
+          "label": "50-75%",
+          "quality": "fair",
+          "savingsPct": 70
+        },
+        {
+          "value": "76-90",
+          "label": "76-90%",
+          "quality": "good",
+          "savingsPct": 50
+        },
+        {
+          "value": "91-100",
+          "label": "91-100%",
+          "quality": "excellent",
+          "savingsPct": 30
+        }
+      ]
+    },
+    {
+      "id": "compliance_exceptions_per_month",
+      "question": "Exceptions handled per month (average)?",
+      "type": "single",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "0-5",
+          "label": "0-5 exceptions",
+          "complexity": "low",
+          "hours": 1
+        },
+        {
+          "value": "6-15",
+          "label": "6-15 exceptions",
+          "complexity": "medium",
+          "hours": 3
+        },
+        {
+          "value": "16-30",
+          "label": "16-30 exceptions",
+          "complexity": "high",
+          "hours": 6
+        },
+        {
+          "value": "30+",
+          "label": "30+ exceptions",
+          "complexity": "very-high",
+          "hours": 12
+        }
+      ]
+    },
+    {
+      "id": "compliance_sla_adherence",
+      "question": "SLA adherence last quarter?",
+      "type": "single",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "<80",
+          "label": "Less than 80%",
+          "performance": "poor",
+          "savingsPct": 85
+        },
+        {
+          "value": "80-90",
+          "label": "80-90%",
+          "performance": "fair",
+          "savingsPct": 70
+        },
+        {
+          "value": "91-97",
+          "label": "91-97%",
+          "performance": "good",
+          "savingsPct": 50
+        },
+        {
+          "value": "98-100",
+          "label": "98-100%",
+          "performance": "excellent",
+          "savingsPct": 30
+        }
+      ]
+    },
+    {
+      "id": "compliance_failure_points",
+      "question": "Most frequent failure points? (Select all that apply)",
+      "type": "checkbox",
+      "showIf": "compliance",
+      "options": [
+        {
+          "value": "missing_docs",
+          "label": "Missing documents",
+          "aiPotential": "high"
+        },
+        {
+          "value": "expired_ids",
+          "label": "Expired IDs/certifications",
+          "aiPotential": "high"
+        },
+        {
+          "value": "late_vendor_checks",
+          "label": "Late vendor background checks",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "regional_variations",
+          "label": "Regional compliance variations",
+          "aiPotential": "high"
+        },
+        {
+          "value": "data_privacy",
+          "label": "Data privacy violations",
+          "aiPotential": "high"
+        },
+        {
+          "value": "incomplete_forms",
+          "label": "Incomplete compliance forms",
+          "aiPotential": "high"
+        }
+      ]
+    },  
+  {
+      "id": "contracts_per_month",
+      "question": "Offer letters/contracts per month?",
+      "type": "single",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "1-10",
+          "label": "1-10 contracts",
+          "volume": "low",
+          "hours": 5
+        },
+        {
+          "value": "11-25",
+          "label": "11-25 contracts",
+          "volume": "medium",
+          "hours": 12
+        },
+        {
+          "value": "26-50",
+          "label": "26-50 contracts",
+          "volume": "high",
+          "hours": 25
+        },
+        {
+          "value": "50+",
+          "label": "50+ contracts",
+          "volume": "very-high",
+          "hours": 40
+        }
+      ]
+    },
+    {
+      "id": "contracts_template_variants",
+      "question": "How many template variants (by country/business unit)?",
+      "type": "single",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 template",
+          "complexity": 1.0,
+          "savingsPct": 60
+        },
+        {
+          "value": "2-3",
+          "label": "2-3 templates",
+          "complexity": 1.2,
+          "savingsPct": 65
+        },
+        {
+          "value": "4-6",
+          "label": "4-6 templates",
+          "complexity": 1.5,
+          "savingsPct": 70
+        },
+        {
+          "value": "7+",
+          "label": "7+ templates",
+          "complexity": 2.0,
+          "savingsPct": 75
+        }
+      ]
+    },
+    {
+      "id": "contracts_legal_redlines",
+      "question": "% needing legal redlines/approvals?",
+      "type": "single",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "<10",
+          "label": "Less than 10%",
+          "complexity": "low",
+          "savingsPct": 50
+        },
+        {
+          "value": "10-25",
+          "label": "10-25%",
+          "complexity": "medium",
+          "savingsPct": 65
+        },
+        {
+          "value": "26-50",
+          "label": "26-50%",
+          "complexity": "high",
+          "savingsPct": 75
+        },
+        {
+          "value": ">50",
+          "label": "More than 50%",
+          "complexity": "very-high",
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "contracts_turnaround_time",
+      "question": "Average contract turnaround (request → signed)?",
+      "type": "single",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "1-2days",
+          "label": "1-2 days",
+          "efficiency": "excellent",
+          "savingsPct": 30
+        },
+        {
+          "value": "3-5days",
+          "label": "3-5 days",
+          "efficiency": "good",
+          "savingsPct": 50
+        },
+        {
+          "value": "1-2weeks",
+          "label": "1-2 weeks",
+          "efficiency": "average",
+          "savingsPct": 70
+        },
+        {
+          "value": "2weeks+",
+          "label": "2+ weeks",
+          "efficiency": "poor",
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "contracts_draft_location",
+      "question": "Where do drafts live/get reviewed?",
+      "type": "single",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "ats",
+          "label": "ATS system",
+          "integration": "excellent",
+          "savingsPct": 40
+        },
+        {
+          "value": "microsoft_word_online",
+          "label": "Microsoft Word Online/SharePoint",
+          "integration": "good",
+          "savingsPct": 50
+        },
+        {
+          "value": "google_docs",
+          "label": "Google Docs/Drive",
+          "integration": "good",
+          "savingsPct": 50
+        },
+        {
+          "value": "mixed",
+          "label": "Mixed locations",
+          "integration": "poor",
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "contracts_common_delays",
+      "question": "Common delays? (Select all that apply)",
+      "type": "checkbox",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "clause_changes",
+          "label": "Clause changes/negotiations",
+          "aiPotential": "high"
+        },
+        {
+          "value": "comp_elements",
+          "label": "Compensation elements",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "approver_availability",
+          "label": "Approver availability",
+          "aiPotential": "high"
+        },
+        {
+          "value": "candidate_edits",
+          "label": "Candidate requested edits",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "template_selection",
+          "label": "Template selection confusion",
+          "aiPotential": "high"
+        },
+        {
+          "value": "version_control",
+          "label": "Version control issues",
+          "aiPotential": "high"
+        }
+      ]
+    },
+    {
+      "id": "contracts_returned_corrections",
+      "question": "% contracts returned for corrections?",
+      "type": "single",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "<2",
+          "label": "Less than 2%",
+          "quality": "excellent",
+          "savingsPct": 20
+        },
+        {
+          "value": "2-5",
+          "label": "2-5%",
+          "quality": "good",
+          "savingsPct": 40
+        },
+        {
+          "value": "6-10",
+          "label": "6-10%",
+          "quality": "fair",
+          "savingsPct": 70
+        },
+        {
+          "value": ">10",
+          "label": "More than 10%",
+          "quality": "poor",
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "contracts_clause_library",
+      "question": "Do you maintain a canonical clause library with change history?",
+      "type": "single",
+      "showIf": "contracts",
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes, comprehensive library",
+          "organization": "excellent",
+          "savingsPct": 30
+        },
+        {
+          "value": "partial",
+          "label": "Partial/basic library",
+          "organization": "good",
+          "savingsPct": 60
+        },
+        {
+          "value": "no",
+          "label": "No, ad-hoc approach",
+          "organization": "poor",
+          "savingsPct": 85
+        }
+      ]
+    },
+    {
+      "id": "aiexperience",
+      "question": "Current experience with AI tools?",
+      "type": "single",
+      "showIf": null,
+      "options": [
+        {
+          "value": "none",
+          "label": "No experience yet",
+          "readiness": "beginner"
+        },
+        {
+          "value": "explored",
+          "label": "Explored a few tools",
+          "readiness": "intermediate"
+        },
+        {
+          "value": "using",
+          "label": "Using 1-2 AI tools regularly",
+          "readiness": "advanced"
+        },
+        {
+          "value": "power",
+          "label": "Power user of multiple AI tools",
+          "readiness": "expert"
+        }
+      ]
+    }
+  ],
+  "aiTools": {
+    "sourcing": [
+      {
+        "name": "Profile Review & Screening",
+        "tools": [
+          "Google Gemini for profile analysis",
+          "Microsoft Copilot for candidate evaluation"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Boolean Search & Query Building",
+        "tools": [
+          "Google Gemini for Boolean strings",
+          "Microsoft Copilot for search queries"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Market Mapping & Company Research",
+        "tools": [
+          "Google Gemini for company research",
+          "Microsoft Copilot for analysis"
+        ],
+        "priority": "medium"
+      },
+      {
+        "name": "Outreach Personalization",
+        "tools": [
+          "Google Gemini for personalization",
+          "Microsoft Copilot for emails"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "ATS Data Entry & Tagging",
+        "tools": [
+          "Google Gemini for data structuring",
+          "Microsoft Copilot for automation"
+        ],
+        "priority": "medium"
+      }
+    ],
+    "admin": [
+      {
+        "name": "Document Creation & Formatting",
+        "tools": [
+          "Google Gemini for JD writing",
+          "Microsoft Copilot in Word"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Data Cleanup & Hygiene",
+        "tools": [
+          "Google Gemini for data analysis",
+          "Microsoft Copilot in Excel"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Communications & Reporting",
+        "tools": [
+          "Google Gemini for emails",
+          "Microsoft Copilot in Outlook"
+        ],
+        "priority": "medium"
+      },
+      {
+        "name": "Weekly Summary Generation",
+        "tools": [
+          "Google Gemini for summaries",
+          "Microsoft Copilot for analysis"
+        ],
+        "priority": "medium"
+      },
+      {
+        "name": "System Integration & Data Transfer",
+        "tools": [
+          "Google Gemini for automation guidance",
+          "Microsoft Copilot for workflows"
+        ],
+        "priority": "critical"
+      }
+    ],
+    "scheduling": [
+      {
+        "name": "Interview Scheduling Automation",
+        "tools": [
+          "Google Gemini for scheduling logic",
+          "Microsoft Copilot for calendar management"
+        ],
+        "priority": "critical"
+      },
+      {
+        "name": "Reschedule Management",
+        "tools": [
+          "Google Gemini for conflict resolution",
+          "Microsoft Copilot for rescheduling"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Availability Collection",
+        "tools": [
+          "Google Gemini for availability analysis",
+          "Microsoft Copilot for coordination"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Communication Automation",
+        "tools": [
+          "Google Gemini for email drafting",
+          "Microsoft Copilot for templates"
+        ],
+        "priority": "medium"
+      },
+      {
+        "name": "Timezone & Panel Coordination",
+        "tools": [
+          "Google Gemini for timezone calculations",
+          "Microsoft Copilot for scheduling"
+        ],
+        "priority": "medium"
+      }
+    ],
+    "compliance": [
+      {
+        "name": "Compliance Task Automation",
+        "tools": [
+          "Google Gemini for compliance guidance",
+          "Microsoft Copilot for compliance checks"
+        ],
+        "priority": "critical"
+      },
+      {
+        "name": "Policy Change Monitoring",
+        "tools": [
+          "Google Gemini for policy analysis",
+          "Microsoft Copilot for tracking"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Checklist & Process Standardization",
+        "tools": [
+          "Google Gemini for process design",
+          "Microsoft Copilot for documentation"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Audit Trail Management",
+        "tools": [
+          "Google Gemini for audit analysis",
+          "Microsoft Copilot for reporting"
+        ],
+        "priority": "medium"
+      },
+      {
+        "name": "Evidence & Documentation",
+        "tools": [
+          "Google Gemini for document organization",
+          "Microsoft Copilot for structuring"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Exception Handling",
+        "tools": [
+          "Google Gemini for exception analysis",
+          "Microsoft Copilot for workflows"
+        ],
+        "priority": "medium"
+      }
+    ],
+    "contracts": [
+      {
+        "name": "Contract Generation & Templates",
+        "tools": [
+          "Google Gemini for contract drafting",
+          "Microsoft Copilot in Word"
+        ],
+        "priority": "critical"
+      },
+      {
+        "name": "Legal Review & Redlining",
+        "tools": [
+          "Google Gemini for legal analysis",
+          "Microsoft Copilot for review"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Draft Management & Workflow",
+        "tools": [
+          "Google Gemini for workflow guidance",
+          "Microsoft Copilot for automation"
+        ],
+        "priority": "high"
+      },
+      {
+        "name": "Quality Control & Corrections",
+        "tools": [
+          "Google Gemini for quality review",
+          "Microsoft Copilot for proofreading"
+        ],
+        "priority": "medium"
+      },
+      {
+        "name": "Clause Library Management",
+        "tools": [
+          "Google Gemini for clause organization",
+          "Microsoft Copilot for search"
+        ],
+        "priority": "medium"
+      },
+      {
+        "name": "Turnaround Time Optimization",
+        "tools": [
+          "Google Gemini for process optimization",
+          "Microsoft Copilot for workflows"
+        ],
+        "priority": "high"
+      }
+    ]
+  }
+}

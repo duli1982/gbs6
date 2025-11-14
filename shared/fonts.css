@@ -1,0 +1,41 @@
+/* Standardized Design System for Randstad GBS Learning Hub */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap');
+
+/* Design System Variables */
+:root {
+    --font-header: 'Google Sans', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --color-primary: #4A90E2;
+    --color-primary-hover: #357ABD;
+}
+
+/* Base Font Classes */
+.google-sans {
+    font-family: var(--font-header);
+}
+
+.roboto {
+    font-family: var(--font-body);
+}
+
+/* Global Font Application */
+body {
+    font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header);
+}
+
+/* Button and Interactive Elements */
+button, .btn, .hub-button {
+    font-family: var(--font-header);
+    font-weight: 500;
+}
+
+/* Navigation Elements */
+nav, .nav, .navigation {
+    font-family: var(--font-header);
+}

@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Strategy Architect Gem - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Craft winning recruitment strategies with AI-powered strategic planning. Design comprehensive talent acquisition approaches with data-driven insights and measurable results.">
+    <meta name="keywords"
+        content="recruitment strategy, talent acquisition planning, hiring strategy, strategic recruiting, AI recruitment, Gemini gem, workforce planning">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around diamond */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(249, 115, 22, 0.1);
+        }
+
+        .strategy-component {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.05));
+            border: 1px solid rgba(249, 115, 22, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .strategy-component:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.15);
+        }
+
+        .component-icon {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(249, 115, 22, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ea580c;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.1);
+            color: #ea580c;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.05));
+            border: 1px solid rgba(249, 115, 22, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-title {
+            font-weight: bold;
+            color: #ea580c;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .two-phase-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .phase-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.05));
+            border: 1px solid rgba(249, 115, 22, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .phase-title {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .gemini-diamond {
+                font-size: 3rem;
+            }
+
+            .constellation-dot {
+                width: 3px;
+                height: 3px;
+            }
+
+            .floating-particle {
+                font-size: 0.8rem;
+            }
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            .two-phase-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .gemini-diamond,
+            .constellation-dot,
+            .constellation-line,
+            .floating-particle {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">🏗️</span>
+                            <span>Strategy Architect</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">🏗️</div>
+            <div class="floating-particle particle-2">📋</div>
+            <div class="floating-particle particle-3">🎯</div>
+            <div class="floating-particle particle-4">📊</div>
+            <div class="floating-particle particle-5">🚀</div>
+            <div class="floating-particle particle-6">⚡</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🏗️</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Recruitment Strategy Architect</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Craft winning recruitment strategies with AI-powered strategic planning. Design comprehensive talent acquisition approaches with data-driven insights and measurable results.
+            </p>
+        </header>
+
+        <main>
+
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🏗️ Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        The Recruitment Strategy Architect is a data-driven AI expert that designs comprehensive,
+                        innovative, and results-oriented recruitment strategies. It creates holistic approaches that
+                        align with business priorities and drive measurable hiring success.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        This gem analyzes labor market data, identifies unique employer value propositions, and builds
+                        actionable plans that attract, engage, and hire the best talent while maximizing speed and
+                        quality.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-orange-500 mr-2">✓</span> Comprehensive
+                            recruitment planning</li>
+                        <li class="flex items-center"><span class="text-orange-500 mr-2">✓</span> Market-specific hiring
+                            strategies</li>
+                        <li class="flex items-center"><span class="text-orange-500 mr-2">✓</span> Channel optimization
+                            and sourcing mix</li>
+                        <li class="flex items-center"><span class="text-orange-500 mr-2">✓</span> Employer value
+                            proposition development</li>
+                        <li class="flex items-center"><span class="text-orange-500 mr-2">✓</span> KPI definition and
+                            measurement</li>
+                        <li class="flex items-center"><span class="text-orange-500 mr-2">✓</span> Competitive advantage
+                            identification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Market Analysis</h3>
+                    <p class="text-gray-600 text-sm">Deep analysis of talent markets and competitive landscape for
+                        strategic positioning.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Data-Driven Insights</h3>
+                    <p class="text-gray-600 text-sm">Evidence-based recommendations using labor market data and hiring
+                        analytics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Channel Optimization</h3>
+                    <p class="text-gray-600 text-sm">Strategic sourcing mix across job boards, referrals, LinkedIn, and
+                        specialized channels.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Value Proposition</h3>
+                    <p class="text-gray-600 text-sm">Compelling employer messaging and unique positioning for target
+                        talent.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="font-bold text-gray-900 mb-2">KPI Framework</h3>
+                    <p class="text-gray-600 text-sm">Clear, measurable objectives and performance indicators for success
+                        tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Implementation Roadmap</h3>
+                    <p class="text-gray-600 text-sm">Strategic roadmap with quick wins and long-term optimization plans.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two-Phase Process -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Two-Phase Strategic Process</h2>
+            <p class="text-gray-600 mb-8">This gem uses a structured two-phase approach to develop comprehensive
+                recruitment strategies:</p>
+
+            <div class="two-phase-container">
+                <div class="phase-card">
+                    <div class="phase-title">Phase 1: Strategic Scratchpad</div>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">🧠 Thinking Aloud Process</h4>
+                            <p class="text-gray-700 text-sm mb-3">Informal brainstorming and strategic exploration in
+                                bullet points.</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Unique value proposition analysis</li>
+                                <li>• Candidate persona development</li>
+                                <li>• Sourcing channel evaluation</li>
+                                <li>• Outreach and screening tactics</li>
+                                <li>• Platform and network optimization</li>
+                                <li>• Referral and buzz generation ideas</li>
+                                <li>• Early success KPI identification</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <p class="text-sm text-orange-800"><strong>Purpose:</strong> Structured but exploratory
+                                brainstorming zone for creative strategy development.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Phase 2: Final Strategy</div>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">📋 Comprehensive Strategy Document</h4>
+                            <p class="text-gray-700 text-sm mb-3">Well-organized, concise, and actionable recruitment
+                                strategy.</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Clear employer/candidate messaging</li>
+                                <li>• Go-to-market tactics by channel</li>
+                                <li>• Launch plan with quick wins</li>
+                                <li>• Sourcing/screening processes</li>
+                                <li>• Key metrics and tracking</li>
+                                <li>• Realistic and creative recommendations</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <p class="text-sm text-orange-800"><strong>Output:</strong> Practical, specific advice tied
+                                to position, target talent, and company context.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategy Components -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Core Strategy Components</h2>
+            <p class="text-gray-600 mb-8">Every strategy includes these essential elements for comprehensive talent
+                acquisition:</p>
+
+            <div class="space-y-6">
+                <div class="strategy-component">
+                    <div class="component-icon">🎪</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Hiring Context Analysis</h3>
+                    <p class="text-gray-700 mb-3">Deep dive into open positions, workforce goals, team culture, and
+                        organizational priorities.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Role requirements, team dynamics,
+                            cultural fit factors, and business alignment.</p>
+                    </div>
+                </div>
+
+                <div class="strategy-component">
+                    <div class="component-icon">🌐</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Talent Market Intelligence</h3>
+                    <p class="text-gray-700 mb-3">Comprehensive analysis of talent market opportunities, competitive
+                        landscape, and positioning advantages.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Market trends, competitor analysis,
+                            talent availability, and differentiation opportunities.</p>
+                    </div>
+                </div>
+
+                <div class="strategy-component">
+                    <div class="component-icon">📢</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Sourcing & Attraction Mix</h3>
+                    <p class="text-gray-700 mb-3">Strategic channel recommendations including job boards, referrals,
+                        LinkedIn, events, and specialized platforms.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Channel prioritization, budget
+                            allocation, and tactical execution plans.</p>
+                    </div>
+                </div>
+
+                <div class="strategy-component">
+                    <div class="component-icon">💎</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Employer Value Proposition</h3>
+                    <p class="text-gray-700 mb-3">Compelling messaging themes and candidate positioning that
+                        differentiate your opportunity.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Unique selling points, candidate
+                            messaging, and competitive positioning.</p>
+                    </div>
+                </div>
+
+                <div class="strategy-component">
+                    <div class="component-icon">📊</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">KPI Framework & Metrics</h3>
+                    <p class="text-gray-700 mb-3">Clear, measurable recruitment objectives and key performance
+                        indicators for success tracking.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Success metrics, tracking methods,
+                            and optimization benchmarks.</p>
+                    </div>
+                </div>
+
+                <div class="strategy-component">
+                    <div class="component-icon">🚀</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Implementation Roadmap</h3>
+                    <p class="text-gray-700 mb-3">High-level strategic roadmap with quick wins, implementation phases,
+                        and ongoing optimization.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Includes:</strong> Launch timeline, priority actions,
+                            and continuous improvement plans.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Performance Indicators -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📈 Strategic KPIs & Metrics</h2>
+            <p class="text-gray-600 mb-6">This gem defines comprehensive metrics for measuring recruitment strategy
+                success:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <span>⏱️</span> Speed & Efficiency Metrics
+                    </div>
+                    <p class="text-gray-700 text-sm">Time-to-fill, time-to-offer, process velocity, and bottleneck
+                        identification.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <span>🎯</span> Quality & Fit Indicators
+                    </div>
+                    <p class="text-gray-700 text-sm">Offer acceptance rates, cultural fit scores, performance ratings,
+                        and retention metrics.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <span>📊</span> Source Performance Analysis
+                    </div>
+                    <p class="text-gray-700 text-sm">Channel effectiveness, cost-per-hire by source, and ROI
+                        optimization.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <span>💰</span> Cost & ROI Metrics
+                    </div>
+                    <p class="text-gray-700 text-sm">Budget utilization, cost-per-quality-hire, and investment
+                        efficiency tracking.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <span>🌟</span> Candidate Experience Scores
+                    </div>
+                    <p class="text-gray-700 text-sm">Satisfaction ratings, process feedback, and employer brand impact
+                        measurement.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <span>🎪</span> Market Competitiveness
+                    </div>
+                    <p class="text-gray-700 text-sm">Win rates against competitors, market positioning effectiveness,
+                        and talent attraction power.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Recruitment Strategy Architect"
+                        or similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions
+                        field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Prepare Context Information</h3>
+                    <p class="text-gray-700">Gather role descriptions, target talent profiles, and company background
+                        details.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Start Strategic Planning</h3>
+                    <p class="text-gray-700">Begin with a specific role or hiring challenge to test the gem's strategic
+                        capabilities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+                    <strong>Role/Persona:</strong> You are the Recruitment Strategy Architect, a highly experienced and
+                    data-driven talent acquisition expert. You specialize in designing comprehensive, innovative, and
+                    results-oriented recruitment strategies that drive hiring success and achieve specific workforce
+                    objectives.
+
+                    <strong>Context/Background:</strong> Your expertise spans diverse industries and global talent
+                    markets, giving you a panoramic view of candidate behavior, sourcing trends, and effective selection
+                    methods. You understand that a successful recruitment strategy is not just about posting jobs, but
+                    about a holistic, integrated approach that aligns with business priorities. You excel at analyzing
+                    labor market data, identifying unique employer value propositions, and building actionable plans
+                    that attract, engage, and hire the best talent while maximizing speed and quality. You are driven by
+                    the challenge of transforming workforce needs into measurable recruiting results.
+
+                    <strong>Goal/Task:</strong> Your primary goal is to help users generate tailored, actionable
+                    recruitment strategies for their roles, teams, or business units. You will:
+
+                    • Analyze the user's hiring context, including open positions, workforce goals, and team culture.
+                    • Identify key talent market opportunities and competitive advantages.
+                    • Propose a comprehensive sourcing and attraction mix, recommending specific channels (job boards,
+                    referrals, LinkedIn, events, agencies) and tactics.
+                    • Outline clear, measurable recruitment objectives and Key Performance Indicators (KPIs).
+                    • Suggest compelling employer value propositions and candidate messaging themes.
+                    • Provide a high-level strategic roadmap for implementation and ongoing optimization.
+
+                    <strong>Constraints/Rules:</strong>
+                    • Always maintain a professional, analytical, and outcomes-driven tone.
+                    • Prioritize data-driven insights and measurable hiring results in all strategic recommendations.
+                    • Ensure strategies are practical, adaptable, and scalable for various business sizes and role
+                    types.
+                    • Consider the candidate journey and experience when recommending channels or processes.
+                    • Encourage ethical, diverse, and inclusive recruitment practices.
+                    • If specific hiring details (e.g., budget, existing resources) are not provided, make reasonable
+                    assumptions and state them, or ask for clarification.
+                    • Avoid generic advice; strive for innovative and customized solutions.
+                    • The output should be structured, clear, and ready for immediate use in recruitment planning.
+
+                    <strong>RECRUITMENT STRATEGY GENERATOR MEGA-PROMPT:</strong>
+
+                    Task: You will develop a comprehensive recruitment strategy for an open role, function, or team
+                    based on the following context:
+
+                    <strong>Role/Position Description:</strong> [INSERT ROLE OR POSITION DESCRIPTION]
+                    <strong>Target Talent Market:</strong> [INSERT TARGET TALENT MARKET/PROFILE]
+                    <strong>Company Background/Team Culture:</strong> [INSERT COMPANY BACKGROUND OR TEAM CULTURE
+                    DETAILS]
+
+                    Your process will consist of two phases:
+
+                    <strong>STEP 1: SCRATCHPAD (THINKING ALOUD)</strong>
+                    Outline your strategy informally in bullet points. Think through:
+                    • What is the unique value proposition for this opportunity/team?
+                    • What candidate personas and sourcing channels are best suited for this search?
+                    • What outreach, screening, and selection tactics will best surface high-potential talent?
+                    • Which job boards, platforms, or networks will maximize reach?
+                    • What ideas could help generate referrals, buzz, or passive interest?
+                    • What KPIs will indicate early success?
+
+                    This is your brainstorming zone—structured but exploratory.
+
+                    <strong>STEP 2: FINAL ANSWER</strong>
+                    Write the full recruitment strategy in a well-organized, concise format. It should include:
+
+                    <strong>1. EMPLOYER/CANDIDATE MESSAGING & POSITIONING</strong>
+                    • Unique value proposition and competitive differentiators
+                    • Key messaging themes for target talent
+                    • Employer brand positioning strategy
+
+                    <strong>2. GO-TO-MARKET TACTICS BY CHANNEL</strong>
+                    • Job boards and career sites strategy
+                    • LinkedIn and social media approach
+                    • Referral program optimization
+                    • Industry events and networking
+                    • Agency and vendor partnerships
+                    • Specialized sourcing channels
+
+                    <strong>3. LAUNCH PLAN WITH QUICK-WIN ACTIONS</strong>
+                    • Priority 1: Immediate actions (Week 1-2)
+                    • Priority 2: Short-term initiatives (Month 1)
+                    • Priority 3: Long-term optimization (Months 2-3)
+
+                    <strong>4. SOURCING/SCREENING/SELECTION PROCESS</strong>
+                    • Candidate identification strategies
+                    • Initial screening and qualification methods
+                    • Interview and assessment recommendations
+                    • Decision-making framework
+
+                    <strong>5. KEY METRICS TO TRACK</strong>
+                    • Speed metrics (time-to-fill, time-to-offer)
+                    • Quality indicators (offer acceptance, cultural fit)
+                    • Source effectiveness and ROI
+                    • Candidate experience scores
+                    • Cost and efficiency measures
+
+                    <strong>6. REALISTIC AND CREATIVE RECOMMENDATIONS</strong>
+                    • Innovative sourcing tactics
+                    • Competitive advantage strategies
+                    • Market positioning approaches
+                    • Continuous improvement plans
+
+                    Avoid fluff. Give practical, specific advice that ties back to the position, target talent, and
+                    company context.
+
+                    <strong>HOW TO USE THE PROMPT:</strong>
+                    Fill in the [INSERT ROLE OR POSITION DESCRIPTION], [INSERT TARGET TALENT MARKET/PROFILE], and
+                    [INSERT COMPANY BACKGROUND OR TEAM CULTURE DETAILS] placeholders with details about the opening, the
+                    ideal candidate/audience, and your company's history, EVP, or mission.
+
+                    <strong>EXAMPLE INPUT:</strong>
+                    "Role: Senior Data Analyst, Biotech
+                    Target Talent: Mid-level data professionals with pharma/biotech experience and Python/R skills
+                    Company: Global life sciences company committed to digital innovation and flexible working, known
+                    for breakthrough therapies and collaborative culture"
+
+                    <strong>KICKOFF TEMPLATE:</strong>
+                    "I need a comprehensive recruitment strategy for the following:
+
+                    Role/Position: [Describe the role, level, key requirements]
+                    Target Talent Market: [Ideal candidate profile, experience level, skills, industry background]
+                    Company Context: [Company size, culture, industry, unique selling points, challenges]
+
+                    Please develop a complete recruitment strategy using your two-phase process."
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                    <h3 class="font-bold text-orange-900 mb-3">🎯 Executive Search Strategy</h3>
+                    <p class="text-orange-800 text-sm mb-3">
+                        "Need strategy for VP of Engineering role. Target: Senior tech leaders with startup scaling
+                        experience. Company: Fast-growing fintech with remote-first culture."
+                    </p>
+                    <p class="text-orange-700 text-xs">
+                        <strong>Gem Output:</strong> Comprehensive executive search strategy with specialized channels,
+                        executive messaging, and competitive positioning.
+                    </p>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">📊 High-Volume Hiring Plan</h3>
+                    <p class="text-blue-800 text-sm mb-3">
+                        "Strategy for hiring 50+ customer service reps. Target: Entry to mid-level with customer focus.
+                        Company: Growing e-commerce with strong training programs."
+                    </p>
+                    <p class="text-blue-700 text-xs">
+                        <strong>Gem Output:</strong> Scalable high-volume strategy with automation, pipeline management,
+                        and efficiency optimization.
+                    </p>
+                </div>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-3">🌍 Specialized Talent Strategy</h3>
+                    <p class="text-green-800 text-sm mb-3">
+                        "Strategy for rare AI/ML specialists. Target: PhD-level researchers with industry experience.
+                        Company: Research-focused tech company with cutting-edge projects."
+                    </p>
+                    <p class="text-green-700 text-xs">
+                        <strong>Gem Output:</strong> Specialized sourcing strategy with academic partnerships, research
+                        community engagement, and technical positioning.
+                    </p>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="font-bold text-purple-900 mb-3">🚀 Market Entry Strategy</h3>
+                    <p class="text-purple-800 text-sm mb-3">
+                        "Strategy for new market expansion team. Target: Sales professionals with regional expertise.
+                        Company: International SaaS expanding to new geography."
+                    </p>
+                    <p class="text-purple-700 text-xs">
+                        <strong>Gem Output:</strong> Market entry recruitment strategy with local partnerships, cultural
+                        considerations, and competitive intelligence.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Collection -->
+        <div class="text-center mt-12">
+            <a href="index.html"
+                class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                ← Back to Gems Collection
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#ea580c';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .strategy-component, .kpi-card').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+
+</html>

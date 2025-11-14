@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Page Template - Randstad GBS Learning Hub</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Secure page template with XSS protection and input sanitization">
+    <meta name="author" content="Randstad GBS">
+
+    <!-- Security: Subresource Integrity (SRI) for CDN resources -->
+    <!-- DOMPurify for XSS protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS (Replace with compiled CSS in production) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="shared/fonts.css">
+    <link rel="stylesheet" href="shared/buttons.css">
+
+    <!-- Security Utilities -->
+    <script src="shared/scripts/utils/security.js" defer></script>
+
+    <style>
+        /* Page-specific styles */
+        .demo-box {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Secure Page Template</h1>
+            <p class="text-lg text-gray-600">Demonstrates XSS protection and secure coding practices</p>
+        </header>
+
+        <!-- Demo 1: Safe innerHTML -->
+        <section class="demo-box">
+            <h2 class="text-2xl font-bold mb-4">Demo 1: Safe HTML Injection</h2>
+            <p class="mb-4">Enter HTML content (try injecting a script):</p>
+
+            <textarea id="html-input" class="w-full p-3 border border-gray-300 rounded-lg mb-4" rows="4"
+                placeholder="Enter HTML here, e.g., <b>Bold text</b> or <script>alert('XSS')</script>"></textarea>
+
+            <button onclick="demoSafeHTML()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                Inject HTML (Safe)
+            </button>
+
+            <div id="safe-output" class="mt-4 p-4 bg-white border border-gray-200 rounded-lg min-h-[100px]">
+                <!-- Sanitized content will appear here -->
+            </div>
+
+            <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm">
+                <strong>✅ Protected:</strong> Script tags and dangerous attributes are automatically removed.
+            </div>
+        </section>
+
+        <!-- Demo 2: Safe Search -->
+        <section class="demo-box">
+            <h2 class="text-2xl font-bold mb-4">Demo 2: Sanitized Search Input</h2>
+            <p class="mb-4">Enter a search query (try injecting scripts):</p>
+
+            <input type="text" id="search-input" class="w-full p-3 border border-gray-300 rounded-lg mb-4"
+                placeholder="Search... (try <script> or javascript:)">
+
+            <button onclick="demoSafeSearch()"
+                class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                Search (Safe)
+            </button>
+
+            <div id="search-output" class="mt-4 p-4 bg-white border border-gray-200 rounded-lg">
+                <!-- Sanitized search results will appear here -->
+            </div>
+        </section>
+
+        <!-- Demo 3: Safe URL Handling -->
+        <section class="demo-box">
+            <h2 class="text-2xl font-bold mb-4">Demo 3: URL Sanitization</h2>
+            <p class="mb-4">Enter a URL (try dangerous protocols like javascript:):</p>
+
+            <input type="text" id="url-input" class="w-full p-3 border border-gray-300 rounded-lg mb-4"
+                placeholder="Enter URL (try javascript:alert('XSS'))">
+
+            <button onclick="demoSafeURL()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">
+                Validate URL
+            </button>
+
+            <div id="url-output" class="mt-4 p-4 bg-white border border-gray-200 rounded-lg">
+                <!-- URL validation results will appear here -->
+            </div>
+        </section>
+
+        <!-- Demo 4: Rate Limiting -->
+        <section class="demo-box">
+            <h2 class="text-2xl font-bold mb-4">Demo 4: Rate Limiting</h2>
+            <p class="mb-4">Click rapidly to test rate limiting (max 5 clicks per 10 seconds):</p>
+
+            <button onclick="demoRateLimit()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">
+                Test Rate Limit
+            </button>
+
+            <div id="ratelimit-output" class="mt-4 p-4 bg-white border border-gray-200 rounded-lg">
+                Clicks: <span id="click-count">0</span>
+            </div>
+        </section>
+
+        <!-- Code Examples -->
+        <section class="demo-box">
+            <h2 class="text-2xl font-bold mb-4">📝 Code Examples</h2>
+
+            <h3 class="text-xl font-semibold mb-2">Safe innerHTML:</h3>
+            <div class="code-block mb-4">
+                <pre>// ❌ UNSAFE
+element.innerHTML = userInput;
+
+// ✅ SAFE
+SecurityUtils.safeSetInnerHTML(element, userInput);</pre>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-2">Sanitize Search Query:</h3>
+            <div class="code-block mb-4">
+                <pre>// Sanitize user search input
+const safeQuery = SecurityUtils.sanitizeSearchQuery(userQuery);
+
+// Use in your search function
+performSearch(safeQuery);</pre>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-2">Validate URL:</h3>
+            <div class="code-block mb-4">
+                <pre>// Validate and sanitize URL
+const url = SecurityUtils.sanitizeURL(userInput);
+
+if (SecurityUtils.isValidURL(url)) {
+    window.location.href = url;
+} else {
+    alert('Invalid URL');
+}</pre>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-2">Rate Limiting:</h3>
+            <div class="code-block mb-4">
+                <pre>// Check rate limit before action
+if (SecurityUtils.checkRateLimit('search', 10, 60000)) {
+    performSearch(query);
+} else {
+    alert('Too many requests. Please wait.');
+}</pre>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Wait for SecurityUtils to load
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log('✅ SecurityUtils loaded:', typeof SecurityUtils !== 'undefined');
+        });
+
+        // Demo 1: Safe HTML Injection
+        function demoSafeHTML() {
+            const input = document.getElementById('html-input').value;
+            const output = document.getElementById('safe-output');
+
+            if (!input) {
+                alert('Please enter some HTML');
+                return;
+            }
+
+            // Use SecurityUtils to safely set innerHTML
+            SecurityUtils.safeSetInnerHTML(output, input);
+
+            // Show what was sanitized
+            const sanitized = SecurityUtils.sanitizeHTML(input);
+            console.log('Original:', input);
+            console.log('Sanitized:', sanitized);
+        }
+
+        // Demo 2: Safe Search
+        function demoSafeSearch() {
+            const input = document.getElementById('search-input').value;
+            const output = document.getElementById('search-output');
+
+            if (!input) {
+                alert('Please enter a search query');
+                return;
+            }
+
+            // Sanitize the search query
+            const safeQuery = SecurityUtils.sanitizeSearchQuery(input);
+
+            // Display results
+            output.innerHTML = `
+                <div class="space-y-2">
+                    <p><strong>Original Input:</strong> ${SecurityUtils.escapeHTML(input)}</p>
+                    <p><strong>Sanitized Query:</strong> ${SecurityUtils.escapeHTML(safeQuery)}</p>
+                    <p class="text-green-600"><strong>✅ Safe to use in search!</strong></p>
+                </div>
+            `;
+        }
+
+        // Demo 3: Safe URL Handling
+        function demoSafeURL() {
+            const input = document.getElementById('url-input').value;
+            const output = document.getElementById('url-output');
+
+            if (!input) {
+                alert('Please enter a URL');
+                return;
+            }
+
+            // Sanitize and validate URL
+            const safeURL = SecurityUtils.sanitizeURL(input);
+            const isValid = SecurityUtils.isValidURL(safeURL);
+
+            // Display results
+            let message = `
+                <div class="space-y-2">
+                    <p><strong>Original Input:</strong> ${SecurityUtils.escapeHTML(input)}</p>
+                    <p><strong>Sanitized URL:</strong> ${SecurityUtils.escapeHTML(safeURL)}</p>
+                    <p class="${isValid ? 'text-green-600' : 'text-red-600'}">
+                        <strong>${isValid ? '✅ Valid URL' : '❌ Invalid or dangerous URL'}</strong>
+                    </p>
+                </div>
+            `;
+
+            output.innerHTML = message;
+        }
+
+        // Demo 4: Rate Limiting
+        let clickCount = 0;
+        function demoRateLimit() {
+            const output = document.getElementById('ratelimit-output');
+            const countSpan = document.getElementById('click-count');
+
+            // Check rate limit (max 5 clicks per 10 seconds)
+            if (SecurityUtils.checkRateLimit('demo-clicks', 5, 10000)) {
+                clickCount++;
+                countSpan.textContent = clickCount;
+                output.innerHTML = `
+                    Clicks: <span id="click-count">${clickCount}</span>
+                    <p class="text-green-600 mt-2">✅ Click registered</p>
+                `;
+            } else {
+                output.innerHTML = `
+                    Clicks: <span id="click-count">${clickCount}</span>
+                    <p class="text-red-600 mt-2">❌ Rate limit exceeded! Please wait 10 seconds.</p>
+                `;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

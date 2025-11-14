@@ -1,0 +1,67 @@
+/* General Body Styles */
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-nav a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-nav a:hover {
+    color: #0056b3;
+}
+
+.breadcrumb-nav .separator {
+    margin: 0 0.5rem;
+    color: #6c757d;
+}
+
+/* Page Header */
+.pathway-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.pathway-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.pathway-header p {
+    font-size: 1.2rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0.5rem auto 0;
+}
+
+/* Content Sections */
+.pathway-section {
+    margin-bottom: 3rem;
+}
+
+.pathway-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* Module Cards */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}

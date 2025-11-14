@@ -1,0 +1,186 @@
+/* Standardized Button System - Randstad GBS Learning Hub */
+
+/* Button Color Variables */
+:root {
+    --btn-primary: #4A90E2;
+    --btn-primary-hover: #357ABD;
+    --btn-primary-active: #2A5F8F;
+    --btn-secondary: #6b7280;
+    --btn-secondary-hover: #4b5563;
+    --btn-success: #10b981;
+    --btn-success-hover: #059669;
+    --btn-warning: #f59e0b;
+    --btn-warning-hover: #d97706;
+    --btn-danger: #ef4444;
+    --btn-danger-hover: #dc2626;
+}
+
+/* Primary Button (Randstad Blue) */
+.btn-primary {
+    background: linear-gradient(135deg, var(--btn-primary) 0%, var(--btn-primary-hover) 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--btn-primary-hover) 0%, var(--btn-primary-active) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+.btn-primary:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background: var(--btn-secondary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--btn-secondary-hover);
+    transform: translateY(-1px);
+}
+
+/* Outline Button */
+.btn-outline {
+    background: transparent;
+    color: var(--btn-primary);
+    border: 2px solid var(--btn-primary);
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: var(--btn-primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Success Button */
+.btn-success {
+    background: linear-gradient(135deg, var(--btn-success) 0%, var(--btn-success-hover) 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background: var(--btn-success-hover);
+    transform: translateY(-1px);
+}
+
+/* Filter Button (for interactive elements) */
+.btn-filter {
+    background: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid #e5e7eb;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-filter:hover {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+.btn-filter.active {
+    background: var(--btn-primary);
+    color: white;
+    border-color: var(--btn-primary);
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+/* CTA Button (Call to Action - larger) */
+.btn-cta {
+    background: linear-gradient(135deg, var(--btn-primary) 0%, var(--btn-primary-hover) 100%);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-family: var(--font-header, 'Google Sans', sans-serif);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.btn-cta:hover {
+    background: linear-gradient(135deg, var(--btn-primary-hover) 0%, var(--btn-primary-active) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+}
+
+/* Small Button */
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+/* Large Button */
+.btn-lg {
+    padding: 16px 32px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+/* Button with Icon */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Rounded Button */
+.btn-rounded {
+    border-radius: 50px;
+}
+
+/* Full Width Button */
+.btn-full {
+    width: 100%;
+    justify-content: center;
+}

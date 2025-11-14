@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Prompting Techniques - RPO Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .tool-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-template {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .prompt-template:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+
+        .prompt-template.selected {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .output-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 100px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Back to Hub Button -->
+    <a href="../../../index.html" class="hub-button">Back To Hub</a>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🎯</div>
+            <h1 class="google-sans text-3xl font-bold text-gray-900 mb-3">Basic Prompting Techniques</h1>
+            <p class="text-lg text-gray-600">Learn the fundamentals of effective AI communication</p>
+        </div>
+
+        <!-- Learning Content -->
+        <div class="bg-white rounded-xl p-6 mb-8">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">What Makes a Good Prompt?</h2>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h3 class="font-bold text-red-800 mb-2">❌ Poor Prompt</h3>
+                    <div class="bg-white p-3 rounded border text-sm font-mono">
+                        "Write a job description"
+                    </div>
+                    <p class="text-red-700 text-sm mt-2">Too vague, no context or requirements</p>
+                </div>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h3 class="font-bold text-green-800 mb-2">✅ Good Prompt</h3>
+                    <div class="bg-white p-3 rounded border text-sm font-mono">
+                        "Write a job description for a Senior Software Engineer position at a fintech startup. Include:
+                        required skills (5+ years experience, Python, React), responsibilities, and company culture.
+                        Keep it engaging and under 300 words."
+                    </div>
+                    <p class="text-green-700 text-sm mt-2">Specific, detailed, with clear requirements</p>
+                </div>
+            </div>
+
+            <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Key Prompting Principles</h3>
+            <div class="space-y-3">
+                <div class="flex items-start space-x-3">
+                    <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span class="text-blue-600 text-sm font-bold">1</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Be Specific</h4>
+                        <p class="text-gray-600 text-sm">Provide clear context, requirements, and desired outcomes</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                    <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span class="text-blue-600 text-sm font-bold">2</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Set the Role</h4>
+                        <p class="text-gray-600 text-sm">Tell the AI what role to play (recruiter, manager, etc.)</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                    <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span class="text-blue-600 text-sm font-bold">3</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Include Examples</h4>
+                        <p class="text-gray-600 text-sm">Show the AI what good output looks like</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                    <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span class="text-blue-600 text-sm font-bold">4</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Specify Format</h4>
+                        <p class="text-gray-600 text-sm">Define length, structure, and style requirements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive AI Prompt Builder Tool -->
+        <div class="tool-section">
+            <div class="flex items-center mb-4">
+                <div class="text-2xl mr-3">🛠️</div>
+                <h2 class="google-sans text-2xl font-bold text-blue-800">AI Prompt Builder</h2>
+            </div>
+            <p class="text-blue-700 mb-6">Practice building effective prompts with our interactive tool. Select a
+                template and customize it for your needs.</p>
+
+            <!-- Template Selection -->
+            <div class="mb-6">
+                <h3 class="font-bold text-gray-900 mb-3">Choose a Template:</h3>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <div class="prompt-template" onclick="selectTemplate('job-description')">
+                        <h4 class="font-semibold text-gray-900">📝 Job Description</h4>
+                        <p class="text-sm text-gray-600">Create compelling job postings</p>
+                    </div>
+
+                    <div class="prompt-template" onclick="selectTemplate('interview-questions')">
+                        <h4 class="font-semibold text-gray-900">❓ Interview Questions</h4>
+                        <p class="text-sm text-gray-600">Generate role-specific questions</p>
+                    </div>
+
+                    <div class="prompt-template" onclick="selectTemplate('candidate-email')">
+                        <h4 class="font-semibold text-gray-900">📧 Candidate Email</h4>
+                        <p class="text-sm text-gray-600">Write professional outreach</p>
+                    </div>
+
+                    <div class="prompt-template" onclick="selectTemplate('boolean-search')">
+                        <h4 class="font-semibold text-gray-900">🔍 Boolean Search</h4>
+                        <p class="text-sm text-gray-600">Build complex search queries</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt Builder Form -->
+            <div id="prompt-builder" class="hidden">
+                <h3 class="font-bold text-gray-900 mb-3">Customize Your Prompt:</h3>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Role/Position:</label>
+                        <input type="text" id="role-input" class="w-full p-3 border border-gray-300 rounded-lg"
+                            placeholder="e.g., Senior Software Engineer">
+
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 mt-4">Company/Industry:</label>
+                        <input type="text" id="company-input" class="w-full p-3 border border-gray-300 rounded-lg"
+                            placeholder="e.g., Fintech startup">
+
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 mt-4">Key Requirements:</label>
+                        <textarea id="requirements-input" class="w-full p-3 border border-gray-300 rounded-lg" rows="3"
+                            placeholder="e.g., 5+ years experience, Python, React"></textarea>
+
+                        <button onclick="generatePrompt()"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mt-4 transition-colors">
+                            Generate Prompt
+                        </button>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Generated Prompt:</label>
+                        <div id="generated-prompt" class="output-box">
+                            Your customized prompt will appear here...
+                        </div>
+
+                        <button onclick="copyPrompt()"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mt-3 transition-colors">
+                            📋 Copy Prompt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-8">
+            <a href="../beginner.html" class="text-gray-500 hover:text-gray-700 font-medium">
+                ← Back to Beginner Path
+            </a>
+
+            <button onclick="completeModule()"
+                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Complete Module
+            </button>
+
+            <a href="beginner-4.html" class="text-blue-600 hover:text-blue-700 font-medium">
+                Next Module →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let selectedTemplate = '';
+
+        const templates = {
+            'job-description': {
+                title: 'Job Description',
+                template: `Act as an experienced recruiter. Write a compelling job description for a [ROLE] position at a [COMPANY]. 
+
+Include the following:
+- Role overview and key responsibilities
+- Required qualifications: [REQUIREMENTS]
+- Preferred skills and experience
+- Company culture and benefits
+- Clear call-to-action
+
+Keep it engaging, professional, and under 300 words. Use bullet points for easy reading.`
+            },
+            'interview-questions': {
+                title: 'Interview Questions',
+                template: `Act as a hiring manager. Create 8-10 interview questions for a [ROLE] position at a [COMPANY].
+
+Include a mix of:
+- Behavioral questions (STAR method)
+- Technical/role-specific questions based on: [REQUIREMENTS]
+- Culture fit questions
+- Situational scenarios
+
+Format each question with the purpose/what you're evaluating in parentheses.`
+            },
+            'candidate-email': {
+                title: 'Candidate Outreach Email',
+                template: `Act as a professional recruiter. Write a personalized outreach email to a potential candidate for a [ROLE] position at [COMPANY].
+
+The email should:
+- Have an engaging subject line
+- Mention specific skills: [REQUIREMENTS]
+- Highlight the opportunity and company benefits
+- Include a clear call-to-action
+- Be professional but friendly
+- Keep it under 150 words
+
+Tone: Professional, enthusiastic, personalized`
+            },
+            'boolean-search': {
+                title: 'Boolean Search Query',
+                template: `Act as a sourcing expert. Create a comprehensive Boolean search string to find candidates for a [ROLE] position at [COMPANY].
+
+Based on these requirements: [REQUIREMENTS]
+
+Provide:
+1. A primary Boolean search string for LinkedIn
+2. An alternative search for job boards
+3. Key synonyms and variations to try
+4. Location and experience level modifiers
+
+Format the searches clearly with explanations of each component.`
+            }
+        };
+
+        function selectTemplate(templateKey) {
+            // Remove previous selection
+            document.querySelectorAll('.prompt-template').forEach(el => {
+                el.classList.remove('selected');
+            });
+
+            // Select new template
+            event.target.closest('.prompt-template').classList.add('selected');
+            selectedTemplate = templateKey;
+
+            // Show builder
+            document.getElementById('prompt-builder').classList.remove('hidden');
+
+            // Clear previous inputs
+            document.getElementById('role-input').value = '';
+            document.getElementById('company-input').value = '';
+            document.getElementById('requirements-input').value = '';
+            document.getElementById('generated-prompt').textContent = 'Your customized prompt will appear here...';
+        }
+
+        function generatePrompt() {
+            if (!selectedTemplate) return;
+
+            const role = document.getElementById('role-input').value || '[ROLE]';
+            const company = document.getElementById('company-input').value || '[COMPANY]';
+            const requirements = document.getElementById('requirements-input').value || '[REQUIREMENTS]';
+
+            let prompt = templates[selectedTemplate].template;
+            prompt = prompt.replace(/\[ROLE\]/g, role);
+            prompt = prompt.replace(/\[COMPANY\]/g, company);
+            prompt = prompt.replace(/\[REQUIREMENTS\]/g, requirements);
+
+            document.getElementById('generated-prompt').textContent = prompt;
+        }
+
+        function copyPrompt() {
+            const promptText = document.getElementById('generated-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
+            if (!completedModules.includes(3)) {
+                completedModules.push(3);
+                localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
+            }
+
+            // Redirect to next module or pathway
+            window.location.href = 'beginner-4.html';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate-Role Fit Analyst Gem - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Optimize candidate-role alignment with AI-powered fit analysis. Evaluate job opportunities against target talent pools to maximize recruitment success and candidate satisfaction.">
+    <meta name="keywords"
+        content="candidate fit analysis, role alignment, talent matching, recruitment optimization, AI fit analysis, Gemini gem, candidate experience">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around diamond */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(236, 72, 153, 0.1);
+        }
+
+        .analysis-step {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), rgba(219, 39, 119, 0.05));
+            border: 1px solid rgba(236, 72, 153, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .analysis-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.15);
+        }
+
+        .step-icon {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(236, 72, 153, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #db2777;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #be185d;
+            transform: translateY(-1px);
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(236, 72, 153, 0.1);
+            color: #db2777;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .fit-factor {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), rgba(219, 39, 119, 0.05));
+            border: 1px solid rgba(236, 72, 153, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .factor-title {
+            font-weight: bold;
+            color: #db2777;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .fit-score {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .fit-high {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .fit-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .fit-low {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .recommendation-card {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), rgba(219, 39, 119, 0.05));
+            border: 2px solid rgba(236, 72, 153, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .recommendation-title {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .gemini-diamond {
+                font-size: 3rem;
+            }
+
+            .constellation-dot {
+                width: 3px;
+                height: 3px;
+            }
+
+            .floating-particle {
+                font-size: 0.8rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .gemini-diamond,
+            .constellation-dot,
+            .constellation-line,
+            .floating-particle {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">🎯</span>
+                            <span>Fit Analyst</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">🎯</div>
+            <div class="floating-particle particle-2">🔍</div>
+            <div class="floating-particle particle-3">⚖️</div>
+            <div class="floating-particle particle-4">📊</div>
+            <div class="floating-particle particle-5">💡</div>
+            <div class="floating-particle particle-6">✨</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🎯</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Recruitment Fit Analyst</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Optimize candidate-role alignment with AI-powered fit analysis. Evaluate job opportunities against target talent pools to maximize recruitment success and candidate satisfaction.
+            </p>
+        </header>
+
+        <main>
+
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        The Candidate-Role Fit Analyst evaluates whether job opportunities genuinely align with target
+                        candidate motivations, pain points, and realities. It prevents wasted hiring efforts by
+                        maximizing role-candidate fit from the start.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        This gem combines strategic recruitment insight with practical talent engagement experience to
+                        ensure roles resonate with the right candidates and avoid common misalignment pitfalls.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-pink-500 mr-2">✓</span> Role-candidate alignment
+                            optimization</li>
+                        <li class="flex items-center"><span class="text-pink-500 mr-2">✓</span> Job opportunity
+                            evaluation</li>
+                        <li class="flex items-center"><span class="text-pink-500 mr-2">✓</span> Candidate motivation
+                            analysis</li>
+                        <li class="flex items-center"><span class="text-pink-500 mr-2">✓</span> Employer value
+                            proposition testing</li>
+                        <li class="flex items-center"><span class="text-pink-500 mr-2">✓</span> Recruitment strategy
+                            validation</li>
+                        <li class="flex items-center"><span class="text-pink-500 mr-2">✓</span> Hiring success
+                            optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Deep Candidate Analysis</h3>
+                    <p class="text-gray-600 text-sm">Comprehensive evaluation of candidate motivations, aspirations, and
+                        dealbreakers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚖️</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Alignment Assessment</h3>
+                    <p class="text-gray-600 text-sm">Systematic evaluation of role-candidate fit across multiple
+                        dimensions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Optimization Insights</h3>
+                    <p class="text-gray-600 text-sm">Actionable recommendations to improve role attractiveness and fit.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Risk Identification</h3>
+                    <p class="text-gray-600 text-sm">Early detection of potential barriers to candidate engagement and
+                        acceptance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Strategic Validation</h3>
+                    <p class="text-gray-600 text-sm">Methods to test and validate candidate-role fit assumptions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Iterative Improvement</h3>
+                    <p class="text-gray-600 text-sm">Continuous refinement based on candidate feedback and market
+                        signals.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Four-Step Analysis Process -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📋 Four-Step Analysis Framework</h2>
+            <p class="text-gray-600 mb-8">This gem uses a systematic four-step process to evaluate and optimize
+                candidate-role fit:</p>
+
+            <div class="space-y-6">
+                <div class="analysis-step">
+                    <div class="step-icon">1</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Target Candidate Analysis</h3>
+                    <p class="text-gray-700 mb-3">Deep dive into candidate characteristics, motivations, aspirations,
+                        frustrations, and job-search behaviors.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Analysis Components:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Skills and experience requirements</li>
+                            <li>• Core values and motivators</li>
+                            <li>• Career goals and aspirations</li>
+                            <li>• Pain points and frustrations</li>
+                            <li>• "Must-have" requirements</li>
+                            <li>• Absolute dealbreakers</li>
+                            <li>• Job search behaviors and preferences</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analysis-step">
+                    <div class="step-icon">2</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Role/Opportunity Alignment</h3>
+                    <p class="text-gray-700 mb-3">Evaluate how well the proposed job meets candidate needs, both
+                        rationally and emotionally.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Evaluation Areas:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Role responsibilities and scope</li>
+                            <li>• Growth and development opportunities</li>
+                            <li>• Company culture and values alignment</li>
+                            <li>• Compensation and rewards package</li>
+                            <li>• Flexibility and work-life balance</li>
+                            <li>• Employer reputation and brand</li>
+                            <li>• Potential barriers and concerns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analysis-step">
+                    <div class="step-icon">3</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Offer/Process Optimization</h3>
+                    <p class="text-gray-700 mb-3">Brainstorm improvements to make the opportunity irresistible for the
+                        right candidates.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Optimization Areas:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Job description and messaging tweaks</li>
+                            <li>• Interview process improvements</li>
+                            <li>• Employer branding enhancements</li>
+                            <li>• Role redesign considerations</li>
+                            <li>• Value proposition refinement</li>
+                            <li>• Candidate experience optimization</li>
+                            <li>• Communication strategy adjustments</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analysis-step">
+                    <div class="step-icon">4</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Final Recommendation</h3>
+                    <p class="text-gray-700 mb-3">Clear strategic recommendation on whether the role is ready to win
+                        over the target talent pool.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Recommendation Options:</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <div class="fit-score fit-high">✅ Pursue as is</div>
+                            <div class="fit-score fit-medium">🔄 Pivot approach</div>
+                            <div class="fit-score fit-medium">🎯 Redefine target</div>
+                            <div class="fit-score fit-low">❌ Drop/redesign</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fit Analysis Factors -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚖️ Key Fit Analysis Factors</h2>
+            <p class="text-gray-600 mb-6">This gem evaluates candidate-role alignment across critical dimensions:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="fit-factor">
+                    <div class="factor-title">
+                        <span>💼</span> Role & Responsibilities Fit
+                    </div>
+                    <p class="text-gray-700 text-sm">Alignment between role scope, responsibilities, and candidate
+                        career goals and interests.</p>
+                </div>
+
+                <div class="fit-factor">
+                    <div class="factor-title">
+                        <span>📈</span> Growth & Development Fit
+                    </div>
+                    <p class="text-gray-700 text-sm">Match between career advancement opportunities and candidate
+                        aspirations for professional growth.</p>
+                </div>
+
+                <div class="fit-factor">
+                    <div class="factor-title">
+                        <span>🏢</span> Culture & Values Fit
+                    </div>
+                    <p class="text-gray-700 text-sm">Alignment between organizational culture, values, and candidate
+                        personal and professional values.</p>
+                </div>
+
+                <div class="fit-factor">
+                    <div class="factor-title">
+                        <span>💰</span> Compensation & Rewards Fit
+                    </div>
+                    <p class="text-gray-700 text-sm">Match between total compensation package and candidate financial
+                        expectations and motivators.</p>
+                </div>
+
+                <div class="fit-factor">
+                    <div class="factor-title">
+                        <span>⚖️</span> Work-Life Balance Fit
+                    </div>
+                    <p class="text-gray-700 text-sm">Alignment between role demands, flexibility options, and candidate
+                        lifestyle preferences.</p>
+                </div>
+
+                <div class="fit-factor">
+                    <div class="factor-title">
+                        <span>🌟</span> Employer Brand Fit
+                    </div>
+                    <p class="text-gray-700 text-sm">Match between employer reputation, mission, and candidate values
+                        and career positioning goals.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Candidate-Role Fit Analyst" or
+                        similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions
+                        field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Prepare Analysis Inputs</h3>
+                    <p class="text-gray-700">Gather detailed target candidate profiles and role/opportunity descriptions
+                        for analysis.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Start Fit Analysis</h3>
+                    <p class="text-gray-700">Begin with a specific role-candidate pairing to test the gem's analytical
+                        capabilities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+                    <strong>Role/Persona:</strong> You are the Candidate-Role Fit Analyst, a highly experienced
+                    recruitment strategist and talent advisor. You specialize in evaluating whether a proposed job
+                    opportunity is a compelling and viable match for a specific target candidate audience.
+
+                    <strong>Context/Background:</strong> Your expertise combines the strategic insight of a recruitment
+                    leader with the practical experience of engaging and converting top talent. You have seen great
+                    roles go unfilled — or attract the wrong applicants — simply because they didn't resonate with the
+                    right candidates, or missed the mark on what matters most. You are adept at dissecting candidate
+                    motivations, mapping talent market gaps, and analyzing job offers to ensure they truly serve and
+                    appeal to the intended audience. Your goal is to prevent wasted hiring efforts by maximizing
+                    role-candidate fit from the start.
+
+                    <strong>Goal/Task:</strong> Your mission is to help users evaluate and optimize the alignment
+                    between their proposed job opportunity and its ideal target candidate pool. You will:
+
+                    • Analyze the proposed job/role and its core requirements, value proposition, and employer brand.
+                    • Deeply examine the target candidate audience, including their demographics, skills, aspirations,
+                    motivators, and pain points.
+                    • Assess the strength of the role-candidate fit, identifying areas of strong appeal and potential
+                    misalignment.
+                    • Spot unmet needs or untapped segments within the candidate pool that the role or employer could
+                    better address.
+                    • Suggest actionable improvements to the job offer, employer pitch, messaging, or even the
+                    definition of the ideal candidate to increase fit and attractiveness.
+                    • Highlight potential risks or barriers to candidate engagement or acceptance.
+                    • Advise on methods to validate candidate-role fit (e.g., candidate research, feedback loops,
+                    outreach testing).
+
+                    <strong>Constraints/Rules:</strong>
+                    • Maintain a critical, analytical, and constructive tone, blending strategic insight with practical
+                    recruiting experience.
+                    • Stay candidate-centric and focused on real motivations and dealbreakers.
+                    • Base your evaluation only on the information provided. If data is missing or vague, ask clarifying
+                    questions.
+                    • Do not actually write job ads or outreach here — your job is to provide strategic evaluation and
+                    guidance.
+                    • Emphasize iterative feedback and continuous improvement based on candidate feedback and market
+                    signals.
+                    • Challenge assumptions about what candidates want, need, or expect.
+                    • Output clear, actionable insights to help refine the recruiting strategy.
+
+                    <strong>CANDIDATE-ROLE FIT MEGA-PROMPT:</strong>
+
+                    <strong>INPUTS:</strong>
+                    • Target Candidate Audience: [INSERT YOUR TARGET CANDIDATE PROFILE]
+                    • Proposed Role/Opportunity: [INSERT YOUR JOB/ROLE/EMPLOYER DESCRIPTION]
+
+                    <strong>STEP 1: TARGET CANDIDATE ANALYSIS</strong>
+                    List key characteristics, skills, motivations, aspirations, frustrations, and job-search behaviors
+                    of this audience. Focus on what truly matters to them when considering new opportunities.
+
+                    <strong>Target Candidate Analysis:</strong>
+                    [Insert bullets: skills, values, goals, pain points, "must-haves," "dealbreakers," etc.]
+
+                    <strong>Key Analysis Areas:</strong>
+                    • Professional background and skill requirements
+                    • Core values and motivational drivers
+                    • Career goals and advancement aspirations
+                    • Current frustrations and pain points
+                    • Non-negotiable requirements ("must-haves")
+                    • Absolute dealbreakers and red flags
+                    • Job search behaviors and decision-making process
+                    • Market positioning and competitive alternatives
+
+                    <strong>STEP 2: ROLE/OPPORTUNITY ALIGNMENT</strong>
+                    Evaluate how well the proposed job or employer meets these candidate needs, both rationally and
+                    emotionally. Consider responsibilities, growth, culture, rewards, flexibility, employer reputation,
+                    and barriers.
+
+                    <strong>Role/Opportunity Alignment:</strong>
+                    [Describe strengths — how this role matches what the audience wants]
+                    [Spot any mismatches or blind spots]
+                    [Note assumptions needing validation]
+
+                    <strong>Alignment Assessment Framework:</strong>
+                    • <strong>Strengths:</strong> How does this role/opportunity excel in meeting candidate needs?
+                    • <strong>Gaps:</strong> Where does the role fall short of candidate expectations?
+                    • <strong>Misalignments:</strong> What aspects might actually repel the target audience?
+                    • <strong>Assumptions:</strong> What beliefs about candidate preferences need validation?
+                    • <strong>Competitive Position:</strong> How does this compare to alternatives candidates might
+                    consider?
+
+                    <strong>STEP 3: OFFER/PROCESS OPTIMIZATION</strong>
+                    Brainstorm improvements or pivots — from job description tweaks, messaging, and interview process
+                    changes, to employer branding or even role redesign — that could make this offer irresistible for
+                    the right candidates.
+
+                    <strong>Optimization Ideas:</strong>
+                    [List specific ways to better align the job/opportunity to the audience]
+
+                    <strong>Optimization Categories:</strong>
+                    • <strong>Role Design:</strong> Adjustments to responsibilities, scope, or structure
+                    • <strong>Messaging & Positioning:</strong> How to better communicate the opportunity
+                    • <strong>Process Improvements:</strong> Interview, assessment, and decision-making enhancements
+                    • <strong>Employer Branding:</strong> Brand positioning and reputation considerations
+                    • <strong>Value Proposition:</strong> Compensation, benefits, and unique selling points
+                    • <strong>Candidate Experience:</strong> Journey optimization and touchpoint improvements
+                    • <strong>Market Positioning:</strong> Competitive differentiation and unique advantages
+
+                    <strong>STEP 4: FINAL RECOMMENDATION</strong>
+                    Is this role ready to win over this talent pool? State your clear recommendation, with your
+                    reasoning.
+
+                    <strong>Recommendation:</strong>
+                    [Pursue as is / Pivot / Redefine / Drop — and why]
+
+                    <strong>Recommendation Framework:</strong>
+                    • <strong>✅ PURSUE AS IS:</strong> Strong alignment, minor tweaks needed, high success probability
+                    • <strong>🔄 PIVOT APPROACH:</strong> Good foundation, significant adjustments required for optimal
+                    fit
+                    • <strong>🎯 REDEFINE TARGET:</strong> Role is solid, but targeting wrong candidate segment
+                    • <strong>❌ DROP/REDESIGN:</strong> Fundamental misalignment, major changes or abandonment
+                    recommended
+
+                    <strong>Supporting Analysis:</strong>
+                    • Fit score assessment (High/Medium/Low) with reasoning
+                    • Key success factors and risk mitigation strategies
+                    • Validation methods to test assumptions
+                    • Timeline and priority recommendations for improvements
+
+                    <strong>HOW TO USE:</strong>
+                    Replace [INSERT YOUR TARGET CANDIDATE PROFILE] with a detailed summary of your ideal candidate group
+                    (skills, experience, motivators, geography, etc.).
+
+                    Replace [INSERT YOUR JOB/ROLE/EMPLOYER DESCRIPTION] with the details of the position and
+                    organization you want to assess.
+
+                    Optionally, add: "If you need more info, ask me clarifying questions before your analysis."
+
+                    <strong>EXAMPLE INPUT:</strong>
+                    Target Candidate Audience: Senior data scientists in Western Europe, motivated by impact,
+                    flexibility, and professional growth. 5-10 years experience, PhD preferred, seeking remote-first
+                    opportunities with meaningful work.
+
+                    Proposed Role/Opportunity: Data Science Lead at an early-stage healthtech startup, remote-first,
+                    high-impact product development, broad responsibilities, equity offered, small team environment.
+
+                    <strong>KICKOFF TEMPLATE:</strong>
+                    "I need a comprehensive candidate-role fit analysis for the following:
+
+                    Target Candidate Audience: [Detailed candidate profile including skills, experience, motivations,
+                    preferences, and requirements]
+
+                    Proposed Role/Opportunity: [Complete role description including responsibilities, company context,
+                    culture, compensation, and unique aspects]
+
+                    Please analyze the fit using your four-step framework and provide specific optimization
+                    recommendations."
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-pink-50 border border-pink-200 rounded-lg p-6">
+                    <h3 class="font-bold text-pink-900 mb-3">🎯 Executive Role Fit</h3>
+                    <p class="text-pink-800 text-sm mb-3">
+                        "Target: Senior tech executives seeking growth opportunities. Role: CTO at scaling fintech,
+                        equity-heavy, high autonomy, fast-paced environment."
+                    </p>
+                    <p class="text-pink-700 text-xs">
+                        <strong>Gem Output:</strong> Comprehensive fit analysis with executive motivations, role
+                        alignment assessment, and optimization recommendations.
+                    </p>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">🔍 Specialist Role Analysis</h3>
+                    <p class="text-blue-800 text-sm mb-3">
+                        "Target: AI/ML researchers with academic background. Role: Research scientist at corporate lab,
+                        publication freedom, cutting-edge projects."
+                    </p>
+                    <p class="text-blue-700 text-xs">
+                        <strong>Gem Output:</strong> Academic-to-industry fit evaluation with research culture alignment
+                        and career progression analysis.
+                    </p>
+                </div>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-3">🌟 Culture Fit Assessment</h3>
+                    <p class="text-green-800 text-sm mb-3">
+                        "Target: Values-driven millennials seeking purpose. Role: Social impact startup, mission-driven,
+                        lower pay, high meaning, collaborative culture."
+                    </p>
+                    <p class="text-green-700 text-xs">
+                        <strong>Gem Output:</strong> Values alignment analysis with purpose-driven positioning and
+                        compensation trade-off evaluation.
+                    </p>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="font-bold text-purple-900 mb-3">⚖️ Work-Life Balance Fit</h3>
+                    <p class="text-purple-800 text-sm mb-3">
+                        "Target: Senior professionals prioritizing flexibility. Role: Consulting position, travel
+                        required, high compensation, demanding schedule."
+                    </p>
+                    <p class="text-purple-700 text-xs">
+                        <strong>Gem Output:</strong> Lifestyle compatibility analysis with flexibility concerns and
+                        compensation-balance trade-off assessment.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Analysis Output -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Sample Analysis Output</h2>
+            <div class="recommendation-card">
+                <div class="recommendation-title">CANDIDATE-ROLE FIT ANALYSIS REPORT</div>
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">TARGET CANDIDATE ANALYSIS</h4>
+                        <p class="text-gray-700 mb-2">• Senior data scientists (5-10 years experience)</p>
+                        <p class="text-gray-700 mb-2">• Values: Impact, flexibility, professional growth</p>
+                        <p class="text-gray-700 mb-2">• Must-haves: Remote work, meaningful projects, learning
+                            opportunities</p>
+                        <p class="text-gray-700">• Dealbreakers: Micromanagement, legacy tech, limited growth</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">ALIGNMENT ASSESSMENT</h4>
+                        <div class="flex gap-4 mb-2">
+                            <span class="fit-score fit-high">Impact: High</span>
+                            <span class="fit-score fit-high">Flexibility: High</span>
+                            <span class="fit-score fit-medium">Growth: Medium</span>
+                        </div>
+                        <p class="text-gray-700">Strong alignment on core values, moderate growth opportunities due to
+                            startup stage.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">OPTIMIZATION RECOMMENDATIONS</h4>
+                        <p class="text-gray-700 mb-1">• Emphasize learning opportunities and skill development</p>
+                        <p class="text-gray-700 mb-1">• Highlight mentorship and conference/training budget</p>
+                        <p class="text-gray-700">• Position as "ground floor" opportunity for career acceleration</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">FINAL RECOMMENDATION</h4>
+                        <div class="fit-score fit-high mb-2">✅ PURSUE WITH OPTIMIZATIONS</div>
+                        <p class="text-gray-700">Strong foundational fit with targeted messaging improvements needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Collection -->
+        <div class="text-center mt-12">
+            <a href="index.html"
+                class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                ← Back to Gems Collection
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#db2777';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .analysis-step, .fit-factor').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+
+</html>

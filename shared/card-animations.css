@@ -1,0 +1,265 @@
+/* Standardized Card Animation System - Randstad GBS Learning Hub */
+
+/* Card Animation Variables */
+:root {
+    --card-shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --card-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.05);
+    --card-shadow-elevated: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+    --card-border: 1px solid #dadce0;
+    --card-border-hover: 1px solid #4A90E2;
+    --card-radius: 12px;
+    --card-transition: all 0.3s ease;
+}
+
+/* Base Card Styles */
+.card-base {
+    background: white;
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+/* Standard Card Animation (most common) */
+.card-standard {
+    background: white;
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+.card-standard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(74, 144, 226, 0.2);
+}
+
+/* Hub Card (for main navigation cards) */
+.card-hub {
+    background: white;
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+.card-hub:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.card-hub h3 {
+    color: var(--btn-primary, #4A90E2);
+    transition: color 0.2s ease;
+}
+
+/* Feature Card (for onboarding and feature highlights) */
+.card-feature {
+    background: white;
+    border: 2px solid #f3f4f6;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+.card-feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: rgba(74, 144, 226, 0.3);
+}
+
+/* Interactive Card (for selectable items) */
+.card-interactive {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+.card-interactive:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--btn-primary, #4A90E2);
+}
+
+.card-interactive.selected {
+    border-color: var(--btn-primary, #4A90E2);
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
+}
+
+.card-interactive.selected .card-icon {
+    transform: scale(1.1);
+}
+
+/* Content Card (for articles, prompts, etc.) */
+.card-content {
+    background: white;
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+.card-content:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* Success Story Card (for use cases) */
+.card-story {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+.card-story:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Prompt Card (for prompt library) */
+.card-prompt {
+    background: white;
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    cursor: pointer;
+}
+
+.card-prompt:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Focus Card (for daily focus cards) */
+.card-focus {
+    background: white;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: scale(0.98); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+}
+
+/* Recommendation Card (for personalized suggestions) */
+.card-recommendation {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-base);
+    transition: var(--card-transition);
+}
+
+.card-recommendation:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--btn-primary, #4A90E2);
+}
+
+/* Gradient Card Variants */
+.card-gradient-blue {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+    border: 2px solid rgba(74, 144, 226, 0.2);
+}
+
+.card-gradient-green {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    border: 2px solid rgba(16, 185, 129, 0.2);
+}
+
+.card-gradient-purple {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+    border: 2px solid rgba(139, 92, 246, 0.2);
+}
+
+/* Card States */
+.card-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.card-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Card Filtering States */
+.card-filtered-out {
+    opacity: 0.3;
+    filter: grayscale(50%);
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+.card-highlighted {
+    border-color: var(--btn-primary, #4A90E2);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2), var(--card-shadow-hover);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .card-standard:hover,
+    .card-hub:hover,
+    .card-feature:hover,
+    .card-interactive:hover,
+    .card-content:hover,
+    .card-story:hover,
+    .card-prompt:hover,
+    .card-recommendation:hover {
+        transform: translateY(-3px); /* Reduced movement on mobile */
+    }
+}
+
+/* Accessibility */
+.card-standard:focus,
+.card-hub:focus,
+.card-feature:focus,
+.card-interactive:focus,
+.card-content:focus,
+.card-story:focus,
+.card-prompt:focus,
+.card-recommendation:focus {
+    outline: 2px solid var(--btn-primary, #4A90E2);
+    outline-offset: 2px;
+}

@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10+ Gems with Prompts - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Ready-to-use Gemini Gems with proven prompts for common business scenarios and specialized tasks. Transform your workflows with AI-powered solutions.">
+    <meta name="keywords"
+        content="Gemini Gems, recruitment AI, hiring tools, AI recruiting, Gemini prompts, recruitment automation, HR AI">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Custom styles for gems collection */
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around diamond */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        .gem-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .gem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .gem-card:hover::before {
+            left: 100%;
+        }
+
+        .gem-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .gem-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .gem-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-ready {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-coming-soon {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .gem-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #4c1d95;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-preview {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: #475569;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .gem-card:hover .prompt-preview {
+            max-height: 200px;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #4c1d95;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .prompt-preview:hover .copy-button {
+            opacity: 1;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            background: white;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-tab:hover:not(.active) {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .coming-soon-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gem-card.coming-soon:hover .coming-soon-overlay {
+            opacity: 1;
+        }
+
+        .floating-gems {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .gemini-diamond {
+                font-size: 3rem;
+            }
+
+            .constellation-dot {
+                width: 3px;
+                height: 3px;
+            }
+
+            .floating-particle {
+                font-size: 0.8rem;
+            }
+
+            .gem-card {
+                padding: 1.5rem;
+            }
+
+            .gems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+
+            .gemini-diamond,
+            .constellation-dot,
+            .constellation-line,
+            .floating-particle,
+            .gem-card {
+                animation: none;
+                transition: none;
+            }
+
+            .gem-card:hover {
+                transform: translateY(-4px);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">💎</div>
+            <div class="floating-particle particle-2">✨</div>
+            <div class="floating-particle particle-3">🔮</div>
+            <div class="floating-particle particle-4">💫</div>
+            <div class="floating-particle particle-5">⭐</div>
+            <div class="floating-particle particle-6">🌟</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">💎</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">10+ Gems with Prompts
+            </h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Ready-to-use Gemini Gems with proven prompts for common business scenarios and specialized tasks.
+                Transform your workflows with AI-powered solutions.
+            </p>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid max-w-4xl mx-auto mt-8">
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="text-gray-700 font-semibold">Ready Gems</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="text-gray-700 font-semibold">Coming Soon</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="text-gray-700 font-semibold">Business Focused</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="text-gray-700 font-semibold">Possibilities</div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Gems</button>
+                <button class="filter-tab" data-filter="strategy">Strategy</button>
+                <button class="filter-tab" data-filter="analysis">Analysis</button>
+                <button class="filter-tab" data-filter="operations">Operations</button>
+                <button class="filter-tab" data-filter="coming-soon">Coming Soon</button>
+            </div>
+
+            <!-- Gems Grid -->
+            <div class="gems-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+                <!-- Gem 1: Game Theory Recruitment -->
+                <div class="gem-card" data-category="strategy">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-purple-500 to-pink-500">🎯</div>
+                    <div class="gem-category">Strategy</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Game Theory Recruitment Strategist Gem
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Apply game theory principles to solve complex recruitment challenges. Strategic thinking meets
+                        AI-powered analysis.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>🔥 Advanced Strategy</span>
+                        <span>⏱️ 5-10 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are a strategic recruitment consultant specializing in game theory applications. Analyze
+                            recruitment challenges using game theory principles...
+                        </div>
+                    </div>
+                    <a href="game-theory-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Gem 2: Report Summarizer -->
+                <div class="gem-card" data-category="analysis">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-blue-500 to-cyan-500">📊</div>
+                    <div class="gem-category">Analysis</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recruitment Results Architect Gem</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Transform lengthy recruitment reports into actionable insights. Extract key metrics and
+                        recommendations instantly.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>📈 Data Analysis</span>
+                        <span>⏱️ 2-3 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are an expert recruitment analyst. Summarize recruitment reports by extracting key
+                            metrics, trends, and actionable insights...
+                        </div>
+                    </div>
+                    <a href="report-summarizer-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Gem 3: Innovation Architect -->
+                <div class="gem-card" data-category="strategy">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-green-500 to-teal-500">🚀</div>
+                    <div class="gem-category">Innovation</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recruiting Innovation Architect Gem</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Design innovative recruitment processes and cutting-edge hiring strategies that set you apart
+                        from competitors.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>💡 Innovation</span>
+                        <span>⏱️ 3-5 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are a recruitment innovation architect. Design cutting-edge recruitment processes that
+                            leverage emerging technologies...
+                        </div>
+                    </div>
+                    <a href="innovation-architect-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-green-500 to-teal-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Gem 4: Strategy Architect -->
+                <div class="gem-card" data-category="strategy">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-orange-500 to-red-500">🏗️</div>
+                    <div class="gem-category">Strategy</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">The Recruitment Strategy Architect Gem</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Build comprehensive recruitment strategies tailored to your organization's unique needs and
+                        market position.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>🎯 Strategic Planning</span>
+                        <span>⏱️ 5-8 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are a senior recruitment strategy architect. Develop comprehensive recruitment
+                            strategies based on organizational goals...
+                        </div>
+                    </div>
+                    <a href="strategy-architect-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Gem 5: Strategy Plan Generator -->
+                <div class="gem-card" data-category="strategy">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-indigo-500 to-purple-500">📋</div>
+                    <div class="gem-category">Planning</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Comprehensive Recruiting Strategy Plan Generator
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Generate detailed, actionable recruitment strategy plans with timelines, KPIs, and
+                        implementation roadmaps.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>📅 Planning</span>
+                        <span>⏱️ 4-6 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are a recruitment planning specialist. Generate comprehensive recruitment strategy plans
+                            with detailed timelines...
+                        </div>
+                    </div>
+                    <a href="plan-generator-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Gem 6: Candidate-Role Fit Analyst -->
+                <div class="gem-card" data-category="analysis">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-pink-500 to-rose-500">🎯</div>
+                    <div class="gem-category">Analysis</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Candidate-Role Fit Analyst Gem</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Analyze candidate profiles against role requirements to determine optimal fit scores and
+                        improvement areas.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>🔍 Fit Analysis</span>
+                        <span>⏱️ 3-4 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are a candidate-role fit analyst. Evaluate candidate profiles against role requirements
+                            and provide detailed fit scores...
+                        </div>
+                    </div>
+                    <a href="fit-analyst-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Gem 7: Value Proposition Architect -->
+                <div class="gem-card" data-category="strategy">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-yellow-500 to-orange-500">💰</div>
+                    <div class="gem-category">Strategy</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recruiter Value Proposition Architect Gem</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Craft compelling value propositions that attract top talent and differentiate your opportunities
+                        in the market.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>💎 Value Creation</span>
+                        <span>⏱️ 4-5 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are a recruiter value proposition architect. Create compelling value propositions that
+                            attract top talent...
+                        </div>
+                    </div>
+                    <a href="value-proposition-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Gem 8: Operations Architect -->
+                <div class="gem-card" data-category="operations">
+                    <div class="gem-status status-ready">Ready</div>
+                    <div class="gem-icon bg-gradient-to-br from-teal-500 to-blue-500">⚙️</div>
+                    <div class="gem-category">Operations</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recruitment Operations Architect Gem</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Optimize recruitment operations with streamlined processes, automation recommendations, and
+                        efficiency improvements.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>⚡ Operations</span>
+                        <span>⏱️ 5-7 min setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt(this)">Copy</button>
+                        <div class="prompt-text">
+                            You are a recruitment operations architect. Analyze and optimize recruitment processes for
+                            maximum efficiency...
+                        </div>
+                    </div>
+                    <a href="operations-architect-gem.html"
+                        class="block w-full mt-4 bg-gradient-to-r from-teal-500 to-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+
+                <!-- Coming Soon Gems -->
+                <!-- Gem 9: Coming Soon -->
+                <div class="gem-card coming-soon" data-category="coming-soon">
+                    <div class="gem-status status-coming-soon">Coming Soon</div>
+                    <div class="gem-icon bg-gradient-to-br from-gray-400 to-gray-500">🔮</div>
+                    <div class="gem-category">Advanced</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">AI Interview Assistant Gem</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Intelligent interview preparation and real-time assistance for conducting more effective
+                        candidate interviews.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>🤖 AI Assistant</span>
+                        <span>⏱️ Coming Q1 2025</span>
+                    </div>
+                    <div class="coming-soon-overlay">
+                        <div class="text-6xl mb-4">🚧</div>
+                        <div class="text-xl font-bold text-gray-700 mb-2">Coming Soon</div>
+                        <div class="text-gray-600">Currently in development</div>
+                    </div>
+                </div>
+
+                <!-- Gem 10: Coming Soon -->
+                <div class="gem-card coming-soon" data-category="coming-soon">
+                    <div class="gem-status status-coming-soon">Coming Soon</div>
+                    <div class="gem-icon bg-gradient-to-br from-gray-400 to-gray-500">📱</div>
+                    <div class="gem-category">Communication</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Candidate Communication Optimizer</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Optimize candidate communication with personalized messaging strategies and engagement tracking.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>💬 Communication</span>
+                        <span>⏱️ Coming Q1 2025</span>
+                    </div>
+                    <div class="coming-soon-overlay">
+                        <div class="text-6xl mb-4">🚧</div>
+                        <div class="text-xl font-bold text-gray-700 mb-2">Coming Soon</div>
+                        <div class="text-gray-600">Currently in development</div>
+                    </div>
+                </div>
+
+                <!-- Gem 11: Coming Soon -->
+                <div class="gem-card coming-soon" data-category="coming-soon">
+                    <div class="gem-status status-coming-soon">Coming Soon</div>
+                    <div class="gem-icon bg-gradient-to-br from-gray-400 to-gray-500">📈</div>
+                    <div class="gem-category">Analytics</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recruitment ROI Calculator</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Calculate and optimize recruitment ROI with advanced analytics and cost-benefit analysis tools.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>💹 ROI Analysis</span>
+                        <span>⏱️ Coming Q2 2025</span>
+                    </div>
+                    <div class="coming-soon-overlay">
+                        <div class="text-6xl mb-4">🚧</div>
+                        <div class="text-xl font-bold text-gray-700 mb-2">Coming Soon</div>
+                        <div class="text-gray-600">Currently in development</div>
+                    </div>
+                </div>
+
+                <!-- Gem 12: Coming Soon -->
+                <div class="gem-card coming-soon" data-category="coming-soon">
+                    <div class="gem-status status-coming-soon">Coming Soon</div>
+                    <div class="gem-icon bg-gradient-to-br from-gray-400 to-gray-500">🌐</div>
+                    <div class="gem-category">Global</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Global Talent Sourcing Strategist</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Navigate global talent markets with cultural insights and international recruitment best
+                        practices.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>🌍 Global Reach</span>
+                        <span>⏱️ Coming Q2 2025</span>
+                    </div>
+                    <div class="coming-soon-overlay">
+                        <div class="text-6xl mb-4">🚧</div>
+                        <div class="text-xl font-bold text-gray-700 mb-2">Coming Soon</div>
+                        <div class="text-gray-600">Currently in development</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action Section -->
+            <div
+                class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 mt-16 text-center border border-purple-200">
+                <div class="text-6xl mb-6">🚀</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Business Workflows?</h2>
+                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Start using these powerful Gemini Gems today and revolutionize your business processes with
+                    AI-powered
+                    solutions.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="../gemini-gems/index.html"
+                        class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        Learn About Gemini Gems
+                    </a>
+                    <a href="../key-principles/index.html"
+                        class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold border-2 border-purple-200 hover:border-purple-400 transition-all duration-300">
+                        Master Prompt Engineering
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                // Update active tab
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Filter gems
+                const filter = this.dataset.filter;
+                const gems = document.querySelectorAll('.gem-card');
+
+                gems.forEach(gem => {
+                    if (filter === 'all' || gem.dataset.category === filter) {
+                        gem.style.display = 'block';
+                        setTimeout(() => {
+                            gem.style.opacity = '1';
+                            gem.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        gem.style.opacity = '0';
+                        gem.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            gem.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Copy prompt functionality
+        function copyPrompt(button) {
+            const promptText = button.nextElementSibling.textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.style.background = '#4c1d95';
+                }, 2000);
+            });
+        }
+
+        // Show gem details (placeholder for future modal functionality)
+        function showGemDetails(gemId) {
+            // This would open a detailed modal with full prompt and setup instructions
+            alert(`Opening detailed view for ${gemId}. This will be implemented with full prompts and setup guides.`);
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all gem cards
+        document.querySelectorAll('.gem-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+
+</html>

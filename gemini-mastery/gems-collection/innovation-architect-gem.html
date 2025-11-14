@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiting Innovation Architect Gem - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Design transformative recruitment solutions with AI-powered innovation. Create breakthrough hiring processes and cutting-edge talent acquisition strategies.">
+    <meta name="keywords"
+        content="recruitment innovation, talent acquisition strategy, hiring innovation, AI recruiting, process design, Gemini gem, HR innovation">
+    <meta name="author" content="Randstad GBS">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around diamond */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        .floating-innovation-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .innovation-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: float-innovation 8s ease-in-out infinite;
+        }
+
+        .innovation-icon:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .innovation-icon:nth-child(2) {
+            top: 25%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .innovation-icon:nth-child(3) {
+            bottom: 35%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .innovation-icon:nth-child(4) {
+            bottom: 25%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .innovation-icon:nth-child(5) {
+            top: 55%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .innovation-icon:nth-child(6) {
+            top: 65%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .innovation-phase {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(5, 150, 105, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .innovation-phase:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        .phase-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #047857;
+            transform: translateY(-1px);
+        }
+
+        .setup-steps {
+            counter-reset: step-counter;
+        }
+
+        .setup-step {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: #047857;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .innovation-area {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(5, 150, 105, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .innovation-title {
+            font-weight: bold;
+            color: #047857;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .prompt-container {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .copy-prompt-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">🚀</span>
+                            <span>Innovation Architect</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">🚀</div>
+            <div class="floating-particle particle-2">💡</div>
+            <div class="floating-particle particle-3">⚡</div>
+            <div class="floating-particle particle-4">🔬</div>
+            <div class="floating-particle particle-5">🎨</div>
+            <div class="floating-particle particle-6">🌟</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🚀</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Recruiting Innovation Architect</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Design transformative recruitment solutions with AI-powered innovation. Create breakthrough hiring processes and cutting-edge talent acquisition strategies.
+            </p>
+        </header>
+
+        <main>
+
+        <!-- Overview Section -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Gem Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        The Recruiting Innovation Architect is a visionary AI assistant that helps you design
+                        breakthrough recruitment solutions. It combines market intelligence, talent insights, and
+                        process expertise to architect original, high-impact innovations.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        This gem identifies inefficiencies in current hiring practices and conceptualizes creative
+                        solutions that improve outcomes for candidates, recruiters, and business leaders alike.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Designing new
+                            recruitment processes</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Solving persistent
+                            hiring challenges</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Creating competitive
+                            advantages</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Improving candidate
+                            experience</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Developing innovative
+                            sourcing strategies</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Building scalable
+                            talent solutions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Problem Identification</h3>
+                    <p class="text-gray-600 text-sm">Uncovers hidden inefficiencies and unmet needs in recruitment
+                        processes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Creative Solutions</h3>
+                    <p class="text-gray-600 text-sm">Generates original, practical solutions that address core hiring
+                        challenges.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Stakeholder Focus</h3>
+                    <p class="text-gray-600 text-sm">Considers benefits for candidates, recruiters, and business
+                        leaders.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Scalability Planning</h3>
+                    <p class="text-gray-600 text-sm">Designs solutions with growth, ROI, and adoption potential in mind.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="font-bold text-gray-900 mb-2">MVP Approach</h3>
+                    <p class="text-gray-600 text-sm">Provides pilot strategies for testing and learning quickly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="font-bold text-gray-900 mb-2">Market Intelligence</h3>
+                    <p class="text-gray-600 text-sm">Incorporates emerging trends and competitive landscape insights.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Innovation Framework -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🏗️ Innovation Development Framework</h2>
+            <p class="text-gray-600 mb-8">This gem guides you through a comprehensive 8-phase innovation process:</p>
+
+            <div class="space-y-6">
+                <div class="innovation-phase">
+                    <div class="phase-icon">👥</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Leader/Team Profile</h3>
+                    <p class="text-gray-700 mb-3">Assess your team's experience, market focus, and recruiting
+                        "superpowers." Identify core strengths, values, and desired impact areas.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Clear understanding of your innovation
+                            capacity and strategic priorities.</p>
+                    </div>
+                </div>
+
+                <div class="innovation-phase">
+                    <div class="phase-icon">📊</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recruiting Market Trends</h3>
+                    <p class="text-gray-700 mb-3">Analyze key HR, tech, and labor trends shaping recruitment. Identify
+                        emerging challenges and differentiation opportunities.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Market intelligence and trend analysis
+                            for strategic positioning.</p>
+                    </div>
+                </div>
+
+                <div class="innovation-phase">
+                    <div class="phase-icon">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Problem Spaces</h3>
+                    <p class="text-gray-700 mb-3">Synthesize pressing recruitment challenges and prioritize based on
+                        urgency and strategic fit. Reframe problems for breakthrough thinking.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Prioritized problem statements with
+                            "How might we..." frameworks.</p>
+                    </div>
+                </div>
+
+                <div class="innovation-phase">
+                    <div class="phase-icon">💡</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Solution Brainstorm</h3>
+                    <p class="text-gray-700 mb-3">Generate innovative process, tool, and workflow ideas. Cross-pollinate
+                        from other industries and explore tech-enabled possibilities.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Diverse range of creative solutions
+                            and breakthrough concepts.</p>
+                    </div>
+                </div>
+
+                <div class="innovation-phase">
+                    <div class="phase-icon">📋</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Idea Shortlist</h3>
+                    <p class="text-gray-700 mb-3">Filter promising ideas using impact, feasibility, and originality
+                        criteria. Select 3-5 concepts for detailed development.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Curated list of high-potential
+                            innovation concepts.</p>
+                    </div>
+                </div>
+
+                <div class="innovation-phase">
+                    <div class="phase-icon">🔧</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Concept Development</h3>
+                    <p class="text-gray-700 mb-3">Flesh out top ideas into working solutions with value propositions,
+                        user groups, features, and MVP plans.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Detailed concept specifications with
+                            implementation roadmaps.</p>
+                    </div>
+                </div>
+
+                <div class="innovation-phase">
+                    <div class="phase-icon">🌟</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Vision Narrative</h3>
+                    <p class="text-gray-700 mb-3">Create compelling stories for your top concept, including long-term
+                        vision and strategies for winning buy-in.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Inspiring vision narrative and
+                            stakeholder communication strategy.</p>
+                    </div>
+                </div>
+
+                <div class="innovation-phase">
+                    <div class="phase-icon">🚀</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Next Steps</h3>
+                    <p class="text-gray-700 mb-3">Define validation priorities, research needs, success metrics, and
+                        pilot launch strategies.</p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600"><strong>Output:</strong> Actionable implementation plan with
+                            risk mitigation strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Innovation Areas -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">🎨 Innovation Focus Areas</h2>
+            <p class="text-gray-600 mb-6">This gem excels at generating breakthrough solutions across key recruitment
+                domains:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="innovation-area">
+                    <div class="innovation-title">
+                        <span>🎯</span> Candidate Experience Innovation
+                    </div>
+                    <p class="text-gray-700 text-sm">Revolutionary approaches to candidate engagement, communication,
+                        and journey optimization.</p>
+                </div>
+
+                <div class="innovation-area">
+                    <div class="innovation-title">
+                        <span>🔍</span> Sourcing & Discovery
+                    </div>
+                    <p class="text-gray-700 text-sm">Next-generation talent identification, passive candidate
+                        activation, and market intelligence.</p>
+                </div>
+
+                <div class="innovation-area">
+                    <div class="innovation-title">
+                        <span>⚡</span> Process Automation
+                    </div>
+                    <p class="text-gray-700 text-sm">Intelligent workflow design, decision support systems, and
+                        efficiency optimization.</p>
+                </div>
+
+                <div class="innovation-area">
+                    <div class="innovation-title">
+                        <span>📊</span> Analytics & Intelligence
+                    </div>
+                    <p class="text-gray-700 text-sm">Predictive hiring models, performance insights, and data-driven
+                        decision frameworks.</p>
+                </div>
+
+                <div class="innovation-area">
+                    <div class="innovation-title">
+                        <span>🌍</span> DEI & Inclusion
+                    </div>
+                    <p class="text-gray-700 text-sm">Bias-free processes, inclusive sourcing strategies, and equitable
+                        assessment methods.</p>
+                </div>
+
+                <div class="innovation-area">
+                    <div class="innovation-title">
+                        <span>🤝</span> Stakeholder Collaboration
+                    </div>
+                    <p class="text-gray-700 text-sm">Enhanced hiring manager partnerships, cross-functional alignment,
+                        and decision-making frameworks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Create Your Gemini Gem</h3>
+                    <p class="text-gray-700">Go to Gemini and create a new Gem. Name it "Recruiting Innovation
+                        Architect" or similar.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Copy the Full Prompt</h3>
+                    <p class="text-gray-700">Copy the complete prompt below and paste it into your Gem's instructions
+                        field.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Define Your Profile</h3>
+                    <p class="text-gray-700">Prepare a brief description of your team's strengths, market focus, and
+                        innovation goals.</p>
+                </div>
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Start Innovating</h3>
+                    <p class="text-gray-700">Begin with a specific recruitment challenge or area where you want to drive
+                        innovation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Prompt -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+            <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+
+            <div class="prompt-container">
+                <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                <div id="full-prompt">
+                    <strong>Role/Persona:</strong> You are the Recruiting Innovation Architect, a visionary expert
+                    specializing in uncovering unmet talent acquisition needs and designing transformative recruitment
+                    solutions. You combine deep market insight, talent intelligence, and process expertise to build the
+                    future of recruiting.
+
+                    <strong>Context/Background:</strong> You've spent years immersed in recruitment—from hands-on
+                    sourcing, hiring, and interviewing to analyzing market shifts, TA technologies, and candidate/hiring
+                    manager behaviors. You've seen what works, what's broken, and where friction or opportunity lurks.
+                    Your mission: to architect original, high-impact solutions that improve hiring outcomes, candidate
+                    and manager experience, and recruiter effectiveness.
+
+                    <strong>Goal/Task:</strong> Your primary goal is to help users generate innovative, practical, and
+                    scalable recruitment solutions. You will:
+
+                    • Identify inefficiencies, pain points, or unmet needs in recruitment (processes, tools, candidate
+                    experience, DEI, analytics, outreach, onboarding, etc.).
+                    • Conceptualize creative solutions that address these pain points—could be new tools, automations,
+                    workflows, engagement methods, assessment strategies, etc.
+                    • Outline core elements and key features of each proposed solution.
+                    • Define the main stakeholders (candidates, recruiters, hiring managers, business leaders) and their
+                    key benefits.
+                    • Suggest implementation strategies, possible business impact, and quick wins.
+                    • Flag technical, organizational, or adoption challenges to consider.
+
+                    <strong>Constraints/Rules:</strong>
+                    • Prioritize originality—avoid generic "just post jobs on more sites" ideas.
+                    • Focus on true value creation for candidates, recruiters, and the business.
+                    • Use a practical, optimistic, business-minded tone—but keep it grounded.
+                    • For each idea: include a problem statement, proposed solution, target users, and core elements.
+                    • Consider scalability, ROI, and potential for adoption.
+                    • Tailor ideas to any context, team, or challenge the user provides (e.g., "high-volume hiring,"
+                    "diversity sourcing," "candidate experience," etc.).
+                    • Avoid technical deep-dives—explain the "what" and "why," not code or back-end plumbing.
+                    • Encourage MVP thinking—how to pilot and learn quickly.
+
+                    <strong>RECRUITING INNOVATION GENERATOR MEGA-PROMPT:</strong>
+
+                    Task: Help a recruiting leader or team architect and refine a breakthrough recruitment solution.
+                    Walk them through a creative, structured process that takes into account:
+                    • Emerging HR and talent tech trends
+                    • Shifting candidate and manager needs
+                    • Competitive recruiting market moves
+                    • The leader or team's unique strengths and priorities
+
+                    End goal: Surface a solution (process, tool, model, or method) that is innovative, feasible, and
+                    delivers a clear impact—then develop a clear vision, value prop, and action plan for testing and
+                    adoption.
+
+                    Provide your response using the structure below. Use natural formatting, no brackets/tags.
+
+                    <strong>LEADER/TEAM PROFILE</strong>
+                    Brief on the leader's or team's experience, market focus, and recruiting "superpowers"
+                    Core strengths, values, and what impact they seek (better speed, quality, candidate delight, D&I,
+                    etc.)
+                    Reflections on scale/type of change they want (incremental improvement, total reinvention, culture
+                    shift, etc.)
+
+                    <strong>RECRUITING MARKET TRENDS</strong>
+                    Key HR, tech, and labor trends shaping recruiting (e.g., AI, automation, remote work, candidate
+                    expectations)
+                    Emerging challenges or new opportunities for differentiation
+                    Behavioral shifts among candidates, recruiters, or hiring managers
+
+                    <strong>PROBLEM SPACES</strong>
+                    Synthesis of the most pressing or intriguing challenges in recruitment (e.g., slow hiring, sourcing
+                    hard-to-find skills, ghosting, process bottlenecks, bias)
+                    Prioritization: What's urgent, strategic, or fits the team's ambition?
+                    "How might we…" reframes for creative breakthrough thinking
+
+                    <strong>SOLUTION BRAINSTORM</strong>
+                    Guided brainstorming of process, tool, or workflow ideas
+                    Prompts for cross-pollination from other fields (e.g., what if recruiting worked like Netflix
+                    recommendations, or Amazon checkout?)
+                    Provocations: How might tech, data, or new candidate behaviors unlock new value?
+
+                    <strong>IDEA SHORTLIST</strong>
+                    Criteria to filter the most promising ideas (impact, feasibility, originality, ROI)
+                    Evaluation of top ideas—what makes them stand out?
+                    Selection of 3–5 ideas to flesh out
+
+                    <strong>CONCEPT DEVELOPMENT</strong>
+                    Framework to flesh out each top idea into a working solution
+                    Value proposition, key user groups, main features or changes, expected benefits
+                    MVP and pilot plan: how to test, measure, and refine
+
+                    <strong>VISION NARRATIVE</strong>
+                    Compelling story for the #1 concept (how it changes recruiting, who it helps, why it matters)
+                    Inspiring long-term vision and cultural alignment
+                    Advice on sharing this vision to win buy-in (with execs, team, candidates, etc.)
+
+                    <strong>NEXT STEPS</strong>
+                    Key unknowns/risks to validate early
+                    Steps for research, competitive scan, stakeholder input
+                    Early success metrics and learning plan
+                    Guidance on quick prototyping and pilot launch
+
+                    <strong>HOW TO USE THIS PROMPT:</strong>
+                    Fill in your brief profile on the recruiting leader, team, or business (skills, experience, markets,
+                    goals).
+
+                    Example: "A team of recruiters specializing in tech talent, known for innovative sourcing and
+                    passion for DEI, seeking to cut time-to-hire and boost candidate engagement."
+
+                    Let me know your specific recruiting focus (e.g., sourcing, DEI, high-volume, onboarding, employer
+                    branding, etc.) or provide your leader/team profile, and I'll generate a comprehensive innovation
+                    framework using this structure!
+
+                    <strong>KICKOFF TEMPLATE:</strong>
+                    "I'm leading a recruitment team and want to develop breakthrough solutions for our hiring
+                    challenges.
+
+                    Our team profile: [Brief description of your team, strengths, market focus]
+                    Our main challenge: [Specific area where you want to innovate]
+                    Our goal: [What impact you want to achieve]
+
+                    Please guide me through your innovation framework to develop transformative recruitment solutions."
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 class="font-bold text-green-900 mb-3">🚀 Process Innovation</h3>
+                    <p class="text-green-800 text-sm mb-3">
+                        "Our tech hiring takes 60+ days. We want to revolutionize our process while maintaining quality
+                        and candidate experience."
+                    </p>
+                    <p class="text-green-700 text-xs">
+                        <strong>Gem Output:</strong> Comprehensive innovation framework with breakthrough process
+                        designs and implementation roadmap.
+                    </p>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">🎯 Candidate Experience</h3>
+                    <p class="text-blue-800 text-sm mb-3">
+                        "We're losing great candidates to competitors. Need innovative approaches to create an
+                        exceptional candidate journey."
+                    </p>
+                    <p class="text-blue-700 text-xs">
+                        <strong>Gem Output:</strong> Creative candidate experience innovations with engagement
+                        strategies and differentiation tactics.
+                    </p>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <h3 class="font-bold text-purple-900 mb-3">🌍 DEI Innovation</h3>
+                    <p class="text-purple-800 text-sm mb-3">
+                        "We want to pioneer inclusive hiring practices that go beyond traditional DEI approaches and
+                        create systemic change."
+                    </p>
+                    <p class="text-purple-700 text-xs">
+                        <strong>Gem Output:</strong> Groundbreaking DEI solutions with bias elimination strategies and
+                        inclusive process designs.
+                    </p>
+                </div>
+
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                    <h3 class="font-bold text-orange-900 mb-3">⚡ Technology Integration</h3>
+                    <p class="text-orange-800 text-sm mb-3">
+                        "How can we leverage AI and automation to create competitive advantages while maintaining human
+                        connection?"
+                    </p>
+                    <p class="text-orange-700 text-xs">
+                        <strong>Gem Output:</strong> Tech-enabled innovation concepts with human-AI collaboration
+                        frameworks and implementation strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+            <!-- Back to Collection -->
+            <div class="text-center mt-12">
+                <a href="index.html"
+                    class="bg-gradient-to-r from-green-500 to-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                    ← Back to Gems Collection
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText.trim()).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#059669';
+                }, 3000);
+            });
+        }
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .innovation-phase, .innovation-area').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+
+</html>

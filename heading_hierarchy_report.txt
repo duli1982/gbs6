@@ -1,0 +1,1123 @@
+================================================================================
+HTML HEADING HIERARCHY ANALYSIS REPORT
+================================================================================
+Total HTML files analyzed: 60
+Files with proper hierarchy: 20 (33.3%)
+Files with improper hierarchy: 39 (65.0%)
+Files with no headings: 1
+
+🚫 FILES WITH IMPROPER HEADING HIERARCHY
+============================================================
+
+File: index.html
+Heading sequence: h3 → h1 → h2 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3
+Issues found:
+  • First heading is h3, should be h1
+  • Skipped from h0 to h3, missing levels: h1, h2
+    Previous level: h0, Current: h3
+    Heading text: "Welcome to GBS Learning Hub!"
+Headings in order:
+  1. h3: "Welcome to GBS Learning Hub!"
+  2. h1: "Randstad GBS Learning Hub"
+  3. h2: "🚀 Quick Wins - Start Using AI Today"
+  4. h3: "AI Prompts"
+  5. h3: "Daily Focus"
+  6. h3: "Success Stories"
+  7. h3: "Get Started with AI"
+  8. h3: "RPO AI Acceleration Program"
+  9. h3: "Guide for GBS Leaders"
+  10. h3: "Daily Sourcing Focus"
+  11. h3: "GBS AI Prompts Library"
+  12. h3: "Knowledge Content"
+  13. h3: "AI SME"
+  14. h3: "AI Success Stories"
+  15. h3: "Sourcing Workshop"
+  16. h3: "No results found"
+
+File: feedback\get-entry-ids.html
+Heading sequence: h1 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Step 1: Enter your Google Form URL"
+Headings in order:
+  1. h1: "Google Form Entry ID Extractor"
+  2. h3: "Step 1: Enter your Google Form URL"
+  3. h3: "Step 2: Copy these values to your feedback form"
+  4. h3: "Step 3: Update your form action URL"
+
+File: feedback\index.html
+Heading sequence: h1 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Quick Response"
+Headings in order:
+  1. h1: "We Value Your Feedback"
+  2. h3: "Quick Response"
+  3. h3: "What Happens Next?"
+
+File: gbs-ai-workshop\index.html
+Heading sequence: h1 → h3 → h3 → h3 → h2 → h4 → h4 → h4 → h2 → h3 → h4 → h4 → h5 → h2 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h4 → h2 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h2 → h2 → h3 → h3 → h3 → h4 → h4 → h4 → h2 → h2 → h4 → h2 → h4 → h4 → h2 → h3 → h3 → h2 → h2 → h2 → h3 → h4 → h4 → h4 → h4
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "1. The Mindset"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Less Time on Reports"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Your Generated Prompt:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Generated Prompt:"
+Headings in order:
+  1. h1: "Reclaim Your Team's Time. Work Smarter, Not Harder."
+  2. h3: "1. The Mindset"
+  3. h3: "2. The Framework"
+  4. h3: "3. The Action Plan"
+  5. h2: "Unlock Real Results"
+  6. h4: "Less Time on Reports"
+  7. h4: "Faster Insights"
+  8. h4: "Saved Per Day"
+  9. h2: "The GBS Opportunity Framework"
+  10. h3: "My Team's "4 R's" Audit"
+  11. h4: "Discover Your AI Opportunities"
+  12. h4: ""
+  13. h5: "Example Gemini Applications:"
+  14. h2: "Best Practices for Prompting"
+  15. h3: "1. Give Clear Context"
+  16. h3: "2. Be Specific About Output"
+  17. h3: "3. Assign the AI a Role"
+  18. h3: "4. Break It Into Steps"
+  19. h3: "5. Provide Examples"
+  20. h3: "6. Refine and Retry"
+  21. h3: "7. Avoid Vague Language"
+  22. h3: "8. Treat It Like an Assistant"
+  23. h3: "9. Choose a Format"
+  24. h3: "10. Provide Negative Constraints"
+  25. h3: "Pro-Level Prompting Examples"
+  26. h3: "11. Be Specific and Detailed"
+  27. h4: "❌ Don't say:"
+  28. h4: "✅ Say:"
+  29. h3: "12. Provide Context and Expertise"
+  30. h4: "❌ Don't say:"
+  31. h4: "✅ Say:"
+  32. h3: "13. Handle Administrative Tasks"
+  33. h4: "❌ Don't say:"
+  34. h4: "✅ Say:"
+  35. h3: "14. Manage Client Relations"
+  36. h4: "❌ Don't say:"
+  37. h4: "✅ Say:"
+  38. h3: "15. Improve Candidate Experience"
+  39. h4: "❌ Don't say:"
+  40. h4: "✅ Say:"
+  41. h3: "16. Manage Supplier Performance"
+  42. h4: "❌ Don't say:"
+  43. h4: "✅ Say:"
+  44. h3: "Universal Pro Tips"
+  45. h3: "17. Make Content Better"
+  46. h4: "❌ Don't say:"
+  47. h4: "✅ Say:"
+  48. h3: "18. Write Cover Letters"
+  49. h4: "❌ Don't say:"
+  50. h4: "✅ Say:"
+  51. h3: "19. Explain Complex Topics"
+  52. h4: "❌ Don't say:"
+  53. h4: "✅ Say:"
+  54. h3: "20. Optimize Resumes"
+  55. h4: "❌ Don't say:"
+  56. h4: "✅ Say:"
+  57. h3: "21. Professional Tone"
+  58. h4: "❌ Don't say:"
+  59. h4: "✅ Say:"
+  60. h3: "22. Edit and Improve"
+  61. h4: "❌ Don't say:"
+  62. h4: "✅ Say:"
+  63. h2: "AI Glossary"
+  64. h3: "Bias"
+  65. h3: "Label"
+  66. h3: "Model"
+  67. h3: "Training"
+  68. h3: "Chatbot"
+  69. h3: "Dataset"
+  70. h3: "Algorithm"
+  71. h3: "Token"
+  72. h3: "Overfitting"
+  73. h3: "AI Agent"
+  74. h3: "AI Ethics"
+  75. h3: "Explainability"
+  76. h3: "Inference"
+  77. h3: "Turing Test"
+  78. h3: "Prompt"
+  79. h3: "Fine‑Tuning"
+  80. h3: "Generative AI"
+  81. h3: "AI Automation"
+  82. h3: "Neural Network"
+  83. h3: "Computer Vision"
+  84. h3: "Transfer Learning"
+  85. h3: "Guardrails (in AI)"
+  86. h3: "Open Source AI"
+  87. h3: "Deep Learning"
+  88. h3: "Reinforcement Learning"
+  89. h3: "Hallucination (in AI)"
+  90. h3: "Zero‑Shot Learning"
+  91. h3: "Speech Recognition"
+  92. h3: "Supervised Learning"
+  93. h3: "Model Context Protocol"
+  94. h3: "Machine Learning"
+  95. h3: "AI (Artificial Intelligence)"
+  96. h3: "Unsupervised Learning"
+  97. h3: "LLM (Large Language Model)"
+  98. h3: "ASI (Artificial Superintelligence)"
+  99. h3: "GPU (Graphics Processing Unit)"
+  100. h3: "NLP (Natural Language Processing)"
+  101. h3: "AGI (Artificial General Intelligence)"
+  102. h3: "GPT (Generative Pre‑trained Transformer)"
+  103. h3: "API (Application Programming Interface)"
+  104. h2: "End-to-End Case Studies"
+  105. h2: "Leading Your Team Through Change"
+  106. h3: "Conversation Starters"
+  107. h3: "Handling Resistance Playbook"
+  108. h3: ""Show and Tell" Meeting Framework"
+  109. h4: "Purpose:"
+  110. h4: "Sample Agenda (30 mins):"
+  111. h4: "Tips for Success:"
+  112. h2: "The Leader's Playbook & Prompt Library"
+  113. h2: "Guided Prompt Builder"
+  114. h4: "Your Generated Prompt:"
+  115. h2: ""Reverse Prompt" Generator"
+  116. h4: "Generated Prompt:"
+  117. h4: "Why this prompt is effective:"
+  118. h2: "My Prompt Library"
+  119. h3: "My Custom Prompts"
+  120. h3: "My Favorite Prompts"
+  121. h2: "Scenario Simulator"
+  122. h2: "My Day with AI"
+  123. h2: "Your Action Plan: The "One-Task" Challenge"
+  124. h3: "Your Mission, Should You Choose to Accept It:"
+  125. h4: "List Every Task"
+  126. h4: "Streamline What Remains"
+  127. h4: "Automate with AI"
+  128. h4: "Scale Faster"
+
+File: onboarding\assessment.html
+Heading sequence: h1 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "1. How familiar are you with AI tools?"
+Headings in order:
+  1. h1: "Quick AI Skills Check"
+  2. h3: "1. How familiar are you with AI tools?"
+  3. h3: "2. What's your biggest time challenge?"
+  4. h3: "3. What would you like to achieve first?"
+
+File: onboarding\index.html
+Heading sequence: h1 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h2
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Personalized"
+Headings in order:
+  1. h1: "Welcome to Your AI Journey!"
+  2. h3: "Personalized"
+  3. h3: "Quick Wins"
+  4. h3: "Track Progress"
+  5. h2: "What's Your Role?"
+  6. h3: "Recruiter/Sourcer"
+  7. h3: "Team Manager"
+  8. h3: "Analyst"
+  9. h3: "Coordinator"
+  10. h2: "Quick AI Skills Check"
+  11. h3: "1. How familiar are you with AI tools?"
+  12. h3: "2. What's your biggest time challenge?"
+  13. h3: "3. What would you like to achieve first?"
+  14. h2: "You're All Set!"
+
+File: onboarding\role-selection.html
+Heading sequence: h1 → h3 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Recruiter/Sourcer"
+Headings in order:
+  1. h1: "What's Your Role?"
+  2. h3: "Recruiter/Sourcer"
+  3. h3: "Team Manager"
+  4. h3: "Business Analyst"
+  5. h3: "Coordinator"
+
+File: onboarding\welcome.html
+Heading sequence: h1 → h3 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Personalized"
+Headings in order:
+  1. h1: "Welcome to Your AI Journey!"
+  2. h3: "Personalized"
+  3. h3: "Quick Wins"
+  4. h3: "Track Progress"
+  5. h3: "What You'll Get:"
+
+File: onboarding-flow\assessment.html
+Heading sequence: h1 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "1. How familiar are you with AI tools?"
+Headings in order:
+  1. h1: "Quick AI Skills Check"
+  2. h3: "1. How familiar are you with AI tools?"
+  3. h3: "2. What's your biggest time challenge?"
+  4. h3: "3. What would you like to achieve first?"
+
+File: onboarding-flow\role-selection.html
+Heading sequence: h1 → h3 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Recruiter/Sourcer"
+Headings in order:
+  1. h1: "What's Your Role?"
+  2. h3: "Recruiter/Sourcer"
+  3. h3: "Team Manager"
+  4. h3: "Business Analyst"
+  5. h3: "Coordinator"
+
+File: onboarding-flow\welcome.html
+Heading sequence: h1 → h3 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Personalized"
+Headings in order:
+  1. h1: "Welcome to Your AI Journey!"
+  2. h3: "Personalized"
+  3. h3: "Quick Wins"
+  4. h3: "Track Progress"
+  5. h3: "What You'll Get:"
+
+File: rpo-training\ai-tools-lab.html
+Heading sequence: h1 → h3 → h3 → h3 → h3 → h3 → h3 → h2 → h3 → h4 → h4 → h4 → h4 → h2 → h2 → h4 → h2 → h3 → h2 → h3 → h2 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "AI Prompt Builder"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Platform-Specific Versions:"
+Headings in order:
+  1. h1: "AI Tools Lab"
+  2. h3: "AI Prompt Builder"
+  3. h3: "Email Enhancement"
+  4. h3: "Boolean Search Builder"
+  5. h3: "Resume Optimizer"
+  6. h3: "Meeting Summary Generator"
+  7. h3: "Document Analyzer"
+  8. h2: "AI Prompt Builder"
+  9. h3: "Choose a Template:"
+  10. h4: "📝 Job Description"
+  11. h4: "❓ Interview Questions"
+  12. h4: "📧 Candidate Email"
+  13. h4: "🔍 Boolean Search"
+  14. h2: "Email Enhancement Tool"
+  15. h2: "Boolean Search Builder"
+  16. h4: "Platform-Specific Versions:"
+  17. h2: "Resume Optimizer"
+  18. h3: "Coming Soon!"
+  19. h2: "Meeting Summary Generator"
+  20. h3: "Premium Feature"
+  21. h2: "Document Analyzer"
+  22. h3: "Premium Feature"
+
+File: shared\footer.html
+Heading sequence: h3 → h4 → h4
+Issues found:
+  • First heading is h3, should be h1
+  • Skipped from h0 to h3, missing levels: h1, h2
+    Previous level: h0, Current: h3
+    Heading text: "Randstad GBS"
+Headings in order:
+  1. h3: "Randstad GBS"
+  2. h4: "Quick Links"
+  3. h4: "Learning Hub"
+
+File: rpo-training\pathways\advanced.html
+Heading sequence: h1 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Prerequisites"
+Headings in order:
+  1. h1: "Advanced AI Learning Path"
+  2. h3: "Prerequisites"
+  3. h3: "AI Strategy & Leadership"
+  4. h3: "Custom AI Solutions Development"
+  5. h3: "Enterprise AI Integration"
+  6. h3: "Team Implementation & Scaling"
+  7. h3: "Future-Proofing & Innovation"
+  8. h3: "AI Leadership Certification"
+  9. h3: "🧠 Expert Resources"
+
+File: rpo-training\pathways\beginner.html
+Heading sequence: h1 → h3 → h3 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "What is AI? (Simple Explanation)"
+Headings in order:
+  1. h1: "Beginner AI Learning Path"
+  2. h3: "What is AI? (Simple Explanation)"
+  3. h3: "Your First AI Conversation"
+  4. h3: "Interactive Practice Session"
+  5. h3: "AI for Your Daily Tasks"
+  6. h3: "Your AI Journey Continues"
+
+File: rpo-training\pathways\intermediate.html
+Heading sequence: h1 → h3 → h3 → h3 → h3 → h3
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Advanced Prompting Techniques"
+Headings in order:
+  1. h1: "Intermediate AI Learning Path"
+  2. h3: "Advanced Prompting Techniques"
+  3. h3: "Role-Specific AI Applications"
+  4. h3: "AI Workflow Integration"
+  5. h3: "Measuring AI Impact & ROI"
+  6. h3: "🎓 Ready for More?"
+
+File: rpo-training\sessions\1-1.html
+Heading sequence: h2 → h3 → h3 → h4 → h4 → h3 → h4 → h4 → h4 → h4 → h4 → h4 → h3 → h4 → h4 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 1.1: Prompt Engineering 101 for Recruiters"
+Headings in order:
+  1. h2: "Session 1.1: Prompt Engineering 101 for Recruiters"
+  2. h3: "The #1 Skill for Working with AI"
+  3. h3: "A Tale of Two Prompts"
+  4. h4: "The "Before" Prompt"
+  5. h4: "The "After" Prompt (C.R.E.A.T.E.)"
+  6. h3: "The C.R.E.A.T.E. Framework"
+  7. h4: "Character"
+  8. h4: "Request"
+  9. h4: "Examples"
+  10. h4: "Additions"
+  11. h4: "Type"
+  12. h4: "Extras"
+  13. h3: "Lab Activities"
+  14. h4: "Lab 1: Creating a Candidate Persona (15 Mins)"
+  15. h4: "Lab 2: Drafting a Compelling Job Description (20 Mins)"
+  16. h3: "Wrap-Up & Next Steps"
+
+File: rpo-training\sessions\1-2.html
+Heading sequence: h2 → h3 → h3 → h4 → h4 → h3 → h4 → h3 → h4 → h4 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 1.2: AI-Powered Email & Content Lab"
+Headings in order:
+  1. h2: "Session 1.2: AI-Powered Email & Content Lab"
+  2. h3: "Go Beyond the First Draft"
+  3. h3: "Example: Changing Your Tone"
+  4. h4: "Prompt 1: Make it more engaging"
+  5. h4: "Prompt 2: Make it more formal"
+  6. h3: "Example: The Power of Summarization"
+  7. h4: "The Prompt:"
+  8. h3: "Lab Activities"
+  9. h4: "Lab 1: The Perfect Outreach Email (20 Mins)"
+  10. h4: "Lab 2: The A/B Testing Challenge (15 Mins)"
+  11. h3: "Key Takeaways & Next Steps"
+
+File: rpo-training\sessions\1-3.html
+Heading sequence: h2 → h3 → h4 → h4 → h3 → h4 → h4 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 1.3: Success Spotlight & Prompt Clinic #1"
+Headings in order:
+  1. h2: "Session 1.3: Success Spotlight & Prompt Clinic #1"
+  2. h3: "Success Spotlight #1"
+  3. h4: "Anna's Winning "Talent Landscape Snapshot" Prompt (C.R.E.A.T.E.)"
+  4. h4: "The Impact: From Hours to Seconds"
+  5. h3: "Live Prompt Clinic #1"
+  6. h4: "Clinic Case Study: Peter's Problem"
+  7. h4: "The Result: From Generic to Perfectly Structured"
+  8. h3: "Wrap-Up & Next Steps"
+
+File: rpo-training\sessions\2-1.html
+Heading sequence: h2 → h3 → h4 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 2.1: AI for Advanced Sourcing"
+Headings in order:
+  1. h2: "Session 2.1: AI for Advanced Sourcing"
+  2. h3: "Part A: Boolean & Beyond"
+  3. h4: "The Evolution of a Search Prompt:"
+  4. h3: "Part B: AI as Your Research Assistant"
+  5. h4: "1. Market Mapping"
+  6. h4: "2. Competitor Analysis"
+  7. h4: "3. Rapid CV Analysis"
+  8. h3: "Lab Activities"
+  9. h4: "Lab 1: The Boolean Builder (20 Mins)"
+  10. h4: "Lab 2: The 5-Minute Market Map (20 Mins)"
+  11. h3: "Key Takeaways & Next Steps"
+
+File: rpo-training\sessions\2-2.html
+Heading sequence: h2 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h3 → h3 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 2.2: The Randstad AI Toolkit"
+Headings in order:
+  1. h2: "Session 2.2: The Randstad AI Toolkit"
+  2. h3: "The Decision Framework"
+  3. h4: "Check for Sensitive Data"
+  4. h4: "Check for Integration"
+  5. h4: "General Creative Tasks"
+  6. h3: "Gemini's Strengths"
+  7. h4: "1. Data Security (The #1 Priority)"
+  8. h4: "2. Workflow Integration"
+  9. h3: "The Security Imperative: A Non-Negotiable Rule"
+  10. h3: "Lab Activity: "Choose Your Tool" Scenarios"
+  11. h3: "Key Takeaways & Next Steps"
+
+File: rpo-training\sessions\2-3.html
+Heading sequence: h2 → h3 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h3 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 2.3: Responsible AI & Final Showcase"
+Headings in order:
+  1. h2: "Session 2.3: Responsible AI & Final Showcase"
+  2. h3: "What is AI Bias?"
+  3. h3: "Where Can Bias Hide in Recruiting?"
+  4. h4: "In Job Descriptions"
+  5. h4: "In CV Summaries"
+  6. h3: "Lab Example: Fixing the Prompt"
+  7. h4: "The Biased AI Output:"
+  8. h4: "The Corrected, Inclusive Prompt:"
+  9. h3: "The Most Important Principle"
+  10. h3: "Final Showcase: The Prompt-a-Thon!"
+  11. h3: "Phase 1 Complete & What's Next"
+
+File: rpo-training\sessions\3-1.html
+Heading sequence: h2 → h3 → h4 → h4 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 3.1: Data Insights with Gemini in Sheets"
+Headings in order:
+  1. h2: "Session 3.1: Data Insights with Gemini in Sheets"
+  2. h3: "Core Skill 1: AI-Powered Data Cleaning"
+  3. h4: "Example 1: Standardizing Data"
+  4. h4: "Example 2: Extracting Data"
+  5. h3: "Core Skill 2: Generating Insights"
+  6. h4: "1. Asking Direct Questions"
+  7. h4: "2. Finding Trends"
+  8. h4: "3. Creating Visuals"
+  9. h3: "Lab Activities"
+  10. h4: "Lab 1: The Data Janitor (20 Mins)"
+  11. h4: "Lab 2: The Data Detective (20 Mins)"
+  12. h3: "Key Takeaways & Next Steps"
+
+File: rpo-training\sessions\3-2.html
+Heading sequence: h2 → h3 → h3 → h3 → h4 → h4 → h3 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 3.2: Building an Intelligent Knowledge Base (No-Code RAG)"
+Headings in order:
+  1. h2: "Session 3.2: Building an Intelligent Knowledge Base (No-Code RAG)"
+  2. h3: "What is RAG? (The Simple Explanation)"
+  3. h3: "The Power of RAG: Meet Your "CV & Candidate Info Bot""
+  4. h3: "Today's Project: Build Your Bot"
+  5. h4: "Part 1: The Build (20 Mins)"
+  6. h4: "Part 2: The Test (40 Mins)"
+  7. h3: "Lab Task: The Scavenger Hunt"
+  8. h3: "Key Takeaways & Next Steps"
+
+File: rpo-training\sessions\4-1.html
+Heading sequence: h2 → h3 → h3 → h4 → h4 → h4 → h3 → h3 → h4 → h4 → h3 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 4.1: Introduction to No-Code Automation"
+Headings in order:
+  1. h2: "Session 4.1: Introduction to No-Code Automation"
+  2. h3: "The "Finished Product" Demo"
+  3. h3: "How Does Automation Actually Work?"
+  4. h4: "APIs"
+  5. h4: "Triggers"
+  6. h4: "Actions"
+  7. h3: "Our Platform: Google Apps Script"
+  8. h3: "Lab Activity: The End-to-End Workflow (65 Mins)"
+  9. h4: "Your Goal:"
+  10. h4: "The Plan of Action:"
+  11. h3: "The "Magic" Prompt"
+  12. h3: "Key Takeaways & Next Steps"
+
+File: rpo-training\sessions\5-1.html
+Heading sequence: h2 → h3 → h4 → h4 → h3 → h3 → h3 → h4 → h4 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 5.1: Becoming an AI Champion"
+Headings in order:
+  1. h2: "Session 5.1: Becoming an AI Champion"
+  2. h3: "The Mentor Mindset"
+  3. h4: "Telling"
+  4. h4: "Coaching"
+  5. h3: "The "Ask, Don't Tell" Model in Action"
+  6. h3: "How to Lead a Great Prompt Clinic"
+  7. h3: "Lab Activities"
+  8. h4: "Lab 1: Mock Prompt Clinic (20 Mins)"
+  9. h4: "Lab 2: Brainstorming Responses (15 Mins)"
+  10. h3: "Key Takeaways & Next Steps"
+
+File: rpo-training\sessions\5-2.html
+Heading sequence: h2 → h3 → h4 → h4 → h4 → h4 → h3 → h4 → h3 → h3 → h3 → h4
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 5.2: Capstone Project Showcase"
+Headings in order:
+  1. h2: "Session 5.2: Capstone Project Showcase"
+  2. h3: "The Keys to a Successful Presentation"
+  3. h4: "1. Speak in Business Terms"
+  4. h4: "2. Demonstrate Clear ROI"
+  5. h4: "3. Tell a Compelling Story"
+  6. h4: "4. Influence Leadership"
+  7. h3: "The Presentation Structure (10 Mins Total)"
+  8. h4: "Your Blueprint for a Powerful Pitch"
+  9. h3: "Today's Agenda"
+  10. h3: "Final Checklist for Presenters"
+  11. h3: ""Graduation" & The Path Forward"
+  12. h4: "Congratulations, AI Champions!"
+
+File: rpo-training\sessions\6-1.html
+Heading sequence: h2 → h3 → h4 → h4 → h3 → h3 → h4 → h4 → h4 → h4 → h3 → h4 → h4 → h3 → h4
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 6.1: Developing an RPO-Specific AI Roadmap"
+Headings in order:
+  1. h2: "Session 6.1: Developing an RPO-Specific AI Roadmap"
+  2. h3: "The Strategic Foundation"
+  3. h4: "1. Our Team's Proven Capabilities"
+  4. h4: "2. Our Department's Business Objectives"
+  5. h3: "Workshop Part 1: Opportunity Mapping"
+  6. h3: "The Prioritization Tool: The Impact vs. Effort Matrix"
+  7. h4: "Quick Wins"
+  8. h4: "Major Projects"
+  9. h4: "Fill-ins"
+  10. h4: "Thankless Tasks"
+  11. h3: "From a Map to a Plan"
+  12. h4: "Workshop Part 2: Prioritizing"
+  13. h4: "Workshop Part 3: Building the Roadmap"
+  14. h3: "Key Takeaways & Next Steps"
+  15. h4: "What We've Achieved Today:"
+
+File: rpo-training\sessions\7-1.html
+Heading sequence: h2 → h3 → h4 → h4 → h3 → h4 → h4 → h3 → h4 → h3 → h4 → h4 → h4 → h3
+Issues found:
+  • First heading is h2, should be h1
+  • Skipped from h0 to h2, missing levels: h1
+    Previous level: h0, Current: h2
+    Heading text: "Session 7.1: The ROI of AI in Recruiting"
+Headings in order:
+  1. h2: "Session 7.1: The ROI of AI in Recruiting"
+  2. h3: "Defining Success"
+  3. h4: "Leading Indicators"
+  4. h4: "Lagging Indicators"
+  5. h3: "Calculating ROI: The Two Sides of Value"
+  6. h4: "Hard ROI: The Financial Case"
+  7. h4: "Soft ROI: The Strategic Case"
+  8. h3: "The Simple Math of Hard ROI"
+  9. h4: "A Conservative Calculation Example"
+  10. h3: "Workshop Activities"
+  11. h4: "Part 1: KPI Mapping (30 Mins)"
+  12. h4: "Part 2: Building the Business Case (30 Mins)"
+  13. h4: "Part 3: Peer Review & Final Refinement (15 Mins)"
+  14. h3: "From Vision to Action Plan"
+
+File: rpo-training\pathways\modules\advanced-1.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h2 → h4 → h4 → h4 → h4 → h4 → h2 → h3 → h3 → h3 → h3 → h3 → h2 → h4 → h4 → h4 → h2 → h3 → h4 → h4 → h2 → h3 → h3 → h3 → h3 → h2 → h4 → h4 → h4
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Level 1: Awareness"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "The Challenge:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Week 1-2:"
+Headings in order:
+  1. h1: "AI Strategy & Leadership"
+  2. h2: "Leading AI Transformation"
+  3. h3: "Strategic Planning"
+  4. h3: "Change Leadership"
+  5. h3: "Governance & Ethics"
+  6. h2: "🏆 AI Maturity Model"
+  7. h4: "Level 1: Awareness"
+  8. h4: "Level 2: Adoption"
+  9. h4: "Level 3: Integration"
+  10. h4: "Level 4: Optimization"
+  11. h4: "Level 5: Innovation"
+  12. h2: "The SCALE Framework for AI Strategy"
+  13. h3: "🎯 S - Strategic Alignment"
+  14. h3: "🏗️ C - Capability Building"
+  15. h3: "🔄 A - Agile Implementation"
+  16. h3: "👥 L - Leadership & Culture"
+  17. h3: "⚖️ E - Ethics & Governance"
+  18. h2: "📊 Case Study: Global Tech Company AI Transformation"
+  19. h4: "The Challenge:"
+  20. h4: "The SCALE Approach:"
+  21. h4: "Results After 12 Months:"
+  22. h2: "AI Governance Essentials"
+  23. h3: "⚖️ Critical Governance Areas"
+  24. h4: "Data & Privacy:"
+  25. h4: "Risk Management:"
+  26. h2: "Leadership Toolkit"
+  27. h3: "🎯 AI Readiness Assessment"
+  28. h3: "📊 ROI Measurement Framework"
+  29. h3: "🗺️ Implementation Roadmap"
+  30. h3: "💬 Communication Playbook"
+  31. h2: "🎯 Your Strategic Action Plan"
+  32. h4: "Week 1-2:"
+  33. h4: "Week 3-4:"
+  34. h4: "Week 5-6:"
+
+File: rpo-training\pathways\modules\advanced-2.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h3 → h2 → h4 → h4 → h4 → h4 → h4 → h4 → h4 → h2 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h2 → h4 → h4 → h4
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Project Overview:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Week 1-2:"
+Headings in order:
+  1. h1: "Custom AI Solutions Development"
+  2. h2: "Beyond Off-the-Shelf Solutions"
+  3. h3: "Tailored Solutions"
+  4. h3: "Competitive Advantage"
+  5. h3: "Scalable Impact"
+  6. h2: "The BUILD Framework for Custom AI Solutions"
+  7. h3: "🔍 B - Business Analysis & Requirements"
+  8. h3: "🏗️ U - User Experience Design"
+  9. h3: "🔧 I - Implementation & Integration"
+  10. h3: "🧪 L - Launch & Learning"
+  11. h3: "📊 D - Data-Driven Optimization"
+  12. h2: "🎯 Hands-On Project: Build Your Own AI Workflow"
+  13. h4: "Project Overview:"
+  14. h4: "Milestone 1: Requirements Analysis"
+  15. h4: "Milestone 2: Solution Architecture"
+  16. h4: "Milestone 3: Prompt Engineering"
+  17. h4: "Milestone 4: Workflow Integration"
+  18. h4: "Milestone 5: Testing & Optimization"
+  19. h4: "🎉 Project Complete!"
+  20. h2: "🏗️ Common Solution Architecture Patterns"
+  21. h3: "📊 Data Processing Pipeline"
+  22. h3: "🔄 Interactive Workflow Engine"
+  23. h3: "🎯 Intelligent Automation"
+  24. h3: "🧠 Knowledge Management System"
+  25. h2: "⚡ Performance Optimization Strategies"
+  26. h3: "🎯 Prompt Optimization"
+  27. h3: "⚡ Performance Tuning"
+  28. h3: "🔄 Workflow Efficiency"
+  29. h3: "📊 Quality Assurance"
+  30. h2: "🚀 Your Custom Solution Development Plan"
+  31. h4: "Week 1-2:"
+  32. h4: "Week 3-4:"
+  33. h4: "Week 5-6:"
+
+File: rpo-training\pathways\modules\advanced-3.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h2 → h4 → h4 → h4 → h4 → h2 → h3 → h3 → h3 → h2 → h4 → h4 → h4 → h4 → h2 → h4 → h4 → h4 → h4
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Data Protection:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "⚡ Performance Metrics"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Phase 1: Foundation"
+Headings in order:
+  1. h1: "Enterprise AI Integration"
+  2. h2: "Enterprise-Scale AI Integration"
+  3. h3: "API Integration"
+  4. h3: "Automation"
+  5. h3: "Analytics"
+  6. h2: "🏗️ Enterprise AI Architecture Patterns"
+  7. h3: "🌐 Hub-and-Spoke Model"
+  8. h3: "🔗 Federated Integration"
+  9. h3: "🚀 Microservices Architecture"
+  10. h3: "🔄 Event-Driven Integration"
+  11. h2: "🔗 API Integration Best Practices"
+  12. h3: "1. API Design & Documentation"
+  13. h3: "2. Authentication & Security"
+  14. h3: "3. Error Handling & Resilience"
+  15. h2: "🔒 Enterprise Security Requirements"
+  16. h4: "Data Protection:"
+  17. h4: "Access Control:"
+  18. h4: "Compliance:"
+  19. h4: "Monitoring:"
+  20. h2: "⚙️ Enterprise Automation Patterns"
+  21. h3: "🔄 Event-Driven Automation"
+  22. h3: "📊 Batch Processing Automation"
+  23. h3: "🎯 Intelligent Routing"
+  24. h2: "📊 Enterprise Monitoring & Analytics"
+  25. h4: "⚡ Performance Metrics"
+  26. h4: "🎯 Quality Metrics"
+  27. h4: "💰 Business Metrics"
+  28. h4: "📈 Sample Monitoring Dashboard"
+  29. h2: "🗺️ Enterprise Integration Roadmap"
+  30. h4: "Phase 1: Foundation"
+  31. h4: "Phase 2: Integration"
+  32. h4: "Phase 3: Scale"
+  33. h4: "Phase 4: Optimize"
+
+File: rpo-training\pathways\modules\advanced-4.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h2 → h3 → h3 → h2 → h4 → h4 → h4
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Days 1-30: Foundation"
+Headings in order:
+  1. h1: "Team Implementation & Scaling"
+  2. h2: "Leading AI Transformation at Scale"
+  3. h3: "Change Leadership"
+  4. h3: "Scaling Strategy"
+  5. h3: "Stakeholder Alignment"
+  6. h2: "The ADAPT Change Management Framework"
+  7. h3: "🎯 A - Assess Readiness & Resistance"
+  8. h3: "💬 D - Develop Communication Strategy"
+  9. h2: "Managing Resistance Patterns"
+  10. h3: "😰 "AI Will Replace My Job""
+  11. h3: "🤔 "This is Too Complicated""
+  12. h3: "⏰ "We Don't Have Time for This""
+  13. h3: "🔒 "AI Isn't Secure/Reliable""
+  14. h2: "🚀 AI Scaling Models"
+  15. h3: "📊 Pilot → Department → Organization"
+  16. h3: "🌊 Wave-Based Rollout"
+  17. h2: "🎯 Leadership Toolkit"
+  18. h3: "📋 Implementation Checklist"
+  19. h3: "📊 Success Metrics Dashboard"
+  20. h2: "🗺️ Your 90-Day Implementation Plan"
+  21. h4: "Days 1-30: Foundation"
+  22. h4: "Days 31-60: Pilot Launch"
+  23. h4: "Days 61-90: Scale & Optimize"
+
+File: rpo-training\pathways\modules\beginner-3-simulation.html
+Heading sequence: h1 → h3 → h4
+Issues found:
+  • Skipped from h1 to h3, missing levels: h2
+    Previous level: h1, Current: h3
+    Heading text: "Practice Scenario 1: Writing a Follow-up Email"
+Headings in order:
+  1. h1: "Interactive AI Practice"
+  2. h3: "Practice Scenario 1: Writing a Follow-up Email"
+  3. h4: "Hint for this scenario:"
+
+File: rpo-training\pathways\modules\beginner-4.html
+Heading sequence: h1 → h2 → h3 → h2 → h4 → h4 → h4 → h4 → h2 → h4 → h4 → h4 → h4 → h2 → h4 → h4 → h2 → h4 → h4 → h2 → h4 → h4 → h4 → h4 → h2 → h4 → h4 → h2 → h2 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h4 → h3
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "❌ Without AI:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Company Research"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "❌ Traditional Job Posting:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "📈 Recruitment Metrics"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "🎯 Project Planning"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "This Week:"
+Headings in order:
+  1. h1: "AI for Your Daily Tasks"
+  2. h2: "Your AI-Powered Workday"
+  3. h3: "The Time-Saving Reality"
+  4. h2: "📧 Email & Communication"
+  5. h4: "❌ Without AI:"
+  6. h4: "✅ With AI:"
+  7. h4: "📨 Interview Scheduling"
+  8. h4: "📋 Follow-up Messages"
+  9. h2: "🔍 Research & Information Gathering"
+  10. h4: "Company Research"
+  11. h4: "Job Market Analysis"
+  12. h4: "Industry Insights"
+  13. h4: "💡 Pro Tip: Research Prompt Template"
+  14. h2: "✍️ Content Creation"
+  15. h4: "❌ Traditional Job Posting:"
+  16. h4: "✅ AI-Enhanced Job Posting:"
+  17. h2: "📊 Data Analysis & Reporting"
+  18. h4: "📈 Recruitment Metrics"
+  19. h4: "📋 Performance Summaries"
+  20. h2: "📅 Planning & Organization"
+  21. h4: "🎯 Project Planning"
+  22. h4: "📝 Meeting Agendas"
+  23. h4: "✅ Task Lists"
+  24. h4: "📊 Process Documentation"
+  25. h2: "🎯 Your AI Quick Wins Checklist"
+  26. h4: "This Week:"
+  27. h4: "Next Week:"
+  28. h2: "🎉 You're Becoming an AI Power User!"
+  29. h2: "Email Enhancement Tool"
+  30. h3: "Choose Email Type:"
+  31. h4: "🎯 Candidate Outreach"
+  32. h4: "🔄 Follow-up"
+  33. h4: "💔 Rejection"
+  34. h3: "Before vs After Example:"
+  35. h4: "❌ Before (Generic)"
+  36. h4: "✅ After (AI-Enhanced)"
+  37. h4: "🎯 Key Improvements:"
+  38. h3: "Try It Yourself:"
+
+File: rpo-training\pathways\modules\beginner-5.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h3 → h2 → h2 → h2 → h2 → h3 → h3 → h3 → h3 → h2 → h4 → h4 → h4 → h2
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Week 1-2: Practice"
+Headings in order:
+  1. h1: "Congratulations! You Did It!"
+  2. h2: "🏆 What You've Accomplished"
+  3. h3: "AI Understanding"
+  4. h3: "Communication Skills"
+  5. h3: "Hands-On Experience"
+  6. h3: "Practical Applications"
+  7. h2: "🎯 Skills You've Earned"
+  8. h2: "📊 Your Confidence Level"
+  9. h2: "💪 You're Not Alone - Real Success Stories"
+  10. h2: "🚀 Where Do You Go From Here?"
+  11. h3: "Intermediate Path"
+  12. h3: "AI Prompts Library"
+  13. h3: "Daily Focus Cards"
+  14. h3: "Success Stories"
+  15. h2: "📋 Your 30-Day AI Action Plan"
+  16. h4: "Week 1-2: Practice"
+  17. h4: "Week 3-4: Expand"
+  18. h4: "Month 2+: Lead"
+  19. h2: "You're Now an AI-Powered Professional!"
+
+File: rpo-training\pathways\modules\intermediate-1.html
+Heading sequence: h1 → h2 → h3 → h2 → h4 → h4 → h4 → h2 → h4 → h2 → h4 → h4 → h2 → h4 → h2 → h4 → h4 → h2 → h4 → h4
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "❌ Basic Approach:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Example - Consistent Job Posting Format:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "❌ Generic:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Template - Candidate Rejection Email:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Scenario A: Performance Review"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Quick Reference:"
+Headings in order:
+  1. h1: "Advanced Prompting Techniques"
+  2. h2: "Beyond Basic Prompts"
+  3. h3: "What You'll Master Today"
+  4. h2: "🔗 Technique 1: Chain-of-Thought Prompting"
+  5. h4: "❌ Basic Approach:"
+  6. h4: "✅ Chain-of-Thought:"
+  7. h4: "Real Example - Candidate Evaluation:"
+  8. h2: "📚 Technique 2: Few-Shot Learning"
+  9. h4: "Example - Consistent Job Posting Format:"
+  10. h2: "🎭 Technique 3: Role-Based Prompting"
+  11. h4: "❌ Generic:"
+  12. h4: "✅ Role-Based:"
+  13. h2: "📋 Technique 4: Prompt Templates"
+  14. h4: "Template - Candidate Rejection Email:"
+  15. h2: "🎯 Practice Exercise"
+  16. h4: "Scenario A: Performance Review"
+  17. h4: "Scenario B: Training Plan"
+  18. h2: "🎉 You're Now an Advanced Prompt Engineer!"
+  19. h4: "Quick Reference:"
+  20. h4: "Next Up:"
+
+File: rpo-training\pathways\modules\intermediate-3.html
+Heading sequence: h1 → h2 → h3 → h2 → h3 → h4 → h4 → h3 → h4 → h4 → h2 → h3 → h3 → h3 → h3 → h2 → h4 → h2 → h3 → h3 → h3 → h3 → h2 → h4 → h4
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Step-by-Step Integration:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "This Week:"
+Headings in order:
+  1. h1: "AI Workflow Integration"
+  2. h2: "From AI Tools to AI Workflows"
+  3. h3: "The Integration Advantage"
+  4. h2: "Workflow Transformation Examples"
+  5. h3: "🔍 Candidate Sourcing Workflow"
+  6. h4: "❌ Traditional Process (4+ hours):"
+  7. h4: "✅ AI-Integrated Process (45 min):"
+  8. h3: "📝 Job Posting Creation Workflow"
+  9. h4: "❌ Manual Process (2+ hours):"
+  10. h4: "✅ AI-Integrated Process (20 min):"
+  11. h2: "The FLOW Integration Framework"
+  12. h3: "Find Repetitive Tasks"
+  13. h3: "Link AI Tools Together"
+  14. h3: "Optimize and Standardize"
+  15. h3: "Watch and Improve"
+  16. h2: "🎯 Hands-On Integration: Interview Process Workflow"
+  17. h4: "Step-by-Step Integration:"
+  18. h2: "Common Integration Patterns"
+  19. h3: "📊 Research → Analysis → Report"
+  20. h3: "✍️ Template → Personalize → Distribute"
+  21. h3: "🔍 Search → Screen → Engage"
+  22. h3: "📅 Plan → Execute → Track"
+  23. h2: "✅ Your Integration Success Checklist"
+  24. h4: "This Week:"
+  25. h4: "Next Week:"
+
+File: rpo-training\pathways\modules\intermediate-4.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h3 → h3 → h2 → h4 → h4 → h2 → h4 → h4 → h4 → h2 → h4 → h4 → h4 → h2 → h3 → h3 → h2 → h4 → h4 → h4
+Issues found:
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Time Savings Calculation:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "⏱️ Efficiency Metrics"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "The Challenge:"
+  • Skipped from h2 to h4, missing levels: h3
+    Previous level: h2, Current: h4
+    Heading text: "Week 1:"
+Headings in order:
+  1. h1: "Measuring AI Impact & ROI"
+  2. h2: "Why Measuring AI Impact Matters"
+  3. h3: "Optimize Performance"
+  4. h3: "Justify Investment"
+  5. h3: "Demonstrate Value"
+  6. h2: "The IMPACT Metrics Framework"
+  7. h3: "⏱️ I - Time Savings"
+  8. h3: "📊 M - Quality Metrics"
+  9. h3: "🎯 P - Productivity Gains"
+  10. h3: "💰 A - Cost Reduction"
+  11. h3: "😊 C - Satisfaction Scores"
+  12. h3: "🚀 T - Strategic Impact"
+  13. h2: "🧮 Interactive ROI Calculator"
+  14. h4: "Time Savings Calculation:"
+  15. h4: "Your ROI Results:"
+  16. h2: "📋 Your AI KPI Dashboard Template"
+  17. h4: "⏱️ Efficiency Metrics"
+  18. h4: "🎯 Quality Metrics"
+  19. h4: "💰 Business Metrics"
+  20. h2: "📈 Real Success Story: Sarah's Recruitment Team"
+  21. h4: "The Challenge:"
+  22. h4: "AI Implementation:"
+  23. h4: "Measured Results (6 months):"
+  24. h2: "📊 Reporting Your AI Success"
+  25. h3: "📈 Weekly Team Report Template"
+  26. h3: "📊 Monthly Executive Summary"
+  27. h2: "🎯 Your Measurement Action Plan"
+  28. h4: "Week 1:"
+  29. h4: "Week 2-4:"
+  30. h4: "Month 2+:"
+
+
+✅ FILES WITH PROPER HEADING HIERARCHY
+============================================================
+
+File: about-us\index.html
+Heading sequence: h1 → h2 → h2 → h2 → h2
+
+File: ai-sme\index.html
+Heading sequence: h1 → h2 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h3
+
+File: ai-sme\new-page-template.html
+Heading sequence: h1 → h2 → h3 → h2 → h2 → h3 → h3 → h3
+
+File: daily-focus\index.html
+Heading sequence: h1 → h2
+
+File: gbs-prompts\index.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h2 → h3
+
+File: gbs-prompts\waywethink.html
+Heading sequence: h1 → h2 → h3 → h3 → h2
+
+File: knowledge-content\index.html
+Heading sequence: h1 → h2 → h2 → h2 → h2
+
+File: onboarding\results.html
+Heading sequence: h1 → h2 → h2 → h2
+
+File: onboarding-flow\results.html
+Heading sequence: h1 → h2 → h2 → h2
+
+File: rpo-training\index.html
+Heading sequence: h1 → h2 → h3 → h4 → h4 → h4 → h4 → h4 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3 → h3
+
+File: use-cases\index.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h4 → h3 → h4 → h4 → h4 → h2 → h2
+
+File: rpo-training\pathways\analyst.html
+Heading sequence: h1 → h2 → h3 → h4 → h4 → h4 → h3
+
+File: rpo-training\pathways\coordinator.html
+Heading sequence: h1 → h2 → h3 → h4 → h4 → h4 → h3
+
+File: rpo-training\pathways\manager.html
+Heading sequence: h1 → h2 → h3 → h4 → h4 → h4 → h3
+
+File: rpo-training\pathways\recruiter.html
+Heading sequence: h1 → h2 → h3 → h4 → h4 → h4 → h3
+
+File: rpo-training\pathways\modules\advanced-5.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h4 → h2 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h3
+
+File: rpo-training\pathways\modules\beginner-1.html
+Heading sequence: h1 → h2 → h3 → h2 → h3 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h2 → h3 → h3 → h3 → h2 → h3 → h4 → h4 → h2
+
+File: rpo-training\pathways\modules\beginner-2.html
+Heading sequence: h1 → h2 → h3 → h2 → h3 → h2 → h3 → h3 → h2 → h3 → h3 → h2 → h3 → h4 → h4 → h2 → h3 → h3 → h3 → h2
+
+File: rpo-training\pathways\modules\beginner-3.html
+Heading sequence: h1 → h2 → h3 → h3 → h3 → h4 → h4 → h4 → h4 → h2 → h3 → h4 → h4 → h4 → h4 → h3
+
+File: rpo-training\pathways\modules\intermediate-2.html
+Heading sequence: h1 → h2 → h2 → h3 → h3 → h2 → h3 → h3
+
+
+📄 FILES WITH NO HEADINGS (1 files)
+============================================================
+• onboarding-flow\index.html

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced AI Skills Audit - Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <style>
+        .demo-section {
+            border: 2px dashed #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 16px 0;
+            background: #f9fafb;
+        }
+        
+        .feature-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 4px;
+        }
+        
+        .mock-insight {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 8px 0;
+        }
+        
+        .mock-prompt {
+            background: #1f2937;
+            color: #10b981;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            Home
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            AI Skill Audit
+                        </a>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current">Enhanced Demo</span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn">
+                    Back to Hub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Enhanced AI Skills Audit</h1>
+            <p class="text-xl text-gray-600 mb-6">Powered by Gemini AI for Dynamic Insights</p>
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <span class="feature-highlight">🧠 AI-Generated Insights</span>
+                <span class="feature-highlight">✨ Personalized Prompts</span>
+                <span class="feature-highlight">📊 Risk Assessment</span>
+                <span class="feature-highlight">🗺️ Adaptive Roadmap</span>
+                <span class="feature-highlight">📈 Benchmarking</span>
+            </div>
+            <div class="flex justify-center gap-4">
+                <a href="index.html" class="btn-primary">
+                    Take Enhanced Audit
+                </a>
+                <button id="demo-features-btn" class="btn-secondary">
+                    Demo Features
+                </button>
+            </div>
+        </div>
+
+        <!-- Feature Demonstrations -->
+        <div id="demo-content" class="hidden">
+            <!-- AI-Generated Insights Demo -->
+            <div class="demo-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🧠</span>
+                    AI-Generated Insights
+                </h2>
+                <p class="text-gray-600 mb-4">See how Gemini AI analyzes your workflow to provide personalized recommendations:</p>
+                
+                <div class="mock-insight">
+                    <h3 class="font-bold mb-2">⚡ Quick Win Identified</h3>
+                    <p class="mb-2">Your Boolean search creation takes 45min/day. AI can reduce this to 5min with 90% accuracy.</p>
+                    <div class="text-sm opacity-90">
+                        <strong>Tools:</strong> ChatGPT, Microsoft Copilot | <strong>Difficulty:</strong> ⭐⭐☆☆☆ | <strong>Time Savings:</strong> 6.7 hrs/week
+                    </div>
+                </div>
+
+                <div class="mock-insight">
+                    <h3 class="font-bold mb-2">💡 Hidden Opportunity</h3>
+                    <p class="mb-2">Your outreach personalization could be automated while maintaining quality. Most recruiters miss this 4-hour weekly saving.</p>
+                    <div class="text-sm opacity-90">
+                        <strong>Impact:</strong> 15% higher reply rates + 4 hrs/week saved
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personalized Prompt Library Demo -->
+            <div class="demo-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">✨</span>
+                    Personalized AI Prompt Library
+                </h2>
+                <p class="text-gray-600 mb-4">Custom prompts generated specifically for your role and challenges:</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Boolean Search Generator</h3>
+                        <div class="mock-prompt">
+                            Create a Boolean search string for [ROLE] requiring [SKILLS] with [YEARS] years experience, 
+                            excluding companies [EXCLUDE_COMPANIES]. Include alternative job titles and skill variations.
+                        </div>
+                        <div class="text-sm text-gray-500 mt-1">
+                            <strong>Use case:</strong> Daily candidate sourcing | <strong>Time saved:</strong> 30 min/search
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Candidate Outreach Personalizer</h3>
+                        <div class="mock-prompt">
+                            Write a personalized LinkedIn message for [CANDIDATE_NAME] who works at [COMPANY] as [CURRENT_ROLE]. 
+                            Highlight how their experience with [SPECIFIC_SKILL] aligns with our [TARGET_ROLE] opportunity. 
+                            Keep it under 150 words and professional but friendly.
+                        </div>
+                        <div class="text-sm text-gray-500 mt-1">
+                            <strong>Use case:</strong> First-touch outreach | <strong>Time saved:</strong> 15 min/message
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Assessment Demo -->
+            <div class="demo-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">📊</span>
+                    AI-Powered Risk Assessment
+                </h2>
+                <p class="text-gray-600 mb-4">Intelligent analysis of your success probability and potential obstacles:</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg p-6 border border-gray-200">
+                        <h3 class="font-bold text-gray-900 mb-3">Success Probability</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex-1 bg-gray-200 rounded-full h-4 mr-3">
+                                <div class="bg-gradient-to-r from-green-400 to-green-600 h-4 rounded-full" style="width: 87%"></div>
+                            </div>
+                            <span class="text-xl font-bold text-green-600">87%</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Based on your profile, experience level, and workflow complexity</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 border border-gray-200">
+                        <h3 class="font-bold text-gray-900 mb-3">Key Success Factors</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>Strong existing tool familiarity</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span>High-volume workflow (good for automation)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-yellow-500 mr-2">⚠</span>
+                                <span>Time constraints for initial setup</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adaptive Roadmap Demo -->
+            <div class="demo-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🗺️</span>
+                    Adaptive Implementation Roadmap
+                </h2>
+                <p class="text-gray-600 mb-4">Personalized 30-day plan that adapts to your schedule and learning style:</p>
+                
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg p-6 border-l-4 border-indigo-500">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="inline-block px-3 py-1 bg-indigo-600 text-white rounded-full text-sm font-bold mr-3">Week 1</div>
+                                <h3 class="text-lg font-bold text-gray-900">Foundation & Quick Wins</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">3-4 hours total</span>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-700 mb-2">Tasks:</h4>
+                                <ul class="space-y-1 text-sm">
+                                    <li class="flex items-center">
+                                        <input type="checkbox" class="mr-2" checked disabled>
+                                        <span>Set up ChatGPT Plus account</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span>Try 3 Boolean search prompts</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <input type="checkbox" class="mr-2">
+                                        <span>Automate first outreach template</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700 mb-2">Success Metrics:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">Tool setup complete</span>
+                                    <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">First time savings measured</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 border-l-4 border-purple-500">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="inline-block px-3 py-1 bg-purple-600 text-white rounded-full text-sm font-bold mr-3">Week 2</div>
+                                <h3 class="text-lg font-bold text-gray-900">Daily Integration</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">2-3 hours total</span>
+                        </div>
+                        <p class="text-gray-600 text-sm">Build AI into your daily workflow with custom prompts and automation...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benchmarking Demo -->
+            <div class="demo-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">📈</span>
+                    Industry Benchmarking
+                </h2>
+                <p class="text-gray-600 mb-4">See how you compare to peers and industry leaders:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg p-6 border border-gray-200 text-center">
+                        <h3 class="font-bold text-gray-900 mb-2">Your Position</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-1">75th</div>
+                        <div class="text-sm text-gray-600">Percentile</div>
+                        <p class="text-xs text-gray-500 mt-2">Above average efficiency</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 border border-gray-200 text-center">
+                        <h3 class="font-bold text-gray-900 mb-2">Industry Average</h3>
+                        <div class="text-3xl font-bold text-gray-600 mb-1">12.5</div>
+                        <div class="text-sm text-gray-600">hrs/week saved</div>
+                        <p class="text-xs text-gray-500 mt-2">Typical AI adoption</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 border border-gray-200 text-center">
+                        <h3 class="font-bold text-gray-900 mb-2">Top 10% Target</h3>
+                        <div class="text-3xl font-bold text-green-600 mb-1">22.0</div>
+                        <div class="text-sm text-gray-600">hrs/week saved</div>
+                        <p class="text-xs text-gray-500 mt-2">Your potential target</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mt-12">
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-white">
+                <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Workflow?</h2>
+                <p class="text-xl mb-6 opacity-90">Get your personalized AI roadmap in just 5 minutes</p>
+                <a href="index.html" class="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    Start Your Enhanced Audit
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        document.getElementById('demo-features-btn').addEventListener('click', function() {
+            const demoContent = document.getElementById('demo-content');
+            const isHidden = demoContent.classList.contains('hidden');
+            
+            if (isHidden) {
+                demoContent.classList.remove('hidden');
+                this.textContent = 'Hide Demo';
+                demoContent.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                demoContent.classList.add('hidden');
+                this.textContent = 'Demo Features';
+            }
+        });
+
+        // Animate progress bars and counters when they come into view
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate progress bars
+                    const progressBars = entry.target.querySelectorAll('[style*="width:"]');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.transition = 'width 1s ease-out';
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe demo sections
+        document.querySelectorAll('.demo-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
