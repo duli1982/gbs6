@@ -75,6 +75,144 @@
                 opacity: 0.8;
             }
         }
+
+        /* Registration Modal Styles */
+        .registration-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-in-out;
+            backdrop-filter: blur(4px);
+        }
+
+        .registration-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registration-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            animation: slideUp 0.4s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .registration-modal-header {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .registration-modal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .registration-modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .registration-modal-body {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .registration-modal-body p {
+            color: #4A4A4A;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .registration-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .registration-modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-button {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .registration-modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+            .registration-modal-header {
+                padding: 1.5rem;
+            }
+            .registration-modal-body {
+                padding: 1.5rem;
+            }
+            .registration-modal-title {
+                font-size: 1.25rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -275,14 +413,65 @@
         </svg>
     </button>
 
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="registration-modal">
+        <div class="registration-modal-content">
+            <button class="registration-modal-close" onclick="closeRegistrationModal()" aria-label="Close modal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="registration-modal-header">
+                <div class="registration-modal-icon">🎓</div>
+                <h3 class="registration-modal-title">Workshop Registration</h3>
+            </div>
+            <div class="registration-modal-body">
+                <p class="google-sans text-lg font-semibold text-gray-900 mb-2">Coming Soon!</p>
+                <p>Workshop registration is currently being finalized. Please contact your manager for early access and priority enrollment.</p>
+                <p class="text-sm text-gray-500 mb-4">We'll notify you as soon as registration opens!</p>
+                <button class="modal-button" onclick="closeRegistrationModal()">Got It</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../shared/scripts/scroll-to-top.js" defer></script>
 
     <script>
+        // Registration Modal Functions
+        function openRegistrationModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRegistrationModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('registrationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRegistrationModal();
+            }
+        });
+
+        // Close modal when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('registrationModal');
+                if (modal.classList.contains('active')) {
+                    closeRegistrationModal();
+                }
+            }
+        });
+
         // Add click handlers for register buttons
         document.querySelectorAll('.register-btn').forEach(button => {
             button.addEventListener('click', function() {
-                // Placeholder for registration functionality
-                alert('Registration functionality coming soon! Please contact your manager for early access.');
+                openRegistrationModal();
             });
         });
     </script>
