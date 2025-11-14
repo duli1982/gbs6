@@ -72,18 +72,18 @@
         }
 
         .progress-step.vague {
-            background: #fee2e2;
-            color: #dc2626;
+            background: #fef2f2;
+            color: #ef4444;
         }
 
         .progress-step.learning {
-            background: #fef3c7;
-            color: #d97706;
+            background: #fffbeb;
+            color: #f59e0b;
         }
 
         .progress-step.specific {
-            background: #d1fae5;
-            color: #059669;
+            background: #f0fdf4;
+            color: #22c55e;
         }
 
         .progress-step:hover {
@@ -189,19 +189,17 @@
 
         .before-after-card {
             padding: 1.5rem;
-            border-radius: 12px;
+            border-radius: 16px;
             position: relative;
             transition: all 0.3s ease;
         }
 
         .before-card {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border: 2px solid #f87171;
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
         }
 
         .after-card {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border: 2px solid #34d399;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
         }
 
         .vs-divider {
@@ -278,8 +276,8 @@
 
         /* Interactive Elements */
         .interactive-demo {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border: 2px solid #3b82f6;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #60a5fa;
             border-radius: 16px;
             padding: 2rem;
             margin: 2rem 0;
@@ -452,14 +450,14 @@
                 <!-- Before/After Comparison -->
                 <div class="comparison-container">
                     <div class="before-card slide-in-left">
-                        <h3 class="font-bold text-red-700 mb-3">❌ Old Way of Thinking</h3>
+                        <h3 class="font-bold text-red-600 mb-3">❌ Old Way of Thinking</h3>
                         <div class="space-y-2 text-sm">
                             <p><strong>Request:</strong> "Write me an email"</p>
                             <p><strong>Delegation:</strong> "Make this report better"</p>
                             <p><strong>Problem:</strong> "This isn't working"</p>
                         </div>
-                        <div class="mt-4 p-3 bg-red-100 rounded-lg">
-                            <p class="text-xs text-red-800"><strong>Result:</strong> Confusion, back-and-forth, wasted
+                        <div class="mt-4 p-3 bg-red-50 rounded-lg border border-red-200">
+                            <p class="text-xs text-red-700"><strong>Result:</strong> Confusion, back-and-forth, wasted
                                 time</p>
                         </div>
                     </div>
@@ -467,7 +465,7 @@
                     <div class="vs-divider">VS</div>
 
                     <div class="after-card slide-in-right">
-                        <h3 class="font-bold text-green-700 mb-3">✅ Prompt-Trained Thinking</h3>
+                        <h3 class="font-bold text-green-600 mb-3">✅ Prompt-Trained Thinking</h3>
                         <div class="space-y-2 text-sm">
                             <p><strong>Request:</strong> "Write a professional follow-up email to [candidate name] for
                                 [role], mentioning [specific interview points], with a warm but formal tone, 150 words
@@ -477,8 +475,8 @@
                             <p><strong>Problem:</strong> "The Boolean search returns 500+ results but only 5% match our
                                 requirements. Need to refine for [specific criteria]"</p>
                         </div>
-                        <div class="mt-4 p-3 bg-green-100 rounded-lg">
-                            <p class="text-xs text-green-800"><strong>Result:</strong> Clear execution, first-time
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                            <p class="text-xs text-green-700"><strong>Result:</strong> Clear execution, first-time
                                 success, efficiency</p>
                         </div>
                     </div>

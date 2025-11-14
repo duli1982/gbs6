@@ -100,6 +100,125 @@
             padding: 1rem 2rem;
             font-size: 1.125rem;
         }
+        /* Coming Soon Badge */
+        .coming-soon-badge {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 9999px;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.3), 0 2px 4px -2px rgba(236, 72, 153, 0.3);
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+        /* Video Modal Styles */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .video-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            animation: slideIn 0.3s ease-out;
+        }
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--ai-accent) 0%, var(--ai-accent-hover) 100%);
+            color: white;
+        }
+        .video-modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .video-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        .video-modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .video-modal-body {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-modal-body iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @media (max-width: 768px) {
+            .video-modal-content {
+                width: 95%;
+            }
+            .video-modal-title {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-body font-sans leading-relaxed">
@@ -240,19 +359,28 @@
                 <div id="workshops" class="tab-content">
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="card">
-                            <span class="text-sm text-brand-primary font-medium">Aug 15, 2025</span>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-brand-primary font-medium">Jan 30, 2026</span>
+                                <span class="coming-soon-badge">Coming Soon</span>
+                            </div>
                             <h3 class="text-xl font-bold text-brand-dark mt-2 mb-3">Prompt Engineering 101</h3>
                             <p class="text-brand-body mb-4">Learn how to write effective prompts to get the best results from Gemini.</p>
                             <a href="#" class="btn btn-primary w-full">Register Now</a>
                         </div>
                         <div class="card">
-                            <span class="text-sm text-brand-primary font-medium">Sep 5, 2025</span>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-brand-primary font-medium">Feb 13, 2026</span>
+                                <span class="coming-soon-badge">Coming Soon</span>
+                            </div>
                             <h3 class="text-xl font-bold text-brand-dark mt-2 mb-3">AI for Data Analysis</h3>
                             <p class="text-brand-body mb-4">Discover how to use Gemini to analyze data, create formulas, and build insightful reports in Excel and Google Sheets.</p>
                             <a href="#" class="btn btn-primary w-full">Register Now</a>
                         </div>
                         <div class="card">
-                            <span class="text-sm text-brand-primary font-medium">Sep 20, 2025</span>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-brand-primary font-medium">Feb 27, 2026</span>
+                                <span class="coming-soon-badge">Coming Soon</span>
+                            </div>
                             <h3 class="text-xl font-bold text-brand-dark mt-2 mb-3">Responsible AI in Practice</h3>
                             <p class="text-brand-body mb-4">An essential session on the ethical considerations and data privacy rules when using Gemini at work.</p>
                             <a href="#" class="btn btn-primary w-full">Register Now</a>
@@ -264,22 +392,22 @@
                         <div class="card text-center">
                             <img src="https://placehold.co/400x225/E5E7EB/374151?text=Video" alt="Video thumbnail" class="rounded-md mb-4 w-full">
                             <h3 class="text-lg font-semibold text-brand-dark">Intro to Gemini</h3>
-                            <a href="https://drive.google.com/file/d/10H_fL0bKVsB-cObFUD5ObETnWJdEMMNY/preview" class="btn btn-secondary w-full mt-4">Watch Now</a>
+                            <button onclick="openVideoModal('https://drive.google.com/file/d/10H_fL0bKVsB-cObFUD5ObETnWJdEMMNY/preview', 'Intro to Gemini')" class="btn btn-secondary w-full mt-4">Watch Now</button>
                         </div>
                          <div class="card text-center">
                             <img src="https://placehold.co/400x225/E5E7EB/374151?text=Video" alt="Video thumbnail" class="rounded-md mb-4 w-full">
                             <h3 class="text-lg font-semibold text-brand-dark">Gemini Masterclass</h3>
-                            <a href="https://drive.google.com/file/d/1iUCn1lbI4-evB_GvkVWK9QU2Wz_A16IM/preview" class="btn btn-secondary w-full mt-4">Watch Now</a>
+                            <button onclick="openVideoModal('https://drive.google.com/file/d/1iUCn1lbI4-evB_GvkVWK9QU2Wz_A16IM/preview', 'Gemini Masterclass')" class="btn btn-secondary w-full mt-4">Watch Now</button>
                         </div>
                          <div class="card text-center">
                             <img src="https://placehold.co/400x225/E5E7EB/374151?text=Video" alt="Video thumbnail" class="rounded-md mb-4 w-full">
                             <h3 class="text-lg font-semibold text-brand-dark">Advanced Prompting</h3>
-                            <a href="https://drive.google.com/file/d/1mfJbDJcXYyEQuZHm4CYMVuZrhKbGsbEo/preview" class="btn btn-secondary w-full mt-4">Watch Now</a>
+                            <button onclick="openVideoModal('https://drive.google.com/file/d/1mfJbDJcXYyEQuZHm4CYMVuZrhKbGsbEo/preview', 'Advanced Prompting')" class="btn btn-secondary w-full mt-4">Watch Now</button>
                         </div>
                          <div class="card text-center">
                             <img src="https://placehold.co/400x225/E5E7EB/374151?text=Video" alt="Video thumbnail" class="rounded-md mb-4 w-full">
                             <h3 class="text-lg font-semibold text-brand-dark">AI for Recruiters</h3>
-                            <a href="https://drive.google.com/file/d/10H_fL0bKVsB-cObFUD5ObETnWJdEMMNY/preview" class="btn btn-secondary w-full mt-4">Watch Now</a>
+                            <button onclick="openVideoModal('https://drive.google.com/file/d/10H_fL0bKVsB-cObFUD5ObETnWJdEMMNY/preview', 'AI for Recruiters')" class="btn btn-secondary w-full mt-4">Watch Now</button>
                         </div>
                     </div>
                 </div>
@@ -356,6 +484,24 @@
 
     </main>
 
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 class="video-modal-title" id="videoTitle">Video Title</h3>
+                <button class="video-modal-close" onclick="closeVideoModal()" aria-label="Close video">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="video-modal-body">
+                <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <div id="footer-placeholder"></div>
     <script src="../shared/scripts/footer.js" defer></script>
 
@@ -428,6 +574,54 @@
                     }
                 });
             });
+        });
+
+        // Video Modal Functions
+        function openVideoModal(videoUrl, videoTitle) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            const title = document.getElementById('videoTitle');
+
+            // Set the video URL and title
+            iframe.src = videoUrl;
+            title.textContent = videoTitle;
+
+            // Show the modal
+            modal.classList.add('active');
+
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+
+            // Hide the modal
+            modal.classList.remove('active');
+
+            // Stop the video by clearing the iframe src
+            iframe.src = '';
+
+            // Re-enable body scrolling
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside the video content
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+
+        // Close modal when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('videoModal');
+                if (modal.classList.contains('active')) {
+                    closeVideoModal();
+                }
+            }
         });
     </script>
     <script src="../shared/scripts/breadcrumb-nav.js"></script>
