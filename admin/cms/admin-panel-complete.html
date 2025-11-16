@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBS Admin - Complete CMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #667eea;
+            font-size: 28px;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-small {
+            width: auto;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .error {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .success {
+            color: #28a745;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        /* Main App */
+        .app-container {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .app-header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header h1 {
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        .app-header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 10px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+            text-align: center;
+        }
+
+        .nav-tab:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .stat-card .number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .content-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        /* Items List */
+        .items-list {
+            margin-top: 20px;
+        }
+
+        .item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .item h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .item p {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .app-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .nav-tab {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-box">
+            <h1>🎯 GBS Admin Panel</h1>
+            <p>Complete Content Management System<br>Phase 1 + Phase 2</p>
+            <div class="form-group">
+                <label for="password">Admin Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <button class="btn" onclick="login()">Login</button>
+            <div id="loginError" class="error"></div>
+            <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px; font-size: 12px; color: #0c5460;">
+                <strong>Managing:</strong><br>
+                • Prompts & Gems (Phase 1)<br>
+                • Use Cases, Workshops, Knowledge (Phase 2)
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="appContainer" class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <h1>🎯 GBS Complete CMS</h1>
+            <div class="user-info">
+                <span>Admin</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="nav-tab" onclick="switchTab('prompts')">💬 Prompts</button>
+            <button class="nav-tab" onclick="switchTab('gems')">💎 Gems</button>
+            <button class="nav-tab" onclick="switchTab('usecases')">🚀 Use Cases</button>
+            <button class="nav-tab" onclick="switchTab('workshops')">🎓 Workshops</button>
+            <button class="nav-tab" onclick="switchTab('knowledge')">📚 Knowledge</button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="content-section active">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3>Prompts</h3>
+                    <div class="number" id="totalPrompts">0</div>
+                    <div class="label">Active prompts</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Gems</h3>
+                    <div class="number" id="totalGems">0</div>
+                    <div class="label">Active gems</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Use Cases</h3>
+                    <div class="number" id="totalUseCases">0</div>
+                    <div class="label">Success stories</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Workshops</h3>
+                    <div class="number" id="totalWorkshops">0</div>
+                    <div class="label">Scheduled</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Videos</h3>
+                    <div class="number" id="totalVideos">0</div>
+                    <div class="label">Training videos</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Articles</h3>
+                    <div class="number" id="totalArticles">0</div>
+                    <div class="label">Help articles</div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>📝 Quick Publish Actions</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <button class="btn btn-success" onclick="publishPrompts()">🚀 Publish Prompts</button>
+                    <button class="btn btn-success" onclick="publishGems()">🚀 Publish Gems</button>
+                    <button class="btn btn-success" onclick="publishUseCases()">🚀 Publish Use Cases</button>
+                    <button class="btn btn-success" onclick="publishWorkshops()">🚀 Publish Workshops</button>
+                    <button class="btn btn-success" onclick="publishKnowledge()">🚀 Publish Knowledge</button>
+                </div>
+            </div>
+
+            <div id="dashboardAlerts"></div>
+
+            <div class="content-card">
+                <h2>ℹ️ System Information</h2>
+                <div style="font-size: 14px; color: #666; line-height: 1.8;">
+                    <p><strong>Phase 1 (Active):</strong> Prompts & Gems Management</p>
+                    <p><strong>Phase 2 (Active):</strong> Use Cases, Workshops, Knowledge Content</p>
+                    <p><strong>Total Content Types:</strong> 6 (Prompts, Gems, Use Cases, Workshops, Videos, Articles)</p>
+                    <p style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 4px;">
+                        ⚠️ <strong>Setup Required:</strong> Configure all API URLs in the JavaScript section below before using.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other sections (Prompts, Gems, Use Cases, etc.) -->
+        <div id="promptsSection" class="content-section">
+            <div class="content-card">
+                <h2>💬 Prompts Management</h2>
+                <p style="color: #666; margin-bottom: 20px;">Manage your GBS prompts. Uses Phase 1 API.</p>
+                <div id="promptsAlert"></div>
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>This section uses the Phase 1 admin panel functionality.</p>
+                    <p>Open <code>admin/cms/phase1/admin-panel.html</code> for full prompts management.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="gemsSection" class="content-section">
+            <div class="content-card">
+                <h2>💎 Gems Management</h2>
+                <p style="color: #666; margin-bottom: 20px;">Manage your Gemini gems collection. Uses Phase 1 API.</p>
+                <div id="gemsAlert"></div>
+                <div class="loading">
+                    <p>This section uses the Phase 1 admin panel functionality.</p>
+                    <p>Open <code>admin/cms/phase1/admin-panel.html</code> for full gems management.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="usecasesSection" class="content-section">
+            <div class="content-card">
+                <h2>🚀 Use Cases Management</h2>
+                <p style="color: #666; margin-bottom: 20px;">Manage AI success stories and use cases.</p>
+                <div id="usecasesAlert"></div>
+                <div class="loading">
+                    <p>Use Cases management interface coming soon.</p>
+                    <p>For now, manage directly in Google Sheets: <strong>GBS Use Cases - Admin CMS</strong></p>
+                    <p style="margin-top: 15px;">
+                        <button class="btn btn-small btn-success" onclick="publishUseCases()">🚀 Generate JSON</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="workshopsSection" class="content-section">
+            <div class="content-card">
+                <h2>🎓 Workshops Management</h2>
+                <p style="color: #666; margin-bottom: 20px;">Manage interactive workshops and events.</p>
+                <div id="workshopsAlert"></div>
+                <div class="loading">
+                    <p>Workshops management interface coming soon.</p>
+                    <p>For now, manage directly in Google Sheets: <strong>GBS Workshops - Admin CMS</strong></p>
+                    <p style="margin-top: 15px;">
+                        <button class="btn btn-small btn-success" onclick="publishWorkshops()">🚀 Generate JSON</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="knowledgeSection" class="content-section">
+            <div class="content-card">
+                <h2>📚 Knowledge Content Management</h2>
+                <p style="color: #666; margin-bottom: 20px;">Manage training videos and help articles.</p>
+                <div id="knowledgeAlert"></div>
+                <div class="loading">
+                    <p>Knowledge Content management interface coming soon.</p>
+                    <p>For now, manage directly in Google Sheets:</p>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
+                        <li><strong>Videos:</strong> GBS Knowledge Content - Admin CMS → Videos tab</li>
+                        <li><strong>Articles:</strong> GBS Knowledge Content - Admin CMS → Articles tab</li>
+                    </ul>
+                    <p style="margin-top: 15px;">
+                        <button class="btn btn-small btn-success" onclick="publishKnowledge()">🚀 Generate JSON</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION - REPLACE WITH YOUR URLS
+        // ==========================================
+
+        // PHASE 1 APIs
+        const PROMPTS_API_URL = 'https://script.google.com/macros/s/AKfycbxo0QUw15F-R0HpcL2sqricsQBMpcT8LgFTY51FohUvNt1XSyypwvbWfw6mC3ZuUbg2Hw/exec';
+        const GEMS_API_URL = 'https://script.google.com/macros/s/AKfycbwXc47XuzQWXszwqOE8HPKZxEaqlaH_nKNXOiN-HmYK7SQHWRMNMtI8pBdSNxyn9r71Kw/exec';
+
+        // PHASE 2 APIs
+        const USECASES_API_URL = 'https://script.google.com/macros/s/AKfycbzBoN4s6_cU7KA_mAZRLTLod2mqOjNtvSdo6vfFWXsPBcorVY2Q9ELY_0XsUlkHzNZu/exec';
+        const WORKSHOPS_API_URL = 'https://script.google.com/macros/s/AKfycbwXVXcwUam5SI0qqIcyNYusw2Km1TtL_kO4rEyulM7gFY6GSn5YWt3VQRWdJ_NI0A5h/exec';
+        const KNOWLEDGE_API_URL = 'https://script.google.com/macros/s/AKfycbzUsIcHuHp0uhwQUTwtm1j5iyprI7vZ70hnuLYPKD844-Ylh8-5hfYHJu-UdIpdJ-4p/exec';
+
+        // Global state
+        let adminPassword = '';
+
+        // ==========================================
+        // LOGIN / LOGOUT
+        // ==========================================
+
+        function login() {
+            const password = document.getElementById('password').value;
+            if (!password) {
+                showError('loginError', 'Please enter password');
+                return;
+            }
+
+            adminPassword = password;
+            loadDashboard();
+        }
+
+        function logout() {
+            adminPassword = '';
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('appContainer').style.display = 'none';
+            document.getElementById('password').value = '';
+        }
+
+        // ==========================================
+        // NAVIGATION
+        // ==========================================
+
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update sections
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+
+            const sectionMap = {
+                'dashboard': 'dashboardSection',
+                'prompts': 'promptsSection',
+                'gems': 'gemsSection',
+                'usecases': 'usecasesSection',
+                'workshops': 'workshopsSection',
+                'knowledge': 'knowledgeSection'
+            };
+
+            const sectionId = sectionMap[tab];
+            if (sectionId) {
+                document.getElementById(sectionId).classList.add('active');
+            }
+
+            if (tab === 'dashboard') {
+                loadDashboard();
+            }
+        }
+
+        // ==========================================
+        // DASHBOARD
+        // ==========================================
+
+        async function loadDashboard() {
+            try {
+                // Check if APIs are configured
+                if (PROMPTS_API_URL === 'YOUR_PROMPTS_WEB_APP_URL_HERE') {
+                    alert('⚠️ Please configure API URLs in the script section!\n\nReplace all "YOUR_*_URL_HERE" with actual Web App URLs.');
+                    return;
+                }
+
+                // Load Phase 1 data
+                const [promptsRes, gemsRes] = await Promise.all([
+                    fetch(`${PROMPTS_API_URL}?action=getAll`).catch(() => ({ json: async () => ({ prompts: [] }) })),
+                    fetch(`${GEMS_API_URL}?action=getAll`).catch(() => ({ json: async () => ({ gems: [] }) }))
+                ]);
+
+                const promptsData = await promptsRes.json();
+                const gemsData = await gemsRes.json();
+
+                // Load Phase 2 data
+                let usecasesData = { useCases: [] };
+                let workshopsData = { workshops: [] };
+                let knowledgeData = { videos: [], articles: [] };
+
+                if (USECASES_API_URL !== 'YOUR_USECASES_WEB_APP_URL_HERE') {
+                    const usecasesRes = await fetch(`${USECASES_API_URL}?action=getAll`).catch(() => ({ json: async () => ({ useCases: [] }) }));
+                    usecasesData = await usecasesRes.json();
+                }
+
+                if (WORKSHOPS_API_URL !== 'YOUR_WORKSHOPS_WEB_APP_URL_HERE') {
+                    const workshopsRes = await fetch(`${WORKSHOPS_API_URL}?action=getAll`).catch(() => ({ json: async () => ({ workshops: [] }) }));
+                    workshopsData = await workshopsRes.json();
+                }
+
+                if (KNOWLEDGE_API_URL !== 'YOUR_KNOWLEDGE_WEB_APP_URL_HERE') {
+                    const knowledgeRes = await fetch(`${KNOWLEDGE_API_URL}?action=getAll`).catch(() => ({ json: async () => ({ videos: [], articles: [] }) }));
+                    knowledgeData = await knowledgeRes.json();
+                }
+
+                // Update stats
+                document.getElementById('totalPrompts').textContent = (promptsData.prompts || []).filter(p => p.Status === 'Active').length;
+                document.getElementById('totalGems').textContent = (gemsData.gems || []).filter(g => g.Status === 'Active').length;
+                document.getElementById('totalUseCases').textContent = (usecasesData.useCases || []).filter(u => u.Status === 'Active').length;
+                document.getElementById('totalWorkshops').textContent = (workshopsData.workshops || []).length;
+                document.getElementById('totalVideos').textContent = (knowledgeData.videos || []).filter(v => v.Status === 'Active').length;
+                document.getElementById('totalArticles').textContent = (knowledgeData.articles || []).filter(a => a.Status === 'Active').length;
+
+                // Show app
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'block';
+
+            } catch (error) {
+                console.error('Dashboard error:', error);
+                showError('loginError', 'Error loading dashboard. Check your API URLs and password.');
+            }
+        }
+
+        // ==========================================
+        // PUBLISH FUNCTIONS
+        // ==========================================
+
+        function publishPrompts() {
+            window.open(`${PROMPTS_API_URL}?action=generateJSON`, '_blank');
+            showAlert('dashboardAlerts', 'Prompts JSON opened in new tab. Copy and save to /gbs-prompts/prompts.json', 'success');
+        }
+
+        function publishGems() {
+            window.open(`${GEMS_API_URL}?action=generateJSON`, '_blank');
+            showAlert('dashboardAlerts', 'Gems JSON opened in new tab. Copy and save to /gemini-mastery/gems-collection/gems.json', 'success');
+        }
+
+        function publishUseCases() {
+            if (USECASES_API_URL === 'YOUR_USECASES_WEB_APP_URL_HERE') {
+                alert('⚠️ Use Cases API not configured yet!\n\nConfigure USECASES_API_URL in the script section.');
+                return;
+            }
+            window.open(`${USECASES_API_URL}?action=generateJSON`, '_blank');
+            showAlert('dashboardAlerts', 'Use Cases JSON opened in new tab. Copy and save to /use-cases/use-cases.json', 'success');
+        }
+
+        function publishWorkshops() {
+            if (WORKSHOPS_API_URL === 'YOUR_WORKSHOPS_WEB_APP_URL_HERE') {
+                alert('⚠️ Workshops API not configured yet!\n\nConfigure WORKSHOPS_API_URL in the script section.');
+                return;
+            }
+            window.open(`${WORKSHOPS_API_URL}?action=generateJSON`, '_blank');
+            showAlert('dashboardAlerts', 'Workshops JSON opened in new tab. Copy and save to /workshops/workshops.json', 'success');
+        }
+
+        function publishKnowledge() {
+            if (KNOWLEDGE_API_URL === 'YOUR_KNOWLEDGE_WEB_APP_URL_HERE') {
+                alert('⚠️ Knowledge API not configured yet!\n\nConfigure KNOWLEDGE_API_URL in the script section.');
+                return;
+            }
+            window.open(`${KNOWLEDGE_API_URL}?action=generateJSON`, '_blank');
+            showAlert('dashboardAlerts', 'Knowledge Content JSON opened in new tab. Copy and save to /knowledge-content/content.json', 'success');
+        }
+
+        // ==========================================
+        // UTILITIES
+        // ==========================================
+
+        function showError(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            setTimeout(() => el.textContent = '', 5000);
+        }
+
+        function showAlert(elementId, message, type) {
+            const el = document.getElementById(elementId);
+            el.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => el.innerHTML = '', 8000);
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check configuration
+            const unconfigured = [];
+            if (PROMPTS_API_URL === 'YOUR_PROMPTS_WEB_APP_URL_HERE') unconfigured.push('Prompts');
+            if (GEMS_API_URL === 'YOUR_GEMS_WEB_APP_URL_HERE') unconfigured.push('Gems');
+            if (USECASES_API_URL === 'YOUR_USECASES_WEB_APP_URL_HERE') unconfigured.push('Use Cases');
+            if (WORKSHOPS_API_URL === 'YOUR_WORKSHOPS_WEB_APP_URL_HERE') unconfigured.push('Workshops');
+            if (KNOWLEDGE_API_URL === 'YOUR_KNOWLEDGE_WEB_APP_URL_HERE') unconfigured.push('Knowledge');
+
+            if (unconfigured.length === 5) {
+                console.warn('⚠️ No APIs configured. Please set up your Web App URLs.');
+            } else if (unconfigured.length > 0) {
+                console.log('⚠️ Unconfigured APIs:', unconfigured.join(', '));
+            } else {
+                console.log('✅ All APIs configured!');
+            }
+        });
+    </script>
+</body>
+</html>
