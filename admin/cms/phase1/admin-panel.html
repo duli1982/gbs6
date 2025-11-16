@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBS Admin - Content Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #667eea;
+            font-size: 28px;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-small {
+            width: auto;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .success {
+            color: #28a745;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        /* Main App */
+        .app-container {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .app-header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header h1 {
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        .app-header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 10px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .nav-tab:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .stat-card .number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .content-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        /* Items List */
+        .items-list {
+            margin-top: 20px;
+        }
+
+        .item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .item h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .item p {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-featured {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .badge-beginner {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .badge-intermediate {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-advanced {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .form-actions .btn {
+            width: auto;
+            flex: 1;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .app-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .item-actions {
+                flex-direction: column;
+            }
+
+            .item-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-box">
+            <h1>🎯 GBS Admin Panel</h1>
+            <p>Content Management System</p>
+            <div class="form-group">
+                <label for="password">Admin Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <button class="btn" onclick="login()">Login</button>
+            <div id="loginError" class="error"></div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="appContainer" class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <h1>🎯 GBS Content Management</h1>
+            <div class="user-info">
+                <span>Admin</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="nav-tab" onclick="switchTab('prompts')">💬 Prompts</button>
+            <button class="nav-tab" onclick="switchTab('gems')">💎 Gems</button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="content-section active">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3>Total Prompts</h3>
+                    <div class="number" id="totalPrompts">0</div>
+                    <div class="label">Active prompts</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Gems</h3>
+                    <div class="number" id="totalGems">0</div>
+                    <div class="label">Active gems</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Featured Gems</h3>
+                    <div class="number" id="featuredGems">0</div>
+                    <div class="label">On homepage</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Categories</h3>
+                    <div class="number" id="totalCategories">0</div>
+                    <div class="label">Across all content</div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>📝 Quick Actions</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <button class="btn" onclick="switchTab('prompts'); openAddPrompt();">➕ Add New Prompt</button>
+                    <button class="btn" onclick="switchTab('gems'); openAddGem();">➕ Add New Gem</button>
+                    <button class="btn btn-success" onclick="publishPrompts()">🚀 Publish Prompts JSON</button>
+                    <button class="btn btn-success" onclick="publishGems()">🚀 Publish Gems JSON</button>
+                </div>
+            </div>
+
+            <div id="dashboardAlerts"></div>
+        </div>
+
+        <!-- Prompts Section -->
+        <div id="promptsSection" class="content-section">
+            <div class="content-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>💬 Manage Prompts</h2>
+                    <button class="btn btn-small" onclick="openAddPrompt()">➕ Add New Prompt</button>
+                </div>
+
+                <div id="promptsAlert"></div>
+                <div id="promptsLoading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading prompts...</p>
+                </div>
+                <div id="promptsList" class="items-list"></div>
+            </div>
+        </div>
+
+        <!-- Gems Section -->
+        <div id="gemsSection" class="content-section">
+            <div class="content-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>💎 Manage Gems</h2>
+                    <button class="btn btn-small" onclick="openAddGem()">➕ Add New Gem</button>
+                </div>
+
+                <div id="gemsAlert"></div>
+                <div id="gemsLoading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading gems...</p>
+                </div>
+                <div id="gemsList" class="items-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prompt Modal -->
+    <div id="promptModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="promptModalTitle">Add New Prompt</h2>
+                <button class="close-modal" onclick="closePromptModal()">×</button>
+            </div>
+
+            <form id="promptForm">
+                <input type="hidden" id="promptId">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="promptCategory">Category *</label>
+                        <select id="promptCategory" required>
+                            <option value="">Select category</option>
+                            <option value="Recruitment">Recruitment</option>
+                            <option value="Sourcing Strategy">Sourcing Strategy</option>
+                            <option value="Communication">Communication</option>
+                            <option value="Data Analysis">Data Analysis</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="promptSubcategory">Subcategory *</label>
+                        <input type="text" id="promptSubcategory" required placeholder="e.g., Write Job Descriptions">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="promptTitle">Title *</label>
+                    <input type="text" id="promptTitle" required placeholder="Enter prompt title">
+                </div>
+
+                <div class="form-group">
+                    <label for="promptDescription">Description *</label>
+                    <textarea id="promptDescription" required placeholder="One-sentence summary"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="promptContent">Prompt Content *</label>
+                    <textarea id="promptContent" required rows="6" placeholder="The full prompt text..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="promptDifficulty">Difficulty</label>
+                        <select id="promptDifficulty">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="promptTime">Estimated Time</label>
+                        <input type="text" id="promptTime" placeholder="e.g., 5-10 minutes">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="promptInputs">Required Inputs (comma-separated)</label>
+                    <input type="text" id="promptInputs" placeholder="e.g., job role, company name">
+                </div>
+
+                <div class="form-group">
+                    <label for="promptSteps">Quick Start Steps (one per line)</label>
+                    <textarea id="promptSteps" rows="4" placeholder="1. First step&#10;2. Second step&#10;3. Third step"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="promptTips">Quick Start Tips (one per line)</label>
+                    <textarea id="promptTips" rows="3" placeholder="• Tip one&#10;• Tip two"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="promptOutput">Expected Output</label>
+                    <textarea id="promptOutput" placeholder="What will the user receive?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="promptTags">Tags (comma-separated)</label>
+                    <input type="text" id="promptTags" placeholder="e.g., recruitment, job, hiring">
+                </div>
+
+                <div class="form-group">
+                    <label for="promptStatus">Status</label>
+                    <select id="promptStatus">
+                        <option value="Active">Active</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Archived">Archived</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closePromptModal()">Cancel</button>
+                    <button type="submit" class="btn">Save Prompt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Gem Modal -->
+    <div id="gemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="gemModalTitle">Add New Gem</h2>
+                <button class="close-modal" onclick="closeGemModal()">×</button>
+            </div>
+
+            <form id="gemForm">
+                <input type="hidden" id="gemId">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gemGemId">Google Gem ID *</label>
+                        <input type="text" id="gemGemId" required placeholder="e.g., ABC123DEF456">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gemTitle">Title *</label>
+                        <input type="text" id="gemTitle" required placeholder="Gem name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gemDescription">Description *</label>
+                    <textarea id="gemDescription" required placeholder="What does this gem do?"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gemCategory">Category *</label>
+                        <select id="gemCategory" required>
+                            <option value="">Select category</option>
+                            <option value="Recruitment">Recruitment</option>
+                            <option value="Communication">Communication</option>
+                            <option value="Data Analysis">Data Analysis</option>
+                            <option value="Content Creation">Content Creation</option>
+                            <option value="Research">Research</option>
+                            <option value="Training">Training</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gemUseCase">Use Case</label>
+                        <input type="text" id="gemUseCase" placeholder="When to use it">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gemInstructions">Instructions (one per line)</label>
+                    <textarea id="gemInstructions" rows="4" placeholder="1. Step one&#10;2. Step two"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="gemExampleInput">Example Input</label>
+                    <textarea id="gemExampleInput" placeholder="Sample input"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="gemExampleOutput">Example Output</label>
+                    <textarea id="gemExampleOutput" placeholder="Sample output"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="gemTips">Tips (one per line)</label>
+                    <textarea id="gemTips" rows="3" placeholder="• Tip one&#10;• Tip two"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gemFeatured">Featured on Homepage</label>
+                        <select id="gemFeatured">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gemOrder">Display Order</label>
+                        <input type="number" id="gemOrder" value="1" min="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gemStatus">Status</label>
+                    <select id="gemStatus">
+                        <option value="Active">Active</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Archived">Archived</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeGemModal()">Cancel</button>
+                    <button type="submit" class="btn">Save Gem</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - REPLACE THESE WITH YOUR ACTUAL WEB APP URLS
+        const PROMPTS_API_URL = 'YOUR_PROMPTS_WEB_APP_URL_HERE';
+        const GEMS_API_URL = 'YOUR_GEMS_WEB_APP_URL_HERE';
+
+        // Global state
+        let adminPassword = '';
+        let currentPrompts = [];
+        let currentGems = [];
+        let editingPromptId = null;
+        let editingGemId = null;
+
+        // ==========================================
+        // LOGIN / LOGOUT
+        // ==========================================
+
+        function login() {
+            const password = document.getElementById('password').value;
+            if (!password) {
+                showError('loginError', 'Please enter password');
+                return;
+            }
+
+            adminPassword = password;
+
+            // Try to load data to verify password
+            loadDashboard();
+        }
+
+        function logout() {
+            adminPassword = '';
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('appContainer').style.display = 'none';
+            document.getElementById('password').value = '';
+        }
+
+        // ==========================================
+        // NAVIGATION
+        // ==========================================
+
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update sections
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+
+            if (tab === 'dashboard') {
+                document.getElementById('dashboardSection').classList.add('active');
+                loadDashboard();
+            } else if (tab === 'prompts') {
+                document.getElementById('promptsSection').classList.add('active');
+                loadPrompts();
+            } else if (tab === 'gems') {
+                document.getElementById('gemsSection').classList.add('active');
+                loadGems();
+            }
+        }
+
+        // ==========================================
+        // DASHBOARD
+        // ==========================================
+
+        async function loadDashboard() {
+            try {
+                // Load prompts
+                const promptsRes = await fetch(`${PROMPTS_API_URL}?action=getAll`);
+                const promptsData = await promptsRes.json();
+
+                if (promptsData.error) {
+                    throw new Error('Invalid password or API error');
+                }
+
+                currentPrompts = promptsData.prompts || [];
+
+                // Load gems
+                const gemsRes = await fetch(`${GEMS_API_URL}?action=getAll`);
+                const gemsData = await gemsRes.json();
+                currentGems = gemsData.gems || [];
+
+                // Update stats
+                const activePrompts = currentPrompts.filter(p => p.Status === 'Active').length;
+                const activeGems = currentGems.filter(g => g.Status === 'Active').length;
+                const featured = currentGems.filter(g => g.Featured === 'Yes').length;
+
+                const categories = new Set([
+                    ...currentPrompts.map(p => p.Category),
+                    ...currentGems.map(g => g.Category)
+                ]);
+
+                document.getElementById('totalPrompts').textContent = activePrompts;
+                document.getElementById('totalGems').textContent = activeGems;
+                document.getElementById('featuredGems').textContent = featured;
+                document.getElementById('totalCategories').textContent = categories.size;
+
+                // Show app, hide login
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'block';
+
+            } catch (error) {
+                showError('loginError', error.message);
+            }
+        }
+
+        // ==========================================
+        // PROMPTS MANAGEMENT
+        // ==========================================
+
+        async function loadPrompts() {
+            const loading = document.getElementById('promptsLoading');
+            const list = document.getElementById('promptsList');
+
+            loading.style.display = 'block';
+            list.innerHTML = '';
+
+            try {
+                const res = await fetch(`${PROMPTS_API_URL}?action=getAll`);
+                const data = await res.json();
+                currentPrompts = data.prompts || [];
+
+                loading.style.display = 'none';
+
+                if (currentPrompts.length === 0) {
+                    list.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📝</div>
+                            <h3>No prompts yet</h3>
+                            <p>Create your first prompt to get started</p>
+                            <button class="btn btn-small" onclick="openAddPrompt()">Add First Prompt</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Render prompts
+                list.innerHTML = currentPrompts.map(prompt => `
+                    <div class="item">
+                        <h4>${prompt.Title}</h4>
+                        <p>${prompt.Description}</p>
+                        <div class="item-meta">
+                            <span>📁 ${prompt.Category} → ${prompt.Subcategory}</span>
+                            <span class="badge badge-${prompt.Difficulty?.toLowerCase() || 'beginner'}">${prompt.Difficulty || 'Beginner'}</span>
+                            <span class="badge badge-${prompt.Status?.toLowerCase() || 'active'}">${prompt.Status || 'Active'}</span>
+                            ${prompt['Estimated Time'] ? `<span>⏱️ ${prompt['Estimated Time']}</span>` : ''}
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn-small" onclick="editPrompt('${prompt.ID}')">✏️ Edit</button>
+                            <button class="btn btn-small btn-danger" onclick="deletePrompt('${prompt.ID}')">🗑️ Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                loading.style.display = 'none';
+                showAlert('promptsAlert', 'Error loading prompts: ' + error.message, 'error');
+            }
+        }
+
+        function openAddPrompt() {
+            editingPromptId = null;
+            document.getElementById('promptModalTitle').textContent = 'Add New Prompt';
+            document.getElementById('promptForm').reset();
+            document.getElementById('promptModal').classList.add('active');
+        }
+
+        function editPrompt(id) {
+            const prompt = currentPrompts.find(p => p.ID === id);
+            if (!prompt) return;
+
+            editingPromptId = id;
+            document.getElementById('promptModalTitle').textContent = 'Edit Prompt';
+
+            // Fill form
+            document.getElementById('promptId').value = prompt.ID;
+            document.getElementById('promptCategory').value = prompt.Category || '';
+            document.getElementById('promptSubcategory').value = prompt.Subcategory || '';
+            document.getElementById('promptTitle').value = prompt.Title || '';
+            document.getElementById('promptDescription').value = prompt.Description || '';
+            document.getElementById('promptContent').value = prompt.Content || '';
+            document.getElementById('promptDifficulty').value = prompt.Difficulty || 'Beginner';
+            document.getElementById('promptTime').value = prompt['Estimated Time'] || '';
+            document.getElementById('promptInputs').value = prompt['Required Inputs'] || '';
+            document.getElementById('promptSteps').value = prompt['Quick Start Steps'] || '';
+            document.getElementById('promptTips').value = prompt['Quick Start Tips'] || '';
+            document.getElementById('promptOutput').value = prompt['Expected Output'] || '';
+            document.getElementById('promptTags').value = prompt.Tags || '';
+            document.getElementById('promptStatus').value = prompt.Status || 'Active';
+
+            document.getElementById('promptModal').classList.add('active');
+        }
+
+        function closePromptModal() {
+            document.getElementById('promptModal').classList.remove('active');
+            editingPromptId = null;
+        }
+
+        async function deletePrompt(id) {
+            if (!confirm('Are you sure you want to delete this prompt?')) return;
+
+            try {
+                const res = await fetch(PROMPTS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'delete',
+                        password: adminPassword,
+                        id: id
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                showAlert('promptsAlert', 'Prompt deleted successfully!', 'success');
+                loadPrompts();
+
+            } catch (error) {
+                showAlert('promptsAlert', 'Error: ' + error.message, 'error');
+            }
+        }
+
+        // Handle prompt form submission
+        document.getElementById('promptForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const promptData = {
+                ID: document.getElementById('promptId').value,
+                Category: document.getElementById('promptCategory').value,
+                Subcategory: document.getElementById('promptSubcategory').value,
+                Title: document.getElementById('promptTitle').value,
+                Description: document.getElementById('promptDescription').value,
+                Content: document.getElementById('promptContent').value,
+                'Required Inputs': document.getElementById('promptInputs').value,
+                Difficulty: document.getElementById('promptDifficulty').value,
+                'Estimated Time': document.getElementById('promptTime').value,
+                'Quick Start Steps': document.getElementById('promptSteps').value,
+                'Quick Start Tips': document.getElementById('promptTips').value,
+                'Expected Output': document.getElementById('promptOutput').value,
+                Tags: document.getElementById('promptTags').value,
+                Status: document.getElementById('promptStatus').value
+            };
+
+            try {
+                const res = await fetch(PROMPTS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: editingPromptId ? 'update' : 'create',
+                        password: adminPassword,
+                        id: editingPromptId,
+                        prompt: promptData
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                showAlert('promptsAlert', `Prompt ${editingPromptId ? 'updated' : 'created'} successfully!`, 'success');
+                closePromptModal();
+                loadPrompts();
+
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
+        async function publishPrompts() {
+            if (!confirm('Generate JSON file for prompts? This will update the website data.')) return;
+
+            try {
+                window.open(`${PROMPTS_API_URL}?action=generateJSON`, '_blank');
+                showAlert('dashboardAlerts', 'Prompts JSON generated! Copy the output and save to /gbs-prompts/prompts.json', 'success');
+            } catch (error) {
+                showAlert('dashboardAlerts', 'Error: ' + error.message, 'error');
+            }
+        }
+
+        // ==========================================
+        // GEMS MANAGEMENT
+        // ==========================================
+
+        async function loadGems() {
+            const loading = document.getElementById('gemsLoading');
+            const list = document.getElementById('gemsList');
+
+            loading.style.display = 'block';
+            list.innerHTML = '';
+
+            try {
+                const res = await fetch(`${GEMS_API_URL}?action=getAll`);
+                const data = await res.json();
+                currentGems = data.gems || [];
+
+                loading.style.display = 'none';
+
+                if (currentGems.length === 0) {
+                    list.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">💎</div>
+                            <h3>No gems yet</h3>
+                            <p>Add your first gem to get started</p>
+                            <button class="btn btn-small" onclick="openAddGem()">Add First Gem</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Render gems
+                list.innerHTML = currentGems.map(gem => `
+                    <div class="item">
+                        <h4>${gem.Title}</h4>
+                        <p>${gem.Description}</p>
+                        <div class="item-meta">
+                            <span>📁 ${gem.Category}</span>
+                            ${gem['Use Case'] ? `<span>🎯 ${gem['Use Case']}</span>` : ''}
+                            <span class="badge badge-${gem.Status?.toLowerCase() || 'active'}">${gem.Status || 'Active'}</span>
+                            ${gem.Featured === 'Yes' ? '<span class="badge badge-featured">⭐ Featured</span>' : ''}
+                            <span>📊 Order: ${gem.Order || 1}</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn-small" onclick="editGem('${gem.ID}')">✏️ Edit</button>
+                            <button class="btn btn-small ${gem.Featured === 'Yes' ? 'btn-secondary' : 'btn-success'}" onclick="toggleGemFeatured('${gem.ID}')">
+                                ${gem.Featured === 'Yes' ? '⭐ Unfeature' : '⭐ Feature'}
+                            </button>
+                            <button class="btn btn-small btn-danger" onclick="deleteGem('${gem.ID}')">🗑️ Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                loading.style.display = 'none';
+                showAlert('gemsAlert', 'Error loading gems: ' + error.message, 'error');
+            }
+        }
+
+        function openAddGem() {
+            editingGemId = null;
+            document.getElementById('gemModalTitle').textContent = 'Add New Gem';
+            document.getElementById('gemForm').reset();
+            document.getElementById('gemModal').classList.add('active');
+        }
+
+        function editGem(id) {
+            const gem = currentGems.find(g => g.ID === id);
+            if (!gem) return;
+
+            editingGemId = id;
+            document.getElementById('gemModalTitle').textContent = 'Edit Gem';
+
+            // Fill form
+            document.getElementById('gemId').value = gem.ID;
+            document.getElementById('gemGemId').value = gem['Gem ID'] || '';
+            document.getElementById('gemTitle').value = gem.Title || '';
+            document.getElementById('gemDescription').value = gem.Description || '';
+            document.getElementById('gemCategory').value = gem.Category || '';
+            document.getElementById('gemUseCase').value = gem['Use Case'] || '';
+            document.getElementById('gemInstructions').value = gem.Instructions || '';
+            document.getElementById('gemExampleInput').value = gem['Example Input'] || '';
+            document.getElementById('gemExampleOutput').value = gem['Example Output'] || '';
+            document.getElementById('gemTips').value = gem.Tips || '';
+            document.getElementById('gemFeatured').value = gem.Featured || 'No';
+            document.getElementById('gemOrder').value = gem.Order || 1;
+            document.getElementById('gemStatus').value = gem.Status || 'Active';
+
+            document.getElementById('gemModal').classList.add('active');
+        }
+
+        function closeGemModal() {
+            document.getElementById('gemModal').classList.remove('active');
+            editingGemId = null;
+        }
+
+        async function deleteGem(id) {
+            if (!confirm('Are you sure you want to delete this gem?')) return;
+
+            try {
+                const res = await fetch(GEMS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'delete',
+                        password: adminPassword,
+                        id: id
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                showAlert('gemsAlert', 'Gem deleted successfully!', 'success');
+                loadGems();
+
+            } catch (error) {
+                showAlert('gemsAlert', 'Error: ' + error.message, 'error');
+            }
+        }
+
+        async function toggleGemFeatured(id) {
+            try {
+                const res = await fetch(GEMS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'toggleFeatured',
+                        password: adminPassword,
+                        id: id
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                showAlert('gemsAlert', 'Featured status updated!', 'success');
+                loadGems();
+                loadDashboard(); // Update stats
+
+            } catch (error) {
+                showAlert('gemsAlert', 'Error: ' + error.message, 'error');
+            }
+        }
+
+        // Handle gem form submission
+        document.getElementById('gemForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const gemData = {
+                ID: document.getElementById('gemId').value,
+                'Gem ID': document.getElementById('gemGemId').value,
+                Title: document.getElementById('gemTitle').value,
+                Description: document.getElementById('gemDescription').value,
+                Category: document.getElementById('gemCategory').value,
+                'Use Case': document.getElementById('gemUseCase').value,
+                Instructions: document.getElementById('gemInstructions').value,
+                'Example Input': document.getElementById('gemExampleInput').value,
+                'Example Output': document.getElementById('gemExampleOutput').value,
+                Tips: document.getElementById('gemTips').value,
+                Featured: document.getElementById('gemFeatured').value,
+                Order: parseInt(document.getElementById('gemOrder').value),
+                Status: document.getElementById('gemStatus').value
+            };
+
+            try {
+                const res = await fetch(GEMS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: editingGemId ? 'update' : 'create',
+                        password: adminPassword,
+                        id: editingGemId,
+                        gem: gemData
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                showAlert('gemsAlert', `Gem ${editingGemId ? 'updated' : 'created'} successfully!`, 'success');
+                closeGemModal();
+                loadGems();
+
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
+        async function publishGems() {
+            if (!confirm('Generate JSON file for gems? This will update the website data.')) return;
+
+            try {
+                window.open(`${GEMS_API_URL}?action=generateJSON`, '_blank');
+                showAlert('dashboardAlerts', 'Gems JSON generated! Copy the output and save to /gemini-mastery/gems-collection/gems.json', 'success');
+            } catch (error) {
+                showAlert('dashboardAlerts', 'Error: ' + error.message, 'error');
+            }
+        }
+
+        // ==========================================
+        // UTILITIES
+        // ==========================================
+
+        function showError(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            setTimeout(() => el.textContent = '', 5000);
+        }
+
+        function showAlert(elementId, message, type) {
+            const el = document.getElementById(elementId);
+            el.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => el.innerHTML = '', 5000);
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if URLs are configured
+            if (PROMPTS_API_URL === 'YOUR_PROMPTS_WEB_APP_URL_HERE' ||
+                GEMS_API_URL === 'YOUR_GEMS_WEB_APP_URL_HERE') {
+                alert('⚠️ Please configure the API URLs in the admin-panel.html file!\n\nReplace:\n- PROMPTS_API_URL\n- GEMS_API_URL\n\nWith your actual Google Apps Script Web App URLs.');
+            }
+        });
+    </script>
+</body>
+</html>
