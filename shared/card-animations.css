@@ -263,3 +263,84 @@
     outline: 2px solid var(--btn-primary, #4A90E2);
     outline-offset: 2px;
 }
+
+/* ============================================================================
+   CLICKABLE CARD INDICATOR SYSTEM
+   Usage: Add .card-clickable to any clickable card for visual affordance
+   ============================================================================ */
+
+.card-clickable {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Always-visible arrow indicator in top-right corner */
+.card-clickable::after {
+    content: "→";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #cbd5e1; /* Light gray - subtle but visible */
+    transition: all 0.2s ease;
+    pointer-events: none; /* Ensures arrow doesn't block clicks */
+    z-index: 10;
+}
+
+/* Hover state - card lifts and arrow turns blue */
+.card-clickable:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card-clickable:hover::after {
+    color: #3b82f6; /* Blue on hover */
+    transform: translateX(2px); /* Slight movement to the right */
+}
+
+/* Active state - card presses down */
+.card-clickable:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for accessibility */
+.card-clickable:focus {
+    outline: 2px solid var(--btn-primary, #4A90E2);
+    outline-offset: 2px;
+}
+
+.card-clickable:focus::after {
+    color: #3b82f6;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .card-clickable:hover {
+        transform: translateY(-3px); /* Reduced movement on mobile */
+    }
+
+    .card-clickable::after {
+        font-size: 1.125rem; /* Slightly smaller on mobile */
+    }
+}
+
+/* Variant: Bottom-right arrow (for cards with top-right content) */
+.card-clickable.card-arrow-bottom::after {
+    top: auto;
+    bottom: 1rem;
+}
+
+/* Variant: Larger arrow for bigger cards */
+.card-clickable.card-arrow-lg::after {
+    font-size: 1.5rem;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+/* Variant: Hidden arrow (for cards that shouldn't have arrow) */
+.card-clickable.card-arrow-none::after {
+    display: none;
+}

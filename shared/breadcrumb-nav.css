@@ -87,14 +87,98 @@
     flex-shrink: 0;
 }
 
-/* Current page (not clickable) */
+/* Current page (not clickable) - "You Are Here" Indicator */
 .breadcrumb-current {
-    color: #1f2937;
-    font-weight: 600;
+    color: #4A90E2;
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
-    padding: 0.25rem 0.5rem;
+    padding: 0.375rem 0.75rem;
+    background: rgba(74, 144, 226, 0.1);
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+/* Subtle left accent bar */
+.breadcrumb-current::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: #4A90E2;
+    border-radius: 0 2px 2px 0;
+}
+
+/* Section-Specific "You Are Here" Colors */
+/* Green for Beginner / RPO Training */
+[data-section="beginner"] .breadcrumb-current,
+[data-section="rpo-beginner"] .breadcrumb-current {
+    color: #059669;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+[data-section="beginner"] .breadcrumb-current::before,
+[data-section="rpo-beginner"] .breadcrumb-current::before {
+    background: #10b981;
+}
+
+/* Blue for Intermediate */
+[data-section="intermediate"] .breadcrumb-current,
+[data-section="rpo-intermediate"] .breadcrumb-current {
+    color: #357ABD;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+[data-section="intermediate"] .breadcrumb-current::before,
+[data-section="rpo-intermediate"] .breadcrumb-current::before {
+    background: #4A90E2;
+}
+
+/* Purple for Advanced */
+[data-section="advanced"] .breadcrumb-current,
+[data-section="rpo-advanced"] .breadcrumb-current {
+    color: #7e22ce;
+    background: rgba(147, 51, 234, 0.1);
+}
+
+[data-section="advanced"] .breadcrumb-current::before,
+[data-section="rpo-advanced"] .breadcrumb-current::before {
+    background: #9333ea;
+}
+
+/* Cyan for Gemini Mastery */
+[data-section="gemini"] .breadcrumb-current {
+    color: #0891b2;
+    background: rgba(6, 182, 212, 0.1);
+}
+
+[data-section="gemini"] .breadcrumb-current::before {
+    background: #06b6d4;
+}
+
+/* Yellow/Orange for GBS Prompts */
+[data-section="prompts"] .breadcrumb-current {
+    color: #ca8a04;
+    background: rgba(234, 179, 8, 0.1);
+}
+
+[data-section="prompts"] .breadcrumb-current::before {
+    background: #eab308;
+}
+
+/* Indigo for Workshops */
+[data-section="workshops"] .breadcrumb-current {
+    color: #4338ca;
+    background: rgba(79, 70, 229, 0.1);
+}
+
+[data-section="workshops"] .breadcrumb-current::before {
+    background: #4f46e5;
 }
 
 /* Separator */
