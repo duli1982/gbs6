@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Gems Collection - GBS Recruitment Mastery</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Ready-to-use Gemini Gems with proven prompts for recruitment scenarios. Transform your hiring workflows with AI-powered solutions.">
+    <meta name="keywords"
+        content="Gemini Gems, AI prompts, recruitment automation, talent acquisition, hiring strategy, AI recruiting">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        /* Gem Cards */
+        .gems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .gem-card {
+            position: relative;
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .gem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .gem-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .gem-category {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            color: #667eea;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .gem-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-ready {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .prompt-preview {
+            position: relative;
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            max-height: 4.5rem;
+            overflow: hidden;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #4c1d95;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .copy-button:hover {
+            background: #5b21b6;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0 3rem;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            background: white;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-tab:hover:not(.active) {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #667eea;
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #dc2626;
+            background: #fef2f2;
+            border-radius: 1rem;
+            margin: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner {
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .gemini-diamond {
+                font-size: 3rem;
+            }
+            .gem-card {
+                padding: 1.5rem;
+            }
+            .gems-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">💎</div>
+            <div class="floating-particle particle-2">✨</div>
+            <div class="floating-particle particle-3">🔮</div>
+            <div class="floating-particle particle-4">💫</div>
+            <div class="floating-particle particle-5">⭐</div>
+            <div class="floating-particle particle-6">🌟</div>
+
+            <!-- Constellation Diamond -->
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">💎</div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Gemini Gems Collection</h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Ready-to-use Gemini Gems with proven prompts for recruitment scenarios. Transform your workflows with AI-powered solutions.
+            </p>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid max-w-4xl mx-auto mt-8" id="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-total">-</div>
+                    <div class="text-gray-700 font-semibold">Total Gems</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-active">-</div>
+                    <div class="text-gray-700 font-semibold">Ready to Use</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-categories">-</div>
+                    <div class="text-gray-700 font-semibold">Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="text-gray-700 font-semibold">Possibilities</div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Filter Tabs (will be populated dynamically) -->
+            <div class="filter-tabs" id="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Gems</button>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="loading-state">
+                <div class="spinner"></div>
+                <p class="mt-4 text-lg font-semibold">Loading gems...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-state" class="error-state" style="display: none;">
+                <h3 class="text-xl font-bold mb-2">Unable to Load Gems</h3>
+                <p class="text-gray-600">Please try refreshing the page or contact support if the problem persists.</p>
+            </div>
+
+            <!-- Gems Grid (will be populated dynamically) -->
+            <div class="gems-grid" id="gems-grid"></div>
+
+            <!-- CTA Section -->
+            <div class="text-center mt-16 bg-white rounded-2xl p-8 shadow-lg max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Recruitment?</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Explore the full potential of AI-powered recruitment. Learn about Gemini Gems and master prompt engineering.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="../gemini-gems/index.html"
+                        class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        Learn About Gemini Gems
+                    </a>
+                    <a href="../key-principles/index.html"
+                        class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold border-2 border-purple-200 hover:border-purple-400 transition-all duration-300">
+                        Master Prompt Engineering
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Configuration
+        const GEMS_JSON_URL = '../../data/gems.json';
+
+        // Color theme mapping
+        const colorThemes = {
+            pink: 'from-pink-500 to-rose-500',
+            purple: 'from-purple-500 to-pink-500',
+            green: 'from-green-500 to-teal-500',
+            teal: 'from-teal-500 to-cyan-500',
+            indigo: 'from-indigo-500 to-purple-500',
+            blue: 'from-blue-500 to-cyan-500',
+            orange: 'from-orange-500 to-red-500',
+            yellow: 'from-yellow-500 to-orange-500'
+        };
+
+        // State
+        let allGems = [];
+        let categories = new Set();
+
+        // Fetch and render gems
+        async function loadGems() {
+            try {
+                const response = await fetch(GEMS_JSON_URL);
+                if (!response.ok) throw new Error('Failed to fetch gems');
+
+                const data = await response.json();
+                allGems = data.gems || [];
+
+                // Extract categories
+                allGems.forEach(gem => {
+                    if (gem.category) categories.add(gem.category);
+                });
+
+                // Update stats
+                updateStats();
+
+                // Render filter tabs
+                renderFilterTabs();
+
+                // Render gems
+                renderGems();
+
+                // Hide loading, show content
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('gems-grid').style.opacity = '1';
+
+                // Initialize animations
+                initializeAnimations();
+
+            } catch (error) {
+                console.error('Error loading gems:', error);
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('error-state').style.display = 'block';
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            document.getElementById('stat-total').textContent = allGems.length;
+            document.getElementById('stat-active').textContent = allGems.filter(g => g.status === 'Active').length;
+            document.getElementById('stat-categories').textContent = categories.size;
+        }
+
+        // Render filter tabs
+        function renderFilterTabs() {
+            const filterTabs = document.getElementById('filter-tabs');
+            const allTab = '<button class="filter-tab active" data-filter="all">All Gems</button>';
+            const categoryTabs = Array.from(categories)
+                .sort()
+                .map(cat => `<button class="filter-tab" data-filter="${cat}">${cat}</button>`)
+                .join('');
+
+            filterTabs.innerHTML = allTab + categoryTabs;
+
+            // Attach event listeners
+            filterTabs.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    filterGems(this.dataset.filter);
+                });
+            });
+        }
+
+        // Render gems
+        function renderGems(filter = 'all') {
+            const gemsGrid = document.getElementById('gems-grid');
+            const filteredGems = filter === 'all'
+                ? allGems
+                : allGems.filter(gem => gem.category === filter);
+
+            gemsGrid.innerHTML = filteredGems.map(gem => createGemCard(gem)).join('');
+        }
+
+        // Create gem card HTML
+        function createGemCard(gem) {
+            const colorGradient = colorThemes[gem.colorTheme] || 'from-purple-500 to-blue-500';
+            const promptPreview = gem.fullPrompt ? gem.fullPrompt.substring(0, 150) + '...' : 'Full prompt available on detail page';
+
+            return `
+                <div class="gem-card" data-category="${gem.category}">
+                    <div class="gem-status status-ready">${gem.status}</div>
+                    <div class="gem-icon bg-gradient-to-br ${colorGradient}">${gem.icon}</div>
+                    <div class="gem-category">${gem.category}</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">${gem.title}</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">${gem.description}</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>🎯 ${gem.category}</span>
+                        <span>⏱️ Quick Setup</span>
+                    </div>
+                    <div class="prompt-preview">
+                        <button class="copy-button" onclick="copyPrompt('${gem.id}')">Copy</button>
+                        <div class="prompt-text" id="prompt-${gem.id}">${promptPreview}</div>
+                    </div>
+                    <a href="gem.html?id=${gem.id}"
+                        class="block w-full mt-4 bg-gradient-to-r ${colorGradient} text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                        View Full Prompt & Setup
+                    </a>
+                </div>
+            `;
+        }
+
+        // Filter gems
+        function filterGems(filter) {
+            const gems = document.querySelectorAll('.gem-card');
+            gems.forEach(gem => {
+                if (filter === 'all' || gem.dataset.category === filter) {
+                    gem.style.display = 'block';
+                    setTimeout(() => {
+                        gem.style.opacity = '1';
+                        gem.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    gem.style.opacity = '0';
+                    gem.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        gem.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Copy prompt functionality
+        function copyPrompt(gemId) {
+            const gem = allGems.find(g => g.id === gemId);
+            if (!gem || !gem.fullPrompt) return;
+
+            navigator.clipboard.writeText(gem.fullPrompt).then(() => {
+                const button = event.target;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.style.background = '#4c1d95';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Initialize scroll animations
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.gem-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Load gems on page load
+        document.addEventListener('DOMContentLoaded', loadGems);
+    </script>
+
+</body>
+
+</html>
