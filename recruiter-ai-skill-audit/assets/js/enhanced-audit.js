@@ -663,14 +663,6 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
                         </svg>
                         Download Enhanced Report
                     </button>
-                    <button id="save-progress-btn" class="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
-                        </svg>
-                        Save My Progress
-                    </button>
                     <button id="share-results-btn" class="inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="18" cy="5" r="3"></circle>
@@ -776,10 +768,6 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
             this.generateEnhancedPDF();
         });
 
-        document.getElementById('save-progress-btn')?.addEventListener('click', () => {
-            this.saveProgress();
-        });
-
         document.getElementById('share-results-btn')?.addEventListener('click', () => {
             this.shareResults();
         });
@@ -822,25 +810,11 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
     saveTaskProgress(week, task, completed) {
         const progressKey = `audit_progress_${this.results.businessUnit}`;
         const progress = JSON.parse(localStorage.getItem(progressKey) || '{}');
-        
+
         if (!progress[week]) progress[week] = {};
         progress[week][task] = completed;
-        
-        localStorage.setItem(progressKey, JSON.stringify(progress));
-    }
 
-    saveProgress() {
-        const progressData = {
-            answers: this.answers,
-            results: this.results,
-            enhancedResults: this.enhancedResults,
-            timestamp: new Date().toISOString()
-        };
-        
-        localStorage.setItem('ai_audit_progress', JSON.stringify(progressData));
-        
-        // Show success message
-        this.showNotification('Progress saved successfully!', 'success');
+        localStorage.setItem(progressKey, JSON.stringify(progress));
     }
 
     shareResults() {
@@ -861,14 +835,293 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
     }
 
     generateEnhancedPDF() {
-        // Enhanced PDF generation with all AI insights
-        this.showNotification('Generating enhanced PDF report...', 'info');
-        
-        // This would integrate with a more sophisticated PDF generation service
-        // For now, we'll use the existing PDF generation with enhanced content
-        setTimeout(() => {
-            this.showNotification('Enhanced PDF downloaded!', 'success');
-        }, 2000);
+        // Create a comprehensive PDF report using browser print
+        const businessUnitLabels = {
+            'sourcing': '🔍 Talent Sourcing',
+            'admin': '📋 Administrative Support',
+            'scheduling': '📅 Interview Scheduling',
+            'compliance': '⚖️ Compliance & Legal',
+            'contracts': '📄 Contract Creation'
+        };
+
+        const businessUnitLabel = businessUnitLabels[this.enhancedResults.businessUnit] || this.enhancedResults.businessUnit;
+        const currentDate = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        const benchmarks = this.enhancedResults.benchmarkingData || {};
+        const insights = this.enhancedResults.aiInsights || {};
+        const roadmap = this.enhancedResults.adaptiveRoadmap || {};
+
+        // Generate comprehensive PDF content
+        const pdfContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>AI Skills Audit Report - ${businessUnitLabel}</title>
+                <style>
+                    @page { margin: 0.75in; }
+                    body {
+                        font-family: 'Segoe UI', Arial, sans-serif;
+                        margin: 0;
+                        padding: 20px;
+                        color: #333;
+                        line-height: 1.6;
+                    }
+                    .header {
+                        text-align: center;
+                        margin-bottom: 30px;
+                        border-bottom: 3px solid #4F46E5;
+                        padding-bottom: 20px;
+                    }
+                    .header h1 { color: #4F46E5; margin-bottom: 10px; font-size: 28px; }
+                    .header h2 { color: #666; margin: 5px 0; font-size: 20px; font-weight: normal; }
+                    .header .date { color: #999; font-size: 14px; margin-top: 10px; }
+
+                    .section { margin: 30px 0; page-break-inside: avoid; }
+                    .section-title {
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #4F46E5;
+                        margin-bottom: 15px;
+                        border-bottom: 2px solid #E5E7EB;
+                        padding-bottom: 8px;
+                    }
+
+                    .metrics {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 15px;
+                        margin: 20px 0;
+                    }
+                    .metric {
+                        text-align: center;
+                        padding: 20px;
+                        background: #F9FAFB;
+                        border-radius: 8px;
+                        border: 1px solid #E5E7EB;
+                    }
+                    .metric-value { font-size: 32px; font-weight: bold; color: #4F46E5; margin-bottom: 5px; }
+                    .metric-label { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+                    .recommendations { margin: 20px 0; }
+                    .recommendation {
+                        margin: 15px 0;
+                        padding: 15px;
+                        border-left: 4px solid #4F46E5;
+                        background: #F9FAFB;
+                        page-break-inside: avoid;
+                    }
+                    .recommendation h3 { margin: 0 0 10px 0; color: #1F2937; font-size: 16px; }
+                    .recommendation-meta { color: #666; font-size: 14px; margin: 8px 0; }
+                    .tools { margin: 10px 0; }
+                    .tool-tag {
+                        display: inline-block;
+                        background: #E0E7FF;
+                        color: #3730A3;
+                        padding: 4px 10px;
+                        margin: 3px;
+                        border-radius: 4px;
+                        font-size: 12px;
+                    }
+
+                    .roadmap { margin: 20px 0; }
+                    .week {
+                        margin: 15px 0;
+                        padding: 15px;
+                        background: #F3F4F6;
+                        border-radius: 8px;
+                        page-break-inside: avoid;
+                    }
+                    .week h3 { margin: 0 0 10px 0; color: #1F2937; }
+                    .week-tasks { margin: 10px 0 10px 20px; }
+                    .week-tasks li { margin: 5px 0; }
+
+                    .benchmarks {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 15px;
+                        margin: 20px 0;
+                    }
+                    .benchmark {
+                        padding: 15px;
+                        background: #FFFBEB;
+                        border-radius: 8px;
+                        border: 1px solid #FDE68A;
+                    }
+                    .benchmark h3 { margin: 0 0 10px 0; color: #92400E; font-size: 14px; font-weight: 600; }
+                    .benchmark-value { font-size: 20px; font-weight: bold; color: #B45309; }
+                    .benchmark-text { font-size: 13px; color: #78350F; margin-top: 5px; }
+
+                    .insights { background: #EFF6FF; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #BFDBFE; }
+                    .insight-item { margin: 10px 0; }
+                    .insight-label { font-weight: 600; color: #1E40AF; }
+
+                    .footer {
+                        margin-top: 40px;
+                        padding-top: 20px;
+                        text-align: center;
+                        color: #6B7280;
+                        font-size: 12px;
+                        border-top: 1px solid #E5E7EB;
+                    }
+
+                    @media print {
+                        body { padding: 0; }
+                        .no-print { display: none; }
+                        .page-break { page-break-after: always; }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>AI-Powered Transformation Report</h1>
+                    <h2>${businessUnitLabel}</h2>
+                    <div class="date">Generated on ${currentDate}</div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Executive Summary</div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-value">${this.enhancedResults.totalTimeSaved} hrs</div>
+                            <div class="metric-label">Saved per week</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">${this.enhancedResults.monthlyTimeSaved} hrs</div>
+                            <div class="metric-label">Saved per month</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">${this.enhancedResults.yearlyTimeSaved} hrs</div>
+                            <div class="metric-label">Saved per year</div>
+                        </div>
+                    </div>
+                </div>
+
+                ${benchmarks.peerComparison ? `
+                <div class="section">
+                    <div class="section-title">Industry Benchmarking</div>
+                    <div class="benchmarks">
+                        <div class="benchmark">
+                            <h3>Your Position</h3>
+                            <div class="benchmark-value">${benchmarks.peerComparison.percentile || '70th'} Percentile</div>
+                            <div class="benchmark-text">${benchmarks.peerComparison.ranking || 'Above average potential'}</div>
+                            ${benchmarks.peerComparison.comparison ? `<div class="benchmark-text" style="margin-top: 8px;">${benchmarks.peerComparison.comparison}</div>` : ''}
+                        </div>
+                        <div class="benchmark">
+                            <h3>Industry Average</h3>
+                            <div class="benchmark-text">${benchmarks.industryStandards?.efficiency || 'Industry benchmarks available'}</div>
+                            <div class="benchmark-text" style="margin-top: 8px;">${benchmarks.industryStandards?.adoption || ''}</div>
+                        </div>
+                        ${benchmarks.bestInClass ? `
+                        <div class="benchmark">
+                            <h3>Top Performers</h3>
+                            <div class="benchmark-text">${benchmarks.bestInClass.target || 'Target performance metrics'}</div>
+                            ${benchmarks.bestInClass.gap ? `<div class="benchmark-text" style="margin-top: 8px;">Gap: ${benchmarks.bestInClass.gap}</div>` : ''}
+                        </div>
+                        ` : ''}
+                        ${benchmarks.improvementPotential ? `
+                        <div class="benchmark">
+                            <h3>Your Potential</h3>
+                            <div class="benchmark-text">${benchmarks.improvementPotential.realistic || 'Improvement opportunities identified'}</div>
+                            <div class="benchmark-text" style="margin-top: 8px;">Timeline: ${benchmarks.improvementPotential.timeline || '3-6 months'}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${insights.quickWins && insights.quickWins.length > 0 ? `
+                <div class="section">
+                    <div class="section-title">Quick Wins (This Week)</div>
+                    ${insights.quickWins.map(win => `
+                        <div class="insight-item">
+                            <div class="insight-label">${win.action}</div>
+                            <div class="benchmark-text">Time savings: ${win.timeSavings} | Difficulty: ${win.difficulty}/5</div>
+                            ${win.tools ? `<div class="tools">${win.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}</div>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
+
+                <div class="section page-break">
+                    <div class="section-title">Your Top AI Opportunities</div>
+                    <div class="recommendations">
+                        ${this.enhancedResults.recommendations.map((rec, idx) => `
+                            <div class="recommendation">
+                                <h3>${idx + 1}. ${rec.name}</h3>
+                                <div class="recommendation-meta">
+                                    <strong>Current Time:</strong> ${rec.hours} hrs/week →
+                                    <strong style="color: #059669;">Potential Savings:</strong> ${rec.savings.toFixed(1)} hrs/week
+                                </div>
+                                <div class="recommendation-meta">
+                                    <strong>Priority:</strong> ${rec.priority.toUpperCase()}
+                                </div>
+                                <div class="tools">
+                                    <strong>Recommended Tools:</strong><br>
+                                    ${rec.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">30-Day Implementation Plan</div>
+                    <div class="roadmap">
+                        ${Object.entries(roadmap).map(([weekKey, weekData]) => {
+                            if (!weekData.title) return '';
+                            return `
+                                <div class="week">
+                                    <h3>${weekData.title}</h3>
+                                    <div><strong>Time Commitment:</strong> ${weekData.timeCommitment || '2-3 hours'}</div>
+                                    ${weekData.focus ? `<div><strong>Focus:</strong> ${weekData.focus}</div>` : ''}
+                                    <ul class="week-tasks">
+                                        ${(weekData.tasks || []).map(task => `<li>${task}</li>`).join('')}
+                                    </ul>
+                                    ${weekData.successMetrics && weekData.successMetrics.length > 0 ? `
+                                        <div style="margin-top: 10px;">
+                                            <strong>Success Metrics:</strong>
+                                            <ul class="week-tasks">
+                                                ${weekData.successMetrics.map(metric => `<li>${metric}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p>Generated by GBS EMEA AI Skills Audit</p>
+                    <p>For more AI tools and training, visit the GBS Learning Hub</p>
+                    <p style="margin-top: 10px;">Report Date: ${currentDate}</p>
+                </div>
+            </body>
+            </html>
+        `;
+
+        // Create a new window and print
+        const printWindow = window.open('', '_blank');
+        if (printWindow) {
+            printWindow.document.write(pdfContent);
+            printWindow.document.close();
+
+            // Wait for content to load, then trigger print dialog
+            printWindow.onload = function() {
+                setTimeout(() => {
+                    printWindow.focus();
+                    printWindow.print();
+                }, 250);
+            };
+
+            this.showNotification('Print dialog opened! Use "Save as PDF" in print options.', 'success');
+        } else {
+            this.showNotification('Please allow popups to download the PDF report.', 'error');
+        }
     }
 
     showNotification(message, type = 'info') {

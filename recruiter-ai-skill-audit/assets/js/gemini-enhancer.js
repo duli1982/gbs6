@@ -103,10 +103,10 @@ class GeminiAuditEnhancer {
                 maxTokens: 1200
             });
 
-            return this.parseBenchmarkingResponse(benchmarks);
+            return this.parseBenchmarkingResponse(benchmarks, auditResults);
         } catch (error) {
             console.error('Failed to generate benchmarking insights:', error);
-            return this.getFallbackBenchmarks();
+            return this.getFallbackBenchmarks(auditResults);
         }
     }
 
@@ -361,7 +361,7 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
         }
     }
 
-    parseBenchmarkingResponse(response) {
+    parseBenchmarkingResponse(response, auditResults) {
         try {
             const parsed = JSON.parse(response);
             return {
@@ -372,7 +372,7 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
             };
         } catch (error) {
             console.error('Failed to parse benchmarking response:', error);
-            return this.getFallbackBenchmarks();
+            return this.getFallbackBenchmarks(auditResults);
         }
     }
 
@@ -580,29 +580,40 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
     // ==================== FALLBACK METHODS ====================
 
     getFallbackInsights(auditResults) {
+        // Use actual audit results to create personalized fallback
+        const topRecommendations = auditResults.recommendations || [];
+        const quickWins = topRecommendations.slice(0, 3).map((rec, idx) => ({
+            action: `Start using AI for ${rec.name}`,
+            timeSavings: `${rec.savings.toFixed(1)} hours/week`,
+            difficulty: idx + 2,
+            tools: rec.tools || ['Google Gemini', 'Microsoft Copilot']
+        }));
+
         return {
-            quickWins: [
-                {
-                    action: 'Set up AI writing assistant',
-                    timeSavings: '2-3 hours/week',
-                    difficulty: 2,
-                    tools: ['Google Gemini', 'Microsoft Copilot']
-                }
-            ],
+            quickWins: quickWins.length > 0 ? quickWins : [{
+                action: 'Set up AI writing assistant',
+                timeSavings: `${auditResults.totalTimeSaved || 3} hours/week`,
+                difficulty: 2,
+                tools: ['Google Gemini', 'Microsoft Copilot']
+            }],
             hiddenOpportunities: [
                 {
-                    opportunity: 'Automate routine communications',
-                    description: 'Use AI to draft emails and status updates'
+                    opportunity: `Automate ${auditResults.businessUnit} workflows`,
+                    description: `Use AI to streamline your ${auditResults.businessUnit} processes`
+                },
+                {
+                    opportunity: 'Build reusable prompt templates',
+                    description: `Create custom prompts for frequent ${auditResults.businessUnit} tasks`
                 }
             ],
             successPredictors: {
-                strengths: ['Existing tool familiarity'],
-                obstacles: ['Time for initial setup'],
-                preparation: ['Block 2 hours for setup']
+                strengths: [`${auditResults.totalTimeSaved} hours/week potential`, 'Clear improvement opportunities'],
+                obstacles: ['Time for initial setup', 'Learning curve'],
+                preparation: ['Block 2-3 hours for setup', 'Start with highest-impact task']
             },
             personalizedInsights: {
-                efficiency: 'Focus on high-impact, low-effort improvements first',
-                competitive: 'AI adoption will differentiate you from peers'
+                efficiency: `You have ${auditResults.totalTimeSaved} hours/week of automation potential`,
+                competitive: `Your ${auditResults.businessUnit} workflow has ${topRecommendations.length} key optimization areas`
             }
         };
     }
@@ -658,51 +669,104 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
     }
 
     getFallbackRoadmap(auditResults) {
+        const topTask = auditResults.recommendations[0];
+        const businessUnit = auditResults.businessUnit;
+        const topTools = topTask?.tools || ['Google Gemini', 'Microsoft Copilot'];
+
         return {
             week1: {
-                title: 'Foundation & Setup',
-                tasks: ['Set up primary AI tool', 'Complete basic training', 'Try first automation'],
+                title: 'Foundation & Quick Wins',
+                tasks: [
+                    `Set up ${topTools[0]} for ${businessUnit} work`,
+                    `Try AI for ${topTask?.name || 'first task'}`,
+                    'Complete basic prompting tutorial',
+                    `Save first ${(topTask?.savings || 1).toFixed(1)} hours`
+                ],
                 timeCommitment: '3-4 hours',
-                successMetrics: ['Tool account created', 'First successful AI interaction']
+                successMetrics: ['Tool setup complete', `First ${topTask?.name || 'task'} automated`, 'Time saved documented'],
+                focus: topTask?.name || 'High-impact task'
             },
             week2: {
-                title: 'Daily Integration',
-                tasks: ['Use AI for routine tasks', 'Build custom prompts', 'Track time savings'],
+                title: 'Daily Integration & Habit Building',
+                tasks: [
+                    `Use AI daily for ${businessUnit} workflows`,
+                    'Build 3-5 custom prompt templates',
+                    `Track time savings (target: ${(auditResults.totalTimeSaved * 0.3).toFixed(1)} hrs)`,
+                    'Refine prompts based on results'
+                ],
                 timeCommitment: '2-3 hours',
-                successMetrics: ['Daily AI usage', 'Documented time savings']
+                successMetrics: ['Daily AI usage', 'Custom prompts created', '30% of target savings achieved'],
+                focus: 'Consistency and optimization'
             },
             week3: {
-                title: 'Workflow Optimization',
-                tasks: ['Integrate with existing tools', 'Share with team', 'Refine processes'],
+                title: 'Workflow Integration & Scaling',
+                tasks: [
+                    `Expand to ${auditResults.recommendations[1]?.name || 'second task'}`,
+                    `Integrate AI with existing ${businessUnit} tools`,
+                    `Target ${(auditResults.totalTimeSaved * 0.6).toFixed(1)} hrs/week savings`,
+                    'Document best practices'
+                ],
                 timeCommitment: '2-3 hours',
-                successMetrics: ['Seamless workflow integration', 'Team adoption']
+                successMetrics: ['Multiple workflows automated', '60% of target savings', 'Process documentation'],
+                focus: 'Breadth and integration'
             },
             week4: {
-                title: 'Mastery & Scaling',
-                tasks: ['Advanced techniques', 'Measure ROI', 'Plan next phase'],
+                title: 'Mastery & Full Potential',
+                tasks: [
+                    `Implement all ${auditResults.recommendations.length} recommendations`,
+                    `Achieve ${auditResults.totalTimeSaved} hrs/week target`,
+                    'Share learnings with team',
+                    'Plan advanced optimizations'
+                ],
                 timeCommitment: '2 hours',
-                successMetrics: ['Quantified benefits', 'Expansion plan']
+                successMetrics: ['Full target savings achieved', 'Team knowledge sharing', 'Continuous improvement plan'],
+                focus: 'Maximum impact and sustainability'
             }
         };
     }
 
-    getFallbackBenchmarks() {
+    getFallbackBenchmarks(auditResults) {
+        // Use audit results and industry data from config
+        const benchmarkData = ConfigManager.getBenchmarks(auditResults.businessUnit);
+        const userSavings = auditResults.totalTimeSaved;
+        const avgSavings = benchmarkData.averageTimeSavings || 10;
+        const topSavings = benchmarkData.topPerformerSavings || 20;
+
+        // Calculate percentile based on user's potential
+        let percentile = '50th';
+        let ranking = 'Average potential';
+        if (userSavings > topSavings * 0.8) {
+            percentile = '90th';
+            ranking = 'Exceptional potential - top 10%';
+        } else if (userSavings > avgSavings * 1.2) {
+            percentile = '75th';
+            ranking = 'Above average potential';
+        } else if (userSavings > avgSavings) {
+            percentile = '60th';
+            ranking = 'Good potential';
+        }
+
         return {
             industryStandards: {
-                efficiency: 'Industry average efficiency: 65%',
-                adoption: 'AI adoption rate: 35%'
+                efficiency: `Industry average for ${auditResults.businessUnit}: ${avgSavings} hrs/week savings`,
+                adoption: `AI adoption rate in ${auditResults.businessUnit}: ${Math.round((benchmarkData.adoptionRate || 0.5) * 100)}%`
             },
             peerComparison: {
-                ranking: 'Above average potential',
-                percentile: '70th percentile'
+                ranking: ranking,
+                percentile: percentile,
+                comparison: userSavings > avgSavings ?
+                    `You're ${((userSavings / avgSavings - 1) * 100).toFixed(0)}% above industry average` :
+                    `You have ${((avgSavings - userSavings) / avgSavings * 100).toFixed(0)}% room to reach average`
             },
             bestInClass: {
-                target: 'Top performers save 25+ hours/week',
-                timeline: '6-12 months to reach'
+                target: `Top ${auditResults.businessUnit} performers save ${topSavings}+ hours/week`,
+                timeline: userSavings > avgSavings ? '3-6 months to reach' : '6-12 months to reach',
+                gap: `${(topSavings - userSavings).toFixed(1)} hours/week to top tier`
             },
             improvementPotential: {
-                realistic: '15-20 hours/week savings',
-                timeline: '3-6 months'
+                realistic: `${Math.min(userSavings * 1.5, topSavings).toFixed(1)} hours/week with optimization`,
+                timeline: '3-6 months',
+                nextSteps: `Focus on your top ${auditResults.recommendations.length} opportunities`
             }
         };
     }
