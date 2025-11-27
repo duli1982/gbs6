@@ -97,44 +97,16 @@ function createGemCard(gem) {
             `).join('')}
         </div>
 
-        <div class="mt-6 flex flex-col gap-3">
+        <div class="mt-6">
             <a href="gem.html?id=${gem.id}"
-               class="inline-block text-center bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+               class="inline-block text-center bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 w-full">
                 Explore This Gem
             </a>
-            <button onclick="copyGemPrompt('${gem.id}')"
-                    class="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50 transition-all duration-300">
-                Copy Prompt
-            </button>
         </div>
     `;
 
     return card;
 }
-
-/**
- * Copy gem prompt to clipboard
- */
-async function copyGemPrompt(gemId) {
-    try {
-        const response = await fetch('gems.json');
-        const data = await response.json();
-        const gem = data.gems.find(g => g.id === gemId);
-
-        if (gem && gem.fullPrompt) {
-            await navigator.clipboard.writeText(gem.fullPrompt);
-            showToast('✅ Prompt copied to clipboard!', 'success');
-        } else {
-            showToast('❌ Prompt not found', 'error');
-        }
-    } catch (error) {
-        console.error('Copy failed:', error);
-        showToast('❌ Failed to copy prompt', 'error');
-    }
-}
-
-// Make function globally available
-window.copyGemPrompt = copyGemPrompt;
 
 /**
  * Show toast notification
