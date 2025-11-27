@@ -1,3 +1,8 @@
+# ========================================
+# SECURITY: Admin Panel - NEVER upload
+# ========================================
+admin/
+
 # Environment variables
 .env
 .env.local

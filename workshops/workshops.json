@@ -1,0 +1,118 @@
+{
+  "workshops": [
+    {
+      "id": "ai-sourcing-masterclass",
+      "icon": "🤖",
+      "iconBackground": "bg-orange-100",
+      "title": "AI-Powered Sourcing Masterclass",
+      "date": "January 15, 2026",
+      "time": "10:00 AM EST",
+      "instructor": "Will be revealed",
+      "status": "coming-soon",
+      "statusLabel": "Coming Soon",
+      "description": "Dive deep into advanced sourcing techniques using AI tools to find top-tier candidates faster.",
+      "order": 1
+    },
+    {
+      "id": "prompt-engineering",
+      "icon": "✨",
+      "iconBackground": "bg-yellow-100",
+      "title": "Prompt Engineering for Recruiters",
+      "date": "February 23, 2026",
+      "time": "1:00 PM EST",
+      "instructor": "Will be revealed",
+      "status": "coming-soon",
+      "statusLabel": "Coming Soon",
+      "description": "Learn the CREATE framework and craft powerful prompts that deliver precise results for any GBS task.",
+      "order": 2
+    },
+    {
+      "id": "leadership-ai-era",
+      "icon": "👔",
+      "iconBackground": "bg-blue-100",
+      "title": "Leadership in the AI Era",
+      "date": "March 5, 2026",
+      "time": "11:00 AM EST",
+      "instructor": "Will be revealed",
+      "status": "coming-soon",
+      "statusLabel": "Coming Soon",
+      "description": "A strategic workshop for GBS leaders on implementing AI, managing change, and driving team adoption.",
+      "order": 3
+    },
+    {
+      "id": "automating-workflow",
+      "icon": "🔧",
+      "iconBackground": "bg-purple-100",
+      "title": "Automating Your Workflow",
+      "date": "April 13, 2026",
+      "time": "2:00 PM EST",
+      "instructor": "Will be revealed",
+      "status": "coming-soon",
+      "statusLabel": "Coming Soon",
+      "description": "Identify and automate repetitive tasks in your daily workflow to save time and boost productivity.",
+      "order": 4
+    }
+  ],
+  "workshopInfo": {
+    "whatToExpect": [
+      {
+        "icon": "✓",
+        "color": "text-green-500",
+        "text": "Interactive live sessions with industry experts"
+      },
+      {
+        "icon": "✓",
+        "color": "text-green-500",
+        "text": "Hands-on exercises and real-world examples"
+      },
+      {
+        "icon": "✓",
+        "color": "text-green-500",
+        "text": "Q&A sessions and peer networking"
+      },
+      {
+        "icon": "✓",
+        "color": "text-green-500",
+        "text": "Downloadable resources and templates"
+      }
+    ],
+    "registrationDetails": [
+      {
+        "icon": "•",
+        "color": "text-blue-500",
+        "text": "Limited seats available (first-come, first-served)"
+      },
+      {
+        "icon": "•",
+        "color": "text-blue-500",
+        "text": "All workshops are free for GBS employees"
+      },
+      {
+        "icon": "•",
+        "color": "text-blue-500",
+        "text": "Calendar invites sent upon registration"
+      },
+      {
+        "icon": "•",
+        "color": "text-blue-500",
+        "text": "Recordings available for registered attendees"
+      }
+    ]
+  },
+  "registrationModal": {
+    "icon": "🎓",
+    "title": "Workshop Registration",
+    "comingSoonTitle": "Coming Soon!",
+    "message": "Workshop registration is currently being finalized. Please contact your manager for early access and priority enrollment.",
+    "subMessage": "We'll notify you as soon as registration opens!",
+    "buttonText": "Got It"
+  },
+  "metadata": {
+    "version": "1.0",
+    "created": "2025-11-23",
+    "lastUpdated": "2025-11-23",
+    "totalWorkshops": 4,
+    "headerTitle": "Interactive Workshops",
+    "headerDescription": "Join live sessions with experts to enhance your skills. Seats are limited!"
+  }
+}

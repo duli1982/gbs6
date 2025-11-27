@@ -612,8 +612,13 @@
             <!-- Main Content (Left Side) -->
             <main class="w-3/4 pr-4">
                 <div class="p-6 md:p-8">
-                    <button id="back-to-home-btn" class="text-gray-500 hover:text-black mb-8">&larr; Back to All
-                        Categories</button>
+                    <button id="back-to-home-btn"
+                       class="btn-primary btn-icon mb-8">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Back to All Categories
+                    </button>
                     <!-- Prompt content will be injected here by JavaScript -->
                     <div id="prompt-display-area"></div>
                 </div>
@@ -859,7 +864,7 @@
                         <ul class="space-y-1">${subCategoryLinks}</ul>
                     </div>
                     <div class="mt-auto">
-                        <button class="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-200 shadow-sm hover:shadow-md" data-category="${categoryName}">Explore ${categoryName} →</button>
+                        <button class="btn-primary btn-full btn-icon" data-category="${categoryName}">Explore ${categoryName} →</button>
                     </div>
                 `;
                 categoryCardsContainer.appendChild(card);
@@ -909,10 +914,10 @@
                         <h3 class="${titleClass} font-semibold main-heading">${highlightedTitle}</h3>
                     </div>
                     <div class="flex-shrink-0 ml-4">
-                        <button class="copy-btn text-sm py-1 px-3 rounded-md bg-indigo-100 text-indigo-700 hover:bg-indigo-200" data-prompt-content="${escapedContent}">
+                        <button class="copy-btn btn-primary btn-sm" data-prompt-content="${escapedContent}">
                             Copy
                         </button>
-                        <button class="create-gem-btn text-sm py-1 px-3 rounded-md bg-green-100 text-green-700 hover:bg-green-200 ml-2" data-prompt-content="${escapedContent}">
+                        <button class="create-gem-btn btn-success btn-sm ml-2" data-prompt-content="${escapedContent}">
                             Create Gem
                         </button>
                     </div>
@@ -948,7 +953,7 @@
                     <h3 class="mt-2 text-sm font-semibold text-gray-900">No prompts found</h3>
                     <p class="mt-1 text-sm text-gray-500">We couldn’t find anything with that search term. Please try again.</p>
                     <div class="mt-6">
-                        <button type="button" id="clear-search-suggestions-btn" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        <button type="button" id="clear-search-suggestions-btn" class="btn-primary btn-sm">
                             Clear Search
                         </button>
                     </div>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button System Reference - GBS EMEA Learning Hub</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Button Styles -->
+    <link rel="stylesheet" href="buttons.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .example-row {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tier-1 { background: #dbeafe; color: #1e40af; }
+        .tier-2 { background: #fef3c7; color: #92400e; }
+        .tier-3 { background: #e5e7eb; color: #374151; }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-3">Button System Reference</h1>
+            <p class="text-blue-100 text-lg">Standardized button components for GBS EMEA Learning Hub</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
+
+        <!-- Introduction -->
+        <div class="section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Three-Tier Button Hierarchy</h2>
+            <p class="text-gray-600 mb-6">Our button system follows a clear visual hierarchy to guide users through different action priorities:</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <span class="tier-badge tier-1 mb-2">Tier 1</span>
+                    <h3 class="font-bold text-lg text-gray-900 mt-2">Primary Buttons</h3>
+                    <p class="text-sm text-gray-600 mt-2">Gradient buttons for main actions and CTAs</p>
+                </div>
+
+                <div class="border-l-4 border-yellow-500 pl-4">
+                    <span class="tier-badge tier-2 mb-2">Tier 2</span>
+                    <h3 class="font-bold text-lg text-gray-900 mt-2">Secondary Buttons</h3>
+                    <p class="text-sm text-gray-600 mt-2">Outline buttons for alternative actions</p>
+                </div>
+
+                <div class="border-l-4 border-gray-400 pl-4">
+                    <span class="tier-badge tier-3 mb-2">Tier 3</span>
+                    <h3 class="font-bold text-lg text-gray-900 mt-2">Tertiary Buttons</h3>
+                    <p class="text-sm text-gray-600 mt-2">Text links for navigation and low-priority actions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Primary Buttons -->
+        <div class="section">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="tier-badge tier-1">Tier 1</span>
+                <h2 class="text-2xl font-bold text-gray-900">Primary Buttons</h2>
+            </div>
+
+            <p class="text-gray-600 mb-6"><strong>Usage:</strong> Main call-to-action buttons, important actions, form submissions</p>
+
+            <!-- Default Blue -->
+            <h3 class="font-semibold text-lg text-gray-800 mb-3">Default (Blue)</h3>
+            <div class="example-row">
+                <button class="btn-primary btn-sm">Small Primary</button>
+                <button class="btn-primary">Default Primary</button>
+                <button class="btn-primary btn-lg">Large Primary</button>
+                <button class="btn-primary btn-icon">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                    With Icon
+                </button>
+                <button class="btn-primary" disabled>Disabled</button>
+            </div>
+            <div class="code-block">
+&lt;button class="btn-primary"&gt;Default Primary&lt;/button&gt;
+&lt;button class="btn-primary btn-sm"&gt;Small Primary&lt;/button&gt;
+&lt;button class="btn-primary btn-lg"&gt;Large Primary&lt;/button&gt;
+&lt;button class="btn-primary btn-icon"&gt;With Icon&lt;/button&gt;</div>
+
+            <!-- Color Variants -->
+            <h3 class="font-semibold text-lg text-gray-800 mb-3 mt-8">Color Variants</h3>
+            <div class="example-row">
+                <button class="btn-primary btn-green">Green (Beginner)</button>
+                <button class="btn-primary btn-purple">Purple (Advanced)</button>
+                <button class="btn-primary btn-indigo">Indigo (Onboarding)</button>
+                <button class="btn-primary btn-yellow">Yellow (Prompts)</button>
+                <button class="btn-primary btn-warning">Warning</button>
+                <button class="btn-primary btn-danger">Danger</button>
+            </div>
+            <div class="code-block">
+&lt;button class="btn-primary btn-green"&gt;Green&lt;/button&gt;
+&lt;button class="btn-primary btn-purple"&gt;Purple&lt;/button&gt;
+&lt;button class="btn-primary btn-indigo"&gt;Indigo&lt;/button&gt;
+&lt;button class="btn-primary btn-yellow"&gt;Yellow&lt;/button&gt;</div>
+
+            <!-- CTA Variant -->
+            <h3 class="font-semibold text-lg text-gray-800 mb-3 mt-8">CTA (Hero Sections)</h3>
+            <div class="example-row">
+                <button class="btn-cta">Start Learning Now</button>
+                <button class="btn-cta btn-green">Get Started Free</button>
+            </div>
+            <div class="code-block">
+&lt;button class="btn-cta"&gt;Start Learning Now&lt;/button&gt;</div>
+        </div>
+
+        <!-- Secondary Buttons -->
+        <div class="section">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="tier-badge tier-2">Tier 2</span>
+                <h2 class="text-2xl font-bold text-gray-900">Secondary Buttons (Outline)</h2>
+            </div>
+
+            <p class="text-gray-600 mb-6"><strong>Usage:</strong> Alternative actions, "Cancel" buttons, secondary CTAs</p>
+
+            <h3 class="font-semibold text-lg text-gray-800 mb-3">Default (Blue Outline)</h3>
+            <div class="example-row">
+                <button class="btn-outline btn-sm">Small Outline</button>
+                <button class="btn-outline">Default Outline</button>
+                <button class="btn-outline btn-lg">Large Outline</button>
+                <button class="btn-outline btn-icon">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Go Back
+                </button>
+            </div>
+            <div class="code-block">
+&lt;button class="btn-outline"&gt;Default Outline&lt;/button&gt;
+&lt;button class="btn-outline btn-icon"&gt;With Icon&lt;/button&gt;</div>
+
+            <h3 class="font-semibold text-lg text-gray-800 mb-3 mt-8">Color Variants</h3>
+            <div class="example-row">
+                <button class="btn-outline btn-green">Green Outline</button>
+                <button class="btn-outline btn-purple">Purple Outline</button>
+                <button class="btn-outline btn-indigo">Indigo Outline</button>
+                <button class="btn-outline btn-warning">Warning Outline</button>
+                <button class="btn-outline btn-danger">Danger Outline</button>
+            </div>
+            <div class="code-block">
+&lt;button class="btn-outline btn-green"&gt;Green Outline&lt;/button&gt;
+&lt;button class="btn-outline btn-purple"&gt;Purple Outline&lt;/button&gt;</div>
+        </div>
+
+        <!-- Tertiary Buttons -->
+        <div class="section">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="tier-badge tier-3">Tier 3</span>
+                <h2 class="text-2xl font-bold text-gray-900">Tertiary Buttons (Text Links)</h2>
+            </div>
+
+            <p class="text-gray-600 mb-6"><strong>Usage:</strong> Navigation links, "Learn More" links, low-priority actions</p>
+
+            <h3 class="font-semibold text-lg text-gray-800 mb-3">Default (Blue Text)</h3>
+            <div class="example-row">
+                <a href="#" class="btn-tertiary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Back to Home
+                </a>
+                <a href="#" class="btn-tertiary">Learn More →</a>
+                <a href="#" class="btn-tertiary">View Details</a>
+            </div>
+            <div class="code-block">
+&lt;a href="#" class="btn-tertiary"&gt;Learn More →&lt;/a&gt;
+&lt;a href="#" class="btn-tertiary btn-icon"&gt;
+    &lt;svg&gt;...&lt;/svg&gt;
+    Back to Home
+&lt;/a&gt;</div>
+
+            <h3 class="font-semibold text-lg text-gray-800 mb-3 mt-8">Color Variants</h3>
+            <div class="example-row">
+                <a href="#" class="btn-tertiary btn-green">Green Link →</a>
+                <a href="#" class="btn-tertiary btn-purple">Purple Link →</a>
+                <a href="#" class="btn-tertiary btn-indigo">Indigo Link →</a>
+                <a href="#" class="btn-tertiary btn-danger">Danger Link →</a>
+            </div>
+            <div class="code-block">
+&lt;a href="#" class="btn-tertiary btn-green"&gt;Green Link&lt;/a&gt;</div>
+        </div>
+
+        <!-- Special Buttons -->
+        <div class="section">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Special Button Types</h2>
+
+            <!-- Filter Buttons -->
+            <h3 class="font-semibold text-lg text-gray-800 mb-3">Filter Buttons</h3>
+            <p class="text-gray-600 mb-4"><strong>Usage:</strong> Tag filters, category selection, toggles</p>
+            <div class="example-row">
+                <button class="btn-filter">All</button>
+                <button class="btn-filter active">Beginner</button>
+                <button class="btn-filter">Intermediate</button>
+                <button class="btn-filter">Advanced</button>
+            </div>
+            <div class="code-block">
+&lt;button class="btn-filter"&gt;All&lt;/button&gt;
+&lt;button class="btn-filter active"&gt;Beginner&lt;/button&gt;</div>
+
+            <!-- Loading State -->
+            <h3 class="font-semibold text-lg text-gray-800 mb-3 mt-8">Loading State</h3>
+            <div class="example-row">
+                <button class="btn-primary btn-loading">Loading...</button>
+                <button class="btn-outline btn-loading">Loading...</button>
+            </div>
+            <div class="code-block">
+&lt;button class="btn-primary btn-loading"&gt;Loading...&lt;/button&gt;</div>
+        </div>
+
+        <!-- Button Groups -->
+        <div class="section">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Button Groups</h2>
+
+            <h3 class="font-semibold text-lg text-gray-800 mb-3">Horizontal Group</h3>
+            <div class="btn-group">
+                <button class="btn-primary">Primary Action</button>
+                <button class="btn-outline">Cancel</button>
+                <button class="btn-tertiary">Learn More →</button>
+            </div>
+            <div class="code-block mt-4">
+&lt;div class="btn-group"&gt;
+    &lt;button class="btn-primary"&gt;Primary Action&lt;/button&gt;
+    &lt;button class="btn-outline"&gt;Cancel&lt;/button&gt;
+    &lt;button class="btn-tertiary"&gt;Learn More&lt;/button&gt;
+&lt;/div&gt;</div>
+
+            <h3 class="font-semibold text-lg text-gray-800 mb-3 mt-8">Vertical Group</h3>
+            <div class="btn-group btn-group-vertical" style="max-width: 300px;">
+                <button class="btn-primary">Start Course</button>
+                <button class="btn-outline">View Syllabus</button>
+                <button class="btn-tertiary">Preview Lessons →</button>
+            </div>
+            <div class="code-block mt-4">
+&lt;div class="btn-group btn-group-vertical"&gt;
+    &lt;button class="btn-primary"&gt;Start Course&lt;/button&gt;
+    &lt;button class="btn-outline"&gt;View Syllabus&lt;/button&gt;
+&lt;/div&gt;</div>
+        </div>
+
+        <!-- Usage Guidelines -->
+        <div class="section bg-blue-50">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Usage Guidelines</h2>
+
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">✅ Do</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Use primary buttons for the most important action on a page</li>
+                        <li>Limit to 1-2 primary buttons per section</li>
+                        <li>Match button colors to section themes (green for beginner, purple for advanced)</li>
+                        <li>Use tertiary buttons for navigation and "back" links</li>
+                        <li>Ensure buttons have clear, action-oriented labels</li>
+                        <li>Use loading states for async actions</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">❌ Don't</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Don't use multiple primary buttons of different colors in the same section</li>
+                        <li>Don't use primary buttons for navigation</li>
+                        <li>Don't use vague labels like "Click Here" or "Submit"</li>
+                        <li>Don't make buttons too small (minimum 44x44px for touch targets)</li>
+                        <li>Don't override button styles with inline CSS</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-2">📐 Accessibility</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>All buttons meet WCAG 2.1 AA contrast requirements</li>
+                        <li>Buttons have minimum 44x44px touch targets</li>
+                        <li>Hover and focus states are clearly visible</li>
+                        <li>Icons should have descriptive text (not icon-only buttons)</li>
+                        <li>Use disabled state appropriately and provide feedback</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Palette Reference -->
+        <div class="section">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Color Theme Mapping</h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="border-l-4 border-green-500 pl-4">
+                    <h3 class="font-bold text-gray-800">Green (.btn-green)</h3>
+                    <p class="text-sm text-gray-600 mt-1">Beginner content, success states, positive actions</p>
+                </div>
+
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="font-bold text-gray-800">Blue (default)</h3>
+                    <p class="text-sm text-gray-600 mt-1">General actions, intermediate content, default CTAs</p>
+                </div>
+
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <h3 class="font-bold text-gray-800">Purple (.btn-purple)</h3>
+                    <p class="text-sm text-gray-600 mt-1">Advanced content, premium features</p>
+                </div>
+
+                <div class="border-l-4 border-indigo-500 pl-4">
+                    <h3 class="font-bold text-gray-800">Indigo (.btn-indigo)</h3>
+                    <p class="text-sm text-gray-600 mt-1">Onboarding flows, setup wizards</p>
+                </div>
+
+                <div class="border-l-4 border-yellow-500 pl-4">
+                    <h3 class="font-bold text-gray-800">Yellow (.btn-yellow)</h3>
+                    <p class="text-sm text-gray-600 mt-1">Prompts library, highlights, featured content</p>
+                </div>
+
+                <div class="border-l-4 border-orange-500 pl-4">
+                    <h3 class="font-bold text-gray-800">Warning (.btn-warning)</h3>
+                    <p class="text-sm text-gray-600 mt-1">Caution actions, important notices</p>
+                </div>
+
+                <div class="border-l-4 border-red-500 pl-4">
+                    <h3 class="font-bold text-gray-800">Danger (.btn-danger)</h3>
+                    <p class="text-sm text-gray-600 mt-1">Destructive actions, delete operations</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">GBS EMEA Learning Hub - Button System Reference</p>
+            <p class="text-xs text-gray-500 mt-2">Last updated: November 2025</p>
+        </div>
+    </footer>
+
+</body>
+</html>

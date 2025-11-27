@@ -1,0 +1,11 @@
+# ========================================
+# SECURITY: Admin Panel - NEVER deploy
+# ========================================
+admin/
+
+# Claude settings (personal preferences)
+.claude/
+
+# Development files
+*.md
+!README.md

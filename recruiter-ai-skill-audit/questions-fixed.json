@@ -468,7 +468,7 @@
     },
     {
       "id": "admin_data_cleanup_frequency",
-      "question": "Frequency of data clean-up across ATS/Sheets/trackers?",
+      "question": "Frequency of data clean-up across ATS/VMS/Sheets/trackers?",
       "type": "single",
       "showIf": "admin",
       "options": [
@@ -532,6 +532,21 @@
         {
           "value": "data_entry",
           "label": "Manual data entry errors",
+          "aiPotential": "high"
+        },
+        {
+          "value": "inconsistent_dates",
+          "label": "Inconsistent date formatting",
+          "aiPotential": "high"
+        },
+        {
+          "value": "outdated_data",
+          "label": "Outdated data",
+          "aiPotential": "high"
+        },
+        {
+          "value": "integration_errors",
+          "label": "Integration errors between systems",
           "aiPotential": "high"
         }
       ]
@@ -645,6 +660,31 @@
           "value": "email_calendar",
           "label": "Email/Calendar systems",
           "aiPotential": "high"
+        },
+        {
+          "value": "sap_fieldglass",
+          "label": "SAP Fieldglass (VMS)",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "beeline",
+          "label": "Beeline (VMS)",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "hr4you",
+          "label": "HR4You (VMS)",
+          "aiPotential": "medium"
+        },
+        {
+          "value": "smartsheets",
+          "label": "Smartsheets (MSP tracking)",
+          "aiPotential": "high"
+        },
+        {
+          "value": "excel",
+          "label": "Excel (reporting)",
+          "aiPotential": "high"
         }
       ]
     },
@@ -714,7 +754,7 @@
     },
     {
       "id": "scheduling_multi_panel_timezone",
-      "question": "% of interviews that are multi-panel or multi-timezone?",
+      "question": "% of interviews with multiple interviewers or across multiple timezones? (Multiple interviewers = several interviews in a row for the same candidate)",
       "type": "single",
       "showIf": "scheduling",
       "options": [
@@ -778,45 +818,45 @@
     },
     {
       "id": "scheduling_availability_collection",
-      "question": "How do you collect availability?",
-      "type": "single",
+      "question": "How do you collect availability? (Select all that apply - methods may vary by interview or interviewer)",
+      "type": "checkbox",
       "showIf": "scheduling",
       "options": [
         {
           "value": "email_pingpong",
           "label": "Email ping-pong",
-          "hours": 5,
-          "savingsPct": 90
+          "aiPotential": "high"
         },
         {
           "value": "calendar_overlay",
           "label": "Calendar overlay tools",
-          "hours": 3,
-          "savingsPct": 70
+          "aiPotential": "medium"
         },
         {
           "value": "microsoft_bookings",
           "label": "Microsoft Bookings",
-          "hours": 1,
-          "savingsPct": 40
+          "aiPotential": "low"
         },
         {
           "value": "google_calendar_scheduling",
           "label": "Google Calendar appointment slots",
-          "hours": 1,
-          "savingsPct": 40
+          "aiPotential": "low"
         },
         {
           "value": "ats_assistant",
           "label": "ATS scheduling assistant",
-          "hours": 2,
-          "savingsPct": 60
+          "aiPotential": "medium"
+        },
+        {
+          "value": "offline_ats",
+          "label": "Availability checked offline but invites sent through ATS",
+          "aiPotential": "high"
         }
       ]
     },
     {
       "id": "scheduling_calendar_integration",
-      "question": "Which calendars are integrated? (Select all that apply)",
+      "question": "Which calendar systems are integrated with your ATS/scheduling tools? (Select all that apply)",
       "type": "checkbox",
       "showIf": "scheduling",
       "options": [
@@ -908,7 +948,7 @@
     },
     {
       "id": "scheduling_noshow_rate",
-      "question": "No-show rate in last 90 days?",
+      "question": "No-show rate in last 90 days? (Include both candidate and interviewer no-shows)",
       "type": "single",
       "showIf": "scheduling",
       "options": [
@@ -951,6 +991,11 @@
           "aiPotential": "high"
         },
         {
+          "value": "interviewer_availability",
+          "label": "Limited interviewer availability",
+          "aiPotential": "high"
+        },
+        {
           "value": "last_minute_changes",
           "label": "Last-minute changes",
           "aiPotential": "medium"
@@ -958,6 +1003,11 @@
         {
           "value": "missing_links",
           "label": "Missing links/prep materials",
+          "aiPotential": "high"
+        },
+        {
+          "value": "missing_incorrect_info",
+          "label": "Missing or incorrect information from hiring team",
           "aiPotential": "high"
         },
         {

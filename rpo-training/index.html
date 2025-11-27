@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="../shared/scroll-to-top.css">
     <link rel="stylesheet" href="../shared/buttons.css">
     <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/tooltips.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -86,18 +87,24 @@
 
                 <!-- Curriculum Stats -->
                 <div class="mt-8 inline-flex items-center gap-8 bg-white px-8 py-4 rounded-full shadow-sm border border-gray-200">
-                    <div class="text-center">
-                        <div class="google-sans text-2xl font-bold text-blue-600">7</div>
+                    <div class="stat-tooltip text-center" data-tooltip="Interactive learning modules covering AI fundamentals, automation, and leadership" tabindex="0">
+                        <div class="google-sans text-2xl font-bold text-blue-600">
+                            7 <span class="info-icon">ⓘ</span>
+                        </div>
                         <div class="text-xs text-gray-600 uppercase">Modules</div>
                     </div>
                     <div class="w-px h-8 bg-gray-300"></div>
-                    <div class="text-center">
-                        <div class="google-sans text-2xl font-bold text-green-600">3</div>
+                    <div class="stat-tooltip text-center" data-tooltip="Beginner, Intermediate, and Advanced learning paths tailored to your skill level" tabindex="0">
+                        <div class="google-sans text-2xl font-bold text-green-600">
+                            3 <span class="info-icon">ⓘ</span>
+                        </div>
                         <div class="text-xs text-gray-600 uppercase">Phases</div>
                     </div>
                     <div class="w-px h-8 bg-gray-300"></div>
-                    <div class="text-center">
-                        <div class="google-sans text-2xl font-bold text-purple-600">~8 hrs</div>
+                    <div class="stat-tooltip text-center" data-tooltip="Average total completion time - learn at your own pace with flexible scheduling" tabindex="0">
+                        <div class="google-sans text-2xl font-bold text-purple-600">
+                            ~8 hrs <span class="info-icon">ⓘ</span>
+                        </div>
                         <div class="text-xs text-gray-600 uppercase">Total Time</div>
                     </div>
                 </div>
@@ -130,7 +137,7 @@
                                 Practice Simulation (10 min)
                             </div>
                         </div>
-                        <button onclick="startLearningPath('beginner')" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors" aria-label="Start Beginner learning path - 35 minutes total">
+                        <button onclick="startLearningPath('beginner')" class="btn-primary btn-green btn-full" aria-label="Start Beginner learning path - 35 minutes total">
                             Start Beginner Path
                         </button>
                     </div>
@@ -154,7 +161,7 @@
                                 Workflow Integration (15 min)
                             </div>
                         </div>
-                        <button onclick="startLearningPath('intermediate')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors" aria-label="Start Intermediate learning path - 50 minutes total">
+                        <button onclick="startLearningPath('intermediate')" class="btn-primary btn-full" aria-label="Start Intermediate learning path - 50 minutes total">
                             Start Intermediate Path
                         </button>
                     </div>
@@ -178,7 +185,7 @@
                                 Team Implementation (20 min)
                             </div>
                         </div>
-                        <button onclick="startLearningPath('advanced')" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors" aria-label="Start Advanced learning path - 75 minutes total">
+                        <button onclick="startLearningPath('advanced')" class="btn-primary btn-purple btn-full" aria-label="Start Advanced learning path - 75 minutes total">
                             Start Advanced Path
                         </button>
                     </div>
@@ -190,7 +197,7 @@
                         <div class="text-4xl mb-3">🛠️</div>
                         <h4 class="google-sans text-xl font-bold text-cyan-800 mb-3">AI Tools Lab</h4>
                         <p class="text-cyan-700 mb-4">Access practical AI tools anytime - prompt builders, email enhancers, and more!</p>
-                        <button onclick="window.location.href='ai-tools-lab.html'" class="bg-cyan-600 hover:bg-cyan-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                        <button onclick="window.location.href='ai-tools-lab.html'" class="btn-primary btn-icon">
                             🚀 Open Tools Lab
                         </button>
                     </div>
