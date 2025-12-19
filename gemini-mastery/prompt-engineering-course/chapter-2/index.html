@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Crafting Prompts for Different Outputs - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Learn to craft prompts for different output types: creative writing, factual text, Q&A, lists, and conversations. Master output control with Gemini AI.">
+    <meta name="keywords"
+        content="prompt types, output control, creative writing prompts, factual prompts, Q&A prompts, list generation">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/fonts.css">
+    <link rel="stylesheet" href="../../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../../shared/buttons.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Chapter 2 specific styling */
+        .chapter-container {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .output-type-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .output-type-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .output-type-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+
+        .output-type-card.active {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+        }
+
+        .prompt-builder {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .prompt-preview {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 16px 0;
+        }
+
+        .interactive-example {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .example-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: #f3f4f6;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .tab-button.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .exercise-workspace {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .prompt-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+        }
+
+        .prompt-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .output-preview {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            min-height: 100px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .floating-chapter {
+            animation: float-chapter 4s ease-in-out infinite;
+        }
+
+        @keyframes float-chapter {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(-1deg);
+            }
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 24px 0;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: #3b82f6;
+            transform: scale(1.2);
+        }
+
+        .progress-dot.completed {
+            background: #10b981;
+        }
+
+        @media (max-width: 768px) {
+            .output-type-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .example-tabs {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800"> <!-- E
+nhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Prompt Engineering Course">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Prompt Engineering Course</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Chapter 2</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Chapter Header -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="floating-chapter text-6xl mb-6">🎨</div>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Chapter 2: Crafting Prompts for Different Outputs
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Discover how to tailor your prompts for specific types of outputs. Learn to guide Gemini toward
+                creative writing, analytical responses, code generation, and more.
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-6 text-sm text-gray-500">
+                <span>⏱️ ~25 minutes</span>
+                <span>📚 Beginner Level</span>
+                <span>🎨 Output Types</span>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-dot completed" title="Chapter 1 Complete"></div>
+                <div class="progress-dot active" title="Chapter 2 Current"></div>
+                <div class="progress-dot" title="Chapter 3"></div>
+                <div class="progress-dot" title="Chapter 4"></div>
+                <div class="progress-dot" title="Chapter 5"></div>
+                <div class="progress-dot" title="Chapter 6"></div>
+            </div>
+            <!-- Section 2.1: Introduction to Controlling Output -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">🎯</span>
+                    2.1 Introduction to Controlling Output
+                </h2>
+
+                <div class="prompt-builder">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        Crafting prompts for Gemini requires knowing how to guide the AI toward producing a desired
+                        style or type of output.
+                        Whether you're looking for factual summaries, creative narratives, or structured lists,
+                        well-constructed prompts are key.
+                    </p>
+
+                    <!-- Interactive Output Type Selector -->
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-4">🎨 Choose an Output Type to Explore:
+                    </h3>
+
+                    <div class="output-type-selector">
+                        <div class="output-type-card active" onclick="selectOutputType('creative')" id="creative-card">
+                            <div class="text-3xl mb-2">✍️</div>
+                            <h4 class="font-bold text-gray-900 mb-1">Creative Writing</h4>
+                            <p class="text-gray-600 text-sm">Stories, poetry, narratives</p>
+                        </div>
+
+                        <div class="output-type-card" onclick="selectOutputType('factual')" id="factual-card">
+                            <div class="text-3xl mb-2">📊</div>
+                            <h4 class="font-bold text-gray-900 mb-1">Factual Text</h4>
+                            <p class="text-gray-600 text-sm">Explanations, summaries</p>
+                        </div>
+
+                        <div class="output-type-card" onclick="selectOutputType('qa')" id="qa-card">
+                            <div class="text-3xl mb-2">❓</div>
+                            <h4 class="font-bold text-gray-900 mb-1">Q&A</h4>
+                            <p class="text-gray-600 text-sm">Questions and answers</p>
+                        </div>
+
+                        <div class="output-type-card" onclick="selectOutputType('list')" id="list-card">
+                            <div class="text-3xl mb-2">📝</div>
+                            <h4 class="font-bold text-gray-900 mb-1">List Generation</h4>
+                            <p class="text-gray-600 text-sm">Structured lists, items</p>
+                        </div>
+
+                        <div class="output-type-card" onclick="selectOutputType('conversation')" id="conversation-card">
+                            <div class="text-3xl mb-2">💬</div>
+                            <h4 class="font-bold text-gray-900 mb-1">Conversational</h4>
+                            <p class="text-gray-600 text-sm">Dialogue, discussions</p>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Content Display -->
+                    <div id="output-content" class="interactive-example">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2.2: Intermediate Level Prompts -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">🔧</span>
+                    2.2 Intermediate Level Prompts Showcasing Output Variety
+                </h2>
+
+                <div class="prompt-builder">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        With a single topic, the design of your prompt can drastically affect the output. Let's explore
+                        how different
+                        prompt structures create different types of responses using the same topic: <strong>Global
+                            Warming</strong>.
+                    </p>
+
+                    <!-- Interactive Example Tabs -->
+                    <div class="example-tabs">
+                        <button class="tab-button active" onclick="showTab('creative-example')">✍️ Creative</button>
+                        <button class="tab-button" onclick="showTab('factual-example')">📊 Factual</button>
+                        <button class="tab-button" onclick="showTab('qa-example')">❓ Q&A</button>
+                        <button class="tab-button" onclick="showTab('list-example')">📝 List</button>
+                        <button class="tab-button" onclick="showTab('conversation-example')">💬 Conversation</button>
+                    </div>
+
+                    <!-- Tab Contents -->
+                    <div id="creative-example" class="tab-content active">
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400 mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">✍️ Creative Writing Prompt:</h4>
+                            <div class="prompt-preview">
+                                You are a creative storyteller specializing in eco-fantasy. In 5 paragraphs, write an
+                                engaging short story where global warming awakens an ancient forest spirit that
+                                intervenes to protect the Earth. Make it imaginative and awe-inspiring.
+                            </div>
+                        </div>
+                        <div class="bg-purple-25 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-2">Expected Output:</h5>
+                            <p class="text-gray-700 text-sm">Gemini will generate a story where the forest spirit
+                                emerges as a mythical protector, illustrating creative writing tailored to the topic of
+                                global warming.</p>
+                        </div>
+                    </div>
+
+                    <div id="factual-example" class="tab-content">
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">📊 Factual Text Prompt:</h4>
+                            <div class="prompt-preview">
+                                You are an environmental scientist explaining complex topics to a general audience. In
+                                two paragraphs, summarize the primary causes and consequences of global warming in a
+                                concise manner.
+                            </div>
+                        </div>
+                        <div class="bg-blue-25 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-2">Expected Output:</h5>
+                            <p class="text-gray-700 text-sm">Gemini will provide a concise explanation of global
+                                warming, breaking down its causes and effects in clear, accessible language.</p>
+                        </div>
+                    </div>
+
+                    <div id="qa-example" class="tab-content">
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400 mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">❓ Q&A Prompt:</h4>
+                            <div class="prompt-preview">
+                                You are a climate change expert helping people understand climate change at a beginner
+                                level. What are the top three causes of global warming, and what solutions can mitigate
+                                each cause? Answer each cause and solution in separate paragraphs.
+                            </div>
+                        </div>
+                        <div class="bg-green-25 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-2">Expected Output:</h5>
+                            <p class="text-gray-700 text-sm">This format prompts Gemini to provide a structured
+                                response, detailing each cause of global warming with its corresponding solution.</p>
+                        </div>
+                    </div>
+
+                    <div id="list-example" class="tab-content">
+                        <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400 mb-4">
+                            <h4 class="font-bold text-orange-800 mb-2">📝 List Generation Prompt:</h4>
+                            <div class="prompt-preview">
+                                You are an environmental strategist. List and explain five key human activities
+                                contributing to global warming. Format your answer as a numbered list.
+                            </div>
+                        </div>
+                        <div class="bg-orange-25 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-2">Expected Output:</h5>
+                            <p class="text-gray-700 text-sm">Gemini will generate a detailed, numbered list identifying
+                                and explaining human activities like deforestation and fossil fuel combustion.</p>
+                        </div>
+                    </div>
+
+                    <div id="conversation-example" class="tab-content">
+                        <div class="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-400 mb-4">
+                            <h4 class="font-bold text-pink-800 mb-2">💬 Conversational Style Prompt:</h4>
+                            <div class="prompt-preview">
+                                You are an encouraging and friendly environmental educator.
+
+                                Person A: "I'm worried about the planet. What can I do to help fight global warming?"
+                                Person B: "There are lots of ways you can make a difference..."
+
+                                Continue this dialogue with three actionable tips for Person A.
+                            </div>
+                        </div>
+                        <div class="bg-pink-25 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-2">Expected Output:</h5>
+                            <p class="text-gray-700 text-sm">Gemini continues the dialogue with practical advice on
+                                fighting global warming, maintaining a supportive and engaging tone.</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Insight -->
+                    <div class="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-lg mt-6">
+                        <h4 class="font-bold text-gray-900 mb-3">💡 Key Insight:</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            Using labels for elements like role, tone, task, and format can make your prompts more
+                            structured.
+                            However, Gemini is flexible and can produce relevant responses even without explicit labels.
+                            The most crucial factor is providing <strong>ample context and clear, detailed
+                                descriptions</strong> of what you need.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 2.3: Interactive Exercises -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">💪</span>
+                    2.3 Exercises to Practice Design for Different Outputs
+                </h2>
+
+                <div class="prompt-builder">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        Practice your prompt design skills with these interactive exercises. Each focuses on a different
+                        output type
+                        to help you master the craft of prompt engineering.
+                    </p>
+
+                    <!-- Exercise Selection -->
+                    <div class="exercise-workspace">
+                        <h3 class="google-sans text-xl font-bold text-gray-900 mb-4">Choose an Exercise:</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                            <button class="exercise-selector active" onclick="selectExercise(1)" id="exercise-1-btn">
+                                <div class="text-2xl mb-2">🏰</div>
+                                <div class="font-semibold">Creative Writing</div>
+                                <div class="text-sm text-gray-600">World Building</div>
+                            </button>
+
+                            <button class="exercise-selector" onclick="selectExercise(2)" id="exercise-2-btn">
+                                <div class="text-2xl mb-2">🧠</div>
+                                <div class="font-semibold">Factual Text</div>
+                                <div class="text-sm text-gray-600">Human Brain & Memory</div>
+                            </button>
+
+                            <button class="exercise-selector" onclick="selectExercise(3)" id="exercise-3-btn">
+                                <div class="text-2xl mb-2">💼</div>
+                                <div class="font-semibold">Q&A</div>
+                                <div class="text-sm text-gray-600">Professional Services</div>
+                            </button>
+
+                            <button class="exercise-selector" onclick="selectExercise(4)" id="exercise-4-btn">
+                                <div class="text-2xl mb-2">✈️</div>
+                                <div class="font-semibold">List Generation</div>
+                                <div class="text-sm text-gray-600">Travel & Adventures</div>
+                            </button>
+
+                            <button class="exercise-selector" onclick="selectExercise(5)" id="exercise-5-btn">
+                                <div class="text-2xl mb-2">🤝</div>
+                                <div class="font-semibold">Conversational</div>
+                                <div class="text-sm text-gray-600">Conflict Resolution</div>
+                            </button>
+                        </div>
+
+                        <!-- Exercise Content -->
+                        <div id="exercise-content">
+                            <!-- Content will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Exercise Workspace -->
+                        <div id="exercise-workspace" class="mt-6">
+                            <h4 class="font-bold text-gray-900 mb-3">✍️ Your Prompt:</h4>
+                            <textarea id="user-prompt" class="prompt-input"
+                                placeholder="Write your prompt here..."></textarea>
+
+                            <div class="flex gap-3 mt-4">
+                                <button onclick="analyzePrompt()"
+                                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    🔍 Analyze Prompt
+                                </button>
+                                <button onclick="showHints()"
+                                    class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    💡 Get Hints
+                                </button>
+                                <button onclick="showSampleSolution()"
+                                    class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                    📝 Sample Solution
+                                </button>
+                            </div>
+
+                            <!-- Feedback Area -->
+                            <div id="exercise-feedback" class="output-preview mt-4" style="display: none;">
+                                <!-- Feedback will appear here -->
+                            </div>
+                        </div>
+
+                        <!-- Progress Tracking -->
+                        <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
+                            <h4 class="font-bold text-gray-900 mb-3">📊 Your Progress</h4>
+                            <div class="grid grid-cols-5 gap-2 mb-4">
+                                <div class="progress-exercise" id="progress-1">
+                                    <div class="text-sm font-medium text-center">Exercise 1</div>
+                                    <div class="h-2 bg-gray-200 rounded-full mt-1">
+                                        <div class="h-2 bg-blue-500 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-exercise" id="progress-2">
+                                    <div class="text-sm font-medium text-center">Exercise 2</div>
+                                    <div class="h-2 bg-gray-200 rounded-full mt-1">
+                                        <div class="h-2 bg-blue-500 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-exercise" id="progress-3">
+                                    <div class="text-sm font-medium text-center">Exercise 3</div>
+                                    <div class="h-2 bg-gray-200 rounded-full mt-1">
+                                        <div class="h-2 bg-blue-500 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-exercise" id="progress-4">
+                                    <div class="text-sm font-medium text-center">Exercise 4</div>
+                                    <div class="h-2 bg-gray-200 rounded-full mt-1">
+                                        <div class="h-2 bg-blue-500 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-exercise" id="progress-5">
+                                    <div class="text-sm font-medium text-center">Exercise 5</div>
+                                    <div class="h-2 bg-gray-200 rounded-full mt-1">
+                                        <div class="h-2 bg-blue-500 rounded-full transition-all duration-500"
+                                            style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <span id="overall-progress" class="text-sm font-medium text-gray-700">0/5 exercises
+                                    attempted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl p-8 text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎉 Chapter 2 Complete!</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Excellent work! You've learned how to craft prompts for different output types and practiced
+                        with interactive exercises.
+                        Ready to explore the importance of context in prompting?
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../chapter-1/index.html" class="nav-button-secondary">
+                            ⬅️ Back to Chapter 1
+                        </a>
+                        <a href="../index.html" class="nav-button-secondary">
+                            📚 Course Overview
+                        </a>
+                        <a href="../chapter-3/index.html" class="nav-button-secondary">
+                            ➡️ Continue to Chapter 3
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../../shared/scripts/footer.js" defer></script>
+    <script src="../../../shared/scripts/scroll-to-top.js" defer></script>
+    <script>
+        // Interactive functionality for Chapter 2
+        let currentOutputType = 'creative';
+        let currentExercise = 1;
+        let exerciseProgress = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+        // Output type content data
+        const outputTypeContent = {
+            creative: {
+                title: '✍️ Creative Writing',
+                description: 'Prompts for creative writing should inspire imagination. Set the scene or introduce an intriguing concept.',
+                example: `You are an imaginative and mysterious fantasy storyteller.
+
+Write a story beginning with this scenario: "In a city where shadows have minds of their own, a young artist discovers her shadow is plotting against her."`,
+                tips: [
+                    'Set a vivid scene or intriguing premise',
+                    'Assign a creative role (storyteller, poet, etc.)',
+                    'Specify the tone (mysterious, whimsical, dramatic)',
+                    'Include length or structure requirements'
+                ]
+            },
+            factual: {
+                title: '📊 Factual Text',
+                description: 'Factual prompts should be direct, defining the topic and format of the desired output.',
+                example: `You are a science communicator. In two clear and engaging paragraphs, explain the significance of the James Webb Space Telescope's first images of distant galaxies.`,
+                tips: [
+                    'Be direct and specific about the topic',
+                    'Define the desired format clearly',
+                    'Specify the target audience level',
+                    'Request evidence or examples when needed'
+                ]
+            },
+            qa: {
+                title: '❓ Q&A Format',
+                description: 'For effective Q&A, state your question clearly, including any specific details or scope.',
+                example: `You are an environmental scientist.
+
+What is the greenhouse effect, and how does it contribute to global warming? Include one example of a greenhouse gas and its impact. Answer in 3-4 sentences.`,
+                tips: [
+                    'State questions clearly and specifically',
+                    'Define the scope of the response',
+                    'Specify desired length or format',
+                    'Include context for complex topics'
+                ]
+            },
+            list: {
+                title: '📝 List Generation',
+                description: 'List-generation prompts should specify the number of items, category, and formatting.',
+                example: `You are an energy consultant.
+
+In a numbered list format, list five renewable energy sources with a brief explanation of how each works.`,
+                tips: [
+                    'Specify the exact number of items',
+                    'Define the category clearly',
+                    'Request specific formatting (numbered, bulleted)',
+                    'Ask for explanations or details if needed'
+                ]
+            },
+            conversation: {
+                title: '💬 Conversational Style',
+                description: 'For conversational responses, include dialogue context and ensure tone alignment.',
+                example: `You are a friendly mentor.
+
+Person A: "I've been feeling stressed lately and need a hobby to help me relax."
+
+In a supportive and conversational tone, respond to Person A with three hobby suggestions and briefly explain why they might help with stress.`,
+                tips: [
+                    'Provide dialogue context',
+                    'Specify the desired tone',
+                    'Define the relationship between speakers',
+                    'Include specific response requirements'
+                ]
+            }
+        };
+
+        // Exercise data
+        const exercises = {
+            1: {
+                title: '🏰 Creative Writing: World Building',
+                description: 'Design a prompt that creates a detailed description of a fictional location with its own set of rules and fantastical elements. This prompt should also allow Gemini to create possible storylines that take place in the fictional location.',
+                hints: [
+                    'Assign a creative role like "world-builder" or "fantasy author"',
+                    'Specify what elements to include (geography, culture, magic system)',
+                    'Ask for both description AND potential storylines',
+                    'Set a tone (mysterious, epic, whimsical)'
+                ],
+                sampleSolution: `You are an imaginative world-builder and fantasy author. Create a detailed description of a fictional realm where music has magical properties and shapes the landscape itself. Include the geography, inhabitants, cultural practices, and magical rules of this world. Then suggest three potential storylines that could take place in this musical realm, each focusing on different aspects of how music magic affects daily life.`
+            },
+            2: {
+                title: '🧠 Factual Text: The Human Brain and Memory',
+                description: 'Design a prompt that asks Gemini to explain how the human brain forms and stores memories. Your prompt should result in factual, clear, and well-structured output.',
+                hints: [
+                    'Assign an expert role like "neuroscientist" or "cognitive psychologist"',
+                    'Specify the target audience (general public, students, etc.)',
+                    'Request clear structure (paragraphs, sections)',
+                    'Ask for specific aspects (formation, storage, retrieval)'
+                ],
+                sampleSolution: `You are a neuroscientist explaining complex brain functions to curious high school students. In three well-structured paragraphs, explain how the human brain forms, stores, and retrieves memories. Include the key brain regions involved and use simple analogies to make the concepts accessible. Focus on both short-term and long-term memory processes.`
+            },
+            3: {
+                title: '💼 Q&A: Professional Services',
+                description: 'Design a prompt that allows Gemini to generate a series of questions and answers about a specific professional service of your choice. Your prompt should generate output suitable for a website FAQ section.',
+                hints: [
+                    'Choose a specific professional service (legal, medical, consulting, etc.)',
+                    'Ask for multiple Q&A pairs',
+                    'Specify the target audience (potential clients)',
+                    'Request FAQ-appropriate tone and length'
+                ],
+                sampleSolution: `You are a digital marketing consultant creating FAQ content for your website. Generate 5 common questions and detailed answers about social media marketing services for small businesses. Each answer should be 2-3 sentences, professional yet approachable, and address practical concerns that potential clients might have about costs, timelines, and expected results.`
+            },
+            4: {
+                title: '✈️ List Generation: Travel and Adventures',
+                description: 'Create a prompt to guide Gemini in creating a list of what to prepare when going to a destination of your choosing. Your prompt should provide enough context about the purpose of your visit so the response is relevant and specific.',
+                hints: [
+                    'Choose a specific destination and travel purpose',
+                    'Specify list format (numbered, categorized)',
+                    'Include context about trip duration and activities',
+                    'Ask for explanations of why items are needed'
+                ],
+                sampleSolution: `You are an experienced travel advisor. Create a comprehensive packing list for a 10-day backpacking trip through Southeast Asia during monsoon season (June-August). Organize the list into categories (clothing, gear, documents, health items) and include 5-7 items per category. For each item, briefly explain why it's essential for this specific type of trip and climate.`
+            },
+            5: {
+                title: '🤝 Conversational: Conflict Resolution',
+                description: 'Write a prompt that asks Gemini to simulate a realistic heated conversation—such as one between coworkers, friends, or family members. Your prompt should specify how Gemini should present potential solutions or ways to de-escalate the situation.',
+                hints: [
+                    'Set up a realistic conflict scenario',
+                    'Define the relationship between people',
+                    'Specify the role Gemini should play',
+                    'Ask for both dialogue AND resolution strategies'
+                ],
+                sampleSolution: `You are a workplace mediator and communication expert. Simulate a heated conversation between two coworkers who disagree about project deadlines - one thinks the timeline is unrealistic while the other insists it's necessary for client satisfaction. Present 4-5 exchanges of realistic dialogue showing the escalation, then provide three specific de-escalation techniques and suggest how a manager could help resolve this conflict constructively.`
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            selectOutputType('creative');
+            selectExercise(1);
+            updateOverallProgress();
+        });
+
+        // Output type selection
+        function selectOutputType(type) {
+            // Update active card
+            document.querySelectorAll('.output-type-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById(type + '-card').classList.add('active');
+
+            currentOutputType = type;
+            displayOutputContent(type);
+        }
+
+        function displayOutputContent(type) {
+            const content = outputTypeContent[type];
+            const contentDiv = document.getElementById('output-content');
+
+            contentDiv.innerHTML = `
+        <h3 class="font-bold text-gray-900 mb-4">${content.title}</h3>
+        <p class="text-gray-700 mb-6">${content.description}</p>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6">
+            <h4 class="font-semibold text-gray-800 mb-3">📝 Example Prompt:</h4>
+            <div class="prompt-preview">${content.example}</div>
+        </div>
+
+        <div class="bg-blue-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-blue-800 mb-3">💡 Key Tips:</h4>
+            <ul class="space-y-2">
+                ${content.tips.map(tip => `<li class="flex items-start"><span class="text-blue-600 mr-2">•</span><span
+                        class="text-blue-700 text-sm">${tip}</span></li>`).join('')}
+            </ul>
+        </div>
+        `;
+        }
+
+        // Tab functionality for examples
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Exercise selection
+        function selectExercise(exerciseNum) {
+            // Update active button
+            document.querySelectorAll('.exercise-selector').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`exercise-${exerciseNum}-btn`).classList.add('active');
+
+            currentExercise = exerciseNum;
+            displayExerciseContent(exerciseNum);
+
+            // Clear previous input and feedback
+            document.getElementById('user-prompt').value = '';
+            document.getElementById('exercise-feedback').style.display = 'none';
+        }
+
+        function displayExerciseContent(exerciseNum) {
+            const exercise = exercises[exerciseNum];
+            const contentDiv = document.getElementById('exercise-content');
+
+            contentDiv.innerHTML = `
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
+            <h3 class="font-bold text-gray-900 mb-3">${exercise.title}</h3>
+            <p class="text-gray-700 leading-relaxed">${exercise.description}</p>
+        </div>
+        `;
+        }
+
+        // Exercise functionality
+        function analyzePrompt() {
+            const userPrompt = document.getElementById('user-prompt').value.trim();
+            const feedbackDiv = document.getElementById('exercise-feedback');
+
+            if (!userPrompt) {
+                showFeedback('Please write a prompt first!', 'warning');
+                return;
+            }
+
+            // Simple analysis based on keywords and structure
+            const analysis = analyzePromptQuality(userPrompt, currentExercise);
+            showFeedback(analysis.feedback, analysis.type);
+
+            // Update progress
+            if (analysis.score > 60) {
+                exerciseProgress[currentExercise] = Math.max(exerciseProgress[currentExercise], analysis.score);
+                updateProgressBar(currentExercise, analysis.score);
+                updateOverallProgress();
+            }
+        }
+
+        function analyzePromptQuality(prompt, exerciseNum) {
+            const promptLower = prompt.toLowerCase();
+            let score = 0;
+            let feedback = [];
+
+            // Check for role assignment
+            if (promptLower.includes('you are') || promptLower.includes('act as')) {
+                score += 25;
+                feedback.push('✅ Good role assignment');
+            } else {
+                feedback.push('💡 Consider adding a role assignment (e.g., "You are a...")');
+            }
+
+            // Check for specificity
+            if (prompt.length > 50) {
+                score += 20;
+                feedback.push('✅ Good level of detail');
+            } else {
+                feedback.push('💡 Try adding more specific details and context');
+            }
+
+            // Exercise-specific checks
+            switch (exerciseNum) {
+                case 1: // Creative Writing
+                    if (promptLower.includes('story') || promptLower.includes('creative') || promptLower.includes('world')) {
+                        score += 25;
+                        feedback.push('✅ Good creative writing focus');
+                    }
+                    break;
+                case 2: // Factual
+                    if (promptLower.includes('explain') || promptLower.includes('describe') || promptLower.includes('brain') ||
+                        promptLower.includes('memory')) {
+                        score += 25;
+                        feedback.push('✅ Good factual explanation request');
+                    }
+                    break;
+                case 3: // Q&A
+                    if (promptLower.includes('question') || promptLower.includes('answer') || promptLower.includes('faq')) {
+                        score += 25;
+                        feedback.push('✅ Good Q&A format specification');
+                    }
+                    break;
+                case 4: // List
+                    if (promptLower.includes('list') || promptLower.includes('travel') || promptLower.includes('pack')) {
+                        score += 25;
+                        feedback.push('✅ Good list generation request');
+                    }
+                    break;
+                case 5: // Conversation
+                    if (promptLower.includes('conversation') || promptLower.includes('dialogue') ||
+                        promptLower.includes('conflict')) {
+                        score += 25;
+                        feedback.push('✅ Good conversational setup');
+                    }
+                    break;
+            }
+
+            // Check for format specification
+            if (promptLower.includes('paragraph') || promptLower.includes('list') || promptLower.includes('format')) {
+                score += 15;
+                feedback.push('✅ Good format specification');
+            }
+
+            // Check for tone/style
+            if (promptLower.includes('tone') || promptLower.includes('style') || promptLower.includes('friendly') ||
+                promptLower.includes('professional')) {
+                score += 15;
+                feedback.push('✅ Good tone specification');
+            }
+
+            let type = 'info';
+            if (score >= 80) type = 'success';
+            else if (score >= 60) type = 'good';
+            else if (score >= 40) type = 'warning';
+            else type = 'error';
+
+            return {
+                score: score,
+                feedback: feedback.join('<br>'),
+                type: type
+            };
+        }
+
+        function showHints() {
+            const exercise = exercises[currentExercise];
+            const hintsHtml = exercise.hints.map(hint => `<li class="flex items-start mb-2"><span
+                class="text-blue-600 mr-2">💡</span><span class="text-gray-700 text-sm">${hint}</span></li>`).join('');
+
+            showFeedback(`<strong>Hints for ${exercise.title}:</strong><br>
+        <ul class="mt-2">${hintsHtml}</ul>`, 'info');
+        }
+
+        function showSampleSolution() {
+            const exercise = exercises[currentExercise];
+            showFeedback(`<strong>Sample Solution:</strong><br>
+        <div class="prompt-preview mt-2">${exercise.sampleSolution}</div>`, 'success');
+        }
+
+        function showFeedback(message, type) {
+            const feedbackDiv = document.getElementById('exercise-feedback');
+            const colors = {
+                success: 'bg-green-100 text-green-800 border-green-200',
+                good: 'bg-blue-100 text-blue-800 border-blue-200',
+                info: 'bg-blue-100 text-blue-800 border-blue-200',
+                warning: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                error: 'bg-red-100 text-red-800 border-red-200'
+            };
+
+            feedbackDiv.className = `output-preview mt-4 border ${colors[type] || colors.info}`;
+            feedbackDiv.innerHTML = message;
+            feedbackDiv.style.display = 'block';
+        }
+
+        function updateProgressBar(exerciseNum, score) {
+            const progressBar = document.querySelector(`#progress-${exerciseNum} .bg-blue-500`);
+            progressBar.style.width = `${score}%`;
+        }
+
+        function updateOverallProgress() {
+            const attempted = Object.values(exerciseProgress).filter(score => score > 0).length;
+            document.getElementById('overall-progress').textContent = `${attempted}/5 exercises attempted`;
+        }
+
+        // Add CSS for exercise selector
+        const style = document.createElement('style');
+        style.textContent = `
+        .exercise-selector {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        }
+
+        .exercise-selector:hover {
+        border-color: #3b82f6;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+
+        .exercise-selector.active {
+        border-color: #3b82f6;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+        }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+
+</html>

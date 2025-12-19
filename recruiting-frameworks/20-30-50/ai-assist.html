@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30% AI Assist - Let the Machine Sweat First | 20-30-50 Framework</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Use AI to draft the repetitive work in recruiting: role briefs, search ideas, outreach drafts, and intake summaries. Humans validate, decide, and build relationships.">
+    <meta name="keywords"
+        content="AI recruiting, AI sourcing, recruitment automation, AI outreach, prompt engineering for recruiters, AI assistance, recruiting workflows">
+    <meta name="author" content="GBS EMEA">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../../shared/scripts/analytics.js"></script>
+    <script src="../../shared/scripts/ui-notifications.js"></script>
+    <script src="../../shared/scripts/utils/network.js"></script>
+    <script src="../../shared/scripts/error-handler.js"></script>
+    <script src="../../shared/scripts/offline-handler.js"></script>
+    <script src="../../shared/scripts/utils/security.js"></script>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com" onerror="console.error('Tailwind CDN failed to load');"></script>
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../css/frameworks.css">
+</head>
+
+<body class="bg-gray-50 text-gray-800 page-ai-assist">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true"></li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Recruiting Frameworks">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Recruiting Frameworks</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true"></li>
+                    <li class="breadcrumb-item">
+                        <a href="../20-30-50-framework.html" class="breadcrumb-link"
+                            aria-label="Go to 20-30-50 Framework">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>20-30-50 Framework</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true"></li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>30% AI Assist</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white site-header">
+        <div class="max-w-5xl mx-auto px-6 py-4">
+            <h1 class="google-sans text-2xl text-gray-700">30% AI Assist</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 py-8">
+        <!-- Page Title -->
+        <div class="text-center mb-12">
+            <h1 class="google-sans text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <span aria-hidden="true" class="mr-2">🤖</span>30% AI Assist
+            </h1>
+            <p class="text-xl text-purple-700 font-bold mb-4">Let the Machine Sweat First</p>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                AI does the heavy and repetitive drafting. Humans do the thinking, deciding, and relationship work.
+            </p>
+        </div>
+
+        <!-- Goal -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 rounded-xl p-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Goal</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                        <div class="font-bold text-gray-900 mb-1">⚙️ AI drafts</div>
+                        <div class="text-sm text-gray-700">Search ideas, outreach drafts, summaries, templates</div>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                        <div class="font-bold text-gray-900 mb-1">🧠 Humans decide</div>
+                        <div class="text-sm text-gray-700">Must-haves, trade-offs, priorities, final messages</div>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                        <div class="font-bold text-gray-900 mb-1">🧭 Guardrails</div>
+                        <div class="text-sm text-gray-700">No automated decisioning; validate facts; protect data</div>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-6">
+                    If you haven’t already, read the safe-use rules in <a class="text-purple-700 font-semibold underline"
+                        href="../../ai-governance/index.html?from=/recruiting-frameworks/20-30-50/ai-assist.html">AI Hiring Governance</a>.
+                </p>
+            </div>
+        </section>
+
+        <!-- The Simple Rule -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">The Simple Rule</h2>
+                <div class="bg-purple-100 border border-gray-200 rounded-lg p-6 text-center">
+                    <p class="text-xl text-gray-900 font-semibold italic">
+                        If it's repetitive, and you've done it 5+ times this month — let AI draft it first.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-white border border-purple-200 rounded-xl p-4">
+                        <div class="font-bold text-gray-900 mb-1">✅ Good uses</div>
+                        <div class="text-sm text-gray-700">Drafting, summarizing, brainstorming options, structuring notes</div>
+                    </div>
+                    <div class="bg-white border border-purple-200 rounded-xl p-4">
+                        <div class="font-bold text-gray-900 mb-1">🚫 Not the use</div>
+                        <div class="text-sm text-gray-700">Auto-rejecting, “fit scores”, guessing sensitive traits</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connect to 20% -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 rounded-xl p-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">What AI Assist Builds On</h2>
+                <p class="text-gray-700 mb-4">
+                    Your best AI outputs come from the 20% foundation: a clean <strong>Role DNA</strong>, a quick <strong>title map</strong>,
+                    and a <strong>starter skeleton</strong> search string.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="search-craft.html" class="nav-button-secondary" aria-label="Back to 20 percent Search Craft">Review 20% Search Craft</a>
+                    <a href="ai-daily-checklist.html" class="nav-button-secondary" aria-label="View Daily AI Checklist">Daily AI Checklist</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What 30% AI Looks Like -->
+        <section class="mb-12">
+            <h2 class="google-sans text-3xl font-bold text-gray-900 mb-6 text-center">What “30% AI” Looks Like in Everyday Work</h2>
+            <p class="text-center text-gray-600 mb-8">Concrete moments to use AI (draft first, validate second)</p>
+
+            <div class="ai-moment">
+                <div class="flex items-start mb-3">
+                    <div class="text-3xl mr-4">📝</div>
+                    <div class="flex-1">
+                        <h3 class="google-sans text-xl font-bold text-purple-700 mb-3">Before You Start Search</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>Turn a messy JD + notes into a clean <strong>Role DNA</strong>.</li>
+                            <li>Ask AI for titles, synonyms, and “profiles to avoid” (then validate).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-moment">
+                <div class="flex items-start mb-3">
+                    <div class="text-3xl mr-4">🔎</div>
+                    <div class="flex-1">
+                        <h3 class="google-sans text-xl font-bold text-purple-700 mb-3">While You Search</h3>
+                        <p class="text-gray-700 mb-2">Ask AI for:</p>
+                        <ul class="space-y-2 text-gray-700 ml-6 list-disc">
+                            <li>alternative job titles + seniority variations</li>
+                            <li>missing keywords/synonyms</li>
+                            <li>3 ways to widen vs 3 ways to narrow your search</li>
+                        </ul>
+                        <p class="text-gray-700 mt-3">Let it draft the first version; you clean it up and run it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-moment">
+                <div class="flex items-start mb-3">
+                    <div class="text-3xl mr-4">💬</div>
+                    <div class="flex-1">
+                        <h3 class="google-sans text-xl font-bold text-purple-700 mb-3">Before You Write Outreach</h3>
+                        <p class="text-gray-700 mb-2">Paste a profile + role summary and ask for:</p>
+                        <ul class="space-y-2 text-gray-700 ml-6 list-disc">
+                            <li>3 outreach variants (short / casual / direct)</li>
+                            <li>1 follow-up for no response after <strong>5–7 days</strong></li>
+                        </ul>
+                        <p class="text-gray-700 mt-3">You add one real detail + your human tone.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-moment">
+                <div class="flex items-start mb-3">
+                    <div class="text-3xl mr-4">📞</div>
+                    <div class="flex-1">
+                        <h3 class="google-sans text-xl font-bold text-purple-700 mb-3">After Calls / Intakes</h3>
+                        <p class="text-gray-700 mb-2">Paste notes; ask AI to:</p>
+                        <ul class="space-y-2 text-gray-700 ml-6 list-disc">
+                            <li>summarize into a clean email to HM</li>
+                            <li>extract must-haves vs flex zones</li>
+                            <li>draft structured screening questions (humans decide)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-moment">
+                <div class="flex items-start mb-3">
+                    <div class="text-3xl mr-4">🧩</div>
+                    <div class="flex-1">
+                        <h3 class="google-sans text-xl font-bold text-purple-700 mb-3">When You're Stuck</h3>
+                        <ul class="space-y-2 text-gray-700 ml-6 list-disc">
+                            <li>“What am I missing in my search and why?”</li>
+                            <li>“Which adjacent profiles might convert?”</li>
+                            <li>“How could I reframe this role to be more attractive (truthfully)?”</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-xl p-6 mt-6">
+                <h3 class="font-bold text-gray-900 mb-3 text-center text-lg">And Always</h3>
+                <div class="text-center">
+                    <p class="text-gray-900 font-semibold mb-2">AI drafts — you decide.</p>
+                    <p class="text-gray-900 font-semibold">AI suggests — you own the final version.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Skills -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6">Core Prompts (Copy-Ready)</h2>
+
+                <div class="mb-8">
+                    <h3 class="google-sans text-xl font-bold text-purple-700 mb-4">
+                        <span class="inline-block bg-purple-500 text-white px-3 py-1 rounded-md text-sm font-bold mr-2">GUIDE</span>
+                        Use Role DNA as the input
+                    </h3>
+                    <p class="text-gray-700 mb-3">When your prompt starts with Role DNA, outputs get sharper and safer.</p>
+                    <div class="prompt-example">
+                        <p>“Use this Role DNA to generate: (1) 10–15 target titles, (2) 8–12 keyword/synonym ideas, (3) a simple LinkedIn Boolean skeleton, and (4) 3 widen vs 3 narrow suggestions. Do not invent details not supported by the Role DNA.”</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="google-sans text-xl font-bold text-purple-700 mb-4">Expand Your Universe</h3>
+                    <p class="text-gray-700 mb-3">Ask for options, then validate with real profiles.</p>
+                    <ul class="skill-list text-gray-700">
+                        <li>10 adjacent titles to X (with seniority notes)</li>
+                        <li>10 companies where this profile likely exists</li>
+                        <li>10 “tool vs outcome” synonyms (what people write in profiles)</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="google-sans text-xl font-bold text-purple-700 mb-4">Prioritize Outreach (job-related only)</h3>
+                    <p class="text-gray-700 mb-2">Better than “fit scores”: ask for evidence + gaps.</p>
+                    <div class="prompt-example">
+                        <p>“Here are 10–15 profile snippets. For each, map evidence to the Role DNA (Evidence / Missing / Validation question). Then suggest an outreach priority order (High/Medium/Low) with one reason. No automated decisioning, no protected traits.”</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="google-sans text-xl font-bold text-purple-700 mb-4">Sanity-Checking</h3>
+                    <p class="text-gray-700 mb-3">Never trust AI blindly. Quick checks:</p>
+                    <ul class="skill-list text-gray-700">
+                        <li>“Is this realistic for this country/seniority?”</li>
+                        <li>“Which assumptions are you making — and what would verify them?”</li>
+                        <li>“Are we over-indexing on one background/company?”</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Blocks -->
+        <section class="mb-12">
+            <div class="flex items-center justify-center mb-8">
+                <span class="inline-block bg-purple-500 text-white px-4 py-2 rounded-md text-sm font-bold mr-3">TRAINING</span>
+                <h2 class="google-sans text-3xl font-bold text-gray-900">Training Blocks</h2>
+            </div>
+            <p class="text-center text-gray-600 mb-8">Hands-on practice aligned with 20% Search Craft</p>
+
+            <!-- Block A1 -->
+            <div class="training-block">
+                <div class="flex items-center mb-4">
+                    <span class="inline-block bg-purple-500 text-white px-3 py-1 rounded-md text-sm font-bold mr-2">A1</span>
+                    <h3 class="google-sans text-xl font-bold text-gray-900">AI for Search & First Shortlist (60 min)</h3>
+                </div>
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded mb-4">
+                    <p class="font-bold text-gray-900">Objective:</p>
+                    <p class="text-gray-700">Get faster to a decent first search and a first outreach priority list (not “perfect”).</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-semibold text-gray-900 mb-3">Steps:</p>
+                    <ol class="space-y-3 text-gray-700 ml-6 list-decimal">
+                        <li>Pick <strong>one live role</strong> for everyone.</li>
+                        <li>Each sourcer generates a <strong>Role DNA</strong> (or uses the agreed version) and asks AI for:
+                            <ul class="ml-6 mt-2 space-y-1 list-disc">
+                                <li>2–3 Boolean/X-ray variants</li>
+                                <li>title/synonym expansion</li>
+                                <li>3 widen vs 3 narrow suggestions</li>
+                            </ul>
+                        </li>
+                        <li>Run the searches; collect <strong>10 profiles</strong>.</li>
+                        <li>Ask AI to map each profile to Role DNA (Evidence / Missing / Validation question).</li>
+                        <li>Group debrief: what helped, what was noise, what changed your search.</li>
+                    </ol>
+                </div>
+                <div class="bg-purple-100 border border-purple-300 p-4 rounded">
+                    <p class="font-bold text-gray-900">Outcome:</p>
+                    <ul class="text-gray-700 ml-6 mt-2 space-y-1 list-disc">
+                        <li>Reusable Role DNA prompt + title prompt</li>
+                        <li>3–5 “starter skeletons” saved for the team library</li>
+                        <li>One evidence-mapping prompt for consistent prioritization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Block A2 -->
+            <div class="training-block">
+                <div class="flex items-center mb-4">
+                    <span class="inline-block bg-purple-500 text-white px-3 py-1 rounded-md text-sm font-bold mr-2">A2</span>
+                    <h3 class="google-sans text-xl font-bold text-gray-900">Outreach Co-Pilot (60 min)</h3>
+                </div>
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded mb-4">
+                    <p class="font-bold text-gray-900">Objective:</p>
+                    <p class="text-gray-700">AI drafts the first version; you make it human, specific, and short.</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-semibold text-gray-900 mb-3">Steps:</p>
+                    <ol class="space-y-3 text-gray-700 ml-6 list-decimal">
+                        <li>Each sourcer picks <strong>one real role</strong> and <strong>one real profile</strong>.</li>
+                        <li>Ask AI for 3 variants (short / casual / direct) + a follow-up for <strong>5–7 days</strong>.</li>
+                        <li>Humanize:
+                            <ul class="ml-6 mt-2 space-y-1 list-disc">
+                                <li>Trim to <strong>120–180 words</strong></li>
+                                <li>Add <strong>one true detail</strong> from the profile</li>
+                                <li>End with <strong>one simple question</strong></li>
+                            </ul>
+                        </li>
+                        <li>Pair feedback: would you reply? what feels fake? what’s unclear?</li>
+                    </ol>
+                </div>
+                <div class="bg-purple-100 border border-purple-300 p-4 rounded">
+                    <p class="font-bold text-gray-900">Outcome:</p>
+                    <ul class="text-gray-700 ml-6 mt-2 space-y-1 list-disc">
+                        <li>A small Outreach Prompt Pack everyone can reuse</li>
+                        <li>Team standard: <em>AI first draft, human final voice</em></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Block A3 -->
+            <div class="training-block">
+                <div class="flex items-center mb-4">
+                    <span class="inline-block bg-purple-500 text-white px-3 py-1 rounded-md text-sm font-bold mr-2">A3</span>
+                    <h3 class="google-sans text-xl font-bold text-gray-900">HM Debrief Assistant (45 min)</h3>
+                </div>
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded mb-4">
+                    <p class="font-bold text-gray-900">Objective:</p>
+                    <p class="text-gray-700">Go from messy notes to a clean, reusable intake structure.</p>
+                </div>
+                <div class="mb-4">
+                    <p class="font-semibold text-gray-900 mb-3">Steps:</p>
+                    <ol class="space-y-3 text-gray-700 ml-6 list-decimal">
+                        <li>Use real intake call notes (messy is fine).</li>
+                        <li>Paste into AI with a prompt like:</li>
+                    </ol>
+                    <div class="prompt-example">
+                        <p>“Turn this into a structured intake summary: context, must-haves, nice-to-haves, flex zones, target companies, profiles to avoid, 5 screening questions, and 3 risks to watch. Don’t invent details; flag anything unclear.”</p>
+                    </div>
+                    <ol class="space-y-3 text-gray-700 ml-6 list-decimal" start="3">
+                        <li>Compare to what the HM actually meant; adjust wording.</li>
+                        <li>Save the final template + 2–3 strong examples.</li>
+                    </ol>
+                </div>
+                <div class="bg-purple-100 border border-purple-300 p-4 rounded">
+                    <p class="font-bold text-gray-900">Outcome:</p>
+                    <ul class="text-gray-700 ml-6 mt-2 space-y-1 list-disc">
+                        <li>Every new role starts with a clean intake summary</li>
+                        <li>Less back-and-forth, clearer search direction</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary & Next Steps -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-8 text-center">
+                <h2 class="google-sans text-3xl font-bold text-gray-900 mb-4">Let AI Do the Heavy Lifting</h2>
+                <p class="text-xl mb-6 text-gray-600">Use AI to handle repetitive drafting so you can focus on judgment, trust, and relationships.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="search-craft.html" class="nav-button-secondary" aria-label="Back to 20 percent Search Craft">
+                        Back to 20% Search Craft
+                    </a>
+                    <a href="human-brand.html" class="nav-button-secondary" aria-label="Next: 50 percent Human and Brand">
+                        Next: 50% Human & Brand
+                    </a>
+                    <a href="../20-30-50-framework.html" class="nav-button-secondary"
+                        aria-label="Back to 20-30-50 Framework overview">
+                        Framework Overview
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../../shared/scripts/core.js"></script>
+    <script src="../../shared/scripts/ui.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,2642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBS EMEA - AI Hub | AI Training & Learning Platform</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Central portal for GBS EMEA AI training programs, interactive workshops, sourcing tools, and expert prompts. Accelerate your AI skills with comprehensive learning paths.">
+    <meta name="keywords"
+        content="AI training, RPO training, recruitment AI, AI prompts, sourcing tools, GBS learning, AI workshops, machine learning, artificial intelligence, talent acquisition">
+    <meta name="author" content="GBS EMEA">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GBS EMEA - AI Hub">
+    <meta property="og:description"
+        content="Central portal for AI training programs, workshops, and tools to transform recruitment operations">
+    <meta property="og:site_name" content="GBS EMEA Learning Hub">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GBS EMEA - AI Hub">
+    <meta name="twitter:description" content="Central portal for AI training programs, workshops, and tools">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="shared/scripts/analytics.js"></script>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="shared/hub-button.css">
+    <link rel="stylesheet" href="shared/fonts.css">
+    <link rel="stylesheet" href="shared/scroll-to-top.css">
+    <link rel="stylesheet" href="shared/buttons.css">
+    <link rel="stylesheet" href="shared/card-animations.css">
+    <style>
+        /* Font styles now handled by shared/fonts.css */
+
+        /* Hub card styles now handled by shared/card-animations.css */
+
+        /* Header styles */
+        .site-header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Banner Styles */
+        .hero-banner {
+            position: relative;
+            background: transparent;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hero-pattern" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="rgba(59,130,246,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23hero-pattern)"/></svg>');
+            animation: hero-bg-move 20s linear infinite;
+            pointer-events: none;
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+
+        /* Ensure animated background elements stay within bounds */
+        .hero-banner .absolute {
+            border-radius: 1.5rem;
+        }
+
+        @keyframes hero-bg-move {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-20px, -20px);
+            }
+        }
+
+        /* Enhanced search input in hero */
+        .hero-banner .search-input {
+            font-size: 18px;
+            padding: 20px 24px 20px 56px;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+        }
+
+        .hero-banner .search-input:focus {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), 0 8px 32px rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-banner .search-icon {
+            left: 20px;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Primary cards enhanced styling */
+        .primary-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Floating animation for hero elements */
+        @keyframes float-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-banner .animate-float {
+            animation: float-gentle 6s ease-in-out infinite;
+        }
+
+        /* Search functionality styles */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 16px;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            min-height: 48px;
+            /* Better touch target */
+        }
+
+        @media (max-width: 768px) {
+            .search-input {
+                padding: 14px 18px 14px 45px;
+                font-size: 16px;
+                /* Prevents zoom on iOS */
+            }
+
+            .search-icon {
+                left: 15px;
+            }
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .clear-search.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .clear-search:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        /* Search results styles */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 9999;
+            margin-top: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .search-results.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .search-result-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .search-result-description {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .search-result-category {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-top: 4px;
+        }
+
+        /* Card filtering styles now handled by shared/card-animations.css */
+
+        /* Search highlight */
+        .search-highlight {
+            background-color: #fef08a;
+            padding: 1px 2px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+
+        .no-results.hidden {
+            display: none;
+        }
+
+        /* Search suggestions */
+        .search-suggestions {
+            padding: 12px 16px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .search-suggestions-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .search-suggestion-tag {
+            display: inline-block;
+            background-color: #e5e7eb;
+            color: #374151;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-right: 6px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-suggestion-tag:hover {
+            background-color: #4A90E2;
+            color: white;
+        }
+
+        /* Enhanced Tour Styles */
+        .tour-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            animation: gentle-pulse 3s infinite;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tour-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+        }
+
+        .tour-button.hidden {
+            display: none;
+        }
+
+        @keyframes gentle-pulse {
+            0% {
+                box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+                transform: scale(1);
+            }
+
+            50% {
+                box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+                transform: scale(1.02);
+            }
+
+            100% {
+                box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+                transform: scale(1);
+            }
+        }
+
+        /* Tour Overlay */
+        .tour-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tour-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Tour Tooltip */
+        .tour-tooltip {
+            position: absolute;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            max-width: 320px;
+            z-index: 10000;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .tour-tooltip.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .tour-tooltip h3 {
+            color: #1967d2;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .tour-tooltip p {
+            color: #5f6368;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .tour-tooltip-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tour-button-secondary {
+            background: none;
+            border: none;
+            color: #5f6368;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .tour-button-secondary:hover {
+            background: #f8f9fa;
+            color: var(--btn-primary, #4A90E2);
+        }
+
+        .tour-button-primary {
+            background: var(--btn-primary, #4A90E2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tour-button-primary:hover {
+            background: var(--btn-primary-hover, #357ABD);
+        }
+
+        /* Tour Progress */
+        .tour-progress {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0 20px 0;
+            gap: 8px;
+        }
+
+        .tour-progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .tour-progress-dot.active {
+            background: var(--btn-primary, #4A90E2);
+            transform: scale(1.2);
+        }
+
+        /* Tour Highlight */
+        .tour-highlight {
+            position: relative;
+            z-index: 9998;
+            border-radius: 12px;
+            box-shadow: 0 0 0 4px rgba(25, 103, 210, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tour Arrow */
+        .tour-tooltip::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .tour-tooltip.arrow-top::before {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-color: white;
+        }
+
+        .tour-tooltip.arrow-bottom::before {
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top-color: white;
+        }
+
+        .tour-tooltip.arrow-left::before {
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-right-color: white;
+        }
+
+        .tour-tooltip.arrow-right::before {
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left-color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Sticky Header -->
+    <header class="bg-white site-header sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <h1 class="google-sans text-2xl text-gray-700">GBS EMEA Learning Hub</h1>
+        </div>
+    </header>
+
+    <!-- Tour Button - Hidden by default, can be shown if needed -->
+    <button id="tour-button" class="tour-button hidden" onclick="console.log('Tour button clicked directly'); if(window.onboardingTour) { console.log('OnboardingTour found, starting tour...'); window.onboardingTour.startTour(); } else { console.error('OnboardingTour not initialized'); }">
+        🚀 Quick Start
+    </button>
+
+    <!-- Tour Overlay -->
+    <div id="tour-overlay" class="tour-overlay">
+        <div id="tour-tooltip" class="tour-tooltip" style="max-width: 320px;">
+            <div class="tour-progress" id="tour-progress">
+                <div class="tour-progress-dot active"></div>
+                <div class="tour-progress-dot"></div>
+                <div class="tour-progress-dot"></div>
+            </div>
+            <h3 id="tour-title">🚀 Quick Start</h3>
+            <div id="tour-description">
+                <p class="text-gray-600 text-sm leading-relaxed mb-3">Three quick highlights to get you started with AI.</p>
+            </div>
+            <div class="tour-tooltip-buttons">
+                <button id="tour-skip" class="tour-button-secondary">Skip Tour</button>
+                <button id="tour-next" class="tour-button-primary">Show Me</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Hero Banner Section -->
+        <section class="hero-banner rounded-3xl p-8 md:p-12 mb-12 mx-4 relative">
+            <!-- Animated Background Elements -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-20 h-20 bg-blue-400 rounded-full animate-pulse"></div>
+                <div class="absolute top-32 right-20 w-16 h-16 bg-purple-400 rounded-full animate-bounce"
+                    style="animation-delay: 0.5s;"></div>
+                <div class="absolute bottom-20 left-32 w-12 h-12 bg-indigo-400 rounded-full animate-pulse"
+                    style="animation-delay: 1s;"></div>
+            </div>
+
+            <div class="relative z-10 text-center max-w-4xl mx-auto">
+                <h1 class="google-sans text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Transform Your Work with <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">AI</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
+                    Your central hub for AI training, tools, and success stories. Start saving hours today.
+                </p>
+
+                <!-- Global Search Bar -->
+                <div class="search-container mb-8 max-w-2xl mx-auto" role="search">
+                    <div class="relative">
+                        <svg class="search-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="global-search" class="search-input text-lg py-4 px-6 pl-14"
+                            placeholder="Try: Boolean search, email templates, time saving..." autocomplete="off"
+                            aria-label="Search all learning modules and content" role="searchbox">
+                        <button class="clear-search" id="clear-search" title="Clear search"
+                            aria-label="Clear search input">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+
+                        <!-- Search Results Dropdown -->
+                        <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
+                            <div class="search-suggestions">
+                                <div class="search-suggestions-title">Popular Searches</div>
+                                <span class="search-suggestion-tag" data-search="AI training">AI Training</span>
+                                <span class="search-suggestion-tag" data-search="prompts">Prompts</span>
+                                <span class="search-suggestion-tag" data-search="resume">Resume</span>
+                                <span class="search-suggestion-tag" data-search="sourcing">Sourcing</span>
+                                <span class="search-suggestion-tag" data-search="boolean">Boolean</span>
+                                <span class="search-suggestion-tag" data-search="leadership">Leadership</span>
+                                <span class="search-suggestion-tag" data-search="create framework">CREATE
+                                    Framework</span>
+                                <span class="search-suggestion-tag" data-search="automation">Automation</span>
+                                <span class="search-suggestion-tag" data-search="success stories">Success Stories</span>
+                            </div>
+                            <div id="search-results-content">
+                                <!-- Dynamic search results will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero CTA Buttons -->
+                <div class="btn-group justify-center">
+                    <a href="recruiter-ai-skill-audit/index.html"
+                        class="btn-cta btn-icon">
+                        🚀 Discover Your AI Potential
+                    </a>
+                    <a href="gbs-prompts/index.html"
+                        class="btn-outline btn-lg btn-rounded btn-icon">
+                        ✨ Browse AI Prompts
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <main>
+            <!-- Primary Cards Section -->
+            <section class="mb-12">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 text-center mb-8">Most Popular</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+                    <!-- Gemini Mastery Guide -->
+                    <a href="gemini-mastery/index.html"
+                        class="card-clickable block bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-200 rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                💎</div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">Gemini Mastery Guide</h3>
+                            <p class="text-sm font-bold text-cyan-700 mb-3 uppercase tracking-wide">Master Google's AI Tool</p>
+                            <p class="text-gray-600 leading-relaxed mb-4">Master Google's most powerful AI with
+                                comprehensive training and advanced techniques.</p>
+                            <span
+                                class="inline-block bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full text-sm font-medium">🔥
+                                Most Popular</span>
+                        </div>
+                    </a>
+
+                    <!-- GBS AI Prompts Library -->
+                    <a href="gbs-prompts/index.html"
+                        class="card-clickable block bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                ✨</div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">AI Prompts Library</h3>
+                            <p class="text-sm font-bold mb-3 uppercase tracking-wide" style="color: #ca8a04;">Ready-to-Use AI Prompts</p>
+                            <p class="text-gray-600 leading-relaxed mb-4">Ready-to-use expert prompts for emails,
+                                sourcing, and daily tasks.</p>
+                            <span
+                                class="inline-block bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">⚡
+                                Instant Results</span>
+                        </div>
+                    </a>
+
+                    <!-- GBS AI Workshop -->
+                    <a href="gbs-ai-workshop/index.html"
+                        class="card-clickable block bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                👔</div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">GBS Leaders Workshop</h3>
+                            <p class="text-sm font-bold text-indigo-700 mb-3 uppercase tracking-wide">Interactive Leadership Training</p>
+                            <p class="text-gray-600 leading-relaxed mb-4">Interactive training with prompt libraries,
+                                simulators, and case studies.</p>
+                            <span
+                                class="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">🎯
+                                Interactive</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Quick Start Toolkit -->
+            <section class="mb-12">
+                <div
+                    class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 md:p-8 max-w-6xl mx-auto border border-emerald-200 mx-4">
+                    <div class="text-center mb-6">
+                        <div class="inline-flex items-center gap-2 mb-2">
+                            <h3 class="google-sans text-xl md:text-2xl font-bold text-emerald-800">🚀 Quick Start Toolkit</h3>
+                            <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full text-xs font-medium animate-pulse">👈 Start here</span>
+                        </div>
+                        <p class="text-emerald-700">Start using AI right now - no setup required</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="gbs-prompts/index.html#instant-prompts"
+                            class="bg-white p-4 rounded-xl border border-emerald-200 hover:border-emerald-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">⚡</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Instant Prompts</h4>
+                            <p class="text-xs text-gray-600 mt-1">Copy & use now</p>
+                        </a>
+                        <a href="gemini-mastery/index.html#quick-start"
+                            class="bg-white p-4 rounded-xl border border-emerald-200 hover:border-emerald-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">💎</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Gemini Setup</h4>
+                            <p class="text-xs text-gray-600 mt-1">5-min guide</p>
+                        </a>
+                        <a href="use-cases/index.html#time-savers"
+                            class="bg-white p-4 rounded-xl border border-emerald-200 hover:border-emerald-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">⏰</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Time Savers</h4>
+                            <p class="text-xs text-gray-600 mt-1">Proven results</p>
+                        </a>
+                        <a href="daily-focus/index.html"
+                            class="bg-white p-4 rounded-xl border border-emerald-200 hover:border-emerald-400 transition-all duration-200 hover:shadow-md group text-center">
+                            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Daily Practice</h4>
+                            <p class="text-xs text-gray-600 mt-1">Skill building</p>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- All Learning Modules -->
+            <section>
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 text-center mb-8">All Learning
+                    Modules</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4"
+                    id="modules-grid" role="navigation" aria-label="All learning modules">
+
+                    <!-- AI Skills Audit -->
+                    <a href="recruiter-ai-skill-audit/index.html"
+                        class="card-clickable block bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai skills audit assessment personalized roadmap time savings gemini enhanced insights recommendations"
+                        aria-label="AI Skills Audit - Discover your AI transformation potential">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🎯
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Skills Audit</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Discover exactly how many hours AI could save you this week. Get your personalized 30-day roadmap with AI-powered insights.</p>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <span class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">🧠 AI-Enhanced</span>
+                            <span class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">⚡ 5-min Assessment</span>
+                            <span class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">📊 Personalized Results</span>
+                        </div>
+                    </a>
+
+                    <!-- RPO AI Acceleration Program -->
+                    <a href="rpo-training/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="rpo ai acceleration program training curriculum foundations leadership strategy modules phases">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🎓
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-1">RPO AI Acceleration Program
+                                </h3>
+                                <p class="text-xs font-bold text-purple-700 uppercase tracking-wide">Role-Based AI Training for Teams</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">The complete, multi-phase training curriculum
+                            for
+                            all RPO team members, from AI foundations to leadership strategy.</p>
+                    </a>
+
+                    <!-- Guide for GBS Leaders -->
+                    <a href="gbs-ai-workshop/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="gbs leaders guide interactive training prompt libraries simulators case studies workshop">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                👔
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-1">Guide for GBS Leaders</h3>
+                                <p class="text-xs font-bold text-indigo-700 uppercase tracking-wide">Interactive Leadership Training</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">An interactive training for GBS leaders,
+                            complete
+                            with prompt libraries, simulators, and case studies.</p>
+                    </a>
+
+                    <!-- Daily Sourcing Focus -->
+                    <a href="daily-focus/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="daily sourcing focus micro-coaching tool actionable cards talent sourcers skills">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🎯
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Daily Sourcing Focus</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">A daily micro-coaching tool with actionable
+                            focus
+                            cards designed to sharpen the skills of our talent sourcers.</p>
+                    </a>
+
+                    <!-- GBS AI Prompts Library -->
+                    <a href="gbs-prompts/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="gbs ai prompts library comprehensive searchable expert prompts daily tasks professionals">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                ✨
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-1">GBS AI Prompts Library</h3>
+                                <p class="text-xs font-bold uppercase tracking-wide" style="color: #ca8a04;">Ready-to-Use AI Prompts</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">A comprehensive and searchable library of
+                            expert
+                            prompts designed to accelerate daily tasks for GBS professionals.</p>
+                    </a>
+
+                    <!-- Knowledge Content -->
+                    <a href="knowledge-content/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="knowledge content wealth resources information learning materials documentation best practices guides tutorials">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                📚
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Knowledge Content</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Essential guides, best practices, and tutorials
+                            covering AI fundamentals, implementation strategies, and troubleshooting common challenges.
+                        </p>
+                    </a>
+
+                    <!-- AI SME -->
+                    <a href="ai-sme/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai sme subject matter expert knowledge resources artificial intelligence expertise advanced techniques deep dive">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🧠
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI SME</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Advanced AI techniques, expert insights, and
+                            deep-dive resources for power users looking to maximize their AI capabilities and become
+                            team
+                            champions.</p>
+                    </a>
+
+                    <!-- AI Success Stories -->
+                    <a href="use-cases/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai success stories real-world examples case studies transforms daily work randstad gbs impact">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                💡
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Success Stories</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Real-world examples and case studies showcasing
+                            how
+                            AI transforms daily work at GBS EMEA. See the impact firsthand.</p>
+                    </a>
+
+                    <!-- AI Simulations -->
+                    <a href="ai-simulations/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai simulations reading between lines interactive training evaluate ai content hidden gems resume analysis">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🔍
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AI Simulations - Reading
+                                    Between the Lines</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Interactive training to sharpen your ability to
+                            evaluate AI-generated content and identify what it might miss in candidate assessments.</p>
+                    </a>
+
+                    <!-- Interactive Workshops -->
+                    <a href="workshops/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="interactive workshops live sessions experts skills sourcing masterclass prompt engineering leadership automation workflow">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🎪
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">Interactive Workshops</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Join live sessions with experts to enhance your
+                            skills. Interactive workshops covering AI sourcing, prompt engineering, leadership, and
+                            workflow
+                            automation.</p>
+                    </a>
+
+                    <!-- AppScript Idea Bank -->
+                    <a href="appscript-bank/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="appscript idea bank automation google apps script drive sheets forms calendar gmail innovation ideas submit">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                🔧
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-2">AppScript Idea Bank</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">A central knowledge bank for innovative
+                            automation
+                            ideas using Google Apps Script. Submit your ideas and discover powerful automation
+                            solutions.
+                        </p>
+                    </a>
+
+                    <!-- Gemini Mastery Guide -->
+                    <a href="gemini-mastery/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="gemini mastery guide google ai advanced techniques expert training comprehensive tutorial">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0">
+                                💎
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-1">Gemini Mastery Guide</h3>
+                                <p class="text-xs font-bold text-cyan-700 uppercase tracking-wide">Master Google's AI Tool</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Comprehensive training and advanced techniques
+                            for
+                            mastering Google's Gemini AI. Expert-level guidance for maximizing productivity and
+                            capabilities.
+                        </p>
+                    </a>
+
+                    <!-- Recruiting Frameworks -->
+                    <a href="recruiting-frameworks/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="recruiting frameworks modern recruiting philosophy trust sourcing copywriting 20-30-50 obvious adams">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0"
+                                aria-hidden="true">
+                                📚
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-1">Recruiting Frameworks</h3>
+                                <p class="text-xs font-bold text-blue-700 uppercase tracking-wide">Modern Recruiting Philosophy</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Practical frameworks and philosophies for modern recruiting teams. Build trust, leverage AI wisely, and create authentic candidate connections.</p>
+                    </a>
+
+                    <!-- Timeless Principles -->
+                    <a href="recruiting-frameworks/timeless-principles.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="timeless principles recruiting what ai cannot change trust relationships honesty bezos long-term">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0"
+                                aria-hidden="true">
+                                ⏳
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-1">Timeless Principles</h3>
+                                <p class="text-xs font-bold text-purple-700 uppercase tracking-wide">What AI Cannot Change</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Focus on what won't change: trust, relationships, honesty, and the human element. The fundamentals that remain constant despite AI advancement.</p>
+                    </a>
+
+                    <!-- AI Hiring Governance -->
+                    <a href="ai-governance/index.html"
+                        class="card-clickable block bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                        data-keywords="ai hiring governance responsible ai recruiting privacy bias adverse impact no automated decisioning safe prompts">
+                        <div class="flex items-start mb-4">
+                            <div
+                                class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl mr-4 flex-shrink-0"
+                                aria-hidden="true">
+                                🛡️
+                            </div>
+                            <div>
+                                <h3 class="google-sans text-xl font-bold text-gray-900 mb-1">AI Hiring Governance</h3>
+                                <p class="text-xs font-bold text-emerald-700 uppercase tracking-wide">Safe Use Guidelines</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Clear do/don’t rules for candidate data, no automated decisioning, bias guardrails, and safe prompt templates.</p>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- No Results Message -->
+            <div class="no-results hidden" id="no-results">
+                <div class="text-center py-12">
+                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33">
+                        </path>
+                    </svg>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No results found</h3>
+                    <p class="text-gray-500 mb-4">Try adjusting your search terms or browse our available modules above.
+                    </p>
+                    <button class="text-blue-600 hover:text-blue-800 font-medium" onclick="clearSearch()">Clear
+                        search</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Security Utilities -->
+    <script src="shared/scripts/utils/security.js"></script>
+
+    <script src="shared/scripts/footer.js" defer></script>
+    <script src="shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Global Search Functionality with Site-wide Content Search
+        class GlobalSearch {
+            constructor() {
+                this.searchInput = document.getElementById('global-search');
+                this.clearButton = document.getElementById('clear-search');
+                this.searchResults = document.getElementById('search-results');
+                this.searchResultsContent = document.getElementById('search-results-content');
+                this.modulesGrid = document.getElementById('modules-grid');
+                this.noResults = document.getElementById('no-results');
+                this.cards = document.querySelectorAll('.card-hub');
+
+                this.searchData = [];
+                this.cardData = [];
+                this.loadSearchIndex();
+                this.initializeEventListeners();
+                this.initializeSuggestions();
+            }
+
+            async loadSearchIndex() {
+                try {
+                    const response = await fetch('shared/search-index.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    this.searchData = data.searchIndex.map(item => ({
+                        ...item,
+                        searchText: `${item.title} ${item.description} ${item.keywords} ${item.content || ''}`.toLowerCase()
+                    }));
+
+                    // Also build card data for local filtering
+                    this.cardData = this.buildCardIndex();
+
+                    console.log(`Loaded ${this.searchData.length} items from search index`);
+                    
+                } catch (error) {
+                    console.warn('Could not load search index, falling back to local search:', error);
+                    this.searchData = this.buildCardIndex();
+                    this.cardData = this.searchData;
+                }
+            }
+
+            buildCardIndex() {
+                const cardData = [];
+                this.cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent;
+                    const description = card.querySelector('p').textContent;
+                    const keywords = card.getAttribute('data-keywords') || '';
+                    const url = card.getAttribute('href');
+
+                    cardData.push({
+                        title,
+                        description,
+                        keywords,
+                        url,
+                        element: card,
+                        category: this.getCategoryFromUrl(url),
+                        type: 'module',
+                        searchText: `${title} ${description} ${keywords}`.toLowerCase()
+                    });
+                });
+                return cardData;
+            }
+
+            initializeEventListeners() {
+                // Search input events
+                this.searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
+                this.searchInput.addEventListener('focus', () => this.showSearchResults());
+                this.searchInput.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+                // Clear button
+                this.clearButton.addEventListener('click', () => this.clearSearch());
+
+                // Click outside to close
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.search-container')) {
+                        this.hideSearchResults();
+                    }
+                });
+
+                // Escape key to close
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.hideSearchResults();
+                        this.searchInput.blur();
+                    }
+                });
+            }
+
+            initializeSuggestions() {
+                const suggestionTags = document.querySelectorAll('.search-suggestion-tag');
+                suggestionTags.forEach(tag => {
+                    tag.addEventListener('click', () => {
+                        const searchTerm = tag.getAttribute('data-search');
+                        this.searchInput.value = searchTerm;
+                        this.handleSearch(searchTerm);
+                        this.searchInput.focus();
+                    });
+                });
+            }
+
+            handleSearch(query) {
+                // Sanitize search query for security
+                const safeQuery = typeof SecurityUtils !== 'undefined'
+                    ? SecurityUtils.sanitizeSearchQuery(query)
+                    : query.trim();
+
+                const trimmedQuery = safeQuery.trim();
+
+                // Rate limiting: max 20 searches per minute
+                if (trimmedQuery && typeof SecurityUtils !== 'undefined') {
+                    if (!SecurityUtils.checkRateLimit('hub-search', 20, 60000)) {
+                        alert('Too many searches. Please wait a moment.');
+                        return;
+                    }
+                }
+
+                // Show/hide clear button
+                if (trimmedQuery) {
+                    this.clearButton.classList.add('visible');
+                } else {
+                    this.clearButton.classList.remove('visible');
+                }
+
+                if (trimmedQuery.length === 0) {
+                    this.resetView();
+                    this.showSearchResults();
+                    return;
+                }
+
+                if (trimmedQuery.length < 2) {
+                    this.hideSearchResults();
+                    return;
+                }
+
+                const results = this.performSearch(trimmedQuery);
+                this.displaySearchResults(results, trimmedQuery);
+                this.filterCards(results, trimmedQuery);
+            }
+
+            performSearch(query) {
+                const queryLower = query.toLowerCase();
+                const results = [];
+                const queryWords = queryLower.split(/\s+/).filter(word => word.length > 1);
+
+                this.searchData.forEach(item => {
+                    let score = 0;
+                    let matchedWords = 0;
+
+                    // Exact phrase match in title (highest priority)
+                    if (item.title.toLowerCase().includes(queryLower)) {
+                        score += 20;
+                    }
+
+                    // Individual word matches in title
+                    queryWords.forEach(word => {
+                        if (item.title.toLowerCase().includes(word)) {
+                            score += 10;
+                            matchedWords++;
+                        }
+                    });
+
+                    // Exact phrase match in description
+                    if (item.description.toLowerCase().includes(queryLower)) {
+                        score += 15;
+                    }
+
+                    // Individual word matches in description
+                    queryWords.forEach(word => {
+                        if (item.description.toLowerCase().includes(word)) {
+                            score += 5;
+                            matchedWords++;
+                        }
+                    });
+
+                    // Keywords match
+                    if (item.keywords && item.keywords.toLowerCase().includes(queryLower)) {
+                        score += 8;
+                    }
+
+                    queryWords.forEach(word => {
+                        if (item.keywords && item.keywords.toLowerCase().includes(word)) {
+                            score += 3;
+                            matchedWords++;
+                        }
+                    });
+
+                    // Content match (for detailed content)
+                    if (item.content && item.content.toLowerCase().includes(queryLower)) {
+                        score += 6;
+                    }
+
+                    queryWords.forEach(word => {
+                        if (item.content && item.content.toLowerCase().includes(word)) {
+                            score += 2;
+                            matchedWords++;
+                        }
+                    });
+
+                    // Fuzzy search in all text
+                    if (item.searchText.includes(queryLower)) {
+                        score += 1;
+                    }
+
+                    // Bonus for matching multiple words
+                    if (queryWords.length > 1 && matchedWords >= queryWords.length * 0.7) {
+                        score += 5;
+                    }
+
+                    // Type-based scoring adjustments
+                    if (item.type === 'module') score *= 1.2;
+                    if (item.type === 'lesson') score *= 1.1;
+                    if (item.type === 'prompt-category') score *= 1.15;
+
+                    if (score > 0) {
+                        results.push({ ...item, score, matchedWords });
+                    }
+                });
+
+                // Sort by relevance score, then by matched words
+                return results.sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return b.matchedWords - a.matchedWords;
+                });
+            }
+
+            displaySearchResults(results, query) {
+                this.searchResultsContent.innerHTML = '';
+
+                if (results.length === 0) {
+                    this.searchResultsContent.innerHTML = `
+                        <div class="search-result-item">
+                            <div class="search-result-title">No results found for "${query}"</div>
+                            <div class="search-result-description">Try different keywords like "prompts", "resume", "sourcing", or "training"</div>
+                        </div>
+                    `;
+                } else {
+                    // Show top 8 results with better categorization
+                    const topResults = results.slice(0, 8);
+
+                    // Group results by type for better organization
+                    const groupedResults = this.groupResultsByType(topResults);
+
+                    Object.entries(groupedResults).forEach(([type, items]) => {
+                        if (items.length > 0) {
+                            // Add type header for multiple types
+                            if (Object.keys(groupedResults).length > 1 && items.length > 1) {
+                                const header = document.createElement('div');
+                                header.className = 'search-result-header';
+                                header.innerHTML = `<div style="padding: 8px 16px; background: #f8fafc; font-weight: 600; font-size: 12px; color: #6b7280; text-transform: uppercase;">${this.getTypeDisplayName(type)}</div>`;
+                                this.searchResultsContent.appendChild(header);
+                            }
+
+                            items.forEach(result => {
+                                const resultElement = this.createSearchResultElement(result, query);
+                                this.searchResultsContent.appendChild(resultElement);
+                            });
+                        }
+                    });
+                }
+
+                this.showSearchResults();
+            }
+
+            groupResultsByType(results) {
+                const groups = {
+                    'module': [],
+                    'lesson': [],
+                    'prompt-category': [],
+                    'use-case': [],
+                    'utility': []
+                };
+
+                results.forEach(result => {
+                    const type = result.type || 'module';
+                    if (groups[type]) {
+                        groups[type].push(result);
+                    } else {
+                        groups['module'].push(result);
+                    }
+                });
+
+                // Remove empty groups
+                Object.keys(groups).forEach(key => {
+                    if (groups[key].length === 0) {
+                        delete groups[key];
+                    }
+                });
+
+                return groups;
+            }
+
+            getTypeDisplayName(type) {
+                const typeNames = {
+                    'module': 'Main Modules',
+                    'lesson': 'Training Lessons',
+                    'prompt-category': 'Prompt Categories',
+                    'use-case': 'Success Stories',
+                    'utility': 'Tools & Support'
+                };
+                return typeNames[type] || 'Content';
+            }
+
+            createSearchResultElement(result, query) {
+                const div = document.createElement('div');
+                div.className = 'search-result-item';
+
+                const highlightedTitle = this.highlightText(result.title, query);
+                const highlightedDescription = this.highlightText(result.description, query);
+
+                // Section title display
+                const sectionDisplay = result.sectionTitle
+                    ? `<div class="search-result-section" style="font-size: 12px; color: #1967d2; font-weight: 500; margin-top: 4px;">↳ In: ${this.highlightText(result.sectionTitle, query)}</div>`
+                    : '';
+
+                // Use safe HTML injection with SecurityUtils
+                const htmlContent = `
+                    <div class="search-result-title">${highlightedTitle}</div>
+                    <div class="search-result-description">${highlightedDescription}</div>
+                    ${sectionDisplay}
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                        <span class="search-result-category">${result.category || this.getCategoryFromUrl(result.url)}</span>
+                        ${result.type === 'lesson' ? '<span style="font-size: 11px; color: #9ca3af;">📚 Lesson</span>' : ''}
+                        ${result.type === 'prompt-category' ? '<span style="font-size: 11px; color: #9ca3af;">🎯 Prompts</span>' : ''}
+                        ${result.type === 'use-case' ? '<span style="font-size: 11px; color: #9ca3af;">📈 Case Study</span>' : ''}
+                    </div>
+                `;
+
+                // Temporarily bypass SecurityUtils for debugging
+                // Direct innerHTML assignment for search results (bypassing SecurityUtils for search highlighting)
+                div.innerHTML = htmlContent;
+
+                div.addEventListener('click', () => {
+                    this.handleResultClick(result);
+                });
+
+                return div;
+            }
+
+            handleResultClick(result) {
+                // Safe URL handling
+                const targetUrl = result.anchor ? `${result.url}#${result.anchor}` : result.url;
+
+                // Validate URL before navigation
+                if (typeof SecurityUtils !== 'undefined') {
+                    const safeUrl = SecurityUtils.sanitizeURL(targetUrl);
+                    if (safeUrl) {
+                        window.location.href = safeUrl;
+                    } else {
+                        console.error('Invalid URL:', targetUrl);
+                    }
+                } else {
+                    window.location.href = targetUrl;
+                }
+            }
+
+            highlightText(text, query) {
+                if (!query) return text;
+                const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                return text.replace(regex, '<span class="search-highlight">$1</span>');
+            }
+
+            getCategoryFromUrl(url) {
+                const categoryMap = {
+                    'rpo-training': 'Training Program',
+                    'gbs-ai-workshop': 'Leadership Workshop',
+                    'daily-focus': 'Daily Tools',
+                    'gbs-prompts': 'Prompt Library',
+                    'knowledge-content': 'Knowledge Base',
+                    'ai-sme': 'Expert Resources',
+                    'use-cases': 'Success Stories',
+                    'sourcing-workshop': 'Workshop'
+                };
+
+                for (const [key, value] of Object.entries(categoryMap)) {
+                    if (url.includes(key)) return value;
+                }
+                return 'Module';
+            }
+
+            filterCards(results, query) {
+                // Get matching URLs from both site-wide results and card data
+                const siteWideUrls = new Set(results.map(r => r.url));
+                const cardMatchingUrls = new Set();
+
+                // Also check card data for local matches
+                this.cardData.forEach(cardItem => {
+                    if (cardItem.searchText.includes(query.toLowerCase())) {
+                        cardMatchingUrls.add(cardItem.url);
+                    }
+                });
+
+                // Combine both sets
+                const allMatchingUrls = new Set([...siteWideUrls, ...cardMatchingUrls]);
+
+                this.cards.forEach(card => {
+                    const cardUrl = card.getAttribute('href');
+                    const isMainModuleMatch = allMatchingUrls.has(cardUrl);
+                    const hasRelatedContent = results.some(r => r.url.startsWith(cardUrl));
+
+                    if (query.length === 0 || isMainModuleMatch || hasRelatedContent) {
+                        // Show matching cards
+                        card.classList.remove('filtered-out');
+                        if (query.length > 0) {
+                            card.classList.add('highlighted');
+                            // Highlight text in cards
+                            this.highlightCardText(card, query);
+                        } else {
+                            card.classList.remove('highlighted');
+                            this.removeCardHighlights(card);
+                        }
+                    } else {
+                        // Hide non-matching cards
+                        card.classList.add('filtered-out');
+                        card.classList.remove('highlighted');
+                    }
+                });
+
+                // Show/hide no results message for main modules
+                const hasMainModuleResults = Array.from(this.cards).some(card =>
+                    !card.classList.contains('filtered-out')
+                );
+
+                if (query.length > 0 && !hasMainModuleResults && results.length === 0) {
+                    this.noResults.classList.remove('hidden');
+                    this.modulesGrid.style.opacity = '0.3';
+                } else {
+                    this.noResults.classList.add('hidden');
+                    this.modulesGrid.style.opacity = '1';
+                }
+            }
+
+            highlightCardText(card, query) {
+                const title = card.querySelector('h3');
+                const description = card.querySelector('p');
+
+                if (!title.getAttribute('data-original')) {
+                    title.setAttribute('data-original', title.innerHTML);
+                    description.setAttribute('data-original', description.innerHTML);
+                }
+
+                title.innerHTML = this.highlightText(title.getAttribute('data-original'), query);
+                description.innerHTML = this.highlightText(description.getAttribute('data-original'), query);
+            }
+
+            removeCardHighlights(card) {
+                const title = card.querySelector('h3');
+                const description = card.querySelector('p');
+
+                if (title.getAttribute('data-original')) {
+                    title.innerHTML = title.getAttribute('data-original');
+                    description.innerHTML = description.getAttribute('data-original');
+                }
+            }
+
+            showSearchResults() {
+                this.searchResults.classList.add('visible');
+            }
+
+            hideSearchResults() {
+                this.searchResults.classList.remove('visible');
+            }
+
+            clearSearch() {
+                this.searchInput.value = '';
+                this.clearButton.classList.remove('visible');
+                this.resetView();
+                this.hideSearchResults();
+                this.searchInput.focus();
+            }
+
+            resetView() {
+                // Reset all cards
+                this.cards.forEach(card => {
+                    card.classList.remove('filtered-out', 'highlighted');
+                    this.removeCardHighlights(card);
+                });
+
+                // Hide no results
+                this.noResults.classList.add('hidden');
+                this.modulesGrid.style.opacity = '1';
+            }
+
+            handleKeydown(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const firstResult = this.searchResultsContent.querySelector('.search-result-item');
+                    if (firstResult) {
+                        firstResult.click();
+                    }
+                }
+            }
+        }
+
+        // Global function for clear search (used by no results button)
+        function clearSearch() {
+            if (window.globalSearch) {
+                window.globalSearch.clearSearch();
+            }
+        }
+
+        // Onboarding Tour Functionality
+        class OnboardingTour {
+            constructor() {
+                console.log('OnboardingTour constructor called');
+                this.currentStep = 0;
+                this.tourButton = document.getElementById('tour-button');
+                this.tourOverlay = document.getElementById('tour-overlay');
+                this.tourTooltip = document.getElementById('tour-tooltip');
+                this.tourTitle = document.getElementById('tour-title');
+                this.tourDescription = document.getElementById('tour-description');
+                this.tourProgress = document.getElementById('tour-progress');
+                this.tourSkip = document.getElementById('tour-skip');
+                this.tourNext = document.getElementById('tour-next');
+                
+                console.log('Tour elements found:', {
+                    button: !!this.tourButton,
+                    overlay: !!this.tourOverlay,
+                    tooltip: !!this.tourTooltip,
+                    title: !!this.tourTitle,
+                    description: !!this.tourDescription,
+                    progress: !!this.tourProgress,
+                    skip: !!this.tourSkip,
+                    next: !!this.tourNext
+                });
+
+                this.steps = [
+                    {
+                        title: "🚀 Quick Start",
+                        description: "Three quick highlights to get you started with AI.",
+                        target: null,
+                        position: 'center',
+                        buttonText: "Show Me"
+                    },
+                    {
+                        title: "⚡ Instant AI Tools",
+                        description: "Click any tool below for ready-to-use AI prompts.",
+                        target: ".bg-gradient-to-r.from-emerald-50",
+                        position: 'top',
+                        buttonText: "Next",
+                        demo: true
+                    },
+                    {
+                        title: "🔍 Smart Search",
+                        description: "Search for anything you need - try 'Boolean search' or 'email templates'.",
+                        target: ".search-container",
+                        position: 'bottom',
+                        buttonText: "Got it!",
+                        interactive: true
+                    }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                console.log('OnboardingTour init called');
+                // Tour is available but hidden by default
+                // Users can access it via console: window.onboardingTour.startTour()
+                this.hideTourButton();
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                console.log('Setting up tour event listeners');
+                if (this.tourButton) {
+                    this.tourButton.addEventListener('click', () => {
+                        console.log('Tour button clicked via event listener');
+                        this.startTour();
+                    });
+                    console.log('Tour button event listener added');
+                } else {
+                    console.error('Tour button not found!');
+                }
+                
+                if (this.tourSkip) {
+                    this.tourSkip.addEventListener('click', () => this.skipTour());
+                }
+                if (this.tourNext) {
+                    this.tourNext.addEventListener('click', () => this.nextStep());
+                }
+
+                // Close on overlay click
+                this.tourOverlay.addEventListener('click', (e) => {
+                    if (e.target === this.tourOverlay) {
+                        this.skipTour();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (this.tourOverlay.classList.contains('active')) {
+                        if (e.key === 'Escape') {
+                            this.skipTour();
+                        } else if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.nextStep();
+                        }
+                    }
+                });
+            }
+
+            hasSeenTour() {
+                const completed = localStorage.getItem('gbs-hub-tour-completed') === 'true';
+                console.log('hasSeenTour check:', completed);
+                return completed;
+            }
+
+            markTourCompleted() {
+                localStorage.setItem('gbs-hub-tour-completed', 'true');
+            }
+
+            showTourButton() {
+                this.tourButton.classList.remove('hidden');
+            }
+
+            hideTourButton() {
+                this.tourButton.classList.add('hidden');
+            }
+
+            startTour() {
+                console.log('startTour called');
+                console.log('Current elements:', {
+                    overlay: this.tourOverlay,
+                    tooltip: this.tourTooltip,
+                    title: this.tourTitle,
+                    description: this.tourDescription
+                });
+                this.currentStep = 0;
+                this.showTourOverlay();
+                this.showStep();
+            }
+
+            skipTour() {
+                this.markTourCompleted();
+                this.hideTourButton();
+                this.hideTourOverlay();
+            }
+
+            nextStep() {
+                this.currentStep++;
+
+                if (this.currentStep >= this.steps.length) {
+                    this.completeTour();
+                    return;
+                }
+
+                this.showStep();
+            }
+
+            completeTour() {
+                this.markTourCompleted();
+                this.hideTourButton();
+
+                // First hide the tooltip immediately
+                this.tourTooltip.classList.remove('active');
+
+                // Then hide the overlay and show completion message
+                this.hideTourOverlay();
+
+                // Show completion message after overlay is fully hidden
+                setTimeout(() => {
+                    this.showCompletionMessage();
+                }, 600); // Increased delay to ensure overlay is fully hidden
+            }
+
+            showCompletionMessage() {
+                const message = document.createElement('div');
+                message.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    padding: 24px;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                    z-index: 1002;
+                    text-align: center;
+                    max-width: 320px;
+                `;
+
+                message.innerHTML = `
+                    <h3 style="color: var(--btn-primary, #4A90E2); font-size: 18px; font-weight: 700; margin-bottom: 8px; font-family: 'Google Sans', sans-serif;">🎉 You're all set!</h3>
+                    <p style="color: #5f6368; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Start exploring the GBS Learning Hub and discover how AI can transform your daily work.</p>
+                    <button onclick="this.parentElement.remove()" class="btn-primary btn-sm">Got it!</button>
+                `;
+
+                document.body.appendChild(message);
+
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (message.parentElement) {
+                        message.remove();
+                    }
+                }, 5000);
+            }
+
+            showStep() {
+                console.log('showStep called, currentStep:', this.currentStep);
+                const step = this.steps[this.currentStep];
+                console.log('Current step data:', step);
+
+                // Update content with enhanced features
+                if (this.tourTitle) {
+                    this.tourTitle.textContent = step.title;
+                    console.log('Updated title to:', step.title);
+                } else {
+                    console.error('Tour title element not found!');
+                }
+                
+                if (this.tourDescription) {
+                    this.tourDescription.innerHTML = this.buildEnhancedDescription(step);
+                    console.log('Updated description');
+                } else {
+                    console.error('Tour description element not found!');
+                }
+                
+                if (this.tourNext) {
+                    this.tourNext.textContent = step.buttonText;
+                    console.log('Updated button text to:', step.buttonText);
+                } else {
+                    console.error('Tour next button element not found!');
+                }
+
+                // Update progress dots
+                this.updateProgress();
+
+                // Remove previous highlights
+                this.removeHighlights();
+
+                // Add demo functionality for Quick Start Toolkit
+                if (step.demo && this.currentStep === 1) {
+                    this.addQuickStartDemo();
+                }
+
+                // Position tooltip and highlight target
+                if (step.target) {
+                    this.positionTooltipAndHighlight(step);
+                } else {
+                    this.centerTooltip();
+                }
+
+                // Show tooltip with animation
+                setTimeout(() => {
+                    console.log('Adding active class to tooltip');
+                    if (this.tourTooltip) {
+                        this.tourTooltip.classList.add('active');
+                        console.log('Tooltip should now be visible');
+                    } else {
+                        console.error('Tour tooltip element not found when trying to show!');
+                    }
+                }, 100);
+            }
+
+            buildEnhancedDescription(step) {
+                let html = `<p class="text-gray-600 text-sm leading-relaxed mb-3">${step.description}</p>`;
+                
+                // Only add interactive search for the last step
+                if (step.interactive && this.currentStep === 2) {
+                    html += `<div class="mt-3">
+                        <input type="text" placeholder="Try: Boolean search" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                               onkeyup="if(event.key==='Enter' && this.value) { document.getElementById('global-search').value = this.value; document.getElementById('global-search').focus(); }"
+                               style="font-size: 14px;">
+                    </div>`;
+                }
+
+                return html;
+            }
+
+            addQuickStartDemo() {
+                // Add a subtle pulse animation to the Quick Start tools
+                setTimeout(() => {
+                    const quickStartSection = document.querySelector('.bg-gradient-to-r.from-emerald-50');
+                    if (quickStartSection) {
+                        // Target the correct elements - they are <a> tags, not buttons
+                        const tools = quickStartSection.querySelectorAll('a');
+                        console.log('Found Quick Start tools:', tools.length);
+                        tools.forEach((tool, index) => {
+                            setTimeout(() => {
+                                tool.style.animation = 'pulse 1s ease-in-out';
+                                setTimeout(() => {
+                                    tool.style.animation = '';
+                                }, 1000);
+                            }, index * 200);
+                        });
+                    }
+                }, 500);
+            }
+
+            updateProgress() {
+                const dots = this.tourProgress.querySelectorAll('.tour-progress-dot');
+                dots.forEach((dot, index) => {
+                    if (index <= this.currentStep) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            positionTooltipAndHighlight(step) {
+                const target = document.querySelector(step.target);
+                if (!target) {
+                    this.centerTooltip();
+                    return;
+                }
+
+                // Add highlight
+                target.classList.add('tour-highlight');
+
+                // Scroll target into view
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                setTimeout(() => {
+                    const targetRect = target.getBoundingClientRect();
+                    const tooltipRect = this.tourTooltip.getBoundingClientRect();
+
+                    let top, left;
+                    const margin = 24; // Increased margin for more space
+                    const extraUpwardOffset = this.currentStep === this.steps.length - 1 ? 40 : 0; // Extra offset for last step
+
+                    // Remove previous arrow classes
+                    this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
+
+                    // Default: show tooltip above or below target, with margin
+                    if (step.position === 'top') {
+                        // Place tooltip above the target, with extra offset for last step
+                        const requiredSpace = tooltipRect.height + margin + extraUpwardOffset;
+                        if (targetRect.top - requiredSpace > 0) {
+                            top = targetRect.top - tooltipRect.height - margin - extraUpwardOffset;
+                            left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
+                            this.tourTooltip.classList.add('arrow-bottom');
+                        } else {
+                            // Not enough space above, place to the right but higher up
+                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                            left = targetRect.right + margin;
+                            this.tourTooltip.classList.add('arrow-left');
+                        }
+                    } else if (step.position === 'bottom') {
+                        // Place tooltip below the target, but if not enough space, place to the left
+                        if (targetRect.bottom + tooltipRect.height + margin < window.innerHeight) {
+                            top = targetRect.bottom + margin;
+                            left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
+                            this.tourTooltip.classList.add('arrow-top');
+                        } else {
+                            // Not enough space below, place to the left but higher up
+                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                            left = targetRect.left - tooltipRect.width - margin;
+                            this.tourTooltip.classList.add('arrow-right');
+                        }
+                    } else if (step.position === 'left') {
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                        left = targetRect.left - tooltipRect.width - margin;
+                        this.tourTooltip.classList.add('arrow-right');
+                    } else if (step.position === 'right') {
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
+                        left = targetRect.right + margin;
+                        this.tourTooltip.classList.add('arrow-left');
+                    } else {
+                        this.centerTooltip();
+                        return;
+                    }
+
+                    // Ensure tooltip stays within viewport
+                    top = Math.max(margin, Math.min(top, window.innerHeight - tooltipRect.height - margin));
+                    left = Math.max(margin, Math.min(left, window.innerWidth - tooltipRect.width - margin));
+
+                    this.tourTooltip.style.top = `${top}px`;
+                    this.tourTooltip.style.left = `${left}px`;
+                    this.tourTooltip.style.transform = 'none';
+                }, 200);
+            }
+
+            centerTooltip() {
+                this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
+                this.tourTooltip.style.top = '50%';
+                this.tourTooltip.style.left = '50%';
+                this.tourTooltip.style.transform = 'translate(-50%, -50%)';
+            }
+
+            removeHighlights() {
+                document.querySelectorAll('.tour-highlight').forEach(el => {
+                    el.classList.remove('tour-highlight');
+                });
+            }
+
+            showTourOverlay() {
+                console.log('showTourOverlay called');
+                console.log('Overlay element:', this.tourOverlay);
+                
+                // Close any existing AI tool modals that might be open
+                const existingModals = document.querySelectorAll('.ai-tool-modal');
+                existingModals.forEach(modal => modal.remove());
+                
+                if (this.tourOverlay) {
+                    this.tourOverlay.classList.add('active');
+                    console.log('Added active class to overlay');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Set a flag to prevent other modals during tour
+                    window.tourInProgress = true;
+                } else {
+                    console.error('Tour overlay element not found!');
+                }
+            }
+
+            hideTourOverlay() {
+                this.tourTooltip.classList.remove('active');
+                setTimeout(() => {
+                    this.tourOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    this.removeHighlights();
+
+                    // Reset tooltip position and styling
+                    this.tourTooltip.style.top = '';
+                    this.tourTooltip.style.left = '';
+                    this.tourTooltip.style.transform = '';
+                    this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
+                    
+                    // Clear the tour in progress flag
+                    window.tourInProgress = false;
+                }, 300);
+            }
+        }
+
+        // Enhanced Quick Access Tools functionality v4.0 - Fixed Syntax
+        window.openEnhancedAITool = function(toolType) {
+            console.log('Opening enhanced AI tool v4.0:', toolType);
+            
+            // Don't open modals during tour
+            if (window.tourInProgress) {
+                console.log('Tour in progress, skipping modal');
+                return;
+            }
+            
+            // Remove any existing modals first
+            const existingModals = document.querySelectorAll('.ai-tool-modal');
+            existingModals.forEach(modal => modal.remove());
+            
+            const tools = {
+                'boolean-generator': {
+                    title: 'Boolean Search Generator',
+                    icon: '🔍',
+                    color: 'blue',
+                    description: 'Generate powerful Boolean search strings for any role',
+                    prompt: 'Create a Boolean search string for [ROLE] with [YEARS] years experience in [SKILLS]. Include alternative job titles and exclude companies [EXCLUDE_COMPANIES].',
+                    placeholder: 'Senior Software Engineer, 5+ years, JavaScript React Node.js, exclude: Google Microsoft',
+                    timeSaved: '30 minutes per search',
+                    usage: 'Used 2,500+ times this month',
+                    action: () => window.open('https://chat.openai.com/', '_blank'),
+                    aiTool: 'ChatGPT'
+                },
+                'email-writer': {
+                    title: 'Professional Email Writer',
+                    icon: '✉️',
+                    color: 'purple',
+                    description: 'Craft perfect professional emails for any situation',
+                    prompt: 'Write a professional email for [PURPOSE] to [RECIPIENT]. Tone should be [TONE]. Include [KEY_POINTS].',
+                    placeholder: 'Follow-up, hiring manager, friendly, interview feedback and next steps',
+                    timeSaved: '15 minutes per email',
+                    usage: 'Used 1,800+ times this month',
+                    action: () => window.open('https://gemini.google.com/', '_blank'),
+                    aiTool: 'Gemini'
+                },
+                'resume-analyzer': {
+                    title: 'Resume Analyzer',
+                    icon: '📄',
+                    color: 'green',
+                    description: 'Analyze resumes against job requirements instantly',
+                    prompt: 'Analyze this resume for [ROLE]. Create a table comparing experience against requirements: [REQUIREMENTS]. Rate fit 1-10 and explain gaps.',
+                    placeholder: 'Product Manager, 5+ years product experience, stakeholder management, roadmap planning',
+                    timeSaved: '20 minutes per resume',
+                    usage: 'Used 3,200+ times this month',
+                    action: () => window.open('https://chat.openai.com/', '_blank'),
+                    aiTool: 'ChatGPT'
+                }
+            };
+
+            const tool = tools[toolType];
+            if (!tool) {
+                console.error('Tool not found:', toolType);
+                return;
+            }
+
+            // Create enhanced modal
+            const modal = document.createElement('div');
+            modal.className = 'ai-tool-modal fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+            modal.style.animation = 'fadeIn 0.3s ease-out';
+            
+            const gradients = {
+                blue: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                purple: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                green: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+            };
+
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-hidden transform scale-95 transition-all duration-300 modal-content" style="animation: slideUp 0.3s ease-out;">
+                    <!-- Enhanced Header -->
+                    <div class="p-8 text-white relative overflow-hidden" style="background: ${gradients[tool.color]};">
+                        <div class="absolute inset-0 bg-black bg-opacity-10"></div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center">
+                                    <div class="text-5xl mr-6 bg-white bg-opacity-20 rounded-2xl w-20 h-20 flex items-center justify-center backdrop-blur-sm">
+                                        ${tool.icon}
+                                    </div>
+                                    <div>
+                                        <h3 class="text-3xl font-bold mb-2">${tool.title}</h3>
+                                        <p class="text-white text-opacity-90 text-lg">${tool.description}</p>
+                                    </div>
+                                </div>
+                                <button onclick="this.closest('.ai-tool-modal').remove()" class="text-white hover:text-gray-200 transition-colors p-3 hover:bg-white hover:bg-opacity-20 rounded-full">
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Enhanced Stats -->
+                            <div class="flex flex-wrap items-center gap-6 text-sm text-white text-opacity-90">
+                                <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Saves ${tool.timeSaved}
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    ${tool.usage}
+                                </div>
+                                <div class="flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    ${tool.aiTool} Ready
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Content -->
+                    <div class="p-8 overflow-y-auto max-h-[60vh]">
+                        <!-- AI Prompt Section -->
+                        <div class="mb-8">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-2xl font-bold text-gray-900 flex items-center">
+                                    <span class="mr-3">🤖</span>
+                                    AI Prompt
+                                </h4>
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold text-sm">Ready to Copy</span>
+                            </div>
+                            <div class="relative">
+                                <div class="bg-gray-900 rounded-2xl p-6 font-mono text-base text-green-400 border-4 border-gray-200 relative overflow-hidden shadow-inner">
+                                    <div class="absolute top-4 right-4">
+                                        <button onclick="navigator.clipboard.writeText('${tool.prompt.replace(/'/g, "\\'")}').then(() => { this.innerHTML = '✅ Copied!'; this.classList.add('bg-green-600'); setTimeout(() => { this.innerHTML = '📋 Copy'; this.classList.remove('bg-green-600'); }, 2000); })" 
+                                                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:scale-105">
+                                            📋 Copy
+                                        </button>
+                                    </div>
+                                    <div class="pr-20 leading-relaxed">
+                                        ${tool.prompt}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Example Section -->
+                        <div class="mb-8">
+                            <h4 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                                <span class="mr-3">💡</span>
+                                Example
+                            </h4>
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200">
+                                <div class="text-blue-900 font-bold text-base mb-3">Replace the [BRACKETS] with your details:</div>
+                                <div class="text-blue-800 text-base leading-relaxed font-medium">
+                                    ${tool.placeholder}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pro Tips -->
+                        <div class="mb-6">
+                            <h4 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                                <span class="mr-3">⚡</span>
+                                Pro Tips
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-yellow-50 rounded-xl p-4 border-2 border-yellow-200">
+                                    <div class="text-yellow-800 font-semibold">
+                                        💡 <strong>Customize:</strong> Adjust the prompt for your specific needs
+                                    </div>
+                                </div>
+                                <div class="bg-green-50 rounded-xl p-4 border-2 border-green-200">
+                                    <div class="text-green-800 font-semibold">
+                                        🚀 <strong>Speed:</strong> Save as a template for repeated use
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Footer -->
+                    <div class="bg-gray-50 px-8 py-6 border-t-2 border-gray-200">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigator.clipboard.writeText('${tool.prompt.replace(/'/g, "\\'")}').then(() => { this.innerHTML = '✅ Copied to Clipboard!'; setTimeout(() => { this.innerHTML = '📋 Copy Prompt'; }, 3000); })" 
+                                    class="flex-1 bg-white border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-2xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-200 font-bold text-lg flex items-center justify-center hover:scale-105">
+                                📋 Copy Prompt
+                            </button>
+                            <button onclick="${tool.action.toString()}(); this.closest('.ai-tool-modal').remove();" 
+                                    class="flex-1 text-white px-8 py-4 rounded-2xl hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-bold text-lg flex items-center justify-center" style="background: ${gradients[tool.color]};">
+                                <span class="mr-3">${tool.icon}</span>
+                                Open ${tool.aiTool} →
+                            </button>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <div class="text-sm text-gray-600 font-semibold">
+                                ⚡ This tool has saved GBS professionals <span class="text-green-600">1,000+ hours</span> this month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { transform: translateY(50px) scale(0.95); opacity: 0; }
+                    to { transform: translateY(0) scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            document.body.appendChild(modal);
+
+            // Close on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+
+            // Close on Escape key
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    modal.remove();
+                    document.removeEventListener('keydown', handleEscape);
+                }
+            };
+            document.addEventListener('keydown', handleEscape);
+        };
+
+        // Enhanced helper functions
+        function closeModal(element) {
+            const modal = element.closest('.fixed');
+            const content = modal.querySelector('.modal-content');
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.remove();
+            }, 300);
+        }
+
+        function copyPrompt(button, prompt, toolName) {
+            navigator.clipboard.writeText(prompt).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = `
+                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Copied!
+                `;
+                button.classList.add('bg-green-600', 'text-white');
+                button.classList.remove('bg-gray-700', 'hover:bg-gray-600', 'bg-white', 'border-gray-300', 'text-gray-700');
+                
+                // Show success notification
+                showNotification(`${toolName} prompt copied to clipboard!`, 'success');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('bg-green-600', 'text-white');
+                    button.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                }, 2000);
+            }).catch(() => {
+                showNotification('Failed to copy prompt. Please try again.', 'error');
+            });
+        }
+
+        function openAIAndClose(action, button) {
+            action();
+            closeModal(button);
+            showNotification('Opening AI tool in new tab...', 'info');
+        }
+
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500'
+            };
+
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-[60] transform translate-x-full transition-transform duration-300`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            requestAnimationFrame(() => {
+                notification.classList.remove('translate-x-full');
+                notification.classList.add('translate-x-0');
+            });
+            
+            setTimeout(() => {
+                notification.classList.remove('translate-x-0');
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Test function for tour
+        window.testTour = function() {
+            console.log('Test tour function called');
+            if (window.onboardingTour) {
+                console.log('Starting tour manually');
+                window.onboardingTour.startTour();
+            } else {
+                console.error('OnboardingTour not available');
+            }
+        };
+
+        window.resetTour = function() {
+            console.log('Resetting tour completion status');
+            localStorage.removeItem('gbs-hub-tour-completed');
+            if (window.onboardingTour) {
+                window.onboardingTour.showTourButton();
+                console.log('Tour button should now be visible');
+            }
+        };
+
+        window.debugTour = function() {
+            console.log('=== TOUR DEBUG INFO ===');
+            console.log('OnboardingTour exists:', !!window.onboardingTour);
+            
+            const elements = {
+                button: document.getElementById('tour-button'),
+                overlay: document.getElementById('tour-overlay'),
+                tooltip: document.getElementById('tour-tooltip'),
+                title: document.getElementById('tour-title'),
+                description: document.getElementById('tour-description'),
+                progress: document.getElementById('tour-progress'),
+                skip: document.getElementById('tour-skip'),
+                next: document.getElementById('tour-next')
+            };
+            
+            console.log('Tour elements:', elements);
+            
+            Object.keys(elements).forEach(key => {
+                const el = elements[key];
+                if (el) {
+                    console.log(`${key}:`, {
+                        exists: true,
+                        visible: el.offsetParent !== null,
+                        classes: el.className,
+                        style: el.style.cssText
+                    });
+                } else {
+                    console.log(`${key}: NOT FOUND`);
+                }
+            });
+            
+            console.log('Tour completed status:', localStorage.getItem('gbs-hub-tour-completed'));
+            console.log('=== END DEBUG INFO ===');
+        };
+
+        window.forceStartTour = function() {
+            console.log('Force starting tour...');
+            const overlay = document.getElementById('tour-overlay');
+            const tooltip = document.getElementById('tour-tooltip');
+            
+            if (overlay && tooltip) {
+                // Force show overlay
+                overlay.classList.add('active');
+                overlay.style.display = 'block';
+                overlay.style.opacity = '1';
+                overlay.style.visibility = 'visible';
+                
+                // Force show tooltip
+                setTimeout(() => {
+                    tooltip.classList.add('active');
+                    tooltip.style.opacity = '1';
+                    tooltip.style.transform = 'scale(1)';
+                }, 100);
+                
+                console.log('Tour should now be visible');
+            } else {
+                console.error('Could not find tour elements');
+            }
+        };
+
+        // Test function for search
+        window.testSearch = function(query = 'boolean') {
+            console.log('=== MANUAL SEARCH TEST ===');
+            if (window.globalSearch) {
+                console.log('GlobalSearch available');
+                console.log('Search data length:', window.globalSearch.searchData.length);
+                
+                // Test the search directly
+                const results = window.globalSearch.performSearch(query);
+                console.log('Manual search results:', results);
+                
+                // Test if search input exists
+                const searchInput = document.getElementById('global-search');
+                console.log('Search input found:', !!searchInput);
+                
+                if (searchInput) {
+                    searchInput.value = query;
+                    searchInput.dispatchEvent(new Event('input'));
+                }
+            } else {
+                console.error('GlobalSearch not available');
+            }
+        };
+
+        // Scroll Position Memory System
+        class ScrollPositionMemory {
+            constructor() {
+                this.storageKey = 'gbs-hub-scroll-position';
+                this.init();
+            }
+
+            init() {
+                // Save scroll position when navigating away
+                this.saveScrollOnNavigation();
+                
+                // Restore scroll position when returning
+                this.restoreScrollOnReturn();
+                
+                // Clean up old scroll positions
+                this.cleanupOldPositions();
+            }
+
+            saveScrollOnNavigation() {
+                // Save scroll position when clicking on any learning module link
+                document.addEventListener('click', (e) => {
+                    const link = e.target.closest('a[href]');
+                    if (link && this.isLearningModuleLink(link)) {
+                        const scrollData = {
+                            position: window.scrollY,
+                            timestamp: Date.now(),
+                            referrer: window.location.href,
+                            targetCard: this.findNearestCard(window.scrollY)
+                        };
+                        
+                        sessionStorage.setItem(this.storageKey, JSON.stringify(scrollData));
+                        console.log('Saved scroll position:', scrollData);
+                    }
+                });
+
+                // Also save on page unload as backup
+                window.addEventListener('beforeunload', () => {
+                    if (this.isMainHubPage()) {
+                        const scrollData = {
+                            position: window.scrollY,
+                            timestamp: Date.now(),
+                            referrer: window.location.href
+                        };
+                        sessionStorage.setItem(this.storageKey, JSON.stringify(scrollData));
+                    }
+                });
+            }
+
+            restoreScrollOnReturn() {
+                // Check if we're returning from a learning module
+                if (this.shouldRestoreScroll()) {
+                    const savedData = this.getSavedScrollData();
+                    if (savedData && this.isRecentNavigation(savedData.timestamp)) {
+                        // Wait for page to fully load, then restore position
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', () => {
+                                this.performScrollRestore(savedData);
+                            });
+                        } else {
+                            // Page already loaded
+                            setTimeout(() => {
+                                this.performScrollRestore(savedData);
+                            }, 100);
+                        }
+                    }
+                }
+            }
+
+            performScrollRestore(savedData) {
+                console.log('Restoring scroll position:', savedData);
+                
+                // Smooth scroll to saved position
+                window.scrollTo({
+                    top: savedData.position,
+                    behavior: 'smooth'
+                });
+
+                // Show a subtle indicator of where we returned to
+                if (savedData.targetCard) {
+                    this.highlightReturnedCard(savedData.targetCard);
+                }
+
+                // Clear the saved position after use
+                sessionStorage.removeItem(this.storageKey);
+            }
+
+            highlightReturnedCard(cardSelector) {
+                const card = document.querySelector(cardSelector);
+                if (card) {
+                    // Add a subtle highlight animation
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.3)';
+                    card.style.transform = 'scale(1.02)';
+                    
+                    // Remove highlight after animation
+                    setTimeout(() => {
+                        card.style.boxShadow = '';
+                        card.style.transform = '';
+                    }, 2000);
+                }
+            }
+
+            findNearestCard(scrollPosition) {
+                // Find which learning module card is closest to the scroll position
+                const cards = document.querySelectorAll('#modules-grid a, .primary-card');
+                let nearestCard = null;
+                let minDistance = Infinity;
+
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const cardTop = rect.top + window.scrollY;
+                    const distance = Math.abs(cardTop - scrollPosition);
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        // Create a unique selector for this card
+                        const title = card.querySelector('h3')?.textContent;
+                        if (title) {
+                            nearestCard = `a[href="${card.getAttribute('href')}"]`;
+                        }
+                    }
+                });
+
+                return nearestCard;
+            }
+
+            isLearningModuleLink(link) {
+                const href = link.getAttribute('href');
+                if (!href) return false;
+
+                // Check if it's a learning module (not external links or anchors)
+                const learningModules = [
+                    'gemini-mastery', 'gbs-prompts', 'gbs-ai-workshop', 'rpo-training',
+                    'daily-focus', 'use-cases', 'recruiter-ai-skill-audit', 'knowledge-content',
+                    'ai-simulations', 'submit-content'
+                ];
+
+                return learningModules.some(module => href.includes(module));
+            }
+
+            isMainHubPage() {
+                return window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+            }
+
+            shouldRestoreScroll() {
+                // Check if we came from a learning module via breadcrumb navigation
+                const referrer = document.referrer;
+                const currentUrl = window.location.href;
+                
+                // If we have a referrer and we're on the main hub page
+                return referrer && 
+                       this.isMainHubPage() && 
+                       referrer !== currentUrl &&
+                       this.getSavedScrollData() !== null;
+            }
+
+            getSavedScrollData() {
+                try {
+                    const saved = sessionStorage.getItem(this.storageKey);
+                    return saved ? JSON.parse(saved) : null;
+                } catch (error) {
+                    console.warn('Error parsing saved scroll data:', error);
+                    return null;
+                }
+            }
+
+            isRecentNavigation(timestamp) {
+                // Only restore if navigation happened within last 5 minutes
+                const fiveMinutes = 5 * 60 * 1000;
+                return (Date.now() - timestamp) < fiveMinutes;
+            }
+
+            cleanupOldPositions() {
+                // Clean up old scroll positions on page load
+                const savedData = this.getSavedScrollData();
+                if (savedData && !this.isRecentNavigation(savedData.timestamp)) {
+                    sessionStorage.removeItem(this.storageKey);
+                }
+            }
+        }
+
+        // Initialize search when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM loaded, initializing components...');
+            
+            try {
+                window.globalSearch = new GlobalSearch();
+                console.log('GlobalSearch initialized');
+            } catch (error) {
+                console.error('Error initializing GlobalSearch:', error);
+            }
+            
+            try {
+                window.onboardingTour = new OnboardingTour();
+                console.log('OnboardingTour initialized');
+                
+                // Test the tour button after a short delay
+                setTimeout(() => {
+                    const button = document.getElementById('tour-button');
+                    if (button) {
+                        console.log('Tour button found, adding backup click handler');
+                        button.addEventListener('click', function(e) {
+                            console.log('Backup click handler triggered');
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (window.onboardingTour) {
+                                window.onboardingTour.startTour();
+                            }
+                        });
+                    }
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error initializing OnboardingTour:', error);
+            }
+
+            try {
+                window.scrollMemory = new ScrollPositionMemory();
+                console.log('ScrollPositionMemory initialized');
+            } catch (error) {
+                console.error('Error initializing ScrollPositionMemory:', error);
+            }
+
+            // Add keyboard shortcut (Ctrl/Cmd + K)
+            document.addEventListener('keydown', function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    document.getElementById('global-search').focus();
+                }
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

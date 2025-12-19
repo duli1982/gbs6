@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Mega-Prompt Template - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master advanced prompt engineering with our comprehensive Mega-Prompt Template. Create structured, detailed prompts for complex Gemini AI tasks.">
+    <meta name="keywords"
+        content="mega prompt template, advanced prompting, prompt engineering, Gemini prompts, structured prompts, AI instructions">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Template-specific styling */
+        .template-card {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.05) 0%, rgba(160, 82, 45, 0.05) 100%);
+            border: 1px solid rgba(139, 69, 19, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .template-card:hover::before {
+            left: 100%;
+        }
+
+        .template-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(139, 69, 19, 0.25), 0 0 0 1px rgba(139, 69, 19, 0.1);
+            border-color: rgba(139, 69, 19, 0.4);
+        }
+
+        .section-icon {
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+            animation: gentle-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-glow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(139, 69, 19, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px rgba(139, 69, 19, 0.6));
+            }
+        }
+
+        .template-section {
+            background: #f8fafc;
+            border-left: 4px solid #8b4513;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .template-section h3 {
+            color: #8b4513;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-template {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            position: relative;
+            margin: 16px 0;
+        }
+
+        .copy-button {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        .copy-button:hover {
+            background: #a0522d;
+        }
+
+        .template-variable {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .example-highlight {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.1) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.3), transparent);
+            height: 1px;
+            margin: 3rem 0;
+        }
+
+        .floating-template {
+            animation: float-template 4s ease-in-out infinite;
+        }
+
+        @keyframes float-template {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(3deg);
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(-3deg);
+            }
+        }
+
+        .template-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #8b4513;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .expandable-section {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .expandable-section:hover {
+            background: rgba(139, 69, 19, 0.05);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .expandable-content.expanded {
+            max-height: 3000px;
+        }
+
+        .phase-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+
+        .phase-title {
+            color: #1d4ed8;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-item {
+            background: white;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 8px 0;
+            border-left: 3px solid #3b82f6;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Mega-Prompt Template</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Hero Section -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="floating-template text-6xl mb-6">📝</div>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Gemini Mega-Prompt Template
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                A comprehensive template framework for creating powerful, structured prompts that deliver consistent
+                results.
+                Master advanced prompt engineering for complex tasks and sophisticated AI interactions.
+            </p>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Introduction Section -->
+            <section class="mb-16">
+                <div class="example-highlight">
+                    <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                        🎯 Why Use a Mega-Prompt Template?
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        Use this template as a foundation for crafting your own mega-prompts. It serves as a highly
+                        effective guide for
+                        generating significantly more advanced responses from Gemini by ensuring your input is
+                        <strong>precise, structured, and thoughtfully detailed</strong>.
+                    </p>
+                    <div class="template-benefits">
+                        <div class="benefit-card">
+                            <div class="text-3xl mb-3">🎯</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Precision</h3>
+                            <p class="text-gray-600 text-sm">Get exactly what you need with clear, specific instructions
+                                that eliminate ambiguity.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="text-3xl mb-3">🏗️</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Structure</h3>
+                            <p class="text-gray-600 text-sm">Organize complex requests into logical phases and steps for
+                                better AI comprehension.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="text-3xl mb-3">🔄</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Consistency</h3>
+                            <p class="text-gray-600 text-sm">Achieve reliable, high-quality outputs every time with
+                                standardized formatting.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="text-3xl mb-3">⚡</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Advanced Results</h3>
+                            <p class="text-gray-600 text-sm">Unlock Gemini's full potential for complex analysis and
+                                sophisticated reasoning.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Template Structure -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    📋 Complete Mega-Prompt Template
+                </h2>
+
+                <div class="template-card rounded-2xl p-8">
+                    <div class="code-template">
+                        <button class="copy-button" onclick="copyToClipboard('mega-template')">Copy Template</button>
+                        <pre id="mega-template">ROLE
+You are an expert <span class="template-variable">[Specify the persona/role Gemini should adopt, e.g., "Data Analyst specializing in market trends," "Strategic Consultant in renewable energy," "Research Scientist in biotechnology," "Critical Literary Critic"]</span>. Your primary goal is to provide <span class="template-variable">[Specify the overarching goal, e.g., "comprehensive insights and actionable recommendations," "a detailed comparative analysis," "an in-depth technical explanation," "a nuanced interpretation"]</span>.
+
+CONTEXT & BACKGROUND
+<span class="template-variable">[Provide all relevant background information necessary for understanding the task. This sets the stage for Gemini's analysis.]</span>
+
+Topic/Domain: <span class="template-variable">[Clearly define the subject area.]</span>
+
+Purpose: <span class="template-variable">[Explain why this analysis is being conducted and what decision or understanding it will inform.]</span>
+
+Audience: <span class="template-variable">[Describe the intended audience for the output (e.g., "executive board," "technical developers," "general public," "students"). This influences tone and complexity.]</span>
+
+Key Information Provided (or to be assumed/researched):
+<span class="template-variable">[List any specific data points, documents, articles, or prior knowledge Gemini should leverage. If providing text, clearly mark it or include links.]</span>
+<span class="template-variable">[Mention any specific theories, frameworks, or methodologies that should be applied.]</span>
+
+Current State/Problem Statement: <span class="template-variable">[Briefly describe the current situation or the core problem this analysis aims to address.]</span>
+
+TASK OVERVIEW
+<span class="template-variable">[Clearly state the main task. Use strong action verbs.]</span> Analyze the <span class="template-variable">[Topic/Domain]</span> to <span class="template-variable">[Overarching Goal]</span>. Your output should address the following key areas:
+
+STEP-BY-STEP INSTRUCTIONS
+<span class="template-variable">[Break down the complex task into logical, sequential steps. This is crucial for guiding Gemini's thought process.]</span>
+
+Phase 1: Information Gathering & Synthesis
+<span class="template-variable">[Step 1.1: e.g., "Extract key facts and figures related to X."]</span>
+<span class="template-variable">[Step 1.2: e.g., "Identify and categorize relevant trends impacting Y."]</span>
+<span class="template-variable">[Step 1.3: e.g., "Synthesize information from [Source 1] and [Source 2] to form a cohesive understanding of Z."]</span>
+
+Phase 2: Analysis & Evaluation
+<span class="template-variable">[Step 2.1: e.g., "Conduct a SWOT analysis on [Subject] based on the gathered information."]</span>
+<span class="template-variable">[Step 2.2: e.g., "Evaluate the implications of [Factor A] on [Outcome B], considering both positive and negative aspects."]</span>
+<span class="template-variable">[Step 2.3: e.g., "Compare and contrast [Concept C] with [Concept D], highlighting similarities, differences, and practical applications."]</span>
+
+Phase 3: Conclusion & Recommendations (if applicable)
+<span class="template-variable">[Step 3.1: e.g., "Formulate a concise summary of the most critical findings."]</span>
+<span class="template-variable">[Step 3.2: e.g., "Develop at least [Number] actionable recommendations based on the analysis, each supported by evidence."]</span>
+<span class="template-variable">[Step 3.3: e.g., "Identify potential risks or challenges associated with the recommendations."]</span>
+
+CONSTRAINTS & REQUIREMENTS
+<span class="template-variable">[Define strict boundaries, negative constraints, and specific output requirements.]</span>
+
+Tone: <span class="template-variable">[e.g., "Formal and academic," "Professional and persuasive," "Neutral and objective," "Slightly conversational but informative"]</span>.
+
+Length: <span class="template-variable">[e.g., "Approximately 1500 words," "Between 3-5 paragraphs per section," "Concise bullet points"]</span>.
+
+Format: <span class="template-variable">[e.g., "Markdown with clear headings and bullet points," "Structured report with an executive summary, main body, and conclusion," "Table format for comparisons," "JSON output"]</span>.
+
+Exclusions: <span class="template-variable">[e.g., "Do not include personal opinions," "Avoid jargon where possible," "Do not suggest solutions that require (specific resource)."]</span>
+
+Inclusions: <span class="template-variable">[e.g., "Include specific examples to illustrate each point," "Cite any external information (if applicable and Gemini has access to it)."]</span>
+
+Depth: <span class="template-variable">[e.g., "Provide a deep dive into statistical methodologies," "Keep explanations high-level and accessible."]</span>
+
+SUCCESS CRITERIA
+<span class="template-variable">[How will you know if Gemini's output is successful? Be explicit.]</span>
+
+The analysis is <span class="template-variable">[e.g., "logically structured" / "data-driven" / "insightful"]</span>.
+All key areas outlined in "TASK OVERVIEW" are thoroughly addressed.
+The recommendations are <span class="template-variable">[e.g., "practical and well-justified" / "innovative" / "aligned with the stated purpose"]</span>.
+The output adheres strictly to all "CONSTRAINTS & REQUIREMENTS," especially regarding tone and format.
+<span class="template-variable">[Add any other specific criteria, e.g., "demonstrates a nuanced understanding of X," "identifies novel connections."]</span>
+
+INITIAL INPUT (if providing text/data directly)
+<span class="template-variable">[Include any specific data, documents, or information here]</span></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Template Sections Breakdown -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    🔍 Template Sections Explained
+                </h2>
+
+                <div class="space-y-6">
+
+                    <div class="template-section">
+                        <h3><span class="section-icon">🎭</span> ROLE</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Define the expert persona Gemini should adopt. This sets the knowledge base, perspective,
+                            and approach for the entire response.
+                            Be specific about the expertise level and domain focus.
+                        </p>
+                    </div>
+
+                    <div class="template-section">
+                        <h3><span class="section-icon">📚</span> CONTEXT & BACKGROUND</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Provide comprehensive background information that Gemini needs to understand the task fully.
+                            Include topic domain,
+                            purpose, target audience, key information, and current state. This section is crucial for
+                            contextual accuracy.
+                        </p>
+                    </div>
+
+                    <div class="template-section">
+                        <h3><span class="section-icon">🎯</span> TASK OVERVIEW</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Clearly state the main objective using strong action verbs. This should be a concise summary
+                            of what you want
+                            Gemini to accomplish, serving as the north star for the entire analysis.
+                        </p>
+                    </div>
+
+                    <div class="template-section">
+                        <h3><span class="section-icon">📋</span> STEP-BY-STEP INSTRUCTIONS</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Break down complex tasks into logical, sequential phases and steps. This guides Gemini's
+                            thought process and
+                            ensures comprehensive coverage of all aspects.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="phase-card">
+                                <div class="phase-title">Phase 1: Information Gathering & Synthesis</div>
+                                <p class="text-sm text-gray-600">Extract, identify, and synthesize relevant information
+                                    from various sources.</p>
+                            </div>
+                            <div class="phase-card">
+                                <div class="phase-title">Phase 2: Analysis & Evaluation</div>
+                                <p class="text-sm text-gray-600">Conduct deep analysis, evaluate implications, and
+                                    compare different concepts.</p>
+                            </div>
+                            <div class="phase-card">
+                                <div class="phase-title">Phase 3: Conclusion & Recommendations</div>
+                                <p class="text-sm text-gray-600">Formulate findings, develop actionable recommendations,
+                                    and identify risks.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="template-section">
+                        <h3><span class="section-icon">⚖️</span> CONSTRAINTS & REQUIREMENTS</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Define strict boundaries, output format, tone, length, and specific requirements. Include
+                            both what to include
+                            and what to exclude. This ensures the output meets your exact specifications.
+                        </p>
+                    </div>
+
+                    <div class="template-section">
+                        <h3><span class="section-icon">✅</span> SUCCESS CRITERIA</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Explicitly define how you'll measure success. This helps Gemini understand the quality
+                            standards and
+                            ensures the output meets your expectations for structure, depth, and usefulness.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Real Example Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    🚀 Real Example: DreamWeaver Marketing Strategy
+                </h2>
+
+                <div class="example-highlight mb-8">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Here's a complete example of the mega-prompt template in action, creating a comprehensive
+                        marketing strategy
+                        for a revolutionary dream-work technology. This demonstrates how to structure complex,
+                        multi-faceted requests.
+                    </p>
+                </div>
+
+                <div class="template-card rounded-2xl p-8">
+                    <div class="expandable-section p-4 rounded-lg border border-gray-300"
+                        onclick="toggleExample('example-content')">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-gray-900">📋 View Complete Example</h3>
+                            <svg class="w-5 h-5 transform transition-transform" id="example-arrow">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="expandable-content" id="example-content">
+                        <div class="code-template mt-4">
+                            <button class="copy-button" onclick="copyToClipboard('example-prompt')">Copy
+                                Example</button>
+                            <pre id="example-prompt">ROLE
+You are a highly innovative Marketing Strategist with a deep understanding of nascent technology markets and consumer psychology. Your primary goal is to provide a cutting-edge marketing expansion strategy and actionable go-to-market plan for a revolutionary new product, focusing on overcoming inherent skepticism and clearly articulating intangible benefits.
+
+CONTEXT & BACKGROUND
+Topic/Domain: Marketing expansion for "DreamWeaver," a technology enabling conscious, productive work within dreams.
+
+Purpose: To successfully launch DreamWeaver into new, global markets, establish it as a legitimate and transformative tool, and achieve significant user adoption and revenue growth within the next 3 years. This strategy will inform investment decisions and resource allocation.
+
+Audience: The internal leadership team (CEO, CTO, Head of Sales, Investor Relations) at DreamWeaver Inc., requiring a persuasive, data-informed, yet visionary plan.
+
+Key Information Provided (or to be assumed/researched):
+Product: DreamWeaver is a non-invasive wearable device that syncs with brainwaves during REM sleep, allowing users to enter a customized, stable "dream-workspace." Users can perform cognitive tasks (e.g., brainstorming, problem-solving, learning, creative design) in a hyper-focused, distraction-free environment, then recall key insights upon waking. Early beta tests show significant increases in creativity and problem-solving efficiency for specific tasks.
+
+Current Status: DreamWeaver has completed successful closed beta testing with a small group of tech-forward professionals and has secured initial seed funding. The core technology is stable and patented.
+
+Market: Currently, there is no direct competitor. Indirect competitors include productivity software, meditation apps, and sleep aids. The concept of "dream work" is largely unproven and associated with speculative or niche interests.
+
+Company Vision: To revolutionize productivity and human potential by unlocking the untapped power of the subconscious mind.
+
+Initial Target Segments (to validate or expand upon):
+- High-pressure creative professionals (designers, writers, artists) seeking breakthrough ideas.
+- Entrepreneurs/Innovators looking for extreme competitive advantage and novel solutions.
+- Lifelong learners/Researchers aiming for accelerated knowledge acquisition.
+
+Current State/Problem Statement: DreamWeaver faces the challenge of marketing a genuinely novel, abstract, and somewhat "sci-fi" concept to a broad audience, overcoming skepticism, and establishing trust and perceived value for an experience that occurs while unconscious.
+
+TASK OVERVIEW
+Analyze the current market landscape and DreamWeaver's unique proposition to develop a robust marketing expansion strategy. Your output should address market entry, audience engagement, messaging, and measurable success metrics.
+
+STEP-BY-STEP INSTRUCTIONS
+Phase 1: Market Understanding & Positioning
+1.1 Target Audience Deep Dive: Refine or identify primary and secondary target audiences for global expansion, detailing their pain points that DreamWeaver solves, their motivations, and where they consume information.
+1.2 Competitive Analysis (Indirect): Analyze how productivity tools, wellness apps, and "brain training" solutions currently market to similar demographics. Identify their strengths, weaknesses, and potential gaps DreamWeaver can exploit.
+1.3 Unique Value Proposition (UVP) Refinement: Articulate a crystal-clear, compelling, and concise UVP for DreamWeaver that resonates with the identified target audiences, focusing on tangible benefits rather than just the technology.
+1.4 Brand Positioning: Define DreamWeaver's desired brand image and positioning within the broader tech and wellness markets (e.g., "pioneering innovation," "elite productivity tool," "mind expansion").
+
+Phase 2: Go-to-Market Strategy & Channel Selection
+2.1 Initial Market Entry Plan: Propose a phased approach for market entry (e.g., specific regions/countries first, or online-only launch, then retail partnerships). Justify the chosen approach.
+2.2 Marketing Mix (Digital & Traditional): Recommend specific marketing channels and tactics for each target audience. Consider:
+- Content Marketing (e.g., thought leadership, educational content, case studies)
+- Digital Advertising (e.g., targeted social media, search engine marketing)
+- PR & Influencer Marketing (e.g., tech reviewers, futurists, productivity gurus)
+- Partnerships (e.g., research institutions, corporate wellness programs)
+- Experiential Marketing (e.g., exclusive demos, virtual reality simulations)
+2.3 Overcoming Skepticism: Detail specific strategies to build credibility and trust, address common misconceptions, and demonstrate the technology's scientific basis and practical results.
+2.4 Messaging Strategy: Develop core message pillars and compelling taglines that effectively communicate the product's benefits and address potential user concerns.
+
+Phase 3: Measurement, Budget & Future Considerations
+3.1 Key Performance Indicators (KPIs): Define clear, measurable KPIs for each phase of the marketing expansion (e.g., brand awareness, lead generation, conversion rates, customer lifetime value).
+3.2 Budget Allocation (High-Level): Provide a high-level suggestion for how marketing budget might be allocated across the recommended channels (e.g., percentages).
+3.3 Risk Assessment & Mitigation: Identify potential marketing-related risks (e.g., negative public perception, ethical concerns, competitive response) and propose mitigation strategies.
+3.4 Long-Term Vision: Briefly outline how the marketing strategy might evolve over 3-5 years as the product gains traction and the market matures.
+
+CONSTRAINTS & REQUIREMENTS
+Tone: Visionary, confident, data-driven, and slightly audacious, yet grounded in practical execution.
+Length: Comprehensive, but concise per section. Aim for a detailed outline with bullet points and brief explanatory paragraphs for each sub-step.
+Format: Markdown with clear headings for each phase and sub-steps. Use bullet points for lists.
+Exclusions: Do not include granular financial projections beyond high-level budget allocation. Avoid overly technical jargon about the brainwave technology itself; focus on its market implications.
+Inclusions: Emphasize innovative and unconventional marketing approaches suitable for a disruptive technology. Include specific examples of how to build credibility for an abstract concept.
+
+SUCCESS CRITERIA
+The strategy provides a clear, actionable roadmap for marketing expansion.
+It effectively addresses the challenge of marketing an abstract, novel technology.
+The target audience and UVP are well-defined and compelling.
+The recommended channels and tactics are innovative and appropriate for the product and market.
+Credibility-building and skepticism-addressing strategies are robust.
+KPIs are measurable and aligned with strategic goals.
+The output adheres strictly to all "CONSTRAINTS & REQUIREMENTS."</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Best Practices Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    💡 Best Practices for Mega-Prompts
+                </h2>
+
+                <div class="template-benefits">
+                    <div class="benefit-card">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Be Specific</h3>
+                        <p class="text-gray-600 text-sm">Use precise language and avoid ambiguous terms. The more
+                            specific your instructions, the better the output.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-3xl mb-3">📋</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Structure Logically</h3>
+                        <p class="text-gray-600 text-sm">Break complex tasks into sequential phases. This helps Gemini
+                            process information systematically.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-3xl mb-3">🎭</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Define the Role</h3>
+                        <p class="text-gray-600 text-sm">Clearly specify the expert persona. This sets the knowledge
+                            base and perspective for the response.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-3xl mb-3">⚖️</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Set Constraints</h3>
+                        <p class="text-gray-600 text-sm">Define what to include and exclude. Clear boundaries ensure
+                            focused, relevant outputs.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-3xl mb-3">✅</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Define Success</h3>
+                        <p class="text-gray-600 text-sm">Explicitly state success criteria. This helps Gemini understand
+                            quality expectations.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-3xl mb-3">🔄</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Iterate & Refine</h3>
+                        <p class="text-gray-600 text-sm">Test your mega-prompts and refine based on results. Continuous
+                            improvement leads to better outcomes.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="mb-16">
+                <div class="example-highlight text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🚀 Ready to Create Your Mega-Prompt?
+                    </h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Use this template to craft sophisticated prompts for complex tasks. Start with the template,
+                        customize it for your specific needs,
+                        and unlock Gemini's full potential for advanced analysis and reasoning.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../prompt-engineering-course/index.html" class="nav-button-secondary">
+                            🎓 Take the Mini-Course
+                        </a>
+                        <a href="../key-principles/index.html" class="nav-button-secondary">
+                            🔑 Learn Key Principles
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Toggle example visibility
+        function toggleExample(contentId) {
+            const content = document.getElementById(contentId);
+            const arrow = document.getElementById('example-arrow');
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Copy to clipboard functionality
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(function () {
+                // Show success feedback
+                const button = element.parentNode.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#8b4513';
+                }, 2000);
+            }).catch(function (err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add intersection observer for benefit cards
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            benefitCards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Add fadeInUp animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+
+</body>
+
+</html>

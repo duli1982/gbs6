@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner AI Learning Path - RPO Training | GBS EMEA</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Start your AI journey with our beginner-friendly learning path. Learn AI basics, write effective prompts, and apply AI to daily recruitment tasks. 40 minutes total, 5 modules.">
+    <meta name="keywords" content="beginner AI training, AI basics, AI prompts for beginners, recruitment AI introduction, AI learning path, AI for recruiters">
+    <meta name="author" content="GBS EMEA">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Beginner AI Learning Path - RPO Training">
+    <meta property="og:description" content="Your gentle introduction to AI - no technical jargon, just practical skills you can use today">
+    <meta property="og:site_name" content="GBS EMEA Learning Hub">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Beginner AI Learning Path">
+    <meta name="twitter:description" content="Start your AI journey with 5 practical modules designed for recruitment professionals">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <style>
+        /* Font styles now handled by shared/fonts.css */
+        
+        .module-card {
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #10b981;
+        }
+        
+        .module-card.completed {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .simulation-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .simulation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .site-header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb {
+            color: #6b7280;
+        }
+
+        .breadcrumb a:hover {
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Beginner Path</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span id="header-progress">0/5 completed</span>
+                </div>
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4" aria-hidden="true">🌱</div>
+            <h2 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Beginner AI Learning Path</h2>
+            <p class="text-lg text-gray-600 mb-6">Your gentle introduction to AI - no technical jargon, just practical skills you can use today. <strong>Total time: ~40 minutes</strong></p>
+
+            <!-- Progress Bar -->
+            <div class="max-w-md mx-auto" role="region" aria-label="Learning progress">
+                <div class="bg-gray-200 rounded-full h-3" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Overall completion progress">
+                    <div id="progress-bar" class="progress-bar bg-green-500 h-3 rounded-full" style="width: 0%"></div>
+                </div>
+                <div class="text-sm text-gray-600 mt-2">
+                    <span id="progress-text" aria-live="polite">0 of 5 modules completed</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Modules -->
+        <div class="max-w-3xl mx-auto space-y-6" role="list" aria-label="Learning modules">
+            
+            <!-- Module 1: What is AI? -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="1" role="listitem">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3" aria-label="Module 1">
+                                <span class="text-green-600 font-bold">1</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">What is AI? (Simple Explanation)</h3>
+                            <span class="ml-3 text-sm text-gray-500" aria-label="Duration 5 minutes">⏱ 5 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Understand AI in plain English - what it is, what it isn't, and why it matters for your daily work.</p>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(1)" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors" aria-label="Start Module 1: What is AI">
+                                Start Module
+                            </button>
+                            <div class="completion-status hidden">
+                                <span class="text-green-600 font-semibold" role="status">✓ Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4" aria-hidden="true">🤖</div>
+                </div>
+            </div>
+
+            <!-- Module 2: Your First AI Conversation -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="2">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-gray-400 font-bold">2</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">Your First AI Conversation</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 8 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Learn how to "talk" to AI tools effectively - the basics of writing good prompts.</p>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(2)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                                Complete Module 1 First
+                            </button>
+                            <div class="completion-status hidden">
+                                <span class="text-green-600 font-semibold">✓ Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">💬</div>
+                </div>
+            </div>
+
+            <!-- Module 3: Practice Simulation -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="3">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-gray-400 font-bold">3</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">Interactive Practice Session</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 10 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Try it yourself! Practice writing prompts in a safe, guided environment.</p>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startSimulation()" class="simulation-btn text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                                🎮 Start Practice
+                            </button>
+                            <div class="completion-status hidden">
+                                <span class="text-green-600 font-semibold">✓ Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">🎯</div>
+                </div>
+            </div>
+
+            <!-- Module 4: AI for Your Daily Tasks -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="4">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-gray-400 font-bold">4</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">AI for Your Daily Tasks</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 12 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">See how AI can help with emails, research, writing, and other tasks you do every day.</p>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(4)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                                Complete Previous Modules
+                            </button>
+                            <div class="completion-status hidden">
+                                <span class="text-green-600 font-semibold">✓ Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">📝</div>
+                </div>
+            </div>
+
+            <!-- Module 5: Next Steps -->
+            <div class="module-card bg-white rounded-xl p-6" data-module="5">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-gray-400 font-bold">5</span>
+                            </div>
+                            <h3 class="google-sans text-xl font-bold text-gray-900">Your AI Journey Continues</h3>
+                            <span class="ml-3 text-sm text-gray-500">⏱ 5 min</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Celebrate your progress and discover what to learn next!</p>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="startModule(5)" class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                                Complete Previous Modules
+                            </button>
+                            <div class="completion-status hidden">
+                                <span class="text-green-600 font-semibold">✓ Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-3xl ml-4">🎉</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completion Badge Callout -->
+        <div class="max-w-3xl mx-auto mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6 text-center" id="completion-badge-notice">
+            <div class="text-3xl mb-3">🏆</div>
+            <h3 class="google-sans text-lg font-bold text-green-900 mb-2">Earn Your Beginner Badge</h3>
+            <p class="text-green-700 text-sm">Complete all 5 modules to earn your AI Foundations certificate and unlock the Intermediate path!</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="text-center mt-12">
+            <a href="../index.html"
+               class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:from-green-600 hover:to-emerald-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to RPO Training
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Debug: Log current progress
+            console.log('Beginner path progress:', completedModules);
+            updateProgress();
+            updateModuleStates();
+            displayRoleSpecificContent();
+        });
+        
+        function startModule(moduleNumber) {
+            // Navigate to the actual module content
+            switch(moduleNumber) {
+                case 1:
+                    window.location.href = 'modules/beginner-1.html';
+                    break;
+                case 2:
+                    window.location.href = 'modules/beginner-2.html';
+                    break;
+                case 3:
+                    startSimulation();
+                    break;
+                case 4:
+                    window.location.href = 'modules/beginner-4.html';
+                    break;
+                case 5:
+                    window.location.href = 'modules/beginner-5.html';
+                    break;
+                default:
+                    alert('Module content coming soon!');
+            }
+        }
+        
+        function startSimulation() {
+            window.location.href = 'modules/beginner-3-simulation.html';
+        }
+        
+        function updateProgress() {
+            const progress = (completedModules.length / 5) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${completedModules.length} of 5 modules completed`;
+            // Update header progress
+            const headerProgress = document.getElementById('header-progress');
+            if (headerProgress) {
+                headerProgress.textContent = `${completedModules.length} of 5 completed`;
+            }
+        }
+        
+        function updateModuleStates() {
+            const modules = document.querySelectorAll('.module-card');
+            
+            modules.forEach((module, index) => {
+                const moduleNumber = index + 1;
+                const isCompleted = completedModules.includes(moduleNumber);
+                const canStart = moduleNumber === 1 || completedModules.includes(moduleNumber - 1);
+                
+                const button = module.querySelector('button');
+                const numberCircle = module.querySelector('.w-8');
+                const completionStatus = module.querySelector('.completion-status');
+                
+                if (isCompleted) {
+                    module.classList.add('completed');
+                    numberCircle.classList.remove('bg-gray-100');
+                    numberCircle.classList.add('bg-green-100');
+                    numberCircle.querySelector('span').classList.remove('text-gray-400');
+                    numberCircle.querySelector('span').classList.add('text-green-600');
+                    if (completionStatus) {
+                        completionStatus.classList.remove('hidden');
+                    }
+                    button.style.display = 'none';
+                } else if (canStart) {
+                    numberCircle.classList.remove('bg-gray-100');
+                    numberCircle.classList.add('bg-green-100');
+                    numberCircle.querySelector('span').classList.remove('text-gray-400');
+                    numberCircle.querySelector('span').classList.add('text-green-600');
+                    button.disabled = false;
+                    button.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    
+                    if (moduleNumber === 3) {
+                        button.classList.add('simulation-btn');
+                        button.textContent = '🎮 Start Practice';
+                    } else {
+                        button.classList.add('bg-green-600', 'hover:bg-green-700');
+                        button.textContent = 'Start Module';
+                    }
+                }
+            });
+        }
+
+        function displayRoleSpecificContent() {
+            const userRole = localStorage.getItem('userRole');
+            if (userRole === 'coordinator') {
+                // Add coordinator-specific welcome message
+                const header = document.querySelector('.text-center.mb-8');
+                const roleMessage = document.createElement('div');
+                roleMessage.className = 'bg-green-50 border border-green-200 rounded-lg p-4 mt-4 max-w-md mx-auto';
+                roleMessage.innerHTML = `
+                    <div class="text-green-800 font-semibold mb-2">🤝 Coordinator Focus</div>
+                    <div class="text-green-700 text-sm">This path emphasizes practical applications, communication enhancement, and workflow optimization for daily coordination tasks.</div>
+                `;
+                header.appendChild(roleMessage);
+            }
+        }
+    </script>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../shared/scripts/breadcrumb-nav.js"></script>
+</body>
+</html>

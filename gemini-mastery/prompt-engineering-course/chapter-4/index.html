@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Improving Prompts for Enhanced Outputs - Gemini Prompt Engineering</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master prompt refinement techniques for Gemini AI. Learn step-by-step prompt improvement, debugging, and iterative enhancement for optimal results.">
+    <meta name="keywords"
+        content="prompt refinement, prompt debugging, iterative improvement, advanced prompting, Gemini optimization">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/fonts.css">
+    <link rel="stylesheet" href="../../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../../shared/buttons.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Chapter 4 specific styling */
+        .chapter-hero {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+            animation: gentle-rotate 25s linear infinite;
+        }
+
+        @keyframes gentle-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .refinement-workshop {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .workshop-header {
+            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .workshop-content {
+            padding: 2rem;
+        }
+
+        .step-navigator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .step-button {
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-button:hover {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .step-button.active {
+            background: #a855f7;
+            color: white;
+            border-color: #a855f7;
+        }
+
+        .step-button.completed {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .step-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .prompt-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .prompt-card.before {
+            border-left: 4px solid #ef4444;
+        }
+
+        .prompt-card.after {
+            border-left: 4px solid #10b981;
+        }
+
+        .prompt-text {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+        }
+
+        .interactive-refiner {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .refiner-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .refiner-input:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        }
+
+        .analysis-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .analysis-score {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .score-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .score-excellent {
+            background: #10b981;
+        }
+
+        .score-good {
+            background: #3b82f6;
+        }
+
+        .score-fair {
+            background: #f59e0b;
+        }
+
+        .score-poor {
+            background: #ef4444;
+        }
+
+        .improvement-suggestions {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .evolution-tracker {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .evolution-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .evolution-stage {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .evolution-stage:last-child {
+            border-bottom: none;
+        }
+
+        .evolution-stage::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .evolution-stage:last-child::before {
+            display: none;
+        }
+
+        .stage-marker {
+            position: absolute;
+            left: 1.25rem;
+            top: 1.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .stage-marker.active {
+            border-color: #a855f7;
+            background: #a855f7;
+            color: white;
+        }
+
+        .stage-content {
+            margin-left: 3rem;
+        }
+
+        .exercise-playground {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .exercise-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .exercise-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .exercise-card:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        .exercise-card.active {
+            border-color: #10b981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .progress-step.completed {
+            color: #059669;
+        }
+
+        .progress-step::before {
+            content: "○";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-step.completed::before {
+            content: "✓";
+            color: #10b981;
+        }
+
+        @media (max-width: 768px) {
+            .prompt-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .step-navigator {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .exercise-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Prompt Engineering Course">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Prompt Engineering Course</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Chapter 4</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Chapter Hero -->
+        <header class="chapter-hero relative z-10">
+            <div class="text-center">
+                <div class="text-6xl mb-4">⚡</div>
+                <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    Chapter 4: Improving Prompts for Enhanced Outputs
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Master the art of prompt refinement through systematic analysis, iterative improvement, and
+                    advanced techniques. Transform basic prompts into powerful, precise instructions.
+                </p>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-step completed">Introduction</div>
+                <div class="progress-step completed">Output Types</div>
+                <div class="progress-step completed">Context Mastery</div>
+                <div class="progress-step completed">Enhancement</div>
+                <div class="progress-step">Formatting</div>
+                <div class="progress-step">Advanced</div>
+            </div>
+
+            <!-- Learning Objectives -->
+            <section class="mb-12">
+                <div class="prompt-card">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎯 What You'll Master</h2>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• <strong>Step-by-step refinement:</strong> Systematic approach to improving any prompt</li>
+                        <li>• <strong>Problem identification:</strong> Quickly diagnose issues in prompt responses</li>
+                        <li>• <strong>Iterative enhancement:</strong> Progressive improvement through testing and
+                            adjustment</li>
+                        <li>• <strong>Evolution tracking:</strong> Document and learn from your refinement process</li>
+                        <li>• <strong>Advanced techniques:</strong> Transform intermediate prompts into expert-level
+                            instructions</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 4.1: Interactive Step-by-Step Guide -->
+            <section class="mb-16">
+                <div class="refinement-workshop">
+                    <div class="workshop-header">
+                        <h2 class="text-2xl font-bold">🔧 Interactive Prompt Refinement Workshop</h2>
+                        <p class="mt-2 opacity-90">Follow our 6-step process to transform any prompt into a powerful
+                            instruction</p>
+                    </div>
+                    <div class="workshop-content">
+
+                        <!-- Step Navigator -->
+                        <div class="step-navigator">
+                            <button class="step-button active" onclick="showStep(1)" id="step-1-btn">
+                                <span>1</span> Understand
+                            </button>
+                            <button class="step-button" onclick="showStep(2)" id="step-2-btn">
+                                <span>2</span> Identify
+                            </button>
+                            <button class="step-button" onclick="showStep(3)" id="step-3-btn">
+                                <span>3</span> Adjust
+                            </button>
+                            <button class="step-button" onclick="showStep(4)" id="step-4-btn">
+                                <span>4</span> Test
+                            </button>
+                            <button class="step-button" onclick="showStep(5)" id="step-5-btn">
+                                <span>5</span> Iterate
+                            </button>
+                            <button class="step-button" onclick="showStep(6)" id="step-6-btn">
+                                <span>6</span> Document
+                            </button>
+                        </div>
+
+                        <!-- Step 1: Understanding -->
+                        <div id="step-1" class="step-content active">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">Step 1: Understanding the Prompt and
+                                Output</h3>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Objective:</strong> Analyze the relationship between your prompt and Gemini's
+                                response.
+                            </p>
+
+                            <div class="prompt-comparison">
+                                <div class="prompt-card before">
+                                    <h4 class="font-bold text-red-600 mb-2">❌ Problematic Example</h4>
+                                    <div class="prompt-text">
+                                        "Explain how inflation works"
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        <strong>Issue:</strong> Gemini might explain balloon inflation instead of
+                                        economic inflation due to ambiguity.
+                                    </p>
+                                </div>
+
+                                <div class="prompt-card after">
+                                    <h4 class="font-bold text-green-600 mb-2">✅ Clear Intent</h4>
+                                    <div class="prompt-text">
+                                        "Explain how economic inflation affects consumer purchasing power"
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        <strong>Better:</strong> Specific context eliminates ambiguity and ensures
+                                        relevant response.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="improvement-suggestions">
+                                <h4 class="font-bold text-blue-800 mb-2">💡 Key Questions to Ask:</h4>
+                                <ul class="text-blue-700 text-sm space-y-1">
+                                    <li>• What was my original intent with this prompt?</li>
+                                    <li>• Does the output align with my expectations?</li>
+                                    <li>• What specific aspects are missing or incorrect?</li>
+                                    <li>• Is the response too broad, narrow, or off-topic?</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Identifying Problems -->
+                        <div id="step-2" class="step-content">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">Step 2: Identifying the Problem</h3>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Objective:</strong> Pinpoint exactly what's wrong with the output.
+                            </p>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-3">🔍 Common Issues</h4>
+                                    <ul class="space-y-2 text-gray-700 text-sm">
+                                        <li>• <strong>Ambiguity:</strong> Prompt allows multiple interpretations</li>
+                                        <li>• <strong>Lack of context:</strong> Missing background information</li>
+                                        <li>• <strong>Wrong scope:</strong> Too broad or too narrow</li>
+                                        <li>• <strong>Missing format:</strong> No structure guidance</li>
+                                        <li>• <strong>Unclear audience:</strong> No target user defined</li>
+                                        <li>• <strong>Tone mismatch:</strong> Wrong style for purpose</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-3">📊 Diagnostic Questions</h4>
+                                    <ul class="space-y-2 text-gray-700 text-sm">
+                                        <li>• Is the response off-topic or irrelevant?</li>
+                                        <li>• Does it lack clarity or structure?</li>
+                                        <li>• Is it too verbose or too concise?</li>
+                                        <li>• Are key details missing?</li>
+                                        <li>• Is the tone inappropriate?</li>
+                                        <li>• Does it meet the intended purpose?</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="prompt-comparison mt-6">
+                                <div class="prompt-card before">
+                                    <h4 class="font-bold text-red-600 mb-2">❌ Problem Example</h4>
+                                    <div class="prompt-text">
+                                        "Explain AI in simple terms"
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        <strong>Output Issue:</strong> Uses technical jargon despite requesting "simple
+                                        terms"
+                                    </p>
+                                </div>
+
+                                <div class="prompt-card after">
+                                    <h4 class="font-bold text-green-600 mb-2">✅ Problem Identified</h4>
+                                    <div class="prompt-text">
+                                        Problem: Lack of emphasis on simplicity and no target audience specified
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        <strong>Solution:</strong> Add role, specify audience, emphasize simplicity
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Adjusting -->
+                        <div id="step-3" class="step-content">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">Step 3: Adjusting the Prompt</h3>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Objective:</strong> Apply specific improvements based on identified problems.
+                            </p>
+
+                            <div class="prompt-comparison">
+                                <div class="prompt-card before">
+                                    <h4 class="font-bold text-red-600 mb-2">❌ Original</h4>
+                                    <div class="prompt-text">
+                                        "Explain AI in simple terms"
+                                    </div>
+                                </div>
+
+                                <div class="prompt-card after">
+                                    <h4 class="font-bold text-green-600 mb-2">✅ Adjusted</h4>
+                                    <div class="prompt-text">
+                                        "You are a teacher explaining concepts to high school students. Explain
+                                        artificial intelligence in simple, everyday language without technical jargon."
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="improvement-suggestions">
+                                <h4 class="font-bold text-blue-800 mb-2">🔧 Adjustment Techniques:</h4>
+                                <ul class="text-blue-700 text-sm space-y-1">
+                                    <li>• <strong>Add role assignment:</strong> "You are a
+                                        [expert/teacher/consultant]..."</li>
+                                    <li>• <strong>Specify audience:</strong> "Explain to
+                                        [beginners/experts/children]..."</li>
+                                    <li>• <strong>Define format:</strong> "Structure as [list/paragraphs/steps]..."</li>
+                                    <li>• <strong>Set tone:</strong> "Use a [professional/friendly/casual] tone..."</li>
+                                    <li>• <strong>Add constraints:</strong> "In [X] words/sentences/paragraphs..."</li>
+                                    <li>• <strong>Include examples:</strong> "Provide examples like [specific cases]..."
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Testing -->
+                        <div id="step-4" class="step-content">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">Step 4: Testing the Adjusted Prompt</h3>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Objective:</strong> Verify that your refinements resolve the original issues.
+                            </p>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-3">✅ Success Indicators</h4>
+                                    <ul class="space-y-2 text-green-700 text-sm">
+                                        <li>• Response directly addresses your intent</li>
+                                        <li>• Appropriate level of detail and complexity</li>
+                                        <li>• Correct tone and style for audience</li>
+                                        <li>• Proper format and structure</li>
+                                        <li>• Relevant examples and explanations</li>
+                                        <li>• Stays within specified constraints</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-3">⚠️ Warning Signs</h4>
+                                    <ul class="space-y-2 text-red-700 text-sm">
+                                        <li>• Still missing key information</li>
+                                        <li>• Wrong level of complexity</li>
+                                        <li>• Inappropriate tone or style</li>
+                                        <li>• Poor structure or organization</li>
+                                        <li>• Irrelevant or confusing examples</li>
+                                        <li>• Exceeds or falls short of constraints</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="prompt-comparison mt-6">
+                                <div class="prompt-card after">
+                                    <h4 class="font-bold text-green-600 mb-2">✅ Test Result Example</h4>
+                                    <div class="prompt-text">
+                                        Refined prompt now produces: "AI is like a smart computer program that can learn
+                                        and make decisions, similar to how you learn to recognize faces or solve math
+                                        problems."
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        <strong>Success:</strong> Simple language, relatable analogy, appropriate for
+                                        high school students
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Iterating -->
+                        <div id="step-5" class="step-content">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">Step 5: Iterative Refinement</h3>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Objective:</strong> Continue refining until you achieve optimal results.
+                            </p>
+
+                            <div class="evolution-tracker">
+                                <div class="evolution-header">
+                                    <h4 class="text-lg font-bold">🔄 Refinement Evolution Example</h4>
+                                </div>
+
+                                <div class="evolution-stage">
+                                    <div class="stage-marker">1</div>
+                                    <div class="stage-content">
+                                        <h5 class="font-bold text-gray-900 mb-2">Initial Prompt</h5>
+                                        <div class="prompt-text">"Explain AI to a 10-year-old"</div>
+                                        <p class="text-sm text-gray-600">Still too technical in output</p>
+                                    </div>
+                                </div>
+
+                                <div class="evolution-stage">
+                                    <div class="stage-marker active">2</div>
+                                    <div class="stage-content">
+                                        <h5 class="font-bold text-gray-900 mb-2">First Iteration</h5>
+                                        <div class="prompt-text">"Explain AI to a 10-year-old, avoiding all technical
+                                            terms"</div>
+                                        <p class="text-sm text-gray-600">Better, but lacks engaging examples</p>
+                                    </div>
+                                </div>
+
+                                <div class="evolution-stage">
+                                    <div class="stage-marker">3</div>
+                                    <div class="stage-content">
+                                        <h5 class="font-bold text-gray-900 mb-2">Final Version</h5>
+                                        <div class="prompt-text">"Explain AI to a 10-year-old using fun examples from
+                                            toys, games, and everyday life. Avoid technical terms completely."</div>
+                                        <p class="text-sm text-green-600">Perfect: Simple, engaging, age-appropriate</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="improvement-suggestions">
+                                <h4 class="font-bold text-blue-800 mb-2">🔄 Iteration Strategies:</h4>
+                                <ul class="text-blue-700 text-sm space-y-1">
+                                    <li>• <strong>Add specificity:</strong> Include more detailed requirements</li>
+                                    <li>• <strong>Simplify language:</strong> Use clearer, more direct instructions</li>
+                                    <li>• <strong>Break down tasks:</strong> Split complex requests into steps</li>
+                                    <li>• <strong>Add examples:</strong> Show exactly what you want</li>
+                                    <li>• <strong>Refine constraints:</strong> Adjust length, format, or style
+                                        requirements</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Documentation -->
+                        <div id="step-6" class="step-content">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">Step 6: Documentation</h3>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Objective:</strong> Record your refinement process for future reference and
+                                learning.
+                            </p>
+
+                            <div class="prompt-card">
+                                <h4 class="font-bold text-gray-900 mb-3">📝 Documentation Template</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <strong>Initial Prompt:</strong>
+                                        <div class="prompt-text mt-1">"Explain AI."</div>
+                                    </div>
+                                    <div>
+                                        <strong>Issues Identified:</strong>
+                                        <ul class="text-sm text-gray-600 mt-1 ml-4">
+                                            <li>• Too broad, resulting in technical response</li>
+                                            <li>• No target audience specified</li>
+                                            <li>• Missing context and examples</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <strong>Final Refined Prompt:</strong>
+                                        <div class="prompt-text mt-1">"Explain AI to a 10-year-old using fun examples
+                                            from toys, games, and everyday life. Avoid technical terms completely."
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <strong>Successful Output:</strong>
+                                        <div class="bg-green-50 p-3 rounded mt-1 text-sm">
+                                            "AI is like a robot brain that helps solve problems, like suggesting songs
+                                            you might like or finding answers quickly online."
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="improvement-suggestions">
+                                <h4 class="font-bold text-blue-800 mb-2">📚 Documentation Benefits:</h4>
+                                <ul class="text-blue-700 text-sm space-y-1">
+                                    <li>• <strong>Learning resource:</strong> Review successful patterns and techniques
+                                    </li>
+                                    <li>• <strong>Time saver:</strong> Reuse refined prompts for similar tasks</li>
+                                    <li>• <strong>Skill development:</strong> Track your improvement over time</li>
+                                    <li>• <strong>Team sharing:</strong> Help colleagues learn from your experience</li>
+                                    <li>• <strong>Quality assurance:</strong> Maintain consistency across projects</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Controls -->
+                        <div class="flex justify-between mt-8">
+                            <button id="prev-step" onclick="previousStep()" class="nav-button-secondary"
+                                style="display: none;">
+                                ← Previous Step
+                            </button>
+                            <button id="next-step" onclick="nextStep()" class="nav-button-secondary">
+                                Next Step →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 4.2: Interactive Prompt Refiner -->
+            <section class="mb-16">
+                <div class="interactive-refiner">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">
+                        🔬 Interactive Prompt Refiner
+                    </h2>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Practice prompt refinement with real-time analysis and suggestions. Enter any prompt below
+                        and get instant feedback on how to improve it.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Enter your prompt to analyze:
+                            </label>
+                            <textarea id="prompt-input" class="refiner-input"
+                                placeholder="Type your prompt here... For example: 'Write about business strategy'"
+                                onchange="analyzePrompt()"></textarea>
+
+                            <div class="flex gap-3 mt-4">
+                                <button onclick="analyzePrompt()" class="nav-button-secondary">
+                                    🔍 Analyze Prompt
+                                </button>
+                                <button onclick="generateSuggestions()" class="nav-button-secondary">
+                                    💡 Get Suggestions
+                                </button>
+                                <button onclick="showRefinedVersion()" class="nav-button-secondary">
+                                    ⚡ Auto-Refine
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="analysis-panel">
+                                <h3 class="font-bold text-gray-900 mb-4">Analysis Results</h3>
+                                <div id="analysis-results">
+                                    <p class="text-gray-500 text-center py-8">
+                                        Enter a prompt to see detailed analysis and improvement suggestions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="refined-prompt-display" class="mt-6" style="display: none;">
+                        <h3 class="font-bold text-gray-900 mb-3">✨ Refined Prompt:</h3>
+                        <div id="refined-prompt-text" class="prompt-text"></div>
+                        <div class="mt-4">
+                            <button onclick="copyRefinedPrompt()" class="nav-button-secondary">
+                                📋 Copy Refined Prompt
+                            </button>
+                            <button onclick="explainRefinements()" class="nav-button-secondary">
+                                📖 Explain Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4.3: Evolution Tracker -->
+            <section class="mb-16">
+                <div class="evolution-tracker">
+                    <div class="evolution-header">
+                        <h2 class="text-2xl font-bold">📈 Prompt Evolution: From Intermediate to Expert</h2>
+                        <p class="mt-2 opacity-90">Watch how a simple prompt transforms through systematic refinement
+                        </p>
+                    </div>
+
+                    <div class="evolution-stage">
+                        <div class="stage-marker">1</div>
+                        <div class="stage-content">
+                            <h3 class="font-bold text-gray-900 mb-2">Initial Prompt (Beginner Level)</h3>
+                            <div class="prompt-text">"Explain artificial intelligence."</div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <strong>Issues:</strong> Too broad, no context, no audience specification, no format
+                                guidance
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="evolution-stage">
+                        <div class="stage-marker">2</div>
+                        <div class="stage-content">
+                            <h3 class="font-bold text-gray-900 mb-2">First Refinement (Intermediate Level)</h3>
+                            <div class="prompt-text">"Explain artificial intelligence in the context of healthcare."
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <strong>Improvement:</strong> Added domain context (healthcare)<br>
+                                <strong>Still needs:</strong> Role assignment, audience specification, format
+                                requirements
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="evolution-stage">
+                        <div class="stage-marker">3</div>
+                        <div class="stage-content">
+                            <h3 class="font-bold text-gray-900 mb-2">Second Refinement (Advanced Level)</h3>
+                            <div class="prompt-text">"You are a healthcare consultant. Explain how artificial
+                                intelligence is transforming patient diagnosis and treatment in healthcare. Include
+                                examples of AI tools currently in use."</div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <strong>Improvements:</strong> Role assignment, specific focus, example requirement<br>
+                                <strong>Still needs:</strong> Audience specification, format structure, tone guidance
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="evolution-stage">
+                        <div class="stage-marker active">4</div>
+                        <div class="stage-content">
+                            <h3 class="font-bold text-gray-900 mb-2">Expert Level Prompt</h3>
+                            <div class="prompt-text">"You are a healthcare data scientist. Write a detailed report for
+                                hospital administrators on the role of artificial intelligence in transforming patient
+                                diagnosis and treatment. Highlight key AI tools, their benefits, potential risks, and
+                                the steps required for effective implementation.
+
+                                Structure the report with an introduction, main body, and conclusion. Use a professional
+                                tone suitable for senior healthcare professionals."</div>
+                            <p class="text-sm text-green-600 mt-2">
+                                <strong>Complete:</strong> Role, audience, task, content requirements, structure, tone -
+                                all specified for optimal results
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4.4: Interactive Exercise Playground -->
+            <section class="mb-16">
+                <div class="exercise-playground">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">
+                        💪 Prompt Refinement Exercises
+                    </h2>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Practice transforming basic prompts into expert-level instructions. Each exercise focuses on
+                        different refinement challenges and techniques.
+                    </p>
+
+                    <!-- Exercise Selector -->
+                    <div class="exercise-selector">
+                        <div class="exercise-card active" onclick="selectExercise(1)" id="exercise-1-card">
+                            <div class="text-3xl mb-2">💼</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Business Strategy</h3>
+                            <p class="text-gray-600 text-sm">Transform vague business prompts</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(2)" id="exercise-2-card">
+                            <div class="text-3xl mb-2">🚀</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Tech Innovation</h3>
+                            <p class="text-gray-600 text-sm">Refine technology discussion prompts</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(3)" id="exercise-3-card">
+                            <div class="text-3xl mb-2">🥗</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Healthy Eating</h3>
+                            <p class="text-gray-600 text-sm">Improve nutrition advice prompts</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(4)" id="exercise-4-card">
+                            <div class="text-3xl mb-2">📱</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Digital Misinformation</h3>
+                            <p class="text-gray-600 text-sm">Focus broad social issues</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(5)" id="exercise-5-card">
+                            <div class="text-3xl mb-2">✍️</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Creative Writing</h3>
+                            <p class="text-gray-600 text-sm">Enhance storytelling prompts</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise Content -->
+                    <div id="exercise-content" class="mt-8">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Exercise Workspace -->
+                    <div id="exercise-workspace" class="mt-6">
+                        <h3 class="font-bold text-gray-900 mb-3">✍️ Your Refined Prompt:</h3>
+                        <textarea id="exercise-input" class="refiner-input"
+                            placeholder="Write your refined prompt here..."></textarea>
+
+                        <div class="flex gap-3 mt-4">
+                            <button onclick="analyzeExercisePrompt()" class="nav-button-secondary">
+                                🔍 Analyze My Prompt
+                            </button>
+                            <button onclick="showExerciseHints()" class="nav-button-secondary">
+                                💡 Get Hints
+                            </button>
+                            <button onclick="showExerciseSolution()" class="nav-button-secondary">
+                                📝 Show Expert Solution
+                            </button>
+                        </div>
+
+                        <!-- Exercise Feedback -->
+                        <div id="exercise-feedback" class="analysis-panel mt-4" style="display: none;">
+                            <!-- Feedback will appear here -->
+                        </div>
+                    </div>
+
+                    <!-- Progress Tracking -->
+                    <div class="mt-8 bg-white p-6 rounded-lg border">
+                        <h3 class="font-bold text-gray-900 mb-4">📊 Exercise Progress</h3>
+                        <div class="grid grid-cols-5 gap-4">
+                            <div class="text-center" id="progress-exercise-1">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">1</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Business</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-2">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">2</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Tech</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-3">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">3</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Health</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-4">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">4</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Digital</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-5">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">5</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Creative</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="mb-12">
+                <div class="prompt-card">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎯 Key Takeaways</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-3">✅ Refinement Principles</h3>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• <strong>Systematic approach:</strong> Follow the 6-step process consistently</li>
+                                <li>• <strong>Iterative improvement:</strong> Refine multiple times for best results
+                                </li>
+                                <li>• <strong>Specific over general:</strong> Add context, audience, and constraints
+                                </li>
+                                <li>• <strong>Test and validate:</strong> Always verify improvements work</li>
+                                <li>• <strong>Document learnings:</strong> Build a knowledge base for future use</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-3">🚀 Expert Techniques</h3>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• <strong>Role assignment:</strong> "You are a [specific expert]..."</li>
+                                <li>• <strong>Audience targeting:</strong> "Explain to [specific group]..."</li>
+                                <li>• <strong>Format specification:</strong> "Structure as [specific format]..."</li>
+                                <li>• <strong>Tone guidance:</strong> "Use a [specific tone]..."</li>
+                                <li>• <strong>Constraint setting:</strong> "Include [specific requirements]..."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-8 text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎉 Chapter 4 Complete!</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Excellent work! You've mastered the art of prompt refinement and learned to transform basic
+                        prompts into powerful, precise instructions. Ready to learn about controlling output length and
+                        format?
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../chapter-3/index.html" class="nav-button-secondary">
+                            ⬅️ Back to Chapter 3
+                        </a>
+                        <a href="../index.html" class="nav-button-secondary">
+                            📚 Course Overview
+                        </a>
+                        <a href="../chapter-5/index.html" class="nav-button-secondary">
+                            ➡️ Continue to Chapter 5
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../../shared/scripts/footer.js" defer></script>
+    <script src="../../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Chapter 4 Interactive Functionality
+        let currentStep = 1;
+        let currentExercise = 1;
+        let exerciseProgress = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+        // Exercise data
+        const exercises = {
+            1: {
+                title: '💼 Business Strategy Refinement',
+                initialPrompt: 'Write about business strategy.',
+                description: 'Transform this vague business prompt into a focused, actionable instruction that produces valuable strategic insights.',
+                hints: [
+                    'Define a specific focus within business strategy (growth, competitive analysis, market entry)',
+                    'Assign a relevant role like business consultant or strategist',
+                    'Specify the target audience (executives, managers, entrepreneurs)',
+                    'Add structure requirements (report format, sections, length)',
+                    'Include actionable elements like case studies or step-by-step guidance'
+                ],
+                expertSolution: `You are a senior business strategy consultant. Write a comprehensive strategic analysis for a mid-sized SaaS company considering international expansion. 
+
+Structure your analysis with:
+1. Market opportunity assessment
+2. Competitive landscape analysis  
+3. Resource requirements and timeline
+4. Risk assessment and mitigation strategies
+5. Recommended action plan with specific milestones
+
+Target audience: C-level executives who need actionable insights for decision-making. Include relevant case studies and data-driven recommendations. Keep the tone professional and analytical.`
+            },
+            2: {
+                title: '🚀 Technological Innovation Discussion',
+                initialPrompt: 'Discuss technological innovation.',
+                description: 'Refine this broad technology prompt to focus on specific innovations, challenges, and implications.',
+                hints: [
+                    'Choose a specific sector (healthcare, education, finance, transportation)',
+                    'Define the discussion purpose (trends, challenges, ethical considerations)',
+                    'Specify desired sections (current state, future implications, case studies)',
+                    'Set the tone (analytical, futuristic, balanced)',
+                    'Include target audience (policymakers, business leaders, technologists)'
+                ],
+                expertSolution: `You are a technology research analyst. Write an in-depth analysis of artificial intelligence applications in healthcare for hospital administrators and healthcare policymakers.
+
+Focus on:
+1. Current AI implementations (diagnostic imaging, drug discovery, patient monitoring)
+2. Emerging trends and breakthrough technologies
+3. Implementation challenges (cost, training, integration)
+4. Ethical considerations and regulatory landscape
+5. Future implications for patient care and healthcare economics
+
+Include specific case studies from leading healthcare institutions. Use a balanced, analytical tone that addresses both opportunities and concerns. Structure as a comprehensive report suitable for strategic planning.`
+            },
+            3: {
+                title: '🥗 Healthy Eating Advice',
+                initialPrompt: 'Give advice on healthy eating.',
+                description: 'Transform this generic health prompt into targeted, practical nutrition guidance for a specific audience.',
+                hints: [
+                    'Identify target audience (busy professionals, athletes, families, seniors)',
+                    'Specify advice type (meal planning, nutrition tips, recipes, lifestyle changes)',
+                    'Add practical constraints (time, budget, dietary restrictions)',
+                    'Include structure (meal ideas, shopping tips, preparation strategies)',
+                    'Assign an expert role (nutritionist, dietitian, wellness coach)'
+                ],
+                expertSolution: `You are a registered dietitian specializing in workplace wellness. Create a comprehensive healthy eating guide for busy professionals who work 50+ hours per week and have limited time for meal preparation.
+
+Structure your guide with:
+1. Quick breakfast options (5-minute meals)
+2. Healthy lunch strategies (meal prep, portable options)
+3. Smart snacking for energy management
+4. Simple dinner solutions (30-minute meals)
+5. Weekend meal prep strategies
+6. Healthy eating while traveling or in meetings
+
+Focus on practical, time-efficient solutions that fit into demanding schedules. Include specific recipes, shopping lists, and prep-ahead tips. Address common challenges like stress eating and irregular meal times.`
+            },
+            4: {
+                title: '📱 Digital Misinformation Analysis',
+                initialPrompt: 'Talk about digital misinformation.',
+                description: 'Focus this broad social issue into a specific, actionable analysis with clear scope and purpose.',
+                hints: [
+                    'Choose specific aspect (social media algorithms, deepfakes, election impact)',
+                    'Define target audience (educators, policymakers, media professionals)',
+                    'Assign domain expertise (media literacy educator, cybersecurity expert)',
+                    'Include structure (context, current challenges, solutions, case studies)',
+                    'Add actionable elements (prevention strategies, detection tools)'
+                ],
+                expertSolution: `You are a digital media literacy expert writing for educators and policymakers. Analyze the impact of deepfake technology on public trust and democratic processes, focusing on recent election cycles.
+
+Structure your analysis with:
+1. Technical overview of deepfake technology and accessibility
+2. Case studies of deepfakes used in political contexts
+3. Impact on voter behavior and public trust in media
+4. Current detection methods and their limitations
+5. Policy recommendations for regulation and education
+6. Practical strategies for media literacy education
+
+Include specific examples from recent elections, expert interviews, and research data. Provide actionable recommendations for both immediate response and long-term prevention strategies.`
+            },
+            5: {
+                title: '✍️ Creative Writing Enhancement',
+                initialPrompt: 'Write a story.',
+                description: 'Transform this basic creative prompt into a rich, structured storytelling instruction with clear parameters.',
+                hints: [
+                    'Add specific setting (dystopian future, enchanted forest, modern city)',
+                    'Define key story elements (characters, themes, conflicts)',
+                    'Specify structure (setup, climax, resolution, word count)',
+                    'Assign creative role (fantasy author, sci-fi writer, literary novelist)',
+                    'Include target audience and message/theme'
+                ],
+                expertSolution: `You are an award-winning science fiction author. Write a compelling 1,500-word short story set in a near-future world where climate change has forced humanity to live in underground cities.
+
+Story requirements:
+- Protagonist: A young engineer who discovers a flaw in the city's life support system
+- Central conflict: Choosing between personal safety and warning the community
+- Theme: Individual responsibility in the face of collective crisis
+- Setting: Underground metropolis with advanced technology but resource scarcity
+- Tone: Hopeful despite challenging circumstances
+
+Structure with clear beginning (character introduction and world-building), middle (discovery and internal conflict), and end (resolution and character growth). Include vivid descriptions of the underground world and authentic character emotions.`
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            showStep(1);
+            selectExercise(1);
+        });
+
+        // Step navigation functions
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.step-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected step
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+            document.getElementById(`step-${stepNumber}-btn`).classList.add('active');
+
+            currentStep = stepNumber;
+
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prev-step');
+            const nextBtn = document.getElementById('next-step');
+
+            if (stepNumber === 1) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'inline-block';
+            }
+
+            if (stepNumber === 6) {
+                nextBtn.textContent = 'Complete Workshop';
+            } else {
+                nextBtn.textContent = 'Next Step →';
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 6) {
+                // Mark current step as completed
+                document.getElementById(`step-${currentStep}-btn`).classList.add('completed');
+                showStep(currentStep + 1);
+            } else {
+                // Complete workshop
+                alert('🎉 Congratulations! You\'ve completed the Prompt Refinement Workshop. You now have the skills to systematically improve any prompt for better results.');
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        }
+
+        // Interactive Prompt Refiner functions
+        function analyzePrompt() {
+            const promptText = document.getElementById('prompt-input').value.trim();
+            const resultsDiv = document.getElementById('analysis-results');
+
+            if (!promptText) {
+                resultsDiv.innerHTML = '<p class="text-red-600">Please enter a prompt to analyze.</p>';
+                return;
+            }
+
+            const analysis = performPromptAnalysis(promptText);
+            displayAnalysisResults(analysis);
+        }
+
+        function performPromptAnalysis(prompt) {
+            const promptLower = prompt.toLowerCase();
+            let score = 0;
+            let issues = [];
+            let strengths = [];
+
+            // Check for role assignment
+            if (promptLower.includes('you are') || promptLower.includes('act as')) {
+                score += 20;
+                strengths.push('Role assignment present');
+            } else {
+                issues.push('Missing role assignment (e.g., "You are a...")');
+            }
+
+            // Check for audience specification
+            if (promptLower.includes('for') || promptLower.includes('audience') || promptLower.includes('explain to')) {
+                score += 15;
+                strengths.push('Audience consideration included');
+            } else {
+                issues.push('No target audience specified');
+            }
+
+            // Check for context/domain
+            if (prompt.length > 50) {
+                score += 15;
+                strengths.push('Good level of detail provided');
+            } else {
+                issues.push('Prompt may be too brief - add more context');
+            }
+
+            // Check for format specification
+            if (promptLower.includes('format') || promptLower.includes('structure') ||
+                promptLower.includes('list') || promptLower.includes('paragraph')) {
+                score += 15;
+                strengths.push('Output format specified');
+            } else {
+                issues.push('No output format guidance provided');
+            }
+
+            // Check for tone/style
+            if (promptLower.includes('tone') || promptLower.includes('style') ||
+                promptLower.includes('professional') || promptLower.includes('casual')) {
+                score += 10;
+                strengths.push('Tone/style guidance included');
+            } else {
+                issues.push('Consider specifying desired tone or style');
+            }
+
+            // Check for constraints
+            if (promptLower.includes('word') || promptLower.includes('sentence') ||
+                promptLower.includes('paragraph') || promptLower.includes('page')) {
+                score += 10;
+                strengths.push('Length constraints specified');
+            } else {
+                issues.push('No length or constraint guidance');
+            }
+
+            // Check for examples
+            if (promptLower.includes('example') || promptLower.includes('like') ||
+                promptLower.includes('such as') || promptLower.includes('include')) {
+                score += 15;
+                strengths.push('Examples or specific requirements included');
+            } else {
+                issues.push('Consider adding examples or specific requirements');
+            }
+
+            return {
+                score: score,
+                strengths: strengths,
+                issues: issues,
+                level: score >= 80 ? 'Expert' : score >= 60 ? 'Advanced' : score >= 40 ? 'Intermediate' : 'Beginner'
+            };
+        }
+
+        function displayAnalysisResults(analysis) {
+            const resultsDiv = document.getElementById('analysis-results');
+            const scoreClass = analysis.score >= 80 ? 'score-excellent' :
+                analysis.score >= 60 ? 'score-good' :
+                    analysis.score >= 40 ? 'score-fair' : 'score-poor';
+
+            resultsDiv.innerHTML = `
+                <div class="analysis-score">
+                    <div class="score-circle ${scoreClass}">
+                        ${analysis.score}
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg">${analysis.level} Level</div>
+                        <div class="text-sm text-gray-600">Prompt Quality Score</div>
+                    </div>
+                </div>
+                
+                ${analysis.strengths.length > 0 ? `
+                <div class="mb-4">
+                    <h4 class="font-bold text-green-600 mb-2">✅ Strengths:</h4>
+                    <ul class="text-sm text-green-700 space-y-1">
+                        ${analysis.strengths.map(strength => `<li>• ${strength}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+                
+                ${analysis.issues.length > 0 ? `
+                <div>
+                    <h4 class="font-bold text-orange-600 mb-2">💡 Improvement Opportunities:</h4>
+                    <ul class="text-sm text-orange-700 space-y-1">
+                        ${analysis.issues.map(issue => `<li>• ${issue}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+            `;
+        }
+
+        function generateSuggestions() {
+            const promptText = document.getElementById('prompt-input').value.trim();
+            const resultsDiv = document.getElementById('analysis-results');
+
+            if (!promptText) {
+                resultsDiv.innerHTML = '<p class="text-red-600">Please enter a prompt to get suggestions.</p>';
+                return;
+            }
+
+            const suggestions = [
+                'Add a role assignment: "You are a [specific expert]..."',
+                'Specify your target audience: "Explain to [specific group]..."',
+                'Define the output format: "Structure as [list/report/essay]..."',
+                'Set the tone: "Use a [professional/casual/friendly] tone..."',
+                'Add length constraints: "In [X] words/paragraphs..."',
+                'Include specific requirements: "Include examples of..."',
+                'Provide context: "In the context of [specific domain]..."',
+                'Add actionable elements: "Provide step-by-step guidance..."'
+            ];
+
+            resultsDiv.innerHTML = `
+                <h4 class="font-bold text-blue-600 mb-3">💡 Refinement Suggestions:</h4>
+                <ul class="text-sm text-blue-700 space-y-2">
+                    ${suggestions.slice(0, 5).map(suggestion => `<li>• ${suggestion}</li>`).join('')}
+                </ul>
+                <p class="text-sm text-gray-600 mt-4">Apply these suggestions to transform your prompt into a more effective instruction.</p>
+            `;
+        }
+
+        function showRefinedVersion() {
+            const promptText = document.getElementById('prompt-input').value.trim();
+
+            if (!promptText) {
+                alert('Please enter a prompt first.');
+                return;
+            }
+
+            // Simple auto-refinement logic
+            let refined = promptText;
+
+            // Add role if missing
+            if (!promptText.toLowerCase().includes('you are')) {
+                refined = `You are an expert in this field. ${refined}`;
+            }
+
+            // Add structure if missing
+            if (!promptText.toLowerCase().includes('structure') && !promptText.toLowerCase().includes('format')) {
+                refined += ' Structure your response clearly with appropriate sections.';
+            }
+
+            // Add audience if missing
+            if (!promptText.toLowerCase().includes('for') && !promptText.toLowerCase().includes('audience')) {
+                refined += ' Target your response for a general professional audience.';
+            }
+
+            document.getElementById('refined-prompt-text').textContent = refined;
+            document.getElementById('refined-prompt-display').style.display = 'block';
+        }
+
+        function copyRefinedPrompt() {
+            const refinedText = document.getElementById('refined-prompt-text').textContent;
+            navigator.clipboard.writeText(refinedText).then(() => {
+                alert('Refined prompt copied to clipboard!');
+            });
+        }
+
+        function explainRefinements() {
+            alert('The refinements added:\n\n• Role assignment for expertise\n• Structure guidance for clarity\n• Audience specification for targeting\n\nThese improvements help Gemini understand exactly what you need and how to deliver it effectively.');
+        }
+
+        // Exercise functions
+        function selectExercise(exerciseNum) {
+            // Update active card
+            document.querySelectorAll('.exercise-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById(`exercise-${exerciseNum}-card`).classList.add('active');
+
+            currentExercise = exerciseNum;
+            displayExerciseContent(exerciseNum);
+
+            // Clear previous input and feedback
+            document.getElementById('exercise-input').value = '';
+            document.getElementById('exercise-feedback').style.display = 'none';
+        }
+
+        function displayExerciseContent(exerciseNum) {
+            const exercise = exercises[exerciseNum];
+            const contentDiv = document.getElementById('exercise-content');
+
+            contentDiv.innerHTML = `
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-gray-900 mb-3">${exercise.title}</h3>
+                    <p class="text-gray-700 mb-4">${exercise.description}</p>
+                    
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400 mb-4">
+                        <h4 class="font-bold text-red-800 mb-2">❌ Initial Prompt:</h4>
+                        <div class="prompt-text">"${exercise.initialPrompt}"</div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                        <h4 class="font-bold text-blue-800 mb-2">🎯 Your Challenge:</h4>
+                        <p class="text-blue-700 text-sm">Transform this basic prompt into an expert-level instruction that produces high-quality, targeted results.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function analyzeExercisePrompt() {
+            const userPrompt = document.getElementById('exercise-input').value.trim();
+            const feedbackDiv = document.getElementById('exercise-feedback');
+
+            if (!userPrompt) {
+                showExerciseFeedback('Please write your refined prompt first!', 'warning');
+                return;
+            }
+
+            const analysis = performPromptAnalysis(userPrompt);
+            const exercise = exercises[currentExercise];
+
+            let feedback = `
+                <div class="analysis-score">
+                    <div class="score-circle ${analysis.score >= 80 ? 'score-excellent' : analysis.score >= 60 ? 'score-good' : analysis.score >= 40 ? 'score-fair' : 'score-poor'}">
+                        ${analysis.score}
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg">${analysis.level} Level Refinement</div>
+                        <div class="text-sm text-gray-600">Quality Score</div>
+                    </div>
+                </div>
+            `;
+
+            if (analysis.score >= 70) {
+                feedback += '<div class="text-green-600 font-medium mb-2">🎉 Excellent refinement! Your prompt shows expert-level thinking.</div>';
+                exerciseProgress[currentExercise] = Math.max(exerciseProgress[currentExercise], analysis.score);
+                updateExerciseProgress(currentExercise, true);
+            } else if (analysis.score >= 50) {
+                feedback += '<div class="text-blue-600 font-medium mb-2">👍 Good improvement! Consider the hints for even better results.</div>';
+            } else {
+                feedback += '<div class="text-orange-600 font-medium mb-2">💡 Keep refining! Use the hints to guide your improvements.</div>';
+            }
+
+            if (analysis.issues.length > 0) {
+                feedback += `
+                    <div class="mt-4">
+                        <h4 class="font-bold text-orange-600 mb-2">Areas for improvement:</h4>
+                        <ul class="text-sm text-orange-700 space-y-1">
+                            ${analysis.issues.map(issue => `<li>• ${issue}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            feedbackDiv.innerHTML = feedback;
+            feedbackDiv.style.display = 'block';
+        }
+
+        function showExerciseHints() {
+            const exercise = exercises[currentExercise];
+            const hintsHtml = exercise.hints.map(hint => `<li class="flex items-start mb-2"><span class="text-blue-600 mr-2">💡</span><span class="text-gray-700 text-sm">${hint}</span></li>`).join('');
+
+            showExerciseFeedback(`
+                <h4 class="font-bold text-blue-800 mb-3">💡 Refinement Hints:</h4>
+                <ul>${hintsHtml}</ul>
+            `, 'info');
+        }
+
+        function showExerciseSolution() {
+            const exercise = exercises[currentExercise];
+            showExerciseFeedback(`
+                <h4 class="font-bold text-green-800 mb-3">📝 Expert Solution:</h4>
+                <div class="prompt-text">${exercise.expertSolution}</div>
+                <p class="text-sm text-green-700 mt-3">This expert-level prompt includes role assignment, specific requirements, clear structure, target audience, and actionable elements.</p>
+            `, 'success');
+        }
+
+        function showExerciseFeedback(message, type) {
+            const feedbackDiv = document.getElementById('exercise-feedback');
+            const colors = {
+                success: 'bg-green-50 border-green-200',
+                info: 'bg-blue-50 border-blue-200',
+                warning: 'bg-yellow-50 border-yellow-200',
+                error: 'bg-red-50 border-red-200'
+            };
+
+            feedbackDiv.className = `analysis-panel mt-4 ${colors[type] || colors.info}`;
+            feedbackDiv.innerHTML = message;
+            feedbackDiv.style.display = 'block';
+        }
+
+        function updateExerciseProgress(exerciseNum, completed) {
+            const progressDiv = document.getElementById(`progress-exercise-${exerciseNum}`);
+            const circle = progressDiv.querySelector('.w-12');
+
+            if (completed) {
+                circle.classList.remove('bg-gray-200');
+                circle.classList.add('bg-green-500', 'text-white');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

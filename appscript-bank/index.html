@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppScript Idea Bank - GBS EMEA Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #4A4A4A;
+            scroll-behavior: smooth;
+        }
+
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .chevron {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        details[open] .chevron {
+            transform: rotate(180deg);
+        }
+
+        .idea-card {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .idea-card-content {
+            flex-grow: 1;
+        }
+
+        .idea-card.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            display: none;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .modal-content {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .iframe-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio */
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Table styles */
+        .info-table th,
+        .info-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-table th {
+            background-color: #f9fafb;
+        }
+
+        .info-table code {
+            background-color: #eef2ff;
+            color: #4338ca;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>AppScript Idea Bank</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-6xl">
+
+        <!-- Header Section -->
+        <header class="text-center mb-10">
+            <h1 class="google-sans text-3xl sm:text-4xl font-bold text-gray-900 mb-2">AI & AppScript Idea Bank</h1>
+            <p class="text-base sm:text-lg text-gray-600">A central knowledge bank for GBS EMEA to store and explore
+                innovative automation ideas.</p>
+        </header>
+
+        <main class="space-y-8">
+
+            <!-- Section: Idea Submission Form -->
+            <section id="submission" class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <details class="group">
+                    <summary class="flex items-center justify-between font-semibold text-gray-800 cursor-pointer">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600 mr-3" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                            <h2 class="google-sans text-2xl font-bold">Have an Idea? Share it here!</h2>
+                        </div>
+                        <span class="text-lg font-medium text-indigo-600 group-open:hidden">Click to expand</span>
+                        <span class="text-lg font-medium text-indigo-600 hidden group-open:inline">Click to
+                            collapse</span>
+                    </summary>
+                    <div id="form-container" class="mt-6 border-t pt-6">
+                        <!-- Hidden iframe to handle form submission - FIXED: Added onload attribute -->
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessMessage();}"></iframe>
+
+                        <form id="ideaForm" class="space-y-4"
+                            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScQfhzEvdDo_GF3ulJDAtq-uZR6g379OIk6GiVVt6T8ttrGwA/formResponse"
+                            method="POST" target="hidden_iframe">
+                            <div>
+                                <label for="ideaTitle" class="block text-sm font-medium text-gray-700 mb-1">Idea
+                                    Title</label>
+                                <input type="text" id="ideaTitle" name="entry.1761465152" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="e.g., Automate Weekly Compliance Reports">
+                            </div>
+                            <div>
+                                <label for="ideaDescription"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                <textarea id="ideaDescription" name="entry.126058050" rows="4" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="Explain the problem this idea solves, how it would work, and its potential benefits."></textarea>
+                            </div>
+                            <div>
+                                <label for="businessUnit" class="block text-sm font-medium text-gray-700 mb-1">Business
+                                    Unit</label>
+                                <select id="businessUnit" name="entry.1453672440" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+                                    <option value="">Please Select Your Business Unit</option>
+                                    <option value="RPO">RPO</option>
+                                    <option value="MSP">MSP</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Compliance">Compliance</option>
+                                    <option value="Interview Scheduling">Interview Scheduling</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <input type="hidden" name="fvv" value="1">
+                            <input type="hidden" name="partialResponse" value="[null,null,&quot;5126939936302376249&quot;]">
+                            <input type="hidden" name="pageHistory" value="0">
+                            <input type="hidden" name="fbzx" value="5126939936302376249">
+                            <input type="hidden" name="submissionTimestamp" value="-1">
+                            <div class="text-right">
+                                <button type="submit" id="submitBtn"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Submit Idea
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Success Message (Hidden by default) -->
+                        <div id="successMessage"
+                            class="hidden mt-6 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
+                            <h3 class="text-xl font-bold text-green-800">Thank you!</h3>
+                            <p class="text-green-700 mt-2">Your idea has been submitted successfully for review.
+                                Approved ideas will appear on the board below.</p>
+                        </div>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Section: Idea Board -->
+            <section id="idea-board">
+                <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600 mr-3" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                        <h2 class="google-sans text-2xl font-bold text-gray-800">Idea Board</h2>
+                    </div>
+                    <!-- Filter Buttons -->
+                    <div id="filter-container" class="flex flex-wrap gap-2">
+                        <button class="filter-btn bg-indigo-600 text-white py-1 px-3 rounded-full text-sm font-semibold"
+                            data-filter="all">All</button>
+                        <button
+                            class="filter-btn bg-white text-gray-700 py-1 px-3 rounded-full text-sm font-semibold border"
+                            data-filter="RPO">RPO</button>
+                        <button
+                            class="filter-btn bg-white text-gray-700 py-1 px-3 rounded-full text-sm font-semibold border"
+                            data-filter="MSP">MSP</button>
+                        <button
+                            class="filter-btn bg-white text-gray-700 py-1 px-3 rounded-full text-sm font-semibold border"
+                            data-filter="Admin">Admin</button>
+                        <button
+                            class="filter-btn bg-white text-gray-700 py-1 px-3 rounded-full text-sm font-semibold border"
+                            data-filter="Compliance">Compliance</button>
+                        <button
+                            class="filter-btn bg-white text-gray-700 py-1 px-3 rounded-full text-sm font-semibold border"
+                            data-filter="Interview Scheduling">Interview Scheduling</button>
+                        <button
+                            class="filter-btn bg-white text-gray-700 py-1 px-3 rounded-full text-sm font-semibold border"
+                            data-filter="Other">Other</button>
+                    </div>
+                </div>
+
+                <!-- Idea Cards Container -->
+                <div id="idea-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="idea-card bg-white p-5 rounded-lg shadow-md border border-gray-200" data-category="RPO">
+                        <div class="idea-card-content">
+                            <span
+                                class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">RPO</span>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Sheets Automation for New Folders</h3>
+                            <p class="text-gray-600 text-sm">An AppScript to automatically create a new Google Drive
+                                folder and a templated Google Sheet within it, triggered by a new entry in a master
+                                tracking Sheet. Reduces manual setup for new clients/projects.</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-200">
+                            <button
+                                class="watch-demo-btn w-full text-indigo-600 font-semibold text-sm hover:text-indigo-800 transition-colors flex items-center justify-center"
+                                data-video-src="https://drive.google.com/file/d/1WZWmLx9wD4tePFU5Kgso-Ej-eXtFqZ40/preview">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Watch Demo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="idea-card bg-white p-5 rounded-lg shadow-md border border-gray-200"
+                        data-category="Admin">
+                        <div class="idea-card-content">
+                            <span
+                                class="inline-block bg-pink-100 text-pink-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">Admin</span>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Automated Onboarding Checklist</h3>
+                            <p class="text-gray-600 text-sm">Create an AppScript that automatically generates and
+                                assigns a Trello/Asana board with all necessary onboarding tasks when a new employee is
+                                added to a specific Google Sheet.</p>
+                        </div>
+                    </div>
+                    <div class="idea-card bg-white p-5 rounded-lg shadow-md border border-gray-200"
+                        data-category="Compliance">
+                        <div class="idea-card-content">
+                            <span
+                                class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">Compliance</span>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">GDPR Data Deletion Helper</h3>
+                            <p class="text-gray-600 text-sm">A script to scan Google Drive for documents containing
+                                specific candidate IDs and flag them for review for GDPR 'right to be forgotten'
+                                requests, reducing manual search time.</p>
+                        </div>
+                    </div>
+                    <div class="idea-card bg-white p-5 rounded-lg shadow-md border border-gray-200"
+                        data-category="Other">
+                        <div class="idea-card-content">
+                            <span
+                                class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">Other</span>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Automation of a Google Form creation with
+                                App Script</h3>
+                            <p class="text-gray-600 text-sm">An Apps Script that programmatically creates a new Google
+                                Form based on predefined questions. Useful for teams that need to generate similar forms
+                                frequently, ensuring consistency and saving time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="no-ideas-message" class="hidden text-center py-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    </svg>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900">No ideas yet</h3>
+                    <p class="mt-1 text-sm text-gray-500">Get started by submitting an idea above.</p>
+                </div>
+            </section>
+
+            <!-- NEW SECTION: Powerful & Hidden Features -->
+            <section id="hidden-features" class="space-y-6">
+                <header class="text-center">
+                    <h2 class="google-sans text-3xl font-bold text-gray-900">Powerful & Hidden Features in Google
+                        Workspace</h2>
+                    <p class="mt-2 text-lg text-gray-600">Discover advanced features to inspire your next great idea.
+                    </p>
+                </header>
+
+                <!-- Accordion 1: AI Features -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <details class="group p-6">
+                        <summary class="flex items-center justify-between font-semibold text-gray-800 cursor-pointer">
+                            <h3 class="google-sans text-xl font-bold">🚀 AI-Powered Features with Gemini for Workspace
+                            </h3>
+                            <svg class="w-6 h-6 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="mt-4 overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-600 info-table">
+                                <thead class="text-xs text-gray-700 uppercase">
+                                    <tr>
+                                        <th scope="col" class="w-1/4">Application</th>
+                                        <th scope="col" class="w-1/4">Hidden/Powerful AI Feature</th>
+                                        <th scope="col" class="w-2/4">How to Use/What it Does</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-semibold">Sheets</td>
+                                        <td>Help me analyze (Gemini Analyst)</td>
+                                        <td>An "on-demand analyst" that finds trends, points out outliers, suggests next
+                                            steps for data deep-dives, and quickly generates clear, interactive charts
+                                            from your data via natural language prompts. (Coming soon/New)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Sheets</td>
+                                        <td>Generate Formulas & Actions</td>
+                                        <td>Ask Gemini in the side panel to generate complex formulas, apply conditional
+                                            formatting, create pivot tables, or build dropdown menus. It can perform
+                                            multi-step edits from a simple prompt.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Sheets</td>
+                                        <td>AI Function</td>
+                                        <td>A capability to run multiple text-based actions at scale from a cell
+                                            formula, such as generating, summarizing, or categorizing text across many
+                                            rows based on specific instructions.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Docs</td>
+                                        <td>Help me refine</td>
+                                        <td>More than just a text generator, this feature acts as a writing coach,
+                                            offering thoughtful suggestions to strengthen arguments, improve structure,
+                                            and clarify key points. (New)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Docs</td>
+                                        <td>Audio Features</td>
+                                        <td>Soon, you'll be able to create full audio versions of documents or generate
+                                            "podcast-style overviews" of key highlights, offering a completely new way
+                                            to interact with content. (New)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Slides</td>
+                                        <td>Generate Image from Prompt</td>
+                                        <td>Use the Gemini side panel to generate custom images for your presentation
+                                            slides directly from a text description.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Sheets/Docs/Slides</td>
+                                        <td>Reference Drive Files (Context)</td>
+                                        <td>When prompting Gemini, you can reference other files in your Drive (e.g.,
+                                            <code>"Summarize the main points from @Meeting Notes Doc"</code>) to
+                                            generate context-aware content.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Accordion 2: Sheets -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <details class="group p-6">
+                        <summary class="flex items-center justify-between font-semibold text-gray-800 cursor-pointer">
+                            <h3 class="google-sans text-xl font-bold">📈 Sheets: Data Visualization and Analysis</h3>
+                            <svg class="w-6 h-6 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="mt-4 overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-600 info-table">
+                                <thead class="text-xs text-gray-700 uppercase">
+                                    <tr>
+                                        <th scope="col" class="w-1/4">Feature</th>
+                                        <th scope="col" class="w-1/2">Description</th>
+                                        <th scope="col" class="w-1/4">How to Find/Use</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sparklines</td>
+                                        <td>Tiny charts within a single cell that quickly visualize trends.</td>
+                                        <td>Use the <code>=SPARKLINE()</code> function.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Heatmaps</td>
+                                        <td>Uses color scales to highlight high/low values, outliers, or errors.</td>
+                                        <td>Format > Conditional formatting > Color Scale.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Filter Views</td>
+                                        <td>Create, name, and save specific filter/sort settings that won't affect
+                                            collaborators.</td>
+                                        <td>Data > Filter views > Create new filter view.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>QUERY Function</td>
+                                        <td>Acts like an SQL-lite database language inside your spreadsheet for complex
+                                            data handling.</td>
+                                        <td><code>=QUERY(data_range, "select * where...")</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>IMPORTRANGE Function</td>
+                                        <td>Connects and imports a range of cells from another Google Sheet.</td>
+                                        <td><code>=IMPORTRANGE("url", "SheetName!A1:C10")</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Smart Chips for Data</td>
+                                        <td>Automatically populate a cell with data like a person's name, file, or date.
+                                        </td>
+                                        <td>Type the <code>@</code> symbol in a cell.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Accordion 3: Apps Script -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <details class="group p-6">
+                        <summary class="flex items-center justify-between font-semibold text-gray-800 cursor-pointer">
+                            <h3 class="google-sans text-xl font-bold">🔧 Apps Script & Automation Ideas</h3>
+                            <svg class="w-6 h-6 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="mt-4 overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-600 info-table">
+                                <thead class="text-xs text-gray-700 uppercase">
+                                    <tr>
+                                        <th scope="col" class="w-1/4">Automation Idea</th>
+                                        <th scope="col" class="w-1/2">Goal/How it Works</th>
+                                        <th scope="col" class="w-1/4">Related Apps/Functions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Data-Driven Mail Merge</td>
+                                        <td>Send personalized emails to a list from a Sheet using a Gmail draft as a
+                                            template.</td>
+                                        <td><code>GmailApp</code>, <code>SpreadsheetApp</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Form-to-Calendar Events</td>
+                                        <td>Automatically create Calendar events from Google Form submissions.</td>
+                                        <td><code>FormApp</code>, <code>CalendarApp</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Progress Bar in Slides</td>
+                                        <td>Programmatically add a visual progress bar to all slides in a presentation.
+                                        </td>
+                                        <td><code>SlidesApp</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Automated PDF Generator</td>
+                                        <td>Create a custom PDF (invoice, report) for each row in a Sheet, save to
+                                            Drive, and email it.</td>
+                                        <td><code>SpreadsheetApp</code>, <code>DriveApp</code>, <code>GmailApp</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AI-Powered Email Triage</td>
+                                        <td>Use the Gemini API to categorize and label new Gmail messages. (Cutting
+                                            Edge)</td>
+                                        <td><code>GmailApp</code>, Gemini/Vertex AI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web-Scraped Stock/Weather</td>
+                                        <td>Pull real-time data from external APIs directly into your Sheets.</td>
+                                        <td><code>UrlFetchApp</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Custom Menu/Macros</td>
+                                        <td>Create a simple custom button or menu item that runs a complex script.</td>
+                                        <td>Extensions > Macros/Apps Script</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Accordion 4: Docs & Slides -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <details class="group p-6">
+                        <summary class="flex items-center justify-between font-semibold text-gray-800 cursor-pointer">
+                            <h3 class="google-sans text-xl font-bold">📝 Docs & Slides: Collaborative and Structural
+                                Enhancements</h3>
+                            <svg class="w-6 h-6 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="mt-4 overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-600 info-table">
+                                <thead class="text-xs text-gray-700 uppercase">
+                                    <tr>
+                                        <th scope="col" class="w-1/4">Feature</th>
+                                        <th scope="col" class="w-1/2">Description</th>
+                                        <th scope="col" class="w-1/4">How to Find/Use</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Pageless View</td>
+                                        <td>Removes page boundaries, allowing you to write on an "infinitely long"
+                                            digital plane.</td>
+                                        <td>File > Page setup > Pageless tab.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>In-document Checklists</td>
+                                        <td>Create interactive checklists that you can mark as complete directly in your
+                                            document.</td>
+                                        <td>Format > Bullets & Numbering > Checklist, or type <code>[]</code> + space.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Insert Chart from Sheets (Linked)</td>
+                                        <td>Embed a chart from a Sheet into a Doc/Slide and update it with one click.
+                                        </td>
+                                        <td>Insert > Chart > From Sheets.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Custom Shortcuts (Docs)</td>
+                                        <td>Define your own keyboard shortcuts for special characters or custom scripts.
+                                        </td>
+                                        <td>Tools > Preferences > Substitutions.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bookmarking and Internal Links (Docs)</td>
+                                        <td>Create anchors within a long document to build a clickable internal
+                                            structure.</td>
+                                        <td>Insert > Bookmark, then Insert > Link.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Live Meetings in Document</td>
+                                        <td>Join a Google Meet call directly from within the Sheets, Docs, or Slides
+                                            file. (Premium)</td>
+                                        <td>Top navigation bar.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+
+    <!-- Modal Structure -->
+    <div id="video-modal"
+        class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-3xl transform -translate-y-10">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 id="modal-title" class="text-lg font-semibold">Idea Demo</h3>
+                <button id="close-modal-btn"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="p-4">
+                <div id="modal-video-container" class="iframe-container bg-black rounded-md">
+                    <!-- Iframe will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // FIXED: Moved submitted variable to global scope
+        var submitted = false;
+
+        // Function to show success message after form submission
+        function showSuccessMessage() {
+            if (submitted) {
+                document.getElementById('ideaForm').style.display = 'none';
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ideaForm = document.getElementById('ideaForm');
+            const container = document.getElementById('idea-cards-container');
+            const filterContainer = document.getElementById('filter-container');
+            const noIdeasMessage = document.getElementById('no-ideas-message');
+
+            // Modal elements
+            const videoModal = document.getElementById('video-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const modalVideoContainer = document.getElementById('modal-video-container');
+            const modalTitle = document.getElementById('modal-title');
+
+            // --- Form Submission Logic ---
+            // Handle form submission - FIXED: Simplified and moved callback to iframe onload attribute
+            if (ideaForm) {
+                ideaForm.addEventListener('submit', function () {
+                    submitted = true;
+                    // Form will submit to Google Forms automatically
+                    // Success message will show when iframe loads (via onload attribute)
+                });
+            }
+
+            // --- Check for No Ideas ---
+            const checkNoIdeas = () => {
+                const visibleCards = container.querySelectorAll('.idea-card:not(.hidden)');
+                const totalCards = container.querySelectorAll('.idea-card').length;
+
+                if (totalCards === 0) {
+                    noIdeasMessage.classList.remove('hidden');
+                    noIdeasMessage.querySelector('h3').textContent = "No ideas yet";
+                    noIdeasMessage.querySelector('p').textContent = "Submit an idea to get started!";
+                } else if (visibleCards.length === 0) {
+                    noIdeasMessage.classList.remove('hidden');
+                    noIdeasMessage.querySelector('h3').textContent = "No ideas match this filter";
+                    noIdeasMessage.querySelector('p').textContent = "Try selecting another category or 'All'.";
+                } else {
+                    noIdeasMessage.classList.add('hidden');
+                }
+            };
+
+            // --- Filter Logic ---
+            if (filterContainer) {
+                filterContainer.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'BUTTON') return;
+
+                    const filter = e.target.dataset.filter;
+
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-white', 'text-gray-700');
+                    });
+                    e.target.classList.add('bg-indigo-600', 'text-white');
+                    e.target.classList.remove('bg-white', 'text-gray-700');
+
+                    document.querySelectorAll('.idea-card').forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                    checkNoIdeas();
+                });
+            }
+
+            // --- Modal Logic ---
+            function openModal(videoSrc, title) {
+                modalVideoContainer.innerHTML = '';
+                const iframe = document.createElement('iframe');
+                iframe.src = videoSrc;
+                iframe.setAttribute('allow', 'autoplay');
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allowfullscreen', '');
+                modalVideoContainer.appendChild(iframe);
+
+                modalTitle.textContent = title;
+                videoModal.classList.remove('hidden');
+                setTimeout(() => {
+                    videoModal.classList.remove('opacity-0');
+                    videoModal.querySelector('.modal-content').classList.remove('-translate-y-10');
+                }, 10);
+            }
+
+            function closeModal() {
+                videoModal.classList.add('opacity-0');
+                videoModal.querySelector('.modal-content').classList.add('-translate-y-10');
+                setTimeout(() => {
+                    videoModal.classList.add('hidden');
+                    modalVideoContainer.innerHTML = '';
+                }, 200);
+            }
+
+            if (container) {
+                container.addEventListener('click', (e) => {
+                    const button = e.target.closest('.watch-demo-btn');
+                    if (button) {
+                        const videoSrc = button.dataset.videoSrc;
+                        const card = button.closest('.idea-card');
+                        const title = card.querySelector('h3').textContent;
+                        openModal(videoSrc, title);
+                    }
+                });
+            }
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            if (videoModal) {
+                videoModal.addEventListener('click', (e) => {
+                    if (e.target === videoModal) {
+                        closeModal();
+                    }
+                });
+            }
+
+            if (noIdeasMessage) {
+                checkNoIdeas();
+            }
+        });
+    </script>
+
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+</body>
+
+</html>

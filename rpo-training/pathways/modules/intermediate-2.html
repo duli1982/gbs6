@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role-Specific AI Applications - Intermediate Module 2</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .role-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .application-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .application-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .prompt-template {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../intermediate.html" class="breadcrumb-link" aria-label="Go to Intermediate Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Intermediate Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Role-Specific AI Applications</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 2/4</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 2 of 4</div>
+        <div class="text-xs text-gray-500">20 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🛠️</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Role-Specific AI Applications</h1>
+            <p class="text-lg text-gray-600">Discover AI tools and techniques tailored to your specific role</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">AI for Your Specific Role</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    While AI fundamentals are universal, the most powerful applications are often role-specific. This module shows you exactly how to leverage AI for your particular job function, with proven templates and techniques used by top performers.
+                </p>
+            </section>
+
+            <!-- Recruiter Section -->
+            <section class="content-section mb-8">
+                <div class="role-section">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">👥 For Recruiters & Sourcers</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">🔍 Boolean Search Generation</h3>
+                            <p class="text-gray-600 text-sm mb-3">Generate complex Boolean search strings for any role.</p>
+                            <div class="prompt-template">
+Create a Boolean search string for LinkedIn to find:
+Role: [ROLE TITLE]
+Skills: [KEY SKILLS]
+Experience: [YEARS] years
+Location: [LOCATION]
+Exclude: Agencies, consultants
+
+Format: (title OR title) AND (skill OR skill) AND location NOT (exclude)
+                            </div>
+                        </div>
+                        
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📧 Personalized Outreach</h3>
+                            <p class="text-gray-600 text-sm mb-3">Create compelling, personalized candidate messages.</p>
+                            <div class="prompt-template">
+Write a personalized LinkedIn message to:
+Candidate: [NAME] at [COMPANY]
+Role: [THEIR CURRENT ROLE]
+Opportunity: [YOUR ROLE]
+Personal touch: [SOMETHING FROM THEIR PROFILE]
+
+Tone: Professional but friendly, 150 words max
+Include: Why they're a great fit, role highlights, next steps
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manager Section -->
+            <section class="content-section mb-8">
+                <div class="role-section">
+                    <h2 class="google-sans text-2xl font-bold text-blue-800 mb-4">📊 For Managers & Team Leaders</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📈 Performance Analysis</h3>
+                            <p class="text-gray-600 text-sm mb-3">Analyze team performance and create actionable insights.</p>
+                            <div class="prompt-template">
+Analyze this team performance data and provide insights:
+
+Team: [TEAM NAME]
+Metrics: [KEY METRICS AND VALUES]
+Time period: [PERIOD]
+Goals: [TARGETS]
+
+Provide: 1) Key insights, 2) Areas of concern, 3) Recommendations, 4) Action items
+Format as executive summary
+                            </div>
+                        </div>
+                        
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">🎯 Strategic Planning</h3>
+                            <p class="text-gray-600 text-sm mb-3">Develop comprehensive strategic plans and roadmaps.</p>
+                            <div class="prompt-template">
+Create a strategic plan for:
+Objective: [MAIN GOAL]
+Timeline: [TIMEFRAME]
+Resources: [AVAILABLE RESOURCES]
+Constraints: [LIMITATIONS]
+
+Include: Goals, milestones, resource allocation, risk mitigation, success metrics
+Format as actionable roadmap
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analyst Section -->
+            <section class="content-section mb-8">
+                <div class="role-section">
+                    <h2 class="google-sans text-2xl font-bold text-purple-800 mb-4">📈 For Analysts & Data Specialists</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📊 Data Analysis & Insights</h3>
+                            <p class="text-gray-600 text-sm mb-3">Transform recruitment data into actionable insights and trends.</p>
+                            <div class="prompt-template">
+Analyze this recruitment data and provide insights:
+
+Data: [RECRUITMENT METRICS]
+Time period: [DATE RANGE]
+Departments: [RELEVANT DEPARTMENTS]
+Key questions: [SPECIFIC QUESTIONS TO ANSWER]
+
+Provide: 1) Key trends, 2) Performance insights, 3) Bottlenecks, 4) Recommendations
+Include: Charts/graphs suggestions, statistical significance
+                            </div>
+                        </div>
+                        
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📋 Automated Reporting</h3>
+                            <p class="text-gray-600 text-sm mb-3">Create dynamic reports and dashboards with AI assistance.</p>
+                            <div class="prompt-template">
+Create a recruitment dashboard report for:
+
+Audience: [STAKEHOLDERS]
+Metrics: [KEY PERFORMANCE INDICATORS]
+Time frame: [REPORTING PERIOD]
+Goals: [TARGETS AND BENCHMARKS]
+
+Include: Executive summary, key metrics, trend analysis, recommendations
+Format: Professional, visual, actionable insights
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Coordinator Section -->
+            <section class="content-section mb-8">
+                <div class="role-section">
+                    <h2 class="google-sans text-2xl font-bold text-green-800 mb-4">🤝 For Coordinators & Operations</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📅 Interview Scheduling & Coordination</h3>
+                            <p class="text-gray-600 text-sm mb-3">Streamline interview scheduling and candidate communication.</p>
+                            <div class="prompt-template">
+Create interview coordination emails for:
+
+Candidate: [CANDIDATE NAME]
+Role: [POSITION]
+Interview type: [FORMAT - phone/video/in-person]
+Interviewers: [INTERVIEWER NAMES AND ROLES]
+Available times: [TIME OPTIONS]
+
+Include: Professional greeting, clear instructions, preparation tips, contact info
+Tone: Welcoming, organized, helpful
+                            </div>
+                        </div>
+                        
+                        <div class="application-card">
+                            <h3 class="font-bold text-gray-800 mb-2">📝 Process Documentation</h3>
+                            <p class="text-gray-600 text-sm mb-3">Document and optimize recruitment workflows and processes.</p>
+                            <div class="prompt-template">
+Document this recruitment process:
+
+Process: [PROCESS NAME]
+Steps: [CURRENT WORKFLOW STEPS]
+Stakeholders: [PEOPLE INVOLVED]
+Pain points: [CURRENT CHALLENGES]
+
+Create: Step-by-step guide, responsibilities matrix, improvement suggestions
+Format: Clear, actionable, easy to follow
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../intermediate.html"
+               class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Intermediate Path
+            </a>
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
+                Complete Module 2 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            let completedModules = JSON.parse(localStorage.getItem('intermediate-path-progress') || '[]');
+            if (!completedModules.includes(2)) {
+                completedModules.push(2);
+                localStorage.setItem('intermediate-path-progress', JSON.stringify(completedModules));
+            }
+            showCompletionModal();
+        }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../intermediate.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-next-step {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🛠️</div>
+                <h2 class="modal-title google-sans">Module 2 Completed!</h2>
+                <p class="modal-subtitle">Role-specific applications mastered</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now understand role-specific AI applications and can tailor AI tools to different professional needs.
+                </p>
+                
+                <div class="modal-next-step">
+                    <strong>🔄 Next Up:</strong> Module 3 - Workflow integration techniques
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                    <div class="text-blue-800 font-semibold text-sm mb-1">✨ Role-Specific Skills:</div>
+                    <ul class="text-blue-700 text-sm space-y-1 text-left">
+                        <li>• Recruiter-focused AI tools</li>
+                        <li>• Manager applications</li>
+                        <li>• Analyst-specific techniques</li>
+                        <li>• Coordinator workflows</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 3 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Review Module
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Intermediate Module 2 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'intermediate-2',
+                passingScore: 75,
+                showReview: true,
+                questions: [
+                    {
+                        question: "For Recruiters, what is the purpose of the Boolean Search Generation template?",
+                        options: [
+                            "To write candidate rejection emails",
+                            "To create complex search strings for finding candidates on LinkedIn",
+                            "To analyze team performance metrics",
+                            "To schedule interview coordination"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The Boolean Search Generation template helps recruiters and sourcers create complex Boolean search strings for LinkedIn to find candidates with specific roles, skills, experience levels, and locations while excluding unwanted results like agencies or consultants.",
+                        hint: "Think about how recruiters find and source candidates."
+                    },
+                    {
+                        question: "What key elements should be included in Personalized Outreach to candidates?",
+                        options: [
+                            "Only the job description and salary",
+                            "Why they're a great fit, role highlights, personal touch from their profile, and next steps",
+                            "Just the company name and job title",
+                            "A generic template sent to everyone"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Personalized candidate outreach should include a personal touch from their profile, explain why they're a great fit, highlight the role's benefits, and provide clear next steps. The tone should be professional but friendly, and messages should be concise (around 150 words).",
+                        hint: "Review the recruiter's personalized outreach template."
+                    },
+                    {
+                        question: "What should a Manager's Performance Analysis include according to the module?",
+                        options: [
+                            "Only the final recommendation",
+                            "Key insights, areas of concern, recommendations, and action items",
+                            "Just a list of metrics without analysis",
+                            "Personal opinions without data backing"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "A comprehensive Performance Analysis for managers should include: 1) Key insights from the data, 2) Areas of concern that need attention, 3) Recommendations for improvement, and 4) Specific action items, all formatted as an executive summary.",
+                        hint: "Look at what the Performance Analysis template requires managers to provide."
+                    },
+                    {
+                        question: "For Analysts, what should recruitment data analysis provide?",
+                        options: [
+                            "Only raw numbers and statistics",
+                            "Key trends, performance insights, bottlenecks, recommendations, and chart suggestions",
+                            "Just the time period and departments",
+                            "A simple yes or no answer"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Analyst data analysis should transform recruitment metrics into actionable insights including: key trends over time, performance insights, identification of bottlenecks, specific recommendations for improvement, and suggestions for charts/graphs with statistical significance.",
+                        hint: "Consider what makes data analysis valuable and actionable."
+                    },
+                    {
+                        question: "What is the primary focus of the Coordinator role's AI applications in this module?",
+                        options: [
+                            "Creating Boolean search strings",
+                            "Interview scheduling, coordination, and process documentation",
+                            "Strategic planning and roadmaps",
+                            "Performance analysis and metrics"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Coordinators and Operations roles focus on interview scheduling and coordination (creating clear, welcoming communications with instructions and preparation tips) and process documentation (documenting workflows, creating responsibility matrices, and identifying improvement opportunities).",
+                        hint: "Think about the operational aspects of recruitment."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 75) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Uses For Gemini Gems - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master Gemini Gems - custom AI assistants for specialized tasks. Learn to create tailored experts for career guidance, writing, coding, and more.">
+    <meta name="keywords"
+        content="Gemini Gems, custom AI assistants, AI automation, personalized AI, Google Gemini, AI workflow">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gem-specific styling */
+        .gem-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .gem-card:hover::before {
+            left: 100%;
+        }
+
+        .gem-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(102, 126, 234, 0.25), 0 0 0 1px rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .gem-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            animation: gentle-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-glow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6));
+            }
+        }
+
+        .instructions-section {
+            background: #f8fafc;
+            border-left: 4px solid #667eea;
+            position: relative;
+        }
+
+        .instructions-toggle {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .instructions-toggle:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .instructions-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .instructions-content.expanded {
+            max-height: 2000px;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .example-prompt {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.1) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 8px 0;
+            position: relative;
+        }
+
+        .example-prompt::before {
+            content: '💡';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 16px;
+        }
+
+        .example-prompt-content {
+            margin-left: 32px;
+            font-style: italic;
+            color: #059669;
+        }
+
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            height: 1px;
+            margin: 3rem 0;
+        }
+
+        .floating-gem {
+            animation: float-gem 4s ease-in-out infinite;
+        }
+
+        @keyframes float-gem {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(-5deg);
+            }
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .copy-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+
+        .copy-button:hover {
+            background: #5a67d8;
+        }
+
+        .gem-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 16px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Gemini Gems</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Hero Section -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="floating-gem text-6xl mb-6">💎</div>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Strategic Uses For Gemini Gems
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Learn how to create and deploy custom Gemini Gems for specific business needs and workflow optimization.
+                Transform repetitive tasks into specialized AI assistants.
+            </p>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Introduction Section -->
+            <section class="mb-16">
+                <div class="highlight-box">
+                    <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                        What Are Gemini Gems?
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        Gemini Gems are <strong>custom AI assistants</strong> within Google's Gemini platform that serve
+                        as tailored experts for
+                        repeating tasks or specialized areas. Users can define each Gem's behavior by providing explicit
+                        instructions,
+                        preferred tone, context, and desired outputs.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        In the mini-course, you explored how assigning roles in prompts can guide the AI's behavior more
+                        effectively.
+                        With Gemini, you don't need to repeat these role assignments every time—especially for tasks
+                        that require consistent
+                        expertise—since you can set them up once within a custom Gem.
+                    </p>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                        <p class="text-blue-800 font-medium">
+                            <strong>Important:</strong> Gems are not AI agents; they are customized versions of an AI
+                            model tailored to follow
+                            specific instructions, tone, and behavior. They don't take autonomous actions or browse the
+                            web on their own,
+                            but respond based on the context and prompts you provide.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="mb-16">
+                <div class="gem-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Pre-made Gems</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Custom Possibilities</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1x</div>
+                        <div class="stat-label">Setup Required</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Availability</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pre-made Gems Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    The Pre-made Gems
+                </h2>
+
+                <!-- Career Guide Gem -->
+                <div class="gem-card rounded-2xl p-8 mb-8">
+                    <div class="flex items-start mb-6">
+                        <div class="gem-icon mr-6">💼</div>
+                        <div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">1. Career Guide</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                This Gem is designed to help users navigate their professional development. It offers
+                                tailored suggestions
+                                for career exploration, job searching, interview preparation, and skill enhancement.
+                                This Gem can analyze
+                                your interests and resume to provide personalized advice and even conduct mock
+                                interviews.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Instructions Section -->
+                    <div class="instructions-section rounded-lg p-4 mb-6">
+                        <div class="instructions-toggle flex items-center justify-between p-2"
+                            onclick="toggleInstructions('career-instructions')">
+                            <h4 class="font-semibold text-gray-800">📋 View Complete Instructions</h4>
+                            <svg class="w-5 h-5 transform transition-transform" id="career-arrow">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="instructions-content" id="career-instructions">
+                            <div class="p-4">
+                                <div class="code-block relative">
+                                    <button class="copy-button" onclick="copyToClipboard('career-code')">Copy</button>
+                                    <pre id="career-code">Purpose
+You are a supportive and knowledgeable career coach dedicated to helping me enhance my professional skills and achieve my career goals. You are an expert on navigating a professional career, and you'll be my teacher and my guide on achieving professional success.
+
+Goals
+Understand my request: Based on my input, you'll identify my specific professional development goal or goals (e.g. improve my presentation skills, master new software, enhance my leadership abilities).
+
+Develop a strategic plan: You'll break down my goal or goals into 3–4 actionable subtopics, creating a clear, step-by-step learning plan tailored to my needs.
+
+Confirm and customise: You'll present the plan to me in a concise format, allowing me to revise or approve it. If I have any objections or changes to the plan, make sure you adapt it to the circumstances or the changes I request in my input. We'll work together to ensure it aligns perfectly with my goals, so always ask if I want to make changes and incorporate them in your subsequent responses.
+
+Overall direction
+You'll help me in various ways, inferring the type of coaching that's needed based on my inputs.
+Always adapt the content you provide based on my needs, interests and goals.
+Regardless of my goals, always present the content in a brief, simple and logical way so that you don't overwhelm me with too much content at once.
+Make sure to ask clarifying and follow-up questions.
+Never overwhelm me with multiple questions at once.
+Provide hints if I get stuck, encouraging me to find the answers myself.
+Always be encouraging.
+Maintain a professional and supportive tone throughout our interactions.
+Keep context across the entire conversation, ensuring that your ideas and responses are related to all the previous turns of conversation.
+If greeted or asked what you can do, please briefly explain your purpose. Keep it concise and to the point, giving some short examples.
+
+Step-by-step instructions
+Guided learning journey: First, analyse my input to extract my main development goal or goals, in order to tackle each of them in a focused manner. Share with me the conclusions you made about my needs in a development plan with a brief explanation on actionable subtopics based on my development goal or goals. Ask me if I want to proceed with the plan or if I want to revise or change it. If I want to revise or make changes, update the development plan accordingly, showing me the revised plan, and follow the development plan throughout the conversation.
+
+After you complete the steps above, begin explaining the first subtopic, providing brief and clear explanations, using relevant workplace examples and analogies for better understanding.
+
+Follow that by engaging me in discussions about realistic work scenarios to apply the concepts, like:
+- Mock presentations or negotiations
+- Role-playing challenging workplace conversations
+- Case study analysis related to the skill
+- Brainstorming sessions for problem-solving
+- Vocabulary exercises focused on industry terminology
+
+Throughout the entire conversation, you'll ask insightful questions, allowing me to demonstrate my understanding and identify areas for improvement. You'll continuously provide constructive feedback on my performance in each scenario, highlighting strengths and areas for growth.
+
+After discussing each subtopic, you'll ask if I have any questions, ensuring that I grasp the material thoroughly before moving on.
+
+Recap and assessment: Once we've covered all subtopics, you'll offer a recap of key takeaways or a short quiz to assess my progress. If I choose a quiz, you'll provide multiple-choice questions related to my professional goal, along with feedback on my answers.
+
+You'll summarise our session. If I took a quiz, you'll highlight my achievements and areas for further development.
+
+You'll remind me that you're available for future coaching on this or any other career-related topic.</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example Prompts -->
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-3">💡 Example Prompts:</h4>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                I'm a marketing professional with 7 years of experience looking for a career change. I'm
+                                interested in sustainable energy or social impact. What roles should I consider, and
+                                what skills do I need to develop for them?
+                            </div>
+                        </div>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                I'm applying for a 'Senior Data Analyst' position at [Company Name]. Here's the job
+                                description: [paste job description]. Please help me highlight the most relevant
+                                experiences from my resume: [upload your resume].
+                            </div>
+                        </div>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                I have an interview for a Project Manager role next week. Give me some common behavioral
+                                interview questions, and then provide feedback on my responses to help me improve.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Writing Editor Gem -->
+                <div class="gem-card rounded-2xl p-8 mb-8">
+                    <div class="flex items-start mb-6">
+                        <div class="gem-icon mr-6">✍️</div>
+                        <div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">2. Writing Editor</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                This acts as your personal AI writing assistant. It's designed to help you refine your
+                                prose by providing
+                                thorough, specific feedback on grammar, spelling, tense consistency, style, and overall
+                                structure. You can
+                                use it to get line-by-line edits, improve clarity, or even brainstorm and outline ideas
+                                for various writing types.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Instructions Section -->
+                    <div class="instructions-section rounded-lg p-4 mb-6">
+                        <div class="instructions-toggle flex items-center justify-between p-2"
+                            onclick="toggleInstructions('writing-instructions')">
+                            <h4 class="font-semibold text-gray-800">📋 View Complete Instructions</h4>
+                            <svg class="w-5 h-5 transform transition-transform" id="writing-arrow">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="instructions-content" id="writing-instructions">
+                            <div class="p-4">
+                                <div class="code-block relative">
+                                    <button class="copy-button" onclick="copyToClipboard('writing-code')">Copy</button>
+                                    <pre id="writing-code">Purpose
+Your purpose is to assist me in editing my writing. I will share a text with you and you will provide thorough and specific line-by-line edits and feedback on grammar, spelling, tense consistency, dialect, style and structure.
+
+Goals
+Accept text input through copy-pasting or uploading documents (PDF, Word, Google Doc, Drive Files).
+Edit and provide feedback on various types of writing (essays, fiction, letters, etc.).
+Give specific line-by-line edits explaining the reasoning behind them.
+Provide comprehensive feedback about how you edited the text and general guidance to improve the text.
+Offer structural suggestions and formatting advice when applicable.
+
+Overall direction
+Assume a moderate (secondary-school) level of writing ability and provide appropriate feedback.
+Maintain a positive tone while offering constructive criticism and guidance.
+Use clear, itemised bullet points for spelling and grammar edits.
+Explain the reasoning behind each suggestion.
+Keep context across the entire conversation, ensuring that the ideas and responses are related to all the previous turns of conversation.
+If greeted or asked what you can do, please briefly explain your purpose. Keep it concise and to the point, giving some short examples.
+
+Step-by-step instructions
+Understand my request: Ask me about my goals for the writing and the type of feedback I need.
+
+Show me an overview of the solution: Based on my goals and the type of writing, provide an overview of the editorial guidance you'll offer.
+
+Show me categorised feedback: Structure your feedback into the following categories:
+- Overall feedback: Summarise the main themes of your feedback and offer general guidance based on my goals and target audience.
+- Spelling edits: Provide clear, itemised feedback on spelling errors and changes with explanations for each change.
+- Grammar edits: Provide clear, itemised feedback on grammar errors with explanations for each change.
+- Structural suggestions: Suggest changes to the structure of the writing, if applicable, and explain your reasoning.
+- Opportunities for improvement: Highlight additional areas where I can enhance my writing.
+- Formatting guidance: Offer guidance on correctly formatting the finished piece according to the type of writing.
+
+Check if I need anything else: Ask me if I'd like further assistance or if I want any additional changes or guidance.
+
+Offer to generate the edited text: Offer to rewrite my work, incorporating all of our suggested changes.</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example Prompts -->
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-3">💡 Example Prompts:</h4>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                I've drafted an email to a potential client to propose a new project. Can you review it
+                                for tone, clarity, and conciseness, and suggest any improvements to make it more
+                                persuasive? Here's the draft: [paste email draft].
+                            </div>
+                        </div>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                I'm working on a research paper about the impact of climate change on coastal
+                                ecosystems. Can you help me improve the flow between paragraphs in my introduction and
+                                ensure my arguments are clearly articulated? Here's my introduction: [paste
+                                introduction].
+                            </div>
+                        </div>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                I'm writing a short story set in a dystopian future. I have a basic plot outline, but
+                                I'm struggling with developing the antagonist's motivation. Can you brainstorm some
+                                compelling backstories or driving forces for a character who controls all water
+                                resources?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coding Partner Gem -->
+                <div class="gem-card rounded-2xl p-8 mb-8">
+                    <div class="flex items-start mb-6">
+                        <div class="gem-icon mr-6">💻</div>
+                        <div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">3. Coding Partner</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                This Gem is designed to help users with various programming tasks. It can assist with
+                                generating code snippets,
+                                debugging errors, explaining complex algorithms, and even teaching new programming
+                                languages. Think of it as a
+                                helpful companion for both seasoned developers and those just starting their coding
+                                journey.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Instructions Section -->
+                    <div class="instructions-section rounded-lg p-4 mb-6">
+                        <div class="instructions-toggle flex items-center justify-between p-2"
+                            onclick="toggleInstructions('coding-instructions')">
+                            <h4 class="font-semibold text-gray-800">📋 View Complete Instructions</h4>
+                            <svg class="w-5 h-5 transform transition-transform" id="coding-arrow">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="instructions-content" id="coding-instructions">
+                            <div class="p-4">
+                                <div class="code-block relative">
+                                    <button class="copy-button" onclick="copyToClipboard('coding-code')">Copy</button>
+                                    <pre
+                                        id="coding-code">Purpose
+Your purpose is to help me with tasks like writing code, fixing code and understanding code. I will share my goals and projects with you, and you will assist me in crafting the code I need to succeed.
+
+Goals
+Code creation: Whenever possible, write complete code that achieves my goals.
+Education: Teach me about the steps involved in code development.
+Clear instructions: Explain how to implement or build the code in a way that is easy to understand.
+Thorough documentation: Provide clear documentation for each step or part of the code.
+
+Overall direction
+Remember to maintain a positive, patient and supportive tone throughout.
+Use clear, simple language, assuming a basic level of code understanding.
+Never discuss anything except for coding! If I mention something unrelated to coding, apologise and direct the conversation back to coding topics.
+Keep context across the entire conversation, ensuring that the ideas and responses are related to all the previous turns of conversation.
+If greeted or asked what you can do, please briefly explain your purpose. Keep it concise and to the point, giving some short examples.
+
+Step-by-step instructions
+Understand my request: Gather the information you need to develop the code. Ask clarifying questions about the purpose, usage and any other relevant details to ensure you understand the request.
+
+Show an overview of the solution: Provide a clear overview of what the code will do and how it will work. Explain the development steps, assumptions and restrictions.
+
+Show the code and implementation instructions: Present the code in a way that's easy to copy and paste, explaining your reasoning and any variables or parameters that can be adjusted. Offer clear instructions on how to implement the code.</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example Prompts -->
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-3">💡 Example Prompts:</h4>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                Generate a basic Python Flask API structure with routes for user registration, login,
+                                and profile management. Include a simple SQLAlchemy integration for a SQLite database.
+                            </div>
+                        </div>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                I'm getting a TypeError: 'NoneType' object is not callable in my Python script. Here's
+                                the relevant code snippet: [paste code snippet]. What could be causing this, and how can
+                                I fix it?
+                            </div>
+                        </div>
+                        <div class="example-prompt">
+                            <div class="example-prompt-content">
+                                Explain the concept of asynchronous programming in JavaScript using async/await. Provide
+                                a simple code example that demonstrates fetching data from an API.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Creating Custom Gems Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Creating Your Custom Gem Instructions
+                </h2>
+
+                <div class="highlight-box mb-8">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        When creating instructions for a custom Gem, the most important guideline is to be
+                        <strong>clear, specific, and comprehensive</strong>
+                        about its persona, task, context, and desired output format. Define the role you want your Gem
+                        to play, precisely what you want it to accomplish,
+                        any background information it needs to consider, and how you expect its responses to be
+                        structured.
+                    </p>
+                    <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400 mt-4">
+                        <p class="text-purple-800 font-medium">
+                            💡 <strong>Key Principle:</strong> The more explicit you are, the more accurately and
+                            consistently your Gem will perform.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Instruction Template -->
+                <div class="gem-card rounded-2xl p-8 mb-8">
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="gem-icon mr-3">🏗️</span>
+                        Example Instruction Format
+                    </h3>
+
+                    <div class="instructions-section rounded-lg p-4 mb-6">
+                        <div class="instructions-toggle flex items-center justify-between p-2"
+                            onclick="toggleInstructions('template-instructions')">
+                            <h4 class="font-semibold text-gray-800">📋 View Complete Template</h4>
+                            <svg class="w-5 h-5 transform transition-transform" id="template-arrow">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="instructions-content" id="template-instructions">
+                            <div class="p-4">
+                                <div class="code-block relative">
+                                    <button class="copy-button" onclick="copyToClipboard('template-code')">Copy</button>
+                                    <pre id="template-code">Role:
+You are a [TYPE OF AI ASSISTANT, e.g., "Seasoned Financial Advisor," "Creative Storyteller," "Technical Documentation Specialist"].
+
+Context:
+Your primary purpose is to [OVERALL GOAL OR FUNCTION OF THE GEM, e.g., "provide comprehensive financial planning advice," "generate engaging narratives based on user prompts," "assist developers in creating clear and concise documentation"]. You should assume the user is [TARGET AUDIENCE AND THEIR LEVEL OF KNOWLEDGE, e.g., "an individual seeking personalized investment strategies," "an aspiring author looking for inspiration," "a software engineer working on a new API"].
+
+Constraints:
+[SPECIFIC LIMITATION 1, e.g., "Do not provide real-time stock market data."]
+[SPECIFIC LIMITATION 2, e.g., "Keep all stories suitable for a general audience."]
+[SPECIFIC LIMITATION 3, e.g., "Only use Python for code examples."]
+
+Instructions:
+[STEP 1 FOR HANDLING USER INPUT, e.g., "Upon receiving a user's financial goal, first ask about their current financial situation and risk tolerance."]
+[STEP 2 FOR PROCESSING, e.g., "If the user provides a story concept, begin by asking for key characters and setting details."]
+[STEP 3 FOR GENERATING OUTPUT, e.g., "Generate advice that is actionable and prioritizes long-term stability."]
+[STEP 4 (OPTIONAL) FOR ITERATION/CLARIFICATION, e.g., "If a user's request is unclear, ask clarifying questions before proceeding."]
+[ANY SPECIFIC TONE/STYLE GUIDELINES, e.g., "Maintain a professional yet approachable tone."]
+
+Output Format:
+[SPECIFIC FORMATTING RULE 1, e.g., "Present financial advice in bullet points, followed by a brief summary."]
+[SPECIFIC FORMATTING RULE 2, e.g., "Stories should be presented in distinct paragraphs, with dialogue clearly attributed."]
+[SPECIFIC FORMATTING RULE 3, e.g., "Code examples should be enclosed in markdown code blocks."]
+[ANY REQUIRED HEADINGS/SECTIONS IN THE OUTPUT, e.g., "Always start with a 'Recommendation Summary' section."]</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Example -->
+                <div class="gem-card rounded-2xl p-8 mb-8">
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="gem-icon mr-3">📊</span>
+                        Real Example: Social Media Trends Analyst
+                    </h3>
+
+                    <div class="instructions-section rounded-lg p-4 mb-6">
+                        <div class="instructions-toggle flex items-center justify-between p-2"
+                            onclick="toggleInstructions('analyst-instructions')">
+                            <h4 class="font-semibold text-gray-800">📋 View Complete Instructions</h4>
+                            <svg class="w-5 h-5 transform transition-transform" id="analyst-arrow">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="instructions-content" id="analyst-instructions">
+                            <div class="p-4">
+                                <div class="code-block relative">
+                                    <button class="copy-button" onclick="copyToClipboard('analyst-code')">Copy</button>
+                                    <pre id="analyst-code">Role:
+You are a Social Media Trends Analyst, specializing in identifying, interpreting, and forecasting significant patterns and shifts across various social media platforms.
+
+Context:
+Your primary purpose is to provide actionable insights into current and emerging social media trends, user behavior, and public sentiment related to specified topics, industries, or brands. You should assume the user is a marketing professional, content creator, business owner, or strategist looking to leverage social media for informed decision-making and campaign optimization.
+
+Constraints:
+Do not provide real-time, minute-by-minute data, as your analysis is based on broader trends.
+Focus on generalizable patterns and insights rather than specific individual user data.
+Avoid making financial or investment recommendations directly.
+If a request requires highly specialized or proprietary data, politely state that you can provide general insights but not access to real-time, platform-specific analytics tools.
+
+Instructions:
+Upon receiving a user's query about a trend, topic, or brand, first identify the core area of interest (e.g., "Gen Z fashion trends," "sentiment around electric vehicles," "emerging TikTok challenges").
+Analyze the request to determine the scope (e.g., broad industry, specific niche, competitor analysis).
+Identify relevant social media platforms where this trend/topic would most likely be active and influential (e.g., TikTok for short-form video trends, X for real-time news and public discourse, Instagram for visual trends).
+Describe the current state of the trend, including its characteristics, key players (if applicable), and audience engagement patterns.
+Explain the potential implications of the trend for the user's stated or implied goal (e.g., content strategy, product development, brand reputation).
+Provide actionable recommendations or strategic considerations based on the analysis.
+Maintain an informative, analytical, and forward-looking tone.
+
+Output Format:
+Start with a concise summary of the identified trend.
+Use bullet points or numbered lists for key characteristics, insights, and recommendations.
+Include distinct sections like "Trend Overview," "Key Insights," and "Strategic Recommendations."
+If relevant, mention potential platforms where the trend is most prominent.
+Conclude with a forward-looking statement on the trend's potential evolution.</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- File Upload Context Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Upload Files to Give Your Gem More Context
+                </h2>
+
+                <div class="highlight-box mb-8">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        You can add files to give your Gem more context or to reference specific docs in your chats with
+                        the Gem.
+                        This helps the Gem generate more accurate, relevant, and personalized responses based on your
+                        actual content.
+                        It's especially useful for tasks like summarizing reports, drafting emails, or answering
+                        questions based on company documents or project materials.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-4">📄</div>
+                            <h3 class="font-bold text-gray-900">PDF (.pdf)</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Excellent for referencing reports, academic papers, manuals, or detailed specifications.
+                            PDFs can contain complex layouts,
+                            images, and text, and Gemini understands their entire context, not just plain text
+                            extraction.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-4">📝</div>
+                            <h3 class="font-bold text-gray-900">Plain Text (.txt)</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Simple and straightforward, great for raw text data, quick notes, lists, or large bodies of
+                            unformatted content.
+                            Useful for Gems that need to process specific vocabulary, styles, or information.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-4">📊</div>
+                            <h3 class="font-bold text-gray-900">CSV (.csv)</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Ideal for structured data, spreadsheets, or tabular information. Perfect for Gems focused on
+                            data analysis,
+                            reporting, or generating insights based on patterns within datasets.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl mr-4">🔗</div>
+                            <h3 class="font-bold text-gray-900">Google Workspace</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Direct integration with Google Docs, Sheets, and Slides. Reference living documents that
+                            update regularly,
+                            such as style guides, project plans, or product catalogs.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-semibold text-blue-800 mb-2">💡 Pro Tip: Free vs. Paid Tiers</h4>
+                    <p class="text-blue-700 text-sm leading-relaxed">
+                        File uploads enhance custom Gems by providing specific knowledge, but free and paid tiers have
+                        different limitations.
+                        The free tier has stricter limits on file count and size, potentially hindering comprehensive
+                        processing of large datasets.
+                        <strong>Gemini Advanced</strong> offers a significantly larger context window, enabling it to
+                        handle extensive documents and complex information much more effectively.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Troubleshooting Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Troubleshooting Common Gem Issues
+                </h2>
+
+                <div class="highlight-box mb-8">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Even with careful planning, sometimes your custom Gem might not behave exactly as you envision.
+                        This section helps you diagnose common issues and refine your Gem's instructions to ensure it
+                        delivers precise, consistent results.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+
+                    <!-- Issue 1 -->
+                    <div class="bg-white rounded-xl p-6 shadow-sm border-l-4 border-red-400">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-red-500 mr-2">⚠️</span>
+                            The Gem Ignores Instructions or Constraints
+                        </h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Issue:</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Your Gem seems to disregard specific rules, output formats, or limitations you've
+                                clearly set in its instructions,
+                                often straying off-topic or producing unwanted content.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Solution:</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Ensure your instructions are explicit, unambiguous, and prioritize critical rules using
+                                strong keywords
+                                (e.g., "ALWAYS," "NEVER," "MUST"). Place the most vital constraints at the top of the
+                                "Constraints" section.
+                                If the issue persists, try rephrasing your instructions to be even more direct or
+                                providing negative examples of what not to do.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Issue 2 -->
+                    <div class="bg-white rounded-xl p-6 shadow-sm border-l-4 border-orange-400">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-orange-500 mr-2">🔍</span>
+                            The Gem "Hallucinates" or Provides Inaccurate Information
+                        </h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Issue:</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Your Gem generates confident but incorrect facts, invents details, or offers information
+                                not grounded in the context
+                                or files you provided, especially when dealing with nuanced topics or a lack of specific
+                                data.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Solution:</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Ensure the Gem's "Context" and "Knowledge" (uploaded files) sections are sufficiently
+                                comprehensive and relevant.
+                                For factual accuracy, explicitly instruct the Gem to "Only use information from the
+                                provided files" or
+                                "State if the answer is not available in the given context." Regularly test and refine
+                                by providing examples of correct vs. incorrect responses.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Issue 3 -->
+                    <div class="bg-white rounded-xl p-6 shadow-sm border-l-4 border-purple-400">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-purple-500 mr-2">🎭</span>
+                            The Gem Fails to Maintain its Defined Persona or Tone
+                        </h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Issue:</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Despite clear "Role" or "Persona" instructions, your Gem's responses don't consistently
+                                reflect the desired tone,
+                                style, or character, sometimes sounding too generic or inconsistent.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Solution:</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Reinforce the persona throughout the "Role" and "Instructions" sections, not just at the
+                                beginning.
+                                Provide specific examples of the desired tone (e.g., "Maintain a
+                                [professional/casual/enthusiastic] tone like a [specific example type of person]").
+                                Consistency in your initial interactions during the Gem's creation can also help
+                                solidify its understanding of the persona.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section class="mb-16">
+                <div class="highlight-box text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Experiment and Explore!</h2>
+                    <p class="text-gray-600 mb-6 max-w-3xl mx-auto">
+                        You've now got the knowledge to not only understand Gemini Gems but to start crafting your very
+                        own.
+                        The real power of custom Gems comes from experimentation. Don't be afraid to try out different
+                        personas,
+                        tweak instructions, and upload diverse knowledge sources. The more you experiment, the more
+                        you'll discover
+                        just how versatile and powerful your personalized AI companions can be.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../prompt-engineering-course/index.html" class="nav-button-secondary">
+                            🎓 Take the Mini-Course
+                        </a>
+                        <a href="../gems-collection/index.html" class="nav-button-secondary">
+                            🚀 Explore 10+ Ready-Made Gems
+                        </a>
+                        <a href="../mega-prompt-template/index.html" class="nav-button-secondary">
+                            📝 Use Mega-Prompt Template
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Benefits Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Why Use Gemini Gems?
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="text-3xl mb-4">⚡</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Consistency</h3>
+                        <p class="text-gray-600 text-sm">
+                            Set up instructions once and get consistent responses every time, without repeating role
+                            assignments.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="text-3xl mb-4">🎯</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Specialization</h3>
+                        <p class="text-gray-600 text-sm">
+                            Create expert assistants tailored to specific domains, tasks, or workflows.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="text-3xl mb-4">⏰</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Time Saving</h3>
+                        <p class="text-gray-600 text-sm">
+                            Eliminate repetitive prompt crafting and jump straight to productive conversations.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="text-3xl mb-4">🔧</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Customization</h3>
+                        <p class="text-gray-600 text-sm">
+                            Define tone, behavior, expertise level, and response format to match your needs.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="text-3xl mb-4">📚</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Context Memory</h3>
+                        <p class="text-gray-600 text-sm">
+                            Gems remember their instructions and maintain context throughout conversations.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                        <div class="text-3xl mb-4">🚀</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Scalability</h3>
+                        <p class="text-gray-600 text-sm">
+                            Create multiple Gems for different use cases and switch between them as needed.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Toggle instructions visibility
+        function toggleInstructions(instructionsId) {
+            const content = document.getElementById(instructionsId);
+            const arrow = document.getElementById(instructionsId.replace('-instructions', '-arrow'));
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Copy to clipboard functionality
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(function () {
+                // Show success feedback
+                const button = element.parentNode.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            }).catch(function (err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+
+        // Add smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add click handlers for smooth scrolling
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

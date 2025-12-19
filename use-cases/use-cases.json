@@ -1,0 +1,484 @@
+{
+  "useCases": [
+    {
+      "id": "boolean-search",
+      "icon": "🔍",
+      "category": "Talent Sourcing",
+      "categorySlug": "sourcing",
+      "difficulty": "Beginner",
+      "difficultySlug": "beginner",
+      "timeSaved": "75% Time Saved",
+      "title": "AI-Powered Boolean Search Generation",
+      "description": "Transform your candidate sourcing with AI-generated Boolean search strings that find better candidates faster.",
+      "metrics": {
+        "time": {
+          "before": "45min",
+          "after": "10min",
+          "label": "Search Creation"
+        },
+        "improvement": {
+          "value": "+300%",
+          "label": "Search Variations"
+        },
+        "quality": {
+          "value": "+40%",
+          "label": "Quality Matches"
+        }
+      },
+      "prerequisites": [
+        "Basic understanding of Boolean operators",
+        "Access to LinkedIn Recruiter or similar platform",
+        "Job requirements document"
+      ],
+      "gettingStarted": [
+        {
+          "step": 1,
+          "title": "Prepare your input",
+          "description": "Gather job title, required skills, and experience level"
+        },
+        {
+          "step": 2,
+          "title": "Use AI prompt",
+          "description": "\"Generate Boolean search for [job title] with [skills]\""
+        },
+        {
+          "step": 3,
+          "title": "Test & refine",
+          "description": "Run search on your platform and adjust based on results"
+        }
+      ],
+      "commonPitfalls": [
+        {
+          "title": "Over-complexity",
+          "description": "Don't add too many OR conditions - keep searches focused"
+        },
+        {
+          "title": "Platform differences",
+          "description": "Boolean syntax varies between LinkedIn, Indeed, etc."
+        }
+      ],
+      "realExample": {
+        "input": "Senior Java Developer with microservices experience",
+        "output": "(Java OR \"Java Developer\") AND (Senior OR \"Sr.\" OR Lead) AND (microservices OR \"micro services\" OR \"service oriented\") AND -junior -intern"
+      },
+      "gbsPromptLink": "../gbs-prompts/index.html#recruitment-1",
+      "demoType": "sourcing-demo",
+      "order": 1,
+      "badgeColor": "blue",
+      "cardColor": "category-sourcing"
+    },
+    {
+      "id": "job-description",
+      "icon": "✍️",
+      "category": "Content Creation",
+      "categorySlug": "content",
+      "difficulty": "Beginner",
+      "difficultySlug": "beginner",
+      "timeSaved": "80% Faster",
+      "title": "Intelligent Job Description Creation",
+      "description": "Create compelling, inclusive job descriptions that attract top talent and increase application rates.",
+      "metrics": {
+        "time": {
+          "before": "2h",
+          "after": "25min",
+          "label": "Creation Time"
+        },
+        "improvement": {
+          "value": "+40%",
+          "label": "Application Rate"
+        },
+        "quality": {
+          "value": "+60%",
+          "label": "Quality Candidates"
+        }
+      },
+      "prerequisites": [
+        "Job requirements and responsibilities list",
+        "Company culture and values information",
+        "Target candidate persona"
+      ],
+      "gettingStarted": [
+        {
+          "step": 1,
+          "title": "Gather information",
+          "description": "Job title, key responsibilities, required skills, company info"
+        },
+        {
+          "step": 2,
+          "title": "Use structured prompt",
+          "description": "\"Create engaging job description for [role] at [company type]\""
+        },
+        {
+          "step": 3,
+          "title": "Review & customize",
+          "description": "Adjust tone, add specific requirements, ensure brand alignment"
+        }
+      ],
+      "commonPitfalls": [
+        {
+          "title": "Generic output",
+          "description": "Always provide specific company and role context for better results"
+        },
+        {
+          "title": "Unrealistic requirements",
+          "description": "Review AI-generated requirements for feasibility"
+        }
+      ],
+      "sampleOutput": {
+        "elements": [
+          "Engaging headline",
+          "Company story & culture",
+          "Role impact & growth opportunities",
+          "Clear requirements & nice-to-haves",
+          "Benefits & perks",
+          "Call-to-action"
+        ]
+      },
+      "gbsPromptLink": "../gbs-prompts/index.html#recruitment-2",
+      "demoType": "content-demo",
+      "order": 2,
+      "badgeColor": "green",
+      "cardColor": "category-content"
+    },
+    {
+      "id": "candidate-outreach",
+      "icon": "💬",
+      "category": "Communication",
+      "categorySlug": "communication",
+      "difficulty": "Intermediate",
+      "difficultySlug": "intermediate",
+      "timeSaved": "3x Response Rate",
+      "title": "Personalized Candidate Outreach",
+      "description": "Craft personalized messages that resonate with candidates and dramatically increase response rates.",
+      "metrics": {
+        "time": {
+          "before": "15min",
+          "after": "3min",
+          "label": "Per Message"
+        },
+        "improvement": {
+          "value": "15% → 45%",
+          "label": "Response Rate"
+        },
+        "quality": {
+          "value": "+200%",
+          "label": "Engagement"
+        }
+      },
+      "prerequisites": [
+        "Candidate's LinkedIn profile or resume",
+        "Job description and company information",
+        "Understanding of candidate's career goals"
+      ],
+      "gettingStarted": [
+        {
+          "step": 1,
+          "title": "Research candidate",
+          "description": "Review their background, current role, and recent achievements"
+        },
+        {
+          "step": 2,
+          "title": "Craft personalized prompt",
+          "description": "Include specific details about their experience and the opportunity"
+        },
+        {
+          "step": 3,
+          "title": "Review & send",
+          "description": "Ensure message feels authentic and includes clear next steps"
+        }
+      ],
+      "commonPitfalls": [
+        {
+          "title": "Over-personalization",
+          "description": "Don't mention too many personal details - keep it professional"
+        },
+        {
+          "title": "Generic AI tone",
+          "description": "Always review and adjust to match your communication style"
+        }
+      ],
+      "personalizationElements": [
+        "Company Research",
+        "Role Relevance",
+        "Career Progression",
+        "Industry Insights"
+      ],
+      "gbsPromptLink": "../gbs-prompts/index.html#recruitment-5",
+      "demoType": "communication-demo",
+      "order": 3,
+      "badgeColor": "orange",
+      "cardColor": "category-communication"
+    },
+    {
+      "id": "market-analysis",
+      "icon": "📊",
+      "category": "Data Analysis",
+      "categorySlug": "analysis",
+      "difficulty": "Advanced",
+      "difficultySlug": "advanced",
+      "timeSaved": "90% Accuracy",
+      "title": "Automated Market Intelligence",
+      "description": "Leverage AI to gather comprehensive market insights, salary benchmarks, and competitive intelligence.",
+      "metrics": {
+        "time": {
+          "before": "4h",
+          "after": "30min",
+          "label": "Research Time"
+        },
+        "improvement": {
+          "value": "90%",
+          "label": "Data Accuracy"
+        },
+        "quality": {
+          "value": "5x",
+          "label": "More Insights"
+        }
+      },
+      "prerequisites": [
+        "Access to market data sources (LinkedIn, Glassdoor, etc.)",
+        "Understanding of data analysis principles",
+        "Clear research objectives and scope"
+      ],
+      "gettingStarted": [
+        {
+          "step": 1,
+          "title": "Define scope",
+          "description": "Specify role, location, industry, and time frame for analysis"
+        },
+        {
+          "step": 2,
+          "title": "Gather data",
+          "description": "Use AI to collect and structure data from multiple sources"
+        },
+        {
+          "step": 3,
+          "title": "Generate insights",
+          "description": "Use AI to identify trends, patterns, and recommendations"
+        }
+      ],
+      "commonPitfalls": [
+        {
+          "title": "Data quality",
+          "description": "Always verify AI-generated data with multiple sources"
+        },
+        {
+          "title": "Context missing",
+          "description": "Ensure AI understands local market conditions and regulations"
+        }
+      ],
+      "analysisIncludes": [
+        "Salary benchmarking",
+        "Skill demand trends",
+        "Competitor analysis",
+        "Location insights",
+        "Market saturation",
+        "Future projections"
+      ],
+      "gbsPromptLink": "../gbs-prompts/index.html#ai-recruitment-1",
+      "demoType": "analysis-demo",
+      "order": 4,
+      "badgeColor": "pink",
+      "cardColor": "category-analysis"
+    },
+    {
+      "id": "role-analyzer",
+      "icon": "🎯",
+      "category": "Talent Sourcing",
+      "categorySlug": "sourcing",
+      "difficulty": "Beginner",
+      "difficultySlug": "beginner",
+      "timeSaved": "3.5 Hours Weekly",
+      "title": "AI-Powered Job Role Analyzer",
+      "description": "Decode job descriptions instantly to understand requirements, identify sourcing strategies, and create targeted candidate profiles.",
+      "metrics": {
+        "time": {
+          "before": "1h",
+          "after": "10min",
+          "label": "Role Analysis"
+        },
+        "improvement": {
+          "value": "15-16h",
+          "label": "Saved Per Week"
+        },
+        "quality": {
+          "value": "+300%",
+          "label": "Search Accuracy"
+        }
+      },
+      "prerequisites": [
+        "Job description or job title",
+        "Basic understanding of recruitment process",
+        "Access to LinkedIn or sourcing platform"
+      ],
+      "gettingStarted": [
+        {
+          "step": 1,
+          "title": "Input job description",
+          "description": "Paste job description or provide job title for analysis"
+        },
+        {
+          "step": 2,
+          "title": "Get structured breakdown",
+          "description": "AI dissects role into responsibilities, requirements, and ideal candidate profile"
+        },
+        {
+          "step": 3,
+          "title": "Use sourcing insights",
+          "description": "Apply suggested job titles, keywords, and LinkedIn search strategies"
+        }
+      ],
+      "commonPitfalls": [
+        {
+          "title": "Incomplete job details",
+          "description": "Provide full job description for comprehensive analysis, not just title"
+        },
+        {
+          "title": "Skipping validation",
+          "description": "Always review AI suggestions with hiring manager before sourcing"
+        }
+      ],
+      "realExample": {
+        "input": "Senior Software Engineer - Cloud Infrastructure position",
+        "output": "AI identified 15 relevant LinkedIn job titles (DevOps Engineer, Cloud Architect, SRE), generated Boolean strings, and created ideal candidate profile highlighting AWS/Azure expertise, reducing intake time from 1h to 10min"
+      },
+      "analysisIncludes": [
+        "Core responsibilities breakdown",
+        "Required vs. nice-to-have skills",
+        "Ideal candidate profile",
+        "LinkedIn job titles to search",
+        "Boolean search keywords",
+        "Sourcing strategy recommendations"
+      ],
+      "gbsPromptLink": "role-analyzer-gem.html",
+      "buttonText": "Check the Whole Prompt",
+      "demoType": "role-analysis-demo",
+      "order": 5,
+      "badgeColor": "blue",
+      "cardColor": "category-sourcing"
+    },
+    {
+      "id": "performance-reporting",
+      "icon": "📈",
+      "category": "Data Analysis",
+      "categorySlug": "analysis",
+      "difficulty": "Intermediate",
+      "difficultySlug": "intermediate",
+      "timeSaved": "70% Time Saved",
+      "title": "Automated Performance Reporting",
+      "description": "Generate comprehensive performance reports with visualizations, insights, and actionable recommendations.",
+      "metrics": {
+        "time": {
+          "before": "3h",
+          "after": "45min",
+          "label": "Report Creation"
+        },
+        "improvement": {
+          "value": "+150%",
+          "label": "Data Insights"
+        },
+        "quality": {
+          "value": "95%",
+          "label": "Accuracy Rate"
+        }
+      },
+      "prerequisites": [
+        "Access to performance data (ATS, CRM, etc.)",
+        "Defined KPIs and metrics",
+        "Basic understanding of data visualization"
+      ],
+      "gettingStarted": [
+        {
+          "step": 1,
+          "title": "Define metrics",
+          "description": "Identify key performance indicators and data sources"
+        },
+        {
+          "step": 2,
+          "title": "Automate collection",
+          "description": "Use AI to gather and clean data from multiple systems"
+        },
+        {
+          "step": 3,
+          "title": "Generate insights",
+          "description": "Create visualizations and identify trends automatically"
+        }
+      ],
+      "commonPitfalls": [
+        {
+          "title": "Data silos",
+          "description": "Ensure all relevant data sources are connected and accessible"
+        },
+        {
+          "title": "Over-complexity",
+          "description": "Focus on actionable insights rather than overwhelming detail"
+        }
+      ],
+      "reportFeatures": [
+        "KPI tracking",
+        "Trend analysis",
+        "Goal progress",
+        "Recommendations",
+        "Predictive modeling",
+        "Executive summaries"
+      ],
+      "gbsPromptLink": "../gbs-prompts/index.html#ai-recruitment-5",
+      "demoType": "reporting-demo",
+      "order": 6,
+      "badgeColor": "pink",
+      "cardColor": "category-analysis"
+    }
+  ],
+  "featuredStories": [
+    {
+      "icon": "🚀",
+      "name": "Sarah M.",
+      "role": "Senior Recruiter",
+      "title": "Sarah's Sourcing Revolution",
+      "quote": "AI-powered Boolean search cut my sourcing time from 4 hours to 1 hour per role.",
+      "timeSaved": "75%",
+      "betterCandidates": "+40%",
+      "gradient": "from-blue-50 to-indigo-100"
+    },
+    {
+      "icon": "✨",
+      "name": "Mark T.",
+      "role": "Talent Acquisition Manager",
+      "title": "Mark's Content Magic",
+      "quote": "AI helps me create job descriptions in minutes. Response rates increased by 60%.",
+      "fasterCreation": "80%",
+      "responseRate": "+60%",
+      "gradient": "from-green-50 to-emerald-100"
+    },
+    {
+      "icon": "🎯",
+      "name": "Dione B.",
+      "role": "GBS EMEA Sourcing Recruiter",
+      "title": "Dione's Daily Time-Saver",
+      "quote": "AI role analysis transformed my workflow. I now save 15-16 hours every week on intake and sourcing prep.",
+      "timeSaved": "3.5h → 16h",
+      "weeklySavings": "15-16 hours",
+      "gradient": "from-blue-50 to-purple-100"
+    }
+  ],
+  "impactStats": [
+    {
+      "value": "75%",
+      "label": "Time Saved on Routine Tasks"
+    },
+    {
+      "value": "3x",
+      "label": "Faster Candidate Sourcing"
+    },
+    {
+      "value": "90%",
+      "label": "Improved Content Quality"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "created": "2025-11-23",
+    "lastUpdated": "2025-11-23",
+    "totalUseCases": 6,
+    "categories": ["Talent Sourcing", "Content Creation", "Communication", "Data Analysis"]
+  }
+}

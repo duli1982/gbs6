@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your First AI Conversation - Beginner Module 2</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .chat-example {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .user-message {
+            background: #3b82f6;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 4px 18px;
+            margin: 0.5rem 0;
+            max-width: 80%;
+            margin-left: auto;
+        }
+        
+        .ai-message {
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 18px 4px;
+            margin: 0.5rem 0;
+            max-width: 80%;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-next-step {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        .do-dont-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .do-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .dont-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            .do-dont-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../beginner.html" class="breadcrumb-link" aria-label="Go to Beginner Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Beginner Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Your First AI Conversation</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 2/5</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 40%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 2 of 5</div>
+        <div class="text-xs text-gray-500">8 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">💬</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Your First AI Conversation</h1>
+            <p class="text-lg text-gray-600">Learn how to "talk" to AI and get amazing results</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Think of AI as a Helpful Colleague</h2>
+                <p class="text-lg text-gray-700 mb-4">
+                    Imagine you're talking to a really smart coworker who wants to help you. You wouldn't just say "Help me" - you'd explain what you need. The same is true with AI. The better you explain what you want, the better help you'll get.
+                </p>
+                
+                <div class="tip-box">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">💡</div>
+                        <div>
+                            <h3 class="font-bold text-amber-800 mb-2">The Golden Rule of AI</h3>
+                            <p class="text-amber-700">
+                                <strong>Be specific, be clear, and be polite.</strong> AI responds best when you give it clear instructions, just like a human would.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Basic Prompt Structure -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">The Simple Formula for Great AI Conversations</h2>
+                
+                <div class="bg-blue-50 rounded-xl p-6 border border-blue-200 mb-6">
+                    <h3 class="google-sans text-xl font-bold text-blue-800 mb-4">📝 The Basic Formula:</h3>
+                    <div class="space-y-3">
+                        <div class="bg-white rounded-lg p-3 border border-blue-200">
+                            <strong class="text-blue-800">1. What you want:</strong> <span class="text-gray-700">"Write an email..."</span>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 border border-blue-200">
+                            <strong class="text-blue-800">2. Who it's for:</strong> <span class="text-gray-700">"...to a job candidate..."</span>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 border border-blue-200">
+                            <strong class="text-blue-800">3. The purpose:</strong> <span class="text-gray-700">"...to schedule an interview"</span>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 border border-blue-200">
+                            <strong class="text-blue-800">4. The tone:</strong> <span class="text-gray-700">"...in a friendly, professional tone"</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Example Conversations -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Let's See This in Action</h2>
+                
+                <!-- Example 1: Email Writing -->
+                <div class="chat-example mb-6">
+                    <h3 class="font-bold text-gray-800 mb-3">📧 Example 1: Writing a Professional Email</h3>
+                    
+                    <div class="user-message">
+                        Write an email to a job candidate named Sarah to schedule an interview for a Marketing Manager position. Make it friendly but professional, and suggest 3 time slots next week.
+                    </div>
+                    
+                    <div class="ai-message">
+                        Subject: Interview Invitation - Marketing Manager Position<br><br>
+                        
+                        Dear Sarah,<br><br>
+                        
+                        Thank you for your interest in the Marketing Manager position at our company. We were impressed with your application and would like to invite you for an interview.<br><br>
+                        
+                        Would any of these times work for you?<br>
+                        • Tuesday, March 14th at 2:00 PM<br>
+                        • Wednesday, March 15th at 10:00 AM<br>
+                        • Friday, March 17th at 3:00 PM<br><br>
+                        
+                        The interview will take approximately 45 minutes and will be conducted via video call. Please let me know which time works best for you.<br><br>
+                        
+                        Looking forward to speaking with you!<br><br>
+                        
+                        Best regards,<br>
+                        [Your Name]
+                    </div>
+                    
+                    <div class="mt-3 text-sm text-gray-600">
+                        <strong>Why this worked:</strong> The request was specific (email type, recipient, purpose, tone) and included all necessary details.
+                    </div>
+                </div>
+
+                <!-- Example 2: Research Help -->
+                <div class="chat-example mb-6">
+                    <h3 class="font-bold text-gray-800 mb-3">🔍 Example 2: Getting Research Help</h3>
+                    
+                    <div class="user-message">
+                        I need to find candidates for a Software Developer role. Can you help me create a list of skills and qualifications I should look for? Focus on mid-level developers, not entry-level or senior.
+                    </div>
+                    
+                    <div class="ai-message">
+                        Here's a comprehensive list for mid-level Software Developer candidates:<br><br>
+                        
+                        <strong>Technical Skills (Required):</strong><br>
+                        • 3-5 years of programming experience<br>
+                        • Proficiency in at least 2 programming languages<br>
+                        • Experience with databases (SQL/NoSQL)<br>
+                        • Understanding of version control (Git)<br>
+                        • Knowledge of testing frameworks<br><br>
+                        
+                        <strong>Soft Skills:</strong><br>
+                        • Problem-solving abilities<br>
+                        • Team collaboration<br>
+                        • Communication skills<br>
+                        • Adaptability to new technologies<br><br>
+                        
+                        <strong>Nice to Have:</strong><br>
+                        • Cloud platform experience<br>
+                        • Agile/Scrum methodology<br>
+                        • API development experience
+                    </div>
+                    
+                    <div class="mt-3 text-sm text-gray-600">
+                        <strong>Why this worked:</strong> Clear request with specific level (mid-level) and context (what it's for).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Do's and Don'ts -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Do's and Don'ts for AI Conversations</h2>
+                
+                <div class="do-dont-grid">
+                    <div class="do-box">
+                        <h3 class="font-bold text-green-800 mb-3 flex items-center">
+                            <span class="text-xl mr-2">✅</span> DO These Things
+                        </h3>
+                        <ul class="text-green-700 space-y-2 text-sm">
+                            <li>• Be specific about what you want</li>
+                            <li>• Include context and background</li>
+                            <li>• Specify the tone or style you need</li>
+                            <li>• Ask follow-up questions if needed</li>
+                            <li>• Say "please" and "thank you" (it helps!)</li>
+                            <li>• Give examples when possible</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dont-box">
+                        <h3 class="font-bold text-red-800 mb-3 flex items-center">
+                            <span class="text-xl mr-2">❌</span> DON'T Do These
+                        </h3>
+                        <ul class="text-red-700 space-y-2 text-sm">
+                            <li>• Be too vague ("Help me with work")</li>
+                            <li>• Assume AI knows your situation</li>
+                            <li>• Use only one-word requests</li>
+                            <li>• Get frustrated if first try isn't perfect</li>
+                            <li>• Share sensitive personal information</li>
+                            <li>• Expect AI to read your mind</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice Examples -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Let's Practice Together</h2>
+                
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
+                    <h3 class="google-sans font-bold text-purple-800 mb-4">🎯 Practice Scenarios</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-gray-800 mb-2">Scenario 1: Job Description</h4>
+                            <p class="text-gray-600 text-sm mb-2">You need to write a job description for a Customer Service Representative.</p>
+                            <div class="bg-gray-50 rounded p-3 text-sm">
+                                <strong>Try this prompt:</strong> "Write a job description for a Customer Service Representative position. Include key responsibilities, required skills, and qualifications. Make it engaging and professional. The role is for a tech company and requires 2+ years of experience."
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-gray-800 mb-2">Scenario 2: Interview Questions</h4>
+                            <p class="text-gray-600 text-sm mb-2">You need good interview questions for a sales role.</p>
+                            <div class="bg-gray-50 rounded p-3 text-sm">
+                                <strong>Try this prompt:</strong> "Create 10 interview questions for a Sales Associate position. Include a mix of behavioral and situational questions. Focus on customer service skills, sales experience, and problem-solving abilities."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Key Takeaways</h2>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-center">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <h3 class="font-bold text-blue-800 mb-2">Be Specific</h3>
+                        <p class="text-blue-700 text-sm">The more details you provide, the better AI can help you.</p>
+                    </div>
+                    
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200 text-center">
+                        <div class="text-2xl mb-2">🔄</div>
+                        <h3 class="font-bold text-green-800 mb-2">Iterate</h3>
+                        <p class="text-green-700 text-sm">If the first response isn't perfect, ask AI to adjust it.</p>
+                    </div>
+                    
+                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200 text-center">
+                        <div class="text-2xl mb-2">💭</div>
+                        <h3 class="font-bold text-purple-800 mb-2">Think Context</h3>
+                        <p class="text-purple-700 text-sm">Always provide background information and context.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What's Next -->
+            <section class="content-section">
+                <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-3">🎉 Excellent! You Can Now Talk to AI</h2>
+                    <p class="text-green-700 mb-4">
+                        You've learned the fundamentals of communicating with AI effectively. Remember: be specific, provide context, and don't be afraid to ask for adjustments.
+                    </p>
+                    <div class="text-sm text-green-600">
+                        <strong>Next up:</strong> Module 3 is where the fun begins! You'll get hands-on practice with real AI tools in a safe, guided environment.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../beginner.html"
+               class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:from-green-600 hover:to-emerald-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Beginner Path
+            </a>
+            
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
+                Complete Module 2 →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            // Mark module as completed
+            let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
+            if (!completedModules.includes(2)) {
+                completedModules.push(2);
+                localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
+            }
+            
+            // Show completion message and redirect
+            showCompletionModal();
+        }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../beginner.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🎉</div>
+                <h2 class="modal-title google-sans">Module 2 Completed!</h2>
+                <p class="modal-subtitle">Congratulations on mastering AI communication</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now know how to communicate effectively with AI using clear prompts and structured conversations. 
+                </p>
+                
+                <div class="modal-next-step">
+                    <strong>🚀 Next Up:</strong> Module 3 - Hands-on practice with real AI tools in a safe, guided environment
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                    <div class="text-blue-800 font-semibold text-sm mb-1">✨ What You've Learned:</div>
+                    <ul class="text-blue-700 text-sm space-y-1 text-left">
+                        <li>• How to structure effective AI prompts</li>
+                        <li>• Best practices for AI conversations</li>
+                        <li>• Common mistakes to avoid</li>
+                        <li>• Practical communication techniques</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 3 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Review Module
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Module 2 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'beginner-2',
+                passingScore: 70,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What is the 'Golden Rule' for communicating with AI?",
+                        options: [
+                            "Be polite and say 'please' and 'thank you'",
+                            "Be specific, be clear, and be polite",
+                            "Write as much detail as possible",
+                            "Use technical language to sound professional"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The golden rule for AI communication is to be specific (say exactly what you want), be clear (use simple, direct language), and be polite (AI responds better to courteous requests).",
+                        hint: "Review the first section about the fundamental principle."
+                    },
+                    {
+                        question: "According to the basic prompt formula, which of these components should you include?",
+                        options: [
+                            "What you want + Who it's for + Purpose + Tone",
+                            "Your name + Date + Location + Time",
+                            "Introduction + Body + Conclusion",
+                            "Question + Answer + Feedback"
+                        ],
+                        correctAnswer: 0,
+                        explanation: "A good prompt includes: What you want (specific task), Who it's for (audience/context), Purpose (why you need it), and Tone (formal, casual, friendly, etc.).",
+                        hint: "Think about the four key elements shown in the chat examples."
+                    },
+                    {
+                        question: "Which of these is a DO when working with AI?",
+                        options: [
+                            "Give one-word instructions",
+                            "Assume AI knows everything about you",
+                            "Provide examples of what you want",
+                            "Never ask follow-up questions"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "You SHOULD provide examples of what you want - showing AI examples helps it understand your expectations better. The other options are all things you should NOT do.",
+                        hint: "Look at the green checkmarks in the Do's and Don'ts section."
+                    },
+                    {
+                        question: "What should you do if the AI's first response isn't quite right?",
+                        options: [
+                            "Give up and start over from scratch",
+                            "Ask the AI to refine or adjust its response",
+                            "Accept it as is - AI responses can't be improved",
+                            "Switch to a different AI tool immediately"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "If the first response isn't perfect, ask the AI to refine or adjust it! AI is iterative - you can have a back-and-forth conversation to get exactly what you need.",
+                        hint: "Remember: 'Think of it as a conversation, not a one-time request.'"
+                    },
+                    {
+                        question: "Why is providing context important when working with AI?",
+                        options: [
+                            "It makes your prompts longer and more impressive",
+                            "AI can't function without knowing your personal information",
+                            "Context helps AI understand your needs and give more relevant responses",
+                            "Context is not important - AI knows everything already"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Providing context helps AI understand your specific situation and needs, leading to more relevant and useful responses. Context includes things like your role, the audience, the purpose, and any constraints.",
+                        hint: "Review the 'Think Context' section at the end of the module."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 70) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>

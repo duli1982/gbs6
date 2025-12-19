@@ -1,0 +1,511 @@
+/* Shared card styles */
+.framework-box {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.example-bad {
+    background: #fef2f2;
+    border-left: 4px solid #ef4444;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.example-good {
+    background: #f0fdf4;
+    border-left: 4px solid #22c55e;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.question-box {
+    background: white;
+    border: 2px solid #fbbf24;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.question-box:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+}
+
+.obvious-summary {
+    background: linear-gradient(135deg, #d97706, #ea580c);
+    color: #fff;
+}
+
+.obvious-summary h2,
+.obvious-summary p {
+    color: #fff;
+}
+
+.obvious-summary .obvious-cta,
+.obvious-summary .obvious-cta:visited {
+    color: #b45309;
+}
+
+/* Copywriting frameworks summary */
+.page-copywriting-frameworks main > section:last-of-type h2,
+.page-copywriting-frameworks main > section:last-of-type p {
+    color: #000;
+}
+
+.page-copywriting-frameworks main > section:last-of-type a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    background: #7c3aed;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.page-copywriting-frameworks main > section:last-of-type a:hover {
+    background: #6d28d9;
+}
+
+.page-copywriting-frameworks main > section:last-of-type a:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.35);
+}
+
+/* 20-30-50 framework landing */
+.percentage-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.percentage-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.percentage-badge-large {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--color-from), var(--color-to));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.voice-box {
+    background: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
+    border-left: 4px solid #3b82f6;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.framework-stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Timeless principles */
+.principle-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.principle-card:hover {
+    border-color: #8b5cf6;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+    transform: translateY(-4px);
+}
+
+.principle-number {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.quote-box {
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    border-left: 4px solid #8b5cf6;
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-style: italic;
+}
+
+.contrast-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contrast-table th,
+.contrast-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.contrast-table th {
+    background: #f9fafb;
+    font-weight: 600;
+}
+
+.changes-col {
+    color: #6b7280;
+}
+
+.constant-col {
+    color: #8b5cf6;
+    font-weight: 600;
+}
+
+.action-item {
+    display: flex;
+    align-items: start;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    background: #faf5ff;
+}
+
+.action-item::before {
+    content: "→";
+    color: #8b5cf6;
+    font-weight: bold;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* AI assist + human brand + search craft shared base */
+.training-block {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.skill-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.skill-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+/* AI Assist page */
+.page-ai-assist .framework-box:hover,
+.page-ai-assist .training-block:hover {
+    border-color: #8b5cf6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.page-ai-assist .ai-moment {
+    background: white;
+    border: 2px solid #c4b5fd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.page-ai-assist .ai-moment:hover {
+    border-color: #8b5cf6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+}
+
+.page-ai-assist .prompt-example {
+    background: #f5f3ff;
+    border-left: 4px solid #8b5cf6;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.page-ai-assist .skill-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    color: #8b5cf6;
+    font-weight: bold;
+}
+
+/* AI Daily Checklist page */
+.checklist-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.checklist-card:hover {
+    border-color: #8b5cf6;
+    box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
+    transform: translateY(-4px);
+}
+
+.page-ai-daily-checklist .prompt-example {
+    background: #f5f3ff;
+    border-left: 4px solid #8b5cf6;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 1rem;
+    padding-left: 0;
+}
+
+.checkbox-item::before {
+    content: "";
+    font-size: 1.25rem;
+    color: #8b5cf6;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.card-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Human brand page */
+.page-human-brand .framework-box:hover,
+.page-human-brand .training-block:hover {
+    border-color: #8b5cf6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.page-human-brand .skill-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    color: #8b5cf6;
+    font-weight: bold;
+}
+
+.jargon-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.jargon-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.jargon-table tr:hover {
+    background: #eef2ff;
+}
+
+.sticky-note {
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    font-style: italic;
+}
+
+/* Search craft page */
+.skill-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.page-search-craft .training-block:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.code-example {
+    background: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.bullet-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.bullet-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.bullet-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    color: #3b82f6;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Search checklists page */
+.step-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.step-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+    transform: translateY(-4px);
+}
+
+.step-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.question-item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.question-item:hover {
+    background: #eff6ff;
+}
+
+.question-number {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    background: #3b82f6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 1rem;
+    font-size: 0.875rem;
+}
+
+.ai-prompt {
+    background: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin: 0.75rem 0;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.page-search-checklists .bullet-list li::before {
+    color: #3b82f6;
+    font-size: 1.5rem;
+}
+
+.alert-box {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+/* Copywriting frameworks accents */
+.page-copywriting-frameworks .framework-box:hover {
+    border-color: #8b5cf6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+}
+
+/* Obvious Adams accents */
+.page-obvious-adams .framework-box:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+}

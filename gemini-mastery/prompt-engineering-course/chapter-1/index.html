@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction to Gemini and Prompt Engineering - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Learn the fundamentals of Gemini AI and prompt engineering. Understand what makes Gemini unique and master the 6 key principles of effective prompting.">
+    <meta name="keywords"
+        content="Gemini introduction, prompt engineering basics, AI fundamentals, multimodal AI, Google AI">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/fonts.css">
+    <link rel="stylesheet" href="../../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../../shared/buttons.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Chapter-specific styling */
+        .chapter-container {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .interactive-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #10b981;
+        }
+
+        .interactive-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .expandable-content.expanded {
+            max-height: 2000px;
+        }
+
+        .toggle-button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .toggle-button:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Prompt Engineering Course">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Prompt Engineering Course</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Chapter 1</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Chapter Header -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="text-6xl mb-6">🎯</div>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Chapter 1: Introduction to Gemini and Prompt Engineering
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Get started with the fundamentals of prompt engineering and understand what makes Gemini unique. 
+                Learn the basic principles that will guide your entire prompting journey.
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-6 text-sm text-gray-500">
+                <span>⏱️ ~35 minutes</span>
+                <span>📚 Beginner Level</span>
+                <span>🎯 Fundamentals</span>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto">    
+        <!-- Section 1.1: Overview of Gemini -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">🚀</span>
+                    1.1 Overview of Gemini
+                </h2>
+                
+                <div class="interactive-section">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                        Gemini is Google's advanced AI model that can understand and generate text, images, audio, video, and code. 
+                        It powers tools like Search, Gmail, and Android to help users write, solve problems, and complete tasks. 
+                        The latest versions offer strong reasoning skills and can even take actions like planning or making calls.
+                    </p>
+                    
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-4">What Makes Gemini Unique?</h3>
+                    
+                    <!-- Interactive Feature Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">🎨</span>
+                                <h4 class="font-bold text-gray-900">Native Multimodal Design</h4>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Built from the ground up to handle text, images, audio, video, and code together - not as add-ons, 
+                                but as a unified understanding system.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">🔗</span>
+                                <h4 class="font-bold text-gray-900">Deep Google Integration</h4>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Tightly woven into Google's products—Search, Gmail, Docs, Sheets, Android, Drive, and Chrome. 
+                                Access to personal context with permission.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border border-purple-200">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">🔬</span>
+                                <h4 class="font-bold text-gray-900">Agentic Capabilities</h4>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Deep Research feature can autonomously browse the web and combine insights with your uploaded files 
+                                for comprehensive reports.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-lg border border-orange-200">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">📱</span>
+                                <h4 class="font-bold text-gray-900">On-Device Processing</h4>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Gemini Nano runs directly on mobile devices like Pixel phones, providing features without internet connection
+                                for privacy and speed.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-pink-50 to-rose-50 p-6 rounded-lg border border-pink-200">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">💎</span>
+                                <h4 class="font-bold text-gray-900">Customizable 'Gems'</h4>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Personalized AI assistants that remember your instructions and context files, streamlining workflows like marketing drafts or code reviews without repeating setup.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>         
+   <!-- Section 1.2: Key Principles -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">🔑</span>
+                    1.2 Key Principles for Gemini Prompt Engineering
+                </h2>
+                
+                <div class="interactive-section">
+                    <div class="bg-gradient-to-r from-green-100 to-blue-100 p-6 rounded-lg mb-8">
+                        <h3 class="font-bold text-gray-900 mb-3">What is Prompt Engineering?</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Prompt engineering is the art of designing and refining the instructions you give Gemini to achieve optimal results. 
+                            A well-crafted prompt can generate high-quality outputs, reduce errors, and save time by delivering what you need on the first try.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Principles Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        
+                        <div class="principle-card bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500 cursor-pointer" 
+                             onclick="showPrincipleDetails('clarity')">
+                            <div class="text-3xl mb-3">🎯</div>
+                            <h4 class="font-bold text-gray-900 mb-2">1. Clarity</h4>
+                            <p class="text-gray-600 text-sm">Straightforward, easy to understand, free of ambiguity</p>
+                            <div class="mt-3 text-blue-600 text-sm font-medium">Click to see example →</div>
+                        </div>
+
+                        <div class="principle-card bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500 cursor-pointer" 
+                             onclick="showPrincipleDetails('specificity')">
+                            <div class="text-3xl mb-3">🔍</div>
+                            <h4 class="font-bold text-gray-900 mb-2">2. Specificity</h4>
+                            <p class="text-gray-600 text-sm">Include enough details to focus on exact needs</p>
+                            <div class="mt-3 text-green-600 text-sm font-medium">Click to see example →</div>
+                        </div>
+
+                        <div class="principle-card bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500 cursor-pointer" 
+                             onclick="showPrincipleDetails('context')">
+                            <div class="text-3xl mb-3">📐</div>
+                            <h4 class="font-bold text-gray-900 mb-2">3. Context Grounding</h4>
+                            <p class="text-gray-600 text-sm">Provide context so Gemini knows the setting</p>
+                            <div class="mt-3 text-purple-600 text-sm font-medium">Click to see example →</div>
+                        </div>
+
+                        <div class="principle-card bg-white p-6 rounded-lg shadow-md border-l-4 border-orange-500 cursor-pointer" 
+                             onclick="showPrincipleDetails('instructiveness')">
+                            <div class="text-3xl mb-3">📋</div>
+                            <h4 class="font-bold text-gray-900 mb-2">4. Instructiveness</h4>
+                            <p class="text-gray-600 text-sm">Specify tone, format, or type of output expected</p>
+                            <div class="mt-3 text-orange-600 text-sm font-medium">Click to see example →</div>
+                        </div>
+
+                        <div class="principle-card bg-white p-6 rounded-lg shadow-md border-l-4 border-red-500 cursor-pointer" 
+                             onclick="showPrincipleDetails('balanced')">
+                            <div class="text-3xl mb-3">⚖️</div>
+                            <h4 class="font-bold text-gray-900 mb-2">5. Balanced Prompting</h4>
+                            <p class="text-gray-600 text-sm">Know when to use concise vs. complex prompts</p>
+                            <div class="mt-3 text-red-600 text-sm font-medium">Click to see example →</div>
+                        </div>
+
+                        <div class="principle-card bg-white p-6 rounded-lg shadow-md border-l-4 border-indigo-500 cursor-pointer" 
+                             onclick="showPrincipleDetails('chaining')">
+                            <div class="text-3xl mb-3">🔗</div>
+                            <h4 class="font-bold text-gray-900 mb-2">6. Prompt Chaining</h4>
+                            <p class="text-gray-600 text-sm">Break large tasks into smaller, manageable steps</p>
+                            <div class="mt-3 text-indigo-600 text-sm font-medium">Click to see example →</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Interactive Example Display -->
+                    <div id="principle-examples" class="bg-gray-50 p-6 rounded-lg" style="display: none;">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="font-bold text-gray-900" id="example-title">Principle Example</h4>
+                            <button onclick="closePrincipleDetails()" class="text-gray-500 hover:text-gray-700">✕</button>
+                        </div>
+                        <div id="example-content"></div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Section 1.3: Beginner Level Prompts -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">📝</span>
+                    1.3 Beginner Level Prompts Illustrating Each Principle
+                </h2>
+
+                <div class="interactive-section">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        Now that we've covered the core principles, let's see them in action.
+                        With Gemini, simply communicate naturally—no XML tagging needed.
+                    </p>
+
+                    <div class="space-y-6">
+
+                        <!-- Clarity Example -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-1 h-12 bg-blue-500 rounded mr-4"></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Clarity</h4>
+                                    <p class="text-sm text-gray-600">Straightforward and unambiguous</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-3">
+                                <p class="text-sm font-mono text-gray-800">Describe that process of Protein Synthesis in simple terms.</p>
+                            </div>
+                            <p class="text-sm text-gray-600">Easy to understand with no vagueness.</p>
+                        </div>
+
+                        <!-- Specificity Example -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-1 h-12 bg-green-500 rounded mr-4"></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Specificity</h4>
+                                    <p class="text-sm text-gray-600">Includes precise details and criteria</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-3">
+                                <p class="text-sm font-mono text-gray-800">You are a sports analyst with expertise in Major League Baseball. List five of the most iconic U.S. baseball players from the 1990s, based on their performance, popularity, and cultural impact during that decade.</p>
+                            </div>
+                            <p class="text-sm text-gray-600">Defines role, timeframe, criteria, and format clearly.</p>
+                        </div>
+
+                        <!-- Context Setting Example -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-1 h-12 bg-purple-500 rounded mr-4"></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Context Setting</h4>
+                                    <p class="text-sm text-gray-600">Establishes role and context</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-3">
+                                <p class="text-sm font-mono text-gray-800">You are a social media influencer. In the context of social media marketing, explain the importance of authenticity of content creation.</p>
+                            </div>
+                            <p class="text-sm text-gray-600">Both role and context ensure relevant, consistent output.</p>
+                        </div>
+
+                        <!-- Instructiveness Example -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-1 h-12 bg-orange-500 rounded mr-4"></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Instructiveness</h4>
+                                    <p class="text-sm text-gray-600">Clear directions with constraints</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-3">
+                                <p class="text-sm font-mono text-gray-800">Rewrite the following paragraph to make it more concise and professional, keeping the original meaning intact and limiting it to 3 sentences: "Our team was really excited about the new product launch, and we worked super hard to get everything ready in time. There were some last-minute issues, but we managed to fix them before the deadline. Everyone put in a lot of effort and showed real dedication."</p>
+                            </div>
+                            <p class="text-sm text-gray-600">Specifies action, approach, and constraints.</p>
+                        </div>
+
+                        <!-- Balanced Prompting Example -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-1 h-12 bg-red-500 rounded mr-4"></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Balanced Prompting</h4>
+                                    <p class="text-sm text-gray-600">Simple vs. complex based on need</p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-xs font-semibold text-gray-500 mb-2">Simple:</p>
+                                <div class="bg-gray-50 p-3 rounded-lg mb-3">
+                                    <p class="text-sm font-mono text-gray-800">Explain what supply and demand means in basic terms.</p>
+                                </div>
+                                <p class="text-xs font-semibold text-gray-500 mb-2">Advanced:</p>
+                                <div class="bg-gray-50 p-3 rounded-lg">
+                                    <p class="text-sm font-mono text-gray-800">Explain the concept of supply and demand in simple terms for someone new to economics. Then, give two real-life examples: one showing what happens when demand is high but supply is low, and another showing the opposite. Keep your explanation clear and relatable.</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600">Match complexity to your goal.</p>
+                        </div>
+
+                        <!-- Iterative Refinement Example -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-1 h-12 bg-indigo-500 rounded mr-4"></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Iterative Refinement</h4>
+                                    <p class="text-sm text-gray-600">Build on previous responses</p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-xs font-semibold text-gray-500 mb-2">Step 1:</p>
+                                <div class="bg-gray-50 p-3 rounded-lg mb-3">
+                                    <p class="text-sm font-mono text-gray-800">Summarize the main idea of the article below in one sentence. [insert article]</p>
+                                </div>
+                                <p class="text-xs font-semibold text-gray-500 mb-2">Step 2:</p>
+                                <div class="bg-gray-50 p-3 rounded-lg">
+                                    <p class="text-sm font-mono text-gray-800">Now expand that summary into a short paragraph that includes the article's main argument, one supporting point, and the author's conclusion. Keep it under 100 words and maintain a neutral tone.</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600">Chain prompts for deeper, controlled results.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-900 mb-3">Key Takeaways</h4>
+                        <ul class="space-y-2 text-gray-700 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2">•</span>
+                                <span><strong>Clarity:</strong> Use straightforward language</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">•</span>
+                                <span><strong>Specificity:</strong> Provide roles and contexts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-500 mr-2">•</span>
+                                <span><strong>Context:</strong> Set the scope clearly</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-orange-500 mr-2">•</span>
+                                <span><strong>Instructiveness:</strong> Specify tone and format</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2">•</span>
+                                <span><strong>Balance:</strong> Match complexity to goals</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-indigo-500 mr-2">•</span>
+                                <span><strong>Refinement:</strong> Build on previous responses</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Section 1.4: Tips and Tricks -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">💡</span>
+                    1.4 Tips and Tricks to Remember These Principles
+                </h2>
+
+                <div class="interactive-section">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        Practical advice to help you internalize effective prompt design, focusing on role assignment and iterative refinement.
+                    </p>
+
+                    <div class="grid gap-6 mb-8">
+
+                        <!-- Tip 1: Checklist -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">1</div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2">Create a Checklist</h4>
+                                    <p class="text-sm text-gray-600 mb-3">Ensure your prompts align with core principles and avoid common pitfalls.</p>
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <p class="text-sm text-gray-700 mb-1">Before finalizing, ask:</p>
+                                        <ul class="text-sm text-gray-600 space-y-1 ml-4">
+                                            <li>• Is the task clearly defined?</li>
+                                            <li>• Are instructions specific?</li>
+                                            <li>• Have I provided context or role?</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 2: Templates -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">2</div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 mb-2">Use Templates</h4>
+                                    <p class="text-sm text-gray-600 mb-3">Save time with consistent structures for recurring tasks.</p>
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <p class="text-xs font-mono text-gray-800 mb-2">Role: You are a private investigator with a keen eye for detail.</p>
+                                        <p class="text-xs font-mono text-gray-800 mb-2">Task: Analyze the following document to spot any inconsistency in the suspect's alibi.</p>
+                                        <p class="text-xs font-mono text-gray-500">[upload file]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 3: Practice -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">3</div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2">Practice Regularly</h4>
+                                    <p class="text-sm text-gray-600">Start with simple tasks, gradually move to complex ones. Track what works and why.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 4: Role Assignment -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">4</div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 mb-2">Leverage Role Assignment</h4>
+                                    <p class="text-sm text-gray-600 mb-3">Experiment with related roles to explore different perspectives.</p>
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <p class="text-xs font-mono text-gray-500 mb-2">[Choose one]</p>
+                                        <p class="text-xs font-mono text-gray-800 mb-1">You are a data analyst.</p>
+                                        <p class="text-xs font-mono text-gray-800 mb-1">You are an economist.</p>
+                                        <p class="text-xs font-mono text-gray-800 mb-2">You are a business mogul.</p>
+                                        <p class="text-xs font-mono text-gray-800">Explain the trend in the following dataset: [data]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 5: Iterate -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">5</div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 mb-2">Iterate and Refine</h4>
+                                    <p class="text-sm text-gray-600 mb-3">Start simple, analyze responses, and improve over time.</p>
+                                    <div class="space-y-2">
+                                        <div class="bg-red-50 p-2 rounded">
+                                            <p class="text-xs text-gray-600 mb-1">Initial:</p>
+                                            <p class="text-xs font-mono text-gray-800">Explain climate change.</p>
+                                        </div>
+                                        <div class="bg-yellow-50 p-2 rounded">
+                                            <p class="text-xs text-gray-600 mb-1">Better:</p>
+                                            <p class="text-xs font-mono text-gray-800">You are a climatologist. Explain climate change in two paragraphs, focusing on causes and effects.</p>
+                                        </div>
+                                        <div class="bg-green-50 p-2 rounded">
+                                            <p class="text-xs text-gray-600 mb-1">Best:</p>
+                                            <p class="text-xs font-mono text-gray-800">You are a climatologist. Write a structured essay on climate change: what it is, how it developed, current measures, individual actions, and future projections if no action is taken.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 6: Critical Thinking -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">6</div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900 mb-2">Practice Critical Thinking When Chaining</h4>
+                                    <p class="text-sm text-gray-600 mb-3">Verify claims and spot inconsistencies before building on responses.</p>
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <p class="text-xs font-mono text-gray-800 mb-2">Step 1: Summarize this article: [text]</p>
+                                        <p class="text-xs font-mono text-gray-800">Step 2: You are a fact-checker. Verify the summary's accuracy and explain potential causes of any inaccuracies.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 7: Feedback -->
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">7</div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2">Ask for Feedback</h4>
+                                    <p class="text-sm text-gray-600">Share prompts with peers or run outputs through quality reviews to spot improvements.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Key Takeaways -->
+                    <div class="bg-white p-6 rounded-lg border-2 border-gray-300">
+                        <h4 class="font-bold text-gray-900 mb-3">Key Takeaways</h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                                <span><strong>Preparation:</strong> Use checklists and templates to streamline creation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                                <span><strong>Iteration:</strong> Refinement leads to better results over time</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                                <span><strong>Leverage Strengths:</strong> Conversational prompts and live web search</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Section 1.5: Interactive Exercises -->
+            <section class="chapter-container mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="text-3xl mr-3">💪</span>
+                    1.5 Practice Exercises
+                </h2>
+                
+                <div class="interactive-section">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        Test your understanding with these interactive exercises. Each focuses on one key principle.
+                    </p>
+
+                    <!-- Exercise Cards -->
+                    <div class="space-y-6">
+                        
+                        <!-- Exercise 1: Clarity -->
+                        <div class="exercise-card bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mr-3">Exercise 1</span>
+                                <h4 class="font-bold text-gray-900">Clarity Practice</h4>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Task:</strong> Write a clear prompt asking Gemini to describe the process of brewing coffee.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                                <textarea id="exercise1" class="w-full p-3 border border-gray-300 rounded-lg resize-none" 
+                                          rows="3" placeholder="Write your prompt here..."></textarea>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="checkExercise(1)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                    Check Answer
+                                </button>
+                                <button onclick="showSolution(1)" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                                    Show Solution
+                                </button>
+                            </div>
+                            <div id="feedback1" class="mt-4 p-3 rounded-lg" style="display: none;"></div>
+                        </div>
+
+                        <!-- Exercise 2: Specificity -->
+                        <div class="exercise-card bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium mr-3">Exercise 2</span>
+                                <h4 class="font-bold text-gray-900">Specificity Practice</h4>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Task:</strong> Create a specific prompt asking for five plant-based protein sources.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                                <textarea id="exercise2" class="w-full p-3 border border-gray-300 rounded-lg resize-none" 
+                                          rows="3" placeholder="Write your prompt here..."></textarea>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="checkExercise(2)" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                                    Check Answer
+                                </button>
+                                <button onclick="showSolution(2)" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                                    Show Solution
+                                </button>
+                            </div>
+                            <div id="feedback2" class="mt-4 p-3 rounded-lg" style="display: none;"></div>
+                        </div>
+
+                        <!-- Exercise 3: Role Assignment -->
+                        <div class="exercise-card bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium mr-3">Exercise 3</span>
+                                <h4 class="font-bold text-gray-900">Role Assignment Practice</h4>
+                            </div>
+                            <p class="text-gray-700 mb-4">
+                                <strong>Task:</strong> Write a prompt with role assignment asking about quantum computing in computer science context.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                                <textarea id="exercise3" class="w-full p-3 border border-gray-300 rounded-lg resize-none" 
+                                          rows="4" placeholder="Write your prompt here..."></textarea>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="checkExercise(3)" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                                    Check Answer
+                                </button>
+                                <button onclick="showSolution(3)" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                                    Show Solution
+                                </button>
+                            </div>
+                            <div id="feedback3" class="mt-4 p-3 rounded-lg" style="display: none;"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- Progress Tracker -->
+                    <div class="mt-8 bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-gray-900 mb-3">Your Progress</h4>
+                        <div class="flex items-center gap-4">
+                            <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                <div id="progress-bar" class="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <span id="progress-text" class="text-sm font-medium text-gray-700">0/3 exercises completed</span>
+                        </div>
+                    </div>
+                </div>
+            </section> 
+           <!-- Chapter Navigation -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-green-100 to-blue-100 rounded-2xl p-8 text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎉 Chapter 1 Complete!</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Great job! You've learned the fundamentals of Gemini and the 6 key principles of prompt engineering. 
+                        Ready to move on to crafting prompts for different outputs?
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../index.html" class="nav-button-secondary">
+                            📚 Back to Course Overview
+                        </a>
+                        <a href="../chapter-2/index.html" class="nav-button-secondary">
+                            ➡️ Continue to Chapter 2
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../../shared/scripts/footer.js" defer></script>
+    <script src="../../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Interactive functionality
+        let completedExercises = 0;
+        const totalExercises = 3;
+
+        // Toggle expandable content
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            const button = event.target;
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                button.textContent = button.textContent.replace('Hide', 'Learn More About');
+            } else {
+                content.classList.add('expanded');
+                button.textContent = button.textContent.replace('Learn More About', 'Hide');
+            }
+        }
+
+        // Show principle details
+        function showPrincipleDetails(principle) {
+            const exampleDiv = document.getElementById('principle-examples');
+            const titleDiv = document.getElementById('example-title');
+            const contentDiv = document.getElementById('example-content');
+            
+            const examples = {
+                clarity: {
+                    title: '🎯 Clarity Example',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+                                <h5 class="font-semibold text-red-800 mb-2">❌ Unclear Prompt:</h5>
+                                <p class="text-red-700 italic">"Tell me about hamburgers."</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+                                <h5 class="font-semibold text-green-800 mb-2">✅ Clear Prompt:</h5>
+                                <p class="text-green-700 italic">"Describe how to make a hamburger in three simple steps."</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-800 mb-2">Why it works:</h5>
+                                <p class="text-blue-700 text-sm">The clear prompt specifies exactly what you want (how to make), the format (steps), and the complexity level (simple).</p>
+                            </div>
+                        </div>
+                    `
+                },
+                specificity: {
+                    title: '🔍 Specificity Example',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+                                <h5 class="font-semibold text-red-800 mb-2">❌ Vague Prompt:</h5>
+                                <p class="text-red-700 italic">"Tell me about profit."</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+                                <h5 class="font-semibold text-green-800 mb-2">✅ Specific Prompt:</h5>
+                                <p class="text-green-700 italic">"Explain the difference between gross profit and net profit in simple terms, and give one short example for each. Keep your answer under 100 words."</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-800 mb-2">Why it works:</h5>
+                                <p class="text-blue-700 text-sm">Specifies the comparison needed, complexity level, format (examples), and length constraint.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                context: {
+                    title: '📐 Context Grounding Example',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+                                <h5 class="font-semibold text-green-800 mb-2">✅ Context-Rich Prompt:</h5>
+                                <p class="text-green-700 italic">"Our company is facing public scrutiny after two senior executives were seen having a personal affair at a concert, and the incident was reported in national media. As part of the PR team, I need help drafting a short public statement that acknowledges the incident, reinforces our commitment to professionalism, and maintains a respectful tone. Keep it under 150 words."</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-800 mb-2">Why it works:</h5>
+                                <p class="text-blue-700 text-sm">Provides complete context about the situation, your role, the audience, and specific requirements for tone and length.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                instructiveness: {
+                    title: '📋 Instructiveness Example',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+                                <h5 class="font-semibold text-green-800 mb-2">✅ Instructive Prompt:</h5>
+                                <p class="text-green-700 italic">"Write a friendly and professional email (around 100 words) to welcome a new employee named Jordan to the marketing team. Make sure to keep the tone warm, include the team's excitement, and mention the upcoming onboarding meeting this Friday."</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-800 mb-2">Why it works:</h5>
+                                <p class="text-blue-700 text-sm">Specifies the format (email), tone (friendly and professional), length (~100 words), and specific elements to include.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                balanced: {
+                    title: '⚖️ Balanced Prompting Example',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
+                                <h5 class="font-semibold text-yellow-800 mb-2">Simple Prompt:</h5>
+                                <p class="text-yellow-700 italic">"Define photosynthesis in simple terms for a 5th grader."</p>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400">
+                                <h5 class="font-semibold text-purple-800 mb-2">Complex Prompt:</h5>
+                                <p class="text-purple-700 italic">"Act as a cybersecurity consultant designing a realistic phishing email simulation for a mid-sized tech company with remote employees. The goal is to test awareness of suspicious links in work-related messages..."</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-800 mb-2">When to use each:</h5>
+                                <p class="text-blue-700 text-sm">Simple prompts for quick answers; complex prompts for sophisticated, multi-faceted tasks requiring specific expertise and detailed outputs.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                chaining: {
+                    title: '🔗 Prompt Chaining Example',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-400">
+                                <h5 class="font-semibold text-indigo-800 mb-2">Step 1:</h5>
+                                <p class="text-indigo-700 italic">"Give me three unconventional locations where I can host a business meeting with executives from a TV production company."</p>
+                            </div>
+                            <div class="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-400">
+                                <h5 class="font-semibold text-indigo-800 mb-2">Step 2:</h5>
+                                <p class="text-indigo-700 italic">"Between the 1st and 2nd option, which location are we less likely to encounter interruptions?"</p>
+                            </div>
+                            <div class="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-400">
+                                <h5 class="font-semibold text-indigo-800 mb-2">Step 3:</h5>
+                                <p class="text-indigo-700 italic">"Let's say I chose option 1. What type of meals are usually served in these types of meetings?"</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-800 mb-2">Why it works:</h5>
+                                <p class="text-blue-700 text-sm">Breaks down a complex planning task into manageable steps, allowing for refinement and specific focus at each stage.</p>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+            
+            titleDiv.textContent = examples[principle].title;
+            contentDiv.innerHTML = examples[principle].content;
+            exampleDiv.style.display = 'block';
+            exampleDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function closePrincipleDetails() {
+            document.getElementById('principle-examples').style.display = 'none';
+        }
+
+        // Exercise checking functionality
+        function checkExercise(exerciseNum) {
+            const textarea = document.getElementById(`exercise${exerciseNum}`);
+            const feedback = document.getElementById(`feedback${exerciseNum}`);
+            const userAnswer = textarea.value.trim().toLowerCase();
+            
+            let isCorrect = false;
+            let feedbackText = '';
+            
+            // Simple keyword checking for demonstration
+            switch(exerciseNum) {
+                case 1:
+                    isCorrect = userAnswer.includes('barista') || userAnswer.includes('coffee') && userAnswer.includes('describe');
+                    feedbackText = isCorrect ? 
+                        '✅ Great! Your prompt includes role assignment and clear instructions.' :
+                        '💡 Try including a role (like "barista") and clear action words like "describe" or "explain".';
+                    break;
+                case 2:
+                    isCorrect = userAnswer.includes('nutritionist') || userAnswer.includes('protein') && userAnswer.includes('five');
+                    feedbackText = isCorrect ? 
+                        '✅ Excellent! You specified the role and exact number needed.' :
+                        '💡 Consider adding a role like "nutritionist" and being specific about the number (five).';
+                    break;
+                case 3:
+                    isCorrect = userAnswer.includes('professor') || userAnswer.includes('computer science') && userAnswer.includes('quantum');
+                    feedbackText = isCorrect ? 
+                        '✅ Perfect! You included role assignment and context.' :
+                        '💡 Try adding a role like "computer science professor" and mention the context clearly.';
+                    break;
+            }
+            
+            feedback.className = `mt-4 p-3 rounded-lg ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`;
+            feedback.textContent = feedbackText;
+            feedback.style.display = 'block';
+            
+            if (isCorrect && !textarea.dataset.completed) {
+                textarea.dataset.completed = 'true';
+                completedExercises++;
+                updateProgress();
+            }
+        }
+
+        function showSolution(exerciseNum) {
+            const feedback = document.getElementById(`feedback${exerciseNum}`);
+            const solutions = {
+                1: 'You are a barista. Describe the process of brewing a cup of coffee in simple terms for a beginner.',
+                2: 'You are a nutritionist. List five plant-based foods that are high in protein.',
+                3: 'You are a computer science professor. Explain quantum computing and its potential uses in computer science.'
+            };
+            
+            feedback.className = 'mt-4 p-3 rounded-lg bg-blue-100 text-blue-800';
+            feedback.innerHTML = `<strong>💡 Solution:</strong><br><em>"${solutions[exerciseNum]}"</em>`;
+            feedback.style.display = 'block';
+        }
+
+        function updateProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const percentage = (completedExercises / totalExercises) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `${completedExercises}/${totalExercises} exercises completed`;
+            
+            if (completedExercises === totalExercises) {
+                setTimeout(() => {
+                    alert('🎉 Congratulations! You\'ve completed all exercises in Chapter 1!');
+                }, 500);
+            }
+        }
+
+        // Add hover effects to principle cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const principleCards = document.querySelectorAll('.principle-card');
+            principleCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

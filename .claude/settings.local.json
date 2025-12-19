@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(curl:*)",
+      "Bash(dir:*)",
+      "Bash(vercel --version:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix Gemini API quota issue - switch to gemini-2.0-flash model\n\n- Updated api/generate-gem.js to use gemini-2.0-flash instead of gemini-2.0-flash-exp\n- Updated api/gemini-audit.js to use gemini-2.0-flash instead of gemini-2.0-flash-exp  \n- Enhanced error logging in gbs-prompts/index.html for better debugging\n- Resolved 429 (Too Many Requests) errors by switching to model with available quota\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(find:*)",
+      "Bash(mkdir:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git pull:*)",
+      "Bash(git checkout:*)",
+      "Bash(done)",
+      "Bash(echo:*)",
+      "Bash(cat:*)",
+      "Bash(node -c:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

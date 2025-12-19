@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - GBS EMEA Learning Hub</title>
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+        content="connect-src 'self' https://script.google.com https://script.googleusercontent.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.googletagmanager.com">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Contact GBS EMEA Learning Hub for support, legal inquiries, privacy questions, or general assistance." />
+    <meta name="keywords" content="contact, support, help, GBS EMEA, legal, privacy" />
+
+    <!-- Cookie Consent Styles -->
+    <link rel="stylesheet" href="../shared/styles/cookie-consent.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #4A4A4A;
+        }
+
+        .google-sans {
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .form-label .required {
+            color: #ef4444;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-help {
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #357ABD;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .info-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .info-card-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .info-card-desc {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #eff6ff;
+            color: #1e40af;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Contact Us</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white py-12 px-4 text-center border-b border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="google-sans text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Have questions about our Terms of Service, Privacy Policy, or need general support? We're here to help.
+            </p>
+        </div>
+    </header>
+
+    <div class="contact-container">
+
+        <!-- Info Cards -->
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="info-card-icon">📧</div>
+                <div class="info-card-title">General Support</div>
+                <div class="info-card-desc">Questions about the platform or need assistance</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon">⚖️</div>
+                <div class="info-card-title">Legal Inquiries</div>
+                <div class="info-card-desc">Terms of Service and legal matters</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon">🔒</div>
+                <div class="info-card-title">Privacy Questions</div>
+                <div class="info-card-desc">Data protection and privacy concerns</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon">🛠️</div>
+                <div class="info-card-title">Technical Issues</div>
+                <div class="info-card-desc">Report bugs or technical problems</div>
+            </div>
+        </div>
+
+        <!-- Info Banner -->
+        <div class="info-banner">
+            <h2 class="text-xl font-bold mb-2">Response Time</h2>
+            <p class="text-sm opacity-90">We typically respond to all inquiries within 2-3 business days. For urgent matters, please mark your inquiry as "Urgent" in the subject line.</p>
+        </div>
+
+        <!-- Contact Form -->
+        <div id="form-container">
+            <div class="contact-card">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Contact Form</h2>
+                <p class="text-gray-600 mb-6">Fill out the form below and we'll get back to you as soon as possible</p>
+
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label class="form-label">Your Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="contact-name" required placeholder="John Doe" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address <span class="required">*</span></label>
+                        <input type="email" class="form-input" id="contact-email" required
+                            placeholder="your.email@company.com" />
+                        <div class="form-help">We'll respond to this email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Inquiry Type <span class="required">*</span></label>
+                        <select class="form-select" id="contact-type" required>
+                            <option value="">Select inquiry type...</option>
+                            <option value="General Support">General Support</option>
+                            <option value="Legal Inquiry">Legal Inquiry</option>
+                            <option value="Privacy Question">Privacy Question</option>
+                            <option value="Technical Issue">Technical Issue</option>
+                            <option value="Content Question">Content Question</option>
+                            <option value="Account Issue">Account Issue</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Subject <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="contact-subject" required
+                            placeholder="Brief description of your inquiry" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message <span class="required">*</span></label>
+                        <textarea class="form-textarea" id="contact-message" required
+                            placeholder="Please provide details about your inquiry..."></textarea>
+                        <div class="form-help">Be as specific as possible to help us assist you better</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Company/Organization (Optional)</label>
+                        <input type="text" class="form-input" id="contact-company"
+                            placeholder="Your company name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Department/Role (Optional)</label>
+                        <input type="text" class="form-input" id="contact-role"
+                            placeholder="e.g., HR, Legal, IT, Employee" />
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="contact-submit-btn">
+                        Send Message →
+                    </button>
+                </form>
+
+                <div id="contact-error" class="error-message">
+                    <div style="font-size: 48px; margin-bottom: 12px;">⚠️</div>
+                    <h3 style="font-size: 20px; font-weight: 700; color: #991b1b; margin-bottom: 8px;">Submission
+                        Failed</h3>
+                    <p id="contact-error-message" style="color: #dc2626;"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success-message">
+            <div style="font-size: 64px; margin-bottom: 16px;">✉️</div>
+            <h3 style="font-size: 24px; font-weight: 700; color: #065f46; margin-bottom: 12px;">Message Sent!</h3>
+            <p style="color: #047857; margin-bottom: 20px;">Thank you for contacting us. We've received your message and will respond within 2-3 business days.</p>
+            <button onclick="resetForm()" class="action-btn btn-primary"
+                style="display: inline-block; padding: 12px 24px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Send
+                Another Message</button>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="contact-card" style="background: #f9fafb; border: 2px solid #e5e7eb;">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Other Ways to Reach Us</h3>
+            <div class="space-y-3 text-gray-700">
+                <p><strong>For urgent technical issues:</strong> Contact your IT helpdesk</p>
+                <p><strong>For HR-related questions:</strong> Reach out to your HR department</p>
+                <p><strong>For legal matters:</strong> Contact your legal department or Data Protection Officer</p>
+            </div>
+        </div>
+
+        <!-- Related Links -->
+        <div class="contact-card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid #bae6fd;">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Related Documents</h3>
+            <div class="flex flex-wrap gap-3">
+                <a href="../privacy-policy/" class="category-badge" style="background: #dbeafe; color: #1e40af; text-decoration: none;">Privacy Policy</a>
+                <a href="../terms-of-service/" class="category-badge" style="background: #dbeafe; color: #1e40af; text-decoration: none;">Terms of Service</a>
+                <a href="../cookie-policy/" class="category-badge" style="background: #dbeafe; color: #1e40af; text-decoration: none;">Cookie Policy</a>
+                <a href="../legal-notice/" class="category-badge" style="background: #dbeafe; color: #1e40af; text-decoration: none;">Legal Notice</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top-btn" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Cookie Consent (BEFORE analytics) -->
+    <script src="../shared/scripts/cookie-consent.js"></script>
+
+    <!-- Analytics (After cookie consent) -->
+    <script src="../shared/scripts/analytics.js" type="module"></script>
+
+    <!-- Hidden iframe for form submission -->
+    <iframe name="submitFrame" style="display:none;"></iframe>
+
+    <script>
+        // TODO: Replace with your Google Apps Script URL
+        // Follow the same setup as submit-content form
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbysLQXOkokA68c_EB34Ht-87iMVkekLd0VckRl7vx8GnVDQ41_rqhFsOSh3vAYbOgvt5A/exec';
+
+        // Create hidden form and submit
+        function createHiddenFormAndSubmit(fieldsObj) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = APPS_SCRIPT_URL;
+            form.target = 'submitFrame';
+            form.style.display = 'none';
+
+            // Add fields
+            for (const key in fieldsObj) {
+                if (!fieldsObj.hasOwnProperty(key)) continue;
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = fieldsObj[key];
+                form.appendChild(input);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+
+            // Remove after short delay
+            setTimeout(() => {
+                if (form && form.parentNode) form.parentNode.removeChild(form);
+            }, 2000);
+        }
+
+        // Show success message
+        function showSuccessMessage() {
+            document.getElementById('contact-form').reset();
+            const submitBtn = document.getElementById('contact-submit-btn');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Send Message →';
+
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('success-message').classList.add('show');
+            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Contact form submit handler
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('contact-submit-btn');
+            const errorDiv = document.getElementById('contact-error');
+            const errorMessage = document.getElementById('contact-error-message');
+
+            errorDiv.classList.remove('show');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending<span class="loading-spinner"></span>';
+
+            const formData = {
+                formType: 'contact',
+                name: document.getElementById('contact-name').value || '',
+                email: document.getElementById('contact-email').value || '',
+                inquiryType: document.getElementById('contact-type').value || '',
+                subject: document.getElementById('contact-subject').value || '',
+                message: document.getElementById('contact-message').value || '',
+                company: document.getElementById('contact-company').value || '',
+                role: document.getElementById('contact-role').value || '',
+                timestamp: new Date().toISOString()
+            };
+
+            // Submit via hidden form to avoid CORS
+            createHiddenFormAndSubmit(formData);
+
+            // Show success UI
+            showSuccessMessage();
+        });
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('success-message').classList.remove('show');
+            document.getElementById('form-container').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+
+</html>

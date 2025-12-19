@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Playground - GBS Learning Hub</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Test and customize your AI prompts in real-time with our interactive prompt playground">
+    <meta name="keywords" content="AI prompts, prompt testing, prompt playground, AI tools">
+    <meta name="author" content="GBS EMEA">
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+
+    <style>
+        .playground-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            min-height: calc(100vh - 300px);
+        }
+
+        .playground-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e5e7eb;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .panel-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+        }
+
+        .code-editor {
+            width: 100%;
+            min-height: 350px;
+            font-family: 'Courier New', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .code-editor:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .variable-container {
+            margin-bottom: 20px;
+        }
+
+        .variable-input {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .variable-input label {
+            min-width: 140px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .variable-input input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .variable-input input:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .preview-box {
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 10px;
+            min-height: 250px;
+            white-space: pre-wrap;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.8;
+            color: #111827;
+            border: 2px solid #e5e7eb;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary-action {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            color: white;
+        }
+
+        .btn-secondary-action {
+            background: white;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+
+        .btn-secondary-action:hover {
+            border-color: #4A90E2;
+            color: #4A90E2;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9ca3af;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .template-selector {
+            margin-bottom: 20px;
+        }
+
+        .template-selector select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .playground-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link" aria-label="Go to Prompts Library">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Prompts</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Playground</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-4 text-gray-900">🎮 Prompt Playground</h1>
+            <p class="text-xl text-gray-600">Test and customize your AI prompts in real-time</p>
+            <p class="text-sm text-gray-500 mt-2">Use {variable_name} syntax to create dynamic templates</p>
+        </header>
+
+        <div class="playground-container">
+            <!-- Left Panel: Editor -->
+            <div class="playground-panel">
+                <div class="panel-header">
+                    <span class="text-3xl">✏️</span>
+                    <h2>Prompt Template</h2>
+                </div>
+
+                <div class="template-selector">
+                    <label for="template-select" class="block text-sm font-semibold mb-2 text-gray-700">
+                        📋 Quick Templates:
+                    </label>
+                    <select id="template-select" onchange="loadTemplate()">
+                        <option value="">-- Select a template --</option>
+                        <option value="email">Professional Email</option>
+                        <option value="job-description">Job Description</option>
+                        <option value="candidate-outreach">Candidate Outreach</option>
+                        <option value="interview-questions">Interview Questions</option>
+                        <option value="rejection-email">Rejection Email</option>
+                        <option value="offer-letter">Offer Letter</option>
+                    </select>
+                </div>
+
+                <textarea id="prompt-editor" class="code-editor" placeholder="Enter your prompt template here...
+
+Example:
+Write a professional email to {candidate_name} about the {role_title} position at {company_name}.
+
+The email should:
+- Be friendly and professional
+- Highlight these key skills: {key_skills}
+- Mention the next steps in the hiring process
+- Include contact information"></textarea>
+
+                <div class="char-count">
+                    <span id="char-count">0</span> characters
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="updatePreview()" class="btn-action btn-primary-action">
+                        <span>🔄</span>
+                        <span>Update Preview</span>
+                    </button>
+                    <button onclick="clearEditor()" class="btn-action btn-secondary-action">
+                        <span>🗑️</span>
+                        <span>Clear</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Variables & Preview -->
+            <div class="playground-panel">
+                <div class="panel-header">
+                    <span class="text-3xl">⚙️</span>
+                    <h2>Variables & Preview</h2>
+                </div>
+
+                <div class="variable-container">
+                    <h3 class="text-sm font-semibold mb-3 text-gray-700">📝 Fill in Variables:</h3>
+                    <div id="variables-container">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🔍</div>
+                            <p>No variables detected.</p>
+                            <p class="text-sm">Use {variable_name} syntax in your template.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-sm font-semibold mb-3 text-gray-700">👁️ Live Preview:</h3>
+                <div id="preview-box" class="preview-box">
+                    Your preview will appear here after you enter a template and update...
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn-action btn-primary-action">
+                        <span>📋</span>
+                        <span>Copy to Clipboard</span>
+                    </button>
+                    <button onclick="downloadPrompt()" class="btn-action btn-secondary-action">
+                        <span>💾</span>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Security Utilities -->
+    <script src="../shared/scripts/utils/security.js"></script>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        let variables = {};
+        const templates = {
+            email: `Write a professional email to {candidate_name} for the {role_title} position at {company_name}.
+
+Key points to cover:
+- Express interest in their background
+- Highlight why they're a good fit
+- Mention next steps: {next_steps}
+- Include contact information
+
+Tone: {tone}`,
+            'job-description': `Create a compelling job description for {role_title} at {company_name}.
+
+Requirements:
+- Years of experience: {experience_years}
+- Required skills: {required_skills}
+- Location: {location}
+- Salary range: {salary_range}
+
+Company benefits: {benefits}`,
+            'candidate-outreach': `Draft an outreach message to {candidate_name} about a {role_title} opportunity.
+
+Personalization:
+- Mention their experience with: {relevant_experience}
+- Company: {company_name}
+- What makes this role unique: {unique_selling_point}
+
+Call to action: {call_to_action}`,
+            'interview-questions': `Generate {number_of_questions} interview questions for a {role_title} position.
+
+Focus areas:
+- Technical skills: {technical_skills}
+- Soft skills: {soft_skills}
+- Experience level: {experience_level}
+
+Question types: behavioral, situational, technical`,
+            'rejection-email': `Write a respectful rejection email for {candidate_name} who applied for {role_title}.
+
+Include:
+- Thank them for their time
+- Provide constructive feedback: {feedback}
+- Encourage future applications
+- Maintain professionalism
+
+Tone: empathetic and respectful`,
+            'offer-letter': `Create an offer letter for {candidate_name} for {role_title} at {company_name}.
+
+Details:
+- Start date: {start_date}
+- Salary: {salary}
+- Benefits: {benefits}
+- Reporting to: {manager_name}
+- Location: {location}
+
+Include standard legal disclaimers.`
+        };
+
+        // Detect variables in template
+        function detectVariables() {
+            const template = document.getElementById('prompt-editor').value;
+            const regex = /\{([^}]+)\}/g;
+            const found = new Set();
+            let match;
+
+            while ((match = regex.exec(template)) !== null) {
+                found.add(match[1]);
+            }
+
+            return Array.from(found);
+        }
+
+        // Render variable inputs
+        function renderVariableInputs() {
+            const detected = detectVariables();
+            const container = document.getElementById('variables-container');
+
+            if (detected.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <p>No variables detected.</p>
+                        <p class="text-sm">Use {variable_name} syntax in your template.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const inputsHTML = detected.map(varName => `
+                <div class="variable-input">
+                    <label for="var-${varName}">{${varName}}:</label>
+                    <input
+                        type="text"
+                        id="var-${varName}"
+                        value="${variables[varName] || ''}"
+                        placeholder="Enter ${varName.replace(/_/g, ' ')}"
+                        oninput="updateVariable('${varName}', this.value)"
+                    >
+                </div>
+            `).join('');
+
+            SecurityUtils.safeSetInnerHTML(container, inputsHTML);
+        }
+
+        // Update variable value
+        function updateVariable(name, value) {
+            variables[name] = SecurityUtils.sanitizeInput(value, {
+                maxLength: 1000,
+                allowHTML: false
+            });
+            updatePreview();
+        }
+
+        // Update preview
+        function updatePreview() {
+            renderVariableInputs();
+
+            let template = document.getElementById('prompt-editor').value;
+
+            // Replace variables with values
+            Object.keys(variables).forEach(varName => {
+                const regex = new RegExp(`\\{${varName}\\}`, 'g');
+                const value = variables[varName] || `{${varName}}`;
+                template = template.replace(regex, value);
+            });
+
+            // Sanitize and display
+            const preview = document.getElementById('preview-box');
+            preview.textContent = template;
+        }
+
+        // Update character count
+        function updateCharCount() {
+            const editor = document.getElementById('prompt-editor');
+            const count = editor.value.length;
+            document.getElementById('char-count').textContent = count.toLocaleString();
+        }
+
+        // Copy to clipboard
+        function copyToClipboard() {
+            const preview = document.getElementById('preview-box').textContent;
+
+            if (!preview || preview === 'Your preview will appear here after you enter a template and update...') {
+                alert('⚠️ Nothing to copy. Please enter a template first.');
+                return;
+            }
+
+            navigator.clipboard.writeText(preview).then(() => {
+                alert('✅ Copied to clipboard!');
+            }).catch(() => {
+                alert('❌ Failed to copy. Please try again.');
+            });
+        }
+
+        // Download prompt
+        function downloadPrompt() {
+            const preview = document.getElementById('preview-box').textContent;
+
+            if (!preview || preview === 'Your preview will appear here after you enter a template and update...') {
+                alert('⚠️ Nothing to download. Please enter a template first.');
+                return;
+            }
+
+            const blob = new Blob([preview], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `prompt-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('✅ Prompt downloaded!');
+        }
+
+        // Clear editor
+        function clearEditor() {
+            if (confirm('Are you sure you want to clear the editor?')) {
+                document.getElementById('prompt-editor').value = '';
+                document.getElementById('template-select').value = '';
+                variables = {};
+                updateCharCount();
+                updatePreview();
+            }
+        }
+
+        // Load template
+        function loadTemplate() {
+            const select = document.getElementById('template-select');
+            const templateKey = select.value;
+
+            if (!templateKey) return;
+
+            const editor = document.getElementById('prompt-editor');
+            editor.value = templates[templateKey];
+            updateCharCount();
+            updatePreview();
+        }
+
+        // Auto-update on typing (debounced)
+        let typingTimer;
+        document.getElementById('prompt-editor').addEventListener('input', () => {
+            updateCharCount();
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                if (typeof SecurityUtils !== 'undefined') {
+                    const debounced = SecurityUtils.debounce(updatePreview, 300);
+                    debounced();
+                } else {
+                    updatePreview();
+                }
+            }, 500);
+        });
+
+        // Initial render
+        updateCharCount();
+        updatePreview();
+    </script>
+
+</body>
+</html>

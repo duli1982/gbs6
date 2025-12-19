@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Key Prompt Engineering Principles - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master prompt engineering with 30 essential principles for Google Gemini AI. Quick reference guide with practical examples and best practices.">
+    <meta name="keywords"
+        content="prompt engineering, Gemini AI, AI prompts, prompt principles, Google AI, prompt techniques, AI best practices">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Custom styles for principles page */
+        .principle-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid transparent;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-left-color: #667eea;
+        }
+
+        .principle-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .quick-nav {
+            position: sticky;
+            top: 2rem;
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .nav-item:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            margin: 2rem 0 1rem 0;
+            text-align: center;
+        }
+
+        .tip-highlight {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .avoid-highlight {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .quick-nav {
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .quick-nav {
+                display: none;
+            }
+
+            .principle-card {
+                break-inside: avoid;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-key"></span>
+                            <span>30 Key Principles</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-2xl mb-6">
+                <span class="text-2xl">🔑</span>
+            </div>
+            <h1 class="google-sans text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                30 Key Prompt Engineering Principles
+            </h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                A comprehensive quick-reference guide for mastering prompt engineering with Google Gemini AI.
+                These principles will help you create more effective, reliable, and powerful prompts.
+            </p>
+            <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg max-w-2xl mx-auto">
+                <p class="text-sm text-blue-800">
+                    💡 <strong>Best used after completing the</strong>
+                    <a href="../prompt-engineering-course/index.html"
+                        class="text-blue-600 hover:text-blue-800 underline">prompt engineering mini-course</a>.
+                    If you haven't taken it yet, we recommend starting there first.
+                </p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+
+            <!-- Quick Navigation Sidebar -->
+            <div class="lg:col-span-1">
+                <nav class="quick-nav">
+                    <h3 class="font-bold text-gray-900 mb-4">Quick Navigation</h3>
+                    <div class="space-y-1">
+                        <a href="#fundamentals" class="nav-item">Fundamentals (1-10)</a>
+                        <a href="#structure" class="nav-item">Structure & Format (11-20)</a>
+                        <a href="#advanced" class="nav-item">Advanced Techniques (21-30)</a>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <h4 class="font-semibold text-gray-700 mb-2">Related Resources</h4>
+                        <a href="../prompt-engineering-course/index.html" class="nav-item">Mini-Course</a>
+                        <a href="../mega-prompt-template/index.html" class="nav-item">Mega-Prompt Template</a>
+                        <a href="../gemini-gems/index.html" class="nav-item">Gemini Gems</a>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+
+                <!-- Fundamentals Section -->
+                <section id="fundamentals">
+                    <div class="category-header">
+                        <h2 class="text-2xl font-bold">Fundamentals (1-10)</h2>
+                        <p class="mt-2 opacity-90">Core principles for effective prompt construction</p>
+                    </div>
+
+                    <!-- Principle 1 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">1</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Be Direct and Clear</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Avoid polite language like "please" or "if you don't mind." Get straight to the task
+                                    with clear, direct instructions.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Good Example:</p>
+                                    <p class="text-sm text-gray-700 mb-3">"Explain the causes of climate change in
+                                        simple terms."</p>
+                                    <p class="font-semibold text-red-700 mb-2">❌ Avoid:</p>
+                                    <p class="text-sm text-gray-700">"Could you please explain climate change if you
+                                        don't mind?"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 2 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">2</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Specify the Audience and Role</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Assign Gemini a specific role to focus the response on your target audience.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"You are a financial advisor for small business
+                                        owners. Explain a savings strategy for someone starting a business."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 3 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">3</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Break Down Complex Tasks</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Use sequential, interactive prompts for clarity when dealing with complex topics.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Explain machine learning basics. Follow up with
+                                        examples of its real-world applications."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 4 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">4</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Use Affirmative Directives</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Phrase instructions positively using "Do" rather than "Don't."
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Good:</p>
+                                    <p class="text-sm text-gray-700 mb-3">"Provide an engaging introduction to AI
+                                        ethics."</p>
+                                    <p class="font-semibold text-red-700 mb-2">❌ Avoid:</p>
+                                    <p class="text-sm text-gray-700">"Don't make it overly technical."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 5 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">5</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Utilize Instruction Tokens for
+                                    Structure</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Organize prompts with clear indicators for clarity and advanced outputs.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Role:</strong> You are a historian explaining ancient Greek
+                                        philosophy.<br>
+                                        <strong>Task:</strong> Summarize the key ideas of Socrates, Plato, and Aristotle
+                                        in under 500 words.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Continue with principles 6-10 -->
+                    <!-- Principle 6 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">6</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Include Few-Shot Examples</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Provide examples of the desired format or tone to guide Gemini's response.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Write an email proposal. Example: 'Dear [Name], I
+                                        am reaching out regarding...' Now, write a similar email for a marketing
+                                        proposal."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 7 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">7</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Control Length Explicitly</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Specify the desired response length to get appropriately sized outputs.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Examples:</p>
+                                    <p class="text-sm text-gray-700">
+                                        • "Summarize this article in 3 bullet points."<br>
+                                        • "Write a 300-word description of Gemini's capabilities."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 8 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">8</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Use Instructional Keywords</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Include phrases like 'Your task is' or 'You MUST' to emphasize requirements.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Your task is to analyze this data and explain its
+                                        key insights."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 9 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">9</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Encourage Iterative Clarification</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Allow Gemini to ask clarifying questions if the task is ambiguous.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"From now on, ask questions to gather all details
+                                        before generating outputs."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 10 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">10</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Leverage Chain-of-Thought (CoT)</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Ask Gemini to think step by step for logical, well-reasoned outputs.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Explain how photosynthesis works, step by step."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Structure & Format Section -->
+                <section id="structure">
+                    <div class="category-header">
+                        <h2 class="text-2xl font-bold">Structure & Format (11-20)</h2>
+                        <p class="mt-2 opacity-90">Organizing prompts for maximum clarity and effectiveness</p>
+                    </div>
+
+                    <!-- Principle 11 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">11</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Use Indicators to Focus Context</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Separate instructions, examples, and input with clear indicators.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Task:</strong> Analyze this text for its historical accuracy.<br>
+                                        <strong>Text:</strong> The Declaration of Independence was signed in 1776.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 12 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">12</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Combine Techniques</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Pair Chain-of-Thought with Few-Shot examples for complex tasks.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Think step by step to solve this logic puzzle.
+                                        Here's an example of how to approach it..."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 13 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">13</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Ask for Unbiased Responses</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Ensure outputs are free of stereotypes or bias by explicitly requesting neutrality.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Ensure your explanation is unbiased and factual."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 14 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">14</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Optimize Token Usage</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Keep prompts concise while providing enough context for accurate responses.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Summarize this 1,000-word document in 5
+                                        sentences."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 15 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">15</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Add Output Primers</h3>
+                                <p class="text-gray-700 mb-3">
+                                    End prompts with the start of the desired output to guide the response format.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"A successful marketing strategy includes..."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 16 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">16</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Pretend Like You're Tipping Your AI
+                                </h3>
+                                <p class="text-gray-700 mb-3">
+                                    Add motivational language to encourage better performance (experimental technique).
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"I'm going to tip $20 for a better solution!"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 17 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">17</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Specify Style and Format</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Define tone, structure, or style requirements explicitly.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Examples:</p>
+                                    <p class="text-sm text-gray-700">
+                                        • "Write a humorous blog post about technology."<br>
+                                        • "Format your response as a Q&A dialogue."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 18 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">18</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Combine Chain-of-Thought with Few-Shot
+                                    Examples</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Guide reasoning with a logical step-by-step approach, using examples for context.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Think step by step: Explain the causes of
+                                        inflation. Example: 'Rising demand can outpace supply...' Now explain other
+                                        causes."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 19 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">19</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Use Follow-Up Questions for Refinement
+                                </h3>
+                                <p class="text-gray-700 mb-3">
+                                    Refine initial outputs with targeted follow-up questions.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Great summary. Can you simplify this explanation
+                                        for a high school audience?"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 20 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">20</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Leverage Multi-Modal Inputs</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Add images, documents, or other media to improve your prompt when necessary.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Write an imaginary background story for this cat
+                                        shown in photo. Come up with a reason why it might be hiding there and why its
+                                        expression is that way."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Advanced Techniques Section -->
+                <section id="advanced">
+                    <div class="category-header">
+                        <h2 class="text-2xl font-bold">Advanced Techniques (21-30)</h2>
+                        <p class="mt-2 opacity-90">Professional-level strategies for complex prompt engineering</p>
+                    </div>
+
+                    <!-- Principle 21 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">21</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Create Iterative Sequences</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Use a sequence of prompts to guide detailed, comprehensive outputs.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">
+                                        Step 1: List key AI advancements.<br>
+                                        Step 2: Explain their impact on healthcare.<br>
+                                        Step 3: Suggest ethical considerations.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 22 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">22</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Use Output Primers</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Prime Gemini by including the beginning of the desired response.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"A good business plan includes three elements: 1)
+                                        Market analysis..."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 23 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">23</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Experiment and Refine</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Test and improve your prompts iteratively based on Gemini's outputs.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Example:</p>
+                                    <p class="text-sm text-gray-700">"Adjust this summary to include more technical
+                                        details."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 24 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">24</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Format Options</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Gemini can structure responses in various formats to match your requirements.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Format Examples:</p>
+                                    <div class="text-sm text-gray-700 space-y-1">
+                                        <p>• <strong>Bullet Points:</strong> "List five benefits of remote work in
+                                            bullet points."</p>
+                                        <p>• <strong>Numbered List:</strong> "Outline the steps to set up a small
+                                            business in numbered format."</p>
+                                        <p>• <strong>Table:</strong> "Compare electric vehicles and traditional vehicles
+                                            in a table format."</p>
+                                        <p>• <strong>Q&A:</strong> "Answer FAQs about renewable energy in conversational
+                                            tone."</p>
+                                        <p>• <strong>Email Template:</strong> "Write a formal email template for
+                                            resigning from a job."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 25 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">25</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Tone Adjustments</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Tone adjustments play a pivotal role in effective communication with Gemini.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Tone Options:</p>
+                                    <div class="text-sm text-gray-700 grid grid-cols-2 gap-2">
+                                        <p>• Friendly</p>
+                                        <p>• Professional</p>
+                                        <p>• Enthusiastic</p>
+                                        <p>• Curious</p>
+                                        <p>• Neutral</p>
+                                        <p>• Formal</p>
+                                    </div>
+                                    <div class="tip-highlight mt-3">
+                                        <p class="text-sm"><strong>💡 Tip:</strong> If the tone isn't suitable, prompt:
+                                            "Rewrite this with a more formal tone for an executive meeting."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 26 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">26</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Think Step-by-Step</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Gemini thrives on detailed subtasks and step-by-step reasoning.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Best Practices:</p>
+                                    <div class="text-sm text-gray-700">
+                                        <p>• Use "List subtasks separately for complex tasks" in your prompt</p>
+                                        <p>• Put "Think step-by-step" request in a separate prompt section</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 27 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">27</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Style Customization</h3>
+                                <p class="text-gray-700 mb-3">
+                                    The tone and approach Gemini takes are essential for aligning with user
+                                    expectations.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Style Options:</p>
+                                    <div class="text-sm text-gray-700 grid grid-cols-2 gap-2 mb-3">
+                                        <p>• Friendly</p>
+                                        <p>• Informative</p>
+                                        <p>• Energetic</p>
+                                        <p>• Curious</p>
+                                        <p>• Professional</p>
+                                        <p>• Academic</p>
+                                    </div>
+                                    <p class="font-semibold text-green-700 mb-2">Example Prompt:</p>
+                                    <p class="text-sm text-gray-700">"You are a helpful and friendly guide. Explain the
+                                        benefits of solar energy as if you're encouraging a beginner to adopt renewable
+                                        energy solutions."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 28 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">28</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Avoid Hallucinations</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Use specific phrases to prevent Gemini from generating inaccurate information.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Anti-Hallucination Prompt:</p>
+                                    <p class="text-sm text-gray-700">"If you don't know the answer, simply say 'I don't
+                                        know.'"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 29 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">29</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Avoid Additional Information</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Get clean, focused outputs without extra explanations when needed.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Clean Output Prompt:</p>
+                                    <p class="text-sm text-gray-700">"Your output must only be the requested data for
+                                        the specified task, without any additional information or explanation of what
+                                        you did."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principle 30 -->
+                    <div class="principle-card bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="principle-number">30</div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Use Few-Shot Prompting to Guide
+                                    Behavior</h3>
+                                <p class="text-gray-700 mb-3">
+                                    Provide specific examples to effectively guide Gemini's behavior, especially for
+                                    complex categorization tasks.
+                                </p>
+                                <div class="example-box">
+                                    <p class="font-semibold text-green-700 mb-2">✅ Few-Shot Structure:</p>
+                                    <div class="text-sm text-gray-700">
+                                        <p class="mb-2">1. Clearly define the task</p>
+                                        <p class="mb-2">2. Include one or more examples showing input-output behavior
+                                        </p>
+                                        <p class="mb-3">3. Present the new input for processing</p>
+
+                                        <p class="font-semibold mb-2">Example Prompt:</p>
+                                        <div class="bg-gray-50 p-3 rounded border-l-4 border-blue-400">
+                                            <p class="mb-2">"Your task is to analyze customer feedback and categorize
+                                                issues. Use these categories: UI/UX, Performance, Feature Request,
+                                                Integration, Pricing, and Other.</p>
+
+                                            <p class="mb-2"><strong>Example 1:</strong></p>
+                                            <p class="mb-1"><em>Input:</em> The new dashboard is a mess! It takes
+                                                forever to load.</p>
+                                            <p class="mb-3"><em>Output:</em> Category: UI/UX, Performance | Sentiment:
+                                                Negative | Priority: High</p>
+
+                                            <p class="mb-2"><strong>Example 2:</strong></p>
+                                            <p class="mb-1"><em>Input:</em> Love the Slack integration! Pricing seems
+                                                steep though.</p>
+                                            <p class="mb-3"><em>Output:</em> Category: Integration, Pricing | Sentiment:
+                                                Mixed | Priority: Medium</p>
+
+                                            <p><strong>Now analyze this feedback:</strong> [INSERT FEEDBACK]"</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary and Next Steps -->
+                <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 mt-12 border border-purple-200">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">🎯 Quick Reference Summary</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <h3 class="font-bold text-purple-800 mb-2">Fundamentals (1-10)</h3>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Be direct and clear</li>
+                                <li>• Specify audience and role</li>
+                                <li>• Break down complex tasks</li>
+                                <li>• Use affirmative directives</li>
+                                <li>• Leverage Chain-of-Thought</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-blue-800 mb-2">Structure (11-20)</h3>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Use clear indicators</li>
+                                <li>• Combine techniques</li>
+                                <li>• Control length explicitly</li>
+                                <li>• Add output primers</li>
+                                <li>• Specify style and format</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-green-800 mb-2">Advanced (21-30)</h3>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Create iterative sequences</li>
+                                <li>• Experiment and refine</li>
+                                <li>• Use format options</li>
+                                <li>• Avoid hallucinations</li>
+                                <li>• Master few-shot prompting</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-purple-200">
+                        <h3 class="font-bold text-gray-900 mb-3">🚀 Next Steps</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a href="../mega-prompt-template/index.html"
+                                class="flex items-center p-3 bg-white rounded-lg border border-purple-200 hover:border-purple-400 transition-colors">
+                                <span class="text-2xl mr-3">📝</span>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Mega-Prompt Template</p>
+                                    <p class="text-sm text-gray-600">Apply these principles systematically</p>
+                                </div>
+                            </a>
+                            <a href="../gemini-gems/index.html"
+                                class="flex items-center p-3 bg-white rounded-lg border border-purple-200 hover:border-purple-400 transition-colors">
+                                <span class="text-2xl mr-3">💎</span>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Create Gemini Gems</p>
+                                    <p class="text-sm text-gray-600">Build custom AI assistants</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Update active navigation item on scroll
+        window.addEventListener('scroll', function () {
+            const sections = ['fundamentals', 'structure', 'advanced'];
+            const navItems = document.querySelectorAll('.nav-item[href^="#"]');
+
+            let currentSection = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 100) {
+                        currentSection = section;
+                    }
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${currentSection}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

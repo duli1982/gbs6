@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Prompt Engineering Changes the Way We Think | GBS AI Initiative</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #4A4A4A;
+        }
+
+        .accent-text {
+            color: #4A90E2;
+        }
+
+        .main-heading {
+            color: #111827;
+        }
+
+        .content-card {
+            background-color: #FFFFFF;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Progress Indicators */
+        .progress-container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e5e7eb 0%, #4A90E2 50%, #10b981 100%);
+            z-index: 1;
+        }
+
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .progress-step.vague {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .progress-step.learning {
+            background: #fffbeb;
+            color: #f59e0b;
+        }
+
+        .progress-step.specific {
+            background: #f0fdf4;
+            color: #22c55e;
+        }
+
+        .progress-step:hover {
+            transform: scale(1.1);
+        }
+
+        /* Brain Visualization */
+        .brain-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .brain-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .thought-bubble {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            padding: 8px 12px;
+            font-size: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .thought-bubble.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .thought-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 20px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            transform: rotate(45deg);
+        }
+
+        /* Expandable Sections */
+        .expandable-section {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .expandable-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .expandable-header:hover {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .expandable-content.expanded {
+            max-height: 1000px;
+        }
+
+        .expandable-inner {
+            padding: 1.5rem;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Before/After Comparison */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .before-after-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .before-card {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        }
+
+        .after-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .vs-divider {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4A90E2 0%, #3b82f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Animated Transitions */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Hover Effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Interactive Elements */
+        .interactive-demo {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #60a5fa;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .interactive-demo:hover::before {
+            left: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .vs-divider {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                margin: 0 auto;
+            }
+
+            .progress-step {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .brain-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link" aria-label="Go to GBS Prompts">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>GBS Prompts</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>How Prompt Engineering Changes Thinking</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========== MAIN CONTENT =========== -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+
+        <!-- Hero Section -->
+        <section class="text-center mb-20 fade-in">
+            <div class="brain-container mb-8">
+                <svg class="brain-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brain outline -->
+                    <path
+                        d="M100 20 C140 20, 170 50, 170 90 C170 130, 140 160, 100 160 C60 160, 30 130, 30 90 C30 50, 60 20, 100 20 Z"
+                        fill="#4A90E2" opacity="0.1" stroke="#4A90E2" stroke-width="2" />
+                    <!-- Neural connections -->
+                    <circle cx="70" cy="70" r="3" fill="#4A90E2" opacity="0.6">
+                        <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="130" cy="70" r="3" fill="#4A90E2" opacity="0.6">
+                        <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="100" cy="100" r="3" fill="#4A90E2" opacity="0.6">
+                        <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite" />
+                    </circle>
+                    <line x1="70" y1="70" x2="130" y2="70" stroke="#4A90E2" stroke-width="1" opacity="0.4" />
+                    <line x1="70" y1="70" x2="100" y2="100" stroke="#4A90E2" stroke-width="1" opacity="0.4" />
+                    <line x1="130" y1="70" x2="100" y2="100" stroke="#4A90E2" stroke-width="1" opacity="0.4" />
+                </svg>
+                <div class="thought-bubble active" style="top: -10px; left: 50%; transform: translateX(-50%);">
+                    Specific thinking
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight main-heading mb-6">
+                How Prompt Engineering Changes the Way We <span class="accent-text">Think</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed">
+                Prompt engineering isn't just about getting better AI responses—it's rewiring our brains to think with
+                unprecedented <strong>specificity</strong> and <strong>clarity</strong>. No more vague requests. No more
+                assumptions. Every detail matters.
+            </p>
+        </section>
+
+        <!-- Progress Journey -->
+        <section class="max-w-5xl mx-auto mb-20">
+            <h2 class="text-3xl font-bold text-center main-heading mb-8">The Thinking Transformation Journey</h2>
+            <div class="progress-container">
+                <div class="progress-line"></div>
+                <div class="progress-step vague" data-step="1">
+                    <span>😵</span>
+                </div>
+                <div class="progress-step learning" data-step="2">
+                    <span>🤔</span>
+                </div>
+                <div class="progress-step specific" data-step="3">
+                    <span>🎯</span>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-8">
+                <div class="text-center">
+                    <h3 class="font-bold text-lg text-red-600 mb-2">Vague Thinking</h3>
+                    <p class="text-gray-600">"Make this better" or "Help me with this task"</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="font-bold text-lg text-orange-600 mb-2">Learning Phase</h3>
+                    <p class="text-gray-600">Starting to add context and constraints</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="font-bold text-lg text-green-600 mb-2">Specific Thinking</h3>
+                    <p class="text-gray-600">Crystal clear instructions with all details</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Core Shift Section -->
+        <section class="max-w-6xl mx-auto mb-20">
+            <div class="interactive-demo">
+                <h2 class="text-3xl font-bold main-heading mb-6 text-center">The Fundamental Shift: Specificity as a
+                    Superpower</h2>
+                <p class="text-xl text-gray-700 text-center mb-8">
+                    Prompt engineering forces us to eliminate ambiguity. Every word counts. Every detail matters. This
+                    precision becomes a mental habit that transforms how we communicate, delegate, and solve problems.
+                </p>
+
+                <!-- Before/After Comparison -->
+                <div class="comparison-container">
+                    <div class="before-card slide-in-left">
+                        <h3 class="font-bold text-red-600 mb-3">❌ Old Way of Thinking</h3>
+                        <div class="space-y-2 text-sm">
+                            <p><strong>Request:</strong> "Write me an email"</p>
+                            <p><strong>Delegation:</strong> "Make this report better"</p>
+                            <p><strong>Problem:</strong> "This isn't working"</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-red-50 rounded-lg border border-red-200">
+                            <p class="text-xs text-red-700"><strong>Result:</strong> Confusion, back-and-forth, wasted
+                                time</p>
+                        </div>
+                    </div>
+
+                    <div class="vs-divider">VS</div>
+
+                    <div class="after-card slide-in-right">
+                        <h3 class="font-bold text-green-600 mb-3">✅ Prompt-Trained Thinking</h3>
+                        <div class="space-y-2 text-sm">
+                            <p><strong>Request:</strong> "Write a professional follow-up email to [candidate name] for
+                                [role], mentioning [specific interview points], with a warm but formal tone, 150 words
+                                max"</p>
+                            <p><strong>Delegation:</strong> "Restructure this report to highlight ROI metrics first, add
+                                visual charts for sections 2-4, and include 3 actionable recommendations"</p>
+                            <p><strong>Problem:</strong> "The Boolean search returns 500+ results but only 5% match our
+                                requirements. Need to refine for [specific criteria]"</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                            <p class="text-xs text-green-700"><strong>Result:</strong> Clear execution, first-time
+                                success, efficiency</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expandable Deep Dives -->
+        <section class="max-w-5xl mx-auto mb-20">
+            <h2 class="text-3xl font-bold text-center main-heading mb-8">Deep Dive: How Specificity Transforms Different
+                Areas</h2>
+
+            <!-- Work Applications -->
+            <div class="expandable-section hover-lift">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <div>
+                        <h3 class="text-xl font-bold main-heading">💼 At Work: From Vague to Precise</h3>
+                        <p class="text-gray-600 text-sm mt-1">See how prompt engineering transforms workplace
+                            communication</p>
+                    </div>
+                    <div class="expand-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="expandable-content">
+                    <div class="expandable-inner">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-red-600 mb-3">Before: Vague Delegation</h4>
+                                <div class="bg-red-50 p-4 rounded-lg mb-4">
+                                    <p class="text-sm italic">"Can you improve our candidate outreach? The response
+                                        rates aren't great."</p>
+                                </div>
+                                <p class="text-sm text-gray-600">Result: Team member spends hours guessing what
+                                    "improve" means, tries random changes, no clear success metrics.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-600 mb-3">After: Prompt-Trained Delegation</h4>
+                                <div class="bg-green-50 p-4 rounded-lg mb-4">
+                                    <p class="text-sm italic">"Analyze our last 50 candidate outreach emails. Identify
+                                        the 3 highest-performing subject lines and message structures. Create 5 new
+                                        templates using these patterns, targeting software engineers with 3-5 years
+                                        experience. Include personalization fields for [company], [role], and [specific
+                                        skill]. Test with A/B split over 2 weeks, measuring open rates and response
+                                        rates."</p>
+                                </div>
+                                <p class="text-sm text-gray-600">Result: Clear action plan, measurable outcomes,
+                                    specific deliverables, timeline defined.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem-Solving -->
+            <div class="expandable-section hover-lift">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <div>
+                        <h3 class="text-xl font-bold main-heading">🧠 Problem-Solving: Breaking Down Complexity</h3>
+                        <p class="text-gray-600 text-sm mt-1">How specific thinking transforms problem-solving
+                            approaches</p>
+                    </div>
+                    <div class="expand-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="expandable-content">
+                    <div class="expandable-inner">
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold text-lg mb-3">The Prompt Engineering Problem-Solving Framework:
+                                </h4>
+                                <div class="grid md:grid-cols-4 gap-4">
+                                    <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                        <div class="text-2xl mb-2">🎯</div>
+                                        <h5 class="font-bold text-sm">Define Precisely</h5>
+                                        <p class="text-xs text-gray-600 mt-1">What exactly is the problem? Include
+                                            constraints, context, and desired outcome.</p>
+                                    </div>
+                                    <div class="bg-purple-50 p-4 rounded-lg text-center">
+                                        <div class="text-2xl mb-2">📊</div>
+                                        <h5 class="font-bold text-sm">Specify Context</h5>
+                                        <p class="text-xs text-gray-600 mt-1">What information is relevant? What are the
+                                            limitations and requirements?</p>
+                                    </div>
+                                    <div class="bg-green-50 p-4 rounded-lg text-center">
+                                        <div class="text-2xl mb-2">⚡</div>
+                                        <h5 class="font-bold text-sm">Request Format</h5>
+                                        <p class="text-xs text-gray-600 mt-1">How should the solution be structured?
+                                            What format works best?</p>
+                                    </div>
+                                    <div class="bg-orange-50 p-4 rounded-lg text-center">
+                                        <div class="text-2xl mb-2">✅</div>
+                                        <h5 class="font-bold text-sm">Success Criteria</h5>
+                                        <p class="text-xs text-gray-600 mt-1">How will you know it worked? What metrics
+                                            matter?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Life -->
+            <div class="expandable-section hover-lift">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <div>
+                        <h3 class="text-xl font-bold main-heading">🏠 Personal Life: Intentional Decision-Making</h3>
+                        <p class="text-gray-600 text-sm mt-1">How prompt thinking improves personal decisions and
+                            self-reflection</p>
+                    </div>
+                    <div class="expand-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="expandable-content">
+                    <div class="expandable-inner">
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg">
+                                <h4 class="font-bold text-lg mb-4">Self-Reflection Prompts You'll Start Using:</h4>
+                                <div class="space-y-3">
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <p class="text-sm"><strong>Instead of:</strong> "I should be healthier"</p>
+                                        <p class="text-sm text-green-700"><strong>Prompt-trained:</strong> "List 3
+                                            specific, measurable health changes I can implement this week, considering
+                                            my current schedule constraints and energy levels. Include success metrics
+                                            and potential obstacles."</p>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <p class="text-sm"><strong>Instead of:</strong> "I need to decide about this job
+                                            offer"</p>
+                                        <p class="text-sm text-green-700"><strong>Prompt-trained:</strong> "Analyze this
+                                            job decision using these criteria: salary impact (30%), career growth (25%),
+                                            work-life balance (25%), company culture (20%). Rate each option 1-10,
+                                            provide reasoning, and recommend next steps."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="text-center mt-24 max-w-4xl mx-auto">
+            <div class="content-card p-8 md:p-12">
+                <h2 class="text-3xl font-bold main-heading mb-6">The Real Superpower: <span class="accent-text">Clarity
+                        of Thought</span></h2>
+                <p class="text-xl text-gray-600 leading-relaxed mb-6">
+                    Prompt engineering is training your brain to eliminate ambiguity and think with laser precision.
+                    It's not just about AI—it's about becoming someone who asks better questions, gives clearer
+                    instructions, and solves problems more effectively.
+                </p>
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
+                    <p class="text-lg font-semibold text-gray-800">
+                        Every time you write a specific prompt, you're practicing the skill of clear thinking. And that
+                        skill transforms everything.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        function toggleExpand(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.expand-icon');
+
+            content.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
+        }
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+
+</html>

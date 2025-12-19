@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Implementation & Scaling - Advanced Module 4</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .change-framework {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .leadership-strategy {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .resistance-pattern {
+            background: linear-gradient(135deg, #fef7f0 0%, #fed7aa 100%);
+            border: 2px solid #f97316;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .scaling-model {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .implementation-phase {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .implementation-phase:hover {
+            border-color: #22c55e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../advanced.html" class="breadcrumb-link" aria-label="Go to Advanced Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Advanced Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Team Implementation & Scaling</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 4/5</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-gray-700">Module 4 of 5</div>
+        <div class="text-xs text-gray-500">20 min read</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">👥</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Team Implementation & Scaling</h1>
+            <p class="text-lg text-gray-600">Lead successful AI adoption across teams, manage change resistance, and scale AI initiatives organization-wide</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Introduction -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Leading AI Transformation at Scale</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Technical implementation is only half the battle. Successful AI adoption requires skilled change leadership, strategic communication, and systematic scaling approaches. This module equips you with frameworks to lead AI transformation across your organization.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200 text-center">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <h3 class="font-bold text-green-800">Change Leadership</h3>
+                        <p class="text-green-700 text-sm">Guide teams through AI adoption with confidence</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200 text-center">
+                        <div class="text-2xl mb-2">📈</div>
+                        <h3 class="font-bold text-purple-800">Scaling Strategy</h3>
+                        <p class="text-purple-700 text-sm">Systematic approach to organization-wide rollout</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-center">
+                        <div class="text-2xl mb-2">🤝</div>
+                        <h3 class="font-bold text-blue-800">Stakeholder Alignment</h3>
+                        <p class="text-blue-700 text-sm">Build consensus and maintain momentum</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Change Management Framework -->
+            <section class="content-section mb-8">
+                <div class="change-framework">
+                    <h2 class="google-sans text-2xl font-bold text-green-800 mb-4">The ADAPT Change Management Framework</h2>
+                    <p class="text-green-700 mb-6">
+                        Use this proven framework to successfully lead AI adoption across your organization:
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="implementation-phase">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-3">🎯</span> A - Assess Readiness & Resistance
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Understand your organization's current state and potential barriers to change.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Readiness Indicators:</strong><br>
+                                    • Leadership commitment level<br>
+                                    • Technical infrastructure maturity<br>
+                                    • Team skill levels and gaps<br>
+                                    • Previous change success rate
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Resistance Sources:</strong><br>
+                                    • Fear of job displacement<br>
+                                    • Comfort with current processes<br>
+                                    • Lack of AI understanding<br>
+                                    • Resource constraints
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="implementation-phase">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center">
+                                <span class="text-xl mr-3">💬</span> D - Develop Communication Strategy
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">Create clear, consistent messaging that addresses concerns and builds excitement.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Key Messages:</strong><br>
+                                    • AI enhances human capabilities<br>
+                                    • Focus on efficiency, not replacement<br>
+                                    • Continuous learning and support<br>
+                                    • Clear benefits and outcomes
+                                </div>
+                                <div class="bg-gray-50 rounded p-3 text-xs">
+                                    <strong>Communication Channels:</strong><br>
+                                    • Town halls and team meetings<br>
+                                    • Email updates and newsletters<br>
+                                    • Training sessions and workshops<br>
+                                    • Success story sharing
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function completeModule() {
+            let completedModules = JSON.parse(localStorage.getItem('advanced-path-progress') || '[]');
+            if (!completedModules.includes(4)) {
+                completedModules.push(4);
+                localStorage.setItem('advanced-path-progress', JSON.stringify(completedModules));
+            }
+            showCompletionModal();
+        }
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToNextModule() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../advanced.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-next-step {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">👥</div>
+                <h2 class="modal-title google-sans">Module 4 Completed!</h2>
+                <p class="modal-subtitle">Team implementation strategies mastered</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You now have the skills to lead team implementation and drive organizational AI adoption.
+                </p>
+                
+                <div class="modal-next-step">
+                    <strong>👑 Next Up:</strong> Module 5 - Final certification and leadership mastery
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
+                    <div class="text-purple-800 font-semibold text-sm mb-1">✨ Leadership Skills Gained:</div>
+                    <ul class="text-purple-700 text-sm space-y-1 text-left">
+                        <li>• Team implementation strategies</li>
+                        <li>• Change management</li>
+                        <li>• Organizational transformation</li>
+                        <li>• Leadership communication</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="continueToNextModule()" class="modal-btn modal-btn-primary">
+                    Continue to Module 5 →
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-secondary">
+                    Review Module
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Advanced Module 4 Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'advanced-4',
+                passingScore: 80,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What does the 'A' in the ADAPT Change Management Framework stand for?",
+                        options: [
+                            "Accelerate Adoption & Action",
+                            "Assess Readiness & Resistance",
+                            "Allocate Resources & Assets",
+                            "Announce Plans & Priorities"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The 'A' in ADAPT stands for 'Assess Readiness & Resistance.' This crucial first step helps you understand your organization's current state, readiness indicators (like leadership commitment and technical infrastructure), and potential barriers to change (like fear of job displacement or resource constraints).",
+                        hint: "Review the ADAPT Change Management Framework section."
+                    },
+                    {
+                        question: "What is the most effective response strategy when team members express fear that 'AI will replace my job'?",
+                        options: [
+                            "Tell them their concerns are unfounded and to embrace change",
+                            "Share specific examples of AI augmentation, highlight new opportunities, and provide retraining programs",
+                            "Avoid discussing the topic to prevent further anxiety",
+                            "Promise that no jobs will be eliminated under any circumstances"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The most effective approach is to address fears directly with evidence and support. Share specific examples showing AI augmentation vs replacement, highlight new skills and opportunities AI creates, provide retraining and upskilling programs, and show career advancement paths with AI skills. This combines transparency with concrete support.",
+                        hint: "Look at the resistance pattern about job displacement fears."
+                    },
+                    {
+                        question: "In the Pilot → Department → Organization scaling model, what is the recommended duration for Phase 1 (Pilot)?",
+                        options: [
+                            "1-2 days with quick testing",
+                            "2-4 weeks with 5-10 early adopters",
+                            "3-6 months with full department participation",
+                            "1 year with organization-wide rollout"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Phase 1 (Pilot) should run for 2-4 weeks with 5-10 early adopters, focusing on a single use case with intensive support and rapid iteration. This allows you to gather meaningful feedback and refine your approach before broader rollout, while keeping the pilot focused and manageable.",
+                        hint: "Review the AI Scaling Models section and the three phases."
+                    },
+                    {
+                        question: "What is the key advantage of using a Wave-Based Rollout approach?",
+                        options: [
+                            "Everyone gets access to AI tools at the same time",
+                            "It allows systematic adoption starting with champions and progressively including more resistant users",
+                            "It requires less planning than other rollout methods",
+                            "It eliminates the need for training and support"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Wave-Based Rollout's key advantage is systematic, strategic phasing: Wave 1 targets Champions & Early Adopters, Wave 2 includes Willing Participants, Wave 3 brings in Neutral Users, and Wave 4 addresses Skeptics & Laggards. This builds momentum and allows success stories from early waves to influence later adopters.",
+                        hint: "Consider how the four waves build upon each other strategically."
+                    },
+                    {
+                        question: "According to the 90-Day Implementation Plan, what are the primary activities during Days 31-60 (Pilot Launch)?",
+                        options: [
+                            "Assess organizational readiness and identify champions",
+                            "Launch pilot with champions, provide intensive support, gather feedback, and document success stories",
+                            "Roll out to broader team and measure overall success",
+                            "Develop long-term strategy and secure executive buy-in"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Days 31-60 (Pilot Launch) focuses on launching the pilot with champions, providing intensive support, gathering feedback and iterating, documenting success stories, and preparing for scaling. This phase is about execution, learning, and building evidence of success before broader deployment.",
+                        hint: "Look at the 90-Day Implementation Plan's middle phase activities."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 80) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        completeBtn.title = 'Great job! Click to complete the module';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>
+         <!-- Resistance Management -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Managing Resistance Patterns</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="resistance-pattern">
+                        <h3 class="font-bold text-orange-800 mb-2">😰 "AI Will Replace My Job"</h3>
+                        <p class="text-orange-700 text-sm mb-3">The most common fear that requires careful, evidence-based addressing.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Response Strategy:</strong><br>
+                            • Share specific examples of AI augmentation vs replacement<br>
+                            • Highlight new skills and opportunities AI creates<br>
+                            • Provide retraining and upskilling programs<br>
+                            • Show career advancement paths with AI skills
+                        </div>
+                    </div>
+                    
+                    <div class="resistance-pattern">
+                        <h3 class="font-bold text-orange-800 mb-2">🤔 "This is Too Complicated"</h3>
+                        <p class="text-orange-700 text-sm mb-3">Perceived complexity can create adoption barriers.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Response Strategy:</strong><br>
+                            • Start with simple, high-impact use cases<br>
+                            • Provide hands-on training and support<br>
+                            • Create easy-to-follow guides and templates<br>
+                            • Celebrate small wins and progress
+                        </div>
+                    </div>
+                    
+                    <div class="resistance-pattern">
+                        <h3 class="font-bold text-orange-800 mb-2">⏰ "We Don't Have Time for This"</h3>
+                        <p class="text-orange-700 text-sm mb-3">Resource constraints and competing priorities.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Response Strategy:</strong><br>
+                            • Demonstrate quick wins and immediate value<br>
+                            • Integrate AI training into existing workflows<br>
+                            • Provide time-saving tools from day one<br>
+                            • Show long-term ROI and efficiency gains
+                        </div>
+                    </div>
+                    
+                    <div class="resistance-pattern">
+                        <h3 class="font-bold text-orange-800 mb-2">🔒 "AI Isn't Secure/Reliable"</h3>
+                        <p class="text-orange-700 text-sm mb-3">Security and reliability concerns about AI systems.</p>
+                        <div class="bg-white rounded p-3 text-xs">
+                            <strong>Response Strategy:</strong><br>
+                            • Provide transparent security documentation<br>
+                            • Share compliance certifications and audits<br>
+                            • Implement gradual rollout with safety nets<br>
+                            • Establish clear governance and oversight
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scaling Models -->
+            <section class="content-section mb-8">
+                <div class="scaling-model">
+                    <h2 class="google-sans text-xl font-bold text-blue-800 mb-4">🚀 AI Scaling Models</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h3 class="font-bold text-blue-800 mb-2">📊 Pilot → Department → Organization</h3>
+                            <p class="text-blue-700 text-sm mb-3">Traditional scaling approach with controlled expansion.</p>
+                            <div class="grid md:grid-cols-3 gap-3 text-xs">
+                                <div class="bg-blue-50 rounded p-2">
+                                    <strong>Phase 1: Pilot (2-4 weeks)</strong><br>
+                                    • 5-10 early adopters<br>
+                                    • Single use case<br>
+                                    • Intensive support<br>
+                                    • Rapid iteration
+                                </div>
+                                <div class="bg-blue-50 rounded p-2">
+                                    <strong>Phase 2: Department (1-3 months)</strong><br>
+                                    • Full department rollout<br>
+                                    • Multiple use cases<br>
+                                    • Training programs<br>
+                                    • Success metrics
+                                </div>
+                                <div class="bg-blue-50 rounded p-2">
+                                    <strong>Phase 3: Organization (3-12 months)</strong><br>
+                                    • Cross-department expansion<br>
+                                    • Standardized processes<br>
+                                    • Center of excellence<br>
+                                    • Continuous improvement
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-blue-200">
+                            <h3 class="font-bold text-blue-800 mb-2">🌊 Wave-Based Rollout</h3>
+                            <p class="text-blue-700 text-sm mb-3">Systematic waves of adoption across different user groups.</p>
+                            <div class="grid md:grid-cols-4 gap-2 text-xs">
+                                <div class="bg-blue-50 rounded p-2 text-center">
+                                    <strong>Wave 1</strong><br>
+                                    Champions & Early Adopters
+                                </div>
+                                <div class="bg-blue-50 rounded p-2 text-center">
+                                    <strong>Wave 2</strong><br>
+                                    Willing Participants
+                                </div>
+                                <div class="bg-blue-50 rounded p-2 text-center">
+                                    <strong>Wave 3</strong><br>
+                                    Neutral Users
+                                </div>
+                                <div class="bg-blue-50 rounded p-2 text-center">
+                                    <strong>Wave 4</strong><br>
+                                    Skeptics & Laggards
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leadership Toolkit -->
+            <section class="content-section mb-8">
+                <div class="leadership-strategy">
+                    <h2 class="google-sans text-xl font-bold text-purple-800 mb-4">🎯 Leadership Toolkit</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h3 class="font-bold text-purple-800 mb-3">📋 Implementation Checklist</h3>
+                            <div class="space-y-2 text-sm">
+                                <label class="flex items-center text-purple-700">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Executive sponsorship secured</span>
+                                </label>
+                                <label class="flex items-center text-purple-700">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Change champions identified</span>
+                                </label>
+                                <label class="flex items-center text-purple-700">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Communication plan developed</span>
+                                </label>
+                                <label class="flex items-center text-purple-700">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Training programs designed</span>
+                                </label>
+                                <label class="flex items-center text-purple-700">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Success metrics defined</span>
+                                </label>
+                                <label class="flex items-center text-purple-700">
+                                    <input type="checkbox" class="mr-2">
+                                    <span>Support systems established</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h3 class="font-bold text-purple-800 mb-3">📊 Success Metrics Dashboard</h3>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-purple-700">Adoption Rate:</span>
+                                    <span class="font-semibold">87%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-purple-700">User Satisfaction:</span>
+                                    <span class="font-semibold">4.6/5</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-purple-700">Time Savings:</span>
+                                    <span class="font-semibold">3.2 hrs/day</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-purple-700">ROI:</span>
+                                    <span class="font-semibold">340%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-purple-700">Support Tickets:</span>
+                                    <span class="font-semibold">↓65%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Plan -->
+            <section class="content-section">
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                    <h2 class="google-sans text-xl font-bold text-green-800 mb-4">🗺️ Your 90-Day Implementation Plan</h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h4 class="font-semibold text-green-800 mb-2">Days 1-30: Foundation</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• Assess organizational readiness</li>
+                                <li>• Identify and recruit champions</li>
+                                <li>• Develop communication strategy</li>
+                                <li>• Design pilot program</li>
+                                <li>• Create training materials</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h4 class="font-semibold text-green-800 mb-2">Days 31-60: Pilot Launch</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• Launch pilot with champions</li>
+                                <li>• Provide intensive support</li>
+                                <li>• Gather feedback and iterate</li>
+                                <li>• Document success stories</li>
+                                <li>• Prepare for scaling</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <h4 class="font-semibold text-green-800 mb-2">Days 61-90: Scale & Optimize</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• Roll out to broader team</li>
+                                <li>• Implement feedback loops</li>
+                                <li>• Measure and report success</li>
+                                <li>• Plan next phase expansion</li>
+                                <li>• Establish ongoing support</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <p class="text-green-600 text-sm">
+                            <strong>Next:</strong> Module 5 will prepare you for the future of AI and help you build innovation frameworks for continuous evolution.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../advanced.html"
+               class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:from-purple-600 hover:to-purple-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Advanced Path
+            </a>
+            
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the quiz first">
+                Complete Module 4 →
+            </button>
+        </div>
+    </div>

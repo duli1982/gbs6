@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Gem Details - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags (will be populated dynamically) -->
+    <meta name="description" id="meta-description" content="Explore this Gemini Gem for recruitment automation">
+    <meta name="keywords" content="Gemini Gems, AI prompts, recruitment automation">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) { top: -20px; left: -30px; animation-delay: 0.2s; }
+        .constellation-dot:nth-child(3) { top: -15px; right: -25px; animation-delay: 0.4s; }
+        .constellation-dot:nth-child(4) { bottom: -20px; left: -20px; animation-delay: 0.6s; }
+        .constellation-dot:nth-child(5) { bottom: -15px; right: -30px; animation-delay: 0.8s; }
+        .constellation-dot:nth-child(6) { top: 10px; left: -40px; animation-delay: 1s; }
+        .constellation-dot:nth-child(7) { top: 15px; right: -35px; animation-delay: 1.2s; }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 { top: -10px; left: -25px; width: 50px; transform: rotate(25deg); animation-delay: 0.5s; }
+        .line-2 { bottom: -10px; right: -25px; width: 45px; transform: rotate(-30deg); animation-delay: 1s; }
+        .line-3 { top: 20px; left: -35px; width: 40px; transform: rotate(60deg); animation-delay: 1.5s; }
+
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .particle-2 { top: 30%; right: 15%; animation-delay: 1s; }
+        .particle-3 { bottom: 40%; left: 20%; animation-delay: 2s; }
+        .particle-4 { bottom: 20%; right: 25%; animation-delay: 3s; }
+        .particle-5 { top: 60%; left: 5%; animation-delay: 4s; }
+        .particle-6 { top: 15%; right: 8%; animation-delay: 5s; }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .setup-steps {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .setup-step {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .loading-state, .error-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .spinner {
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        @keyframes line-pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.6; } }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-10px) rotate(90deg); opacity: 0.8; }
+            50% { transform: translateY(-5px) rotate(180deg); opacity: 0.4; }
+            75% { transform: translateY(-15px) rotate(270deg); opacity: 0.9; }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .gemini-diamond { font-size: 3rem; }
+            .content-section { padding: 1.5rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">💎</span>
+                            <span>Gems Collection</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page" id="breadcrumb-current">
+                            <span id="breadcrumb-icon">💎</span>
+                            <span id="breadcrumb-title">Loading...</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="loading-state">
+        <div class="spinner"></div>
+        <p class="mt-4 text-lg font-semibold text-purple-600">Loading gem details...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="error-state" class="error-state" style="display: none;">
+        <h3 class="text-2xl font-bold text-red-600 mb-2">Gem Not Found</h3>
+        <p class="text-gray-600 mb-4">The requested gem could not be found.</p>
+        <a href="index.html" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+            Back to Gems Collection
+        </a>
+    </div>
+
+    <!-- Main Content (Hidden until loaded) -->
+    <div id="main-content" class="container mx-auto px-4 py-8 md:py-12 lg:py-20" style="display: none;">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <div class="floating-particle particle-1">💎</div>
+            <div class="floating-particle particle-2">✨</div>
+            <div class="floating-particle particle-3">🔮</div>
+            <div class="floating-particle particle-4">💫</div>
+            <div class="floating-particle particle-5">⭐</div>
+            <div class="floating-particle particle-6">🌟</div>
+
+            <div class="gemini-constellation">
+                <div class="gemini-diamond" id="header-icon">💎</div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 id="gem-title" class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900"></h1>
+            <p id="gem-description" class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed"></p>
+        </header>
+
+        <main>
+
+            <!-- Overview Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Gem Overview</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                        <p id="gem-overview" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                        <ul id="perfect-for-list" class="space-y-2 text-gray-700"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 Key Features</h2>
+                <div id="features-grid" class="feature-grid"></div>
+            </div>
+
+            <!-- Setup Instructions -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Setup Instructions</h2>
+                <div id="setup-steps" class="setup-steps"></div>
+            </div>
+
+            <!-- Full Prompt -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+                <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+                <div class="prompt-container">
+                    <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                    <div id="full-prompt"></div>
+                </div>
+            </div>
+
+            <!-- Usage Examples (if available) -->
+            <div id="usage-examples-section" class="content-section" style="display: none;">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💡 Usage Examples</h2>
+                <div id="usage-examples" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center mt-8">
+                <a href="index.html"
+                    class="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    ← Back to All Gems
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        const GEMS_JSON_URL = 'gems.json';
+
+        async function loadGemDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gemId = urlParams.get('id');
+
+            if (!gemId) {
+                showError();
+                return;
+            }
+
+            try {
+                const response = await fetch(GEMS_JSON_URL);
+                if (!response.ok) throw new Error('Failed to fetch gems');
+
+                const data = await response.json();
+                const gem = data.gems.find(g => g.id === gemId);
+
+                if (!gem) {
+                    showError();
+                    return;
+                }
+
+                renderGem(gem);
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading gem:', error);
+                showError();
+            }
+        }
+
+        function renderGem(gem) {
+            // Update page title and meta
+            document.getElementById('page-title').textContent = `${gem.title} - Gemini Mastery Guide`;
+            document.getElementById('meta-description').setAttribute('content', gem.description);
+
+            // Update breadcrumb
+            document.getElementById('breadcrumb-icon').textContent = gem.icon;
+            document.getElementById('breadcrumb-title').textContent = gem.title;
+
+            // Update header
+            document.getElementById('header-icon').textContent = gem.icon;
+            document.getElementById('gem-title').textContent = gem.title;
+            document.getElementById('gem-description').textContent = gem.description;
+
+            // Overview
+            document.getElementById('gem-overview').textContent = gem.overview;
+
+            // Perfect For list
+            const perfectForList = document.getElementById('perfect-for-list');
+            perfectForList.innerHTML = gem.perfectFor.map(item =>
+                `<li class="flex items-center"><span class="text-purple-500 mr-2">✓</span>${item}</li>`
+            ).join('');
+
+            // Key Features
+            const featuresGrid = document.getElementById('features-grid');
+            featuresGrid.innerHTML = gem.keyFeatures.map(feature => `
+                <div class="feature-card">
+                    <div class="feature-icon">${feature.icon}</div>
+                    <h3 class="font-bold text-gray-900 mb-2">${feature.title}</h3>
+                    <p class="text-gray-600 text-sm">${feature.description}</p>
+                </div>
+            `).join('');
+
+            // Setup Steps
+            const setupSteps = document.getElementById('setup-steps');
+            setupSteps.innerHTML = gem.setupSteps.map((step, index) => `
+                <div class="setup-step">
+                    <h3 class="font-bold text-gray-900 mb-2">Step ${index + 1}</h3>
+                    <p class="text-gray-700">${step}</p>
+                </div>
+            `).join('');
+
+            // Full Prompt
+            document.getElementById('full-prompt').textContent = gem.fullPrompt;
+
+            // Usage Examples (if available)
+            if (gem.usageExamples && gem.usageExamples.length > 0) {
+                document.getElementById('usage-examples-section').style.display = 'block';
+                const usageExamples = document.getElementById('usage-examples');
+                usageExamples.innerHTML = gem.usageExamples.map(example => `
+                    <div class="bg-gradient-to-br from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="font-bold text-purple-900 mb-3">${example.title}</h3>
+                        <p class="text-purple-800 text-sm mb-3">${example.description}</p>
+                        <p class="text-purple-700 text-xs"><strong>Gem Output:</strong> ${example.output}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function showError() {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('error-state').style.display = 'block';
+        }
+
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                button.textContent = 'Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = 'Copy Full Prompt';
+                    button.style.background = '#667eea';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy prompt. Please select and copy manually.');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadGemDetails);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Workshops - GBS EMEA Learning Hub</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../shared/scripts/analytics.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #4A4A4A;
+            scroll-behavior: smooth;
+        }
+        
+        .workshop-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .workshop-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-btn {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+        }
+        
+        .workshop-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 9999px;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.3), 0 2px 4px -2px rgba(236, 72, 153, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Registration Modal Styles */
+        .registration-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-in-out;
+            backdrop-filter: blur(4px);
+        }
+
+        .registration-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registration-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            animation: slideUp 0.4s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .registration-modal-header {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .registration-modal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .registration-modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .registration-modal-body {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .registration-modal-body p {
+            color: #4A4A4A;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .registration-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .registration-modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-button {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .registration-modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+            .registration-modal-header {
+                padding: 1.5rem;
+            }
+            .registration-modal-body {
+                padding: 1.5rem;
+            }
+            .registration-modal-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Interactive Workshops</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+
+        <!-- Header Section -->
+        <header class="text-center mb-8 md:mb-12 px-4">
+            <h1 class="google-sans text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Interactive Workshops</h1>
+            <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Join live sessions with experts to enhance your skills. Seats are limited!</p>
+        </header>
+
+        <!-- Workshops Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12 px-4">
+            
+            <!-- AI-Powered Sourcing Masterclass -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-orange-100">
+                        🤖
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600 font-medium">January 15, 2026</span>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Powered Sourcing Masterclass</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Dive deep into advanced sourcing techniques using AI tools to find top-tier candidates faster.</p>
+
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Time:</strong> 10:00 AM EST</div>
+                    <div><strong>Instructor:</strong> Will be revealed</div>
+                </div>
+
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+            <!-- Prompt Engineering for Recruiters -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-yellow-100">
+                        ✨
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600 font-medium">February 23, 2026</span>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Prompt Engineering for Recruiters</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Learn the CREATE framework and craft powerful prompts that deliver precise results for any GBS task.</p>
+
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Time:</strong> 1:00 PM EST</div>
+                    <div><strong>Instructor:</strong> Will be revealed</div>
+                </div>
+
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+            <!-- Leadership in the AI Era -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-blue-100">
+                        👔
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600 font-medium">March 5, 2026</span>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Leadership in the AI Era</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">A strategic workshop for GBS leaders on implementing AI, managing change, and driving team adoption.</p>
+
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Time:</strong> 11:00 AM EST</div>
+                    <div><strong>Instructor:</strong> Will be revealed</div>
+                </div>
+
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+            <!-- Automating Your Workflow -->
+            <div class="workshop-card bg-white p-6 rounded-xl shadow-sm">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="workshop-icon bg-purple-100">
+                        🔧
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600 font-medium">April 13, 2026</span>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+                <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Automating Your Workflow</h3>
+                <p class="text-gray-600 text-sm mb-4 leading-relaxed">Identify and automate repetitive tasks in your daily workflow to save time and boost productivity.</p>
+
+                <div class="space-y-2 text-xs text-gray-500 mb-6">
+                    <div><strong>Time:</strong> 2:00 PM EST</div>
+                    <div><strong>Instructor:</strong> Will be revealed</div>
+                </div>
+
+                <button class="register-btn w-full py-3 px-4 text-white font-semibold rounded-lg">
+                    Register Now
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Additional Information Section -->
+        <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Workshop Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">What to Expect</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Interactive live sessions with industry experts
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Hands-on exercises and real-world examples
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Q&A sessions and peer networking
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Downloadable resources and templates
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Registration Details</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Limited seats available (first-come, first-served)
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            All workshops are free for GBS employees
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Calendar invites sent upon registration
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Recordings available for registered attendees
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="registration-modal">
+        <div class="registration-modal-content">
+            <button class="registration-modal-close" onclick="closeRegistrationModal()" aria-label="Close modal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="registration-modal-header">
+                <div class="registration-modal-icon">🎓</div>
+                <h3 class="registration-modal-title">Workshop Registration</h3>
+            </div>
+            <div class="registration-modal-body">
+                <p class="google-sans text-lg font-semibold text-gray-900 mb-2">Coming Soon!</p>
+                <p>Workshop registration is currently being finalized. Please contact your manager for early access and priority enrollment.</p>
+                <p class="text-sm text-gray-500 mb-4">We'll notify you as soon as registration opens!</p>
+                <button class="modal-button" onclick="closeRegistrationModal()">Got It</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+
+    <!-- Load workshops from JSON -->
+    <script src="load-workshops.js"></script>
+
+    <script>
+        // Registration Modal Functions
+        function openRegistrationModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRegistrationModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('registrationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRegistrationModal();
+            }
+        });
+
+        // Close modal when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('registrationModal');
+                if (modal.classList.contains('active')) {
+                    closeRegistrationModal();
+                }
+            }
+        });
+
+        // Add click handlers for register buttons
+        document.querySelectorAll('.register-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                openRegistrationModal();
+            });
+        });
+    </script>
+
+</body>
+</html>

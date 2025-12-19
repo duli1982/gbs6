@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Managing Gemini's Output Length and Format - Gemini Prompt Engineering</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master output control techniques for Gemini AI. Learn to precisely manage response length, format, and structure for optimal results.">
+    <meta name="keywords"
+        content="output control, response formatting, length management, structured prompts, Gemini formatting">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/fonts.css">
+    <link rel="stylesheet" href="../../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../../shared/buttons.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Chapter 5 specific styling */
+        .chapter-hero {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.1) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.05) 0%, transparent 70%);
+            animation: gentle-rotate 30s linear infinite;
+        }
+
+        @keyframes gentle-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .control-lab {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .lab-header {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .lab-content {
+            padding: 2rem;
+        }
+
+        .technique-tabs {
+            display: flex;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+
+        .technique-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .technique-tab:hover {
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+        }
+
+        .technique-tab.active {
+            color: #16a34a;
+            background: white;
+            border-bottom-color: #22c55e;
+        }
+
+        .technique-content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .technique-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .format-controller {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .control-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .control-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .slider-control {
+            margin: 1rem 0;
+        }
+
+        .control-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .control-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #22c55e;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #22c55e;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .format-preview {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+            min-height: 120px;
+        }
+
+        .example-showcase {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .showcase-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .example-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-card.explicit {
+            border-left: 4px solid #ef4444;
+        }
+
+        .example-card.flexible {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .example-card.structured {
+            border-left: 4px solid #22c55e;
+        }
+
+        .example-card.iterative {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .exercise-studio {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .exercise-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .exercise-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .exercise-card:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        .exercise-card.active {
+            border-color: #10b981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+        }
+
+        .format-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .format-input:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .analysis-display {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .format-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .progress-step.completed {
+            color: #059669;
+        }
+
+        .progress-step::before {
+            content: "○";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-step.completed::before {
+            content: "✓";
+            color: #10b981;
+        }
+
+        @media (max-width: 768px) {
+            .control-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .technique-tabs {
+                flex-wrap: wrap;
+            }
+
+            .technique-tab {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .exercise-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Prompt Engineering Course">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Prompt Engineering Course</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Chapter 5</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Chapter Hero -->
+        <header class="chapter-hero relative z-10">
+            <div class="text-center">
+                <div class="text-6xl mb-4">📏</div>
+                <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    Chapter 5: Managing Gemini's Output Length and Format
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Master precise control over Gemini's responses. Learn advanced techniques to manage length,
+                    structure, and format for optimal results in any context.
+                </p>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-step completed">Introduction</div>
+                <div class="progress-step completed">Output Types</div>
+                <div class="progress-step completed">Context Mastery</div>
+                <div class="progress-step completed">Enhancement</div>
+                <div class="progress-step completed">Formatting</div>
+                <div class="progress-step">Advanced</div>
+            </div>
+
+            <!-- Learning Objectives -->
+            <section class="mb-12">
+                <div class="control-section">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎯 What You'll Master</h2>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• <strong>Explicit control:</strong> Direct length and format specifications</li>
+                        <li>• <strong>Flexible constraints:</strong> Range-based length management</li>
+                        <li>• <strong>Structured formatting:</strong> Lists, tables, and custom layouts</li>
+                        <li>• <strong>Iterative refinement:</strong> Follow-up prompts for precision</li>
+                        <li>• <strong>System-level settings:</strong> Persistent formatting preferences</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 5.1: Interactive Control Techniques Lab -->
+            <section class="mb-16">
+                <div class="control-lab">
+                    <div class="lab-header">
+                        <h2 class="text-2xl font-bold">🔬 Output Control Techniques Lab</h2>
+                        <p class="mt-2 opacity-90">Explore 5 powerful techniques for managing Gemini's output</p>
+                    </div>
+
+                    <div class="technique-tabs">
+                        <button class="technique-tab active" onclick="showTechnique('explicit')">
+                            📐 Explicit Control
+                        </button>
+                        <button class="technique-tab" onclick="showTechnique('flexible')">
+                            🎯 Flexible Ranges
+                        </button>
+                        <button class="technique-tab" onclick="showTechnique('structured')">
+                            📋 Structured Lists
+                        </button>
+                        <button class="technique-tab" onclick="showTechnique('iterative')">
+                            🔄 Follow-up Prompts
+                        </button>
+                        <button class="technique-tab" onclick="showTechnique('system')">
+                            ⚙️ System Settings
+                        </button>
+                    </div>
+
+                    <!-- Explicit Control -->
+                    <div id="explicit" class="technique-content active">
+                        <h3 class="text-xl font-bold text-green-600 mb-4">📐 Explicit Control Technique</h3>
+                        <p class="text-gray-700 mb-4">
+                            The most direct approach: specify exact requirements for length, format, and structure.
+                        </p>
+
+                        <div class="example-grid">
+                            <div class="example-card explicit">
+                                <h4 class="font-bold text-red-600 mb-2">❌ Vague Request</h4>
+                                <div class="format-preview">
+                                    "Summarize this article about data privacy."
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    No length or format guidance - unpredictable results
+                                </p>
+                            </div>
+
+                            <div class="example-card explicit">
+                                <h4 class="font-bold text-green-600 mb-2">✅ Explicit Control</h4>
+                                <div class="format-preview">
+                                    "You are a professor summarizing a lecture. Summarize this article about data
+                                    privacy in exactly three sentences. Use formal academic tone."
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Clear role, exact length, specific tone requirements
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400 mt-6">
+                            <h4 class="font-bold text-green-800 mb-2">💡 Key Elements:</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• <strong>Role assignment:</strong> "You are a [specific expert]..."</li>
+                                <li>• <strong>Exact length:</strong> "In exactly [X] sentences/words..."</li>
+                                <li>• <strong>Format specification:</strong> "Structure as [specific format]..."</li>
+                                <li>• <strong>Tone guidance:</strong> "Use [specific tone/style]..."</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Flexible Ranges -->
+                    <div id="flexible" class="technique-content">
+                        <h3 class="text-xl font-bold text-green-600 mb-4">🎯 Flexible Range Technique</h3>
+                        <p class="text-gray-700 mb-4">
+                            Allow natural flow while maintaining control by specifying ranges rather than exact
+                            requirements.
+                        </p>
+
+                        <div class="example-grid">
+                            <div class="example-card flexible">
+                                <h4 class="font-bold text-orange-600 mb-2">📱 Social Media Example</h4>
+                                <div class="format-preview">
+                                    "You are a social media content creator. Draft a tweet about sustainability that
+                                    reads like a haiku. Keep it under 280 characters."
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Creative constraint with character limit flexibility
+                                </p>
+                            </div>
+
+                            <div class="example-card flexible">
+                                <h4 class="font-bold text-orange-600 mb-2">📝 Article Example</h4>
+                                <div class="format-preview">
+                                    "Write a blog post introduction about remote work. Aim for around 150-200 words.
+                                    Make it engaging and conversational."
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Word range allows natural expression within bounds
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400 mt-6">
+                            <h4 class="font-bold text-orange-800 mb-2">🎯 When to Use Ranges:</h4>
+                            <ul class="text-orange-700 text-sm space-y-1">
+                                <li>• <strong>Creative content:</strong> Allow natural expression flow</li>
+                                <li>• <strong>Conversational tone:</strong> Avoid rigid, mechanical responses</li>
+                                <li>• <strong>Complex topics:</strong> Give room for necessary explanations</li>
+                                <li>• <strong>Platform constraints:</strong> Social media character limits</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Structured Lists -->
+                    <div id="structured" class="technique-content">
+                        <h3 class="text-xl font-bold text-green-600 mb-4">📋 Structured List Technique</h3>
+                        <p class="text-gray-700 mb-4">
+                            Use lists and templates to enforce consistent formatting and control response length
+                            naturally.
+                        </p>
+
+                        <div class="example-card structured">
+                            <h4 class="font-bold text-green-600 mb-2">📋 Template Example</h4>
+                            <div class="format-preview">
+                                You are a nutritionist. List five high-sugar processed foods using this format:
+
+                                1. [Food Name] - [Sugar Content]
+                                - Health Risk: [Specific risk]
+                                - Alternative: [Healthier option]
+
+                                2. [Food Name] - [Sugar Content]
+                                - Health Risk: [Specific risk]
+                                - Alternative: [Healthier option]
+
+                                [Continue for all 5 items]
+                            </div>
+                            <p class="text-sm text-gray-600">
+                                Template ensures consistent structure and controlled length
+                            </p>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400 mt-6">
+                            <h4 class="font-bold text-green-800 mb-2">📋 List Advantages:</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• <strong>Natural constraints:</strong> Fixed structure limits length</li>
+                                <li>• <strong>Consistent formatting:</strong> Predictable output structure</li>
+                                <li>• <strong>Easy scanning:</strong> Information is well-organized</li>
+                                <li>• <strong>Template reuse:</strong> Apply same format to different topics</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Iterative Prompts -->
+                    <div id="iterative" class="technique-content">
+                        <h3 class="text-xl font-bold text-green-600 mb-4">🔄 Follow-up Prompt Technique</h3>
+                        <p class="text-gray-700 mb-4">
+                            Refine length and format through iterative prompts without starting over.
+                        </p>
+
+                        <div class="example-grid">
+                            <div class="example-card iterative">
+                                <h4 class="font-bold text-blue-600 mb-2">1️⃣ Initial Prompt</h4>
+                                <div class="format-preview">
+                                    "Explain the causes of soil erosion."
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Broad request - may get lengthy response
+                                </p>
+                            </div>
+
+                            <div class="example-card iterative">
+                                <h4 class="font-bold text-blue-600 mb-2">2️⃣ Follow-up Options</h4>
+                                <div class="format-preview">
+                                    Option A: "Summarize your explanation in one sentence."
+
+                                    Option B: "Expand with specific examples and case studies."
+
+                                    Option C: "Reformat as a bulleted list."
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Adjust length and format based on initial response
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 mt-6">
+                            <h4 class="font-bold text-blue-800 mb-2">🔄 Iterative Benefits:</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• <strong>Preserve context:</strong> Build on previous response</li>
+                                <li>• <strong>Fine-tune results:</strong> Adjust without restarting</li>
+                                <li>• <strong>Explore variations:</strong> Try different formats</li>
+                                <li>• <strong>Efficient refinement:</strong> Quick adjustments</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- System Settings -->
+                    <div id="system" class="technique-content">
+                        <h3 class="text-xl font-bold text-green-600 mb-4">⚙️ System-Level Settings</h3>
+                        <p class="text-gray-700 mb-4">
+                            Set persistent preferences to avoid repeating formatting instructions in every session.
+                        </p>
+
+                        <div class="example-card">
+                            <h4 class="font-bold text-purple-600 mb-2">⚙️ Custom Preset Example</h4>
+                            <div class="format-preview">
+                                Custom Instructions for Gemini:
+
+                                • Use simple language and avoid jargon
+                                • Keep responses concise (under 200 words unless specified)
+                                • Structure answers with clear headings when appropriate
+                                • Include practical examples when explaining concepts
+                                • Use bullet points for lists and key information
+                                • Maintain a professional but friendly tone
+                                • When providing code, include brief explanations
+                            </div>
+                            <p class="text-sm text-gray-600">
+                                These preferences apply to all future conversations
+                            </p>
+                        </div>
+
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400 mt-6">
+                            <h4 class="font-bold text-purple-800 mb-2">⚙️ System Setting Tips:</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• <strong>Broad preferences:</strong> Apply across most interactions</li>
+                                <li>• <strong>Save time:</strong> Avoid repeating common instructions</li>
+                                <li>• <strong>Consistent style:</strong> Maintain uniform output quality</li>
+                                <li>• <strong>Override when needed:</strong> Specific prompts take precedence</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5.2: Interactive Format Controller -->
+            <section class="mb-16">
+                <div class="format-controller">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">
+                        🎛️ Interactive Format Controller
+                    </h2>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Experiment with different length and format controls to see how they affect prompt structure.
+                    </p>
+
+                    <div class="control-panel">
+                        <div class="control-section">
+                            <h3 class="font-bold text-gray-900 mb-4">Length Controls</h3>
+
+                            <div class="slider-control">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Response Length: <span id="length-value">Medium</span>
+                                </label>
+                                <input type="range" min="1" max="5" value="3" class="control-slider" id="length-slider"
+                                    onchange="updateFormatPreview()">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>Brief</span>
+                                    <span>Short</span>
+                                    <span>Medium</span>
+                                    <span>Long</span>
+                                    <span>Detailed</span>
+                                </div>
+                            </div>
+
+                            <div class="slider-control">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Structure Level: <span id="structure-value">Moderate</span>
+                                </label>
+                                <input type="range" min="1" max="4" value="2" class="control-slider"
+                                    id="structure-slider" onchange="updateFormatPreview()">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>Free-form</span>
+                                    <span>Moderate</span>
+                                    <span>Structured</span>
+                                    <span>Rigid</span>
+                                </div>
+                            </div>
+
+                            <div class="slider-control">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Formality: <span id="tone-value">Professional</span>
+                                </label>
+                                <input type="range" min="1" max="4" value="3" class="control-slider" id="tone-slider"
+                                    onchange="updateFormatPreview()">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>Casual</span>
+                                    <span>Friendly</span>
+                                    <span>Professional</span>
+                                    <span>Academic</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-section">
+                            <h3 class="font-bold text-gray-900 mb-4">Format Options</h3>
+
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="include-role" class="mr-2"
+                                        onchange="updateFormatPreview()" checked>
+                                    <span class="text-sm">Include role assignment</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="include-examples" class="mr-2"
+                                        onchange="updateFormatPreview()">
+                                    <span class="text-sm">Request examples</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="include-constraints" class="mr-2"
+                                        onchange="updateFormatPreview()" checked>
+                                    <span class="text-sm">Add length constraints</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="include-format" class="mr-2"
+                                        onchange="updateFormatPreview()">
+                                    <span class="text-sm">Specify output format</span>
+                                </label>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Topic:
+                                </label>
+                                <select id="topic-select" class="w-full p-2 border border-gray-300 rounded"
+                                    onchange="updateFormatPreview()">
+                                    <option value="ai">Artificial Intelligence</option>
+                                    <option value="climate">Climate Change</option>
+                                    <option value="productivity">Workplace Productivity</option>
+                                    <option value="health">Digital Health</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analysis-display">
+                        <h3 class="font-bold text-gray-900 mb-3">Generated Prompt:</h3>
+                        <div id="generated-prompt" class="format-preview">
+                            <!-- Dynamic content will be inserted here -->
+                        </div>
+
+                        <div class="format-metrics">
+                            <div class="metric-card">
+                                <div class="metric-value" id="word-estimate">~150</div>
+                                <div class="metric-label">Est. Words</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="complexity-score">7/10</div>
+                                <div class="metric-label">Complexity</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="control-level">High</div>
+                                <div class="metric-label">Control Level</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 mt-4">
+                            <button onclick="copyGeneratedPrompt()" class="nav-button-secondary">
+                                📋 Copy Prompt
+                            </button>
+                            <button onclick="analyzePromptStructure()" class="nav-button-secondary">
+                                🔍 Analyze Structure
+                            </button>
+                            <button onclick="resetControls()" class="nav-button-secondary">
+                                🔄 Reset Controls
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 5.3: Expert Examples Showcase -->
+            <section class="mb-16">
+                <div class="example-showcase">
+                    <div class="showcase-header">
+                        <h2 class="text-2xl font-bold">🏆 Expert-Level Format Control Examples</h2>
+                        <p class="mt-2 opacity-90">Study these professional prompts that demonstrate advanced formatting
+                            techniques</p>
+                    </div>
+
+                    <div class="example-grid">
+                        <div class="example-card explicit">
+                            <h3 class="font-bold text-red-600 mb-3">📐 Explicit Control Example</h3>
+                            <h4 class="font-semibold text-gray-900 mb-2">AI Ethics Policy Brief</h4>
+                            <div class="format-preview">
+                                You are an expert in artificial intelligence ethics, writing for interdisciplinary
+                                researchers and policy advisors.
+
+                                Summarize the core ethical challenges in deploying AI systems for public-sector
+                                decision-making (criminal justice, healthcare allocation, social services). Emphasize
+                                algorithmic bias, transparency, accountability, and democratic impact.
+
+                                Constraints:
+                                • Exactly five sentences
+                                • One cohesive paragraph
+                                • Formal academic tone
+                                • No citations or footnotes
+                                • Use precise, field-relevant terminology
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <strong>Key Features:</strong> Exact length specification, tone control, format
+                                constraints
+                            </p>
+                        </div>
+
+                        <div class="example-card flexible">
+                            <h3 class="font-bold text-orange-600 mb-3">🎯 Flexible Range Example</h3>
+                            <h4 class="font-semibold text-gray-900 mb-2">Climate Action Tweet</h4>
+                            <div class="format-preview">
+                                You are a social media strategist specializing in climate communication.
+
+                                Write a tweet about renewable energy's role in sustainable development. Balance urgency
+                                with inspiration for a general audience. Use strong verbs and emotionally resonant
+                                phrasing.
+
+                                Constraints:
+                                • 280-500 characters
+                                • No hashtags or emojis
+                                • Avoid technical jargon
+                                • High-impact nonprofit style
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <strong>Key Features:</strong> Character range, style guidance, audience targeting
+                            </p>
+                        </div>
+
+                        <div class="example-card structured">
+                            <h3 class="font-bold text-green-600 mb-3">📋 Structured List Example</h3>
+                            <h4 class="font-semibold text-gray-900 mb-2">Waste Reduction Strategies</h4>
+                            <div class="format-preview">
+                                You are an environmental sustainability consultant for mid-sized companies.
+
+                                Identify the top five organizational waste reduction strategies. Use this exact format:
+
+                                1. [Strategy Name] — [One-sentence explanation linking strategy to
+                                environmental/operational benefit]
+                                2. [Strategy Name] — [Explanation]
+                                3. [Strategy Name] — [Explanation]
+                                4. [Strategy Name] — [Explanation]
+                                5. [Strategy Name] — [Explanation]
+
+                                Constraints:
+                                • Plain language for non-technical decision-makers
+                                • Specific and actionable (avoid "go green" generalities)
+                                • Each sentence under 25 words
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <strong>Key Features:</strong> Template structure, word limits, audience specification
+                            </p>
+                        </div>
+
+                        <div class="example-card iterative">
+                            <h3 class="font-bold text-blue-600 mb-3">🔄 Iterative Control Example</h3>
+                            <h4 class="font-semibold text-gray-900 mb-2">Blockchain Technology Explanation</h4>
+                            <div class="format-preview">
+                                <strong>Initial Prompt:</strong>
+                                You are a blockchain expert writing for intermediate technical audience. Explain
+                                blockchain technology's core principles: distributed ledgers, consensus mechanisms,
+                                cryptographic security, immutability, decentralization. Use cohesive paragraph format
+                                with correct terminology.
+
+                                <strong>Follow-up Prompt:</strong>
+                                Revise the explanation above to fit within 250 words while preserving technical depth
+                                and clarity. Prioritize concise phrasing without oversimplifying core concepts.
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <strong>Key Features:</strong> Two-stage refinement, length reduction, complexity
+                                preservation
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5.4: Interactive Exercise Studio -->
+            <section class="mb-16">
+                <div class="exercise-studio">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">
+                        💪 Format Control Exercise Studio
+                    </h2>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Practice implementing length and format control with these hands-on exercises.
+                        Each exercise focuses on different control techniques.
+                    </p>
+
+                    <!-- Exercise Selector -->
+                    <div class="exercise-selector">
+                        <div class="exercise-card active" onclick="selectExercise(1)" id="exercise-1-card">
+                            <div class="text-3xl mb-2">📐</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Explicit Format</h3>
+                            <p class="text-gray-600 text-sm">Data privacy summary</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(2)" id="exercise-2-card">
+                            <div class="text-3xl mb-2">💼</div>
+                            <h3 class="font-bold text-gray-900 mb-1">LinkedIn Post</h3>
+                            <p class="text-gray-600 text-sm">Remote work benefits</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(3)" id="exercise-3-card">
+                            <div class="text-3xl mb-2">📋</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Structured List</h3>
+                            <p class="text-gray-600 text-sm">Productivity strategies</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(4)" id="exercise-4-card">
+                            <div class="text-3xl mb-2">🔄</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Two-Step Process</h3>
+                            <p class="text-gray-600 text-sm">Quantum computing</p>
+                        </div>
+
+                        <div class="exercise-card" onclick="selectExercise(5)" id="exercise-5-card">
+                            <div class="text-3xl mb-2">🐦</div>
+                            <h3 class="font-bold text-gray-900 mb-1">Tweet Thread</h3>
+                            <p class="text-gray-600 text-sm">AI history summary</p>
+                        </div>
+                    </div>
+
+                    <!-- Exercise Content -->
+                    <div id="exercise-content" class="mt-8">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Exercise Workspace -->
+                    <div id="exercise-workspace" class="mt-6">
+                        <h3 class="font-bold text-gray-900 mb-3">✍️ Your Solution:</h3>
+                        <textarea id="exercise-input" class="format-input"
+                            placeholder="Write your formatted prompt here..."></textarea>
+
+                        <div class="flex gap-3 mt-4">
+                            <button onclick="analyzeExerciseFormat()" class="nav-button-secondary">
+                                🔍 Analyze Format
+                            </button>
+                            <button onclick="showExerciseHints()" class="nav-button-secondary">
+                                💡 Get Hints
+                            </button>
+                            <button onclick="showExerciseSolution()" class="nav-button-secondary">
+                                📝 Show Solution
+                            </button>
+                            <button onclick="testWithGemini()" class="nav-button-secondary">
+                                🚀 Test Prompt
+                            </button>
+                        </div>
+
+                        <!-- Exercise Feedback -->
+                        <div id="exercise-feedback" class="analysis-display mt-4" style="display: none;">
+                            <!-- Feedback will appear here -->
+                        </div>
+                    </div>
+
+                    <!-- Progress Tracking -->
+                    <div class="mt-8 bg-white p-6 rounded-lg border">
+                        <h3 class="font-bold text-gray-900 mb-4">📊 Exercise Progress</h3>
+                        <div class="grid grid-cols-5 gap-4">
+                            <div class="text-center" id="progress-exercise-1">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">1</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Explicit</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-2">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">2</span>
+                                </div>
+                                <div class="text-xs text-gray-600">LinkedIn</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-3">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">3</span>
+                                </div>
+                                <div class="text-xs text-gray-600">List</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-4">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">4</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Two-Step</div>
+                            </div>
+                            <div class="text-center" id="progress-exercise-5">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <span class="text-sm font-bold">5</span>
+                                </div>
+                                <div class="text-xs text-gray-600">Thread</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="mb-12">
+                <div class="control-section">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎯 Format Control Mastery</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-3">✅ Control Techniques</h3>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• <strong>Explicit control:</strong> Exact specifications for predictable results
+                                </li>
+                                <li>• <strong>Flexible ranges:</strong> Natural flow within defined boundaries</li>
+                                <li>• <strong>Structured templates:</strong> Consistent formatting across responses</li>
+                                <li>• <strong>Iterative refinement:</strong> Progressive improvement without restart
+                                </li>
+                                <li>• <strong>System settings:</strong> Persistent preferences for efficiency</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-3">🚀 Best Practices</h3>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• <strong>Match technique to purpose:</strong> Rigid for data, flexible for
+                                    creativity</li>
+                                <li>• <strong>Layer constraints:</strong> Combine length, format, and tone controls</li>
+                                <li>• <strong>Test and iterate:</strong> Refine based on actual outputs</li>
+                                <li>• <strong>Document successful patterns:</strong> Build reusable templates</li>
+                                <li>• <strong>Balance control with quality:</strong> Don't over-constrain creativity
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl p-8 text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎉 Chapter 5 Complete!</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Outstanding! You've mastered the art of controlling Gemini's output length and format.
+                        You can now precisely manage response structure, length, and style for any purpose.
+                        Ready to explore advanced prompt design techniques?
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../chapter-4/index.html" class="nav-button-secondary">
+                            ⬅️ Back to Chapter 4
+                        </a>
+                        <a href="../index.html" class="nav-button-secondary">
+                            📚 Course Overview
+                        </a>
+                        <a href="../chapter-6/index.html" class="nav-button-secondary">
+                            ➡️ Continue to Chapter 6
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../../shared/scripts/footer.js" defer></script>
+    <script src="../../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Chapter 5 Interactive Functionality
+        let currentExercise = 1;
+        let exerciseProgress = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+        // Exercise data
+        const exercises = {
+            1: {
+                title: '📐 Explicit Format Control',
+                description: 'Design a prompt that instructs Gemini to write a five-sentence summary about the importance of data privacy in modern technology.',
+                challenge: 'Create a prompt with exact length specification and clear formatting requirements.',
+                hints: [
+                    'Specify exactly five sentences in your prompt',
+                    'Add a role assignment for expertise (e.g., "You are a cybersecurity expert")',
+                    'Define the target audience (general public, professionals, etc.)',
+                    'Include tone guidance (formal, accessible, etc.)',
+                    'Add any specific requirements (no jargon, include examples, etc.)'
+                ],
+                solution: `You are a cybersecurity expert writing for business professionals who need to understand data privacy fundamentals.
+
+Write a summary about the importance of data privacy in modern technology that consists of exactly five sentences. Use clear, professional language that avoids technical jargon while maintaining accuracy.
+
+Structure your response as one cohesive paragraph that covers:
+1. Why data privacy matters in today's digital world
+2. Key risks of poor data privacy practices
+3. Benefits of strong data privacy measures
+
+Constraints:
+• Exactly five sentences
+• Professional tone suitable for business audience
+• No technical jargon or acronyms
+• Focus on practical implications`
+            },
+            2: {
+                title: '💼 Professional LinkedIn Post',
+                description: 'Create a prompt that asks Gemini to write a professional LinkedIn post about the benefits of remote work.',
+                challenge: 'Balance professional tone with engagement while controlling length for social media.',
+                hints: [
+                    'Specify LinkedIn as the platform for appropriate tone',
+                    'Set a word count range (LinkedIn posts work well at 100-200 words)',
+                    'Request engaging elements (questions, calls to action)',
+                    'Define the target audience (professionals, managers, etc.)',
+                    'Include formatting preferences (emojis, hashtags, etc.)'
+                ],
+                solution: `You are a workplace productivity consultant creating content for LinkedIn to engage with HR professionals and business leaders.
+
+Write a LinkedIn post about the benefits of remote work that will generate meaningful discussion and engagement. Target busy professionals who are evaluating or implementing remote work policies.
+
+Content requirements:
+• 150-200 words for optimal LinkedIn engagement
+• Professional yet conversational tone
+• Include 2-3 specific benefits with brief explanations
+• End with a thought-provoking question to encourage comments
+• Use 1-2 relevant emojis for visual appeal
+• Include 3-5 relevant hashtags
+
+Structure:
+1. Hook: Start with an interesting statistic or observation
+2. Benefits: Present 2-3 key advantages of remote work
+3. Engagement: End with a question that invites discussion`
+            },
+            3: {
+                title: '📋 Structured List Format',
+                description: 'Compose a prompt that asks Gemini to identify and describe the top five strategies for improving employee productivity, presented in a structured list format.',
+                challenge: 'Create a template that ensures consistent formatting and controlled length for each item.',
+                hints: [
+                    'Provide an exact template format for Gemini to follow',
+                    'Specify the number of items (five strategies)',
+                    'Define what information to include for each item',
+                    'Set length limits for descriptions (e.g., one sentence each)',
+                    'Include role assignment for credibility'
+                ],
+                solution: `You are a workplace efficiency consultant advising managers on team productivity improvement.
+
+Identify the top five evidence-based strategies for improving employee productivity. Present your response using this exact format:
+
+**Top 5 Employee Productivity Strategies**
+
+1. **[Strategy Name]** - [One-sentence description of the strategy and its primary benefit]
+   • Implementation: [Brief practical tip for implementation]
+   • Expected Impact: [Specific outcome or improvement]
+
+2. **[Strategy Name]** - [Description and benefit]
+   • Implementation: [Practical tip]
+   • Expected Impact: [Specific outcome]
+
+[Continue this format for all 5 strategies]
+
+Requirements:
+• Focus on actionable, research-backed strategies
+• Keep each description to one sentence (under 20 words)
+• Implementation tips should be specific and practical
+• Target audience: team managers with limited time
+• Avoid generic advice; be specific and measurable`
+            },
+            4: {
+                title: '🔄 Two-Step Process Control',
+                description: 'Create a two-step prompt about quantum computing. First request a detailed explanation, then ask Gemini to summarize it for high school students.',
+                challenge: 'Design a follow-up system that refines length and complexity while preserving key information.',
+                hints: [
+                    'Design the first prompt for comprehensive coverage',
+                    'Make the follow-up prompt specific about length reduction',
+                    'Specify the new target audience (high school students)',
+                    'Request simplification without losing core concepts',
+                    'Consider what analogies or examples might help'
+                ],
+                solution: `**Step 1 - Initial Detailed Prompt:**
+
+You are a quantum physics researcher writing for an audience with undergraduate-level science background.
+
+Provide a comprehensive explanation of quantum computing that covers:
+• Basic quantum mechanics principles (superposition, entanglement)
+• How quantum computers differ from classical computers
+• Key components (qubits, quantum gates, quantum circuits)
+• Current applications and potential future uses
+• Major challenges and limitations
+
+Use technical accuracy while maintaining clarity. Structure as 4-5 paragraphs with logical flow from basic concepts to applications.
+
+**Step 2 - Follow-up Simplification Prompt:**
+
+Now revise your explanation above for high school students taking introductory physics. 
+
+Requirements for the revision:
+• Reduce to approximately 150-200 words
+• Replace technical terms with simple analogies
+• Focus on the most important concepts only
+• Use everyday examples they can relate to
+• Maintain scientific accuracy while being accessible
+• Structure as 2-3 short paragraphs`
+            },
+            5: {
+                title: '🐦 Tweet Thread System',
+                description: 'Develop a system-level prompt that directs Gemini to create a Twitter thread summarizing the history of artificial intelligence, with each tweet limited to 280 characters.',
+                challenge: 'Create a multi-part format that maintains coherence across character-limited segments.',
+                hints: [
+                    'Specify the thread format (numbered tweets)',
+                    'Set character limits for each tweet (280 characters)',
+                    'Define the scope of AI history to cover',
+                    'Request thread coherence and flow',
+                    'Include engagement elements (hashtags, etc.)'
+                ],
+                solution: `You are a tech historian and social media expert creating educational content about artificial intelligence for a general audience on Twitter.
+
+Create a Twitter thread that summarizes the history of artificial intelligence from its origins to today. Structure as a cohesive narrative across multiple tweets.
+
+Thread Requirements:
+• 8-10 tweets total (including intro and conclusion)
+• Each tweet must be under 280 characters
+• Number each tweet (1/10, 2/10, etc.)
+• Maintain narrative flow between tweets
+• Include key milestones, breakthroughs, and figures
+• Use accessible language for general audience
+
+Content Structure:
+1. Hook tweet: Engaging introduction to AI history
+2-3. Early foundations (1940s-1960s)
+4-5. AI winters and revivals (1970s-1990s)
+6-7. Modern breakthroughs (2000s-2010s)
+8-9. Current state and recent developments
+10. Conclusion with future outlook
+
+Style Guidelines:
+• Conversational but informative tone
+• Include 2-3 relevant hashtags per thread (not per tweet)
+• Use emojis sparingly for visual appeal
+• Ensure each tweet can stand alone while contributing to the whole`
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            showTechnique('explicit');
+            selectExercise(1);
+            updateFormatPreview();
+        });
+
+        // Technique tab functions
+        function showTechnique(technique) {
+            // Hide all technique contents
+            document.querySelectorAll('.technique-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.technique-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected technique and activate tab
+            document.getElementById(technique).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Format controller functions
+        function updateFormatPreview() {
+            const length = document.getElementById('length-slider').value;
+            const structure = document.getElementById('structure-slider').value;
+            const tone = document.getElementById('tone-slider').value;
+            const topic = document.getElementById('topic-select').value;
+
+            const includeRole = document.getElementById('include-role').checked;
+            const includeExamples = document.getElementById('include-examples').checked;
+            const includeConstraints = document.getElementById('include-constraints').checked;
+            const includeFormat = document.getElementById('include-format').checked;
+
+            // Update slider labels
+            const lengthLabels = ['Brief', 'Short', 'Medium', 'Long', 'Detailed'];
+            const structureLabels = ['Free-form', 'Moderate', 'Structured', 'Rigid'];
+            const toneLabels = ['Casual', 'Friendly', 'Professional', 'Academic'];
+
+            document.getElementById('length-value').textContent = lengthLabels[length - 1];
+            document.getElementById('structure-value').textContent = structureLabels[structure - 1];
+            document.getElementById('tone-value').textContent = toneLabels[tone - 1];
+
+            // Generate prompt based on settings
+            let prompt = generatePromptFromSettings(topic, length, structure, tone, {
+                includeRole, includeExamples, includeConstraints, includeFormat
+            });
+
+            document.getElementById('generated-prompt').textContent = prompt;
+
+            // Update metrics
+            updateMetrics(prompt, length, structure);
+        }
+
+        function generatePromptFromSettings(topic, length, structure, tone, options) {
+            const topics = {
+                ai: 'artificial intelligence',
+                climate: 'climate change',
+                productivity: 'workplace productivity',
+                health: 'digital health'
+            };
+
+            const lengthSpecs = {
+                1: 'in 1-2 sentences',
+                2: 'in a brief paragraph (3-4 sentences)',
+                3: 'in 2-3 paragraphs',
+                4: 'in a detailed explanation (4-5 paragraphs)',
+                5: 'in a comprehensive analysis (500+ words)'
+            };
+
+            const toneSpecs = {
+                1: 'casual and conversational',
+                2: 'friendly and approachable',
+                3: 'professional and informative',
+                4: 'formal and academic'
+            };
+
+            let prompt = '';
+
+            // Role assignment
+            if (options.includeRole) {
+                const roles = {
+                    ai: 'technology expert',
+                    climate: 'environmental scientist',
+                    productivity: 'workplace efficiency consultant',
+                    health: 'digital health specialist'
+                };
+                prompt += `You are a ${roles[topic]}. `;
+            }
+
+            // Main task
+            prompt += `Explain ${topics[topic]} `;
+
+            // Length specification
+            if (options.includeConstraints) {
+                prompt += lengthSpecs[length] + '. ';
+            }
+
+            // Tone specification
+            prompt += `Use a ${toneSpecs[tone]} tone. `;
+
+            // Format specification
+            if (options.includeFormat && structure > 2) {
+                const formats = {
+                    3: 'Structure your response with clear headings and bullet points where appropriate.',
+                    4: 'Follow a strict format with numbered sections and subsections.'
+                };
+                prompt += formats[structure] + ' ';
+            }
+
+            // Examples request
+            if (options.includeExamples) {
+                prompt += 'Include specific examples to illustrate key points. ';
+            }
+
+            return prompt.trim();
+        }
+
+        function updateMetrics(prompt, length, structure) {
+            const wordEstimates = [25, 75, 150, 300, 500];
+            const complexityScores = [3, 5, 7, 8, 9];
+            const controlLevels = ['Low', 'Medium', 'High', 'Very High', 'Maximum'];
+
+            document.getElementById('word-estimate').textContent = `~${wordEstimates[length - 1]}`;
+            document.getElementById('complexity-score').textContent = `${complexityScores[length - 1]}/10`;
+            document.getElementById('control-level').textContent = controlLevels[structure - 1];
+        }
+
+        function copyGeneratedPrompt() {
+            const promptText = document.getElementById('generated-prompt').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert('Prompt copied to clipboard!');
+            });
+        }
+
+        function analyzePromptStructure() {
+            const promptText = document.getElementById('generated-prompt').textContent;
+            const analysis = analyzePrompt(promptText);
+
+            alert(`Prompt Analysis:\n\n• Word count: ${analysis.wordCount}\n• Has role: ${analysis.hasRole ? 'Yes' : 'No'}\n• Has constraints: ${analysis.hasConstraints ? 'Yes' : 'No'}\n• Has tone guidance: ${analysis.hasTone ? 'Yes' : 'No'}\n• Control level: ${analysis.controlLevel}`);
+        }
+
+        function analyzePrompt(prompt) {
+            const words = prompt.split(' ').length;
+            const hasRole = prompt.toLowerCase().includes('you are');
+            const hasConstraints = prompt.includes('sentence') || prompt.includes('paragraph') || prompt.includes('word');
+            const hasTone = prompt.includes('tone') || prompt.includes('casual') || prompt.includes('professional') || prompt.includes('formal');
+
+            let controlLevel = 'Low';
+            if (hasRole && hasConstraints && hasTone) controlLevel = 'High';
+            else if ((hasRole && hasConstraints) || (hasRole && hasTone) || (hasConstraints && hasTone)) controlLevel = 'Medium';
+
+            return { wordCount: words, hasRole, hasConstraints, hasTone, controlLevel };
+        }
+
+        function resetControls() {
+            document.getElementById('length-slider').value = 3;
+            document.getElementById('structure-slider').value = 2;
+            document.getElementById('tone-slider').value = 3;
+            document.getElementById('topic-select').value = 'ai';
+            document.getElementById('include-role').checked = true;
+            document.getElementById('include-examples').checked = false;
+            document.getElementById('include-constraints').checked = true;
+            document.getElementById('include-format').checked = false;
+            updateFormatPreview();
+        }
+
+        // Exercise functions
+        function selectExercise(exerciseNum) {
+            // Update active card
+            document.querySelectorAll('.exercise-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById(`exercise-${exerciseNum}-card`).classList.add('active');
+
+            currentExercise = exerciseNum;
+            displayExerciseContent(exerciseNum);
+
+            // Clear previous input and feedback
+            document.getElementById('exercise-input').value = '';
+            document.getElementById('exercise-feedback').style.display = 'none';
+        }
+
+        function displayExerciseContent(exerciseNum) {
+            const exercise = exercises[exerciseNum];
+            const contentDiv = document.getElementById('exercise-content');
+
+            contentDiv.innerHTML = `
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-gray-900 mb-3">${exercise.title}</h3>
+                    <p class="text-gray-700 mb-4">${exercise.description}</p>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                        <h4 class="font-bold text-blue-800 mb-2">🎯 Your Challenge:</h4>
+                        <p class="text-blue-700 text-sm">${exercise.challenge}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function analyzeExerciseFormat() {
+            const userPrompt = document.getElementById('exercise-input').value.trim();
+            const feedbackDiv = document.getElementById('exercise-feedback');
+
+            if (!userPrompt) {
+                showExerciseFeedback('Please write your prompt first!', 'warning');
+                return;
+            }
+
+            const analysis = analyzePromptFormat(userPrompt, currentExercise);
+            showExerciseFeedback(analysis.feedback, analysis.type);
+
+            if (analysis.score >= 70) {
+                exerciseProgress[currentExercise] = Math.max(exerciseProgress[currentExercise], analysis.score);
+                updateExerciseProgress(currentExercise, true);
+            }
+        }
+
+        function analyzePromptFormat(prompt, exerciseNum) {
+            const promptLower = prompt.toLowerCase();
+            let score = 0;
+            let feedback = [];
+
+            // General format checks
+            if (promptLower.includes('you are')) {
+                score += 20;
+                feedback.push('✅ Good role assignment');
+            } else {
+                feedback.push('💡 Consider adding a role assignment');
+            }
+
+            // Exercise-specific checks
+            switch (exerciseNum) {
+                case 1: // Explicit format
+                    if (promptLower.includes('five sentence') || promptLower.includes('5 sentence')) {
+                        score += 30;
+                        feedback.push('✅ Explicit length specification');
+                    } else {
+                        feedback.push('❌ Missing exact sentence count requirement');
+                    }
+                    break;
+
+                case 2: // LinkedIn post
+                    if (promptLower.includes('linkedin')) {
+                        score += 20;
+                        feedback.push('✅ Platform specified');
+                    }
+                    if (promptLower.includes('word') && (promptLower.includes('150') || promptLower.includes('200'))) {
+                        score += 20;
+                        feedback.push('✅ Appropriate length range');
+                    }
+                    break;
+
+                case 3: // Structured list
+                    if (promptLower.includes('format') || promptLower.includes('template')) {
+                        score += 25;
+                        feedback.push('✅ Format template provided');
+                    }
+                    if (promptLower.includes('five') || promptLower.includes('5')) {
+                        score += 15;
+                        feedback.push('✅ Number of items specified');
+                    }
+                    break;
+
+                case 4: // Two-step
+                    if (prompt.includes('Step 1') || prompt.includes('First') || prompt.includes('Initial')) {
+                        score += 25;
+                        feedback.push('✅ Two-step process structure');
+                    }
+                    break;
+
+                case 5: // Tweet thread
+                    if (promptLower.includes('thread') && promptLower.includes('280')) {
+                        score += 30;
+                        feedback.push('✅ Thread format with character limits');
+                    }
+                    break;
+            }
+
+            // Additional quality checks
+            if (prompt.length > 100) {
+                score += 15;
+                feedback.push('✅ Good level of detail');
+            }
+
+            if (promptLower.includes('tone') || promptLower.includes('style')) {
+                score += 10;
+                feedback.push('✅ Tone/style guidance included');
+            }
+
+            let type = 'info';
+            if (score >= 80) type = 'success';
+            else if (score >= 60) type = 'good';
+            else if (score >= 40) type = 'warning';
+            else type = 'error';
+
+            return {
+                score: score,
+                feedback: feedback.join('<br>'),
+                type: type
+            };
+        }
+
+        function showExerciseHints() {
+            const exercise = exercises[currentExercise];
+            const hintsHtml = exercise.hints.map(hint => `<li class="flex items-start mb-2"><span class="text-blue-600 mr-2">💡</span><span class="text-gray-700 text-sm">${hint}</span></li>`).join('');
+
+            showExerciseFeedback(`<strong>Hints for ${exercise.title}:</strong><br><ul class="mt-2">${hintsHtml}</ul>`, 'info');
+        }
+
+        function showExerciseSolution() {
+            const exercise = exercises[currentExercise];
+            showExerciseFeedback(`<strong>Expert Solution:</strong><br><div class="format-preview mt-2">${exercise.solution}</div>`, 'success');
+        }
+
+        function testWithGemini() {
+            const userPrompt = document.getElementById('exercise-input').value.trim();
+            if (!userPrompt) {
+                alert('Please write your prompt first!');
+                return;
+            }
+
+            showExerciseFeedback(`
+                <h4 class="font-bold text-purple-800 mb-2">🚀 Testing Instructions:</h4>
+                <p class="text-purple-700 text-sm mb-3">Copy your prompt and test it with Gemini to see how well it controls the output format and length.</p>
+                <div class="bg-purple-100 p-3 rounded">
+                    <p class="text-purple-800 text-sm"><strong>Your prompt is ready to test!</strong> Look for:</p>
+                    <ul class="text-purple-700 text-xs mt-2 ml-4">
+                        <li>• Does the output match your length requirements?</li>
+                        <li>• Is the format exactly as specified?</li>
+                        <li>• Does the tone match your instructions?</li>
+                        <li>• Are all constraints followed?</li>
+                    </ul>
+                </div>
+            `, 'info');
+        }
+
+        function showExerciseFeedback(message, type) {
+            const feedbackDiv = document.getElementById('exercise-feedback');
+            const colors = {
+                success: 'bg-green-50 border-green-200',
+                good: 'bg-blue-50 border-blue-200',
+                info: 'bg-blue-50 border-blue-200',
+                warning: 'bg-yellow-50 border-yellow-200',
+                error: 'bg-red-50 border-red-200'
+            };
+
+            feedbackDiv.className = `analysis-display mt-4 ${colors[type] || colors.info}`;
+            feedbackDiv.innerHTML = message;
+            feedbackDiv.style.display = 'block';
+        }
+
+        function updateExerciseProgress(exerciseNum, completed) {
+            const progressDiv = document.getElementById(`progress-exercise-${exerciseNum}`);
+            const circle = progressDiv.querySelector('.w-12');
+
+            if (completed) {
+                circle.classList.remove('bg-gray-200');
+                circle.classList.add('bg-green-500', 'text-white');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

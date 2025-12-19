@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Exploring the Importance of Context - Gemini Prompt Engineering</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master the art of providing context to Gemini AI. Learn how background information, examples, and situational details dramatically improve response quality.">
+    <meta name="keywords"
+        content="Gemini context, AI context management, prompt context, background information, Gemini prompting">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/fonts.css">
+    <link rel="stylesheet" href="../../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../../shared/buttons.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Chapter-specific styling */
+        .chapter-hero {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+            animation: gentle-rotate 20s linear infinite;
+        }
+
+        @keyframes gentle-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .context-explorer {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .context-tabs {
+            display: flex;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+
+        .context-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .context-tab:hover {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+
+        .context-tab.active {
+            color: #059669;
+            background: white;
+            border-bottom-color: #10b981;
+        }
+
+        .context-content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .context-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .context-example {
+            background: #f8fafc;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .context-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-card.poor {
+            border-left: 4px solid #ef4444;
+        }
+
+        .comparison-card.good {
+            border-left: 4px solid #10b981;
+        }
+
+        .context-exercise {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .exercise-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .exercise-input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .context-analyzer {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .analysis-result {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .analysis-result.excellent {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .analysis-result.good {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .analysis-result.needs-work {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .context-tip {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .context-tip::before {
+            content: "💡";
+            margin-right: 0.5rem;
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .progress-step.completed {
+            color: #059669;
+        }
+
+        .progress-step::before {
+            content: "○";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-step.completed::before {
+            content: "✓";
+            color: #10b981;
+        }
+
+        .interactive-demo {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .demo-content {
+            padding: 2rem;
+        }
+
+        .context-slider {
+            margin: 2rem 0;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .context-range {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .context-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .context-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .context-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .context-tabs {
+                flex-wrap: wrap;
+            }
+
+            .context-tab {
+                flex: 1;
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Prompt Engineering Course">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Prompt Engineering Course</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Chapter 3</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Chapter Hero -->
+        <header class="chapter-hero relative z-10">
+            <div class="text-center">
+                <div class="text-6xl mb-4">📐</div>
+                <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    Chapter 3: Exploring the Importance of Context
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Master the art of providing context to Gemini AI. Learn how background information, examples, and
+                    situational details dramatically improve response quality and relevance.
+                </p>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-step completed">Introduction</div>
+                <div class="progress-step completed">Output Types</div>
+                <div class="progress-step completed">Context Mastery</div>
+                <div class="progress-step">Enhancement</div>
+                <div class="progress-step">Formatting</div>
+                <div class="progress-step">Advanced</div>
+            </div>
+
+            <!-- Learning Objectives -->
+            <section class="mb-12">
+                <div class="context-example">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎯 What You'll Learn</h2>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• <strong>Why context matters:</strong> Understanding how Gemini uses background information
+                        </li>
+                        <li>• <strong>Types of context:</strong> Situational, domain-specific, and example-based context
+                        </li>
+                        <li>• <strong>Context layering:</strong> Building comprehensive background information</li>
+                        <li>• <strong>Context optimization:</strong> Providing just enough without overwhelming</li>
+                        <li>• <strong>Practical application:</strong> Real-world scenarios and hands-on practice</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Interactive Context Explorer -->
+            <section class="mb-12">
+                <div class="context-explorer">
+                    <div class="context-tabs">
+                        <button class="context-tab active" onclick="showContextType('situational')">
+                            🎭 Situational Context
+                        </button>
+                        <button class="context-tab" onclick="showContextType('domain')">
+                            🏢 Domain Context
+                        </button>
+                        <button class="context-tab" onclick="showContextType('example')">
+                            📝 Example Context
+                        </button>
+                        <button class="context-tab" onclick="showContextType('audience')">
+                            👥 Audience Context
+                        </button>
+                        <button class="context-tab" onclick="showContextType('constraints')">
+                            ⚖️ Constraint Context
+                        </button>
+                    </div>
+
+                    <!-- Situational Context -->
+                    <div id="situational" class="context-content active">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">🎭 Situational Context</h3>
+                        <p class="text-gray-700 mb-4">
+                            Situational context provides the "when," "where," and "why" behind your request.
+                            It helps Gemini understand the circumstances and adapt its response accordingly.
+                        </p>
+
+                        <div class="context-comparison">
+                            <div class="comparison-card poor">
+                                <h4 class="font-bold text-red-600 mb-2">❌ Without Situational Context</h4>
+                                <div class="bg-red-50 p-3 rounded mb-3">
+                                    <code>"Write an email about the meeting."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Too vague - Gemini doesn't know what kind of meeting, the purpose, or the tone
+                                    needed.
+                                </p>
+                            </div>
+
+                            <div class="comparison-card good">
+                                <h4 class="font-bold text-green-600 mb-2">✅ With Situational Context</h4>
+                                <div class="bg-green-50 p-3 rounded mb-3">
+                                    <code>"Write a follow-up email to team members after our quarterly planning meeting yesterday. 
+                                    The meeting ran over time, and we need to reschedule the budget discussion. 
+                                    Keep the tone professional but understanding."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Clear situation, specific circumstances, and appropriate tone guidance.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="context-tip">
+                            <strong>Key Elements:</strong> Time frame, location, circumstances, urgency level,
+                            emotional context, and any relevant background events.
+                        </div>
+                    </div>
+
+                    <!-- Domain Context -->
+                    <div id="domain" class="context-content">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">🏢 Domain Context</h3>
+                        <p class="text-gray-700 mb-4">
+                            Domain context establishes the field, industry, or area of expertise relevant to your
+                            request.
+                            This helps Gemini use appropriate terminology and knowledge.
+                        </p>
+
+                        <div class="context-comparison">
+                            <div class="comparison-card poor">
+                                <h4 class="font-bold text-red-600 mb-2">❌ Without Domain Context</h4>
+                                <div class="bg-red-50 p-3 rounded mb-3">
+                                    <code>"Explain the process of optimization."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Unclear domain - could be business, software, mathematics, or many other fields.
+                                </p>
+                            </div>
+
+                            <div class="comparison-card good">
+                                <h4 class="font-bold text-green-600 mb-2">✅ With Domain Context</h4>
+                                <div class="bg-green-50 p-3 rounded mb-3">
+                                    <code>"As a software engineer working on web applications, explain the process of 
+                                    database query optimization for improving page load times in e-commerce sites."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Specific domain (software engineering), context (web apps), and application
+                                    (e-commerce).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="context-tip">
+                            <strong>Domain Types:</strong> Industry (healthcare, finance), Role (developer, manager),
+                            Field (marketing, engineering), or Specialty (machine learning, UX design).
+                        </div>
+                    </div>
+
+                    <!-- Example Context -->
+                    <div id="example" class="context-content">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">📝 Example Context</h3>
+                        <p class="text-gray-700 mb-4">
+                            Example context provides concrete instances or patterns that demonstrate what you're looking
+                            for.
+                            This is especially powerful for establishing style, format, or approach.
+                        </p>
+
+                        <div class="context-comparison">
+                            <div class="comparison-card poor">
+                                <h4 class="font-bold text-red-600 mb-2">❌ Without Example Context</h4>
+                                <div class="bg-red-50 p-3 rounded mb-3">
+                                    <code>"Write a product description that's engaging."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    "Engaging" is subjective - no clear style or format guidance.
+                                </p>
+                            </div>
+
+                            <div class="comparison-card good">
+                                <h4 class="font-bold text-green-600 mb-2">✅ With Example Context</h4>
+                                <div class="bg-green-50 p-3 rounded mb-3">
+                                    <code>"Write a product description similar to Apple's style - clean, benefit-focused, 
+                                    and emotionally resonant. For example, instead of 'fast processor,' they say 
+                                    'lightning-fast performance that keeps up with your creativity.' 
+                                    Apply this approach to our new wireless headphones."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Clear style reference with specific example showing the desired approach.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="context-tip">
+                            <strong>Example Types:</strong> Style samples, format templates, similar successful cases,
+                            or specific instances that demonstrate your desired outcome.
+                        </div>
+                    </div>
+
+                    <!-- Audience Context -->
+                    <div id="audience" class="context-content">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">👥 Audience Context</h3>
+                        <p class="text-gray-700 mb-4">
+                            Audience context defines who will receive or consume the output. This dramatically affects
+                            tone, complexity, terminology, and approach.
+                        </p>
+
+                        <div class="context-comparison">
+                            <div class="comparison-card poor">
+                                <h4 class="font-bold text-red-600 mb-2">❌ Without Audience Context</h4>
+                                <div class="bg-red-50 p-3 rounded mb-3">
+                                    <code>"Explain machine learning."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    No audience specified - could be for experts, beginners, children, or executives.
+                                </p>
+                            </div>
+
+                            <div class="comparison-card good">
+                                <h4 class="font-bold text-green-600 mb-2">✅ With Audience Context</h4>
+                                <div class="bg-green-50 p-3 rounded mb-3">
+                                    <code>"Explain machine learning to a group of non-technical executives who need to 
+                                    understand its business value and implementation costs. Focus on ROI, risks, 
+                                    and practical applications rather than technical details."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Clear audience (executives), knowledge level (non-technical), and focus areas
+                                    (business value).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="context-tip">
+                            <strong>Audience Factors:</strong> Technical expertise, role/position, age group,
+                            cultural background, time constraints, and decision-making authority.
+                        </div>
+                    </div>
+
+                    <!-- Constraint Context -->
+                    <div id="constraints" class="context-content">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">⚖️ Constraint Context</h3>
+                        <p class="text-gray-700 mb-4">
+                            Constraint context establishes limitations, requirements, or boundaries that must be
+                            respected.
+                            This includes length limits, style requirements, or content restrictions.
+                        </p>
+
+                        <div class="context-comparison">
+                            <div class="comparison-card poor">
+                                <h4 class="font-bold text-red-600 mb-2">❌ Without Constraint Context</h4>
+                                <div class="bg-red-50 p-3 rounded mb-3">
+                                    <code>"Write a social media post about our new product."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    No platform, length, or style constraints specified.
+                                </p>
+                            </div>
+
+                            <div class="comparison-card good">
+                                <h4 class="font-bold text-green-600 mb-2">✅ With Constraint Context</h4>
+                                <div class="bg-green-50 p-3 rounded mb-3">
+                                    <code>"Write a LinkedIn post about our new product launch. Keep it under 150 words, 
+                                    maintain a professional tone, include a call-to-action, and avoid overly promotional language. 
+                                    The post should comply with our brand guidelines: no exclamation marks, 
+                                    focus on value rather than features."</code>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Clear platform, length limit, tone requirements, and brand constraints.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="context-tip">
+                            <strong>Constraint Types:</strong> Length limits, format requirements, tone restrictions,
+                            brand guidelines, legal considerations, and platform-specific rules.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Context Builder -->
+            <section class="mb-12">
+                <div class="interactive-demo">
+                    <div class="demo-header">
+                        <h2 class="text-2xl font-bold">🛠️ Interactive Context Builder</h2>
+                        <p class="mt-2 opacity-90">Practice building comprehensive context for better Gemini responses
+                        </p>
+                    </div>
+                    <div class="demo-content">
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-3">Scenario: Product Launch Announcement</h3>
+                            <p class="text-gray-600 mb-4">
+                                You need to create content announcing a new software product. Use the sliders below to
+                                see how different levels of context affect the prompt quality.
+                            </p>
+                        </div>
+
+                        <div class="context-slider">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Situational Context Level
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="100" value="50" class="context-range"
+                                    id="situationalSlider" onchange="updateContextDemo()">
+                                <div class="slider-labels">
+                                    <span>Minimal</span>
+                                    <span>Moderate</span>
+                                    <span>Comprehensive</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="context-slider">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Domain Context Level
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="100" value="50" class="context-range" id="domainSlider"
+                                    onchange="updateContextDemo()">
+                                <div class="slider-labels">
+                                    <span>Generic</span>
+                                    <span>Industry-Specific</span>
+                                    <span>Highly Specialized</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="context-slider">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Audience Context Level
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="100" value="50" class="context-range"
+                                    id="audienceSlider" onchange="updateContextDemo()">
+                                <div class="slider-labels">
+                                    <span>General</span>
+                                    <span>Targeted</span>
+                                    <span>Highly Specific</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="context-analyzer">
+                            <h4 class="font-bold text-gray-900 mb-3">Generated Prompt:</h4>
+                            <div id="generatedPrompt" class="bg-gray-50 p-4 rounded-lg border font-mono text-sm">
+                                <!-- Dynamic content will be inserted here -->
+                            </div>
+                            <div id="contextScore" class="mt-4">
+                                <!-- Context quality score will be shown here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Hands-On Context Exercises -->
+            <section class="mb-12">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    🎯 Hands-On Context Exercises
+                </h2>
+
+                <!-- Exercise 1: Business Context -->
+                <div class="context-exercise">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">
+                        📊 Exercise 1: Business Strategy Context
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        <strong>Scenario:</strong> You're a marketing manager at a mid-sized SaaS company. Your team
+                        needs
+                        to create a competitive analysis report for the executive team. The company is considering
+                        entering
+                        the European market, and leadership wants to understand the competitive landscape.
+                    </p>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Write a prompt that includes comprehensive context for this scenario:
+                        </label>
+                        <textarea id="businessExercise" class="exercise-input"
+                            placeholder="Your prompt here... Include situational, domain, audience, and constraint context."
+                            onchange="analyzeBusinessContext()"></textarea>
+                    </div>
+
+                    <div id="businessAnalysis" class="context-analyzer" style="display: none;">
+                        <h4 class="font-bold text-gray-900 mb-3">Context Analysis:</h4>
+                        <div id="businessResults"></div>
+                        <div class="mt-4">
+                            <button class="nav-button-secondary" onclick="showBusinessSolution()">
+                                💡 Show Sample Solution
+                            </button>
+                        </div>
+                        <div id="businessSolution" style="display: none;"
+                            class="mt-4 p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
+                            <h5 class="font-bold text-green-800 mb-2">Sample Solution:</h5>
+                            <div class="font-mono text-sm text-green-700 bg-white p-3 rounded">
+                                "As a marketing manager at [Company Name], a mid-sized B2B SaaS company specializing in
+                                project management tools,
+                                I need to create a comprehensive competitive analysis report for our executive team.
+
+                                <strong>Context:</strong> We're considering expanding into the European market within
+                                the next 12 months,
+                                and leadership needs to understand the competitive landscape to make informed decisions
+                                about market entry strategy,
+                                pricing, and positioning.
+
+                                <strong>Audience:</strong> The report will be presented to C-level executives (CEO, CTO,
+                                CFO) who have limited time
+                                but need actionable insights. They're particularly interested in market size, key
+                                competitors, pricing strategies,
+                                and potential barriers to entry.
+
+                                <strong>Requirements:</strong> The analysis should focus on the top 5 competitors in the
+                                European project management
+                                software market, include market share data where available, highlight key
+                                differentiators, and provide
+                                strategic recommendations. Format as an executive summary (2 pages) with supporting data
+                                appendix.
+
+                                Please structure the competitive analysis to address these specific decision points and
+                                provide
+                                actionable recommendations for our European market entry strategy."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 2: Technical Context -->
+                <div class="context-exercise">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">
+                        💻 Exercise 2: Technical Documentation Context
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        <strong>Scenario:</strong> You're a senior developer who needs to create API documentation for a
+                        new
+                        authentication system. The documentation will be used by both internal developers and external
+                        partners
+                        with varying levels of technical expertise.
+                    </p>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Create a context-rich prompt for generating this technical documentation:
+                        </label>
+                        <textarea id="technicalExercise" class="exercise-input"
+                            placeholder="Your prompt here... Consider the technical domain, multiple audiences, and documentation standards."
+                            onchange="analyzeTechnicalContext()"></textarea>
+                    </div>
+
+                    <div id="technicalAnalysis" class="context-analyzer" style="display: none;">
+                        <h4 class="font-bold text-gray-900 mb-3">Context Analysis:</h4>
+                        <div id="technicalResults"></div>
+                        <div class="mt-4">
+                            <button class="nav-button-secondary" onclick="showTechnicalSolution()">
+                                💡 Show Sample Solution
+                            </button>
+                        </div>
+                        <div id="technicalSolution" style="display: none;"
+                            class="mt-4 p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
+                            <h5 class="font-bold text-green-800 mb-2">Sample Solution:</h5>
+                            <div class="font-mono text-sm text-green-700 bg-white p-3 rounded">
+                                "As a senior software developer, I need to create comprehensive API documentation for
+                                our new OAuth 2.0
+                                authentication system that will be integrated into our customer-facing web application.
+
+                                <strong>Technical Context:</strong> The API uses RESTful architecture, supports JWT
+                                tokens, includes rate limiting,
+                                and follows OpenAPI 3.0 specification. It handles user registration, login, password
+                                reset, and session management
+                                with multi-factor authentication support.
+
+                                <strong>Audience Context:</strong> The documentation serves two primary audiences:
+                                1. Internal developers (full-stack, mobile) - need complete technical details, error
+                                handling, and integration examples
+                                2. External partner developers - need clear getting-started guides, common use cases,
+                                and troubleshooting
+
+                                <strong>Documentation Standards:</strong> Follow our company's API documentation
+                                template, include interactive
+                                examples, provide code samples in JavaScript, Python, and cURL, and ensure all endpoints
+                                have clear
+                                request/response schemas.
+
+                                <strong>Constraints:</strong> Must be beginner-friendly for external partners while
+                                comprehensive enough for
+                                internal use. Include security best practices, common pitfalls, and maintain consistency
+                                with our existing
+                                API documentation style.
+
+                                Please structure the documentation with a quick-start guide, detailed endpoint
+                                reference,
+                                authentication flow diagrams, and practical integration examples."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 3: Creative Context -->
+                <div class="context-exercise">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">
+                        🎨 Exercise 3: Creative Content Context
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        <strong>Scenario:</strong> You're a content creator for a sustainable fashion brand targeting
+                        environmentally conscious millennials. You need to create social media content for Earth Day
+                        that aligns with your brand values and engages your specific audience.
+                    </p>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Develop a prompt with rich context for this creative content:
+                        </label>
+                        <textarea id="creativeExercise" class="exercise-input"
+                            placeholder="Your prompt here... Include brand context, audience insights, and creative constraints."
+                            onchange="analyzeCreativeContext()"></textarea>
+                    </div>
+
+                    <div id="creativeAnalysis" class="context-analyzer" style="display: none;">
+                        <h4 class="font-bold text-gray-900 mb-3">Context Analysis:</h4>
+                        <div id="creativeResults"></div>
+                        <div class="mt-4">
+                            <button class="nav-button-secondary" onclick="showCreativeSolution()">
+                                💡 Show Sample Solution
+                            </button>
+                        </div>
+                        <div id="creativeSolution" style="display: none;"
+                            class="mt-4 p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
+                            <h5 class="font-bold text-green-800 mb-2">Sample Solution:</h5>
+                            <div class="font-mono text-sm text-green-700 bg-white p-3 rounded">
+                                "As a content creator for EcoThreads, a sustainable fashion brand, I need to develop
+                                Earth Day social media content
+                                that resonates with our core audience and reinforces our brand mission.
+
+                                <strong>Brand Context:</strong> EcoThreads creates stylish, affordable clothing from
+                                recycled materials and ethical
+                                manufacturing. Our brand voice is authentic, optimistic, and educational without being
+                                preachy. We focus on
+                                'sustainable style that doesn't compromise' and celebrate small, actionable steps toward
+                                environmental consciousness.
+
+                                <strong>Audience Context:</strong> Our primary audience is environmentally conscious
+                                millennials (ages 25-35) who
+                                value sustainability but also want to look fashionable. They're active on Instagram and
+                                TikTok, appreciate
+                                transparency, and are willing to pay slightly more for ethical products. They respond
+                                well to behind-the-scenes
+                                content, styling tips, and educational posts about sustainability.
+
+                                <strong>Platform & Constraints:</strong> Create content for Instagram (feed post +
+                                stories) and TikTok.
+                                Instagram post should include engaging visuals, 3-5 relevant hashtags, and encourage
+                                user interaction.
+                                Keep captions under 150 words, maintain our warm but informative tone, and include a
+                                subtle call-to-action.
+
+                                <strong>Earth Day Angle:</strong> Focus on how small fashion choices make a big
+                                environmental impact.
+                                Avoid guilt-inducing messaging and instead inspire positive action. Connect to our
+                                current spring collection
+                                made from ocean plastic.
+
+                                Please create content that educates, inspires, and drives engagement while staying true
+                                to our brand values."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Context Best Practices -->
+            <section class="mb-12">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    🏆 Context Best Practices
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="context-example">
+                        <h3 class="text-lg font-bold text-green-600 mb-3">✅ Do This</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• <strong>Layer context progressively:</strong> Start with the most important context
+                                first</li>
+                            <li>• <strong>Be specific about constraints:</strong> Include length, format, and style
+                                requirements</li>
+                            <li>• <strong>Define your audience clearly:</strong> Technical level, role, and needs</li>
+                            <li>• <strong>Provide relevant examples:</strong> Show the style or approach you want</li>
+                            <li>• <strong>Include situational details:</strong> When, where, why, and under what
+                                circumstances</li>
+                            <li>• <strong>Specify the domain:</strong> Industry, field, or area of expertise</li>
+                        </ul>
+                    </div>
+
+                    <div class="context-example bg-red-50 border-l-red-400">
+                        <h3 class="text-lg font-bold text-red-600 mb-3">❌ Avoid This</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• <strong>Information overload:</strong> Too much irrelevant context confuses the AI
+                            </li>
+                            <li>• <strong>Vague descriptions:</strong> "Professional tone" without defining what that
+                                means</li>
+                            <li>• <strong>Contradictory context:</strong> Conflicting requirements or constraints</li>
+                            <li>• <strong>Assuming knowledge:</strong> Not providing necessary background information
+                            </li>
+                            <li>• <strong>Generic audience:</strong> "General public" instead of specific user groups
+                            </li>
+                            <li>• <strong>Missing constraints:</strong> No guidance on length, format, or limitations
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Context Checklist -->
+            <section class="mb-12">
+                <div class="interactive-demo">
+                    <div class="demo-header">
+                        <h2 class="text-2xl font-bold">📋 Context Quality Checklist</h2>
+                        <p class="mt-2 opacity-90">Use this checklist to ensure your prompts have comprehensive context
+                        </p>
+                    </div>
+                    <div class="demo-content">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-4">Essential Context Elements</h3>
+                                <div class="space-y-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Situational context (when, where, why)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Domain/industry context</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Audience definition (who, expertise level)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Output constraints (length, format)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Tone and style guidance</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-4">Advanced Context Elements</h3>
+                                <div class="space-y-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Relevant examples or references</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Success criteria or goals</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Potential challenges or considerations</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Brand or organizational guidelines</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="context-checkbox mr-3"
+                                            onchange="updateChecklistScore()">
+                                        <span>Cultural or regional considerations</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="checklistScore" class="mt-6 p-4 bg-gray-50 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-gray-600">Context Quality Score: <span
+                                    id="scoreValue">0</span>/10</div>
+                            <div id="scoreMessage" class="text-sm text-gray-600 mt-2">Start checking items to see your
+                                context quality score!</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter Summary -->
+            <section class="mb-12">
+                <div class="context-example">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">📚 Chapter Summary</h2>
+                    <p class="text-gray-700 mb-4">
+                        Context is the foundation of effective prompt engineering. By providing comprehensive background
+                        information,
+                        you enable Gemini to understand not just what you want, but why you want it and how it should be
+                        delivered.
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-4 mt-6">
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🎭</div>
+                            <h3 class="font-bold text-gray-900">Situational</h3>
+                            <p class="text-sm text-gray-600">When, where, why, and under what circumstances</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🏢</div>
+                            <h3 class="font-bold text-gray-900">Domain</h3>
+                            <p class="text-sm text-gray-600">Industry, field, or area of expertise</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">👥</div>
+                            <h3 class="font-bold text-gray-900">Audience</h3>
+                            <p class="text-sm text-gray-600">Who will consume the output and their needs</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-green-100 to-teal-100 rounded-2xl p-8 text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎉 Chapter 3 Complete!</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Outstanding! You've mastered the art of providing context to Gemini AI. You now understand how
+                        situational, domain, audience, and constraint context dramatically improve response quality.
+                        Ready to learn how to improve and refine your prompts?
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../chapter-2/index.html" class="nav-button-secondary">
+                            ⬅️ Back to Chapter 2
+                        </a>
+                        <a href="../index.html" class="nav-button-secondary">
+                            📚 Course Overview
+                        </a>
+                        <a href="../chapter-4/index.html" class="nav-button-secondary">
+                            ➡️ Continue to Chapter 4
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../../shared/scripts/footer.js" defer></script>
+    <script src="../../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Context Explorer Functions
+        function showContextType(type) {
+            // Hide all content
+            document.querySelectorAll('.context-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.context-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected content and activate tab
+            document.getElementById(type).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Context Builder Demo
+        function updateContextDemo() {
+            const situational = document.getElementById('situationalSlider').value;
+            const domain = document.getElementById('domainSlider').value;
+            const audience = document.getElementById('audienceSlider').value;
+
+            let prompt = "Write a product launch announcement";
+            let score = 0;
+
+            // Add situational context
+            if (situational > 66) {
+                prompt += " for our new project management software that we're launching next week after 18 months of development. This is our company's first major product release since our Series B funding, and we need to generate significant market buzz to meet our Q4 revenue targets";
+                score += 35;
+            } else if (situational > 33) {
+                prompt += " for our new project management software launching next week";
+                score += 20;
+            } else {
+                prompt += " for our new software product";
+                score += 5;
+            }
+
+            // Add domain context
+            if (domain > 66) {
+                prompt += ". We're a B2B SaaS company in the enterprise productivity space, competing directly with Asana, Monday.com, and Notion. Our unique differentiator is AI-powered task prioritization and advanced analytics for team performance optimization";
+                score += 30;
+            } else if (domain > 33) {
+                prompt += ". We're a B2B SaaS company in the project management space";
+                score += 15;
+            } else {
+                prompt += ". We're a software company";
+                score += 5;
+            }
+
+            // Add audience context
+            if (audience > 66) {
+                prompt += ". The announcement targets IT decision-makers and team leads at mid-to-large enterprises (500+ employees) who are frustrated with current project management tools. They value efficiency, data-driven insights, and seamless integrations with existing workflows. They're typically skeptical of new tools but will adopt if ROI is clear";
+                score += 35;
+            } else if (audience > 33) {
+                prompt += ". Target audience is business professionals and team managers";
+                score += 15;
+            } else {
+                prompt += ". Target audience is general business users";
+                score += 5;
+            }
+
+            prompt += ".";
+
+            document.getElementById('generatedPrompt').textContent = prompt;
+
+            // Update score display
+            const scoreElement = document.getElementById('contextScore');
+            let scoreClass = 'needs-work';
+            let scoreMessage = 'Needs more context for optimal results';
+
+            if (score >= 80) {
+                scoreClass = 'excellent';
+                scoreMessage = 'Excellent context! This prompt should generate high-quality, targeted results.';
+            } else if (score >= 60) {
+                scoreClass = 'good';
+                scoreMessage = 'Good context level. Consider adding more specific details for even better results.';
+            }
+
+            scoreElement.innerHTML = `
+                <div class="analysis-result ${scoreClass}">
+                    Context Quality Score: ${score}/100 - ${scoreMessage}
+                </div>
+            `;
+        }
+
+        // Exercise Analysis Functions
+        function analyzeBusinessContext() {
+            const text = document.getElementById('businessExercise').value;
+            const analysis = analyzeContextQuality(text, 'business');
+            document.getElementById('businessResults').innerHTML = analysis;
+            document.getElementById('businessAnalysis').style.display = 'block';
+        }
+
+        function analyzeTechnicalContext() {
+            const text = document.getElementById('technicalExercise').value;
+            const analysis = analyzeContextQuality(text, 'technical');
+            document.getElementById('technicalResults').innerHTML = analysis;
+            document.getElementById('technicalAnalysis').style.display = 'block';
+        }
+
+        function analyzeCreativeContext() {
+            const text = document.getElementById('creativeExercise').value;
+            const analysis = analyzeContextQuality(text, 'creative');
+            document.getElementById('creativeResults').innerHTML = analysis;
+            document.getElementById('creativeAnalysis').style.display = 'block';
+        }
+
+        function analyzeContextQuality(text, type) {
+            if (!text.trim()) {
+                return '<div class="analysis-result needs-work">Please enter a prompt to analyze.</div>';
+            }
+
+            let score = 0;
+            let feedback = [];
+
+            // Check for situational context
+            if (text.toLowerCase().includes('scenario') || text.toLowerCase().includes('situation') ||
+                text.toLowerCase().includes('context') || text.toLowerCase().includes('background')) {
+                score += 20;
+                feedback.push('✅ Good situational context provided');
+            } else {
+                feedback.push('⚠️ Consider adding more situational context');
+            }
+
+            // Check for audience definition
+            if (text.toLowerCase().includes('audience') || text.toLowerCase().includes('team') ||
+                text.toLowerCase().includes('executive') || text.toLowerCase().includes('user')) {
+                score += 20;
+                feedback.push('✅ Audience clearly defined');
+            } else {
+                feedback.push('⚠️ Audience could be more specific');
+            }
+
+            // Check for constraints
+            if (text.toLowerCase().includes('format') || text.toLowerCase().includes('length') ||
+                text.toLowerCase().includes('requirement') || text.toLowerCase().includes('constraint')) {
+                score += 20;
+                feedback.push('✅ Constraints and requirements specified');
+            } else {
+                feedback.push('⚠️ Add specific format or length requirements');
+            }
+
+            // Check for domain specificity
+            const domainKeywords = ['company', 'business', 'technical', 'software', 'marketing', 'industry'];
+            if (domainKeywords.some(keyword => text.toLowerCase().includes(keyword))) {
+                score += 20;
+                feedback.push('✅ Domain context included');
+            } else {
+                feedback.push('⚠️ Add more domain-specific context');
+            }
+
+            // Check for examples or specificity
+            if (text.toLowerCase().includes('example') || text.toLowerCase().includes('like') ||
+                text.toLowerCase().includes('similar to') || text.length > 200) {
+                score += 20;
+                feedback.push('✅ Good level of detail and specificity');
+            } else {
+                feedback.push('⚠️ Consider adding examples or more specific details');
+            }
+
+            let resultClass = 'needs-work';
+            let resultMessage = 'Needs improvement';
+
+            if (score >= 80) {
+                resultClass = 'excellent';
+                resultMessage = 'Excellent context!';
+            } else if (score >= 60) {
+                resultClass = 'good';
+                resultMessage = 'Good context level';
+            }
+
+            return `
+                <div class="analysis-result ${resultClass}">
+                    Context Quality: ${score}/100 - ${resultMessage}
+                </div>
+                <div class="mt-3">
+                    <h5 class="font-bold text-gray-900 mb-2">Feedback:</h5>
+                    <ul class="text-sm space-y-1">
+                        ${feedback.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Solution Display Functions
+        function showBusinessSolution() {
+            document.getElementById('businessSolution').style.display = 'block';
+        }
+
+        function showTechnicalSolution() {
+            document.getElementById('technicalSolution').style.display = 'block';
+        }
+
+        function showCreativeSolution() {
+            document.getElementById('creativeSolution').style.display = 'block';
+        }
+
+        // Checklist Functions
+        function updateChecklistScore() {
+            const checkboxes = document.querySelectorAll('.context-checkbox');
+            const checked = document.querySelectorAll('.context-checkbox:checked').length;
+            const total = checkboxes.length;
+
+            document.getElementById('scoreValue').textContent = checked;
+
+            let message = '';
+            let scoreClass = '';
+
+            if (checked === 0) {
+                message = 'Start checking items to see your context quality score!';
+                scoreClass = 'text-gray-600';
+            } else if (checked <= 3) {
+                message = 'Basic context level - your prompts will work but could be much better.';
+                scoreClass = 'text-red-600';
+            } else if (checked <= 6) {
+                message = 'Good context level - you\'re providing solid background information.';
+                scoreClass = 'text-yellow-600';
+            } else if (checked <= 8) {
+                message = 'Great context level - your prompts should generate high-quality responses.';
+                scoreClass = 'text-blue-600';
+            } else {
+                message = 'Excellent context mastery - you\'re providing comprehensive, actionable context!';
+                scoreClass = 'text-green-600';
+            }
+
+            const scoreElement = document.getElementById('scoreMessage');
+            scoreElement.textContent = message;
+            scoreElement.className = `text-sm mt-2 ${scoreClass}`;
+        }
+
+        // Initialize demo
+        document.addEventListener('DOMContentLoaded', function () {
+            updateContextDemo();
+
+            // Add smooth animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.context-exercise, .context-explorer').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

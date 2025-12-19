@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Advanced Prompt Design Techniques - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master advanced prompt engineering techniques for Gemini AI. Learn token optimization, multi-role synthesis, self-reflection, and multimodal prompting.">
+    <meta name="keywords"
+        content="advanced prompting, token optimization, multi-role prompting, self-reflection, multimodal AI, deep research">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/fonts.css">
+    <link rel="stylesheet" href="../../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../../shared/buttons.css">
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Chapter 6 specific styling */
+        .chapter-hero {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(126, 34, 206, 0.1) 100%);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.05) 0%, transparent 70%);
+            animation: gentle-rotate 35s linear infinite;
+        }
+
+        @keyframes gentle-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .advanced-lab {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(147, 51, 234, 0.2);
+        }
+
+        .lab-header {
+            background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .lab-content {
+            padding: 2rem;
+        }
+
+        .technique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .technique-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(147, 51, 234, 0.15);
+        }
+
+        .technique-card.active {
+            border-color: #9333ea;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(126, 34, 206, 0.1) 100%);
+        }
+
+        .technique-card.token-aware {
+            border-left: 4px solid #ef4444;
+        }
+
+        .technique-card.conversation {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .technique-card.multi-role {
+            border-left: 4px solid #22c55e;
+        }
+
+        .technique-card.self-reflection {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .technique-card.deep-research {
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .technique-card.multimodal {
+            border-left: 4px solid #ec4899;
+        }
+
+        .technique-detail {
+            display: none;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .technique-detail.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .demo-workspace {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .prompt-builder {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .builder-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .advanced-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .advanced-input:focus {
+            outline: none;
+            border-color: #9333ea;
+            box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+        }
+
+        .technique-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .technique-tag {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+
+        .technique-tag:hover {
+            background: rgba(147, 51, 234, 0.1);
+            border-color: #9333ea;
+        }
+
+        .technique-tag.active {
+            background: #9333ea;
+            color: white;
+            border-color: #9333ea;
+        }
+
+        .example-showcase {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .showcase-header {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .example-tabs {
+            display: flex;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+
+        .example-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .example-tab:hover {
+            background: rgba(147, 51, 234, 0.1);
+            color: #7e22ce;
+        }
+
+        .example-tab.active {
+            color: #7e22ce;
+            background: white;
+            border-bottom-color: #9333ea;
+        }
+
+        .example-content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .example-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .comparison-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-card.before {
+            border-left: 4px solid #ef4444;
+        }
+
+        .comparison-card.after {
+            border-left: 4px solid #10b981;
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .token-counter {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .token-savings {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .mastery-tracker {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .tracker-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .mastery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .mastery-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .mastery-item.completed {
+            background: #dcfce7;
+            border-color: #10b981;
+        }
+
+        .mastery-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .progress-step.completed {
+            color: #059669;
+        }
+
+        .progress-step::before {
+            content: "○";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-step.completed::before {
+            content: "✓";
+            color: #10b981;
+        }
+
+        @media (max-width: 768px) {
+            .prompt-builder {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-view {
+                grid-template-columns: 1fr;
+            }
+            
+            .technique-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .example-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .example-tab {
+                flex: 1;
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Prompt Engineering Course">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Prompt Engineering Course</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Chapter 6</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Chapter Hero -->
+        <header class="chapter-hero relative z-10">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🚀</div>
+                <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    Chapter 6: Advanced Prompt Design Techniques
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Master the most sophisticated prompting strategies for Gemini AI. Unlock advanced techniques 
+                    including token optimization, multi-role synthesis, and multimodal reasoning.
+                </p>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-step completed">Introduction</div>
+                <div class="progress-step completed">Output Types</div>
+                <div class="progress-step completed">Context Mastery</div>
+                <div class="progress-step completed">Enhancement</div>
+                <div class="progress-step completed">Formatting</div>
+                <div class="progress-step completed">Advanced</div>
+            </div>
+
+            <!-- Learning Objectives -->
+            <section class="mb-12">
+                <div class="builder-section">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎯 Advanced Mastery Goals</h2>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• <strong>Token optimization:</strong> Maximize efficiency within context limits</li>
+                        <li>• <strong>Conversation threading:</strong> Leverage extensive context memory</li>
+                        <li>• <strong>Multi-role synthesis:</strong> Orchestrate multiple perspectives simultaneously</li>
+                        <li>• <strong>Self-reflection prompting:</strong> Guide Gemini to analyze its own reasoning</li>
+                        <li>• <strong>Deep research structuring:</strong> Design complex, evidence-based queries</li>
+                        <li>• <strong>Multimodal mastery:</strong> Combine text, images, audio, and video inputs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 6.1: Advanced Techniques Overview -->
+            <section class="mb-16">
+                <div class="advanced-lab">
+                    <div class="lab-header">
+                        <h2 class="text-2xl font-bold">🧪 Advanced Techniques Laboratory</h2>
+                        <p class="mt-2 opacity-90">Explore 6 sophisticated prompting strategies that unlock Gemini's full potential</p>
+                    </div>
+                    
+                    <div class="lab-content">
+                        <div class="technique-grid">
+                            <div class="technique-card token-aware" onclick="showTechnique('token-aware')">
+                                <div class="text-3xl mb-3">⚡</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Token-Aware Compression</h3>
+                                <p class="text-gray-600 text-sm">Optimize prompts for maximum efficiency within context limits</p>
+                                <div class="mt-3 text-xs text-red-600 font-medium">Essential for API cost control</div>
+                            </div>
+
+                            <div class="technique-card conversation" onclick="showTechnique('conversation')">
+                                <div class="text-3xl mb-3">🔗</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Conversation Threading</h3>
+                                <p class="text-gray-600 text-sm">Reference and build upon previous exchanges</p>
+                                <div class="mt-3 text-xs text-orange-600 font-medium">Leverages 1M token context</div>
+                            </div>
+
+                            <div class="technique-card multi-role" onclick="showTechnique('multi-role')">
+                                <div class="text-3xl mb-3">🎭</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Multi-Role Synthesis</h3>
+                                <p class="text-gray-600 text-sm">Orchestrate multiple perspectives simultaneously</p>
+                                <div class="mt-3 text-xs text-green-600 font-medium">Perfect for complex analysis</div>
+                            </div>
+
+                            <div class="technique-card self-reflection" onclick="showTechnique('self-reflection')">
+                                <div class="text-3xl mb-3">🪞</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Self-Reflection</h3>
+                                <p class="text-gray-600 text-sm">Guide Gemini to analyze its own reasoning</p>
+                                <div class="mt-3 text-xs text-blue-600 font-medium">Improves accuracy & transparency</div>
+                            </div>
+
+                            <div class="technique-card deep-research" onclick="showTechnique('deep-research')">
+                                <div class="text-3xl mb-3">🔬</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Deep Research</h3>
+                                <p class="text-gray-600 text-sm">Structure complex, evidence-based investigations</p>
+                                <div class="mt-3 text-xs text-purple-600 font-medium">Requires expert-level prompts</div>
+                            </div>
+
+                            <div class="technique-card multimodal" onclick="showTechnique('multimodal')">
+                                <div class="text-3xl mb-3">🎨</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Multimodal Mastery</h3>
+                                <p class="text-gray-600 text-sm">Combine text, images, audio, and video</p>
+                                <div class="mt-3 text-xs text-pink-600 font-medium">Gemini's unique strength</div>
+                            </div>
+                        </div>
+
+                        <!-- Technique Details -->
+                        <div id="token-aware-detail" class="technique-detail active">
+                            <h3 class="text-xl font-bold text-red-600 mb-4">⚡ Token-Aware Prompt Compression</h3>
+                            <p class="text-gray-700 mb-4">
+                                Optimize prompts to reduce token consumption while preserving essential meaning. 
+                                Critical for API cost management and maximizing context window utilization.
+                            </p>
+                            
+                            <div class="comparison-view">
+                                <div class="comparison-card before">
+                                    <h4 class="font-bold text-red-600 mb-2">❌ Token-Heavy Prompt</h4>
+                                    <div class="code-block">
+Create a detailed and comprehensive description of a futuristic city that incorporates advanced technology, sustainable energy solutions, and a diverse population, with particular focus on its infrastructure, cultural aspects, and the daily life experiences of residents.
+                                    </div>
+                                    <div class="token-counter">
+                                        <strong>Token Count:</strong> ~45 tokens
+                                    </div>
+                                </div>
+                                
+                                <div class="comparison-card after">
+                                    <h4 class="font-bold text-green-600 mb-2">✅ Compressed Prompt</h4>
+                                    <div class="code-block">
+Describe futuristic city: advanced tech, sustainable energy, diverse population. Focus: infrastructure, culture, daily life.
+                                    </div>
+                                    <div class="token-counter">
+                                        <strong>Token Count:</strong> ~18 tokens
+                                        <div class="token-savings">60% reduction!</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+                                <h4 class="font-bold text-red-800 mb-2">💡 Compression Strategies:</h4>
+                                <ul class="text-red-700 text-sm space-y-1">
+                                    <li>• Remove redundant words and phrases</li>
+                                    <li>• Use concise, targeted language</li>
+                                    <li>• Employ abbreviations and shorthand</li>
+                                    <li>• Prioritize essential information only</li>
+                                    <li>• Batch related requests efficiently</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="conversation-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-orange-600 mb-4">🔗 Conversation Thread Referencing</h3>
+                            <p class="text-gray-700 mb-4">
+                                Leverage Gemini's massive 1M token context window to reference and build upon 
+                                previous exchanges in the same conversation.
+                            </p>
+                            
+                            <div class="code-block">
+<strong>Previous Exchange:</strong>
+User: "Create a marketing strategy for eco-friendly products"
+Gemini: [Provides detailed strategy with 5 key points]
+
+<strong>Follow-up Prompt:</strong>
+"Based on our previous discussion about eco-friendly marketing, apply the same strategic framework you outlined to a sustainable fashion brand targeting millennials. Use the same 5-point structure but adapt the content."
+                            </div>
+
+                            <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400 mt-4">
+                                <h4 class="font-bold text-orange-800 mb-2">🔗 Threading Best Practices:</h4>
+                                <ul class="text-orange-700 text-sm space-y-1">
+                                    <li>• Use brief labels like "Format A" or "Previous approach"</li>
+                                    <li>• Reference specific elements from earlier responses</li>
+                                    <li>• Build complexity progressively across exchanges</li>
+                                    <li>• Maintain context coherence throughout conversation</li>
+                                    <li>• Leverage Gemini's exceptional memory capabilities</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="multi-role-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-green-600 mb-4">🎭 Dynamic Multi-Role Synthesis</h3>
+                            <p class="text-gray-700 mb-4">
+                                Assign multiple roles to Gemini simultaneously to explore different perspectives 
+                                or collaborate on complex problems.
+                            </p>
+                            
+                            <div class="code-block">
+Assume three roles to design a sustainable urban park:
+
+<strong>City Planner:</strong> Outline layout, infrastructure, transit integration
+<strong>Environmental Scientist:</strong> Detail eco-features, native plants, renewable energy
+<strong>Community Resident:</strong> Describe community benefits, cultural aspects, daily use
+
+Synthesize all perspectives into a cohesive plan that addresses each role's priorities while creating synergies between different viewpoints.
+                            </div>
+
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400 mt-4">
+                                <h4 class="font-bold text-green-800 mb-2">🎭 Multi-Role Strategies:</h4>
+                                <ul class="text-green-700 text-sm space-y-1">
+                                    <li>• Assign distinct voices and objectives to each role</li>
+                                    <li>• Use structured markers (headers, delimiters)</li>
+                                    <li>• Prevent role drift with clear boundaries</li>
+                                    <li>• Create collaboration or opposition dynamics</li>
+                                    <li>• Synthesize perspectives for comprehensive solutions</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="self-reflection-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-blue-600 mb-4">🪞 Self-Reflection Prompting</h3>
+                            <p class="text-gray-700 mb-4">
+                                Guide Gemini to analyze its own reasoning process, identify potential errors, 
+                                and provide transparency in its decision-making.
+                            </p>
+                            
+                            <div class="code-block">
+<strong>Self-Reflection Prompts:</strong>
+
+• "How did you arrive at that conclusion? Walk me through your reasoning step-by-step."
+
+• "Double-check your previous response for accuracy. Are there any claims that need verification?"
+
+• "Explain why you chose this approach over alternative methods."
+
+• "What assumptions did you make in your analysis, and how might they affect your conclusions?"
+                            </div>
+
+                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 mt-4">
+                                <h4 class="font-bold text-blue-800 mb-2">🪞 Reflection Applications:</h4>
+                                <ul class="text-blue-700 text-sm space-y-1">
+                                    <li>• Address potential hallucinations or errors</li>
+                                    <li>• Understand reasoning behind unexpected responses</li>
+                                    <li>• Improve transparency in complex analyses</li>
+                                    <li>• Guide iterative improvement of responses</li>
+                                    <li>• Build trust through explainable AI interactions</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="deep-research-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">🔬 Deep Research Structuring</h3>
+                            <p class="text-gray-700 mb-4">
+                                Design sophisticated, evidence-based research prompts that leverage Gemini's 
+                                Deep Research capabilities for comprehensive investigations.
+                            </p>
+                            
+                            <div class="code-block">
+You are a marketing research analyst with expertise in unconventional strategies.
+
+<strong>Deep Research Task:</strong> Investigate rogue marketing tactics (2022-2025)
+
+<strong>Required Analysis:</strong>
+• Company/brand identification
+• Tactic description and context
+• Measurable outcomes (ROI, visibility, conversion)
+• Public/media reception
+• Ethical considerations
+
+<strong>Output Requirements:</strong>
+• Reliable citations and sources
+• Organized, analysis-ready format
+• Evidence-based conclusions
+• Industry context and implications
+                            </div>
+
+                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400 mt-4">
+                                <h4 class="font-bold text-purple-800 mb-2">🔬 Deep Research Elements:</h4>
+                                <ul class="text-purple-700 text-sm space-y-1">
+                                    <li>• Specific timeframes and parameters</li>
+                                    <li>• Clear evidence requirements</li>
+                                    <li>• Structured output specifications</li>
+                                    <li>• Expert-level domain knowledge</li>
+                                    <li>• Citation and source verification</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="multimodal-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-pink-600 mb-4">🎨 Strategic Multimodal Prompting</h3>
+                            <p class="text-gray-700 mb-4">
+                                Combine text, images, audio, and video inputs for sophisticated analysis 
+                                that leverages Gemini's native multimodal capabilities.
+                            </p>
+                            
+                            <div class="code-block">
+<strong>Multimodal Chain-of-Thought Example:</strong>
+
+1. <strong>Visual Analysis:</strong> "Analyze this microscopic tissue sample image. Identify cellular structures and any abnormalities."
+
+2. <strong>Context Integration:</strong> "Given that this sample is from a patient with Rheumatoid Arthritis symptoms..."
+
+3. <strong>Synthesis:</strong> "Combine your visual observations with the clinical context to propose cellular mechanisms and identify potential therapeutic targets."
+                            </div>
+
+                            <div class="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-400 mt-4">
+                                <h4 class="font-bold text-pink-800 mb-2">🎨 Multimodal Strategies:</h4>
+                                <ul class="text-pink-700 text-sm space-y-1">
+                                    <li>• Sequential analysis: visual → contextual → synthesis</li>
+                                    <li>• External grounding with additional text sources</li>
+                                    <li>• Cross-modal reasoning and inference</li>
+                                    <li>• Comprehensive input integration</li>
+                                    <li>• Advanced pattern recognition across modalities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> 
+           <!-- Section 6.2: Interactive Advanced Prompt Builder -->
+            <section class="mb-16">
+                <div class="interactive-demo">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">
+                        🛠️ Advanced Prompt Builder
+                    </h2>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Combine multiple advanced techniques to create sophisticated prompts. 
+                        Select techniques and see how they work together.
+                    </p>
+
+                    <div class="demo-workspace">
+                        <div class="technique-selector">
+                            <div class="technique-tag active" onclick="toggleTechnique('compression')" id="compression-tag">
+                                ⚡ Token Compression
+                            </div>
+                            <div class="technique-tag" onclick="toggleTechnique('threading')" id="threading-tag">
+                                🔗 Threading
+                            </div>
+                            <div class="technique-tag" onclick="toggleTechnique('multi-role')" id="multi-role-tag">
+                                🎭 Multi-Role
+                            </div>
+                            <div class="technique-tag" onclick="toggleTechnique('reflection')" id="reflection-tag">
+                                🪞 Self-Reflection
+                            </div>
+                            <div class="technique-tag" onclick="toggleTechnique('research')" id="research-tag">
+                                🔬 Deep Research
+                            </div>
+                            <div class="technique-tag" onclick="toggleTechnique('multimodal')" id="multimodal-tag">
+                                🎨 Multimodal
+                            </div>
+                        </div>
+
+                        <div class="prompt-builder">
+                            <div class="builder-section">
+                                <h3 class="font-bold text-gray-900 mb-3">Prompt Configuration</h3>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        Base Topic:
+                                    </label>
+                                    <select id="topic-select" class="w-full p-2 border border-gray-300 rounded" onchange="updateAdvancedPrompt()">
+                                        <option value="climate">Climate Change Solutions</option>
+                                        <option value="ai-ethics">AI Ethics in Healthcare</option>
+                                        <option value="urban-planning">Sustainable Urban Planning</option>
+                                        <option value="education">Future of Education Technology</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        Complexity Level:
+                                    </label>
+                                    <input type="range" min="1" max="5" value="3" class="w-full" 
+                                           id="complexity-slider" onchange="updateAdvancedPrompt()">
+                                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                        <span>Basic</span>
+                                        <span>Expert</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        Output Format:
+                                    </label>
+                                    <select id="format-select" class="w-full p-2 border border-gray-300 rounded" onchange="updateAdvancedPrompt()">
+                                        <option value="analysis">Detailed Analysis</option>
+                                        <option value="report">Research Report</option>
+                                        <option value="comparison">Comparative Study</option>
+                                        <option value="proposal">Action Proposal</option>
+                                    </select>
+                                </div>
+
+                                <button onclick="generateAdvancedPrompt()" class="w-full nav-button-secondary">
+                                    🚀 Generate Advanced Prompt
+                                </button>
+                            </div>
+
+                            <div class="builder-section">
+                                <h3 class="font-bold text-gray-900 mb-3">Generated Prompt</h3>
+                                <textarea id="advanced-prompt-output" class="advanced-input" readonly 
+                                          placeholder="Configure your settings and click 'Generate Advanced Prompt' to see the result..."></textarea>
+                                
+                                <div class="flex gap-2 mt-4">
+                                    <button onclick="copyAdvancedPrompt()" class="nav-button-secondary flex-1">
+                                        📋 Copy
+                                    </button>
+                                    <button onclick="analyzeAdvancedPrompt()" class="nav-button-secondary flex-1">
+                                        🔍 Analyze
+                                    </button>
+                                    <button onclick="optimizePrompt()" class="nav-button-secondary flex-1">
+                                        ⚡ Optimize
+                                    </button>
+                                </div>
+
+                                <div id="prompt-analysis" class="mt-4" style="display: none;">
+                                    <!-- Analysis results will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6.3: Expert Examples Showcase -->
+            <section class="mb-16">
+                <div class="example-showcase">
+                    <div class="showcase-header">
+                        <h2 class="text-2xl font-bold">🏆 Expert-Level Advanced Prompts</h2>
+                        <p class="mt-2 opacity-90">Study these masterful examples that combine multiple advanced techniques</p>
+                    </div>
+                    
+                    <div class="example-tabs">
+                        <button class="example-tab active" onclick="showExample('token-compression')">
+                            ⚡ Token Compression
+                        </button>
+                        <button class="example-tab" onclick="showExample('conversation-threading')">
+                            🔗 Threading
+                        </button>
+                        <button class="example-tab" onclick="showExample('multi-role-synthesis')">
+                            🎭 Multi-Role
+                        </button>
+                        <button class="example-tab" onclick="showExample('self-reflection')">
+                            🪞 Reflection
+                        </button>
+                        <button class="example-tab" onclick="showExample('deep-research')">
+                            🔬 Research
+                        </button>
+                        <button class="example-tab" onclick="showExample('multimodal')">
+                            🎨 Multimodal
+                        </button>
+                    </div>
+
+                    <!-- Token Compression Example -->
+                    <div id="token-compression" class="example-content active">
+                        <h3 class="text-xl font-bold text-red-600 mb-4">⚡ Token-Aware Compression Example</h3>
+                        
+                        <div class="comparison-view">
+                            <div class="comparison-card before">
+                                <h4 class="font-bold text-red-600 mb-2">❌ Original Verbose Prompt</h4>
+                                <div class="code-block">
+I would like you to create a comprehensive and detailed description of what a futuristic city might look like, taking into consideration advanced technological innovations, sustainable and renewable energy solutions, and a diverse population with various cultural backgrounds. Please focus particularly on the infrastructure systems, the cultural aspects and social dynamics, and provide insights into what the daily life experiences of the residents living in this city would be like.
+                                </div>
+                                <div class="token-counter">
+                                    <strong>Estimated Tokens:</strong> ~75 tokens
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-card after">
+                                <h4 class="font-bold text-green-600 mb-2">✅ Compressed Version</h4>
+                                <div class="code-block">
+Describe futuristic city: advanced tech, sustainable energy, diverse population. Focus: infrastructure, culture, daily life.
+                                </div>
+                                <div class="token-counter">
+                                    <strong>Estimated Tokens:</strong> ~18 tokens
+                                    <div class="token-savings">76% reduction - saves ~$0.02 per request</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400 mt-4">
+                            <h4 class="font-bold text-red-800 mb-2">🎯 Compression Techniques Used:</h4>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                <li>• Removed redundant phrases ("comprehensive and detailed", "taking into consideration")</li>
+                                <li>• Eliminated filler words ("I would like you to", "Please")</li>
+                                <li>• Used concise terminology ("tech" vs "technological innovations")</li>
+                                <li>• Structured with colons for clarity without extra words</li>
+                                <li>• Maintained all essential requirements in compressed form</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Conversation Threading Example -->
+                    <div id="conversation-threading" class="example-content">
+                        <h3 class="text-xl font-bold text-orange-600 mb-4">🔗 Conversation Thread Referencing</h3>
+                        
+                        <div class="code-block">
+<strong>Previous Exchange Context:</strong>
+User: "Create a marketing strategy for sustainable fashion brands"
+Gemini: [Provided 5-point strategy including: 1) Transparency storytelling, 2) Influencer partnerships, 3) Community building, 4) Educational content, 5) Circular economy messaging]
+
+<strong>Advanced Threading Prompt:</strong>
+"Based on our previous discussion about sustainable fashion marketing, apply the same 5-point strategic framework you outlined to a tech startup developing carbon capture technology. 
+
+Maintain the structural approach (transparency, partnerships, community, education, messaging) but adapt each point for B2B audiences, longer sales cycles, and technical complexity. Reference 'Strategy Framework A' from our previous exchange and show how each element translates to this new context."
+                        </div>
+
+                        <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400 mt-4">
+                            <h4 class="font-bold text-orange-800 mb-2">🔗 Threading Advantages:</h4>
+                            <ul class="text-orange-700 text-sm space-y-1">
+                                <li>• <strong>Context preservation:</strong> Builds on established frameworks</li>
+                                <li>• <strong>Efficiency:</strong> No need to re-explain the 5-point structure</li>
+                                <li>• <strong>Consistency:</strong> Maintains coherent approach across topics</li>
+                                <li>• <strong>Complexity building:</strong> Layers sophistication progressively</li>
+                                <li>• <strong>Memory utilization:</strong> Leverages Gemini's 1M token context</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Role Synthesis Example -->
+                    <div id="multi-role-synthesis" class="example-content">
+                        <h3 class="text-xl font-bold text-green-600 mb-4">🎭 Dynamic Multi-Role Synthesis</h3>
+                        
+                        <div class="code-block">
+<strong>Multi-Role Urban Planning Prompt:</strong>
+
+Assume three distinct roles to collaboratively design a sustainable urban park for a city of 500,000 people:
+
+<strong>🏗️ CITY PLANNER:</strong>
+- Outline park layout, zoning, and infrastructure
+- Detail integration with public transit systems
+- Address accessibility and safety considerations
+- Provide cost estimates and implementation timeline
+
+<strong>🌱 ENVIRONMENTAL SCIENTIST:</strong>
+- Specify native plant species and ecosystem design
+- Design water recycling and renewable energy systems
+- Explain ecological benefits and carbon impact
+- Address biodiversity and habitat creation
+
+<strong>👥 COMMUNITY RESIDENT:</strong>
+- Describe how the park enhances daily community life
+- Identify cultural programming and local traditions
+- Explain benefits for different age groups and demographics
+- Address community concerns and usage patterns
+
+<strong>SYNTHESIS REQUIREMENT:</strong>
+Integrate all three perspectives into a cohesive master plan that addresses each role's priorities while creating synergies between infrastructure, ecology, and community needs.
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400 mt-4">
+                            <h4 class="font-bold text-green-800 mb-2">🎭 Multi-Role Benefits:</h4>
+                            <ul class="text-green-700 text-sm space-y-1">
+                                <li>• <strong>Comprehensive analysis:</strong> Multiple expert perspectives</li>
+                                <li>• <strong>Conflict resolution:</strong> Addresses competing priorities</li>
+                                <li>• <strong>Holistic solutions:</strong> Integrates diverse viewpoints</li>
+                                <li>• <strong>Stakeholder representation:</strong> Covers all key interests</li>
+                                <li>• <strong>Creative synthesis:</strong> Finds innovative compromises</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Self-Reflection Example -->
+                    <div id="self-reflection" class="example-content">
+                        <h3 class="text-xl font-bold text-blue-600 mb-4">🪞 Self-Reflection Prompting</h3>
+                        
+                        <div class="code-block">
+<strong>Initial Response Analysis:</strong>
+[After Gemini provides a complex analysis about AI bias in hiring]
+
+<strong>Self-Reflection Prompts:</strong>
+
+1. <strong>Reasoning Transparency:</strong>
+"Walk me through your step-by-step reasoning for concluding that algorithmic bias in hiring is primarily due to training data issues. What evidence did you consider, and what alternative explanations did you evaluate?"
+
+2. <strong>Assumption Identification:</strong>
+"What key assumptions did you make in your analysis? How might different assumptions change your conclusions about AI bias solutions?"
+
+3. <strong>Accuracy Verification:</strong>
+"Double-check your previous response for factual accuracy. Are there any claims that need verification or qualification? Use your 'Double Check' capability to review."
+
+4. <strong>Alternative Perspectives:</strong>
+"What are the strongest counterarguments to your position? How would critics of your analysis respond, and how would you address their concerns?"
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 mt-4">
+                            <h4 class="font-bold text-blue-800 mb-2">🪞 Reflection Applications:</h4>
+                            <ul class="text-blue-700 text-sm space-y-1">
+                                <li>• <strong>Error detection:</strong> Identifies potential hallucinations</li>
+                                <li>• <strong>Reasoning clarity:</strong> Explains decision-making process</li>
+                                <li>• <strong>Bias awareness:</strong> Reveals underlying assumptions</li>
+                                <li>• <strong>Quality improvement:</strong> Iterative response enhancement</li>
+                                <li>• <strong>Trust building:</strong> Transparent AI interactions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Deep Research Example -->
+                    <div id="deep-research" class="example-content">
+                        <h3 class="text-xl font-bold text-purple-600 mb-4">🔬 Deep Research Structuring</h3>
+                        
+                        <div class="code-block">
+<strong>Expert-Level Deep Research Prompt:</strong>
+
+You are a marketing research analyst with expertise in unconventional marketing strategies and digital disruption.
+
+<strong>DEEP RESEARCH INVESTIGATION:</strong>
+Conduct comprehensive research into "rogue marketing tactics" used by companies within the past 3 years (2022–2025). Focus on unconventional, boundary-pushing campaigns that generated significant impact.
+
+<strong>REQUIRED ANALYSIS FOR EACH TACTIC:</strong>
+• Company/brand identification and background
+• Detailed tactic description and execution method
+• Industry context and competitive landscape
+• Measurable outcomes (conversion rates, brand visibility, ROI)
+• Public reception and media coverage analysis
+• Ethical considerations and regulatory responses
+• Long-term brand impact assessment
+
+<strong>EVIDENCE REQUIREMENTS:</strong>
+• Reliable citations with source links
+• Quantitative data where available
+• Expert commentary and industry analysis
+• Case study documentation
+
+<strong>OUTPUT SPECIFICATIONS:</strong>
+• Organize by campaign/tactic (minimum 5 examples)
+• Executive summary with key insights
+• Trend analysis and pattern identification
+• Strategic recommendations for ethical implementation
+• Risk assessment framework
+
+<strong>RESEARCH ANCHORS:</strong>
+Focus on campaigns by companies like Liquid Death, Cards Against Humanity, Patagonia's anti-consumption messaging, or similar boundary-pushing brands.
+                        </div>
+
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400 mt-4">
+                            <h4 class="font-bold text-purple-800 mb-2">🔬 Deep Research Elements:</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• <strong>Expert role assignment:</strong> Establishes domain authority</li>
+                                <li>• <strong>Specific parameters:</strong> Clear timeframe and scope</li>
+                                <li>• <strong>Structured requirements:</strong> Detailed analysis framework</li>
+                                <li>• <strong>Evidence standards:</strong> Citation and verification needs</li>
+                                <li>• <strong>Concrete anchors:</strong> Specific companies for focused research</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Multimodal Example -->
+                    <div id="multimodal" class="example-content">
+                        <h3 class="text-xl font-bold text-pink-600 mb-4">🎨 Strategic Multimodal Prompting</h3>
+                        
+                        <div class="code-block">
+<strong>Advanced Multimodal Chain-of-Thought:</strong>
+
+[Image Upload: Microscopic view of inflamed synovial tissue showing cellular infiltration]
+
+<strong>PHASE 1 - Visual Analysis:</strong>
+"Analyze this microscopic biological sample image. Identify and quantify the different cellular structures present. Pay attention to morphology, distribution patterns, and any visible abnormalities."
+
+<strong>PHASE 2 - Context Integration:</strong>
+"Now integrate this visual data with the following clinical context: This sample was taken from a patient exhibiting symptoms of Rheumatoid Arthritis, including joint pain, morning stiffness, and elevated inflammatory markers."
+
+<strong>PHASE 3 - Advanced Synthesis:</strong>
+"Combine your visual observations with the clinical context to:
+• Propose plausible cellular mechanisms explaining the observed abnormalities
+• Identify potential diagnostic markers visible in the tissue
+• Suggest therapeutic targets based on the cellular pathology
+• Explain how the microscopic findings correlate with clinical symptoms"
+
+<strong>EXTERNAL GROUNDING:</strong>
+"Reference current research on synovial tissue pathology in autoimmune conditions to support your analysis and ensure accuracy."
+                        </div>
+
+                        <div class="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-400 mt-4">
+                            <h4 class="font-bold text-pink-800 mb-2">🎨 Multimodal Advantages:</h4>
+                            <ul class="text-pink-700 text-sm space-y-1">
+                                <li>• <strong>Sequential processing:</strong> Visual → contextual → synthesis</li>
+                                <li>• <strong>Cross-modal reasoning:</strong> Integrates different information types</li>
+                                <li>• <strong>External grounding:</strong> Anchors analysis in research</li>
+                                <li>• <strong>Comprehensive analysis:</strong> Beyond simple image description</li>
+                                <li>• <strong>Professional application:</strong> Real-world diagnostic scenarios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6.3: Advanced Practice Exercises -->
+            <section class="mb-16">
+                <div class="advanced-lab">
+                    <div class="lab-header">
+                        <h2 class="text-2xl font-bold">💪 Advanced Technique Practice Exercises</h2>
+                        <p class="mt-2 opacity-90">Master each advanced technique through hands-on practice and real-world challenges</p>
+                    </div>
+                    
+                    <div class="lab-content">
+                        <p class="text-gray-700 mb-6 text-center">
+                            This final section provides comprehensive exercises designed to help you master advanced techniques 
+                            in Gemini prompt design. Each exercise incorporates the sophisticated strategies we've explored, 
+                            with practical challenges that mirror real-world applications.
+                        </p>
+
+                        <!-- Exercise Grid -->
+                        <div class="technique-grid">
+                            <div class="technique-card token-aware" onclick="showExercise('exercise-1')">
+                                <div class="text-3xl mb-3">⚡</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Exercise 1: Token Compression</h3>
+                                <p class="text-gray-600 text-sm">Consumer behavior trends analysis with minimal tokens</p>
+                                <div class="mt-3 text-xs text-red-600 font-medium">Focus: Efficiency & Clarity</div>
+                            </div>
+
+                            <div class="technique-card conversation" onclick="showExercise('exercise-2')">
+                                <div class="text-3xl mb-3">🔗</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Exercise 2: Threading</h3>
+                                <p class="text-gray-600 text-sm">Reference and elaborate on previous conversations</p>
+                                <div class="mt-3 text-xs text-orange-600 font-medium">Focus: Context Building</div>
+                            </div>
+
+                            <div class="technique-card multi-role" onclick="showExercise('exercise-3')">
+                                <div class="text-3xl mb-3">🎭</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Exercise 3: Multi-Role Debate</h3>
+                                <p class="text-gray-600 text-sm">Simulate expert debate on controversial marketing</p>
+                                <div class="mt-3 text-xs text-green-600 font-medium">Focus: Perspective Synthesis</div>
+                            </div>
+
+                            <div class="technique-card self-reflection" onclick="showExercise('exercise-4')">
+                                <div class="text-3xl mb-3">🪞</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Exercise 4: Self-Reflection</h3>
+                                <p class="text-gray-600 text-sm">Guide Gemini to evaluate its own reasoning</p>
+                                <div class="mt-3 text-xs text-blue-600 font-medium">Focus: Quality Assurance</div>
+                            </div>
+
+                            <div class="technique-card deep-research" onclick="showExercise('exercise-5')">
+                                <div class="text-3xl mb-3">🔬</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Exercise 5: Deep Research</h3>
+                                <p class="text-gray-600 text-sm">Investigate emerging tourist destinations with data</p>
+                                <div class="mt-3 text-xs text-purple-600 font-medium">Focus: Evidence-Based Analysis</div>
+                            </div>
+
+                            <div class="technique-card multimodal" onclick="showExercise('exercise-6')">
+                                <div class="text-3xl mb-3">🎨</div>
+                                <h3 class="font-bold text-gray-900 mb-2">Exercise 6: Multimodal Design</h3>
+                                <p class="text-gray-600 text-sm">Interior design analysis with image and text inputs</p>
+                                <div class="mt-3 text-xs text-pink-600 font-medium">Focus: Cross-Modal Integration</div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise Details -->
+                        <div id="exercise-1-detail" class="technique-detail active">
+                            <h3 class="text-xl font-bold text-red-600 mb-4">⚡ Exercise 1: Token-Aware Prompt Compression</h3>
+                            
+                            <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400 mb-4">
+                                <h4 class="font-bold text-red-800 mb-2">🎯 Challenge:</h4>
+                                <p class="text-red-700 text-sm">
+                                    Write a token-aware compressed prompt that asks Gemini to identify and summarize the top 3 emerging 
+                                    consumer behavior trends from a document. Your prompt should be clear, focused, and optimized to use 
+                                    as few tokens as possible while still guiding the AI to perform precise, useful analysis.
+                                </p>
+                            </div>
+
+                            <div class="demo-workspace">
+                                <h4 class="font-bold text-gray-900 mb-3">✍️ Your Compressed Prompt:</h4>
+                                <textarea id="exercise-1-input" class="advanced-input" 
+                                          placeholder="Write your token-optimized prompt here..."></textarea>
+                                
+                                <div class="flex gap-3 mt-4">
+                                    <button onclick="analyzeTokens(1)" class="nav-button-secondary">
+                                        📊 Count Tokens
+                                    </button>
+                                    <button onclick="showExerciseHint(1)" class="nav-button-secondary">
+                                        💡 Get Hint
+                                    </button>
+                                    <button onclick="showExerciseSolution(1)" class="nav-button-secondary">
+                                        📝 Show Solution
+                                    </button>
+                                </div>
+
+                                <div id="exercise-1-feedback" class="mt-4" style="display: none;">
+                                    <!-- Feedback will appear here -->
+                                </div>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-4">
+                                <h4 class="font-bold text-yellow-800 mb-2">💡 Optimization Tips:</h4>
+                                <ul class="text-yellow-700 text-sm space-y-1">
+                                    <li>• Check for redundant phrasing and eliminate unnecessary words</li>
+                                    <li>• Use concise, direct language while maintaining clarity</li>
+                                    <li>• Focus on essential instructions only</li>
+                                    <li>• Consider using abbreviations where appropriate</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="exercise-2-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-orange-600 mb-4">🔗 Exercise 2: Conversation Thread Referencing</h3>
+                            
+                            <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400 mb-4">
+                                <h4 class="font-bold text-orange-800 mb-2">🎯 Challenge:</h4>
+                                <p class="text-orange-700 text-sm">
+                                    Go to a previous session with Gemini and review previous conversations. Write a prompt 
+                                    referencing a past answer of your choice and ask Gemini to elaborate on that answer further 
+                                    or provide a summary if it's already a long answer.
+                                </p>
+                            </div>
+
+                            <div class="demo-workspace">
+                                <h4 class="font-bold text-gray-900 mb-3">✍️ Your Threading Prompt:</h4>
+                                <textarea id="exercise-2-input" class="advanced-input" 
+                                          placeholder="Write your conversation threading prompt here..."></textarea>
+                                
+                                <div class="flex gap-3 mt-4">
+                                    <button onclick="analyzeThreading(2)" class="nav-button-secondary">
+                                        🔗 Analyze Threading
+                                    </button>
+                                    <button onclick="showExerciseHint(2)" class="nav-button-secondary">
+                                        💡 Get Hint
+                                    </button>
+                                    <button onclick="showExerciseSolution(2)" class="nav-button-secondary">
+                                        📝 Show Solution
+                                    </button>
+                                </div>
+
+                                <div id="exercise-2-feedback" class="mt-4" style="display: none;">
+                                    <!-- Feedback will appear here -->
+                                </div>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-4">
+                                <h4 class="font-bold text-yellow-800 mb-2">💡 Threading Tips:</h4>
+                                <ul class="text-yellow-700 text-sm space-y-1">
+                                    <li>• Be precise while describing the past conversation you're referencing</li>
+                                    <li>• Use clear labels like "our previous discussion about X"</li>
+                                    <li>• Reference specific elements or frameworks from earlier responses</li>
+                                    <li>• Build complexity progressively on established foundations</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="exercise-3-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-green-600 mb-4">🎭 Exercise 3: Dynamic Multi-Role Synthesis</h3>
+                            
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-400 mb-4">
+                                <h4 class="font-bold text-green-800 mb-2">🎯 Challenge:</h4>
+                                <p class="text-green-700 text-sm">
+                                    You're researching opposing views on a controversial marketing approach. Write a prompt that 
+                                    assigns two distinct expert roles with conflicting perspectives. Instruct Gemini to simulate 
+                                    a debate between them and present a clear summary of their arguments.
+                                </p>
+                            </div>
+
+                            <div class="demo-workspace">
+                                <h4 class="font-bold text-gray-900 mb-3">✍️ Your Multi-Role Debate Prompt:</h4>
+                                <textarea id="exercise-3-input" class="advanced-input" 
+                                          placeholder="Write your multi-role debate prompt here..."></textarea>
+                                
+                                <div class="flex gap-3 mt-4">
+                                    <button onclick="analyzeMultiRole(3)" class="nav-button-secondary">
+                                        🎭 Analyze Roles
+                                    </button>
+                                    <button onclick="showExerciseHint(3)" class="nav-button-secondary">
+                                        💡 Get Hint
+                                    </button>
+                                    <button onclick="showExerciseSolution(3)" class="nav-button-secondary">
+                                        📝 Show Solution
+                                    </button>
+                                </div>
+
+                                <div id="exercise-3-feedback" class="mt-4" style="display: none;">
+                                    <!-- Feedback will appear here -->
+                                </div>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-4">
+                                <h4 class="font-bold text-yellow-800 mb-2">💡 Multi-Role Tips:</h4>
+                                <ul class="text-yellow-700 text-sm space-y-1">
+                                    <li>• Clearly define each role's expertise and stance</li>
+                                    <li>• Ensure their perspectives genuinely conflict for meaningful debate</li>
+                                    <li>• Use structured markers to separate different voices</li>
+                                    <li>• Request synthesis or summary of the debate outcomes</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="exercise-4-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-blue-600 mb-4">🪞 Exercise 4: Self-Reflection Prompting</h3>
+                            
+                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 mb-4">
+                                <h4 class="font-bold text-blue-800 mb-2">🎯 Challenge:</h4>
+                                <p class="text-blue-700 text-sm">
+                                    Write a prompt that asks Gemini to reflect on its own response to a previous question. 
+                                    Your goal is to encourage the AI to evaluate the reasoning behind its answer, check for 
+                                    possible flaws or biases, and suggest how it might improve the output if asked again.
+                                </p>
+                            </div>
+
+                            <div class="demo-workspace">
+                                <h4 class="font-bold text-gray-900 mb-3">✍️ Your Self-Reflection Prompt:</h4>
+                                <textarea id="exercise-4-input" class="advanced-input" 
+                                          placeholder="Write your self-reflection prompt here..."></textarea>
+                                
+                                <div class="flex gap-3 mt-4">
+                                    <button onclick="analyzeReflection(4)" class="nav-button-secondary">
+                                        🪞 Analyze Reflection
+                                    </button>
+                                    <button onclick="showExerciseHint(4)" class="nav-button-secondary">
+                                        💡 Get Hint
+                                    </button>
+                                    <button onclick="showExerciseSolution(4)" class="nav-button-secondary">
+                                        📝 Show Solution
+                                    </button>
+                                </div>
+
+                                <div id="exercise-4-feedback" class="mt-4" style="display: none;">
+                                    <!-- Feedback will appear here -->
+                                </div>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-4">
+                                <h4 class="font-bold text-yellow-800 mb-2">💡 Reflection Tips:</h4>
+                                <ul class="text-yellow-700 text-sm space-y-1">
+                                    <li>• Focus on making the prompt clear and constructive</li>
+                                    <li>• Ask as if you're requesting a peer to double-check their thinking</li>
+                                    <li>• Request specific evaluation of reasoning steps</li>
+                                    <li>• Encourage identification of assumptions and potential biases</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="exercise-5-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-purple-600 mb-4">🔬 Exercise 5: Deep Research Structuring</h3>
+                            
+                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400 mb-4">
+                                <h4 class="font-bold text-purple-800 mb-2">🎯 Challenge:</h4>
+                                <p class="text-purple-700 text-sm">
+                                    Create a Deep Research prompt that asks Gemini to research the top emerging tourist 
+                                    destinations in a specific country over the past five years, including key attractions, 
+                                    visitor trends, and supporting data.
+                                </p>
+                            </div>
+
+                            <div class="demo-workspace">
+                                <h4 class="font-bold text-gray-900 mb-3">✍️ Your Deep Research Prompt:</h4>
+                                <textarea id="exercise-5-input" class="advanced-input" 
+                                          placeholder="Write your deep research prompt here..."></textarea>
+                                
+                                <div class="flex gap-3 mt-4">
+                                    <button onclick="analyzeResearch(5)" class="nav-button-secondary">
+                                        🔬 Analyze Research Structure
+                                    </button>
+                                    <button onclick="showExerciseHint(5)" class="nav-button-secondary">
+                                        💡 Get Hint
+                                    </button>
+                                    <button onclick="showExerciseSolution(5)" class="nav-button-secondary">
+                                        📝 Show Solution
+                                    </button>
+                                </div>
+
+                                <div id="exercise-5-feedback" class="mt-4" style="display: none;">
+                                    <!-- Feedback will appear here -->
+                                </div>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-4">
+                                <h4 class="font-bold text-yellow-800 mb-2">💡 Research Tips:</h4>
+                                <ul class="text-yellow-700 text-sm space-y-1">
+                                    <li>• Start by clearly stating the country and time frame</li>
+                                    <li>• Specify what kind of insights you're looking for</li>
+                                    <li>• Use precise language to help Gemini focus its search</li>
+                                    <li>• Request evidence, data, and reliable sources</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="exercise-6-detail" class="technique-detail">
+                            <h3 class="text-xl font-bold text-pink-600 mb-4">🎨 Exercise 6: Advanced Multimodal Prompting</h3>
+                            
+                            <div class="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-400 mb-4">
+                                <h4 class="font-bold text-pink-800 mb-2">🎯 Challenge:</h4>
+                                <p class="text-pink-700 text-sm">
+                                    Design a multimodal prompt that analyzes an image of a room's current interior and, 
+                                    given specific design preferences and a budget (text), generates a detailed redecoration 
+                                    plan including furniture suggestions and color palette recommendations.
+                                </p>
+                            </div>
+
+                            <div class="demo-workspace">
+                                <h4 class="font-bold text-gray-900 mb-3">✍️ Your Multimodal Design Prompt:</h4>
+                                <textarea id="exercise-6-input" class="advanced-input" 
+                                          placeholder="Write your multimodal design prompt here..."></textarea>
+                                
+                                <div class="flex gap-3 mt-4">
+                                    <button onclick="analyzeMultimodal(6)" class="nav-button-secondary">
+                                        🎨 Analyze Multimodal Structure
+                                    </button>
+                                    <button onclick="showExerciseHint(6)" class="nav-button-secondary">
+                                        💡 Get Hint
+                                    </button>
+                                    <button onclick="showExerciseSolution(6)" class="nav-button-secondary">
+                                        📝 Show Solution
+                                    </button>
+                                </div>
+
+                                <div id="exercise-6-feedback" class="mt-4" style="display: none;">
+                                    <!-- Feedback will appear here -->
+                                </div>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-4">
+                                <h4 class="font-bold text-yellow-800 mb-2">💡 Multimodal Tips:</h4>
+                                <ul class="text-yellow-700 text-sm space-y-1">
+                                    <li>• Consider how AI's ability to 'see' visual details enriches suggestions</li>
+                                    <li>• Structure the prompt to analyze image first, then integrate text context</li>
+                                    <li>• Request specific deliverables (furniture, colors, layout)</li>
+                                    <li>• Combine visual analysis with practical constraints (budget, preferences)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Mastery Tracker -->
+            <section class="mb-16">
+                <div class="mastery-tracker">
+                    <div class="tracker-header">
+                        <h2 class="text-2xl font-bold">🎯 Advanced Technique Mastery</h2>
+                        <p class="mt-2 opacity-90">Track your progress mastering each advanced technique</p>
+                    </div>
+                    
+                    <div class="mastery-grid">
+                        <div class="mastery-item" id="mastery-compression">
+                            <div class="mastery-icon">⚡</div>
+                            <h3 class="font-bold text-gray-900">Token Compression</h3>
+                            <p class="text-sm text-gray-600">Optimize for efficiency</p>
+                            <button onclick="practiceCompression()" class="mt-2 text-xs bg-red-100 text-red-700 px-2 py-1 rounded">
+                                Practice
+                            </button>
+                        </div>
+
+                        <div class="mastery-item" id="mastery-threading">
+                            <div class="mastery-icon">🔗</div>
+                            <h3 class="font-bold text-gray-900">Threading</h3>
+                            <p class="text-sm text-gray-600">Reference conversations</p>
+                            <button onclick="practiceThreading()" class="mt-2 text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">
+                                Practice
+                            </button>
+                        </div>
+
+                        <div class="mastery-item" id="mastery-multi-role">
+                            <div class="mastery-icon">🎭</div>
+                            <h3 class="font-bold text-gray-900">Multi-Role</h3>
+                            <p class="text-sm text-gray-600">Multiple perspectives</p>
+                            <button onclick="practiceMultiRole()" class="mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                                Practice
+                            </button>
+                        </div>
+
+                        <div class="mastery-item" id="mastery-reflection">
+                            <div class="mastery-icon">🪞</div>
+                            <h3 class="font-bold text-gray-900">Self-Reflection</h3>
+                            <p class="text-sm text-gray-600">Analyze reasoning</p>
+                            <button onclick="practiceReflection()" class="mt-2 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                                Practice
+                            </button>
+                        </div>
+
+                        <div class="mastery-item" id="mastery-research">
+                            <div class="mastery-icon">🔬</div>
+                            <h3 class="font-bold text-gray-900">Deep Research</h3>
+                            <p class="text-sm text-gray-600">Evidence-based queries</p>
+                            <button onclick="practiceResearch()" class="mt-2 text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">
+                                Practice
+                            </button>
+                        </div>
+
+                        <div class="mastery-item" id="mastery-multimodal">
+                            <div class="mastery-icon">🎨</div>
+                            <h3 class="font-bold text-gray-900">Multimodal</h3>
+                            <p class="text-sm text-gray-600">Cross-modal analysis</p>
+                            <button onclick="practiceMultimodal()" class="mt-2 text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded">
+                                Practice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Completion -->
+            <section class="mb-12">
+                <div class="builder-section">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎓 Mastery Achievement</h2>
+                    <p class="text-gray-700 mb-4">
+                        Congratulations! You've completed the comprehensive Gemini Prompt Engineering Mini-Course. 
+                        You now possess advanced skills that unlock Gemini's full potential across diverse applications.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-3">🏆 Skills Mastered</h3>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• <strong>Foundational techniques:</strong> Role assignment, context, and structure</li>
+                                <li>• <strong>Output control:</strong> Length, format, and style management</li>
+                                <li>• <strong>Advanced strategies:</strong> Token optimization and multi-role synthesis</li>
+                                <li>• <strong>Specialized applications:</strong> Research, reflection, and multimodal</li>
+                                <li>• <strong>Professional implementation:</strong> Real-world prompt engineering</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-3">🚀 Next Steps</h3>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li>• Apply techniques to your specific use cases</li>
+                                <li>• Experiment with technique combinations</li>
+                                <li>• Build a personal prompt library</li>
+                                <li>• Share knowledge with your team</li>
+                                <li>• Continue learning with advanced AI developments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-8 text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎉 Course Complete!</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        Outstanding achievement! You've mastered advanced prompt engineering techniques for Gemini AI. 
+                        You're now equipped to tackle complex challenges and unlock Gemini's full potential in any domain.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../chapter-5/index.html" class="nav-button-secondary">
+                            ⬅️ Back to Chapter 5
+                        </a>
+                        <a href="../index.html" class="nav-button-secondary">
+                            📚 Course Overview
+                        </a>
+                        <a href="../../index.html" class="nav-button-secondary">
+                            🏠 Gemini Mastery Hub
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../../shared/scripts/footer.js" defer></script>
+    <script src="../../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Chapter 6 Interactive Functionality
+        let activeTechniques = ['compression'];
+        let masteryProgress = {
+            compression: false,
+            threading: false,
+            'multi-role': false,
+            reflection: false,
+            research: false,
+            multimodal: false
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            showTechnique('token-aware');
+            showExample('token-compression');
+            updateAdvancedPrompt();
+        });
+
+        // Technique detail functions
+        function showTechnique(technique) {
+            // Hide all technique details
+            document.querySelectorAll('.technique-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Remove active class from all cards
+            document.querySelectorAll('.technique-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Show selected technique and activate card
+            document.getElementById(technique + '-detail').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Example showcase functions
+        function showExample(example) {
+            // Hide all example contents
+            document.querySelectorAll('.example-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.example-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected example and activate tab
+            document.getElementById(example).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Advanced prompt builder functions
+        function toggleTechnique(technique) {
+            const tag = document.getElementById(technique + '-tag');
+            const index = activeTechniques.indexOf(technique);
+            
+            if (index > -1) {
+                activeTechniques.splice(index, 1);
+                tag.classList.remove('active');
+            } else {
+                activeTechniques.push(technique);
+                tag.classList.add('active');
+            }
+            
+            updateAdvancedPrompt();
+        }
+
+        function updateAdvancedPrompt() {
+            // This function would update the prompt preview based on selected techniques
+            // For demo purposes, we'll show a simple update
+            const promptOutput = document.getElementById('advanced-prompt-output');
+            if (promptOutput) {
+                promptOutput.placeholder = `Advanced prompt will be generated based on selected techniques: ${activeTechniques.join(', ')}`;
+            }
+        }
+
+        function generateAdvancedPrompt() {
+            const topic = document.getElementById('topic-select').value;
+            const complexity = document.getElementById('complexity-slider').value;
+            const format = document.getElementById('format-select').value;
+            
+            let prompt = buildAdvancedPrompt(topic, complexity, format, activeTechniques);
+            document.getElementById('advanced-prompt-output').value = prompt;
+        }
+
+        function buildAdvancedPrompt(topic, complexity, format, techniques) {
+            const topics = {
+                climate: 'climate change solutions',
+                'ai-ethics': 'AI ethics in healthcare',
+                'urban-planning': 'sustainable urban planning',
+                education: 'future of education technology'
+            };
+            
+            const complexityLevels = {
+                1: 'basic overview',
+                2: 'intermediate analysis',
+                3: 'detailed examination',
+                4: 'expert-level investigation',
+                5: 'comprehensive research study'
+            };
+            
+            let prompt = '';
+            
+            // Add role based on complexity
+            if (complexity >= 3) {
+                prompt += 'You are a senior expert in this field. ';
+            }
+            
+            // Add multi-role if selected
+            if (techniques.includes('multi-role')) {
+                prompt += 'Assume multiple expert perspectives: researcher, practitioner, and policy advisor. ';
+            }
+            
+            // Main task
+            prompt += `Provide a ${complexityLevels[complexity]} of ${topics[topic]}. `;
+            
+            // Add threading reference if selected
+            if (techniques.includes('threading')) {
+                prompt += 'Build upon our previous discussion framework. ';
+            }
+            
+            // Add research requirements if selected
+            if (techniques.includes('research')) {
+                prompt += 'Include evidence-based analysis with reliable sources. ';
+            }
+            
+            // Add reflection if selected
+            if (techniques.includes('reflection')) {
+                prompt += 'Explain your reasoning process and verify key claims. ';
+            }
+            
+            // Add format specification
+            const formats = {
+                analysis: 'Structure as a detailed analysis with clear sections.',
+                report: 'Format as a professional research report.',
+                comparison: 'Present as a comparative study with multiple viewpoints.',
+                proposal: 'Develop as an actionable proposal with implementation steps.'
+            };
+            prompt += formats[format];
+            
+            return prompt;
+        }
+
+        function copyAdvancedPrompt() {
+            const promptText = document.getElementById('advanced-prompt-output').value;
+            if (promptText) {
+                navigator.clipboard.writeText(promptText).then(() => {
+                    alert('Advanced prompt copied to clipboard!');
+                });
+            } else {
+                alert('Please generate a prompt first!');
+            }
+        }
+
+        function analyzeAdvancedPrompt() {
+            const promptText = document.getElementById('advanced-prompt-output').value;
+            if (!promptText) {
+                alert('Please generate a prompt first!');
+                return;
+            }
+            
+            const analysis = performAdvancedAnalysis(promptText);
+            displayAdvancedAnalysis(analysis);
+        }
+
+        function performAdvancedAnalysis(prompt) {
+            const techniques = [];
+            let score = 0;
+            
+            if (prompt.toLowerCase().includes('you are')) {
+                techniques.push('Role Assignment');
+                score += 15;
+            }
+            
+            if (prompt.toLowerCase().includes('multiple') || prompt.toLowerCase().includes('perspectives')) {
+                techniques.push('Multi-Role Synthesis');
+                score += 20;
+            }
+            
+            if (prompt.toLowerCase().includes('previous') || prompt.toLowerCase().includes('framework')) {
+                techniques.push('Conversation Threading');
+                score += 15;
+            }
+            
+            if (prompt.toLowerCase().includes('evidence') || prompt.toLowerCase().includes('sources')) {
+                techniques.push('Deep Research');
+                score += 20;
+            }
+            
+            if (prompt.toLowerCase().includes('reasoning') || prompt.toLowerCase().includes('verify')) {
+                techniques.push('Self-Reflection');
+                score += 15;
+            }
+            
+            if (prompt.toLowerCase().includes('structure') || prompt.toLowerCase().includes('format')) {
+                techniques.push('Format Control');
+                score += 10;
+            }
+            
+            const wordCount = prompt.split(' ').length;
+            const efficiency = wordCount < 50 ? 'High' : wordCount < 100 ? 'Medium' : 'Low';
+            
+            return {
+                techniques: techniques,
+                score: Math.min(score, 100),
+                wordCount: wordCount,
+                efficiency: efficiency,
+                level: score >= 80 ? 'Expert' : score >= 60 ? 'Advanced' : score >= 40 ? 'Intermediate' : 'Beginner'
+            };
+        }
+
+        function displayAdvancedAnalysis(analysis) {
+            const analysisDiv = document.getElementById('prompt-analysis');
+            
+            analysisDiv.innerHTML = `
+                <h4 class="font-bold text-gray-900 mb-3">🔍 Advanced Prompt Analysis</h4>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="bg-purple-50 p-3 rounded">
+                        <div class="font-bold text-purple-800">Sophistication Score</div>
+                        <div class="text-2xl font-bold text-purple-600">${analysis.score}/100</div>
+                        <div class="text-sm text-purple-700">${analysis.level} Level</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded">
+                        <div class="font-bold text-blue-800">Token Efficiency</div>
+                        <div class="text-2xl font-bold text-blue-600">${analysis.efficiency}</div>
+                        <div class="text-sm text-blue-700">${analysis.wordCount} words</div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                    <div class="font-bold text-gray-800 mb-2">Techniques Detected:</div>
+                    <div class="flex flex-wrap gap-2">
+                        ${analysis.techniques.map(tech => `<span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">${tech}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            analysisDiv.style.display = 'block';
+        }
+
+        function optimizePrompt() {
+            const promptText = document.getElementById('advanced-prompt-output').value;
+            if (!promptText) {
+                alert('Please generate a prompt first!');
+                return;
+            }
+            
+            // Simple optimization - remove redundant words
+            const optimized = promptText
+                .replace(/\b(please|kindly|would you|could you)\b/gi, '')
+                .replace(/\b(detailed|comprehensive|thorough)\b/gi, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+            
+            document.getElementById('advanced-prompt-output').value = optimized;
+            alert('Prompt optimized for token efficiency!');
+        }
+
+        // Exercise functions
+        function showExercise(exerciseId) {
+            // Hide all exercise details
+            document.querySelectorAll('.technique-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Remove active class from all cards
+            document.querySelectorAll('.technique-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Show selected exercise and activate card
+            document.getElementById(exerciseId + '-detail').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Exercise analysis functions
+        function analyzeTokens(exerciseNum) {
+            const input = document.getElementById(`exercise-${exerciseNum}-input`).value.trim();
+            const feedbackDiv = document.getElementById(`exercise-${exerciseNum}-feedback`);
+            
+            if (!input) {
+                showExerciseFeedback(exerciseNum, 'Please write your prompt first!', 'warning');
+                return;
+            }
+            
+            const wordCount = input.split(' ').length;
+            const tokenEstimate = Math.ceil(wordCount * 0.75); // Rough token estimation
+            
+            let efficiency = 'Low';
+            let color = 'red';
+            if (tokenEstimate < 20) {
+                efficiency = 'Excellent';
+                color = 'green';
+            } else if (tokenEstimate < 35) {
+                efficiency = 'Good';
+                color = 'blue';
+            } else if (tokenEstimate < 50) {
+                efficiency = 'Fair';
+                color = 'yellow';
+            }
+            
+            const feedback = `
+                <h4 class="font-bold text-${color}-800 mb-2">📊 Token Analysis:</h4>
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="bg-${color}-50 p-3 rounded text-center">
+                        <div class="font-bold text-${color}-800">Words</div>
+                        <div class="text-2xl font-bold text-${color}-600">${wordCount}</div>
+                    </div>
+                    <div class="bg-${color}-50 p-3 rounded text-center">
+                        <div class="font-bold text-${color}-800">Est. Tokens</div>
+                        <div class="text-2xl font-bold text-${color}-600">${tokenEstimate}</div>
+                    </div>
+                    <div class="bg-${color}-50 p-3 rounded text-center">
+                        <div class="font-bold text-${color}-800">Efficiency</div>
+                        <div class="text-lg font-bold text-${color}-600">${efficiency}</div>
+                    </div>
+                </div>
+                <p class="text-${color}-700 text-sm">
+                    ${efficiency === 'Excellent' ? '🎉 Outstanding compression! Your prompt is highly efficient.' :
+                      efficiency === 'Good' ? '👍 Good compression. Consider further optimization.' :
+                      efficiency === 'Fair' ? '💡 Moderate efficiency. Look for redundant words to remove.' :
+                      '⚠️ High token usage. Significant compression opportunities available.'}
+                </p>
+            `;
+            
+            showExerciseFeedback(exerciseNum, feedback, 'info');
+        }
+
+        function analyzeThreading(exerciseNum) {
+            const input = document.getElementById(`exercise-${exerciseNum}-input`).value.trim();
+            
+            if (!input) {
+                showExerciseFeedback(exerciseNum, 'Please write your prompt first!', 'warning');
+                return;
+            }
+            
+            const hasReference = input.toLowerCase().includes('previous') || input.toLowerCase().includes('earlier') || input.toLowerCase().includes('our discussion');
+            const hasSpecificity = input.toLowerCase().includes('framework') || input.toLowerCase().includes('approach') || input.toLowerCase().includes('format');
+            const hasContinuity = input.toLowerCase().includes('build') || input.toLowerCase().includes('expand') || input.toLowerCase().includes('elaborate');
+            
+            let score = 0;
+            const feedback = [];
+            
+            if (hasReference) {
+                score += 30;
+                feedback.push('✅ Good reference to previous conversation');
+            } else {
+                feedback.push('❌ Missing clear reference to previous exchange');
+            }
+            
+            if (hasSpecificity) {
+                score += 30;
+                feedback.push('✅ Specific elements referenced');
+            } else {
+                feedback.push('💡 Consider referencing specific frameworks or formats');
+            }
+            
+            if (hasContinuity) {
+                score += 40;
+                feedback.push('✅ Clear continuity and building instruction');
+            } else {
+                feedback.push('💡 Add instruction for how to build on previous content');
+            }
+            
+            const level = score >= 80 ? 'Expert' : score >= 60 ? 'Advanced' : score >= 40 ? 'Intermediate' : 'Beginner';
+            
+            const analysisHtml = `
+                <h4 class="font-bold text-orange-800 mb-2">🔗 Threading Analysis:</h4>
+                <div class="bg-orange-50 p-3 rounded mb-3">
+                    <div class="font-bold text-orange-800">Threading Quality: ${score}/100 - ${level}</div>
+                </div>
+                <div class="space-y-1 text-sm">
+                    ${feedback.map(item => `<div>${item}</div>`).join('')}
+                </div>
+            `;
+            
+            showExerciseFeedback(exerciseNum, analysisHtml, 'info');
+        }
+
+        function analyzeMultiRole(exerciseNum) {
+            const input = document.getElementById(`exercise-${exerciseNum}-input`).value.trim();
+            
+            if (!input) {
+                showExerciseFeedback(exerciseNum, 'Please write your prompt first!', 'warning');
+                return;
+            }
+            
+            const roleCount = (input.match(/role|expert|perspective|as a/gi) || []).length;
+            const hasConflict = input.toLowerCase().includes('debate') || input.toLowerCase().includes('opposing') || input.toLowerCase().includes('conflict');
+            const hasStructure = input.toLowerCase().includes('first') || input.toLowerCase().includes('second') || input.toLowerCase().includes('then');
+            const hasSynthesis = input.toLowerCase().includes('summary') || input.toLowerCase().includes('synthesize') || input.toLowerCase().includes('combine');
+            
+            let score = 0;
+            const feedback = [];
+            
+            if (roleCount >= 2) {
+                score += 25;
+                feedback.push(`✅ Multiple roles detected (${roleCount} role indicators)`);
+            } else {
+                feedback.push('❌ Need at least 2 distinct roles');
+            }
+            
+            if (hasConflict) {
+                score += 25;
+                feedback.push('✅ Conflict/debate structure present');
+            } else {
+                feedback.push('💡 Add explicit conflict or opposing viewpoints');
+            }
+            
+            if (hasStructure) {
+                score += 25;
+                feedback.push('✅ Clear structural organization');
+            } else {
+                feedback.push('💡 Add structural markers to separate roles');
+            }
+            
+            if (hasSynthesis) {
+                score += 25;
+                feedback.push('✅ Synthesis/summary requested');
+            } else {
+                feedback.push('💡 Request synthesis of different perspectives');
+            }
+            
+            const level = score >= 80 ? 'Expert' : score >= 60 ? 'Advanced' : score >= 40 ? 'Intermediate' : 'Beginner';
+            
+            const analysisHtml = `
+                <h4 class="font-bold text-green-800 mb-2">🎭 Multi-Role Analysis:</h4>
+                <div class="bg-green-50 p-3 rounded mb-3">
+                    <div class="font-bold text-green-800">Multi-Role Quality: ${score}/100 - ${level}</div>
+                </div>
+                <div class="space-y-1 text-sm">
+                    ${feedback.map(item => `<div>${item}</div>`).join('')}
+                </div>
+            `;
+            
+            showExerciseFeedback(exerciseNum, analysisHtml, 'info');
+        }
+
+        function analyzeReflection(exerciseNum) {
+            const input = document.getElementById(`exercise-${exerciseNum}-input`).value.trim();
+            
+            if (!input) {
+                showExerciseFeedback(exerciseNum, 'Please write your prompt first!', 'warning');
+                return;
+            }
+            
+            const hasReflection = input.toLowerCase().includes('reflect') || input.toLowerCase().includes('evaluate') || input.toLowerCase().includes('analyze');
+            const hasReasoning = input.toLowerCase().includes('reasoning') || input.toLowerCase().includes('logic') || input.toLowerCase().includes('thought process');
+            const hasImprovement = input.toLowerCase().includes('improve') || input.toLowerCase().includes('better') || input.toLowerCase().includes('enhance');
+            const hasBias = input.toLowerCase().includes('bias') || input.toLowerCase().includes('assumption') || input.toLowerCase().includes('flaw');
+            
+            let score = 0;
+            const feedback = [];
+            
+            if (hasReflection) {
+                score += 25;
+                feedback.push('✅ Clear reflection instruction');
+            } else {
+                feedback.push('❌ Missing explicit reflection request');
+            }
+            
+            if (hasReasoning) {
+                score += 25;
+                feedback.push('✅ Reasoning analysis requested');
+            } else {
+                feedback.push('💡 Ask for reasoning or thought process analysis');
+            }
+            
+            if (hasImprovement) {
+                score += 25;
+                feedback.push('✅ Improvement suggestions requested');
+            } else {
+                feedback.push('💡 Request suggestions for improvement');
+            }
+            
+            if (hasBias) {
+                score += 25;
+                feedback.push('✅ Bias/assumption identification included');
+            } else {
+                feedback.push('💡 Ask about assumptions or potential biases');
+            }
+            
+            const level = score >= 80 ? 'Expert' : score >= 60 ? 'Advanced' : score >= 40 ? 'Intermediate' : 'Beginner';
+            
+            const analysisHtml = `
+                <h4 class="font-bold text-blue-800 mb-2">🪞 Reflection Analysis:</h4>
+                <div class="bg-blue-50 p-3 rounded mb-3">
+                    <div class="font-bold text-blue-800">Reflection Quality: ${score}/100 - ${level}</div>
+                </div>
+                <div class="space-y-1 text-sm">
+                    ${feedback.map(item => `<div>${item}</div>`).join('')}
+                </div>
+            `;
+            
+            showExerciseFeedback(exerciseNum, analysisHtml, 'info');
+        }
+
+        function analyzeResearch(exerciseNum) {
+            const input = document.getElementById(`exercise-${exerciseNum}-input`).value.trim();
+            
+            if (!input) {
+                showExerciseFeedback(exerciseNum, 'Please write your prompt first!', 'warning');
+                return;
+            }
+            
+            const hasTimeframe = input.toLowerCase().includes('year') || input.toLowerCase().includes('2019') || input.toLowerCase().includes('past') || input.toLowerCase().includes('recent');
+            const hasLocation = input.toLowerCase().includes('country') || input.toLowerCase().includes('nation') || /\b[A-Z][a-z]+\b/.test(input);
+            const hasData = input.toLowerCase().includes('data') || input.toLowerCase().includes('statistics') || input.toLowerCase().includes('trends');
+            const hasStructure = input.toLowerCase().includes('format') || input.toLowerCase().includes('organize') || input.toLowerCase().includes('structure');
+            const hasSources = input.toLowerCase().includes('source') || input.toLowerCase().includes('citation') || input.toLowerCase().includes('evidence');
+            
+            let score = 0;
+            const feedback = [];
+            
+            if (hasTimeframe) {
+                score += 20;
+                feedback.push('✅ Clear timeframe specified');
+            } else {
+                feedback.push('❌ Missing specific timeframe');
+            }
+            
+            if (hasLocation) {
+                score += 20;
+                feedback.push('✅ Geographic focus identified');
+            } else {
+                feedback.push('💡 Specify country or region');
+            }
+            
+            if (hasData) {
+                score += 20;
+                feedback.push('✅ Data/trends requirements included');
+            } else {
+                feedback.push('💡 Request specific data or trend analysis');
+            }
+            
+            if (hasStructure) {
+                score += 20;
+                feedback.push('✅ Output structure specified');
+            } else {
+                feedback.push('💡 Define desired output format');
+            }
+            
+            if (hasSources) {
+                score += 20;
+                feedback.push('✅ Source/evidence requirements included');
+            } else {
+                feedback.push('💡 Request citations and reliable sources');
+            }
+            
+            const level = score >= 80 ? 'Expert' : score >= 60 ? 'Advanced' : score >= 40 ? 'Intermediate' : 'Beginner';
+            
+            const analysisHtml = `
+                <h4 class="font-bold text-purple-800 mb-2">🔬 Research Analysis:</h4>
+                <div class="bg-purple-50 p-3 rounded mb-3">
+                    <div class="font-bold text-purple-800">Research Quality: ${score}/100 - ${level}</div>
+                </div>
+                <div class="space-y-1 text-sm">
+                    ${feedback.map(item => `<div>${item}</div>`).join('')}
+                </div>
+            `;
+            
+            showExerciseFeedback(exerciseNum, analysisHtml, 'info');
+        }
+
+        function analyzeMultimodal(exerciseNum) {
+            const input = document.getElementById(`exercise-${exerciseNum}-input`).value.trim();
+            
+            if (!input) {
+                showExerciseFeedback(exerciseNum, 'Please write your prompt first!', 'warning');
+                return;
+            }
+            
+            const hasImageRef = input.toLowerCase().includes('image') || input.toLowerCase().includes('photo') || input.toLowerCase().includes('picture') || input.toLowerCase().includes('visual');
+            const hasAnalysis = input.toLowerCase().includes('analyze') || input.toLowerCase().includes('examine') || input.toLowerCase().includes('identify');
+            const hasIntegration = input.toLowerCase().includes('combine') || input.toLowerCase().includes('integrate') || input.toLowerCase().includes('together');
+            const hasSpecifics = input.toLowerCase().includes('furniture') || input.toLowerCase().includes('color') || input.toLowerCase().includes('design') || input.toLowerCase().includes('budget');
+            const hasSequence = input.toLowerCase().includes('first') || input.toLowerCase().includes('then') || input.toLowerCase().includes('based on');
+            
+            let score = 0;
+            const feedback = [];
+            
+            if (hasImageRef) {
+                score += 20;
+                feedback.push('✅ Clear image reference');
+            } else {
+                feedback.push('❌ Missing explicit image reference');
+            }
+            
+            if (hasAnalysis) {
+                score += 20;
+                feedback.push('✅ Visual analysis requested');
+            } else {
+                feedback.push('💡 Request specific visual analysis');
+            }
+            
+            if (hasIntegration) {
+                score += 20;
+                feedback.push('✅ Cross-modal integration specified');
+            } else {
+                feedback.push('💡 Request integration of visual and text inputs');
+            }
+            
+            if (hasSpecifics) {
+                score += 20;
+                feedback.push('✅ Specific deliverables mentioned');
+            } else {
+                feedback.push('💡 Specify concrete outputs (furniture, colors, etc.)');
+            }
+            
+            if (hasSequence) {
+                score += 20;
+                feedback.push('✅ Sequential processing structure');
+            } else {
+                feedback.push('💡 Add sequential structure (analyze first, then integrate)');
+            }
+            
+            const level = score >= 80 ? 'Expert' : score >= 60 ? 'Advanced' : score >= 40 ? 'Intermediate' : 'Beginner';
+            
+            const analysisHtml = `
+                <h4 class="font-bold text-pink-800 mb-2">🎨 Multimodal Analysis:</h4>
+                <div class="bg-pink-50 p-3 rounded mb-3">
+                    <div class="font-bold text-pink-800">Multimodal Quality: ${score}/100 - ${level}</div>
+                </div>
+                <div class="space-y-1 text-sm">
+                    ${feedback.map(item => `<div>${item}</div>`).join('')}
+                </div>
+            `;
+            
+            showExerciseFeedback(exerciseNum, analysisHtml, 'info');
+        }
+
+        // Exercise hint and solution functions
+        function showExerciseHint(exerciseNum) {
+            const hints = {
+                1: 'Focus on removing redundant words like "please", "detailed", "comprehensive" while keeping the core instruction clear. Try: "Identify top 3 emerging consumer trends from document. Summarize each."',
+                2: 'Start with "Based on our previous discussion about [topic]..." then reference specific elements like "the framework you outlined" or "the approach you described".',
+                3: 'Assign roles like "Marketing Ethics Expert (pro-regulation)" vs "Growth Marketing Strategist (anti-regulation)" with clear opposing stances on controversial tactics.',
+                4: 'Use phrases like "Walk me through your reasoning", "What assumptions did you make?", "How might you improve this response?" to encourage self-analysis.',
+                5: 'Structure with: timeframe (2019-2024), country (specific), requirements (attractions, trends, data), format (organized report), sources (citations needed).',
+                6: 'Sequence: "Analyze this room image for current layout/style" → "Given budget $X and preferences Y" → "Generate redecoration plan with specific furniture and colors".'
+            };
+            
+            showExerciseFeedback(exerciseNum, `<h4 class="font-bold text-yellow-800 mb-2">💡 Hint:</h4><p class="text-yellow-700 text-sm">${hints[exerciseNum]}</p>`, 'info');
+        }
+
+        function showExerciseSolution(exerciseNum) {
+            const solutions = {
+                1: `Identify top 3 emerging consumer behavior trends from document. Summarize each: trend name, key characteristics, market impact.`,
+                2: `Based on our previous discussion about sustainable marketing strategies, apply the 5-point framework you outlined (transparency, partnerships, community, education, messaging) to a tech startup developing renewable energy solutions. Adapt each element for B2B audiences and longer sales cycles.`,
+                3: `Assume two expert roles to debate influencer marketing ethics:
+
+**Marketing Ethics Advocate:** Argue for strict disclosure requirements, authentic partnerships only, and consumer protection from deceptive practices.
+
+**Growth Marketing Strategist:** Argue for creative freedom, market-driven solutions, and minimal regulation that stifles innovation.
+
+Simulate a 4-exchange debate, then summarize each position's strongest arguments.`,
+                4: `Review your previous response about [specific topic]. Walk me through your step-by-step reasoning process. What key assumptions did you make? Identify any potential biases or gaps in your analysis. How would you improve this response if asked again?`,
+                5: `You are a tourism research analyst. Investigate emerging tourist destinations in Portugal (2019-2024).
+
+**Research Requirements:**
+• Top 5 new/growing destinations
+• Key attractions and unique features  
+• Visitor trend data and growth statistics
+• Infrastructure developments
+• Reliable sources and citations
+
+**Format:** Organized report with destination profiles, trend analysis, and supporting data.`,
+                6: `Analyze this room interior image, identifying current furniture, layout, color scheme, and lighting. 
+
+**Context:** Budget $5,000, preferences for modern minimalist style, need functional workspace area.
+
+**Generate:** Detailed redecoration plan including:
+• Furniture recommendations with specific pieces
+• Color palette with paint/accent suggestions  
+• Layout optimization for workspace integration
+• Budget breakdown by category
+
+Combine visual analysis with design preferences for comprehensive plan.`
+            };
+            
+            showExerciseFeedback(exerciseNum, `<h4 class="font-bold text-green-800 mb-2">📝 Expert Solution:</h4><div class="bg-white p-3 rounded border font-mono text-sm">${solutions[exerciseNum]}</div>`, 'success');
+        }
+
+        function showExerciseFeedback(exerciseNum, message, type) {
+            const feedbackDiv = document.getElementById(`exercise-${exerciseNum}-feedback`);
+            const colors = {
+                success: 'bg-green-50 border-green-200',
+                info: 'bg-blue-50 border-blue-200',
+                warning: 'bg-yellow-50 border-yellow-200',
+                error: 'bg-red-50 border-red-200'
+            };
+            
+            feedbackDiv.className = `mt-4 p-4 rounded-lg border ${colors[type] || colors.info}`;
+            feedbackDiv.innerHTML = message;
+            feedbackDiv.style.display = 'block';
+        }
+
+        // Mastery practice functions
+        function practiceCompression() {
+            alert('🎯 Compression Practice:\n\nTry this exercise:\n1. Take a verbose prompt\n2. Remove redundant words\n3. Keep essential meaning\n4. Aim for 50%+ reduction\n\nExample: "I would like you to please provide a detailed explanation" → "Explain"');
+            markMasteryComplete('compression');
+        }
+
+        function practiceThreading() {
+            alert('🔗 Threading Practice:\n\nTry this exercise:\n1. Have a conversation with Gemini\n2. Reference a previous response\n3. Use labels like "Format A" or "Previous approach"\n4. Build complexity progressively\n\nExample: "Use the same structure from our previous discussion about X"');
+            markMasteryComplete('threading');
+        }
+
+        function practiceMultiRole() {
+            alert('🎭 Multi-Role Practice:\n\nTry this exercise:\n1. Assign 2-3 distinct roles\n2. Give each role specific objectives\n3. Use clear separators\n4. Request synthesis\n\nExample: "As a doctor... As a patient... As a researcher... Now synthesize all perspectives"');
+            markMasteryComplete('multi-role');
+        }
+
+        function practiceReflection() {
+            alert('🪞 Reflection Practice:\n\nTry this exercise:\n1. Get a response from Gemini\n2. Ask "How did you arrive at that conclusion?"\n3. Request assumption identification\n4. Ask for accuracy verification\n\nExample: "Explain your reasoning step-by-step and identify any assumptions"');
+            markMasteryComplete('reflection');
+        }
+
+        function practiceResearch() {
+            alert('🔬 Research Practice:\n\nTry this exercise:\n1. Choose a complex topic\n2. Specify evidence requirements\n3. Request citations\n4. Define output structure\n\nExample: "Research X with reliable sources, citations, and structured analysis"');
+            markMasteryComplete('research');
+        }
+
+        function practiceMultimodal() {
+            alert('🎨 Multimodal Practice:\n\nTry this exercise:\n1. Upload an image to Gemini\n2. Ask for detailed analysis\n3. Provide additional context\n4. Request synthesis\n\nExample: "Analyze this image, then combine with this context to provide insights"');
+            markMasteryComplete('multimodal');
+        }
+
+        function markMasteryComplete(technique) {
+            masteryProgress[technique] = true;
+            const masteryItem = document.getElementById(`mastery-${technique}`);
+            masteryItem.classList.add('completed');
+            
+            // Check if all techniques are mastered
+            const allMastered = Object.values(masteryProgress).every(mastered => mastered);
+            if (allMastered) {
+                setTimeout(() => {
+                    alert('🎉 Congratulations! You have achieved mastery in all advanced prompt engineering techniques!');
+                }, 500);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

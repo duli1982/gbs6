@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Veo — Mastery Guide - GBS EMEA Learning Hub</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master Google's Veo AI video generation with cinematic controls, native audio, and vertical formats. From text-to-video basics to advanced storytelling techniques.">
+    <meta name="keywords"
+        content="Google Veo, Veo AI, text to video, video generation, AI video, cinematic AI, Veo 3.1, video creation, AI storytelling">
+    <meta name="author" content="GBS EMEA">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../../shared/scripts/analytics.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/card-animations.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Veo Header */
+        .veo-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .veo-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .veo-icon {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Constellation dots around camera icon */
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) {
+            top: -20px;
+            left: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .constellation-dot:nth-child(3) {
+            top: -15px;
+            right: -25px;
+            animation-delay: 0.4s;
+        }
+
+        .constellation-dot:nth-child(4) {
+            bottom: -20px;
+            left: -20px;
+            animation-delay: 0.6s;
+        }
+
+        .constellation-dot:nth-child(5) {
+            bottom: -15px;
+            right: -30px;
+            animation-delay: 0.8s;
+        }
+
+        .constellation-dot:nth-child(6) {
+            top: 10px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .constellation-dot:nth-child(7) {
+            top: 15px;
+            right: -35px;
+            animation-delay: 1.2s;
+        }
+
+        /* Connecting lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 {
+            top: -10px;
+            left: -25px;
+            width: 50px;
+            transform: rotate(25deg);
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            bottom: -10px;
+            right: -25px;
+            width: 45px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 20px;
+            left: -35px;
+            width: 40px;
+            transform: rotate(60deg);
+            animation-delay: 1.5s;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle-3 {
+            bottom: 40%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle-4 {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .particle-5 {
+            top: 60%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        .particle-6 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 5s;
+        }
+
+        /* Enhanced card hover effects */
+        .veo-card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .veo-card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .veo-card-hover:hover::before {
+            left: 100%;
+        }
+
+        .veo-card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(102, 126, 234, 0.25), 0 0 0 1px rgba(102, 126, 234, 0.1);
+        }
+
+        .prompt-example {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-left: 4px solid #667eea;
+            position: relative;
+        }
+
+        .prompt-example::before {
+            content: '🎬';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        /* Quick start section with constellation theme */
+        .constellation-quick-start {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .constellation-quick-start::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 40% 60%, rgba(102, 126, 234, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px, 60px 60px, 40px 40px;
+            animation: constellation-bg 20s linear infinite;
+            pointer-events: none;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes line-pulse {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(90deg);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(180deg);
+                opacity: 0.4;
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes constellation-bg {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-50px, -50px);
+            }
+        }
+
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .veo-icon {
+                font-size: 3rem;
+            }
+
+            .constellation-dot {
+                width: 3px;
+                height: 3px;
+            }
+
+            .floating-particle {
+                font-size: 0.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+
+            .veo-icon,
+            .constellation-dot,
+            .constellation-line,
+            .floating-particle,
+            .constellation-quick-start::before {
+                animation: none;
+            }
+
+            .veo-card-hover:hover {
+                transform: translateY(-4px);
+            }
+
+            .feature-card:hover {
+                transform: translateY(-2px);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Google Veo — Mastery Guide</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Veo Header -->
+        <header class="veo-header text-center mb-8 md:mb-12 px-4">
+            <!-- Floating Particles -->
+            <div class="floating-particle particle-1">🎬</div>
+            <div class="floating-particle particle-2">🎥</div>
+            <div class="floating-particle particle-3">🎞️</div>
+            <div class="floating-particle particle-4">📹</div>
+            <div class="floating-particle particle-5">🎦</div>
+            <div class="floating-particle particle-6">🎭</div>
+
+            <!-- Constellation Camera -->
+            <div class="veo-constellation">
+                <div class="veo-icon">🎬</div>
+                <!-- Constellation dots -->
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <!-- Connecting lines -->
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Google Veo — Mastery Guide
+            </h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Cinematic AI video with native audio, vertical formats, and narrative control. Plan, prompt, and produce
+                professional clips—fast.
+            </p>
+        </header>
+
+        <main>
+
+            <!-- Quick Start Section -->
+            <div class="constellation-quick-start rounded-2xl p-4 md:p-8 mb-8 md:mb-12 max-w-5xl mx-auto">
+                <div class="text-center mb-4 md:mb-6 relative z-10">
+                    <h3 class="google-sans text-xl md:text-2xl font-bold text-purple-800 mb-2">🚀 Start Your Veo Journey
+                    </h3>
+                    <p class="text-purple-700 text-sm md:text-base">Essential resources to master Google's video AI</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative z-10">
+                    <div
+                        class="bg-white p-4 rounded-lg border border-purple-200 hover:border-purple-400 transition-all duration-200 hover:shadow-md group">
+                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">When to Use Veo</h4>
+                        <p class="text-sm text-gray-600">Discover perfect use cases for video AI</p>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded-lg border border-purple-200 hover:border-purple-400 transition-all duration-200 hover:shadow-md group">
+                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">📝</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Prompt Patterns</h4>
+                        <p class="text-sm text-gray-600">Copy-paste proven video prompts</p>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded-lg border border-purple-200 hover:border-purple-400 transition-all duration-200 hover:shadow-md group">
+                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">⚡</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Quick Start</h4>
+                        <p class="text-sm text-gray-600">Get started with Gemini API</p>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded-lg border border-purple-200 hover:border-purple-400 transition-all duration-200 hover:shadow-md group">
+                        <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🍳</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Ready Recipes</h4>
+                        <p class="text-sm text-gray-600">3 recruiter-ready video templates</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Elevator Pitch -->
+            <section class="mb-12">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 veo-card-hover">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                        <span class="text-3xl mr-3">🚀</span>
+                        Elevator Pitch
+                    </h2>
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        Veo is Google DeepMind's state-of-the-art text-to-video model. The latest release (Veo 3.1) adds
+                        richer native audio (dialogue, SFX, ambience), stronger narrative control, and improved
+                        realism—available via the Gemini API and Veo Studio. It's built for cinematic prompts, camera
+                        moves,
+                        multi-shot storytelling, and now social-ready vertical formats.
+                    </p>
+                </div>
+            </section>
+
+            <!-- What Veo Can Do -->
+            <section class="mb-12">
+                <h2 class="google-sans text-3xl font-bold text-gray-900 mb-8 text-center">What Veo Can Do (At a Glance)
+                </h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="text-3xl mb-4">🎥</div>
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Text → Video with Cinematic Controls</h3>
+                        <p class="text-gray-600">Camera, lens, moves, shot styles with strong physics prompt-adherence
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-4">🔊</div>
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Audio with Your Video</h3>
+                        <p class="text-gray-600">Veo 3/3.1 generates synchronized dialogue, sound effects, and ambience
+                            natively</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-4">📱</div>
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Formats & Fidelity</h3>
+                        <p class="text-gray-600">1080p output and vertical (9:16) video; Veo 3 Fast for quicker, cheaper
+                            renders</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="text-3xl mb-4">🔗</div>
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Access Options</h3>
+                        <p class="text-gray-600">Gemini API (paid preview), Veo Studio (AI Studio demo), and features
+                            rolling into Gemini app/Flow</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- When to Use Veo -->
+            <section class="mb-12">
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-200">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">💡</span>
+                        When to Use Veo
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3 text-blue-800">🎯 Recruitment Marketing</h3>
+                            <p class="text-gray-700 mb-4">Short brand explainers, role spotlights, event teasers,
+                                day-in-the-life shorts</p>
+
+                            <h3 class="font-semibold text-lg mb-3 text-green-800">📚 L&D / Training</h3>
+                            <p class="text-gray-700">Quick safety how-tos, workflow demos, and narrated micro-lessons
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3 text-purple-800">📱 Social & Employer Branding</h3>
+                            <p class="text-gray-700 mb-4">Vertical, captioned stories for LinkedIn/YouTube Shorts/TikTok
+                            </p>
+
+                            <h3 class="font-semibold text-lg mb-3 text-orange-800">⚡ Product & Campaign Sprints</h3>
+                            <p class="text-gray-700">Fast concept tests, A/B storyboards, and mood reels</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Start -->
+            <section class="mb-12">
+                <div class="quick-start-section p-8">
+                    <h2
+                        class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center flex items-center justify-center">
+                        <span class="text-3xl mr-3">🚀</span>
+                        Quick Start (Gemini API)
+                    </h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h3 class="font-bold text-lg mb-3 text-gray-900">1. Pick Your Mode</h3>
+                            <p class="text-gray-600">Veo 3.1 for quality; Veo 3.1 Fast for iterations</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h3 class="font-bold text-lg mb-3 text-gray-900">2. Set Aspect Ratio</h3>
+                            <p class="text-gray-600">e.g., aspectRatio=9:16 for vertical; mind current 1080p/16:9 caveat
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h3 class="font-bold text-lg mb-3 text-gray-900">3. Write Cinematic Prompt</h3>
+                            <p class="text-gray-600">Subject + action + setting + camera + style + timing + audio</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h3 class="font-bold text-lg mb-3 text-gray-900">4. Guide the Story</h3>
+                            <p class="text-gray-600">Specify shots ("Shot 1… Shot 2…") and transitions</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h3 class="font-bold text-lg mb-3 text-gray-900">5. Render & Review</h3>
+                            <p class="text-gray-600">Adjust lens/moves, pacing, or audio notes and re-render</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h3 class="font-bold text-lg mb-3 text-gray-900">📚 Documentation</h3>
+                            <p class="text-gray-600">See the Google developer update for docs & paid preview details</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Proven Prompt Patterns -->
+            <section class="mb-12">
+                <h2 class="google-sans text-3xl font-bold text-gray-900 mb-8 text-center">Proven Prompt Patterns
+                    (Copy/Paste)</h2>
+
+                <div class="space-y-8">
+                    <!-- Pattern 1 -->
+                    <div class="prompt-example p-6 rounded-xl">
+                        <h3 class="font-bold text-xl mb-4 text-purple-800">1) Cinematic Explainer (Landscape, 16:9)</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm leading-relaxed">
+                            "Create a 25-second cinematic explainer about lab safety for biotech interns. Style: modern,
+                            optimistic; Setting: bright R&D lab; Action: a mentor demonstrates glove disposal and
+                            eyewash
+                            steps. Camera: start with a slow push-in, then a medium over-shoulder, end on a static
+                            close-up
+                            of the safety poster. Audio: calm voiceover explaining steps, subtle room tone and soft UI
+                            beeps."
+                        </div>
+                    </div>
+
+                    <!-- Pattern 2 -->
+                    <div class="prompt-example p-6 rounded-xl">
+                        <h3 class="font-bold text-xl mb-4 text-blue-800">2) Social Role Spotlight (Vertical, 9:16)</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm leading-relaxed">
+                            "Generate a 12-second vertical (9:16) clip titled 'Life as a QA Chemist'. Shots:
+                            establishing
+                            lab exterior (2s), pipetting sample (4s) with macro rack-focus, tablet readout (3s) with
+                            top-down shot, smiling wave (3s). Style: high-key, crisp; Audio: upbeat instrumental and
+                            subtle
+                            lab ambience."
+                        </div>
+                    </div>
+
+                    <!-- Pattern 3 -->
+                    <div class="prompt-example p-6 rounded-xl">
+                        <h3 class="font-bold text-xl mb-4 text-green-800">3) Campus Job Fair Teaser</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm leading-relaxed">
+                            "15-second energetic teaser for our Budapest Hiring Day. Camera: quick whip-pans, handheld
+                            vibe;
+                            Edits: match cuts to signage and smiling teams; Text overlays: date/time. Audio: crowd
+                            ambience
+                            + rhythmic claps; no dialogue."
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Best Practice Tips -->
+            <section class="mb-12">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 veo-card-hover">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">💡</span>
+                        Best-Practice Tips
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3 mt-1">🎯</span>
+                                <div>
+                                    <h3 class="font-semibold mb-2">Be Explicit</h3>
+                                    <p class="text-gray-600">Include camera moves (dolly, pan, gimbal), lenses
+                                        (35mm/85mm),
+                                        and edit structure (cuts, transitions). Veo's cinematography understanding
+                                        responds
+                                        well to detail.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3 mt-1">📝</span>
+                                <div>
+                                    <h3 class="font-semibold mb-2">Storyboard in Text</h3>
+                                    <p class="text-gray-600">"Shot 1… Shot 2…" improves pacing and continuity.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3 mt-1">🔊</span>
+                                <div>
+                                    <h3 class="font-semibold mb-2">Guide Audio</h3>
+                                    <p class="text-gray-600">Specify ambience, SFX moments, or high-level VO tone; Veo
+                                        3.x
+                                        can synthesize these natively.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3 mt-1">⚡</span>
+                                <div>
+                                    <h3 class="font-semibold mb-2">Iterate Cheaply</h3>
+                                    <p class="text-gray-600">Draft with Veo 3.1 Fast; finalize with Veo 3.1. (Pricing
+                                        varies; recent reductions noted in press.)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3 mt-1">📱</span>
+                                <div>
+                                    <h3 class="font-semibold mb-2">Target Platform</h3>
+                                    <p class="text-gray-600">Choose 16:9 1080p for YouTube; 9:16 for
+                                        Shorts/Reels/LinkedIn
+                                        vertical.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Limits & Gotchas -->
+            <section class="mb-12">
+                <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-8">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">⚠️</span>
+                        Limits & Gotchas (So You're Not Surprised)
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2 text-yellow-800">Resolution/AR Nuances</h3>
+                            <p class="text-gray-700">Recent updates added vertical 9:16 and stable 1080p, with current
+                                constraints around which ARs get 1080p.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2 text-yellow-800">Access Model</h3>
+                            <p class="text-gray-700">Newest features are paid preview in the Gemini API/Veo Studio;
+                                availability can differ by region and product tier.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2 text-yellow-800">Watermarking</h3>
+                            <p class="text-gray-700">Earlier releases shipped SynthID watermarks to flag AI-generated
+                                media
+                                (policy may persist).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="mb-12">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 veo-card-hover">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">❓</span>
+                        FAQ (Short)
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2 text-purple-800">Is Veo only text-to-video?</h3>
+                            <p class="text-gray-700">Primarily, but it also supports creative controls that mimic shot
+                                lists
+                                and can pair visuals with generated audio in 3.x.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2 text-blue-800">Can I make vertical videos?</h3>
+                            <p class="text-gray-700">Yes—set aspectRatio=9:16 in the API; note the current 1080p/AR
+                                caveat.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2 text-green-800">How do I try it?</h3>
+                            <p class="text-gray-700">Use Veo Studio (AI Studio demo) or the Gemini API (paid preview)
+                                per
+                                Google's developer blog.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2 text-orange-800">What about VideoFX / Gemini app
+                                features?
+                            </h3>
+                            <p class="text-gray-700">Earlier versions (Veo 2) appeared in VideoFX and for Gemini
+                                Advanced/AI
+                                Premium subs; Google is rolling more Veo capabilities into Flow and Gemini surfaces.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- For Recruiters: 3 Ready Recipes -->
+            <section class="mb-12">
+                <h2 class="google-sans text-3xl font-bold text-gray-900 mb-8 text-center">For Recruiters: 3 Ready
+                    Recipes
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="recipe-card">
+                        <div class="text-3xl mb-4">🎯</div>
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Role Explainer (45–60s)</h3>
+                        <p class="text-gray-600 mb-4">Landscape; clear VO; lab or office B-roll; end card with QR to
+                            apply.
+                        </p>
+                    </div>
+                    <div class="recipe-card">
+                        <div class="text-3xl mb-4">🎉</div>
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Event Hype (12–15s)</h3>
+                        <p class="text-gray-600 mb-4">Vertical; quick cuts + captions; upbeat SFX; CTA "Meet us Fri
+                            14:00."
+                        </p>
+                    </div>
+                    <div class="recipe-card">
+                        <div class="text-3xl mb-4">📚</div>
+                        <h3 class="font-bold text-lg mb-3 text-gray-900">Day-in-the-Life Micro-Lesson (20–30s)</h3>
+                        <p class="text-gray-600 mb-4">Show 3 tasks, each 6–8s; calm VO; on-screen tips; music bed low.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+</body>
+
+</html>

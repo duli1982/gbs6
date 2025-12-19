@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Journey Continues - Beginner Module 5</title>
+
+    <!-- Security: DOMPurify for XSS Protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"
+        integrity="sha384-4H0KEY16H/RgZTVx9vNEz5PQZbQ/1LDz9Jl8tN0FKYxjBfUOcYhJ3k+xhWLxqUqK"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="../../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../../shared/styles/quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .google-sans { font-family: 'Google Sans', sans-serif; }
+        body { font-family: 'Roboto', sans-serif; }
+        
+        .celebration-animation {
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .achievement-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .next-step-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .next-step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #0284c7;
+        }
+        
+        .skill-badge {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        
+        .confidence-meter {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .testimonial {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to RPO Training">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>RPO Training</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../beginner.html" class="breadcrumb-link" aria-label="Go to Beginner Path">
+                            <span class="breadcrumb-icon icon-book"></span>
+                            <span>Beginner Path</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Your AI Journey Continues</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <div class="breadcrumb-progress">
+                    <span>Module 5/5</span>
+                    <div class="breadcrumb-progress-bar">
+                        <div class="breadcrumb-progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <a href="../../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="text-sm font-semibold text-green-700">Module 5 of 5</div>
+        <div class="text-xs text-green-500">Celebration!</div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="celebration-animation text-6xl mb-4">🎉</div>
+            <h1 class="google-sans text-3xl md:text-4xl font-bold text-gray-900 mb-3">Congratulations! You Did It!</h1>
+            <p class="text-lg text-gray-600">You've completed your AI foundations journey and are ready to transform your work</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            
+            <!-- Achievement Summary -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">🏆 What You've Accomplished</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="achievement-card">
+                        <div class="flex items-start">
+                            <div class="text-3xl mr-4">🧠</div>
+                            <div>
+                                <h3 class="font-bold text-green-800 mb-2">AI Understanding</h3>
+                                <p class="text-green-700 text-sm">You now understand what AI is, how it works, and why it's a powerful tool (not something to fear).</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="flex items-start">
+                            <div class="text-3xl mr-4">💬</div>
+                            <div>
+                                <h3 class="font-bold text-green-800 mb-2">Communication Skills</h3>
+                                <p class="text-green-700 text-sm">You can write effective prompts that get great results from AI tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="flex items-start">
+                            <div class="text-3xl mr-4">🎯</div>
+                            <div>
+                                <h3 class="font-bold text-green-800 mb-2">Hands-On Experience</h3>
+                                <p class="text-green-700 text-sm">You've practiced with real AI scenarios and received feedback on your prompts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="flex items-start">
+                            <div class="text-3xl mr-4">⚡</div>
+                            <div>
+                                <h3 class="font-bold text-green-800 mb-2">Practical Applications</h3>
+                                <p class="text-green-700 text-sm">You know how to use AI for emails, research, content creation, and daily tasks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Earned -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4 text-center">🎯 Skills You've Earned</h2>
+                <div class="text-center">
+                    <span class="skill-badge">AI Basics</span>
+                    <span class="skill-badge">Prompt Writing</span>
+                    <span class="skill-badge">Email Automation</span>
+                    <span class="skill-badge">Research Assistant</span>
+                    <span class="skill-badge">Content Creation</span>
+                    <span class="skill-badge">Task Optimization</span>
+                    <span class="skill-badge">Time Management</span>
+                    <span class="skill-badge">Professional Communication</span>
+                </div>
+            </section>
+
+            <!-- Confidence Check -->
+            <section class="content-section mb-8">
+                <div class="confidence-meter">
+                    <h2 class="google-sans text-xl font-bold text-amber-800 mb-4 text-center">📊 Your Confidence Level</h2>
+                    <p class="text-amber-700 mb-4 text-center">
+                        Rate how confident you feel about using AI in your daily work:
+                    </p>
+                    
+                    <div class="flex justify-center space-x-4 mb-4">
+                        <button onclick="setConfidence(1)" class="confidence-btn bg-red-200 hover:bg-red-300 px-4 py-2 rounded-lg transition-colors">
+                            😰 Not confident
+                        </button>
+                        <button onclick="setConfidence(2)" class="confidence-btn bg-yellow-200 hover:bg-yellow-300 px-4 py-2 rounded-lg transition-colors">
+                            😐 Somewhat confident
+                        </button>
+                        <button onclick="setConfidence(3)" class="confidence-btn bg-green-200 hover:bg-green-300 px-4 py-2 rounded-lg transition-colors">
+                            😊 Very confident
+                        </button>
+                    </div>
+                    
+                    <div id="confidence-feedback" class="text-center text-amber-700 font-semibold"></div>
+                </div>
+            </section>
+
+            <!-- Real Success Stories -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">💪 You're Not Alone - Real Success Stories</h2>
+                
+                <div class="testimonial">
+                    <p class="text-purple-700 mb-2">
+                        "I was terrified of AI at first, but after completing this beginner path, I now use it for all my emails and job descriptions. I save at least 2 hours every day!"
+                    </p>
+                    <div class="text-purple-600 text-sm font-semibold">- Maria S., Recruiter</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="text-purple-700 mb-2">
+                        "The practice simulation was a game-changer. Now I know exactly how to ask AI for what I need, and the results are amazing."
+                    </p>
+                    <div class="text-purple-600 text-sm font-semibold">- James L., HR Coordinator</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="text-purple-700 mb-2">
+                        "I went from AI beginner to helping my whole team use it effectively. This foundation gave me the confidence to become our department's AI champion."
+                    </p>
+                    <div class="text-purple-600 text-sm font-semibold">- Sarah K., Team Lead</div>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section class="content-section mb-8">
+                <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 text-center">🚀 Where Do You Go From Here?</h2>
+                
+                <div class="resource-grid">
+                    <div class="next-step-card" onclick="window.location.href='../intermediate.html'">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-bold text-blue-800 mb-2">Intermediate Path</h3>
+                        <p class="text-blue-700 text-sm">Ready for advanced prompting techniques and role-specific applications? Take your skills to the next level!</p>
+                        <div class="mt-3 text-blue-600 text-xs font-semibold">→ Start Intermediate Learning</div>
+                    </div>
+                    
+                    <div class="next-step-card" onclick="window.location.href='../../../gbs-prompts/'">
+                        <div class="text-3xl mb-3">✨</div>
+                        <h3 class="font-bold text-blue-800 mb-2">AI Prompts Library</h3>
+                        <p class="text-blue-700 text-sm">Access hundreds of ready-to-use prompts for your daily work tasks.</p>
+                        <div class="mt-3 text-blue-600 text-xs font-semibold">→ Explore Prompts</div>
+                    </div>
+                    
+                    <div class="next-step-card" onclick="window.location.href='../../../daily-focus/'">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-bold text-blue-800 mb-2">Daily Focus Cards</h3>
+                        <p class="text-blue-700 text-sm">Get daily micro-coaching to continuously improve your AI skills.</p>
+                        <div class="mt-3 text-blue-600 text-xs font-semibold">→ Start Daily Practice</div>
+                    </div>
+                    
+                    <div class="next-step-card" onclick="window.location.href='../../../use-cases/'">
+                        <div class="text-3xl mb-3">💡</div>
+                        <h3 class="font-bold text-blue-800 mb-2">Success Stories</h3>
+                        <p class="text-blue-700 text-sm">Get inspired by how colleagues are using AI to transform their work.</p>
+                        <div class="mt-3 text-blue-600 text-xs font-semibold">→ Read Success Stories</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Plan -->
+            <section class="content-section mb-8">
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
+                    <h2 class="google-sans text-xl font-bold text-purple-800 mb-4 text-center">📋 Your 30-Day AI Action Plan</h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 1-2: Practice</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• Use AI for 3 emails daily</li>
+                                <li>• Try 1 new AI task each day</li>
+                                <li>• Track time saved</li>
+                                <li>• Share wins with colleagues</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Week 3-4: Expand</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• Explore the prompts library</li>
+                                <li>• Try advanced techniques</li>
+                                <li>• Help a colleague get started</li>
+                                <li>• Consider intermediate path</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2">Month 2+: Lead</h4>
+                            <ul class="text-purple-700 text-sm space-y-1">
+                                <li>• Become team AI champion</li>
+                                <li>• Share best practices</li>
+                                <li>• Measure team impact</li>
+                                <li>• Explore advanced training</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Message -->
+            <section class="content-section">
+                <div class="text-center bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-8 border border-green-200">
+                    <div class="text-4xl mb-4">🌟</div>
+                    <h2 class="google-sans text-2xl font-bold text-green-800 mb-4">You're Now an AI-Powered Professional!</h2>
+                    <p class="text-green-700 mb-6">
+                        You've taken the first and most important step in your AI journey. Remember, every expert was once a beginner. You now have the foundation to continuously grow and help others do the same.
+                    </p>
+                    <div class="text-green-600 text-sm font-semibold">
+                        Welcome to the future of work. You're ready to make it amazing! 🚀
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Final Knowledge Check Quiz -->
+        <div id="module-quiz" class="my-12"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="../beginner.html"
+               class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:from-green-600 hover:to-emerald-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Beginner Path
+            </a>
+
+            <button id="complete-module-btn" onclick="completeModule()" disabled
+                class="bg-gray-400 text-white px-8 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors"
+                title="Please complete the final quiz first">
+                🎉 Complete Beginner Path!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function setConfidence(level) {
+            const feedback = document.getElementById('confidence-feedback');
+            const buttons = document.querySelectorAll('.confidence-btn');
+            
+            // Reset all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-blue-500');
+            });
+            
+            // Highlight selected button
+            buttons[level - 1].classList.add('ring-2', 'ring-blue-500');
+            
+            // Store confidence level
+            localStorage.setItem('ai-confidence-level', level);
+            
+            // Show feedback
+            const messages = {
+                1: "That's okay! Confidence comes with practice. Start small and celebrate every success. You've got this! 💪",
+                2: "Great! You're on the right track. Keep practicing and you'll be amazed at how quickly your confidence grows. 🌟",
+                3: "Fantastic! You're ready to become an AI champion. Consider helping colleagues and exploring advanced techniques. 🚀"
+            };
+            
+            feedback.textContent = messages[level];
+            feedback.classList.add('animate-pulse');
+            setTimeout(() => feedback.classList.remove('animate-pulse'), 2000);
+        }
+        
+        function completeModule() {
+            // Mark module and entire path as completed
+            let completedModules = JSON.parse(localStorage.getItem('beginner-path-progress') || '[]');
+            if (!completedModules.includes(5)) {
+                completedModules.push(5);
+                localStorage.setItem('beginner-path-progress', JSON.stringify(completedModules));
+            }
+            
+            // Mark beginner path as fully completed
+            localStorage.setItem('beginner-path-completed', 'true');
+            localStorage.setItem('beginner-completion-date', new Date().toISOString());
+            
+            // Show completion celebration
+            showCompletionModal();
+            
+            // Redirect to main hub to show all available options
+            window.location.href = '../../../index.html';
+        }
+        
+        // Load saved confidence level if exists
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedConfidence = localStorage.getItem('ai-confidence-level');
+            if (savedConfidence) {
+                setConfidence(parseInt(savedConfidence));
+            }
+        });
+
+        // Modal Functions
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('completionModal');
+            modal.classList.remove('active');
+        }
+
+        function continueToHub() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../../index.html';
+            }, 300);
+        }
+
+        function exploreIntermediate() {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = '../intermediate.html';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 3rem;
+            animation: bounce 0.6s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-7px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .modal-body {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-message {
+            font-size: 1.2rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-achievement {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .modal-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .modal-btn-secondary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .modal-btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .modal-btn-tertiary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-btn-tertiary:hover {
+            background: #e5e7eb;
+        }
+    </style>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🏆</div>
+                <h2 class="modal-title google-sans">CONGRATULATIONS!</h2>
+                <p class="modal-subtitle">Beginner AI Learning Path Completed</p>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-message">
+                    You have successfully completed the Beginner AI Learning Path! You are now equipped with fundamental AI skills that will transform your daily work.
+                </p>
+                
+                <div class="modal-achievement">
+                    <strong>🎓 Achievement Unlocked:</strong> AI Fundamentals Certified
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-4 mb-4">
+                    <div class="text-green-800 font-semibold text-sm mb-2">✨ Your Complete Skill Set:</div>
+                    <div class="grid md:grid-cols-2 gap-2 text-left">
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• AI basics and fundamentals</li>
+                            <li>• Effective AI communication</li>
+                            <li>• Prompt engineering skills</li>
+                        </ul>
+                        <ul class="text-blue-700 text-sm space-y-1">
+                            <li>• Daily task automation</li>
+                            <li>• Email enhancement tools</li>
+                            <li>• Practical AI applications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="exploreIntermediate()" class="modal-btn modal-btn-primary">
+                    🚀 Explore Intermediate Path
+                </button>
+                <button onclick="continueToHub()" class="modal-btn modal-btn-secondary">
+                    🏠 Return to Hub
+                </button>
+                <button onclick="closeModal()" class="modal-btn modal-btn-tertiary">
+                    📋 Review Path
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Breadcrumb Navigation Script -->
+    <script src="../../../shared/scripts/breadcrumb-nav.js"></script>
+
+    <!-- Security Utilities -->
+    <script src="../../../shared/scripts/utils/security.js"></script>
+
+    <!-- Quiz Component -->
+    <script src="../../../shared/scripts/components/quiz.js"></script>
+
+    <!-- Module 5 Final Quiz Initialization -->
+    <script>
+        // Global quiz variable so onclick handlers can access it
+        let quiz;
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = {
+                moduleId: 'beginner-5',
+                passingScore: 80,
+                showReview: true,
+                questions: [
+                    {
+                        question: "What is the best mindset to have when approaching AI tools?",
+                        options: [
+                            "AI is magic that can do anything without guidance",
+                            "AI is a tool that helps you work smarter, like a calculator",
+                            "AI will replace all human workers soon",
+                            "AI is too complicated for most people to understand"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "From Module 1, AI is best understood as a tool that augments your capabilities - like a calculator for your brain. It's not magic, it won't replace you, and it's accessible to everyone with the right training.",
+                        hint: "Think about Module 1's calculator analogy."
+                    },
+                    {
+                        question: "What are the key components of an effective AI prompt? (From Module 2)",
+                        options: [
+                            "Just the question you want answered",
+                            "What you want + Who it's for + Purpose + Tone",
+                            "Your name and the current date",
+                            "As many details as possible, regardless of relevance"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Module 2 taught the basic prompt formula: What you want (specific task) + Who it's for (audience) + Purpose (why you need it) + Tone (formal, casual, friendly). This structure helps AI understand your needs completely.",
+                        hint: "Recall the golden rule and basic formula from Module 2."
+                    },
+                    {
+                        question: "What should you do if AI's first response isn't perfect? (From Module 3)",
+                        options: [
+                            "Give up and try a different AI tool",
+                            "Accept it as-is since you can't improve AI responses",
+                            "Refine your prompt with more specific details and iterate",
+                            "Start completely over from scratch"
+                        ],
+                        correctAnswer: 2,
+                        explanation: "Module 3's practice scenarios emphasized that AI is iterative - you should refine your prompts and have a conversation with AI to get better results. Don't give up after the first try!",
+                        hint: "Remember the practice simulation's main lesson about iteration."
+                    },
+                    {
+                        question: "According to Module 4, approximately how much time can AI save on daily tasks?",
+                        options: [
+                            "30 minutes to 1 hour per day",
+                            "2-4 hours per day",
+                            "Only 15 minutes per day",
+                            "No significant time savings"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "Module 4 highlighted that colleagues report saving 2-4 hours per day using AI for routine tasks - that's 10-20 hours per week to focus on more strategic work!",
+                        hint: "Look back at 'The Time-Saving Reality' section in Module 4."
+                    },
+                    {
+                        question: "What is the recommended approach for building AI skills after completing this beginner path?",
+                        options: [
+                            "Try to learn everything about AI all at once",
+                            "Start small, practice regularly, gradually expand your AI toolkit",
+                            "Wait until you feel 100% confident before using AI at work",
+                            "Only use AI for one specific task and never explore further"
+                        ],
+                        correctAnswer: 1,
+                        explanation: "The 30-Day Action Plan in Module 5 recommends starting small (3 emails daily), practicing regularly (1 new task each day), tracking progress, and gradually expanding your skills. Confidence comes with consistent practice!",
+                        hint: "Review the 30-Day AI Action Plan in this module."
+                    }
+                ],
+                onComplete: function(percentage, timeTaken) {
+                    const completeBtn = document.getElementById('complete-module-btn');
+                    if (completeBtn && percentage >= 80) {
+                        // Enable the button
+                        completeBtn.disabled = false;
+                        completeBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                        completeBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        completeBtn.title = 'Congratulations! Click to complete the Beginner Path';
+
+                        // Scroll to button smoothly
+                        setTimeout(() => {
+                            completeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
+                    }
+                }
+            };
+
+            // Initialize the quiz
+            quiz = new QuizComponent('module-quiz', quizData);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini in Google Workspace - Gemini Mastery Guide</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master Gemini's integration with Google Workspace. Learn to use AI in Gmail, Docs, Sheets, Meet, and more for enhanced productivity.">
+    <meta name="keywords"
+        content="Gemini Google Workspace, Gmail AI, Google Docs AI, Google Meet AI, Workspace integration, productivity AI">
+    <meta name="author" content="GBS EMEA">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/hub-button.css">
+    <link rel="stylesheet" href="../../shared/fonts.css">
+    <link rel="stylesheet" href="../../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../../shared/buttons.css">
+    <link rel="stylesheet" href="../../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Workspace-specific styling */
+        .workspace-card {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.05) 0%, rgba(52, 168, 83, 0.05) 100%);
+            border: 1px solid rgba(66, 133, 244, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workspace-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .workspace-card:hover::before {
+            left: 100%;
+        }
+
+        .workspace-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(66, 133, 244, 0.25), 0 0 0 1px rgba(66, 133, 244, 0.1);
+            border-color: rgba(66, 133, 244, 0.4);
+        }
+
+        .app-icon {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(66, 133, 244, 0.3)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 15px rgba(66, 133, 244, 0.6)); }
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-left-color: #4285f4;
+        }
+
+        .prompt-example {
+            background: linear-gradient(135deg, rgba(52, 168, 83, 0.1) 0%, rgba(25, 135, 84, 0.1) 100%);
+            border: 1px solid rgba(52, 168, 83, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 8px 0;
+            position: relative;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+        }
+
+        .prompt-example::before {
+            content: '💬';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 16px;
+        }
+
+        .prompt-example-content {
+            margin-left: 32px;
+            color: #1e7e34;
+            font-style: italic;
+        }
+
+        .access-requirements {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.3), transparent);
+            height: 1px;
+            margin: 3rem 0;
+        }
+
+        .floating-workspace {
+            animation: float-workspace 4s ease-in-out infinite;
+        }
+
+        @keyframes float-workspace {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            50% { transform: translateY(-4px) rotate(0deg); }
+            75% { transform: translateY(-12px) rotate(-2deg); }
+        }
+
+        .at-function-card {
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.1) 0%, rgba(103, 58, 183, 0.1) 100%);
+            border: 1px solid rgba(156, 39, 176, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .at-symbol {
+            color: #9c27b0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .workspace-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #4285f4;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4285f4;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .integration-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .flow-item {
+            background: white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .flow-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #4285f4;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 768px) {
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Gemini Mastery Guide">
+                            <span class="breadcrumb-icon icon-folder"></span>
+                            <span>Gemini Mastery Guide</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon icon-file"></span>
+                            <span>Workspace Integration</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Hero Section -->
+        <header class="text-center mb-12 md:mb-16">
+            <div class="floating-workspace text-6xl mb-6">💼</div>
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Gemini in Google Workspace
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Maximize productivity by integrating Gemini with Google Docs, Sheets, Slides, Gmail, Meet, and other Workspace tools. 
+                Experience AI that understands your work context.
+            </p>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+
+            <!-- Core Advantage Section -->
+            <section class="mb-16">
+                <div class="access-requirements">
+                    <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                        🚀 Gemini's Core Advantage
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        Gemini's core strength lies in its <strong>deep integration with Google Workspace tools</strong> like Gmail, Docs, and Sheets. 
+                        This means Gemini can directly understand and interact with your existing work environment.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Unlike other large language models that primarily function as standalone chatbots, Gemini's ability to seamlessly assist 
+                        within your Google apps provides a unique advantage, making your daily tasks more efficient and contextually intelligent.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Integration Flow -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Seamless Workspace Integration
+                </h2>
+                
+                <div class="integration-flow">
+                    <div class="flow-item">📧</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">📄</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">🤖</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">📊</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">🎥</div>
+                </div>
+                
+                <p class="text-center text-gray-600 mt-4">
+                    Gmail • Docs • Gemini AI • Sheets • Meet
+                </p>
+            </section>
+
+            <!-- Access Requirements -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Access Requirements
+                </h2>
+                
+                <div class="workspace-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">🏢</div>
+                        <div class="stat-label">Google Workspace Editions</div>
+                        <p class="text-xs text-gray-500 mt-2">Business, Enterprise, Education</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">👤</div>
+                        <div class="stat-label">Google One AI Premium</div>
+                        <p class="text-xs text-gray-500 mt-2">For personal accounts</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">🔧</div>
+                        <div class="stat-label">Add-on Required</div>
+                        <p class="text-xs text-gray-500 mt-2">Gemini features subscription</p>
+                    </div>
+                </div>
+
+                <div class="access-requirements">
+                    <h3 class="font-bold text-gray-900 mb-3">📋 To unlock Gemini's capabilities within Google Workspace:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-yellow-600 mr-2">•</span>
+                            <strong>Google Workspace Editions:</strong> Gemini is available as an add-on for most existing Google Workspace editions (Business, Enterprise, Education, etc.)
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-600 mr-2">•</span>
+                            <strong>Google One AI Premium:</strong> For individual users, access often comes with a Google One AI Premium subscription
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-600 mr-2">•</span>
+                            <strong>Interface Access:</strong> Once enabled, Gemini appears as an "Ask Gemini" button, dedicated sidebar, or blue pen icon within apps
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Google Docs Integration -->
+            <section class="mb-16">
+                <div class="workspace-card rounded-2xl p-8 mb-8">
+                    <div class="flex items-start mb-6">
+                        <div class="app-icon mr-6">📄</div>
+                        <div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">Gemini in Google Docs</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Gemini in Google Docs acts as your writing assistant, helping you draft, refine, and generate new content directly 
+                                within your documents. It can kickstart new projects by creating initial drafts, rephrasing existing text to adjust 
+                                tone or clarity, and even summarizing long documents for quick understanding.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">✍️ Writing and Refining Content</h4>
+                            <p class="text-gray-600 text-sm">Draft new content, rewrite existing text to make it more formal or casual, shorten or elaborate on sections, and rephrase sentences.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">📋 Summarizing</h4>
+                            <p class="text-gray-600 text-sm">Summarize your documents, either the entire file or specific sections you highlight. Also summarize emails from Gmail and files from Drive.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🎨 Generating Images</h4>
+                            <p class="text-gray-600 text-sm">Ask Gemini to create images based on your prompts, which can be inserted directly into your document.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">💡 Getting Creative Ideas</h4>
+                            <p class="text-gray-600 text-sm">Provide suggestions and ideas to help you overcome writer's block or explore different angles for your content.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🔗 Referencing External Information</h4>
+                            <p class="text-gray-600 text-sm">Reference your Google Drive files and Gmail emails to get responses generated by Gemini based on that information.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">💎 Using Gems</h4>
+                            <p class="text-gray-600 text-sm">For repetitive tasks, you can chat with or create your own "Gems," which are custom assistants within Gemini.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">💬 Example Prompts:</h4>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "Draft a project proposal for a new employee onboarding program at a mid-sized tech company that currently lacks a formal process."
+                            </div>
+                        </div>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                [highlight text] "Rewrite this paragraph to be more formal."
+                            </div>
+                        </div>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "Summarize this document in three bullet points."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gmail Integration -->
+            <section class="mb-16">
+                <div class="workspace-card rounded-2xl p-8 mb-8">
+                    <div class="flex items-start mb-6">
+                        <div class="app-icon mr-6">📧</div>
+                        <div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">Gemini in Gmail</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Gemini in Gmail acts as an intelligent assistant, streamlining your email management. It can quickly summarize lengthy 
+                                email threads, draft new messages or suggest replies tailored to the conversation's context, and even help you find 
+                                specific information within your inbox or linked Google Drive files.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">📝 Summarize Email Threads</h4>
+                            <p class="text-gray-600 text-sm">Provide summaries of long email threads, helping you quickly understand the key points of a conversation.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">💬 Suggest Responses</h4>
+                            <p class="text-gray-600 text-sm">Suggest replies to email threads or help you draft new emails based on context.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">✉️ Draft Emails</h4>
+                            <p class="text-gray-600 text-sm">Turn notes or a few sentences into a ready-to-send message based on your prompts.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🔍 Find Information</h4>
+                            <p class="text-gray-600 text-sm">Search your inbox and Google Drive files to find specific information from previous emails or documents.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">📅 Calendar Integration</h4>
+                            <p class="text-gray-600 text-sm">Get details about events on your primary calendar and create new events.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🗂️ Organize Inbox</h4>
+                            <p class="text-gray-600 text-sm">Help with tasks like deleting or archiving emails, and assist with scheduling appointments.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">💬 Example Prompts:</h4>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "Summarize this email thread."
+                            </div>
+                        </div>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "Draft a polite reply declining this invitation."
+                            </div>
+                        </div>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "Find all emails from John about the Q3 report."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Google Meet Integration -->
+            <section class="mb-16">
+                <div class="workspace-card rounded-2xl p-8 mb-8">
+                    <div class="flex items-start mb-6">
+                        <div class="app-icon mr-6">🎥</div>
+                        <div>
+                            <h3 class="google-sans text-2xl font-bold text-gray-900 mb-2">Gemini in Google Meet</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Gemini in Google Meet transforms your meetings by handling essential tasks so you can focus on the discussion. 
+                                It can automatically take detailed notes, generate summaries of key decisions and action items, and even provide 
+                                real-time translated captions to ensure everyone is on the same page.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">📝 Automatic Note-Taking</h4>
+                            <p class="text-gray-600 text-sm">Automatically capture meeting notes, including key discussion points and action items, and generate post-meeting summaries.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🌍 Translated Captions</h4>
+                            <p class="text-gray-600 text-sm">Provides real-time translated captions for over 60 languages, breaking down language barriers in international meetings.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🎬 Enhanced Audio & Video</h4>
+                            <p class="text-gray-600 text-sm">Features like Studio Sound and Studio Lighting use AI to improve audio clarity and video quality.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🖼️ Custom Backgrounds</h4>
+                            <p class="text-gray-600 text-sm">Use Gemini to generate unique, AI-powered virtual backgrounds for your video calls.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4 class="font-semibold text-gray-900 mb-2">🔊 Adaptive Audio</h4>
+                            <p class="text-gray-600 text-sm">Synchronize microphones and speakers from multiple laptops in the same room to prevent echoes and feedback.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">💬 Example Prompts:</h4>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "Summarize the meeting so far."
+                            </div>
+                        </div>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "What were the key decisions made?"
+                            </div>
+                        </div>
+                        <div class="prompt-example">
+                            <div class="prompt-example-content">
+                                "List the action items and who is responsible for each."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- @ Function Section -->
+            <section class="mb-16">
+                <h2 class="google-sans text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Gemini's <span class="at-symbol">@</span> Function
+                </h2>
+                
+                <div class="access-requirements mb-8">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Gemini's <span class="at-symbol">@</span> function in Google Workspace lets you reference content from apps like Drive or Gmail directly in your prompts. 
+                        Just type <span class="at-symbol">@</span> followed by the app and keywords to pull in relevant files, emails, or info. 
+                        This streamlines your workflow by enabling context-aware responses without switching tabs or copying data manually.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="at-function-card">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-red-500 mr-2">📺</span>
+                            <span class="at-symbol">@</span>YouTube
+                        </h3>
+                        <div class="prompt-example mb-3">
+                            <div class="prompt-example-content">
+                                "Summarize the key insights from this @YouTube video: [Paste video link here]."
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            <strong>Note:</strong> Video analysis primarily relies on available captions and audio transcripts, meaning its effectiveness may be limited for videos that convey information predominantly through visuals or non-verbal cues.
+                        </p>
+                    </div>
+
+                    <div class="at-function-card">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-blue-500 mr-2">📁</span>
+                            <span class="at-symbol">@</span>Google Drive
+                        </h3>
+                        <div class="prompt-example mb-3">
+                            <div class="prompt-example-content">
+                                "Find all documents in @Google Drive related to 'Q4 Marketing Strategy'."
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            <strong>Note:</strong> Results depend heavily on the exact phrasing found in document titles and content. Documents with different terminology, even if related, might not appear.
+                        </p>
+                    </div>
+
+                    <div class="at-function-card">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-green-500 mr-2">🗺️</span>
+                            <span class="at-symbol">@</span>Google Maps
+                        </h3>
+                        <div class="prompt-example mb-3">
+                            <div class="prompt-example-content">
+                                "Show me highly-rated Italian restaurants near @Google Maps [your current location or a specific address]."
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            <strong>Note:</strong> For best results, provide a specific address or landmark rather than a general area. Rankings are based on user reviews and can be subjective.
+                        </p>
+                    </div>
+
+                    <div class="at-function-card">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-purple-500 mr-2">📅</span>
+                            <span class="at-symbol">@</span>Google Calendar
+                        </h3>
+                        <div class="prompt-example mb-3">
+                            <div class="prompt-example-content">
+                                "What's my schedule look like on @Google Calendar for next Monday?"
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            <strong>Note:</strong> Be specific with dates and times, using phrases like "next Tuesday at 2 PM" rather than vague terms. Include duration and attendees for complete calendar entries.
+                        </p>
+                    </div>
+
+                    <div class="at-function-card">
+                        <h3 class="font-bold text-gray-900 mb-3 flex items-center">
+                            <span class="text-orange-500 mr-2">✅</span>
+                            <span class="at-symbol">@</span>Google Tasks
+                        </h3>
+                        <div class="prompt-example mb-3">
+                            <div class="prompt-example-content">
+                                "Add 'Research new project management tools' to my @Google Tasks list."
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            <strong>Note:</strong> Always clearly state the action (add, show, complete, modify) and be specific about the task title and any associated dates/times.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Conclusion Section -->
+            <section class="mb-16">
+                <div class="access-requirements text-center">
+                    <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">🎯 The Power of Deep Integration</h2>
+                    <p class="text-gray-600 mb-6 max-w-3xl mx-auto">
+                        The examples shown above highlight just a few of the ways Gemini can enhance your experience with Google Workspace tools. 
+                        Rather than attempting to cover every possible feature or use case, we encourage you to explore Gemini's interface directly. 
+                        Many capabilities are best discovered through hands-on interaction within the tools you already use.
+                    </p>
+                    <p class="text-gray-700 font-medium">
+                        Because Gemini is deeply integrated across Google Workspace applications, frequent users of Google tools will likely find 
+                        themselves utilizing its capabilities regularly, often without even consciously intending to.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                        <a href="../key-principles/index.html" class="nav-button-secondary">
+                            🔑 Learn Key Principles
+                        </a>
+                        <a href="../prompt-engineering-course/index.html" class="nav-button-secondary">
+                            🎓 Take the Mini-Course
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../../shared/scripts/footer.js" defer></script>
+    <script src="../../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for smooth scrolling
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add intersection observer for feature items
+            const featureItems = document.querySelectorAll('.feature-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            featureItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Job Role Analyzer - GBS Use Case</title>
+
+    <meta name="description" content="Dione's AI-powered job role analyzer - decode job descriptions instantly and save 15-16 hours weekly">
+    <meta name="keywords" content="AI, recruitment, job analysis, role analyzer, GBS, Dione Boks">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+
+    <style>
+        /* Gemini Interactive Header */
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        .constellation-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .constellation-dot:nth-child(2) { top: -20px; left: -30px; animation-delay: 0.2s; }
+        .constellation-dot:nth-child(3) { top: -15px; right: -25px; animation-delay: 0.4s; }
+        .constellation-dot:nth-child(4) { bottom: -20px; left: -20px; animation-delay: 0.6s; }
+        .constellation-dot:nth-child(5) { bottom: -15px; right: -30px; animation-delay: 0.8s; }
+        .constellation-dot:nth-child(6) { top: 10px; left: -40px; animation-delay: 1s; }
+        .constellation-dot:nth-child(7) { top: 15px; right: -35px; animation-delay: 1.2s; }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: line-pulse 3s ease-in-out infinite;
+        }
+
+        .line-1 { top: -10px; left: -25px; width: 50px; transform: rotate(25deg); animation-delay: 0.5s; }
+        .line-2 { bottom: -10px; right: -25px; width: 45px; transform: rotate(-30deg); animation-delay: 1s; }
+        .line-3 { top: 20px; left: -35px; width: 40px; transform: rotate(60deg); animation-delay: 1.5s; }
+
+        .floating-particle {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .particle-1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .particle-2 { top: 30%; right: 15%; animation-delay: 1s; }
+        .particle-3 { bottom: 40%; left: 20%; animation-delay: 2s; }
+        .particle-4 { bottom: 20%; right: 25%; animation-delay: 3s; }
+        .particle-5 { top: 60%; left: 5%; animation-delay: 4s; }
+        .particle-6 { top: 15%; right: 8%; animation-delay: 5s; }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .setup-steps {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .setup-step {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .metric-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes gentle-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        @keyframes line-pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.6; } }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-10px) rotate(90deg); opacity: 0.8; }
+            50% { transform: translateY(-5px) rotate(180deg); opacity: 0.4; }
+            75% { transform: translateY(-15px) rotate(270deg); opacity: 0.9; }
+        }
+
+        @media (max-width: 768px) {
+            .gemini-diamond { font-size: 3rem; }
+            .content-section { padding: 1.5rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">📊</span>
+                            <span>Use Cases</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span>🎯</span>
+                            <span>Job Role Analyzer</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4">
+            <div class="floating-particle particle-1">🎯</div>
+            <div class="floating-particle particle-2">✨</div>
+            <div class="floating-particle particle-3">🔮</div>
+            <div class="floating-particle particle-4">💫</div>
+            <div class="floating-particle particle-5">⭐</div>
+            <div class="floating-particle particle-6">🌟</div>
+
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🎯</div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-dot"></div>
+                <div class="constellation-line line-1"></div>
+                <div class="constellation-line line-2"></div>
+                <div class="constellation-line line-3"></div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+                AI-Powered Job Role Analyzer
+            </h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Decode job descriptions instantly to understand requirements, identify sourcing strategies, and create targeted candidate profiles.
+            </p>
+            <div class="mt-4">
+                <span class="metric-badge">🚀 Save 15-16 Hours Weekly</span>
+                <span class="metric-badge">💼 Talent Sourcing</span>
+                <span class="metric-badge">✅ Beginner</span>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- Success Story -->
+            <div class="content-section">
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-purple-500 p-6 rounded-lg">
+                    <p class="text-lg italic text-gray-800 mb-3">
+                        "AI role analysis transformed my workflow. I now save 15-16 hours every week on intake and sourcing prep."
+                    </p>
+                    <p class="font-semibold text-purple-700">— Dione Boks, GBS EMEA Sourcing Recruiter</p>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Gem Overview</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">What This Gem Does</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            The Job Role Analyzer is a powerful AI assistant that instantly decodes job descriptions into actionable recruitment insights. It breaks down complex job postings into structured components, suggesting sourcing strategies, LinkedIn search terms, and ideal candidate profiles. This gem eliminates hours of manual analysis and helps recruiters focus on what matters: connecting with the right talent.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Perfect For</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>✓ Intake preparation and role scoping</li>
+                            <li>✓ LinkedIn search strategy development</li>
+                            <li>✓ Candidate profile creation</li>
+                            <li>✓ Sourcing channel identification</li>
+                            <li>✓ Boolean search keyword generation</li>
+                            <li>✓ Requirement vs. nice-to-have analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact Metrics -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Real-World Impact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                        <div class="text-3xl font-bold text-blue-700 mb-2">1h → 10min</div>
+                        <div class="text-sm text-gray-700">Role Analysis Time</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                        <div class="text-3xl font-bold text-purple-700 mb-2">2-3h → 30min</div>
+                        <div class="text-sm text-gray-700">LinkedIn Search Prep</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                        <div class="text-3xl font-bold text-green-700 mb-2">15-16 hours</div>
+                        <div class="text-sm text-gray-700">Saved Per Week</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+                        <div class="text-3xl font-bold text-pink-700 mb-2">+300%</div>
+                        <div class="text-sm text-gray-700">Search Accuracy</div>
+                    </div>
+                </div>
+                <div class="mt-6 bg-purple-50 p-6 rounded-xl">
+                    <h3 class="font-bold text-lg text-gray-900 mb-3">Dione's Weekly Time Savings:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>✅ <strong>Intake preparation:</strong> Reduced from 1h to 10min per role</li>
+                        <li>✅ <strong>LinkedIn searches:</strong> Cut from 2-3h to 30min</li>
+                        <li>✅ <strong>Screening calls:</strong> Eliminated unsuitable candidates (saved 1.3h)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🚀 What This Gem Analyzes</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Core Responsibilities</h3>
+                        <p class="text-gray-600 text-sm">Breaks down role into key responsibilities and daily tasks</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⭐</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Required vs Nice-to-Have</h3>
+                        <p class="text-gray-600 text-sm">Separates must-have skills from optional qualifications</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👤</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Ideal Candidate Profile</h3>
+                        <p class="text-gray-600 text-sm">Creates detailed profile of perfect candidate</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3 class="font-bold text-gray-900 mb-2">LinkedIn Job Titles</h3>
+                        <p class="text-gray-600 text-sm">Suggests alternative job titles to search on LinkedIn</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔤</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Boolean Keywords</h3>
+                        <p class="text-gray-600 text-sm">Provides search keywords for sourcing platforms</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="font-bold text-gray-900 mb-2">Sourcing Strategy</h3>
+                        <p class="text-gray-600 text-sm">Recommends best channels and approaches</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Setup Instructions -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ How to Use</h2>
+                <div class="setup-steps">
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Input job description</h3>
+                                <p class="text-gray-700 text-sm">Paste job description or provide job title for analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Get structured breakdown</h3>
+                                <p class="text-gray-700 text-sm">AI dissects role into responsibilities, requirements, and ideal candidate profile</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Use sourcing insights</h3>
+                                <p class="text-gray-700 text-sm">Apply suggested job titles, keywords, and LinkedIn search strategies</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Prompt -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
+                <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
+                <div class="prompt-container">
+                    <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                    <div id="full-prompt">Purpose and Goals:
+
+Act as a 'Template for analyzing role' and help users dissect and understand job roles and their requirements.
+Provide a structured framework for analyzing job descriptions, focusing on key responsibilities, required skills, and desired qualifications.
+Offer insights into sourcing candidates on platforms like LinkedIn, including effective search strategies and relevant job titles.
+Help users identify what to look for in a candidate beyond the surface-level job description.
+
+Behaviors and Rules:
+
+1) Initial Inquiry:
+a) Greet the user and introduce yourself as their assistant for role analysis and candidate sourcing.
+b) Ask the user to provide a job title or a full job description they want to analyze.
+c) If they provide a job description, ask them to highlight any specific parts they want to focus on.
+
+2) Analysis and Insight Generation:
+a) Based on the user's input, break down the role into core components: 'What the role is' (responsibilities and purpose) and 'What the requirements are' (skills, qualifications, and experience).
+b) Suggest a list of job titles and keywords a recruiter could use on LinkedIn to find suitable candidates.
+c) Provide a concise summary of what an ideal candidate for this role would look like.
+d) Present the analysis in a clear, bulleted, or numbered format for easy readability.
+
+3) Follow-up and Refinement:
+a) Ask the user if they would like to delve deeper into any specific aspect of the analysis (e.g., 'Do you want to explore more job titles or specific sourcing strategies?').
+b) Offer to provide tips on writing a compelling job post based on the analysis.
+
+Overall Tone:
+Use a professional, knowledgeable, and helpful tone.
+Be structured and systematic in your responses.
+The language should be clear and business-oriented, similar to a professional consultant.</div>
+                </div>
+            </div>
+
+            <!-- Prerequisites & Tips -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📋 Prerequisites & Tips</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <h3 class="font-bold text-blue-900 mb-3">✅ What You Need:</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li>• Job description or job title</li>
+                            <li>• Basic understanding of recruitment process</li>
+                            <li>• Access to LinkedIn or sourcing platform</li>
+                        </ul>
+                    </div>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                        <h3 class="font-bold text-yellow-900 mb-3">⚠️ Common Pitfalls:</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li>• Don't use just job title - provide full description</li>
+                            <li>• Always validate AI suggestions with hiring manager</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center mt-8">
+                <a href="https://gemini.google.com" target="_blank"
+                    class="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 mr-4">
+                    🚀 Create Your Gem in Gemini
+                </a>
+                <a href="index.html"
+                    class="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                    ← Back to Use Cases
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="scroll-to-top" title="Back to top" aria-label="Scroll to top">
+        ↑
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../shared/scripts/breadcrumb-nav.js" defer></script>
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+
+    <script>
+        function copyFullPrompt() {
+            const promptText = document.getElementById('full-prompt').textContent;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = document.querySelector('.copy-prompt-btn');
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.style.background = '#10b981';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy prompt. Please select and copy manually.');
+            });
+        }
+    </script>
+</body>
+
+</html>
