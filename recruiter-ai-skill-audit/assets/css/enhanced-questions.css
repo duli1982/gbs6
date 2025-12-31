@@ -1,0 +1,566 @@
+/**
+ * Enhanced Question Design Styles
+ * Transforms GOOD → GREAT question UX
+ */
+
+/* ============================================
+   TYPE INDICATORS
+   ============================================ */
+
+.type-indicator {
+    animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.selection-counter {
+    animation: bounceIn 0.3s ease-out;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ============================================
+   ENHANCED OPTION CONTAINERS
+   ============================================ */
+
+.enhanced-checkbox-option,
+.enhanced-single-option {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover Effects - Multi-Layer */
+.option-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Layer 1: Border & Lift */
+.option-container {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.option-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.2);
+}
+
+/* Layer 2: Background Gradient */
+.option-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(79, 70, 229, 0.05),
+        transparent
+    );
+    transition: left 0.6s ease-out;
+    pointer-events: none;
+}
+
+.option-container:hover::before {
+    left: 100%;
+}
+
+/* Layer 3: Accent Bar */
+.option-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(180deg, #4F46E5, #7C4DFF);
+    transition: height 0.3s ease-out 0.1s;
+    border-radius: 0 4px 4px 0;
+}
+
+.option-container:hover::after {
+    height: 100%;
+}
+
+/* Selected State */
+.option-container.selected {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 77, 255, 0.05));
+    border-color: #4F46E5 !important;
+}
+
+/* ============================================
+   SEMANTIC EMOJI BADGES
+   ============================================ */
+
+.emoji-badge {
+    transition: all 0.3s ease-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-container:hover .emoji-badge {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Critical Priority - Pulse Animation */
+.option-container[data-metadata*='"priority":"critical"'] .emoji-badge {
+    animation: criticalPulse 2s ease-in-out infinite;
+}
+
+@keyframes criticalPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+}
+
+/* ============================================
+   VISUAL VALUE INDICATORS
+   ============================================ */
+
+.visual-indicators {
+    animation: fadeInUp 0.4s ease-out 0.1s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Progress Bars */
+.indicator-row .h-2 {
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.option-container:hover .indicator-row .h-2 {
+    box-shadow: 0 0 8px rgba(79, 70, 229, 0.4);
+}
+
+/* Animate bars on first render */
+@keyframes fillBar {
+    from {
+        width: 0;
+    }
+}
+
+.indicator-row .h-2 {
+    animation: fillBar 1s ease-out;
+}
+
+/* ============================================
+   HOVER PREVIEW SYSTEM
+   ============================================ */
+
+.hover-preview {
+    animation: none; /* Controlled by JavaScript */
+    transform-origin: top center;
+}
+
+.option-container:hover .hover-preview {
+    animation: scaleIn 0.3s ease-out forwards;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Hover Preview Arrow (pointing up to option) */
+.hover-preview::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgb(199, 210, 254); /* border color */
+}
+
+.hover-preview::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid white;
+}
+
+/* Hover Preview Entrance Animation */
+.hover-preview {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   LAYERED INFORMATION
+   ============================================ */
+
+.layered-info {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-out;
+}
+
+.option-container:hover .layered-info {
+    opacity: 1;
+}
+
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.expandable-content:not(.hidden) {
+    max-height: 300px;
+}
+
+.expand-details-btn {
+    transition: all 0.2s ease-out;
+}
+
+.expand-details-btn:hover {
+    transform: translateX(4px);
+}
+
+/* ============================================
+   PRIORITY BADGES
+   ============================================ */
+
+.priority-badge {
+    display: inline-block;
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   INTERACTIVE ANIMATIONS
+   ============================================ */
+
+/* Magnetic Attraction Effect */
+.option-container {
+    will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .enhanced-options-container {
+        perspective: 1000px;
+    }
+
+    .option-container {
+        transform-style: preserve-3d;
+    }
+
+    /* Parallax depth on hover */
+    .option-container:hover .emoji-badge {
+        transform: translateZ(20px) scale(1.15);
+    }
+
+    .option-container:hover .visual-indicators {
+        transform: translateZ(10px);
+    }
+}
+
+/* Ripple Effect on Click */
+.option-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(79, 70, 229, 0.3);
+    transform: scale(0);
+    animation: rippleEffect 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Edge Glow Effect */
+.option-container {
+    position: relative;
+}
+
+.option-container::before {
+    border-radius: inherit;
+}
+
+.option-container[data-metadata*='"priority":"critical"']:hover {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4),
+                0 10px 25px -5px rgba(79, 70, 229, 0.2);
+}
+
+.option-container[data-metadata*='"priority":"high"']:hover {
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.3),
+                0 10px 25px -5px rgba(79, 70, 229, 0.2);
+}
+
+/* ============================================
+   NUMBER COUNT-UP ANIMATION
+   ============================================ */
+
+.count-up {
+    display: inline-block;
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.visual-indicators [class*="text-green-"],
+.visual-indicators [class*="text-yellow-"],
+.visual-indicators [class*="text-orange-"],
+.visual-indicators [class*="text-red-"] {
+    animation: countUp 0.6s ease-out;
+}
+
+/* ============================================
+   CHECKBOX & RADIO ENHANCEMENTS
+   ============================================ */
+
+/* Custom Checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    position: relative;
+}
+
+input[type="checkbox"]:hover {
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+input[type="checkbox"]:checked {
+    background: #4F46E5;
+    border-color: #4F46E5;
+    animation: checkboxBounce 0.3s ease-out;
+}
+
+@keyframes checkboxBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Radio Indicator */
+.radio-indicator {
+    transition: all 0.2s ease-out;
+}
+
+.option-container:hover .radio-indicator {
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* ============================================
+   RESPONSIVE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 640px) {
+    /* Simplify on mobile */
+    .hover-preview {
+        position: static !important;
+        opacity: 0 !important;
+        display: none !important;
+    }
+
+    .option-container {
+        padding: 1rem !important;
+    }
+
+    .emoji-badge {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.25rem;
+    }
+
+    /* Touch-friendly spacing */
+    .enhanced-options-container {
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    /* Tablet optimizations */
+    .hover-preview {
+        width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+
+/* Focus States */
+.option-container:focus-within {
+    outline: 3px solid #4F46E5;
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .option-container {
+        border-width: 3px;
+    }
+
+    .emoji-badge {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .option-container:hover {
+        transform: none;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    .hover-preview,
+    .expand-details-btn {
+        display: none !important;
+    }
+
+    .option-container {
+        border: 2px solid #000 !important;
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(79, 70, 229, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(79, 70, 229, 0.8);
+    }
+}
+
+.shimmer {
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}

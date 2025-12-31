@@ -36,6 +36,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             <span class="text-gray-400">•</span>
                             <a href="${getRelativePath('/terms-of-service/')}" class="text-gray-600 hover:text-blue-600">Terms of Service</a>
                             <span class="text-gray-400">•</span>
+                            <a href="${getRelativePath('/faq.html')}" class="text-gray-600 hover:text-blue-600">FAQ</a>
+                            <span class="text-gray-400">•</span>
                             <a href="${getRelativePath('/feedback/')}" class="text-gray-600 hover:text-blue-600">Feedback</a>
                         </div>
                         <div class="text-sm text-gray-500 pt-4 border-t border-gray-200">

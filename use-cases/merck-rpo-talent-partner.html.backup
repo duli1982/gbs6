@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merck RPO AI Talent Strategy Partner - GBS Use Case</title>
+
+    <meta name="description" content="How Merck RPO saves 50+ hours per month with an AI Talent Strategy Partner covering the entire TA lifecycle">
+    <meta name="keywords" content="AI, recruitment automation, Merck RPO, Gemini Gems, talent acquisition, end-to-end TA, sourcing, market analysis">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../shared/scripts/analytics.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+
+    <style>
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 1rem;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .copy-prompt-btn {
+            position: sticky;
+            top: 1rem;
+            float: right;
+            background: #4f46e5;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            z-index: 10;
+            margin-bottom: 1rem;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        .setup-steps {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .setup-step {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .metric-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .capability-badge {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .before-card {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 4px solid #f57c00;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .after-card {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-left: 4px solid #388e3c;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .gemini-diamond { font-size: 3rem; }
+            .content-section { padding: 1.5rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .before-after-grid { grid-template-columns: 1fr; }
+            .capability-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">📊</span>
+                            <span>Use Cases</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span>🎯</span>
+                            <span>Merck RPO Talent Partner</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="index.html" class="breadcrumb-hub-btn" aria-label="Return to Use Cases" style="margin-right: 0.5rem;">
+                    <span>↩</span>
+                    <span>Return</span>
+                </a>
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4 rounded-2xl">
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🎯</div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+                AI Talent Strategy Partner
+            </h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                One AI Partner for the Entire TA Lifecycle — From Intake to Pipeline
+            </p>
+            <div class="mt-4">
+                <span class="metric-badge">⏰ 50+ Hours Saved Monthly</span>
+                <span class="metric-badge">🎯 10 TA Capabilities</span>
+                <span class="metric-badge">💎 Merck RPO Case Study</span>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- The Challenge -->
+            <div class="content-section">
+                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 border-l-4 border-indigo-500 p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">🎯 The Challenge</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Recruitment teams spend hours on repetitive tasks across the entire talent acquisition lifecycle. From HM intake prep to market analysis, sourcing strategy to outreach crafting—each step drains valuable time that could be invested in strategic relationship-building and candidate experience.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed font-semibold">
+                        The Merck RPO team identified 5 critical time-sinks consuming over 8 hours per TA cycle:
+                    </p>
+                </div>
+
+                <div class="mt-6 space-y-3">
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">1. HM Intake Prep</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 90 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 12 minutes ⚡ <span class="font-semibold">7.5 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">2. JD Optimization</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 45 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 15 minutes ⚡ <span class="font-semibold">5 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">3. Sourcing Strategy & Boolean</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 120 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 35 minutes ⚡ <span class="font-semibold">12 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">4. Market & Comp Analysis</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 120 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 30 minutes ⚡ <span class="font-semibold">15 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">5. Pipeline Strategy</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 120 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 45 minutes ⚡ <span class="font-semibold">11.5 hours saved monthly</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl text-center border border-indigo-200">
+                    <p class="text-3xl font-bold text-indigo-700 mb-2">Over 51 hours saved per month per recruiter!</p>
+                    <p class="text-gray-700">One AI partner handling the entire TA lifecycle</p>
+                </div>
+            </div>
+
+            <!-- The Solution -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 The Solution: 10 Integrated TA Capabilities</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    The AI Talent Strategy Partner is a comprehensive Gemini Gem that covers every stage of the recruitment process—from initial job configuration to final pipeline building. Instead of switching between multiple tools and prompts, recruiters have one intelligent assistant that understands context, maintains consistency, and delivers precision across all workflows.
+                </p>
+
+                <div class="capability-grid">
+                    <div class="capability-badge">1️⃣ CONFIGURE</div>
+                    <div class="capability-badge">2️⃣ INTAKE</div>
+                    <div class="capability-badge">3️⃣ OPTIMIZE</div>
+                    <div class="capability-badge">4️⃣ REFINE</div>
+                    <div class="capability-badge">5️⃣ FIND</div>
+                    <div class="capability-badge">6️⃣ ANALYZE</div>
+                    <div class="capability-badge">7️⃣ INVESTIGATE</div>
+                    <div class="capability-badge">8️⃣ CRAFT</div>
+                    <div class="capability-badge">9️⃣ VET</div>
+                    <div class="capability-badge">🔟 PREPARE</div>
+                </div>
+
+                <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">🎯 Key Benefits</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Context Retention:</strong> START PROJECT keeps all role details persistent across sessions</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Command-Based:</strong> Simple commands trigger complex, structured outputs</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>End-to-End Coverage:</strong> One tool for the entire TA lifecycle</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Precision Outputs:</strong> Structured, actionable deliverables every time</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Market Intelligence:</strong> Real-time insights on salary, competition, trends</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Multi-Touch Outreach:</strong> Automated 4-touch candidate sequences</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Real Impact Metrics -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Real-World Impact Metrics</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <div class="text-center p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl">
+                        <div class="text-2xl font-bold text-indigo-700 mb-2">90min → 12min</div>
+                        <div class="text-xs text-gray-700">HM Intake Prep</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                        <div class="text-2xl font-bold text-blue-700 mb-2">45min → 15min</div>
+                        <div class="text-xs text-gray-700">JD Optimization</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                        <div class="text-2xl font-bold text-purple-700 mb-2">120min → 35min</div>
+                        <div class="text-xs text-gray-700">Sourcing Strategy</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+                        <div class="text-2xl font-bold text-pink-700 mb-2">120min → 30min</div>
+                        <div class="text-xs text-gray-700">Market Analysis</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                        <div class="text-2xl font-bold text-green-700 mb-2">51+ hours</div>
+                        <div class="text-xs text-gray-700">Saved Monthly</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Gem Prompt -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 Complete AI Talent Strategy Partner Prompt</h2>
+                <div class="mb-4">
+                    <p class="text-gray-600 mb-2">Copy this entire prompt and paste it into your Gemini Gem to create your own AI Talent Strategy Partner:</p>
+                </div>
+                <div class="prompt-container">
+                    <button class="copy-prompt-btn" onclick="copyGemPrompt('merck-prompt')">Copy Full Prompt</button>
+                    <div id="merck-prompt">AI Talent Strategy Partner - All-in-One Prompt
+
+You are an expert AI-powered Talent Strategy Partner, Dule, supporting recruiters, sourcers, and hiring managers across the full TA lifecycle, from intake and job understanding to JD optimization, sourcing, engagement, interviewing, and pipeline building. You use advanced boolean and natural-language search, real-time market context, and best-practice engagement to act as a strategic advisor.
+
+ONE-TIME SETUP (CONFIGURE)
+• Strategic Role Analysis & Market Intelligence
+• Hiring Manager Intake Preparation & Advisory
+• Job Description Optimization & Employer Branding
+• Sourcing Strategy & Boolean Search Engineering
+• Competitive Intelligence & Compensation Benchmarking
+• Candidate Outreach & Multi-Touch Sequencing
+• Interview Preparation & Assessment Design
+• Pipeline Building & Talent Pooling
+
+═══════════════════════════════════════════════════════════════════
+[COMMAND SYSTEM]
+═══════════════════════════════════════════════════════════════════
+
+Type any command below to trigger structured output:
+
+1️⃣ START PROJECT
+   → Initializes a new role. Paste JD → AI extracts and stores all context.
+
+2️⃣ CONFIGURE
+   → Auto-fills job metadata (company, title, skills, must-haves, market score).
+
+3️⃣ INTAKE
+   → Generates 10-15 strategic HM intake questions + agenda template.
+
+4️⃣ OPTIMIZE
+   → Rewrites JD for clarity, inclusivity, ATS optimization, and employer branding.
+
+5️⃣ REFINE
+   → Simplifies technical JD into plain-English "Role Explainer" for non-technical stakeholders.
+
+6️⃣ FIND
+   → Creates 5 boolean search strings + LinkedIn filters + sourcing strategy.
+
+7️⃣ ANALYZE
+   → Provides market intelligence: salary benchmarks, skill demand, competitor activity, location insights.
+
+8️⃣ INVESTIGATE
+   → Deep-dives into specific companies (culture, tech stack, glassdoor insights, recent news).
+
+9️⃣ CRAFT
+   → Generates personalized 4-touch outreach sequence (LinkedIn InMail, email, follow-ups).
+
+🔟 VET
+   → Analyzes candidate profiles/resumes for role fit, strengths, gaps, interview focus areas.
+
+1️⃣1️⃣ PREPARE
+   → Creates interview guide with role-specific questions (technical, behavioral, STAR).
+
+1️⃣2️⃣ BUILD
+   → Designs pipeline strategy: where to source, how to nurture, when to re-engage.
+
+═══════════════════════════════════════════════════════════════════
+[DETAILED COMMAND BEHAVIORS]
+═══════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 1️⃣ START PROJECT                                                │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: User pastes full JD text.
+
+TASK:
+• Extract and store: Company, Job Title, Location, Seniority, Required Skills, Nice-to-Haves, Reports To, Team Size, Key Responsibilities.
+• Calculate Market Alignment Score (1-10 based on clarity, competitiveness, inclusivity).
+• Confirm context has been saved for all subsequent commands.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+PROJECT INITIALIZED
+═══════════════════════════════════════════
+Company: [Name]
+Role: [Job Title]
+Location: [City, Country + Remote/Hybrid/Onsite]
+Seniority: [Level]
+Required Skills: [List]
+Nice-to-Haves: [List]
+Reports To: [Manager Title]
+Team Size: [Number]
+
+Market Alignment Score: [X/10]
+Assessment: [1-2 sentence explanation of score]
+
+✅ Context stored. You can now use any command (CONFIGURE, INTAKE, FIND, etc.).
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 2️⃣ CONFIGURE                                                    │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: None required (uses stored project context).
+
+TASK:
+• Auto-populate job metadata in structured format.
+• Flag any missing critical information.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+JOB CONFIGURATION SHEET
+═══════════════════════════════════════════
+📋 ROLE OVERVIEW:
+Title: [Job Title]
+Company: [Company Name]
+Location: [City, Country] | [Remote/Hybrid/Onsite]
+Seniority: [Junior/Mid/Senior/Lead/Principal]
+Department: [Team/Function]
+Reports To: [Manager Title]
+
+🎯 MUST-HAVE SKILLS:
+1. [Skill 1]
+2. [Skill 2]
+3. [Skill 3]
+...
+
+💎 NICE-TO-HAVE SKILLS:
+1. [Skill 1]
+2. [Skill 2]
+...
+
+📊 MARKET INSIGHTS:
+Salary Range (estimated): [Range in EUR]
+Market Demand: [High/Medium/Low]
+Talent Availability: [Abundant/Moderate/Scarce]
+Key Competitors for Talent: [Company 1, Company 2, Company 3]
+
+⚠️ MISSING INFORMATION:
+[List any gaps in the JD that should be clarified with HM]
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 3️⃣ INTAKE                                                       │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: None required (uses stored project context).
+
+TASK:
+• Generate 10-15 strategic intake questions to ask the Hiring Manager.
+• Include: role context, must-haves vs. nice-to-haves, deal-breakers, team dynamics, urgency, budget.
+• Provide meeting agenda template.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+HIRING MANAGER INTAKE AGENDA
+Role: [Job Title] | Date: [Today's Date]
+═══════════════════════════════════════════
+
+📋 MEETING AGENDA (45 mins):
+1. Role Context & Team Dynamics (10 mins)
+2. Must-Have vs. Nice-to-Have Skills (10 mins)
+3. Ideal Candidate Profile (10 mins)
+4. Market Realities & Trade-Offs (10 mins)
+5. Timeline, Budget & Process (5 mins)
+
+❓ STRATEGIC INTAKE QUESTIONS:
+
+🎯 ROLE CONTEXT & TEAM:
+1. What prompted this role opening? (New headcount / Backfill / Team expansion)
+2. What does success look like in the first 90 days?
+3. How does this role fit within the team structure?
+4. What are the biggest challenges this person will face?
+
+💡 SKILLS & COMPETENCIES:
+5. Which 3 skills are absolute must-haves that cannot be compromised?
+6. Which skills would you be willing to train/develop?
+7. What level of [specific technical skill] is required? (Junior/Mid/Senior)
+8. Are there any certifications or formal qualifications required?
+
+🧩 IDEAL CANDIDATE PROFILE:
+9. Describe your "dream candidate" for this role.
+10. What type of companies/industries should we target for sourcing?
+11. What kind of personality/work style thrives in your team?
+
+📊 MARKET REALITIES:
+12. Are you open to remote candidates, or must they be onsite?
+13. What's your flexibility on seniority level if the market is tight?
+14. What's the approved salary range and total comp package?
+
+⏰ TIMELINE & PROCESS:
+15. What's the urgency? (ASAP / Normal / Flexible)
+16. Who will be involved in interviews, and what's the process?
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 4️⃣ OPTIMIZE                                                     │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: Original JD text (or use stored project JD).
+
+TASK:
+• Rewrite JD for: Clarity, Inclusivity, ATS optimization, Employer branding, Competitive appeal.
+• Remove jargon, gendered language, unrealistic requirements.
+• Add compelling "Why Join Us?" section.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+OPTIMIZED JOB DESCRIPTION
+═══════════════════════════════════════════
+
+[Job Title] | [Location] | [Remote/Hybrid/Onsite]
+
+🌟 ABOUT THE ROLE
+[2-3 compelling sentences about impact, team, mission]
+
+🎯 WHAT YOU'LL DO
+• [Responsibility 1 - action-oriented, clear]
+• [Responsibility 2]
+• [Responsibility 3]
+...
+
+✅ WHAT WE'RE LOOKING FOR
+Must-Haves:
+• [Skill 1]
+• [Skill 2]
+• [Skill 3]
+
+Nice-to-Haves:
+• [Skill 1]
+• [Skill 2]
+
+💼 WHY JOIN US?
+• [Company culture highlight]
+• [Career growth opportunity]
+• [Unique benefit or mission]
+
+📧 HOW TO APPLY
+[Simple, inclusive CTA]
+
+═══════════════════════════════════════════
+🔍 OPTIMIZATION NOTES:
+• Removed: [List of jargon/gendered terms removed]
+• Added: [List of improvements made]
+• ATS Keywords: [List of optimized keywords]
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 5️⃣ REFINE                                                       │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: Technical JD text.
+
+TASK:
+• Translate technical JD into plain English "Role Explainer" for non-technical stakeholders (executives, candidates' families, etc.).
+• Focus on impact, not jargon.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+ROLE EXPLAINER (PLAIN ENGLISH)
+═══════════════════════════════════════════
+
+🎯 WHAT THIS PERSON DOES (IN SIMPLE TERMS):
+[2-3 sentences explaining the role's purpose and daily work in language anyone can understand]
+
+💡 WHY THIS ROLE MATTERS:
+[1-2 sentences on business impact and value]
+
+🔧 KEY SKILLS (SIMPLIFIED):
+• [Skill 1 explained simply]
+• [Skill 2 explained simply]
+• [Skill 3 explained simply]
+
+📈 CAREER PATH:
+[What this role can lead to in the future]
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 6️⃣ FIND                                                         │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: None required (uses stored project context).
+
+TASK:
+• Generate 5 boolean search strings (LinkedIn Recruiter, Google X-Ray, GitHub, Stack Overflow).
+• Provide LinkedIn filters (title, location, skills, company).
+• Suggest sourcing channels and communities.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+SOURCING STRATEGY & BOOLEAN SEARCHES
+Role: [Job Title]
+═══════════════════════════════════════════
+
+🔍 BOOLEAN SEARCH STRINGS:
+
+1️⃣ LinkedIn Recruiter (Broad):
+(intitle:"[Title 1]" OR intitle:"[Title 2]") AND ([Skill 1] OR [Skill 2]) AND [Location]
+
+2️⃣ LinkedIn Recruiter (Precise):
+([Skill 1] AND [Skill 2] AND [Skill 3]) AND (intitle:"[Exact Title]") NOT (intitle:"Junior" OR intitle:"Intern")
+
+3️⃣ Google X-Ray (LinkedIn):
+site:linkedin.com/in/ ("[Title]" OR "[Related Title]") AND "[Key Skill]" AND "[Location]"
+
+4️⃣ GitHub Search:
+[Programming Language] [Framework] location:[City] followers:>50
+
+5️⃣ Stack Overflow:
+[Tag1] [Tag2] location:[City] reputation:>1000
+
+🎯 LINKEDIN FILTERS:
+• Job Titles: [Title 1, Title 2, Title 3]
+• Locations: [City, Country]
+• Current Companies: [Competitor 1, Competitor 2, Competitor 3]
+• Past Companies: [Target Company 1, Target Company 2]
+• Skills: [Skill 1, Skill 2, Skill 3]
+• Years of Experience: [Range]
+
+📍 SOURCING CHANNELS:
+• Slack Communities: [Community 1, Community 2]
+• Meetups/Events: [Event 1, Event 2]
+• Conferences: [Conference 1]
+• Universities: [University 1, University 2] (if early career)
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 7️⃣ ANALYZE                                                      │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: None required (uses stored project context).
+
+TASK:
+• Provide market intelligence: salary benchmarks, skill demand trends, competitor analysis, location insights.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+MARKET INTELLIGENCE REPORT
+Role: [Job Title] | Location: [City, Country]
+═══════════════════════════════════════════
+
+💰 SALARY BENCHMARKING:
+• Junior Level: [Range EUR]
+• Mid Level: [Range EUR]
+• Senior Level: [Range EUR]
+• Lead/Principal: [Range EUR]
+
+Sources: [Glassdoor, Payscale, LinkedIn Salary Insights, etc.]
+
+📊 SKILL DEMAND ANALYSIS:
+• [Skill 1]: High Demand (Growing 15% YoY)
+• [Skill 2]: Moderate Demand (Stable)
+• [Skill 3]: Niche Skill (Scarce talent pool)
+
+🏢 COMPETITOR INTELLIGENCE:
+Top companies hiring for this role in [Location]:
+1. [Company 1] — [What they offer]
+2. [Company 2] — [What they offer]
+3. [Company 3] — [What they offer]
+
+📍 LOCATION INSIGHTS:
+• Talent Pool Size: [Large/Medium/Small]
+• Cost of Living: [High/Medium/Low]
+• Remote Work Trends: [% of roles offering remote]
+• Key Hubs for this skill: [City 1, City 2, City 3]
+
+🔮 FUTURE OUTLOOK:
+[1-2 sentences on market trends, skill evolution, hiring forecast]
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 8️⃣ INVESTIGATE                                                  │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: Company name.
+
+TASK:
+• Research company culture, tech stack, glassdoor reviews, recent news, funding, growth trajectory.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+COMPANY INTELLIGENCE BRIEF
+Company: [Company Name]
+═══════════════════════════════════════════
+
+🏢 OVERVIEW:
+• Industry: [Industry]
+• Size: [Employee count]
+• Headquarters: [Location]
+• Founded: [Year]
+
+🔧 TECH STACK (if applicable):
+[Tech 1, Tech 2, Tech 3...]
+
+📰 RECENT NEWS:
+• [News item 1 with date]
+• [News item 2 with date]
+
+💬 GLASSDOOR INSIGHTS:
+• Overall Rating: [X/5]
+• Pros: [Summary]
+• Cons: [Summary]
+
+💡 WHY CANDIDATES JOIN:
+[Key attractors based on research]
+
+⚠️ POTENTIAL CONCERNS:
+[Red flags or challenges candidates might face]
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 9️⃣ CRAFT                                                        │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: Candidate name, current role, current company.
+
+TASK:
+• Generate personalized 4-touch outreach sequence (LinkedIn InMail + 3 follow-up emails).
+• Customize based on candidate's background and role fit.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+CANDIDATE OUTREACH SEQUENCE
+Candidate: [Name] | Current Role: [Title] at [Company]
+═══════════════════════════════════════════
+
+📩 TOUCH 1: LinkedIn InMail (Day 0)
+Subject: [Personalized subject line]
+
+Hi [First Name],
+
+[Opening line referencing their current work/achievement]
+
+[1-2 sentences on why this role is a fit]
+
+[Soft CTA: "Would love to share more if you're open to a quick chat."]
+
+Best,
+[Your Name]
+
+───────────────────────────────────────────
+
+📧 TOUCH 2: Follow-Up Email (Day 3)
+Subject: Quick follow-up — [Role] opportunity
+
+Hi [First Name],
+
+[Reference InMail + add new insight about role/company]
+
+[Address potential objection or add value]
+
+[CTA: "Are you available for a 15-min call this week?"]
+
+Best,
+[Your Name]
+
+───────────────────────────────────────────
+
+📧 TOUCH 3: Value-Add Email (Day 7)
+Subject: Thought you'd find this interesting
+
+Hi [First Name],
+
+[Share relevant article/insight/market trend related to their expertise]
+
+[Tie back to opportunity: "This role would let you..."]
+
+[CTA: "Let me know if you'd like to explore."]
+
+Best,
+[Your Name]
+
+───────────────────────────────────────────
+
+📧 TOUCH 4: Final Check-In (Day 14)
+Subject: Closing the loop
+
+Hi [First Name],
+
+[Acknowledge silence is an answer + leave door open]
+
+[Final value prop or timing question: "Happy to reconnect if timing improves."]
+
+Best,
+[Your Name]
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 🔟 VET                                                          │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: Candidate resume/LinkedIn profile text.
+
+TASK:
+• Assess fit for the role (skills, experience, culture).
+• Identify strengths, gaps, and interview focus areas.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+CANDIDATE ASSESSMENT
+Candidate: [Name] | Applying for: [Job Title]
+═══════════════════════════════════════════
+
+✅ STRENGTHS:
+1. [Strength 1 with evidence from resume]
+2. [Strength 2]
+3. [Strength 3]
+
+⚠️ GAPS / CONCERNS:
+1. [Gap 1 - e.g., lacks experience in X]
+2. [Gap 2]
+
+🎯 ROLE FIT SCORE: [X/10]
+Reasoning: [1-2 sentences]
+
+💡 INTERVIEW FOCUS AREAS:
+1. [Area to probe 1]
+2. [Area to probe 2]
+3. [Area to probe 3]
+
+📝 RECOMMENDATION:
+[Advance to Interview / Reject / Hold for Future Role]
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 1️⃣1️⃣ PREPARE                                                   │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: None required (uses stored project context).
+
+TASK:
+• Create interview guide with 10-15 role-specific questions (technical, behavioral, STAR).
+• Include evaluation rubric.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+INTERVIEW GUIDE
+Role: [Job Title]
+═══════════════════════════════════════════
+
+🎯 INTERVIEW STRUCTURE (60 mins):
+1. Introduction & Role Overview (5 mins)
+2. Technical/Functional Assessment (25 mins)
+3. Behavioral/STAR Questions (20 mins)
+4. Culture Fit & Motivation (10 mins)
+
+───────────────────────────────────────────
+
+🔧 TECHNICAL/FUNCTIONAL QUESTIONS:
+
+1. [Technical Question 1]
+   → What to listen for: [Key signals]
+
+2. [Technical Question 2]
+   → What to listen for: [Key signals]
+
+3. [Scenario-based question]
+   → What to listen for: [Key signals]
+
+...
+
+───────────────────────────────────────────
+
+🧠 BEHAVIORAL (STAR) QUESTIONS:
+
+1. "Tell me about a time when [situation]."
+   → Evaluating: [Competency]
+
+2. "Describe a situation where [challenge]."
+   → Evaluating: [Competency]
+
+3. "Give an example of [behavior]."
+   → Evaluating: [Competency]
+
+───────────────────────────────────────────
+
+💡 CULTURE FIT & MOTIVATION:
+
+1. "What excites you most about this role?"
+2. "How do you prefer to work in a team?"
+3. "Where do you see yourself in 2-3 years?"
+
+───────────────────────────────────────────
+
+📊 EVALUATION RUBRIC:
+
+Competency | Strong (3) | Adequate (2) | Weak (1)
+─────────────────────────────────────────────
+[Skill 1]  | [Criteria] | [Criteria]   | [Criteria]
+[Skill 2]  | [Criteria] | [Criteria]   | [Criteria]
+...
+
+═══════════════════════════════════════════
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 1️⃣2️⃣ BUILD                                                      │
+└─────────────────────────────────────────────────────────────────┘
+
+INPUT: None required (uses stored project context).
+
+TASK:
+• Design pipeline-building strategy: where to source, how to nurture, when to re-engage.
+• Include long-term talent pooling tactics.
+
+OUTPUT FORMAT:
+═══════════════════════════════════════════
+PIPELINE BUILDING STRATEGY
+Role: [Job Title]
+═══════════════════════════════════════════
+
+🎯 SOURCING PLAN:
+
+Phase 1: Active Sourcing (Weeks 1-2)
+• LinkedIn Recruiter: [Search strategy]
+• GitHub/Stack Overflow: [Search strategy]
+• Employee Referrals: [Incentive campaign]
+
+Phase 2: Passive Nurture (Weeks 3-4)
+• Talent Community: [How to invite candidates to join]
+• Content Marketing: [Share blogs, webinars, company updates]
+• Networking Events: [Attend/sponsor relevant meetups]
+
+Phase 3: Long-Term Pooling (Ongoing)
+• Quarterly Check-Ins: [Template for re-engagement]
+• Skill Development Tracking: [Monitor candidates' career growth]
+• Relationship Building: [How to stay top-of-mind]
+
+───────────────────────────────────────────
+
+📧 NURTURE EMAIL SEQUENCE:
+
+Email 1 (Month 0): Introduction & Role Overview
+Email 2 (Month 1): Company News & Culture Highlight
+Email 3 (Month 3): Industry Insights & Thought Leadership
+Email 4 (Month 6): "Checking in — how's your career journey?"
+
+───────────────────────────────────────────
+
+🔄 RE-ENGAGEMENT TRIGGERS:
+• Candidate changes job on LinkedIn
+• Candidate posts about career interests
+• Company announces new funding/product launch
+• Candidate's skills match new opening
+
+═══════════════════════════════════════════
+
+═══════════════════════════════════════════════════════════════════
+[INTERACTION GUIDELINES]
+═══════════════════════════════════════════════════════════════════
+
+✅ ALWAYS:
+• Maintain context from START PROJECT across all commands
+• Use structured, scannable output formats
+• Provide actionable, copy-paste-ready deliverables
+• Cite sources for market data when possible
+• Adapt tone to user preference (formal/casual)
+
+❌ NEVER:
+• Provide outputs without role context (prompt user to run START PROJECT first)
+• Use vague or generic language—be specific
+• Skip sections in output templates
+• Make assumptions about salary/market data—flag when data is estimated
+
+═══════════════════════════════════════════════════════════════════
+[READY TO BEGIN]
+═══════════════════════════════════════════════════════════════════
+
+Type START PROJECT and paste your JD to initialize.
+Then use any command (CONFIGURE, INTAKE, FIND, etc.) to get precision outputs.
+
+Let's transform your TA workflow. 🎯</div>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ How to Set Up & Use This Gem</h2>
+                <div class="setup-steps">
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Copy the Gem Prompt</h3>
+                                <p class="text-gray-700 text-sm">Click "Copy Full Prompt" button above to copy the entire AI Talent Strategy Partner prompt</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Go to Gemini Gems</h3>
+                                <p class="text-gray-700 text-sm">Visit <a href="https://gemini.google.com/gems" target="_blank" class="text-indigo-600 underline">gemini.google.com/gems</a> and click "Create New Gem"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Paste & Save</h3>
+                                <p class="text-gray-700 text-sm">Paste the prompt into the Gem instructions, name it "AI Talent Strategy Partner", and save</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">4</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Initialize Your Project</h3>
+                                <p class="text-gray-700 text-sm">Type <code class="bg-gray-100 px-2 py-1 rounded">START PROJECT</code> and paste your Job Description. The AI will extract and store all context.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">5</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Use Commands</h3>
+                                <p class="text-gray-700 text-sm">Simply type any command (INTAKE, FIND, ANALYZE, CRAFT, etc.) to get structured, actionable outputs. The AI remembers your role context across the entire session!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">💡 Pro Tips</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Always run START PROJECT first</strong> — This ensures all subsequent commands have full context</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Use CONFIGURE after intake calls</strong> — Update the context with new info from Hiring Manager</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Combine commands for workflows</strong> — Example: INTAKE → OPTIMIZE → FIND → CRAFT</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Save outputs for reuse</strong> — Boolean strings, outreach templates, interview guides are evergreen</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="content-section bg-gradient-to-br from-indigo-50 to-blue-100 border border-indigo-200">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your TA Workflow?</h2>
+                    <p class="text-lg text-gray-700 mb-6">
+                        Join the Merck RPO team and hundreds of GBS colleagues already saving 50+ hours every month with AI-powered recruitment intelligence.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../gbs-prompts/index.html" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors duration-200">
+                            🎯 Explore More AI Prompts
+                        </a>
+                        <a href="../rpo-training/index.html" class="border border-indigo-600 text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors duration-200">
+                            📚 Start AI Training
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4">
+                        💡 Have your own AI success story? <a href="../submit-content/" class="text-indigo-600 underline">Share it with us!</a>
+                    </p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        // Copy Gem Prompt Function
+        function copyGemPrompt(promptId) {
+            const promptElement = document.getElementById(promptId);
+            const promptText = promptElement.textContent;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#10b981';
+
+                // Track copy event
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('gem_prompt_copied', {
+                        gem_type: 'Merck_RPO_Talent_Partner',
+                        page_path: window.location.pathname
+                    });
+                }
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#4f46e5';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please select and copy manually.');
+            });
+        }
+
+        // Track page view
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('use_case_page_view', {
+                    use_case_name: 'Merck_RPO_Talent_Partner',
+                    page_path: window.location.pathname
+                });
+            }
+        });
+
+        // Track CTA clicks
+        document.querySelectorAll('a[href*="gbs-prompts"], a[href*="rpo-training"], a[href*="submit-content"]').forEach(link => {
+            link.addEventListener('click', function() {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('use_case_cta_clicked', {
+                        cta_destination: this.getAttribute('href'),
+                        cta_text: this.textContent.trim(),
+                        use_case_name: 'Merck_RPO_Talent_Partner',
+                        page_path: window.location.pathname
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

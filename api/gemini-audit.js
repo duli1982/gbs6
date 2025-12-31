@@ -189,9 +189,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-2.0-flash').trim();
-    const fallbackModels = parseList(process.env.GEMINI_FALLBACK_MODELS);
-    const modelsToTry = Array.from(new Set([primaryModel, ...fallbackModels, 'gemini-1.5-flash'])).filter(Boolean);
+    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+    const extraFallbackModels = parseList(process.env.GEMINI_FALLBACK_MODELS);
+    const modelsToTry = Array.from(
+      new Set([primaryModel, 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
+    ).filter(Boolean);
 
     const payload = {
       contents: [
@@ -234,7 +236,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ text, response: text });
       }
 
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const endpoint = `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
       const run = (async () => {
         const controller = new AbortController();
@@ -293,7 +295,8 @@ export default async function handler(req, res) {
         }
 
         console.error('Gemini API error:', err?.details ?? String(err));
-        return res.status(status).json({ error: 'Gemini API error', details: err?.details ?? String(err) });
+        const outwardStatus = status === 404 || status === 400 ? 502 : status;
+        return res.status(outwardStatus).json({ error: 'Gemini API error', details: err?.details ?? String(err) });
       } finally {
         inFlight.delete(cacheKey);
       }
@@ -306,7 +309,8 @@ export default async function handler(req, res) {
       return res.status(429).json({ error: 'Gemini API rate-limited', retryAfterSeconds, details: lastError?.details ?? String(lastError) });
     }
 
-    return res.status(status).json({ error: 'Gemini API error', details: lastError?.details ?? String(lastError) });
+    const outwardStatus = status === 404 || status === 400 ? 502 : status;
+    return res.status(outwardStatus).json({ error: 'Gemini API error', details: lastError?.details ?? String(lastError) });
   } catch (err) {
     console.error('Gemini audit error:', err);
     return res.status(500).json({ error: 'Server error', details: String(err) });

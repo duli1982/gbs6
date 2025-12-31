@@ -1,0 +1,23 @@
+{
+  "name": "gbs6-emea-ai-learning-hub",
+  "version": "1.0.0",
+  "description": "GBS EMEA AI Learning Hub - Production Ready Platform",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "ai",
+    "learning",
+    "gemini",
+    "recruitment",
+    "gbs"
+  ],
+  "author": "",
+  "license": "ISC"
+}

@@ -18,6 +18,27 @@ class AISkillsAudit {
         this.resultsStep = document.getElementById('results-step');
         this.startBtn = document.getElementById('start-btn');
 
+        // Phase 3: Analytics and Conditional Logic
+        this.analyticsTracker = window.AnalyticsTracker ? new window.AnalyticsTracker() : null;
+        this.conditionalLogic = window.ConditionalLogicEngine ? new window.ConditionalLogicEngine() : null;
+
+        // Calculation Transparency (Phase 1)
+        this.transparencyEngine = window.CalculationTransparency ? new window.CalculationTransparency() : null;
+
+        // Calculation Transparency Phase 2 (Interactive Features)
+        this.transparencyPhase2 = window.CalculationTransparencyPhase2 ? new window.CalculationTransparencyPhase2() : null;
+
+        // Calculation Transparency Phase 3 (Depth Features)
+        this.transparencyPhase3 = window.CalculationTransparencyPhase3 ? new window.CalculationTransparencyPhase3() : null;
+
+        // Calculation Transparency Phase 4 (Advanced Features)
+        this.transparencyPhase4 = window.CalculationTransparencyPhase4 ? new window.CalculationTransparencyPhase4() : null;
+
+        // Store globally for analytics dashboard access
+        if (this.analyticsTracker) {
+            window.analyticsTracker = this.analyticsTracker;
+        }
+
         this.init();
     }
 
@@ -41,9 +62,34 @@ class AISkillsAudit {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            const data = await response.json();
+            let data = await response.json();
             console.log('Questions loaded successfully:', data);
-            
+
+            // Check version and migrate if needed
+            if (window.DataVersioning) {
+                const versioning = new window.DataVersioning();
+
+                if (versioning.needsMigration(data)) {
+                    console.log('🔄 Data migration needed');
+                    const migrationResult = versioning.migrateData(data);
+                    versioning.logMigrationReport(migrationResult);
+                    data = migrationResult.data;
+                } else {
+                    console.log(`✅ Data is at current version (v${versioning.getDataVersion(data)})`);
+                }
+            }
+
+            // Validate schema if validator available
+            if (window.SchemaValidator) {
+                const validator = new window.SchemaValidator();
+                const validationReport = validator.validateQuestions(data);
+                validator.logReport();
+
+                if (!validationReport.isValid) {
+                    console.warn('⚠️ Data quality issues detected. Review validation report above.');
+                }
+            }
+
             this.questions = data.questions;
             this.businessUnits = data.businessUnits;
             this.aiTools = data.aiTools;
@@ -115,6 +161,13 @@ class AISkillsAudit {
 
     setupEventListeners() {
         this.startBtn.addEventListener('click', () => {
+            // Track assessment start
+            if (this.analyticsTracker) {
+                this.analyticsTracker.trackEvent('assessment_started', {
+                    timestamp: Date.now()
+                });
+            }
+
             this.changeStep('questions');
             this.renderQuestion();
         });
@@ -129,10 +182,19 @@ class AISkillsAudit {
     }
 
     getRelevantQuestions() {
-        const relevant = this.questions.filter(q => {
+        let relevant = this.questions.filter(q => {
             if (!q.showIf) return true;
             return this.answers.businessUnit === q.showIf;
         });
+
+        // Apply conditional logic filtering if available
+        if (this.conditionalLogic) {
+            const filtered = this.conditionalLogic.filterQuestions(relevant, this.answers);
+            this.skippedQuestions = filtered.skipped;
+            relevant = filtered.questions;
+            console.log(`Conditional logic applied: ${filtered.skipped.length} questions skipped`);
+        }
+
         console.log(`Business Unit: ${this.answers.businessUnit}, Relevant Questions: ${relevant.length}`, relevant.map(q => q.id));
         return relevant;
     }
@@ -142,11 +204,28 @@ class AISkillsAudit {
         const currentQuestionIndex = relevantQuestions.findIndex(q => !this.answers[q.id]);
 
         if (currentQuestionIndex === -1) {
+            // Track assessment completion
+            if (this.analyticsTracker) {
+                this.analyticsTracker.trackEvent('assessment_completed', {
+                    totalQuestions: relevantQuestions.length,
+                    answeredQuestions: Object.keys(this.answers).length
+                });
+            }
+
             this.calculateResults();
             return;
         }
 
         const currentQuestion = relevantQuestions[currentQuestionIndex];
+
+        // Track question view
+        if (this.analyticsTracker) {
+            this.analyticsTracker.trackEvent('question_viewed', {
+                questionId: currentQuestion.id,
+                questionIndex: currentQuestionIndex
+            });
+        }
+
         const progress = (Object.keys(this.answers).filter(key =>
             relevantQuestions.find(q => q.id === key)).length / relevantQuestions.length) * 100;
 
@@ -155,25 +234,82 @@ class AISkillsAudit {
     }
 
     renderProgressBar(current, total, progress) {
-        const progressHtml = `
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-medium text-gray-600">Question ${current} of ${total}</span>
-                <span class="text-sm font-medium text-indigo-600">${Math.round(progress)}% Complete</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2">
-                <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
-            </div>
-        `;
+        // Render multi-stage progress if enhanced features are available
+        let progressHtml = '';
+
+        if (window.enhancedFeatures) {
+            progressHtml = window.enhancedFeatures.renderMultiStageProgress();
+
+            // Add time estimate and review button
+            progressHtml += `
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm font-medium text-gray-600">Question ${current} of ${total}</span>
+                        ${window.enhancedFeatures.renderTimeEstimate()}
+                    </div>
+                    <button id="review-answers-btn" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1">
+                        <span>📋</span>
+                        <span>Review Answers</span>
+                    </button>
+                </div>
+            `;
+
+            // Check for milestones
+            window.enhancedFeatures.checkMilestone(progress);
+        } else {
+            // Fallback to basic progress bar
+            progressHtml = `
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-gray-600">Question ${current} of ${total}</span>
+                    <span class="text-sm font-medium text-indigo-600">${Math.round(progress)}% Complete</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
+                </div>
+            `;
+        }
+
         document.getElementById('progress-container').innerHTML = progressHtml;
+
+        // Add event listener for review button if it exists
+        const reviewBtn = document.getElementById('review-answers-btn');
+        if (reviewBtn && window.enhancedFeatures) {
+            reviewBtn.addEventListener('click', () => {
+                if (!document.getElementById('review-panel')) {
+                    window.enhancedFeatures.createReviewPanel();
+                }
+                window.enhancedFeatures.openReviewPanel();
+            });
+        }
     }
 
     renderQuestionCard(question, currentIndex, relevantQuestions) {
-        let questionHtml = `<h2 class="text-2xl font-bold text-gray-900 mb-8">${question.question}</h2>`;
+        // Add context bridge if enhanced features available
+        let questionHtml = '';
 
-        if (question.type === 'checkbox') {
-            questionHtml += this.renderCheckboxQuestion(question);
+        if (window.enhancedFeatures && currentIndex > 0) {
+            const previousQuestion = relevantQuestions[currentIndex - 1];
+            questionHtml += window.enhancedFeatures.addContextBridge(previousQuestion, question);
+        }
+
+        questionHtml += `<h2 class="text-2xl font-bold text-gray-900 mb-8">${question.question}</h2>`;
+
+        // Use enhanced question renderer if available
+        if (window.enhancedQuestionRenderer) {
+            questionHtml += window.enhancedQuestionRenderer.renderEnhancedQuestion(question, this.answers);
         } else {
-            questionHtml += this.renderSingleChoiceQuestion(question);
+            // Fallback to basic rendering
+            if (question.type === 'checkbox') {
+                questionHtml += this.renderCheckboxQuestion(question);
+            } else {
+                questionHtml += this.renderSingleChoiceQuestion(question);
+            }
+        }
+
+        // Add enhanced features if available
+        if (window.enhancedFeatures) {
+            questionHtml += window.enhancedFeatures.addContextualHelp(question);
+            questionHtml += window.enhancedFeatures.addQuestionPreview(currentIndex, relevantQuestions);
         }
 
         // Add button container with proper spacing
@@ -194,6 +330,13 @@ class AISkillsAudit {
         questionHtml += `</div>`;
 
         document.getElementById('question-card').innerHTML = questionHtml;
+
+        // Attach enhanced question behaviors if available
+        if (window.enhancedQuestionRenderer) {
+            const questionCard = document.getElementById('question-card');
+            window.enhancedQuestionRenderer.attachInteractiveBehaviors(questionCard);
+        }
+
         this.attachQuestionEventListeners(question, currentIndex, relevantQuestions);
     }
 
@@ -245,12 +388,29 @@ class AISkillsAudit {
             document.getElementById('checkbox-continue').addEventListener('click', () => {
                 const checkedBoxes = document.querySelectorAll('.checkbox-option input:checked');
                 const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+
+                // Track answer
+                if (this.analyticsTracker) {
+                    this.analyticsTracker.trackEvent('question_answered', {
+                        questionId: question.id,
+                        answer: selectedValues
+                    });
+                }
+
                 this.answers[question.id] = selectedValues;
                 this.proceedToNext(currentIndex, relevantQuestions);
             });
         } else {
             document.querySelectorAll('.question-option').forEach(btn => {
                 btn.addEventListener('click', () => {
+                    // Track answer
+                    if (this.analyticsTracker) {
+                        this.analyticsTracker.trackEvent('question_answered', {
+                            questionId: question.id,
+                            answer: btn.dataset.value
+                        });
+                    }
+
                     this.answers[question.id] = btn.dataset.value;
                     this.proceedToNext(currentIndex, relevantQuestions);
                 });
@@ -260,6 +420,14 @@ class AISkillsAudit {
         if (currentIndex > 0) {
             document.getElementById('back-btn').addEventListener('click', () => {
                 const prevQuestion = relevantQuestions[currentIndex - 1];
+
+                // Track answer change
+                if (this.analyticsTracker && this.answers[prevQuestion.id]) {
+                    this.analyticsTracker.trackEvent('answer_changed', {
+                        questionId: prevQuestion.id
+                    });
+                }
+
                 delete this.answers[prevQuestion.id];
                 this.renderQuestion();
             });
@@ -267,6 +435,11 @@ class AISkillsAudit {
     }
 
     proceedToNext(currentIndex, relevantQuestions) {
+        // Save progress if enhanced features available
+        if (window.enhancedFeatures) {
+            window.enhancedFeatures.saveProgress();
+        }
+
         if (currentIndex === relevantQuestions.length - 1) {
             setTimeout(() => this.calculateResults(), 300);
         } else {
@@ -314,6 +487,273 @@ class AISkillsAudit {
             readiness: aiExperienceData?.readiness || 'beginner',
             insights: this.generateInsights(businessUnit)
         };
+
+        // Generate explainable calculation if available
+        if (window.CalculationExplainer) {
+            const explainer = new window.CalculationExplainer();
+            const allQuestions = this.questions;
+            const explainedResult = explainer.calculateWithExplanation(this.answers, allQuestions);
+
+            // Add explanation data to results
+            this.results.explanation = explainedResult;
+            this.results.confidence = explainedResult.confidence;
+            this.results.calculationSteps = explainedResult.steps;
+        }
+
+        // Generate benchmarking comparison if available
+        if (window.BenchmarkingData) {
+            const benchmarking = new window.BenchmarkingData();
+            const comparison = benchmarking.generateComparison({
+                weekly: this.results.totalTimeSaved,
+                monthly: this.results.monthlyTimeSaved,
+                yearly: this.results.yearlyTimeSaved
+            });
+
+            // Add comparison data to results
+            this.results.benchmarking = comparison;
+            this.results.benchmarkInsights = benchmarking.getInsights(comparison);
+        }
+
+        // Generate multi-dimensional scoring if available
+        if (window.MultiDimensionalScorer) {
+            const scorer = new window.MultiDimensionalScorer();
+            const multiDimResult = scorer.calculateAllDimensions(
+                this.answers,
+                this.questions,
+                {
+                    totalTimeSaved: this.results.totalTimeSaved,
+                    monthlyTimeSaved: this.results.monthlyTimeSaved,
+                    yearlyTimeSaved: this.results.yearlyTimeSaved
+                }
+            );
+
+            // Add multi-dimensional scoring to results
+            this.results.multiDimensional = multiDimResult;
+            this.results.overallScore = multiDimResult.overallScore;
+        }
+
+        // Tier 1 Feature: Workflow Stage Mapping
+        if (window.WorkflowStageMapper) {
+            const workflowMapper = new window.WorkflowStageMapper();
+            const workflowAnalysis = workflowMapper.analyzeWorkflow(businessUnit, this.answers);
+
+            if (workflowAnalysis) {
+                this.results.workflowAnalysis = workflowAnalysis;
+                console.log(`📊 Workflow Analysis: ${workflowAnalysis.bottlenecks.length} bottleneck(s) detected`);
+            }
+        }
+
+        // Tier 1 Feature: Role Archetype Detection
+        if (window.RoleArchetypeDetector) {
+            const archetypeDetector = new window.RoleArchetypeDetector();
+            const archetypeDetection = archetypeDetector.detectArchetype(businessUnit, this.answers);
+
+            if (archetypeDetection) {
+                this.results.archetype = archetypeDetection;
+                console.log(`🎯 Archetype Detected: ${archetypeDetection.primaryArchetype.name} (${archetypeDetection.primaryArchetype.matchPercentage}% match)`);
+            }
+        }
+
+        // Tier 1 Feature: Cross-Functional Pain Detection
+        if (window.CrossFunctionalPainDetector) {
+            const painDetector = new window.CrossFunctionalPainDetector();
+            const painDetection = painDetector.detectCrossFunctionalPains(this.answers);
+
+            if (painDetection) {
+                this.results.crossFunctionalPains = painDetection;
+                console.log(`🔍 Cross-Functional Analysis: ${painDetection.totalIssues} issue(s) detected`);
+            }
+        }
+
+        // Tier 1 Feature: Scenario-Based Analysis
+        if (window.ScenarioBasedAnalyzer) {
+            const scenarioAnalyzer = new window.ScenarioBasedAnalyzer();
+            const scenarioAnalyses = [];
+
+            // Check for scenario answers in the responses
+            Object.keys(this.answers).forEach(key => {
+                if (key.endsWith('_scenario')) {
+                    const scenarioId = key;
+                    const selectedOptions = this.answers[key];
+
+                    if (Array.isArray(selectedOptions) && selectedOptions.length > 0) {
+                        const analysis = scenarioAnalyzer.analyzeScenario(
+                            businessUnit,
+                            scenarioId,
+                            selectedOptions
+                        );
+
+                        if (analysis) {
+                            scenarioAnalyses.push(analysis);
+                        }
+                    }
+                }
+            });
+
+            if (scenarioAnalyses.length > 0) {
+                this.results.scenarioAnalyses = scenarioAnalyses;
+                console.log(`📋 Scenario Analyses: ${scenarioAnalyses.length} scenario(s) analyzed`);
+            }
+        }
+
+        // Tier 2 Feature: Pain Point Intensity Scoring
+        if (window.PainIntensityScorer) {
+            const painScorer = new window.PainIntensityScorer();
+            const painAnalysis = painScorer.analyzePainIntensity(businessUnit, this.answers);
+
+            if (painAnalysis) {
+                this.results.painAnalysis = painAnalysis;
+                console.log(`😤 Pain Analysis: Avg pain ${painAnalysis.avgPainLevel}/5, ${painAnalysis.criticalPains.length} critical point(s)`);
+            }
+        }
+
+        // Tier 2 Feature: Role-Specific Success Metrics
+        if (window.RoleSuccessMetrics) {
+            const metricsTracker = new window.RoleSuccessMetrics();
+            const successMetrics = metricsTracker.calculateMetrics(businessUnit, this.answers);
+
+            if (successMetrics) {
+                this.results.successMetrics = successMetrics;
+                console.log(`📈 Success Metrics: ${successMetrics.metrics.length} KPI(s) tracked, avg +${successMetrics.summary.avgImprovement}% with AI`);
+            }
+        }
+
+        // Tier 2 Feature: Comparative Role Analysis
+        if (window.ComparativeRoleAnalyzer) {
+            const comparativeAnalyzer = new window.ComparativeRoleAnalyzer();
+            const comparativeAnalysis = comparativeAnalyzer.performComparativeAnalysis(
+                businessUnit,
+                this.answers,
+                this.results.successMetrics
+            );
+
+            if (comparativeAnalysis) {
+                this.results.comparativeAnalysis = comparativeAnalysis;
+                console.log(`📊 Comparative Analysis: ${comparativeAnalysis.userPercentile}th percentile (${comparativeAnalysis.standing.label})`);
+            }
+        }
+
+        // Tier 3 Feature: Industry-Specific Pain Points
+        if (window.IndustryPainDetector) {
+            const industryDetector = new window.IndustryPainDetector();
+            const industryDetection = industryDetector.detectIndustry(this.answers);
+
+            if (industryDetection.detected) {
+                const industryPains = industryDetector.analyzeIndustryPains(businessUnit, industryDetection);
+                if (industryPains) {
+                    this.results.industryPains = industryPains;
+                    console.log(`💼 Industry Detected: ${industryDetection.industryProfile.name} (${Math.round(industryDetection.confidence * 100)}% confidence), ${industryPains.painCount} pain(s)`);
+                }
+            } else {
+                console.log(`💼 Industry Detection: No clear industry detected`);
+            }
+        }
+
+        // Tier 3 Feature: Dynamic Role Profiling
+        if (window.DynamicRoleProfiler) {
+            const profiler = new window.DynamicRoleProfiler();
+            const roleProfile = profiler.buildProfile(
+                businessUnit,
+                this.answers,
+                this.results.successMetrics,
+                this.results.painAnalysis
+            );
+
+            if (roleProfile) {
+                this.results.roleProfile = roleProfile;
+                console.log(`🧬 Role Profile: ${roleProfile.persona.details.name} (${Math.round(roleProfile.confidence * 100)}% confidence)`);
+            }
+        }
+
+        // Tier 3 Feature: Role Evolution Tracking
+        if (window.RoleEvolutionTracker) {
+            const evolutionTracker = new window.RoleEvolutionTracker();
+            const evolution = evolutionTracker.trackEvolution(
+                businessUnit,
+                this.results.roleProfile,
+                this.results.painAnalysis
+            );
+
+            if (evolution && evolution.available) {
+                this.results.evolution = evolution;
+                console.log(`🚀 Evolution Tracking: ${evolution.businessUnit} role evolution mapped through 24 months`);
+            }
+        }
+
+        // Generate Calculation Transparency Data
+        if (this.transparencyEngine) {
+            this.results.assumptionDisclosure = this.transparencyEngine.createAssumptionDisclosure(
+                businessUnit,
+                this.answers
+            );
+            console.log(`📋 Assumption Disclosure: ${this.results.assumptionDisclosure.totalAssumptions} assumptions documented`);
+        }
+
+        // Generate Phase 2 Interactive Transparency Features
+        if (this.transparencyPhase2) {
+            // Generate scenario comparison (conservative/realistic/optimistic)
+            this.results.scenarioComparison = this.transparencyPhase2.generateScenarios(
+                businessUnit,
+                this.answers,
+                this.results
+            );
+            console.log(`🎯 Scenario Comparison: Conservative (${this.results.scenarioComparison.conservative.weeklyTimeSaved}h) | Realistic (${this.results.scenarioComparison.realistic.weeklyTimeSaved}h) | Optimistic (${this.results.scenarioComparison.optimistic.weeklyTimeSaved}h)`);
+
+            // Generate interactive assumption adjuster
+            this.results.assumptionAdjuster = this.transparencyPhase2.createAssumptionAdjuster(
+                businessUnit,
+                this.results.assumptionDisclosure
+            );
+            console.log(`🎛️ Assumption Adjuster: ${this.results.assumptionAdjuster.adjustableAssumptions.length} interactive sliders created`);
+        }
+
+        // Generate Phase 3 Depth Features
+        if (this.transparencyPhase3) {
+            // Generate formula explainer with mathematical breakdowns
+            this.results.formulaExplainer = this.transparencyPhase3.createFormulaExplainer(
+                businessUnit,
+                this.answers,
+                this.results
+            );
+            console.log(`📐 Formula Explainer: ${this.results.formulaExplainer.totalFormulas} formulas documented`);
+
+            // Generate personalization proof showing answer impact
+            this.results.personalizationProof = this.transparencyPhase3.createPersonalizationProof(
+                businessUnit,
+                this.answers,
+                this.results
+            );
+            console.log(`🎯 Personalization Proof: ${this.results.personalizationProof.answersAnalyzed} answers analyzed, ${(this.results.personalizationProof.personalizationScore * 100).toFixed(0)}% personalization score`);
+
+            // Generate source citations library
+            this.results.sourceCitations = this.transparencyPhase3.createSourceCitations(businessUnit);
+            console.log(`📚 Source Citations: ${this.results.sourceCitations.totalCitations} research sources documented`);
+        }
+
+        // Generate Phase 4 Advanced Features (for power users)
+        if (this.transparencyPhase4) {
+            // Generate calculation audit trail with timestamped logs
+            this.results.auditTrail = this.transparencyPhase4.createAuditTrail(
+                businessUnit,
+                this.answers,
+                this.results
+            );
+            console.log(`🔍 Audit Trail: ${this.results.auditTrail.totalSteps} steps logged in ${this.results.auditTrail.durationMs}ms (ID: ${this.results.auditTrail.metadata.auditId})`);
+
+            // Generate sensitivity analysis showing key assumptions
+            this.results.sensitivityAnalysis = this.transparencyPhase4.createSensitivityAnalysis(
+                businessUnit,
+                this.results
+            );
+            console.log(`📊 Sensitivity Analysis: ${this.results.sensitivityAnalysis.assumptionsTested} assumptions tested, most sensitive = ${this.results.sensitivityAnalysis.topSensitiveAssumption}`);
+
+            // Generate confidence intervals with range estimates
+            this.results.confidenceIntervals = this.transparencyPhase4.createConfidenceIntervals(
+                businessUnit,
+                this.results
+            );
+            console.log(`📈 Confidence Intervals: 90% CI = ${this.results.confidenceIntervals.intervals[0].lowerBound}-${this.results.confidenceIntervals.intervals[0].upperBound} hrs/week`);
+        }
 
         this.renderResults();
         this.changeStep('results');
@@ -689,7 +1129,43 @@ class AISkillsAudit {
                         <div class="text-pink-100">Saved per year</div>
                     </div>
                 </div>
-                
+
+                ${this.transparencyEngine && this.results.assumptionDisclosure ? `
+                    ${this.transparencyEngine.renderAssumptionDisclosure(this.results.assumptionDisclosure)}
+                ` : ''}
+
+                ${this.transparencyPhase2 && this.results.scenarioComparison ? `
+                    ${this.transparencyPhase2.renderScenarioComparison(this.results.scenarioComparison)}
+                ` : ''}
+
+                ${this.transparencyPhase2 && this.results.assumptionAdjuster ? `
+                    ${this.transparencyPhase2.renderAssumptionAdjuster(this.results.assumptionAdjuster, this.results.totalTimeSaved)}
+                ` : ''}
+
+                ${this.transparencyPhase3 && this.results.formulaExplainer ? `
+                    ${this.transparencyPhase3.renderFormulaExplainer(this.results.formulaExplainer)}
+                ` : ''}
+
+                ${this.transparencyPhase3 && this.results.personalizationProof ? `
+                    ${this.transparencyPhase3.renderPersonalizationProof(this.results.personalizationProof)}
+                ` : ''}
+
+                ${this.transparencyPhase3 && this.results.sourceCitations ? `
+                    ${this.transparencyPhase3.renderSourceCitations(this.results.sourceCitations)}
+                ` : ''}
+
+                ${this.transparencyPhase4 && this.results.auditTrail ? `
+                    ${this.transparencyPhase4.renderAuditTrail(this.results.auditTrail)}
+                ` : ''}
+
+                ${this.transparencyPhase4 && this.results.sensitivityAnalysis ? `
+                    ${this.transparencyPhase4.renderSensitivityAnalysis(this.results.sensitivityAnalysis)}
+                ` : ''}
+
+                ${this.transparencyPhase4 && this.results.confidenceIntervals ? `
+                    ${this.transparencyPhase4.renderConfidenceIntervals(this.results.confidenceIntervals)}
+                ` : ''}
+
                 <div class="mb-12">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Top AI Opportunities for ${businessUnitLabel}</h2>
                     <div class="space-y-6">
@@ -754,8 +1230,70 @@ class AISkillsAudit {
                         </div>
                     </div>
                 </div>
-                
-                <div class="text-center space-y-4">
+
+                ${this.results.multiDimensional && window.MultiDimensionalScorer ? `
+                    ${new window.MultiDimensionalScorer().renderScorecardHTML(this.results.multiDimensional)}
+                ` : ''}
+
+                ${this.results.benchmarking && window.BenchmarkingData ? `
+                    ${new window.BenchmarkingData().renderComparisonHTML(this.results.benchmarking)}
+                ` : ''}
+
+                ${this.results.explanation && window.CalculationExplainer ? `
+                    ${new window.CalculationExplainer().renderExplanationHTML(this.results.explanation)}
+                ` : ''}
+
+                ${this.conditionalLogic && this.skippedQuestions && this.skippedQuestions.length > 0 ? `
+                    ${this.conditionalLogic.renderConditionalExplanation(this.skippedQuestions)}
+                ` : ''}
+
+                ${this.analyticsTracker && window.AnalyticsDashboard ? `
+                    ${new window.AnalyticsDashboard(this.analyticsTracker).renderCompactWidget()}
+                ` : ''}
+
+                ${this.results.archetype && window.RoleArchetypeDetector ? `
+                    ${new window.RoleArchetypeDetector().renderArchetypeCard(this.results.archetype)}
+                ` : ''}
+
+                ${this.results.workflowAnalysis && window.WorkflowStageMapper ? `
+                    ${new window.WorkflowStageMapper().renderWorkflowVisualization(this.results.workflowAnalysis)}
+                ` : ''}
+
+                ${this.results.crossFunctionalPains && window.CrossFunctionalPainDetector ? `
+                    ${new window.CrossFunctionalPainDetector().renderCrossFunctionalPainDetection(this.results.crossFunctionalPains)}
+                ` : ''}
+
+                ${this.results.scenarioAnalyses && window.ScenarioBasedAnalyzer && this.results.scenarioAnalyses.length > 0 ? `
+                    ${this.results.scenarioAnalyses.map(analysis =>
+                        new window.ScenarioBasedAnalyzer().renderScenarioAnalysis(analysis)
+                    ).join('')}
+                ` : ''}
+
+                ${this.results.painAnalysis && window.PainIntensityScorer ? `
+                    ${new window.PainIntensityScorer().renderPainAnalysis(this.results.painAnalysis)}
+                ` : ''}
+
+                ${this.results.successMetrics && window.RoleSuccessMetrics ? `
+                    ${new window.RoleSuccessMetrics().renderSuccessMetrics(this.results.successMetrics)}
+                ` : ''}
+
+                ${this.results.comparativeAnalysis && window.ComparativeRoleAnalyzer ? `
+                    ${new window.ComparativeRoleAnalyzer().renderComparativeAnalysis(this.results.comparativeAnalysis)}
+                ` : ''}
+
+                ${this.results.industryPains && window.IndustryPainDetector ? `
+                    ${new window.IndustryPainDetector().renderIndustryPainAnalysis(this.results.industryPains)}
+                ` : ''}
+
+                ${this.results.roleProfile && window.DynamicRoleProfiler ? `
+                    ${new window.DynamicRoleProfiler().renderProfile(this.results.roleProfile)}
+                ` : ''}
+
+                ${this.results.evolution && window.RoleEvolutionTracker ? `
+                    ${new window.RoleEvolutionTracker().renderEvolutionTracking(this.results.evolution)}
+                ` : ''}
+
+                <div class="text-center space-y-4 mt-8">
                     <button id="download-pdf-btn" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-indigo-700 transition-colors shadow-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -1181,5 +1719,5 @@ class AISkillsAudit {
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new AISkillsAudit();
+    window.auditInstance = new AISkillsAudit();
 });

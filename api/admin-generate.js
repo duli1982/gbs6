@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing type' });
   }
 
-  const model = (process.env.GEMINI_MODEL || 'gemini-2.0-flash').trim();
+  const model = (process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
 
   const instruction = buildInstruction(type, params);
   if (!instruction) return res.status(400).json({ error: 'Invalid type or params' });
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
     contents: [{ role: 'user', parts: [{ text: instruction }]}],
     generationConfig: { temperature: 0.4, topK: 40, topP: 0.95, maxOutputTokens: 1200 },
   };
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const endpoint = `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
@@ -60,7 +60,8 @@ export default async function handler(req, res) {
     clearTimeout(timeout);
     if (!resp.ok) {
       const text = await resp.text();
-      return res.status(resp.status).json({ error: 'Gemini API error', details: text });
+      const outwardStatus = resp.status === 404 || resp.status === 400 ? 502 : resp.status;
+      return res.status(outwardStatus).json({ error: 'Gemini API error', details: text });
     }
     const data = await resp.json();
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -110,4 +111,3 @@ Items:\n${items.map((x,i)=>`${i+1}. ${x}`).join('\n')}`;
       return null;
   }
 }
-

@@ -19,9 +19,29 @@
       "Bash(done)",
       "Bash(echo:*)",
       "Bash(cat:*)",
-      "Bash(node -c:*)"
+      "Bash(node -c:*)",
+      "Bash(if [ -f \"c:\\\\Users\\\\Dule\\\\Downloads\\\\Vercel Ready\\\\Last Github Project\\\\gbs6-main-uloaded one 29122025\\\\shared\\\\generated\\\\tailwind.css\" ])",
+      "Bash(then echo \"File exists\")",
+      "Bash(else echo \"File does not exist\")",
+      "Bash(fi)",
+      "Bash(npm install:*)",
+      "Bash(vercel dev:*)",
+      "Bash(vercel login)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "typescript-sdk",
+    "github",
+    "puppeteer",
+    "slack",
+    "filesystem",
+    "memory-bank",
+    "sequential-thinking",
+    "brave-search",
+    "google-maps",
+    "deep-graph"
+  ]
 }

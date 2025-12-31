@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbus Early Career AI Transformation - GBS Use Case</title>
+
+    <meta name="description" content="How Airbus Early Career team saved 3+ hours per week using AI Gemini Gems for recruitment automation">
+    <meta name="keywords" content="AI, recruitment automation, Airbus, Gemini Gems, JR processing, interview analysis, early career">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../shared/scripts/analytics.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+
+    <style>
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 1rem;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .setup-steps {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .setup-step {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .metric-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .before-card {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 4px solid #f57c00;
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+
+        .after-card {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-left: 4px solid #388e3c;
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .gemini-diamond { font-size: 3rem; }
+            .content-section { padding: 1.5rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .before-after-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">📊</span>
+                            <span>Use Cases</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span>🚀</span>
+                            <span>Airbus Early Career</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="index.html" class="breadcrumb-hub-btn" aria-label="Return to Use Cases" style="margin-right: 0.5rem;">
+                    <span>↩</span>
+                    <span>Return</span>
+                </a>
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4 rounded-2xl">
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🚀</div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+                Airbus Early Career AI Transformation
+            </h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                How AI is Saving us TIME and Increasing QUALITY at Airbus Early Career
+            </p>
+            <div class="mt-4">
+                <span class="metric-badge">⏰ 3+ Hours Saved Weekly</span>
+                <span class="metric-badge">📋 60-80 JRs Managed</span>
+                <span class="metric-badge">🎯 Real Case Study</span>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- Success Story Quote -->
+            <div class="content-section">
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-purple-500 p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">🎯 The Challenge</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        The Airbus Early Career recruitment team manages 60-80 Job Requisitions simultaneously. Before AI, two critical bottlenecks consumed hours of valuable time:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg border border-orange-200">
+                            <h3 class="font-bold text-orange-800 mb-2">Problem 1: JR Quality Check & Posting</h3>
+                            <p class="text-sm text-gray-700 mb-2"><strong>Time:</strong> 25-40 minutes per JR</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Manual verification of JR format and compliance</li>
+                                <li>• Publication delays due to necessary adjustments</li>
+                                <li>• Time lost in back-and-forth with Hiring Managers</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-orange-200">
+                            <h3 class="font-bold text-orange-800 mb-2">Problem 2: Shortlist Preparation</h3>
+                            <p class="text-sm text-gray-700 mb-2"><strong>Time:</strong> 35-50 minutes per candidate</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Full video viewing and manual note-taking</li>
+                                <li>• Drafting the Candidate Screening Form (CSF)</li>
+                                <li>• Visual fatigue and risk of bias</li>
+                                <li>• Limited time for other high-value tasks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Solution -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 The AI Revolution - Our Concrete Gains</h2>
+
+                <div class="before-after-grid">
+                    <!-- Hack 1 -->
+                    <div class="after-card">
+                        <h3 class="text-xl font-bold text-green-800 mb-3">Hack 1: "Zero Friction" JR Publication</h3>
+                        <div class="space-y-2 mb-4">
+                            <p class="font-semibold text-gray-900">With AI:</p>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>✨ <strong>Airbus JR Formatter Gem:</strong> Instant QC and formatting in one click</li>
+                                <li>✨ <strong>LinkedIn Publisher Gem:</strong> Optimized and fast publication</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-bold text-green-700 text-lg">Gains:</p>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>⏰ <strong>≈15-25 mins/JR saved</strong></li>
+                                <li>✅ Near-immediate publication</li>
+                                <li>🎯 Zero back-and-forth on format/compliance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Hack 2 -->
+                    <div class="after-card">
+                        <h3 class="text-xl font-bold text-green-800 mb-3">Hack 2: Augmented Shortlist</h3>
+                        <div class="space-y-2 mb-4">
+                            <p class="font-semibold text-gray-900">With AI:</p>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>✨ <strong>Airbus Interview Processor Gem:</strong> Video transcription analysis in 1 minute</li>
+                                <li>✨ <strong>CSF Auto-Formatter Gem:</strong> Populates the Candidate Screening Form in 30 seconds</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-bold text-green-700 text-lg">Gains:</p>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>⏰ <strong>≈30 mins/candidate saved</strong></li>
+                                <li>📊 From 40 mins down to 10 mins validation</li>
+                                <li>🎯 More objective and faster shortlist</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl text-center border border-green-200">
+                    <p class="text-3xl font-bold text-green-700 mb-2">Over 3 hours/week saved per recruiter!</p>
+                    <p class="text-gray-700">Managing 60-80 JRs with better quality and less stress</p>
+                </div>
+            </div>
+
+            <!-- Impact - Where Time Goes -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">🎯 Strategic Reinvestment - Where the SAVED Time Goes</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                        <div class="text-4xl mb-3">🤝</div>
+                        <h3 class="font-bold text-gray-900 mb-3">Strategic Hiring Manager Relationship</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• <strong>Proactivity & Consulting:</strong> "We are partners, not just 'order takers.'"</li>
+                            <li>• More time to anticipate needs and propose solutions</li>
+                            <li>• "Turbo" Relaunches: Automated reminders for faster interview scheduling</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                        <div class="text-4xl mb-3">💬</div>
+                        <h3 class="font-bold text-gray-900 mb-3">Enhanced Candidate Experience</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• <strong>Fast & On-Time Feedback:</strong> Every candidate receives feedback on-time</li>
+                            <li>• <strong>Reinforced Engagement:</strong> More personalized communication</li>
+                            <li>• Better candidate journey from application to decision</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                        <div class="text-4xl mb-3">🎓</div>
+                        <h3 class="font-bold text-gray-900 mb-3">Sourcing & Strategy</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• More time for <strong>proactive sourcing</strong> on hard-to-find profiles</li>
+                            <li>• Focus on <strong>campus strategy</strong> and optimizing partnerships</li>
+                            <li>• Building long-term talent pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real Impact Metrics -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Real-World Impact Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                        <div class="text-3xl font-bold text-blue-700 mb-2">25-40min → 15min</div>
+                        <div class="text-sm text-gray-700">JR Processing Time</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                        <div class="text-3xl font-bold text-purple-700 mb-2">50min → 10min</div>
+                        <div class="text-sm text-gray-700">Shortlist Validation</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                        <div class="text-3xl font-bold text-green-700 mb-2">3+ hours</div>
+                        <div class="text-sm text-gray-700">Saved Per Week</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+                        <div class="text-3xl font-bold text-pink-700 mb-2">60-80</div>
+                        <div class="text-sm text-gray-700">JRs Managed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gem 1: Airbus JR Formatter -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 Gem 1: Airbus JR Formatter</h2>
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">What This Gem Does</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        The Airbus JR Formatter is your quality control assistant for Job Requisitions. It instantly analyzes JR drafts to identify technical ambiguities, non-inclusive language, and generates strategic questions for Hiring Manager intake calls. It also creates ready-to-publish LinkedIn posts, ensuring your JRs are professional, compliant, and compelling.
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Perfect For</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
+                        <li>✓ Pre-publication JR quality checks</li>
+                        <li>✓ Hiring Manager intake call preparation</li>
+                        <li>✓ Inclusive language verification</li>
+                        <li>✓ LinkedIn job post generation</li>
+                        <li>✓ JR format compliance</li>
+                        <li>✓ Technical requirement clarification</li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">📝 Complete Gem Prompt</h3>
+                    <p class="text-gray-600 mb-2">Copy this entire prompt and paste it into your Gemini Gem:</p>
+                </div>
+                <div class="prompt-container">
+                    <button class="copy-prompt-btn" onclick="copyGemPrompt('gem1-prompt')">Copy Full Prompt</button>
+                    <div id="gem1-prompt">Act as a senior Airbus HR/Recruitment Officer. Your primary task is to ensure the compliance and quality of the Job Requisition (JR) draft provided below.
+
+Analyse the text: [Paste JR Text Here].
+
+Task:
+1. Identify 3 points of technical ambiguity and 2 terms that could be perceived as non-inclusive.
+2. Generate a list of 5 key questions for the Hiring Manager to clarify these points during the Intake Call.
+3. Generate a complete, ready-to-publish LinkedIn post (Max 3 lines + 3 Emojis).
+
+Output Format:
+═══════════════════════════════════
+AIRBUS JR QUALITY CHECK REPORT
+═══════════════════════════════════
+
+📋 TECHNICAL AMBIGUITIES DETECTED:
+1. [Ambiguity point 1 with explanation]
+2. [Ambiguity point 2 with explanation]
+3. [Ambiguity point 3 with explanation]
+
+⚠️ INCLUSIVITY CONCERNS:
+1. [Non-inclusive term 1 with suggested alternative]
+2. [Non-inclusive term 2 with suggested alternative]
+
+❓ HIRING MANAGER INTAKE QUESTIONS:
+1. [Strategic question 1]
+2. [Strategic question 2]
+3. [Strategic question 3]
+4. [Strategic question 4]
+5. [Strategic question 5]
+
+📱 READY-TO-PUBLISH LINKEDIN POST:
+[3-line post with 3 emojis, ready to copy-paste]
+
+═══════════════════════════════════</div>
+                </div>
+            </div>
+
+            <!-- Gem 2: Airbus Interview Processor -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 Gem 2: Airbus Interview Processor</h2>
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">What This Gem Does</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        The Airbus Interview Processor transforms video interview transcriptions into structured candidate evaluations. It isolates key answers (Motivation, Technical Skill, STAR Behavioral), assigns objective scores, and generates shortlist recommendations—all in under 2 minutes instead of 40+ minutes of manual review.
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Perfect For</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
+                        <li>✓ Video interview analysis (Hirevue, etc.)</li>
+                        <li>✓ Candidate Screening Form (CSF) population</li>
+                        <li>✓ Objective scoring and evaluation</li>
+                        <li>✓ Shortlist decision support</li>
+                        <li>✓ Identifying candidate strengths/weaknesses</li>
+                        <li>✓ Reducing unconscious bias</li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">📝 Complete Gem Prompt</h3>
+                    <p class="text-gray-600 mb-2">Copy this entire prompt and paste it into your Gemini Gem:</p>
+                </div>
+                <div class="prompt-container">
+                    <button class="copy-prompt-btn" onclick="copyGemPrompt('gem2-prompt')">Copy Full Prompt</button>
+                    <div id="gem2-prompt">Act as a senior Airbus evaluator. You have the JR for an internship/apprenticeship in [Title/Field].
+
+Here is the transcription of the video interview: [Paste Transcription Here].
+
+Task:
+1. Isolate the answers to the 3 main questions (Motivation, Technical Skill, STAR Behavioral Situation).
+2. For each answer, assign a score [1 to 5] for Clarity/Structure and Technical Relevance.
+3. Generate an objective conclusion of 3 sentences: Key Strengths, Areas for Development, Shortlist Recommendation.
+
+Output Format:
+═══════════════════════════════════
+AIRBUS CANDIDATE EVALUATION REPORT
+Position: [Title/Field]
+═══════════════════════════════════
+
+📌 QUESTION 1: MOTIVATION
+Answer Summary: [2-3 sentence summary of candidate's response]
+
+Scores:
+├─ Clarity & Structure: [X/5] ⭐
+└─ Relevance & Passion: [X/5] ⭐
+
+Key Observations: [Brief analysis]
+
+───────────────────────────────────
+
+📌 QUESTION 2: TECHNICAL SKILL
+Answer Summary: [2-3 sentence summary of candidate's response]
+
+Scores:
+├─ Clarity & Structure: [X/5] ⭐
+└─ Technical Depth: [X/5] ⭐
+
+Key Observations: [Brief analysis]
+
+───────────────────────────────────
+
+📌 QUESTION 3: STAR BEHAVIORAL SITUATION
+Answer Summary: [2-3 sentence summary of candidate's response]
+
+Scores:
+├─ Clarity & Structure: [X/5] ⭐
+└─ STAR Completeness: [X/5] ⭐
+
+Key Observations: [Brief analysis]
+
+═══════════════════════════════════
+🎯 OBJECTIVE CONCLUSION
+═══════════════════════════════════
+
+💪 Key Strengths: [1 sentence]
+
+📈 Areas for Development: [1 sentence]
+
+✅ Shortlist Recommendation: [STRONG YES / YES / MAYBE / NO] - [1 sentence justification]
+
+═══════════════════════════════════</div>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ How to Set Up & Use These Gems</h2>
+                <div class="setup-steps">
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Copy the Gem Prompt</h3>
+                                <p class="text-gray-700 text-sm">Click "Copy Full Prompt" button above for either Gem 1 or Gem 2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Go to Gemini Gems</h3>
+                                <p class="text-gray-700 text-sm">Visit <a href="https://gemini.google.com/gems" target="_blank" class="text-blue-600 underline">gemini.google.com/gems</a> and click "Create New Gem"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Paste & Save</h3>
+                                <p class="text-gray-700 text-sm">Paste the prompt into the Gem instructions, give it a name (e.g., "Airbus JR Formatter"), and save</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">4</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Use Your Gem</h3>
+                                <p class="text-gray-700 text-sm">Paste your JR text or interview transcription where indicated, and let the AI do the heavy lifting!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="content-section bg-gradient-to-br from-blue-50 to-purple-100 border border-blue-200">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Recruitment Workflow?</h2>
+                    <p class="text-lg text-gray-700 mb-6">
+                        Join the Airbus Early Career team and hundreds of GBS colleagues already saving hours every week with AI-powered productivity hacks.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../gbs-prompts/index.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+                            🎯 Explore More AI Prompts
+                        </a>
+                        <a href="../rpo-training/index.html" class="border border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-200">
+                            📚 Start AI Training
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4">
+                        💡 Have your own AI success story? <a href="../submit-content/" class="text-blue-600 underline">Share it with us!</a>
+                    </p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        // Copy Gem Prompt Function
+        function copyGemPrompt(promptId) {
+            const promptElement = document.getElementById(promptId);
+            const promptText = promptElement.textContent;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#10b981';
+
+                // Track copy event
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('gem_prompt_copied', {
+                        gem_type: promptId === 'gem1-prompt' ? 'JR_Formatter' : 'Interview_Processor',
+                        page_path: window.location.pathname
+                    });
+                }
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please select and copy manually.');
+            });
+        }
+
+        // Track page view
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('use_case_page_view', {
+                    use_case_name: 'Airbus_Early_Career',
+                    page_path: window.location.pathname
+                });
+            }
+        });
+
+        // Track CTA clicks
+        document.querySelectorAll('a[href*="gbs-prompts"], a[href*="rpo-training"], a[href*="submit-content"]').forEach(link => {
+            link.addEventListener('click', function() {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('use_case_cta_clicked', {
+                        cta_destination: this.getAttribute('href'),
+                        cta_text: this.textContent.trim(),
+                        use_case_name: 'Airbus_Early_Career',
+                        page_path: window.location.pathname
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

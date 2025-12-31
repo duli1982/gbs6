@@ -54,16 +54,6 @@
             border-left: 4px solid #f57c00;
         }
 
-        .category-automation {
-            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            border-left: 4px solid #ff9800;
-        }
-
-        .category-ta-lifecycle {
-            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-            border-left: 4px solid #4f46e5;
-        }
-
         /* Category Badges */
         .badge-sourcing {
             background: #1976d2;
@@ -82,16 +72,6 @@
 
         .badge-communication {
             background: #f57c00;
-            color: white;
-        }
-
-        .badge-automation {
-            background: #ff9800;
-            color: white;
-        }
-
-        .badge-ta-lifecycle {
-            background: #4f46e5;
             color: white;
         }
 
@@ -233,16 +213,11 @@
                 <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
                     
                     <!-- Story 1 -->
-                    <div class="bg-white border border-gray-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-lg transition-all duration-200 h-full">
-                        <div class="flex items-start mb-3">
-                            <div class="text-3xl mr-3">🚀</div>
-                            <div>
-                                <h3 class="google-sans text-lg font-bold text-gray-900">Sarah's Sourcing Revolution</h3>
-                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Sourcing</p>
-                            </div>
-                        </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-3">🚀</div>
+                        <h3 class="google-sans text-lg font-bold text-gray-900 mb-2">Sarah's Sourcing Revolution</h3>
                         <p class="text-gray-700 text-sm mb-4">"AI-powered Boolean search cut my sourcing time from 4 hours to 1 hour per role."</p>
-                        <div class="bg-gray-50 rounded-lg p-4 mb-3 border border-gray-100">
+                        <div class="bg-white rounded-lg p-4 mb-3">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-xs text-gray-600">Time saved:</span>
                                 <span class="text-lg font-bold text-blue-600">75%</span>
@@ -252,26 +227,17 @@
                                 <span class="text-lg font-bold text-green-600">+40%</span>
                             </div>
                         </div>
-                        <div class="text-xs text-gray-600 mb-4">
+                        <div class="text-xs text-gray-600">
                             <strong>Sarah M.</strong> - Senior Recruiter
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-xs text-gray-700 border border-gray-200 px-2 py-1 rounded">Sourcing</span>
-                            <span class="text-blue-600 font-semibold">Explore →</span>
                         </div>
                     </div>
 
                     <!-- Story 2 -->
-                    <div class="bg-white border border-gray-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-lg transition-all duration-200 h-full">
-                        <div class="flex items-start mb-3">
-                            <div class="text-3xl mr-3">✨</div>
-                            <div>
-                                <h3 class="google-sans text-lg font-bold text-gray-900">Mark's Content Magic</h3>
-                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Engagement</p>
-                            </div>
-                        </div>
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-3">✨</div>
+                        <h3 class="google-sans text-lg font-bold text-gray-900 mb-2">Mark's Content Magic</h3>
                         <p class="text-gray-700 text-sm mb-4">"AI helps me create job descriptions in minutes. Response rates increased by 60%."</p>
-                        <div class="bg-gray-50 rounded-lg p-4 mb-3 border border-gray-100">
+                        <div class="bg-white rounded-lg p-4 mb-3">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-xs text-gray-600">Faster creation:</span>
                                 <span class="text-lg font-bold text-emerald-600">80%</span>
@@ -281,44 +247,75 @@
                                 <span class="text-lg font-bold text-green-600">+60%</span>
                             </div>
                         </div>
-                        <div class="text-xs text-gray-600 mb-4">
+                        <div class="text-xs text-gray-600">
                             <strong>Mark T.</strong> - Talent Acquisition Manager
                         </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-xs text-gray-700 border border-gray-200 px-2 py-1 rounded">Engagement</span>
-                            <span class="text-blue-600 font-semibold">Explore →</span>
-                        </div>
                     </div>
 
-                    <!-- Story 3 - Airbus Early Career -->
-                    <div class="bg-white border border-gray-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-lg transition-all duration-200 h-full cursor-pointer" onclick="window.location.href='airbus-early-career.html'">
-                        <div class="flex items-start mb-3">
-                            <div class="text-3xl mr-3">🚀</div>
-                            <div>
-                                <h3 class="google-sans text-lg font-bold text-gray-900">Airbus Early Career's AI Revolution</h3>
-                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Recruitment Automation</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 text-sm mb-4">"AI cut our JR processing from 40 minutes to 10 minutes, and shortlist prep from 50 mins to 10 mins per candidate."</p>
-                        <div class="bg-gray-50 rounded-lg p-4 mb-3 border border-gray-100">
+                    <!-- Story 3 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-3">📊</div>
+                        <h3 class="google-sans text-lg font-bold text-gray-900 mb-2">Lisa's Analytics Leap</h3>
+                        <p class="text-gray-700 text-sm mb-4">"AI transforms my data analysis. What took days now takes hours with clearer insights."</p>
+                        <div class="bg-white rounded-lg p-4 mb-3">
                             <div class="flex justify-between items-center mb-2">
-                                <span class="text-xs text-gray-600">Time saved/week:</span>
-                                <span class="text-lg font-bold text-emerald-600">3+ hours</span>
+                                <span class="text-xs text-gray-600">Time saved:</span>
+                                <span class="text-lg font-bold text-purple-600">70%</span>
                             </div>
                             <div class="flex justify-between items-center">
-                                <span class="text-xs text-gray-600">JRs managed:</span>
-                                <span class="text-lg font-bold text-blue-600">60-80</span>
+                                <span class="text-xs text-gray-600">Insight quality:</span>
+                                <span class="text-lg font-bold text-pink-600">+85%</span>
                             </div>
                         </div>
-                        <div class="text-xs text-gray-600 mb-4">
-                            <strong>Airbus EC Team</strong> - Early Career Recruitment
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-xs text-gray-700 border border-gray-200 px-2 py-1 rounded">Real Case Study</span>
-                            <span class="text-blue-600 font-semibold">Explore →</span>
+                        <div class="text-xs text-gray-600">
+                            <strong>Lisa K.</strong> - Business Analyst
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <!-- Filter Categories -->
+            <div id="filters" class="flex flex-wrap justify-center gap-3 mb-12">
+                <button data-filter="all"
+                    class="category-filter active px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">All
+                    Stories</button>
+                <button data-filter="sourcing"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Talent
+                    Sourcing</button>
+                <button data-filter="content"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Content
+                    Creation</button>
+                <button data-filter="analysis"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Data
+                    Analysis</button>
+                <button data-filter="communication"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Communication</button>
+            </div>
+
+            <!-- Integration Banner -->
+            <div class="max-w-6xl mx-auto mb-12">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 rounded-full p-3 mr-4">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-blue-900">Connected to GBS Prompt Library</h3>
+                                <p class="text-blue-700 text-sm">Each use case links to production-ready prompts tested
+                                    by GBS teams. Click "Use GBS Prompt" for real AI-powered results.</p>
+                            </div>
+                        </div>
+                        <a href="../gbs-prompts/index.html"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap">
+                            Browse All Prompts
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -993,13 +990,44 @@
             </div>
 
             <!-- Call to Action -->
-            <div class="text-center mt-16 bg-gradient-to-br from-blue-50 to-indigo-100 p-12 rounded-xl border border-blue-200">
+            <div
+                class="text-center mt-16 bg-gradient-to-br from-blue-50 to-indigo-100 p-12 rounded-xl border border-blue-200">
                 <div class="max-w-4xl mx-auto">
-                    <h2 class="google-sans text-3xl font-bold text-gray-900 mb-6">Ready to Transform Your Work?</h2>
-                    <a href="../gbs-prompts/index.html"
-                        class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
-                        Explore GBS Prompt Library
-                    </a>
+                    <h2 class="google-sans text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Work?</h2>
+                    <p class="text-lg text-gray-600 mb-6">These use cases are powered by our GBS Prompt Library -
+                        production-tested AI prompts used by teams across GBS EMEA.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="text-2xl mb-2">🚀</div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Instant Results</h3>
+                            <p class="text-sm text-gray-600">Copy, paste, and get professional outputs immediately</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="text-2xl mb-2">✅</div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Battle-Tested</h3>
+                            <p class="text-sm text-gray-600">Used by hundreds of GBS colleagues in real workflows</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="text-2xl mb-2">📈</div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Proven ROI</h3>
+                            <p class="text-sm text-gray-600">Measurable time savings and quality improvements</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../gbs-prompts/index.html"
+                            class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+                            🎯 Explore GBS Prompt Library
+                        </a>
+                        <a href="../gbs-ai-workshop/index.html"
+                            class="border border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-200">
+                            📚 Start AI Workshop
+                        </a>
+                    </div>
+
+                    <p class="text-sm text-gray-500 mt-4">Join the AI revolution at GBS - start with prompts, master
+                        with training</p>
                 </div>
             </div>
         </main>

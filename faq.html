@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions (FAQ) | GBS EMEA Learning Hub</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Find answers to frequently asked questions about GBS EMEA Learning Hub, AI training, prompts, badges, and more.">
+    <meta name="keywords" content="FAQ, help, questions, learning hub, AI training, prompts, badges">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/shared/generated/tailwind.css">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="shared/breadcrumb-nav.css">
+    <link rel="stylesheet" href="shared/hub-button.css">
+    <link rel="stylesheet" href="shared/fonts.css">
+    <link rel="stylesheet" href="shared/scroll-to-top.css">
+
+    <style>
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+        }
+
+        .faq-item summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #1f2937;
+            padding: 1.25rem 1.5rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: "▼";
+            font-size: 12px;
+            color: #6b7280;
+            transition: transform 0.3s;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-item[open] summary {
+            color: #4f46e5;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .faq-answer {
+            padding: 1.25rem 1.5rem;
+            color: #4b5563;
+            line-height: 1.7;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .faq-answer a {
+            color: #4f46e5;
+            text-decoration: underline;
+        }
+
+        .faq-answer a:hover {
+            color: #3730a3;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            margin-right: 0.75rem;
+        }
+
+        .search-box {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            background-color: #fef3c7;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span class="breadcrumb-icon">❓</span>
+                            <span>FAQ</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="google-sans text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Frequently Asked Questions
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Find quick answers to common questions about the GBS EMEA Learning Hub
+            </p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="max-w-2xl mx-auto">
+                <input type="text" id="faq-search" placeholder="Search for questions..."
+                    class="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none"
+                    aria-label="Search FAQ">
+                <p class="text-sm text-gray-500 mt-2 text-center">Type keywords to filter questions</p>
+            </div>
+        </div>
+
+        <!-- FAQ Categories -->
+
+        <!-- Getting Started -->
+        <div class="faq-category" data-category="getting-started">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <span class="category-icon">🚀</span>
+                Getting Started
+            </h2>
+
+            <details class="faq-item" data-keywords="what is learning hub platform">
+                <summary>What is the GBS EMEA Learning Hub?</summary>
+                <div class="faq-answer">
+                    The GBS EMEA Learning Hub is a comprehensive AI training platform designed specifically for
+                    recruitment professionals. It provides:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Structured learning paths for AI skills (Beginner, Intermediate, Advanced)</li>
+                        <li>A library of ready-to-use AI prompts for daily tasks</li>
+                        <li>Interactive workshops and simulations</li>
+                        <li>Progress tracking with badges and certifications</li>
+                    </ul>
+                    All content is free and designed for GBS EMEA team members.
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="account login registration">
+                <summary>Do I need an account to access the content?</summary>
+                <div class="faq-answer">
+                    No account is required! All content is freely accessible. However, your learning progress and badges
+                    are saved locally in your browser using localStorage. This means:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>No personal data is sent to servers</li>
+                        <li>Progress is tied to your current browser</li>
+                        <li>You can export your progress data anytime</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="start where begin pathway beginner">
+                <summary>Which learning path should I start with?</summary>
+                <div class="faq-answer">
+                    We recommend starting with the <strong>Beginner pathway</strong> (~40 minutes) if you're new to AI.
+                    It covers:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>What AI is in plain English</li>
+                        <li>How to write your first AI prompts</li>
+                        <li>Practical applications for daily tasks</li>
+                    </ul>
+                    If you already use AI tools regularly, you can jump to <strong>Intermediate</strong> or take the <a
+                        href="recruiter-ai-skill-audit/">AI Skills Audit</a> to find your level.
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="skip modules order sequence">
+                <summary>Can I skip modules or must I complete them in order?</summary>
+                <div class="faq-answer">
+                    Modules within each pathway unlock sequentially. You must complete Module 1 before Module 2, and so
+                    on. This ensures you build foundational knowledge before advanced concepts. However, you can pause
+                    anytime and resume later - your progress is automatically saved.
+                </div>
+            </details>
+        </div>
+
+        <!-- Learning Paths -->
+        <div class="faq-category" data-category="learning">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <span class="category-icon">📚</span>
+                Learning Paths & Training
+            </h2>
+
+            <details class="faq-item" data-keywords="time duration how long pathway">
+                <summary>How long does each pathway take to complete?</summary>
+                <div class="faq-answer">
+                    <ul class="list-disc ml-6">
+                        <li><strong>Beginner Path:</strong> ~40 minutes (5 modules)</li>
+                        <li><strong>Intermediate Path:</strong> ~50 minutes (4 modules)</li>
+                        <li><strong>Advanced Path:</strong> ~125 minutes (5 modules)</li>
+                    </ul>
+                    <p class="mt-3">These are estimates. You can take as much time as you need and pause/resume anytime.
+                    </p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="pause resume save progress">
+                <summary>Can I pause and resume my learning?</summary>
+                <div class="faq-answer">
+                    Yes! Your progress is automatically saved in your browser. You can:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Close the page and come back anytime</li>
+                        <li>Complete modules at your own pace</li>
+                        <li>Switch between different pathways</li>
+                    </ul>
+                    Your completed modules, badges, and time spent are all preserved.
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="complete finish pathway what happens next">
+                <summary>What happens when I complete a pathway?</summary>
+                <div class="faq-answer">
+                    When you complete all modules in a pathway:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>You earn a pathway badge (🌱 Beginner, 🚀 Intermediate, or ⚡ Advanced)</li>
+                        <li>A celebration modal appears with your achievement</li>
+                        <li>Your badge appears in the <a href="rpo-training/my-badges.html">My Badges</a> collection
+                        </li>
+                        <li>The next difficulty level unlocks (if applicable)</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="certificate certification download">
+                <summary>Do I get a certificate?</summary>
+                <div class="faq-answer">
+                    Yes! Each pathway completion earns you a digital badge:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li><strong>AI Foundations Badge</strong> (Beginner)</li>
+                        <li><strong>AI Practitioner Badge</strong> (Intermediate)</li>
+                        <li><strong>AI Champion Badge</strong> (Advanced)</li>
+                    </ul>
+                    <p class="mt-3">View all your badges at <a href="rpo-training/my-badges.html">My Badges</a>. You can
+                        export your progress data (including badges and completion dates) as JSON.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="badges earn collect achievement">
+                <summary>How do I earn badges?</summary>
+                <div class="faq-answer">
+                    Badges are earned by completing all modules in a learning pathway:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Complete all 5 beginner modules → 🌱 AI Foundations Badge</li>
+                        <li>Complete all 4 intermediate modules → 🚀 AI Practitioner Badge</li>
+                        <li>Complete all 5 advanced modules → ⚡ AI Champion Badge</li>
+                    </ul>
+                    <p class="mt-3">Badges track your time investment and completion date. They're displayed in your <a
+                            href="rpo-training/my-badges.html">badge collection</a>.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- AI Prompts & Gems -->
+        <div class="faq-category" data-category="prompts">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <span class="category-icon">💎</span>
+                AI Prompts & Gemini Gems
+            </h2>
+
+            <details class="faq-item" data-keywords="gemini gems what are custom">
+                <summary>What are Gemini Gems?</summary>
+                <div class="faq-answer">
+                    Gemini Gems are custom AI assistants you can create in Google's Gemini platform. They're like
+                    personalized chatbots trained for specific tasks. Our <a href="gbs-prompts/">prompt library</a>
+                    includes a "Generate Gem" feature that converts any prompt into a ready-to-use Gem configuration.
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="create make custom gem">
+                <summary>How do I create a custom Gem?</summary>
+                <div class="faq-answer">
+                    To create a Gem from our prompts:
+                    <ol class="list-decimal ml-6 mt-2">
+                        <li>Visit the <a href="gbs-prompts/">GBS Prompts</a> page</li>
+                        <li>Find a prompt you like and click "Generate Gem"</li>
+                        <li>Copy the generated Gem configuration</li>
+                        <li>Go to <a href="https://gemini.google.com/gems" target="_blank">gemini.google.com/gems</a>
+                        </li>
+                        <li>Click "Create New Gem" and paste the configuration</li>
+                        <li>Save and start using your custom AI assistant!</li>
+                    </ol>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="share prompts team export">
+                <summary>Can I share prompts with my team?</summary>
+                <div class="faq-answer">
+                    Yes! All prompts in our library are designed for team use. You can:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Copy any prompt directly from the page</li>
+                        <li>Generate a Gem and share the configuration</li>
+                        <li>Submit your own successful prompts via the <a href="submit-content/">Submit Content</a> page
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="chatgpt compatible work other ai">
+                <summary>Are these prompts compatible with ChatGPT?</summary>
+                <div class="faq-answer">
+                    Most prompts work with any AI platform (ChatGPT, Claude, Gemini, etc.). The Gem generation feature
+                    is specific to Google Gemini, but the core prompts are platform-agnostic. We indicate in each prompt
+                    description if there are platform-specific features.
+                </div>
+            </details>
+        </div>
+
+        <!-- Progress & Tracking -->
+        <div class="faq-category" data-category="progress">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <span class="category-icon">📊</span>
+                Progress & Tracking
+            </h2>
+
+            <details class="faq-item" data-keywords="track progress save data">
+                <summary>How is my progress tracked?</summary>
+                <div class="faq-answer">
+                    Your progress is tracked locally in your browser using localStorage. We track:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Completed modules per pathway</li>
+                        <li>Earned badges and completion dates</li>
+                        <li>Time spent on each pathway</li>
+                        <li>Overall completion percentage</li>
+                    </ul>
+                    <p class="mt-3"><strong>Important:</strong> Data is stored in your browser only. If you clear
+                        browser data or switch browsers, your progress may be lost (unless you export it first).</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="badges view collection">
+                <summary>Where can I see my badges?</summary>
+                <div class="faq-answer">
+                    Visit the <a href="rpo-training/my-badges.html">My Badges</a> page to see:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>All earned badges with completion dates</li>
+                        <li>Locked badges showing what's next to unlock</li>
+                        <li>Overall stats (completion %, modules completed, time invested)</li>
+                        <li>Export/Import buttons to backup your progress</li>
+                    </ul>
+                    <p class="mt-3">You can also access this from the RPO Training page by clicking "🏆 My Badges".</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="export download backup progress">
+                <summary>Can I export my progress?</summary>
+                <div class="faq-answer">
+                    Yes! On the <a href="rpo-training/my-badges.html">My Badges</a> page, click the "Export Progress"
+                    button. This downloads a JSON file containing:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>All completed modules</li>
+                        <li>Earned badges with dates</li>
+                        <li>Time spent per pathway</li>
+                        <li>Your unique user ID</li>
+                    </ul>
+                    <p class="mt-3">You can import this file on another device or browser to restore your progress.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="lost progress restore recover">
+                <summary>What if I lose my progress?</summary>
+                <div class="faq-answer">
+                    If you haven't exported your progress, it may be lost if you:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Clear your browser cache/cookies</li>
+                        <li>Use a different browser</li>
+                        <li>Switch devices</li>
+                    </ul>
+                    <p class="mt-3"><strong>Prevention:</strong> Regularly export your progress from the <a
+                            href="rpo-training/my-badges.html">My Badges</a> page. This creates a backup you can import
+                        anytime.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Technical Support -->
+        <div class="faq-category" data-category="technical">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <span class="category-icon">⚙️</span>
+                Technical Support
+            </h2>
+
+            <details class="faq-item" data-keywords="browser supported compatibility">
+                <summary>Which browsers are supported?</summary>
+                <div class="faq-answer">
+                    The Learning Hub works best on modern browsers:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li><strong>Recommended:</strong> Chrome, Edge, Firefox, Safari (latest versions)</li>
+                        <li><strong>Required:</strong> JavaScript enabled, localStorage support</li>
+                        <li><strong>Not recommended:</strong> Internet Explorer (not supported)</li>
+                    </ul>
+                    <p class="mt-3">Mobile browsers work, but the experience is optimized for desktop/laptop screens.
+                    </p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="not saving progress broken">
+                <summary>Why isn't my progress saving?</summary>
+                <div class="faq-answer">
+                    If your progress isn't saving, check:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li><strong>Browser settings:</strong> Ensure cookies/localStorage aren't blocked</li>
+                        <li><strong>Private/Incognito mode:</strong> Progress doesn't persist in private browsing</li>
+                        <li><strong>Browser extensions:</strong> Some privacy extensions block localStorage</li>
+                        <li><strong>Storage space:</strong> Ensure your browser has storage available</li>
+                    </ul>
+                    <p class="mt-3">Test by completing a module and refreshing the page. If it still shows as
+                        incomplete, check your browser settings.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="bug report issue problem">
+                <summary>How do I report a bug?</summary>
+                <div class="faq-answer">
+                    To report bugs or technical issues:
+                    <ol class="list-decimal ml-6 mt-2">
+                        <li>Visit the <a href="feedback/">Feedback</a> page</li>
+                        <li>Describe the issue with as much detail as possible</li>
+                        <li>Include your browser version and any error messages</li>
+                        <li>Submit the form</li>
+                    </ol>
+                    <p class="mt-3">We review all feedback and prioritize bug fixes. Thank you for helping us improve!
+                    </p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="feedback suggest feature request">
+                <summary>Where can I give feedback or suggest features?</summary>
+                <div class="faq-answer">
+                    We welcome your feedback! You can:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Use the <a href="feedback/">Feedback Form</a> to submit suggestions</li>
+                        <li>Submit content ideas via <a href="submit-content/">Submit Content</a></li>
+                        <li>Report specific issues with detailed descriptions</li>
+                    </ul>
+                    <p class="mt-3">Your input helps shape the future of the Learning Hub!</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- AI Skills Audit -->
+        <div class="faq-category" data-category="audit">
+            <h2 class="google-sans text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <span class="category-icon">🎯</span>
+                AI Skills Audit
+            </h2>
+
+            <details class="faq-item" data-keywords="skills audit assessment test">
+                <summary>What is the AI Skills Audit?</summary>
+                <div class="faq-answer">
+                    The <a href="recruiter-ai-skill-audit/">AI Skills Audit</a> is a quick assessment that evaluates
+                    your current AI proficiency across:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>AI Basics & Understanding</li>
+                        <li>Prompt Engineering Skills</li>
+                        <li>Practical Application</li>
+                        <li>Advanced Techniques</li>
+                    </ul>
+                    <p class="mt-3">It provides personalized recommendations for which learning path to start with.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="how long audit time">
+                <summary>How long does the audit take?</summary>
+                <div class="faq-answer">
+                    The AI Skills Audit takes approximately <strong>5-10 minutes</strong> to complete. There are 12
+                    questions covering different aspects of AI usage. You can take as much time as you need to answer
+                    thoughtfully.
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="private data privacy audit">
+                <summary>Is my audit data private?</summary>
+                <div class="faq-answer">
+                    Yes, completely private. Your audit responses are:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Processed entirely in your browser (client-side)</li>
+                        <li>Never sent to any server</li>
+                        <li>Not stored or tracked</li>
+                        <li>Only used to calculate your skill level</li>
+                    </ul>
+                    <p class="mt-3">The AI-enhanced version (optional) uses Gemini API to provide personalized
+                        recommendations, but no personal data is included in the request.</p>
+                </div>
+            </details>
+
+            <details class="faq-item" data-keywords="retake audit again">
+                <summary>Can I retake the audit?</summary>
+                <div class="faq-answer">
+                    Yes! You can retake the audit anytime to:
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>Reassess your skills after completing training</li>
+                        <li>Get updated recommendations</li>
+                        <li>Track your improvement over time</li>
+                    </ul>
+                    <p class="mt-3">Simply visit the <a href="recruiter-ai-skill-audit/">AI Skills Audit</a> page again.
+                    </p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Still Have Questions? -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-8 mt-12 text-center">
+            <h2 class="google-sans text-2xl font-bold text-blue-900 mb-4">
+                Still have questions?
+            </h2>
+            <p class="text-blue-700 mb-6">
+                Can't find the answer you're looking for? We're here to help!
+            </p>
+            <a href="feedback/"
+                class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 transform hover:-translate-y-1">
+                Contact Support
+            </a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="shared/scripts/footer.js" defer></script>
+    <script src="shared/scripts/scroll-to-top.js" defer></script>
+    <script src="shared/scripts/breadcrumb-nav.js"></script>
+
+    <script type="module">
+        import { FAQController } from './shared/scripts/features/faq.ts';
+        document.addEventListener('DOMContentLoaded', () => {
+            const faq = new FAQController('faq-search', '.faq-item');
+            faq.init();
+        });
+    </script>
+</body>
+
+</html>

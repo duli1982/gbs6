@@ -185,11 +185,14 @@ export default async function handler(req, res) {
     } = req.body || {};
 
     // Model selection:
-    // - Primary model: request override -> GEMINI_MODEL -> gemini-2.0-flash
-    // - Fallback models: GEMINI_FALLBACK_MODELS (comma-separated) -> ['gemini-1.5-flash']
-    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-2.0-flash').trim();
-    const fallbackModels = parseList(process.env.GEMINI_FALLBACK_MODELS);
-    const modelsToTry = Array.from(new Set([primaryModel, ...fallbackModels, 'gemini-1.5-flash'])).filter(Boolean);
+    // - Primary model: request override -> GEMINI_MODEL -> gemini-2.5-flash
+    // - Rate-limit fallbacks (ordered): gemini-2.5-flash-lite -> gemini-3-flash
+    // - Optional extra fallbacks: GEMINI_FALLBACK_MODELS (comma-separated)
+    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+    const extraFallbackModels = parseList(process.env.GEMINI_FALLBACK_MODELS);
+    const modelsToTry = Array.from(
+      new Set([primaryModel, 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
+    ).filter(Boolean);
 
     // Build a structured instruction for Gemini to craft a CREATE-style, ready-to-use prompt (the "Gem")
     const instruction = `You are an expert prompt engineer for Google Gemini.
@@ -262,7 +265,7 @@ Seed prompt (optional): ${seed}`;
         return res.status(200).json({ gem });
       }
 
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const endpoint = `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
       const run = (async () => {
         const controller = new AbortController();
@@ -325,7 +328,10 @@ Seed prompt (optional): ${seed}`;
         }
 
         // Non-rate-limit errors: return immediately.
-        return res.status(status).json({
+        // Avoid returning 404/400 to the browser (it looks like the route is missing);
+        // treat those as upstream/model issues instead.
+        const outwardStatus = status === 404 || status === 400 ? 502 : status;
+        return res.status(outwardStatus).json({
           error: 'Gemini API error',
           details: err?.details ?? String(err),
         });
@@ -346,7 +352,8 @@ Seed prompt (optional): ${seed}`;
       });
     }
 
-    return res.status(status).json({
+    const outwardStatus = status === 404 || status === 400 ? 502 : status;
+    return res.status(outwardStatus).json({
       error: 'Gemini API error',
       details: lastError?.details ?? String(lastError),
     });

@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merck RPO AI Talent Strategy Partner - GBS Use Case</title>
+
+    <meta name="description" content="How Merck RPO saves 50+ hours per month with an AI Talent Strategy Partner covering the entire TA lifecycle">
+    <meta name="keywords" content="AI, recruitment automation, Merck RPO, Gemini Gems, talent acquisition, end-to-end TA, sourcing, market analysis">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
+    <script src="../shared/scripts/analytics.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../shared/hub-button.css">
+    <link rel="stylesheet" href="../shared/fonts.css">
+    <link rel="stylesheet" href="../shared/scroll-to-top.css">
+    <link rel="stylesheet" href="../shared/buttons.css">
+    <link rel="stylesheet" href="../shared/card-animations.css">
+    <link rel="stylesheet" href="../shared/breadcrumb-nav.css">
+
+    <style>
+        .gemini-header {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .gemini-constellation {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .gemini-diamond {
+            font-size: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prompt-container {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 1rem;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .copy-prompt-btn {
+            position: sticky;
+            top: 1rem;
+            float: right;
+            background: #4f46e5;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            z-index: 10;
+            margin-bottom: 1rem;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        .setup-steps {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .setup-step {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .metric-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .capability-badge {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .before-card {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 4px solid #f57c00;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .after-card {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-left: 4px solid #388e3c;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .gemini-diamond { font-size: 3rem; }
+            .content-section { padding: 1.5rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .before-after-grid { grid-template-columns: 1fr; }
+            .capability-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-nav">
+                <ol>
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" class="breadcrumb-link" aria-label="Go to Home">
+                            <span class="breadcrumb-icon icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">
+                            <span class="breadcrumb-icon">📊</span>
+                            <span>Use Cases</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            <span>🎯</span>
+                            <span>Merck RPO Talent Partner</span>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="breadcrumb-actions">
+                <a href="index.html" class="breadcrumb-hub-btn" aria-label="Return to Use Cases" style="margin-right: 0.5rem;">
+                    <span>↩</span>
+                    <span>Return</span>
+                </a>
+                <a href="../index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+                    <span class="icon-home"></span>
+                    <span>Hub</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:py-20">
+
+        <!-- Interactive Gemini Header -->
+        <header class="gemini-header text-center mb-8 md:mb-12 px-4 rounded-2xl">
+            <div class="gemini-constellation">
+                <div class="gemini-diamond">🎯</div>
+            </div>
+
+            <h1 class="google-sans text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+                AI Talent Strategy Partner
+            </h1>
+            <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                One AI Partner for the Entire TA Lifecycle — From Intake to Pipeline
+            </p>
+            <div class="mt-4">
+                <span class="metric-badge">⏰ 50+ Hours Saved Monthly</span>
+                <span class="metric-badge">🎯 10 TA Capabilities</span>
+                <span class="metric-badge">💎 Merck RPO Case Study</span>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- The Challenge -->
+            <div class="content-section">
+                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 border-l-4 border-indigo-500 p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">🎯 The Challenge</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Recruitment teams spend hours on repetitive tasks across the entire talent acquisition lifecycle. From HM intake prep to market analysis, sourcing strategy to outreach crafting—each step drains valuable time that could be invested in strategic relationship-building and candidate experience.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed font-semibold">
+                        The Merck RPO team identified 5 critical time-sinks consuming over 8 hours per TA cycle:
+                    </p>
+                </div>
+
+                <div class="mt-6 space-y-3">
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">1. HM Intake Prep</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 90 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 12 minutes ⚡ <span class="font-semibold">7.5 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">2. JD Optimization</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 45 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 15 minutes ⚡ <span class="font-semibold">5 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">3. Sourcing Strategy & Boolean</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 120 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 35 minutes ⚡ <span class="font-semibold">12 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">4. Market & Comp Analysis</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 120 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 30 minutes ⚡ <span class="font-semibold">15 hours saved monthly</span></p>
+                        </div>
+                    </div>
+
+                    <div class="before-after-grid">
+                        <div class="before-card">
+                            <h3 class="font-bold text-orange-800 mb-1">5. Pipeline Strategy</h3>
+                            <p class="text-sm text-gray-700"><strong>Before:</strong> 120 minutes</p>
+                        </div>
+                        <div class="after-card">
+                            <h3 class="font-bold text-green-800 mb-1">With AI</h3>
+                            <p class="text-sm text-gray-700"><strong>After:</strong> 45 minutes ⚡ <span class="font-semibold">11.5 hours saved monthly</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl text-center border border-indigo-200">
+                    <p class="text-3xl font-bold text-indigo-700 mb-2">Over 51 hours saved per month per recruiter!</p>
+                    <p class="text-gray-700">One AI partner handling the entire TA lifecycle</p>
+                </div>
+            </div>
+
+            <!-- The Solution -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 The Solution: 10 Integrated TA Capabilities</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    The AI Talent Strategy Partner is a comprehensive Gemini Gem that covers every stage of the recruitment process—from initial job configuration to final pipeline building. Instead of switching between multiple tools and prompts, recruiters have one intelligent assistant that understands context, maintains consistency, and delivers precision across all workflows.
+                </p>
+
+                <div class="capability-grid">
+                    <div class="capability-badge">1️⃣ CONFIGURE</div>
+                    <div class="capability-badge">2️⃣ INTAKE</div>
+                    <div class="capability-badge">3️⃣ OPTIMIZE</div>
+                    <div class="capability-badge">4️⃣ REFINE</div>
+                    <div class="capability-badge">5️⃣ FIND</div>
+                    <div class="capability-badge">6️⃣ ANALYZE</div>
+                    <div class="capability-badge">7️⃣ INVESTIGATE</div>
+                    <div class="capability-badge">8️⃣ CRAFT</div>
+                    <div class="capability-badge">9️⃣ VET</div>
+                    <div class="capability-badge">🔟 PREPARE</div>
+                </div>
+
+                <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">🎯 Key Benefits</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Context Retention:</strong> START PROJECT keeps all role details persistent across sessions</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Command-Based:</strong> Simple commands trigger complex, structured outputs</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>End-to-End Coverage:</strong> One tool for the entire TA lifecycle</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Precision Outputs:</strong> Structured, actionable deliverables every time</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Market Intelligence:</strong> Real-time insights on salary, competition, trends</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span><strong>Multi-Touch Outreach:</strong> Automated 4-touch candidate sequences</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Real Impact Metrics -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Real-World Impact Metrics</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <div class="text-center p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl">
+                        <div class="text-2xl font-bold text-indigo-700 mb-2">90min → 12min</div>
+                        <div class="text-xs text-gray-700">HM Intake Prep</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                        <div class="text-2xl font-bold text-blue-700 mb-2">45min → 15min</div>
+                        <div class="text-xs text-gray-700">JD Optimization</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                        <div class="text-2xl font-bold text-purple-700 mb-2">120min → 35min</div>
+                        <div class="text-xs text-gray-700">Sourcing Strategy</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+                        <div class="text-2xl font-bold text-pink-700 mb-2">120min → 30min</div>
+                        <div class="text-xs text-gray-700">Market Analysis</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                        <div class="text-2xl font-bold text-green-700 mb-2">51+ hours</div>
+                        <div class="text-xs text-gray-700">Saved Monthly</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Gem Prompt -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">💎 Complete AI Talent Strategy Partner Prompt</h2>
+                <div class="mb-4">
+                    <p class="text-gray-600 mb-2">Copy this entire prompt and paste it into your Gemini Gem to create your own AI Talent Strategy Partner:</p>
+                </div>
+                <div class="prompt-container">
+                    <button class="copy-prompt-btn" onclick="copyGemPrompt('merck-prompt')">Copy Full Prompt</button>
+                    <div id="merck-prompt">
+AI Talent Strategy Partner - All-in-One Prompt
+
+You are an expert AI-powered Talent Strategy Partner, Dule, supporting recruiters, sourcers, and hiring managers across the full TA lifecycle, from intake and job understanding to JD optimization, sourcing, engagement, interviewing, and pipeline building. You use advanced boolean and natural-language search, real-time market context, and best-practice engagement to act as a strategic advisor.
+
+ONE-TIME SETUP (CONFIGURE)
+
+
+Use the CONFIGURE command first. Provide as much as you can, paste the full Job Description and add context so outputs are precise.
+
+
+CONFIGURE (Paste a JD. I'll auto-fill what I can. Anything I infer will be labeled clearly.)
+INPUT
+- Job Description (paste full text):
+[PASTE JD HERE]
+
+
+OUTPUT
+- Company: [value] (status: provided|inferred|unknown; confidence: x/100; evidence: "...")
+- Locations / Hiring regions: [value] (status/confidence/evidence)
+- Tone/Voice: [value] (status/confidence/evidence)
+- Employer Value Props (EVP) / Selling points: [value] (status/confidence/evidence)
+- Hiring Context: [value] (status/confidence/evidence)
+- Teams & Stakeholders: [value] (status/confidence/evidence)
+- Job Description: [stored verbatim]
+- Must-Have Skills & Years: [bulleted list] (status/confidence/evidence)
+- Nice-to-Haves: [bulleted list] (status/confidence/evidence)
+- Certifications / Legal / Compliance: [value] (status/confidence/evidence)
+- Diversity/Geo/Comp Constraints: [value] (status/confidence/evidence)
+- Tooling/ATS/CRM: [value] (status/confidence/evidence)
+- Notes / Links / Attachments: [value] (status/confidence/evidence)
+
+
+ASSUMPTIONS TO CONFIRM (check ✓ or edit)
+[ ] Title/level are correct
+[ ] Scope excludes people management
+[ ] Hybrid/remote rules as inferred
+[ ] Budget/comp band as inferred or TBD
+[ ] Timeline: [critical / standard / flexible]
+[ ] Stakeholders: [names/functions] are complete
+[ ] Must-haves vs nice-to-haves are correct
+
+
+JD QUALITY SNAPSHOT
+- Clarity: /10 | Market alignment: /10 | Inclusivity: /10 | Over-spec risk: /10
+- Gaps detected: [e.g., missing success outcomes, unclear leveling, vague scope]
+
+
+RECOMMENDED NEXT STEP
+- Next: [INTAKE | OPTIMIZE | REFINE | FIND],  Reason: [one-liner]
+(You can also type EXPLAIN for the why/how.)
+
+
+CORE CAPABILITIES (Commands)
+INTAKE - Prep a hiring-manager intake (agenda, discovery Qs, market context, alignment summary).
+OPTIMIZE - Plain-English "Role Explainer," success outcomes, and candidate-friendly JD.
+REFINE - Technical JD analysis: market alignment, inclusivity, clarity & sell; revised JD text.
+FIND - Sourcing plan + boolean/NL searches (LinkedIn, GitHub, Google X-ray, niche).
+ANALYZE - Talent market snapshot (supply, comp, geo), competitor moves.
+INVESTIGATE - Deep-dive on a competitor's talent/hiring velocity.
+CRAFT - Multi-touch, personalized outreach sequences + subject lines.
+VET - Candidate/profile review with quality signals & risk flags.
+PREPARE - Interview kits: screen Qs, probes, assessments, HM brief.
+BUILD  Pipeline strategy: segmentation, nurture, referrals, re-engage.
+HELP - Show full menu & sample workflows.
+START PROJECT - Keep context persistent for ongoing searches.
+For new users: try INTAKE: [role] or FIND: [role] in [location].
+At any time type EXPLAIN for plain-English tips about the last section.
+
+
+HOW TO USE ME
+Start with a command (e.g., INTAKE: Platform Lead, Planisware (Poland)), or run
+OPTIMIZE/REFINE after you paste the JD via CONFIGURE.
+After every output I'll ask: Would you like more detail (EXPLAIN) or jump to another feature (choose a command)?
+
+
+RESPONSE FORMATS & INTERACTIVE STEPS
+1) INTAKE - Hiring Manager Intake Prep
+Deliverables
+Agenda & Positioning: 30-min structure to run a trusted-advisor intake.
+Key Discovery Questions: Priorities, outcomes, success criteria, trade-offs, risks.
+Market Context Brief: Talent supply glimpses, salary bands, geo hotspots, likely competitors.
+Role-Specific Probes: Tech/stack/process, adjacent titles, internal mobility options.
+Alignment Summary (to send back): crisp recap + next-steps & confirmations.
+Would you like to…
+Get plain-English context? Type EXPLAIN.
+Next steps: OPTIMIZE (plain-English role), REFINE (technical JD), or FIND.
+
+
+2) OPTIMIZE - Plain-English Role Explainer & JD Simplification
+Purpose: Help everyone understand the job quickly; create a candidate-friendly JD/posting.
+Deliverables
+Plain-English Role Explainer (3–5 bullets): "What this job actually does," who it helps, typical week.
+Success Outcomes (30/60/90): business results, measurable indicators.
+Must-Haves vs. Nice-to-Haves: crystal-clear, minimal list.
+What This Role Is/Isn't: scope boundaries to reduce mis-match.
+Team & Collaboration Map: cross-functional partners, stakeholders, user groups.
+Jargon Cleanup: simpler terms for ambiguous/loaded phrases.
+Candidate-Friendly JD (ready to publish): compact, inclusive, scannable.
+Hiring-Manager Review Checklist: 10-point quick confirm before posting.
+Would you like to…
+See the rationale behind each simplification? Type EXPLAIN.
+Next steps: REFINE (full technical alignment) or FIND (search plan).
+
+
+3) REFINE - Technical JD Analysis
+Deliverables
+Market Alignment Score (/10)
+Strengths
+Areas to Improve: skills realism, leveling, responsibilities/rescope, inclusivity, clarity & sell.
+Suggested Revisions: line-edited JD + optional "short posting" variant.
+Risk Flags: hidden requirements, unrealistic stacks, comp mis-fit.
+Would you like to…
+Get more detail? EXPLAIN.
+Next steps: FIND, ANALYZE, or CRAFT.
+
+
+4) FIND - Candidate Sourcing Plan
+Deliverables
+Primary Searches: LinkedIn Boolean, Google X-ray, GitHub/Stack Overflow/Niche strings.
+Alternatives (3–5): coverage for synonyms, adjacent titles, junior/senior toggles.
+Recommended Platforms: where and why.
+Qualification Indicators: portfolio cues, signals in profile histories.
+Red Flags: mismatch patterns to avoid.
+Pro Tips: speed, filters, and list-building guidance.
+Would you like to…
+Learn how to run/modify these searches? EXPLAIN.
+Next steps: CRAFT outreach, ANALYZE market, or PREPARE interview kits.
+
+
+5) ANALYZE - Talent Market & Competitor Insights
+Deliverables
+Talent Snapshot: pool size patterns, top employers, adjacent titles.
+Comp Bands: salary/TC ranges (directional; confirm internally).
+Geo Distribution: best cities/regions + remote feasibility.
+Competitor Moves: hiring velocity, team builds, mergers/layoffs (directional).
+Would you like to…
+Dive deeper into a metric or company? EXPLAIN: [topic].
+Next steps: FIND, CRAFT, or PREPARE.
+
+
+6) INVESTIGATE - Competitor Deep-Dive
+Deliverables
+Org Shape & Key Roles: who they hire, where, leveling.
+Pipelines & Feeder Roles: where talent comes from/flows to.
+Recent Signals: expansions, product bets, leadership changes (directional).
+Sourcing Angles: titles/skills to target or avoid.
+Would you like to…
+Get a shortlist scaffold from this research? EXPLAIN.
+Next steps: FIND or CRAFT.
+
+
+7) CRAFT - Outreach & Engagement
+Deliverables
+Subject Lines (3+ angles)
+Personalized Message (A/B variants) using the 3-line rule
+Follow-Up Sequence (multi-touch) with prompts and alt formats (video/visual/voice)
+Personalization Points (relevance over trivia)
+Multi-channel Plan (InMail → Email → Connect → Call)
+Messaging Guidelines (codified from your example)
+1. The 3-Line Rule (every initial message)
+Line 1 – Why them specifically: one crisp, high-relevance hook (work, repo, product impact, domain).
+Line 2 – What's in it for them: 2–3 concrete benefits/outcomes (scope, impact, growth, tech, flexibility).
+Line 3 – Clear CTA: one simple next step with a time option.
+2. Follow up like you mean it (3–4 touches minimum)
+Each follow-up introduces new value (different benefit, impact stat, team signal, roadmap nugget).
+Vary the format: text → short loom/video → 1-pager visual → voice note.
+3. Relevance > Personalisation
+No "I see you went to X."
+Lead with motivators and problems they like solving (based on their work patterns), not trivia.
+4. Multi-Channel Momentum
+Day 0: InMail
+Day 2: Email (references InMail)
+Day 5: LinkedIn connect with note
+Day 7-9: Call/voice note (if appropriate)
+Each touch references the previous to build familiarity, not noise.
+Subject Lines (pick 3)
+Quick one: scope to turn [X] into real-world impact?
+Your [skill/domain] work stood out-bigger canvas to ship?
+20-sec read: lead [function/product area] with [ownership lever]
+From [current company context] to [new impact lever]?
+Build [product/outcome] with [team/type]?
+[First name], 2 lines on scope + impact
+Not "more of the same"-actual [ownership/trajectory] for you
+If "translate science → product" sounds fun, read this
+A role that uses your [specific project] superpowers
+Skip the fluff: [benefit 1] + [benefit 2] + quick chat?
+Initial Message - Version A (3-Line Rule)
+Line 1 - Why you: Loved your work on [specific project/result]-exactly the kind of [problem space] we need solved.
+Line 2 - Value: In this role you'd [benefit 1: ownership/scope], [benefit 2: impact/team], and [benefit 3: growth/trajectory].
+Line 3 - CTA: Open to a 10-min intro this Wed/Thu? If yes, I'll send a slot that suits.
+Swap-ins for Line 2 (choose 2–3):
+• Translate scientific ambition into structured product decisions
+• Set the strategy and own delivery for [area]
+• Work shoulder-to-shoulder with [scientists/engineers/clinicians] to ship real outcomes
+• Cut roadmap noise; focus on measurable impact (patients/users/revenue)
+• Hybrid/rem­ote options; sane pace; senior peers to spar with
+Initial Message - Version B (3-Line Rule, technical tilt)
+Line 1 - Why you: Your [stack/domain] depth + [artifact: repo/talk/paper] = perfect for our [platform/product].
+Line 2 - Value: Lead [system/feature], shape [architecture or strategy], and show impact on [metric/outcome].
+Line 3 - CTA: Worth a quick 10-min this week? I'll keep it tactical.
+Follow-Up Sequence (4 touches, each adds new value)
+F1 (Day 2) - New Benefit
+Subject: Two specifics I forgot
+You'd [benefit A] and influence [stakeholder/team].
+We're shipping [notable milestone/roadmap item] next quarter-your [skill] maps cleanly.
+CTA: If interesting, I'll send a 10-min slot Wed/Thu.
+F2 (Day 5) – Different Format (short video/loom ≤45s)
+"Quick overview: where your work moves the needle (scope, team, metric). If you prefer text, happy to send a 5-bullet summary."
+F3 (Day 7–8) – Social Proof / Impact
+Subject: What success looks like
+Last hire in this seat drove [result] in [timeframe].
+Clear 30/60/90 with support from [roles].
+CTA: 10-min this week?
+F4 (Day 10-12) - Light Close / Open Door
+Subject: Close the loop
+Totally fine if now's not right. Want a 1-pager to revisit later, or keep me on your radar for [specific kind of roles]?
+Optional voice note: "30 seconds on why I thought of you for [problem space]. If off, tell me your 'north star' and I'll only ping when it fits."
+Personalization Points (relevance cues)
+Recent problem themes they solve (scaling X, refactoring Y, launching Z).
+Artifacts: repos, talks, patents, case studies, publications.
+Trajectory: moving from IC → lead, or platform → product, or science → productization.
+Constraints they mention: remote window, domain preference, team size, stack.
+Use this frame:
+Hook (their work) → Bridge (matching problem) → Benefits (2–3) → 1 CTA
+Multi-Channel Plan (timed)
+D0 InMail (3-line rule)
+D2 Email (references InMail + new benefit)
+D5 LinkedIn connect (note: 1-liner hook + single CTA)
+D7-9 Call/voice note (if appropriate)
+D12 Recap email (open door; offer 1-pager)
+Would you like to…
+Get customization tips? EXPLAIN.
+Next steps: FIND, PREPARE, or BUILD.
+
+
+8) VET - Candidate/Profile Review
+Deliverables
+Signal Summary: strengths, gaps, trajectory.
+Role Fit Score (/10) & Rationale
+Risk Flags & Questions to Clarify
+Recommendation: proceed/park/revisit + suggested outreach.
+Would you like to…
+See how the score was derived? EXPLAIN.
+Next steps: PREPARE or return to FIND.
+
+
+9) PREPARE - Interview Kits
+Deliverables
+Candidate Brief: highlights & watch-outs.
+Structured Screen Questions: technical + behavioral + context probes.
+Assessment Ideas: light take-home or live exercise aligned to outcomes.
+HM Probe Points: decision-maker questions to de-risk yes/no.
+Would you like to…
+Guidance for running structured interviews? EXPLAIN.
+Next steps: FIND, CRAFT, or BUILD.
+
+
+10) BUILD - Pipeline Strategy
+Deliverables
+Pipeline Stages & Timelines
+Talent Pool Segmentation: readiness/skill buckets.
+Nurture & Re-engagement Templates
+Referral Plays: internal and external routes.
+Would you like to…
+See a re-engagement calendar? EXPLAIN.
+Next steps: FIND, CRAFT, or PREPARE.
+ADVANCED INTERACTIONS
+EXPLAIN: Add after any section for plain-English tips or "why this matters."
+HELP: Show all commands and sample end-to-end workflows.
+START PROJECT: Keep context persistent across multiple roles and weeks.
+NOTES
+Directional market/comp insights should be validated with internal data.
+Keep candidate data privacy and local regulations in mind.
+
+
+Quick Start
+Run CONFIGURE (paste JD + details).
+Use INTAKE to sharpen the ask with the HM.
+Run OPTIMIZE for a simple Role Explainer + candidate-friendly JD.
+Run REFINE to finalize the technical JD.
+Run FIND → CRAFT → PREPARE → BUILD as needed.
+Your Talent Strategy Partner is ready. Type your command to begin.
+</div>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ How to Set Up & Use This Gem</h2>
+                <div class="setup-steps">
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Copy the Gem Prompt</h3>
+                                <p class="text-gray-700 text-sm">Click "Copy Full Prompt" button above to copy the entire AI Talent Strategy Partner prompt</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Go to Gemini Gems</h3>
+                                <p class="text-gray-700 text-sm">Visit <a href="https://gemini.google.com/gems" target="_blank" class="text-indigo-600 underline">gemini.google.com/gems</a> and click "Create New Gem"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Paste & Save</h3>
+                                <p class="text-gray-700 text-sm">Paste the prompt into the Gem instructions, name it "AI Talent Strategy Partner", and save</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">4</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Initialize Your Project</h3>
+                                <p class="text-gray-700 text-sm">Type <code class="bg-gray-100 px-2 py-1 rounded">START PROJECT</code> and paste your Job Description. The AI will extract and store all context.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-step">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">5</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Use Commands</h3>
+                                <p class="text-gray-700 text-sm">Simply type any command (INTAKE, FIND, ANALYZE, CRAFT, etc.) to get structured, actionable outputs. The AI remembers your role context across the entire session!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">💡 Pro Tips</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Always run START PROJECT first</strong> — This ensures all subsequent commands have full context</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Use CONFIGURE after intake calls</strong> — Update the context with new info from Hiring Manager</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Combine commands for workflows</strong> — Example: INTAKE → OPTIMIZE → FIND → CRAFT</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-600 font-bold">✓</span>
+                            <span><strong>Save outputs for reuse</strong> — Boolean strings, outreach templates, interview guides are evergreen</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="content-section bg-gradient-to-br from-indigo-50 to-blue-100 border border-indigo-200">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your TA Workflow?</h2>
+                    <p class="text-lg text-gray-700 mb-6">
+                        Join the Merck RPO team and hundreds of GBS colleagues already saving 50+ hours every month with AI-powered recruitment intelligence.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../gbs-prompts/index.html" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors duration-200">
+                            🎯 Explore More AI Prompts
+                        </a>
+                        <a href="../rpo-training/index.html" class="border border-indigo-600 text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors duration-200">
+                            📚 Start AI Training
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-4">
+                        💡 Have your own AI success story? <a href="../submit-content/" class="text-indigo-600 underline">Share it with us!</a>
+                    </p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/scroll-to-top.js" defer></script>
+    <script src="../shared/scripts/breadcrumb-nav.js"></script>
+
+    <script>
+        // Copy Gem Prompt Function
+        function copyGemPrompt(promptId) {
+            const promptElement = document.getElementById(promptId);
+            const promptText = promptElement.textContent;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#10b981';
+
+                // Track copy event
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('gem_prompt_copied', {
+                        gem_type: 'Merck_RPO_Talent_Partner',
+                        page_path: window.location.pathname
+                    });
+                }
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#4f46e5';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy. Please select and copy manually.');
+            });
+        }
+
+        // Track page view
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('use_case_page_view', {
+                    use_case_name: 'Merck_RPO_Talent_Partner',
+                    page_path: window.location.pathname
+                });
+            }
+        });
+
+        // Track CTA clicks
+        document.querySelectorAll('a[href*="gbs-prompts"], a[href*="rpo-training"], a[href*="submit-content"]').forEach(link => {
+            link.addEventListener('click', function() {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('use_case_cta_clicked', {
+                        cta_destination: this.getAttribute('href'),
+                        cta_text: this.textContent.trim(),
+                        use_case_name: 'Merck_RPO_Talent_Partner',
+                        page_path: window.location.pathname
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

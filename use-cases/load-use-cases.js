@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function loadAndRenderUseCases() {
     try {
-        console.log('Loading use cases from JSON...');
+
         const response = await fetch('use-cases.json');
 
         if (!response.ok) {
@@ -23,12 +23,12 @@ async function loadAndRenderUseCases() {
         }
 
         const data = await response.json();
-        console.log(`Loaded ${data.useCases.length} use cases`);
+
 
         renderUseCases(data.useCases);
         renderFeaturedStories(data.featuredStories);
         renderImpactStats(data.impactStats);
-        console.log('Use cases rendered successfully!');
+
 
     } catch (error) {
         console.error('Failed to load use cases:', error);
@@ -65,7 +65,13 @@ function renderFeaturedStories(stories) {
     container.innerHTML = '';
     stories.forEach(story => {
         const storyCard = document.createElement('div');
-        storyCard.className = `bg-gradient-to-br ${story.gradient} rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow`;
+        const baseClasses = `bg-gradient-to-br ${story.gradient} rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow`;
+        storyCard.className = story.link ? `${baseClasses} cursor-pointer` : baseClasses;
+
+        // Add click handler if link exists
+        if (story.link) {
+            storyCard.onclick = () => window.location.href = story.link;
+        }
 
         let metricsHTML = '';
         if (story.timeSaved && story.betterCandidates) {
@@ -99,6 +105,30 @@ function renderFeaturedStories(stories) {
                 <div class="flex justify-between items-center">
                     <span class="text-xs text-gray-600">Weekly savings:</span>
                     <span class="text-lg font-bold text-purple-600">${story.weeklySavings}</span>
+                </div>
+            `;
+        } else if (story.timeSaved && story.monthlyImpact) {
+            // Merck RPO specific
+            metricsHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs text-gray-600">Time saved:</span>
+                    <span class="text-lg font-bold text-indigo-600">${story.timeSaved}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-gray-600">Impact:</span>
+                    <span class="text-lg font-bold text-purple-600">${story.monthlyImpact}</span>
+                </div>
+            `;
+        } else if (story.timeSavedWeek && story.jrsManaged) {
+            // Airbus Early Career specific
+            metricsHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs text-gray-600">Time saved/week:</span>
+                    <span class="text-lg font-bold text-emerald-600">${story.timeSavedWeek}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-gray-600">JRs managed:</span>
+                    <span class="text-lg font-bold text-blue-600">${story.jrsManaged}</span>
                 </div>
             `;
         } else if (story.timeSaved && story.insightQuality) {
@@ -146,8 +176,12 @@ function renderUseCases(useCases) {
     // Sort by order and render each use case
     useCases.sort((a, b) => a.order - b.order);
     useCases.forEach(useCase => {
-        const useCaseCard = createUseCaseCard(useCase);
-        container.appendChild(useCaseCard);
+        try {
+            const useCaseCard = createUseCaseCard(useCase);
+            container.appendChild(useCaseCard);
+        } catch (itemError) {
+            console.error('Failed to render use case item:', itemError, useCase);
+        }
     });
 
     // Re-initialize animations after rendering
@@ -233,15 +267,15 @@ function createUseCaseCard(useCase) {
                 <h4 class="font-semibold text-gray-900 mb-2">Personalization Elements:</h4>
                 <div class="flex flex-wrap gap-2">
                     ${useCase.personalizationElements.map(el => {
-                        const colorMap = {
-                            'Company Research': 'blue',
-                            'Role Relevance': 'green',
-                            'Career Progression': 'purple',
-                            'Industry Insights': 'orange'
-                        };
-                        const color = colorMap[el] || 'gray';
-                        return `<span class="bg-${color}-100 text-${color}-800 px-2 py-1 rounded text-xs">${el}</span>`;
-                    }).join('')}
+            const colorMap = {
+                'Company Research': 'blue',
+                'Role Relevance': 'green',
+                'Career Progression': 'purple',
+                'Industry Insights': 'orange'
+            };
+            const color = colorMap[el] || 'gray';
+            return `<span class="bg-${color}-100 text-${color}-800 px-2 py-1 rounded text-xs">${el}</span>`;
+        }).join('')}
                 </div>
             </div>
         `;
@@ -260,15 +294,15 @@ function createUseCaseCard(useCase) {
                 <h4 class="font-semibold text-gray-900 mb-2">Question Categories:</h4>
                 <div class="flex flex-wrap gap-2">
                     ${useCase.questionCategories.map(cat => {
-                        const colorMap = {
-                            'Technical Skills': 'indigo',
-                            'Behavioral': 'pink',
-                            'Situational': 'yellow',
-                            'Culture Fit': 'teal'
-                        };
-                        const color = colorMap[cat] || 'gray';
-                        return `<span class="bg-${color}-100 text-${color}-800 px-2 py-1 rounded text-xs">${cat}</span>`;
-                    }).join('')}
+            const colorMap = {
+                'Technical Skills': 'indigo',
+                'Behavioral': 'pink',
+                'Situational': 'yellow',
+                'Culture Fit': 'teal'
+            };
+            const color = colorMap[cat] || 'gray';
+            return `<span class="bg-${color}-100 text-${color}-800 px-2 py-1 rounded text-xs">${cat}</span>`;
+        }).join('')}
                 </div>
             </div>
         `;
@@ -287,28 +321,16 @@ function createUseCaseCard(useCase) {
     card.innerHTML = `
         <div class="text-center use-case-icon">${useCase.icon}</div>
         <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center gap-2">
-                <span class="badge-${useCase.categorySlug} px-3 py-1 rounded-full text-xs font-semibold">${useCase.category}</span>
-                <span class="difficulty-${useCase.difficultySlug} px-2 py-1 rounded text-xs font-semibold">${useCase.difficulty}</span>
-            </div>
+            <span class="badge-${useCase.categorySlug} px-3 py-1 rounded-full text-xs font-semibold">${useCase.category}</span>
             <span class="text-green-600 font-semibold">${useCase.timeSaved}</span>
         </div>
         <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">${useCase.title}</h3>
+        <p class="text-gray-600 mb-4">${useCase.description}</p>
 
-        <!-- Enhanced Metrics -->
-        <div class="grid grid-cols-3 gap-3 mb-4">
-            <div class="metric-time p-3 rounded-lg text-center">
-                <div class="text-lg font-bold text-blue-700">${useCase.metrics.time.before} → ${useCase.metrics.time.after}</div>
-                <div class="text-xs text-gray-600">${useCase.metrics.time.label}</div>
-            </div>
-            <div class="metric-improvement p-3 rounded-lg text-center">
-                <div class="text-lg font-bold text-green-700">${useCase.metrics.improvement.value}</div>
-                <div class="text-xs text-gray-600">${useCase.metrics.improvement.label}</div>
-            </div>
-            <div class="metric-quality p-3 rounded-lg text-center">
-                <div class="text-lg font-bold text-purple-700">${useCase.metrics.quality.value}</div>
-                <div class="text-xs text-gray-600">${useCase.metrics.quality.label}</div>
-            </div>
+        <!-- Single Key Metric -->
+        <div class="metric-time p-6 rounded-lg text-center mb-4">
+            <div class="text-3xl font-bold text-blue-700 mb-2">${useCase.metrics.time.before} → ${useCase.metrics.time.after}</div>
+            <div class="text-sm text-gray-600">${useCase.metrics.time.label}</div>
         </div>
 
         ${prerequisitesHTML}
@@ -372,4 +394,4 @@ function initializeUseCaseAnimations() {
     });
 }
 
-console.log('Use cases JSON loader initialized');
+
