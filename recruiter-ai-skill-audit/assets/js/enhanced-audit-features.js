@@ -28,6 +28,24 @@ class EnhancedAuditFeatures {
         this.setupSwipeGestures();
     }
 
+    setupEnhancements() {
+        if (!this.audit) return;
+
+        // Ensure progress persistence is wired even if the base audit changes.
+        if (typeof this.audit.proceedToNext === 'function' && !this.audit.__enhancedProceedToNextWrapped) {
+            const originalProceedToNext = this.audit.proceedToNext.bind(this.audit);
+            this.audit.proceedToNext = (...args) => {
+                try {
+                    this.saveProgress();
+                } catch (e) {
+                    // Non-fatal: persistence should never break the audit flow
+                }
+                return originalProceedToNext(...args);
+            };
+            this.audit.__enhancedProceedToNextWrapped = true;
+        }
+    }
+
     /**
      * 1. PROGRESSIVE DISCLOSURE ENHANCEMENTS
      */

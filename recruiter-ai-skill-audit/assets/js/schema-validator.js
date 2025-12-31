@@ -19,8 +19,8 @@ class SchemaValidator {
             id: {
                 type: 'string',
                 required: true,
-                pattern: /^[a-z_]+$/,
-                errorMsg: 'Question ID must be lowercase with underscores only'
+                pattern: /^[a-zA-Z][a-zA-Z0-9_]*$/,
+                errorMsg: 'Question ID must start with a letter and contain only letters, numbers, and underscores'
             },
             question: {
                 type: 'string',
@@ -52,6 +52,46 @@ class SchemaValidator {
     }
 
     /**
+     * Define schema rules for legacy (showIf-based) questions
+     */
+    getLegacyQuestionSchema() {
+        return {
+            id: {
+                type: 'string',
+                required: true,
+                pattern: /^[a-zA-Z][a-zA-Z0-9_]*$/,
+                errorMsg: 'Question ID must start with a letter and contain only letters, numbers, and underscores'
+            },
+            question: {
+                type: 'string',
+                required: true,
+                minLength: 10,
+                maxLength: 500,
+                errorMsg: 'Question text must be 10-500 characters'
+            },
+            type: {
+                type: 'enum',
+                required: true,
+                values: ['checkbox', 'single', 'multi'],
+                errorMsg: 'Type must be checkbox, single, or multi'
+            },
+            showIf: {
+                type: 'enum',
+                required: false,
+                values: ['', 'sourcing', 'admin', 'scheduling', 'compliance', 'contracts'],
+                errorMsg: 'Invalid showIf business unit'
+            },
+            options: {
+                type: 'array',
+                required: true,
+                minLength: 2,
+                maxLength: 10,
+                errorMsg: 'Must have 2-10 options'
+            }
+        };
+    }
+
+    /**
      * Define schema rules for options
      */
     getOptionSchema() {
@@ -62,6 +102,13 @@ class SchemaValidator {
                 minLength: 1,
                 maxLength: 200,
                 errorMsg: 'Option value must be 1-200 characters'
+            },
+            label: {
+                type: 'string',
+                required: false,
+                minLength: 1,
+                maxLength: 200,
+                errorMsg: 'Option label must be 1-200 characters'
             },
             hours: {
                 type: 'number',
@@ -85,6 +132,29 @@ class SchemaValidator {
                 errorMsg: 'Multiplier must be between 0.1 and 5.0'
             }
         };
+    }
+
+    detectSchema(questionsData) {
+        if (!questionsData || typeof questionsData !== 'object') return 'unknown';
+
+        const businessUnits = questionsData.businessUnits;
+        const questions = questionsData.questions;
+
+        const isV2 =
+            Array.isArray(businessUnits) &&
+            businessUnits.some(bu => bu && typeof bu === 'object' && Array.isArray(bu.questions));
+
+        if (isV2) return 'v2';
+
+        const isLegacy =
+            Array.isArray(businessUnits) &&
+            Array.isArray(questions) &&
+            (businessUnits.some(bu => bu && typeof bu === 'object' && 'id' in bu && 'label' in bu) ||
+                questions.some(q => q && typeof q === 'object' && 'showIf' in q));
+
+        if (isLegacy) return 'legacy';
+
+        return 'unknown';
     }
 
     /**
@@ -300,6 +370,30 @@ class SchemaValidator {
         return isValid;
     }
 
+    validateLegacyQuestion(question, index) {
+        const schema = this.getLegacyQuestionSchema();
+        const path = `questions[${index}]`;
+        let isValid = true;
+
+        // Validate question fields
+        for (const field in schema) {
+            if (!this.validateField(field, question[field], schema, path)) {
+                isValid = false;
+            }
+        }
+
+        // Validate options if present
+        if (question.options && Array.isArray(question.options)) {
+            question.options.forEach((option, optIndex) => {
+                if (!this.validateOption(option, optIndex, question.id)) {
+                    isValid = false;
+                }
+            });
+        }
+
+        return isValid;
+    }
+
     /**
      * Validate entire questions dataset
      */
@@ -317,54 +411,108 @@ class SchemaValidator {
             return this.generateReport();
         }
 
-        if (!questionsData.businessUnits || !Array.isArray(questionsData.businessUnits)) {
+        const schemaType = this.detectSchema(questionsData);
+        let questionCount = 0;
+        let optionCount = 0;
+
+        if (schemaType === 'v2') {
+            if (!questionsData.businessUnits || !Array.isArray(questionsData.businessUnits)) {
+                this.errors.push({
+                    path: 'root',
+                    field: 'businessUnits',
+                    message: 'businessUnits must be an array',
+                    severity: 'error'
+                });
+                return this.generateReport();
+            }
+
+            // Validate each business unit (v2: nested questions)
+            questionsData.businessUnits.forEach((bu, buIndex) => {
+                if (!bu.name) {
+                    this.errors.push({
+                        path: `businessUnits[${buIndex}]`,
+                        field: 'name',
+                        message: 'Business unit name is required',
+                        severity: 'error'
+                    });
+                }
+
+                if (!bu.questions || !Array.isArray(bu.questions)) {
+                    this.errors.push({
+                        path: `businessUnits[${buIndex}]`,
+                        field: 'questions',
+                        message: 'Business unit must have questions array',
+                        severity: 'error'
+                    });
+                    return;
+                }
+
+                bu.questions.forEach((question, qIndex) => {
+                    this.validateQuestion(question, qIndex);
+                    questionCount++;
+                    if (question.options) optionCount += question.options.length;
+                });
+            });
+        } else if (schemaType === 'legacy') {
+            if (!questionsData.businessUnits || !Array.isArray(questionsData.businessUnits)) {
+                this.errors.push({
+                    path: 'root',
+                    field: 'businessUnits',
+                    message: 'businessUnits must be an array',
+                    severity: 'error'
+                });
+                return this.generateReport();
+            }
+
+            if (!questionsData.questions || !Array.isArray(questionsData.questions)) {
+                this.errors.push({
+                    path: 'root',
+                    field: 'questions',
+                    message: 'questions must be an array',
+                    severity: 'error'
+                });
+                return this.generateReport();
+            }
+
+            // Validate business units (legacy: id/label/description)
+            questionsData.businessUnits.forEach((bu, buIndex) => {
+                if (!bu.id) {
+                    this.errors.push({
+                        path: `businessUnits[${buIndex}]`,
+                        field: 'id',
+                        message: 'Business unit id is required',
+                        severity: 'error'
+                    });
+                }
+                if (!bu.label) {
+                    this.errors.push({
+                        path: `businessUnits[${buIndex}]`,
+                        field: 'label',
+                        message: 'Business unit label is required',
+                        severity: 'error'
+                    });
+                }
+            });
+
+            // Validate each question (legacy: showIf-based)
+            questionsData.questions.forEach((question, qIndex) => {
+                this.validateLegacyQuestion(question, qIndex);
+                questionCount++;
+                if (question.options) optionCount += question.options.length;
+            });
+        } else {
             this.errors.push({
                 path: 'root',
-                field: 'businessUnits',
-                message: 'businessUnits must be an array',
+                field: 'questionsData',
+                message: 'Unknown questions data schema (expected legacy or v2 structure)',
                 severity: 'error'
             });
             return this.generateReport();
         }
 
-        let questionCount = 0;
-        let optionCount = 0;
-
-        // Validate each business unit
-        questionsData.businessUnits.forEach((bu, buIndex) => {
-            if (!bu.name) {
-                this.errors.push({
-                    path: `businessUnits[${buIndex}]`,
-                    field: 'name',
-                    message: 'Business unit name is required',
-                    severity: 'error'
-                });
-            }
-
-            if (!bu.questions || !Array.isArray(bu.questions)) {
-                this.errors.push({
-                    path: `businessUnits[${buIndex}]`,
-                    field: 'questions',
-                    message: 'Business unit must have questions array',
-                    severity: 'error'
-                });
-                return;
-            }
-
-            // Validate each question
-            bu.questions.forEach((question, qIndex) => {
-                this.validateQuestion(question, qIndex);
-                questionCount++;
-                if (question.options) {
-                    optionCount += question.options.length;
-                }
-            });
-        });
-
-        // Generate summary statistics
         this.validationReport = this.generateReport();
         this.validationReport.statistics = {
-            totalBusinessUnits: questionsData.businessUnits.length,
+            totalBusinessUnits: Array.isArray(questionsData.businessUnits) ? questionsData.businessUnits.length : 0,
             totalQuestions: questionCount,
             totalOptions: optionCount,
             avgOptionsPerQuestion: questionCount > 0 ? (optionCount / questionCount).toFixed(1) : 0

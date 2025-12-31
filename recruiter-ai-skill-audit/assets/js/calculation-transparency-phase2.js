@@ -162,7 +162,7 @@ class CalculationTransparencyPhase2 {
                 'Fast AI adoption curve assumed',
                 'Minimal learning curve impact',
                 'Best-case AI efficiency'
-            },
+            ],
 
             weeklyTimeSaved: this.calculateScenarioSavings(baseResults, {
                 aiEfficiency: 1.0,

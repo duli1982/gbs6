@@ -54,10 +54,11 @@ class AISkillsAudit {
 
     async loadQuestions() {
         try {
-            console.log('Loading questions from:', window.location.href);
-            const response = await fetch('./questions-fixed.json');
+            const questionsUrl = new URL('./questions-fixed.json', window.location.href);
+            console.log('Loading questions from:', questionsUrl.toString());
+            const response = await fetch(questionsUrl);
             console.log('Response status:', response.status);
-            
+             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -75,7 +76,12 @@ class AISkillsAudit {
                     versioning.logMigrationReport(migrationResult);
                     data = migrationResult.data;
                 } else {
-                    console.log(`✅ Data is at current version (v${versioning.getDataVersion(data)})`);
+                    const detectedVersion = versioning.getDataVersion(data);
+                    if (detectedVersion) {
+                        console.log(`✅ Data is at current version (v${detectedVersion})`);
+                    } else {
+                        console.log('✅ Data is unversioned; skipping migrations');
+                    }
                 }
             }
 

@@ -58,6 +58,7 @@ class DataVersioning {
      */
     needsMigration(data) {
         const dataVersion = this.getDataVersion(data);
+        if (!dataVersion) return false;
         return this.compareVersions(dataVersion, this.currentVersion) < 0;
     }
 
@@ -65,13 +66,15 @@ class DataVersioning {
      * Get version from data
      */
     getDataVersion(data) {
+        if (!data || typeof data !== 'object') return null;
+
         // Check various possible version locations
         if (data.version) return data.version;
         if (data.schemaVersion) return data.schemaVersion;
         if (data.metadata && data.metadata.version) return data.metadata.version;
 
-        // If no version found, assume oldest version
-        return '1.0.0';
+        // If no version found, treat as legacy/unversioned data (do not auto-migrate)
+        return null;
     }
 
     /**
