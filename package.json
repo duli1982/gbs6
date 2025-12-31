@@ -4,11 +4,11 @@
   "description": "GBS EMEA AI Learning Hub - Production Ready Platform",
   "type": "module",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "vercel dev",
-    "build": "echo 'No build step required for static site'",
+    "build": "node scripts/build-static.mjs",
     "deploy": "vercel --prod"
   },
   "keywords": [
