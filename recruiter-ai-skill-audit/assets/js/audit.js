@@ -300,16 +300,11 @@ class AISkillsAudit {
 
         questionHtml += `<h2 class="text-2xl font-bold text-gray-900 mb-8">${question.question}</h2>`;
 
-        // Use enhanced question renderer if available
-        if (window.enhancedQuestionRenderer) {
-            questionHtml += window.enhancedQuestionRenderer.renderEnhancedQuestion(question, this.answers);
+        // Render options (minimal UI)
+        if (question.type === 'checkbox') {
+            questionHtml += this.renderCheckboxQuestion(question);
         } else {
-            // Fallback to basic rendering
-            if (question.type === 'checkbox') {
-                questionHtml += this.renderCheckboxQuestion(question);
-            } else {
-                questionHtml += this.renderSingleChoiceQuestion(question);
-            }
+            questionHtml += this.renderSingleChoiceQuestion(question);
         }
 
         // Add enhanced features if available
@@ -336,12 +331,6 @@ class AISkillsAudit {
         questionHtml += `</div>`;
 
         document.getElementById('question-card').innerHTML = questionHtml;
-
-        // Attach enhanced question behaviors if available
-        if (window.enhancedQuestionRenderer) {
-            const questionCard = document.getElementById('question-card');
-            window.enhancedQuestionRenderer.attachInteractiveBehaviors(questionCard);
-        }
 
         this.attachQuestionEventListeners(question, currentIndex, relevantQuestions);
     }
@@ -1783,5 +1772,10 @@ class AISkillsAudit {
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // If the enhanced audit bundle is present, it will bootstrap its own instance.
+    if (typeof EnhancedAISkillsAudit !== 'undefined' && typeof GeminiAuditEnhancer !== 'undefined') {
+        return;
+    }
+
     window.auditInstance = new AISkillsAudit();
 });

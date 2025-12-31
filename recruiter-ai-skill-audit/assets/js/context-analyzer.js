@@ -493,6 +493,7 @@ class ContextAnalyzer {
      * Assess readiness for AI adoption
      */
     assessReadiness(answers) {
+        answers = answers && typeof answers === 'object' ? answers : {};
         return {
             technicalReadiness: this.assessTechnicalReadiness(answers),
             culturalReadiness: this.assessCulturalReadiness(answers),
@@ -502,6 +503,7 @@ class ContextAnalyzer {
     }
 
     assessTechnicalReadiness(answers) {
+        answers = answers && typeof answers === 'object' ? answers : {};
         const tools = Object.values(answers).filter(val => Array.isArray(val)).flat();
         const hasModernTools = tools.some(tool =>
             tool.includes('slack') || tool.includes('teams') || tool.includes('notion')
@@ -517,6 +519,7 @@ class ContextAnalyzer {
     }
 
     assessCulturalReadiness(answers) {
+        answers = answers && typeof answers === 'object' ? answers : {};
         const aiExperience = answers.aiexperience;
         const scoreMap = {
             'power': { level: 'high', score: 95, rationale: 'Power user - ready to implement advanced AI' },
@@ -529,6 +532,7 @@ class ContextAnalyzer {
     }
 
     assessResourceReadiness(answers) {
+        answers = answers && typeof answers === 'object' ? answers : {};
         const budget = this.inferBudget(answers);
         const scoreMap = {
             'enterprise': { level: 'high', score: 90, rationale: 'Enterprise budget available' },
@@ -540,8 +544,9 @@ class ContextAnalyzer {
     }
 
     assessChangeReadiness(answers) {
+        answers = answers && typeof answers === 'object' ? answers : {};
         // Infer change readiness from urgency and current inefficiencies
-        const urgency = this.calculateUrgencyScore(answers, answers.businessUnit);
+        const urgency = this.calculateUrgencyScore(answers, answers.businessUnit || '');
 
         if (urgency >= 70) {
             return {

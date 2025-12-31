@@ -207,6 +207,8 @@ export default async function handler(req, res) {
         topK: 40,
         topP: 0.95,
         maxOutputTokens: maxTokens,
+        // Encourage strict JSON outputs (the client-side parsers expect JSON).
+        responseMimeType: 'application/json',
       },
     };
 

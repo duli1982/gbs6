@@ -623,8 +623,9 @@ class EnhancedAuditFeatures {
 document.addEventListener('DOMContentLoaded', () => {
     // Wait for audit instance to be created
     setTimeout(() => {
-        if (window.auditInstance) {
-            window.enhancedFeatures = new EnhancedAuditFeatures(window.auditInstance);
+        const auditInstance = window.auditApp || window.auditInstance;
+        if (auditInstance) {
+            window.enhancedFeatures = new EnhancedAuditFeatures(auditInstance);
         }
     }, 100);
 });

@@ -301,6 +301,8 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
             <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
                 ${this.renderHeader(businessUnitLabel)}
                 ${this.renderExecutiveSummary()}
+                ${this.renderAnswersReview()}
+                ${this.renderHowToAddAI()}
                 ${this.renderAIInsights()}
                 ${this.renderMetricsCards()}
                 ${this.renderBenchmarkingSection()}
@@ -322,6 +324,198 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         if (this.interactiveReporting) {
             this.interactiveReporting.attachEventListeners();
         }
+    }
+
+    escapeHtml(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    getAnsweredQuestionRows() {
+        const answers = this.answers && typeof this.answers === 'object' ? this.answers : {};
+        const questions = Array.isArray(this.questions) ? this.questions : [];
+
+        return questions
+            .filter(q => answers[q.id] !== undefined)
+            .map(q => {
+                const rawAnswer = answers[q.id];
+                const optionByValue = new Map((q.options || []).map(o => [o.value, o]));
+
+                const toLabel = (value) => {
+                    const opt = optionByValue.get(value);
+                    return opt?.label ?? String(value);
+                };
+
+                const answerText = Array.isArray(rawAnswer)
+                    ? rawAnswer.map(toLabel).join(', ')
+                    : toLabel(rawAnswer);
+
+                return {
+                    id: q.id,
+                    question: q.question,
+                    businessUnit: q.showIf || 'all',
+                    type: q.type,
+                    answerText,
+                };
+            });
+    }
+
+    renderAnswersReview() {
+        const rows = this.getAnsweredQuestionRows();
+        if (rows.length === 0) return '';
+
+        const businessUnit = this.enhancedResults?.businessUnit || this.results?.businessUnit || this.answers?.businessUnit || 'all';
+
+        // Put always-shown questions first, then the selected business unit.
+        const order = ['all', businessUnit];
+        const grouped = new Map();
+        for (const row of rows) {
+            const key = order.includes(row.businessUnit) ? row.businessUnit : row.businessUnit;
+            if (!grouped.has(key)) grouped.set(key, []);
+            grouped.get(key).push(row);
+        }
+
+        const sectionTitle = 'Your Answers';
+
+        const renderGroup = (groupKey, groupRows) => {
+            const groupLabel = groupKey === 'all'
+                ? 'General'
+                : `Business Unit: ${this.escapeHtml(groupKey)}`;
+
+            return `
+                <div class="mb-6">
+                    <h3 class="font-semibold text-gray-900 mb-3">${groupLabel}</h3>
+                    <div class="divide-y divide-gray-100 rounded-xl border border-gray-200 overflow-hidden bg-white">
+                        ${groupRows.map(r => `
+                            <div class="p-4">
+                                <div class="text-sm font-medium text-gray-900">${this.escapeHtml(r.question)}</div>
+                                <div class="text-sm text-gray-600 mt-1">${this.escapeHtml(r.answerText)}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        };
+
+        // Render ordered groups first if present
+        const groupHtmlParts = [];
+        for (const k of order) {
+            if (grouped.has(k)) groupHtmlParts.push(renderGroup(k, grouped.get(k)));
+        }
+        // Render remaining groups
+        for (const [k, v] of grouped.entries()) {
+            if (order.includes(k)) continue;
+            groupHtmlParts.push(renderGroup(k, v));
+        }
+
+        return `
+            <div class="bg-white rounded-xl p-6 mb-8 border border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">📝</span>
+                    ${sectionTitle}
+                </h2>
+                <p class="text-sm text-gray-600 mb-6">Review what you selected during the assessment.</p>
+                ${groupHtmlParts.join('')}
+            </div>
+        `;
+    }
+
+    renderHowToAddAI() {
+        const businessUnit = this.enhancedResults?.businessUnit || this.results?.businessUnit || this.answers?.businessUnit || null;
+        if (!businessUnit) return '';
+
+        const tools = (this.aiTools && this.aiTools[businessUnit]) ? this.aiTools[businessUnit] : [];
+        const recommendations = Array.isArray(this.results?.recommendations) ? this.results.recommendations : [];
+
+        const highPotentialSignals = [];
+        const answers = this.answers && typeof this.answers === 'object' ? this.answers : {};
+        const questions = Array.isArray(this.questions) ? this.questions : [];
+
+        for (const q of questions) {
+            const raw = answers[q.id];
+            if (!raw) continue;
+
+            if (q.type === 'checkbox' && Array.isArray(raw)) {
+                for (const selectedValue of raw) {
+                    const opt = (q.options || []).find(o => o.value === selectedValue);
+                    const aiPotential = opt?.aiPotential;
+                    if (aiPotential === 'high' || aiPotential === 'medium') {
+                        highPotentialSignals.push({
+                            question: q.question,
+                            option: opt?.label || String(selectedValue),
+                            aiPotential,
+                        });
+                    }
+                }
+            }
+        }
+
+        return `
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-8 border border-green-200">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🤖</span>
+                    How to Add AI in Your Work
+                </h2>
+                <p class="text-sm text-gray-700 mb-6">
+                    Practical ways to apply AI based on your role and the answers you provided.
+                </p>
+
+                ${highPotentialSignals.length ? `
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-gray-900 mb-3">High AI-Opportunity Areas From Your Answers</h3>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            ${highPotentialSignals.slice(0, 6).map(s => `
+                                <div class="bg-white rounded-lg p-4 border border-green-200">
+                                    <div class="text-xs text-green-700 font-semibold mb-1">${this.escapeHtml(String(s.aiPotential).toUpperCase())} potential</div>
+                                    <div class="text-sm font-medium text-gray-900">${this.escapeHtml(s.option)}</div>
+                                    <div class="text-xs text-gray-600 mt-1">${this.escapeHtml(s.question)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${tools.length ? `
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-gray-900 mb-3">Recommended AI Use Cases for ${this.escapeHtml(businessUnit)}</h3>
+                        <div class="space-y-3">
+                            ${tools.map(t => `
+                                <div class="bg-white rounded-lg p-4 border border-green-200">
+                                    <div class="flex items-center justify-between gap-3">
+                                        <div class="text-sm font-semibold text-gray-900">${this.escapeHtml(t.name)}</div>
+                                        <span class="text-xs px-2 py-1 rounded-full ${t.priority === 'high' ? 'bg-orange-100 text-orange-700' : t.priority === 'critical' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
+                                            ${this.escapeHtml((t.priority || 'medium').toUpperCase())}
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-2">
+                                        Tools: ${(t.tools || []).map(x => this.escapeHtml(x)).join(' • ')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${recommendations.length ? `
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-3">Start Here (Top Recommendations)</h3>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            ${recommendations.slice(0, 4).map(r => `
+                                <div class="bg-white rounded-lg p-4 border border-green-200">
+                                    <div class="text-sm font-semibold text-gray-900">${this.escapeHtml(r.name)}</div>
+                                    <div class="text-xs text-gray-600 mt-1">Estimated savings: ${this.escapeHtml(r.savings)} hrs/week</div>
+                                    <div class="text-xs text-gray-600 mt-1">Suggested tools: ${(r.tools || []).map(x => this.escapeHtml(x)).join(' • ')}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
     }
 
     renderHeader(businessUnitLabel) {

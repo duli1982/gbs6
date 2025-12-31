@@ -16,6 +16,13 @@ class GeminiAuditEnhancer {
      * Generate ALL AI enhancements in a single Gemini call to minimize quota usage.
      */
     async generateAllEnhancements(auditResults, userAnswers, userPreferences = {}) {
+        auditResults = auditResults && typeof auditResults === 'object' ? auditResults : null;
+        userAnswers = userAnswers && typeof userAnswers === 'object' ? userAnswers : {};
+
+        if (!auditResults || !auditResults.businessUnit) {
+            return this.getFallbackAllEnhancements(auditResults);
+        }
+
         const cacheKey = this.generateCacheKey(auditResults, userAnswers);
 
         const cached = this.getLocalCached(cacheKey);
@@ -46,6 +53,13 @@ class GeminiAuditEnhancer {
      * Generate comprehensive AI-powered insights for audit results
      */
     async generatePersonalizedInsights(auditResults, userAnswers) {
+        auditResults = auditResults && typeof auditResults === 'object' ? auditResults : null;
+        userAnswers = userAnswers && typeof userAnswers === 'object' ? userAnswers : {};
+
+        if (!auditResults || !auditResults.businessUnit) {
+            return this.getFallbackInsights(auditResults);
+        }
+
         const cacheKey = this.generateCacheKey(auditResults, userAnswers);
         
         if (this.cache.has(cacheKey)) {
@@ -91,6 +105,13 @@ class GeminiAuditEnhancer {
      * Generate risk assessment and success prediction
      */
     async generateRiskAssessment(auditResults, userAnswers) {
+        auditResults = auditResults && typeof auditResults === 'object' ? auditResults : null;
+        userAnswers = userAnswers && typeof userAnswers === 'object' ? userAnswers : {};
+
+        if (!auditResults || !auditResults.businessUnit) {
+            return this.getFallbackRiskAssessment();
+        }
+
         try {
             const assessment = await this.callGeminiWithRetry({
                 prompt: this.buildRiskAssessmentPrompt(auditResults, userAnswers),
@@ -109,6 +130,13 @@ class GeminiAuditEnhancer {
      * Generate adaptive implementation roadmap
      */
     async generateAdaptiveRoadmap(auditResults, userAnswers, userPreferences = {}) {
+        auditResults = auditResults && typeof auditResults === 'object' ? auditResults : null;
+        userAnswers = userAnswers && typeof userAnswers === 'object' ? userAnswers : {};
+
+        if (!auditResults || !auditResults.businessUnit) {
+            return this.getFallbackRoadmap(auditResults);
+        }
+
         try {
             const roadmap = await this.callGeminiWithRetry({
                 prompt: this.buildRoadmapPrompt(auditResults, userAnswers, userPreferences),
@@ -127,6 +155,13 @@ class GeminiAuditEnhancer {
      * Generate industry benchmarking insights
      */
     async generateBenchmarkingInsights(auditResults, userAnswers) {
+        auditResults = auditResults && typeof auditResults === 'object' ? auditResults : null;
+        userAnswers = userAnswers && typeof userAnswers === 'object' ? userAnswers : {};
+
+        if (!auditResults || !auditResults.businessUnit) {
+            return this.getFallbackBenchmarks(auditResults);
+        }
+
         try {
             const benchmarks = await this.callGeminiWithRetry({
                 prompt: this.buildBenchmarkingPrompt(auditResults, userAnswers),
@@ -331,19 +366,82 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
 
     // ==================== RESPONSE PARSERS ====================
 
-    parseAllEnhancementsResponse(response, auditResults) {
-        try {
-            let text = String(response || '').trim();
-            text = text.replace(/```json|```/g, '').trim();
+    extractFirstJsonObject(text) {
+        const source = String(text || '');
+        const start = source.indexOf('{');
+        if (start < 0) return null;
 
-            // Best-effort extract JSON object from any surrounding text
-            const start = text.indexOf('{');
-            const end = text.lastIndexOf('}');
-            if (start >= 0 && end > start) {
-                text = text.slice(start, end + 1);
+        let depth = 0;
+        let inString = false;
+        let escape = false;
+
+        for (let i = start; i < source.length; i++) {
+            const ch = source[i];
+
+            if (inString) {
+                if (escape) {
+                    escape = false;
+                    continue;
+                }
+                if (ch === '\\\\') {
+                    escape = true;
+                    continue;
+                }
+                if (ch === '"') inString = false;
+                continue;
             }
 
-            const parsed = JSON.parse(text);
+            if (ch === '"') {
+                inString = true;
+                continue;
+            }
+
+            if (ch === '{') depth += 1;
+            if (ch === '}') {
+                depth -= 1;
+                if (depth === 0) {
+                    return source.slice(start, i + 1);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    safeParseJsonFromModel(responseText) {
+        let text = String(responseText || '').trim();
+
+        // Remove common Markdown fences
+        text = text.replace(/```json/gi, '```');
+        if (text.startsWith('```')) {
+            text = text.replace(/^```[a-zA-Z]*\s*/i, '').replace(/```$/i, '').trim();
+        }
+
+        // Best-effort extraction of a JSON object from surrounding prose
+        const extracted = this.extractFirstJsonObject(text) || text;
+
+        // Try strict JSON parse first
+        try {
+            return JSON.parse(extracted);
+        } catch {
+            // Try a minimal "repair" pass for common LLM JSON issues
+            const repaired = extracted
+                .replace(/[“”]/g, '"')
+                .replace(/[‘’]/g, "'")
+                .replace(/,\s*([}\]])/g, '$1');
+
+            try {
+                return JSON.parse(repaired);
+            } catch {
+                return null;
+            }
+        }
+    }
+
+    parseAllEnhancementsResponse(response, auditResults) {
+        try {
+            const parsed = this.safeParseJsonFromModel(response);
+            if (!parsed) throw new Error('Model response was not valid JSON');
             return {
                 aiInsights: parsed.aiInsights || this.getFallbackInsights(auditResults),
                 personalizedPrompts: parsed.personalizedPrompts || this.getFallbackPrompts(auditResults?.businessUnit),
@@ -359,7 +457,7 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
 
     parseInsightsResponse(response) {
         try {
-            const parsed = JSON.parse(response);
+            const parsed = this.safeParseJsonFromModel(response) || {};
             return {
                 quickWins: parsed.quickWins || [],
                 hiddenOpportunities: parsed.hiddenOpportunities || [],
@@ -374,7 +472,7 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
 
     parsePromptLibraryResponse(response) {
         try {
-            const parsed = JSON.parse(response);
+            const parsed = this.safeParseJsonFromModel(response) || {};
             return {
                 dailyWorkflow: parsed.dailyWorkflow || [],
                 problemSolving: parsed.problemSolving || [],
@@ -388,7 +486,7 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
 
     parseRiskAssessmentResponse(response) {
         try {
-            const parsed = JSON.parse(response);
+            const parsed = this.safeParseJsonFromModel(response) || {};
             return {
                 successProbability: parsed.successProbability || 75,
                 confidenceInterval: parsed.confidenceInterval || [65, 85],
@@ -405,7 +503,7 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
 
     parseRoadmapResponse(response) {
         try {
-            const parsed = JSON.parse(response);
+            const parsed = this.safeParseJsonFromModel(response) || {};
             return {
                 week1: parsed.week1 || {},
                 week2: parsed.week2 || {},
@@ -420,7 +518,7 @@ Provide specific percentiles, metrics, and actionable comparisons.`;
 
     parseBenchmarkingResponse(response, auditResults) {
         try {
-            const parsed = JSON.parse(response);
+            const parsed = this.safeParseJsonFromModel(response) || {};
             return {
                 industryStandards: parsed.industryStandards || {},
                 peerComparison: parsed.peerComparison || {},
@@ -514,12 +612,15 @@ Generate:
     }
 
     generateCacheKey(auditResults, userAnswers) {
+        auditResults = auditResults && typeof auditResults === 'object' ? auditResults : {};
+        userAnswers = userAnswers && typeof userAnswers === 'object' ? userAnswers : {};
+
         const keyData = {
-            businessUnit: auditResults.businessUnit,
-            totalTimeSaved: auditResults.totalTimeSaved,
-            aiExperience: userAnswers.aiexperience,
+            businessUnit: auditResults.businessUnit || userAnswers.businessUnit || 'unknown',
+            totalTimeSaved: auditResults.totalTimeSaved || 0,
+            aiExperience: userAnswers.aiexperience || 'unknown',
             // Add key answer fields that affect recommendations
-            ...this.extractKeyAnswers(userAnswers, auditResults.businessUnit)
+            ...this.extractKeyAnswers(userAnswers, auditResults.businessUnit || userAnswers.businessUnit || 'unknown')
         };
         
         return btoa(JSON.stringify(keyData));
