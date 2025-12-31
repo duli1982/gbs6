@@ -390,10 +390,21 @@ class AISkillsAudit {
     }
 
     attachQuestionEventListeners(question, currentIndex, relevantQuestions) {
+        const hasEnhancedRenderer = Boolean(window.enhancedQuestionRenderer);
+
         if (question.type === 'checkbox') {
             document.getElementById('checkbox-continue').addEventListener('click', () => {
-                const checkedBoxes = document.querySelectorAll('.checkbox-option input:checked');
-                const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+                let selectedValues = [];
+
+                if (hasEnhancedRenderer) {
+                    const checked = document.querySelectorAll('.enhanced-checkbox-option input[type="checkbox"]:checked');
+                    selectedValues = Array.from(checked)
+                        .map(inputEl => inputEl.closest('[data-option-value]')?.dataset?.optionValue)
+                        .filter(Boolean);
+                } else {
+                    const checkedBoxes = document.querySelectorAll('.checkbox-option input:checked');
+                    selectedValues = Array.from(checkedBoxes).map(cb => cb.value).filter(Boolean);
+                }
 
                 // Track answer
                 if (this.analyticsTracker) {
@@ -407,20 +418,67 @@ class AISkillsAudit {
                 this.proceedToNext(currentIndex, relevantQuestions);
             });
         } else {
-            document.querySelectorAll('.question-option').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Track answer
-                    if (this.analyticsTracker) {
-                        this.analyticsTracker.trackEvent('question_answered', {
-                            questionId: question.id,
-                            answer: btn.dataset.value
-                        });
-                    }
+            if (hasEnhancedRenderer) {
+                // Enhanced renderer uses [data-option-value] containers, not .question-option buttons.
+                const optionEls = document.querySelectorAll('.enhanced-single-option[data-option-value] .option-container');
+                optionEls.forEach(optionContainer => {
+                    optionContainer.addEventListener('click', (e) => {
+                        // Ignore clicks on internal controls (e.g. expand/collapse button)
+                        if (e.target?.closest('.expand-details-btn')) return;
 
-                    this.answers[question.id] = btn.dataset.value;
-                    this.proceedToNext(currentIndex, relevantQuestions);
+                        const wrapper = optionContainer.closest('[data-option-value]');
+                        const value = wrapper?.dataset?.optionValue;
+                        if (!value) return;
+
+                        if (this.analyticsTracker) {
+                            this.analyticsTracker.trackEvent('question_answered', {
+                                questionId: question.id,
+                                answer: value
+                            });
+                        }
+
+                        this.answers[question.id] = value;
+                        this.proceedToNext(currentIndex, relevantQuestions);
+                    });
                 });
-            });
+
+                // Also allow selecting from the hover preview CTA button.
+                const previewCtas = document.querySelectorAll('.enhanced-single-option[data-option-value] .hover-preview button');
+                previewCtas.forEach(cta => {
+                    cta.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const wrapper = cta.closest('[data-option-value]');
+                        const value = wrapper?.dataset?.optionValue;
+                        if (!value) return;
+
+                        if (this.analyticsTracker) {
+                            this.analyticsTracker.trackEvent('question_answered', {
+                                questionId: question.id,
+                                answer: value
+                            });
+                        }
+
+                        this.answers[question.id] = value;
+                        this.proceedToNext(currentIndex, relevantQuestions);
+                    });
+                });
+            } else {
+                document.querySelectorAll('.question-option').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Track answer
+                        if (this.analyticsTracker) {
+                            this.analyticsTracker.trackEvent('question_answered', {
+                                questionId: question.id,
+                                answer: btn.dataset.value
+                            });
+                        }
+
+                        this.answers[question.id] = btn.dataset.value;
+                        this.proceedToNext(currentIndex, relevantQuestions);
+                    });
+                });
+            }
         }
 
         if (currentIndex > 0) {
