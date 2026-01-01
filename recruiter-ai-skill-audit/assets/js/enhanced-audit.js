@@ -100,6 +100,8 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         const sortedActivities = activities.sort((a, b) => b.savings - a.savings);
         const aiExperienceData = this.questions.find(q => q.id === 'aiexperience')?.options.find(o => o.value === this.answers.aiexperience);
 
+        const baseInsights = super.generateInsights(businessUnit);
+
         this.results = {
             businessUnit: businessUnit,
             totalTimeSaved: Math.round(totalTimeSaved * 10) / 10,
@@ -107,7 +109,7 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
             yearlyTimeSaved: Math.round(totalTimeSaved * 52 * 10) / 10,
             recommendations: sortedActivities.slice(0, 3).filter(a => a.savings > 0),
             readiness: aiExperienceData?.readiness || 'beginner',
-            insights: this.generateInsights(businessUnit),
+            insights: baseInsights,
             enhancedContext: context,
             contextMultiplier: contextMultiplier,
             adoptionReadiness: adoptionReadiness,

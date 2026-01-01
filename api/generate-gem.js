@@ -202,7 +202,7 @@ Craft a single, polished prompt (a \"Gem\") using the CREATE framework internall
 Desired shape of the final text (no labels):
 - Begin with a short, task-focused title line.
 - Immediately follow with an instruction paragraph that includes the role (\"Act as...\"), context, and the core task.
-- Provide 3–6 numbered constraints/steps (expectations) as a single list.
+- Provide 3-6 numbered constraints/steps (expectations) as a single list.
 - Include a single sentence clarifying the intended audience.
 - Include one concise sentence for tone/style.
 - End with an explicit Output Format block (Markdown section list or a fenced code block with schema) so responses are consistent.
@@ -274,8 +274,7 @@ Seed prompt (optional): ${seed}`;
         topP: 0.95,
         // Gem output can be fairly long (title + instructions + constraints + output format)
         maxOutputTokens: 1200,
-        // Encourage a single plain-text output (helps avoid partial/multipart parsing issues).
-        responseMimeType: 'text/plain',
+        // responseMimeType is not supported on all Gemini endpoints/models; omit for compatibility.
       },
     };
 
