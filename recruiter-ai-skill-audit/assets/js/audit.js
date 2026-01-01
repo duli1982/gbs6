@@ -242,43 +242,12 @@ class AISkillsAudit {
     renderProgressBar(current, total, progress) {
         // Minimal progress UI (no multi-stage panel)
         let progressHtml = `
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-medium text-gray-600">Question ${current} of ${total}</span>
-                <span class="text-sm font-medium text-indigo-600">${Math.round(progress)}% Complete</span>
-            </div>
             <div class="w-full bg-gray-200 rounded-full h-2">
                 <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
             </div>
         `;
 
-        if (window.enhancedFeatures) {
-            progressHtml = `
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex items-center gap-4">
-                        <span class="text-sm font-medium text-gray-600">Question ${current} of ${total}</span>
-                        ${window.enhancedFeatures.renderTimeEstimate()}
-                    </div>
-                    <button id="review-answers-btn" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1">
-                        <span>dY"<</span>
-                        <span>Review Answers</span>
-                    </button>
-                </div>
-            ` + progressHtml;
-
-            window.enhancedFeatures.checkMilestone(progress);
-        }
-
         document.getElementById('progress-container').innerHTML = progressHtml;
-
-        const reviewBtn = document.getElementById('review-answers-btn');
-        if (reviewBtn && window.enhancedFeatures) {
-            reviewBtn.addEventListener('click', () => {
-                if (!document.getElementById('review-panel')) {
-                    window.enhancedFeatures.createReviewPanel();
-                }
-                window.enhancedFeatures.openReviewPanel();
-            });
-        }
 
         return;
 
@@ -353,7 +322,6 @@ class AISkillsAudit {
 
         // Add enhanced features if available
         if (window.enhancedFeatures) {
-            questionHtml += window.enhancedFeatures.addContextualHelp(question);
             questionHtml += window.enhancedFeatures.addQuestionPreview(currentIndex, relevantQuestions);
         }
 

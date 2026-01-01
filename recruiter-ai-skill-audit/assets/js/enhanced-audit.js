@@ -413,8 +413,8 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         }
 
         return `
-            <details class="bg-white rounded-xl p-6 mb-8 border border-gray-200" open>
-                <summary class="cursor-pointer select-none list-none">
+            <details class="group bg-white rounded-xl mb-8 border border-gray-200 overflow-hidden">
+                <summary class="cursor-pointer select-none list-none block p-6">
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <h2 class="text-2xl font-bold text-gray-900 flex items-center">
@@ -423,10 +423,15 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
                             </h2>
                             <p class="text-sm text-gray-600 mt-1">Review what you selected during the assessment.</p>
                         </div>
-                        <div class="text-sm text-gray-500 mt-1 whitespace-nowrap">Click to collapse/expand</div>
+                        <div class="flex items-center gap-3 mt-1 whitespace-nowrap">
+                            <span class="text-sm text-gray-500">Click to collapse/expand</span>
+                            <svg class="w-4 h-4 text-gray-400 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
                     </div>
                 </summary>
-                <div class="mt-6">
+                <div class="px-6 pb-6 pt-2">
                     ${groupHtmlParts.join('')}
                 </div>
             </details>
@@ -464,8 +469,8 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         }
 
         return `
-            <details class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-8 border border-green-200" open>
-                <summary class="cursor-pointer select-none list-none">
+            <details class="group bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl mb-8 border border-green-200 overflow-hidden">
+                <summary class="cursor-pointer select-none list-none block p-6">
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <h2 class="text-2xl font-bold text-gray-900 flex items-center">
@@ -476,11 +481,16 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
                                 Practical ways to apply AI based on your role and the answers you provided.
                             </p>
                         </div>
-                        <div class="text-sm text-gray-600 mt-1 whitespace-nowrap">Click to collapse/expand</div>
+                        <div class="flex items-center gap-3 mt-1 whitespace-nowrap">
+                            <span class="text-sm text-gray-600">Click to collapse/expand</span>
+                            <svg class="w-4 h-4 text-gray-500 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
                     </div>
                 </summary>
 
-                <div class="mt-6">
+                <div class="px-6 pb-6 pt-2">
                     ${highPotentialSignals.length ? `
                         <div class="mb-6">
                             <h3 class="font-semibold text-gray-900 mb-3">High AI-Opportunity Areas From Your Answers</h3>
