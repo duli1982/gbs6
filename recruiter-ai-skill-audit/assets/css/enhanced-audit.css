@@ -86,6 +86,17 @@
         --color-surface: #1F2937;
         --color-border: #374151;
     }
+
+    /* Keep key UX panels readable even in dark mode */
+    .review-panel,
+    .progress-stages {
+        background: #FFFFFF;
+        color: #111827;
+    }
+
+    .review-answer-item:hover {
+        background: #F9FAFB;
+    }
 }
 
 /* ============================================

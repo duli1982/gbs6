@@ -883,5 +883,121 @@ window.toggleRecDetails = function(index) {
 };
 
 window.showWeekDetails = function(weekNumber) {
-    alert(`Week ${weekNumber} detailed plan coming soon!`);
+    const existing = document.getElementById('week-details-modal-overlay');
+    if (existing) existing.remove();
+
+    const app = window.auditApp || window.auditInstance || null;
+    const roadmap = app?.enhancedResults?.adaptiveRoadmap || app?.results?.adaptiveRoadmap || null;
+
+    const escapeHtml = (value) => String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+    const getWeekData = () => {
+        if (!roadmap || typeof roadmap !== 'object') return null;
+
+        const directKey = `week${weekNumber}`;
+        if (roadmap[directKey]) return roadmap[directKey];
+
+        // Fallback to insertion order (matches existing roadmap renderer logic elsewhere)
+        const entries = Object.entries(roadmap);
+        const entry = entries[weekNumber - 1];
+        if (entry && entry[1]) return entry[1];
+
+        return null;
+    };
+
+    const weekData = getWeekData();
+    const title = weekData?.title ? `Week ${weekNumber}: ${weekData.title}` : `Week ${weekNumber} Details`;
+
+    const tasks = Array.isArray(weekData?.tasks) ? weekData.tasks : [];
+    const successMetrics = Array.isArray(weekData?.successMetrics) ? weekData.successMetrics : [];
+    const timeCommitment = weekData?.timeCommitment || null;
+    const focus = weekData?.focus || null;
+
+    const bodyHtml = weekData ? `
+        ${timeCommitment ? `<div class="text-sm text-gray-600 mb-4"><span class="font-semibold text-gray-900">Time:</span> ${escapeHtml(timeCommitment)}</div>` : ''}
+        ${focus ? `<div class="text-sm text-gray-600 mb-4"><span class="font-semibold text-gray-900">Focus:</span> ${escapeHtml(focus)}</div>` : ''}
+
+        ${tasks.length ? `
+            <div class="mb-4">
+                <h4 class="text-sm font-semibold text-gray-900 mb-2">Tasks</h4>
+                <ul class="space-y-2">
+                    ${tasks.map(t => `
+                        <li class="flex items-start gap-2">
+                            <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold">✓</span>
+                            <span class="text-sm text-gray-700">${escapeHtml(t)}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+        ` : ''}
+
+        ${successMetrics.length ? `
+            <div class="mb-2">
+                <h4 class="text-sm font-semibold text-gray-900 mb-2">Success Metrics</h4>
+                <ul class="space-y-2">
+                    ${successMetrics.map(m => `
+                        <li class="flex items-start gap-2">
+                            <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-green-700 text-xs font-bold">★</span>
+                            <span class="text-sm text-gray-700">${escapeHtml(m)}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+        ` : ''}
+    ` : `
+        <div class="text-sm text-gray-700">
+            Detailed plan is not available yet for this week.
+        </div>
+    `;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'week-details-modal-overlay';
+    overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4';
+    overlay.innerHTML = `
+        <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-gray-200">
+            <div class="flex items-start justify-between gap-4 p-6 border-b border-gray-100">
+                <div>
+                    <div class="text-xs font-semibold text-indigo-600 uppercase tracking-wide">30-Day Implementation Timeline</div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-1">${escapeHtml(title)}</h3>
+                </div>
+                <button id="week-details-modal-close" class="rounded-lg p-2 text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition-colors" aria-label="Close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6">
+                ${bodyHtml}
+            </div>
+            <div class="p-6 pt-0 flex justify-end gap-3">
+                <button id="week-details-modal-ok" class="px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    `;
+
+    const close = () => overlay.remove();
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close();
+    });
+    document.body.appendChild(overlay);
+
+    const closeBtn = document.getElementById('week-details-modal-close');
+    const okBtn = document.getElementById('week-details-modal-ok');
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (okBtn) okBtn.addEventListener('click', close);
+
+    const onKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            close();
+            document.removeEventListener('keydown', onKeyDown);
+        }
+    };
+    document.addEventListener('keydown', onKeyDown);
 };

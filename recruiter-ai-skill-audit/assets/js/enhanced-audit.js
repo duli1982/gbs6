@@ -413,14 +413,23 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         }
 
         return `
-            <div class="bg-white rounded-xl p-6 mb-8 border border-gray-200">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span class="text-3xl mr-3">📝</span>
-                    ${sectionTitle}
-                </h2>
-                <p class="text-sm text-gray-600 mb-6">Review what you selected during the assessment.</p>
-                ${groupHtmlParts.join('')}
-            </div>
+            <details class="bg-white rounded-xl p-6 mb-8 border border-gray-200" open>
+                <summary class="cursor-pointer select-none list-none">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900 flex items-center">
+                                <span class="text-3xl mr-3">📝</span>
+                                ${sectionTitle}
+                            </h2>
+                            <p class="text-sm text-gray-600 mt-1">Review what you selected during the assessment.</p>
+                        </div>
+                        <div class="text-sm text-gray-500 mt-1 whitespace-nowrap">Click to collapse/expand</div>
+                    </div>
+                </summary>
+                <div class="mt-6">
+                    ${groupHtmlParts.join('')}
+                </div>
+            </details>
         `;
     }
 
@@ -455,66 +464,75 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         }
 
         return `
-            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-8 border border-green-200">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span class="text-3xl mr-3">🤖</span>
-                    How to Add AI in Your Work
-                </h2>
-                <p class="text-sm text-gray-700 mb-6">
-                    Practical ways to apply AI based on your role and the answers you provided.
-                </p>
-
-                ${highPotentialSignals.length ? `
-                    <div class="mb-6">
-                        <h3 class="font-semibold text-gray-900 mb-3">High AI-Opportunity Areas From Your Answers</h3>
-                        <div class="grid md:grid-cols-2 gap-3">
-                            ${highPotentialSignals.slice(0, 6).map(s => `
-                                <div class="bg-white rounded-lg p-4 border border-green-200">
-                                    <div class="text-xs text-green-700 font-semibold mb-1">${this.escapeHtml(String(s.aiPotential).toUpperCase())} potential</div>
-                                    <div class="text-sm font-medium text-gray-900">${this.escapeHtml(s.option)}</div>
-                                    <div class="text-xs text-gray-600 mt-1">${this.escapeHtml(s.question)}</div>
-                                </div>
-                            `).join('')}
+            <details class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-8 border border-green-200" open>
+                <summary class="cursor-pointer select-none list-none">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900 flex items-center">
+                                <span class="text-3xl mr-3">🤖</span>
+                                How to Add AI in Your Work
+                            </h2>
+                            <p class="text-sm text-gray-700 mt-1">
+                                Practical ways to apply AI based on your role and the answers you provided.
+                            </p>
                         </div>
+                        <div class="text-sm text-gray-600 mt-1 whitespace-nowrap">Click to collapse/expand</div>
                     </div>
-                ` : ''}
+                </summary>
 
-                ${tools.length ? `
-                    <div class="mb-6">
-                        <h3 class="font-semibold text-gray-900 mb-3">Recommended AI Use Cases for ${this.escapeHtml(businessUnit)}</h3>
-                        <div class="space-y-3">
-                            ${tools.map(t => `
-                                <div class="bg-white rounded-lg p-4 border border-green-200">
-                                    <div class="flex items-center justify-between gap-3">
-                                        <div class="text-sm font-semibold text-gray-900">${this.escapeHtml(t.name)}</div>
-                                        <span class="text-xs px-2 py-1 rounded-full ${t.priority === 'high' ? 'bg-orange-100 text-orange-700' : t.priority === 'critical' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
-                                            ${this.escapeHtml((t.priority || 'medium').toUpperCase())}
-                                        </span>
+                <div class="mt-6">
+                    ${highPotentialSignals.length ? `
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-gray-900 mb-3">High AI-Opportunity Areas From Your Answers</h3>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                ${highPotentialSignals.slice(0, 6).map(s => `
+                                    <div class="bg-white rounded-lg p-4 border border-green-200">
+                                        <div class="text-xs text-green-700 font-semibold mb-1">${this.escapeHtml(String(s.aiPotential).toUpperCase())} potential</div>
+                                        <div class="text-sm font-medium text-gray-900">${this.escapeHtml(s.option)}</div>
+                                        <div class="text-xs text-gray-600 mt-1">${this.escapeHtml(s.question)}</div>
                                     </div>
-                                    <div class="text-xs text-gray-600 mt-2">
-                                        Tools: ${(t.tools || []).map(x => this.escapeHtml(x)).join(' • ')}
-                                    </div>
-                                </div>
-                            `).join('')}
+                                `).join('')}
+                            </div>
                         </div>
-                    </div>
-                ` : ''}
+                    ` : ''}
 
-                ${recommendations.length ? `
-                    <div>
-                        <h3 class="font-semibold text-gray-900 mb-3">Start Here (Top Recommendations)</h3>
-                        <div class="grid md:grid-cols-2 gap-3">
-                            ${recommendations.slice(0, 4).map(r => `
-                                <div class="bg-white rounded-lg p-4 border border-green-200">
-                                    <div class="text-sm font-semibold text-gray-900">${this.escapeHtml(r.name)}</div>
-                                    <div class="text-xs text-gray-600 mt-1">Estimated savings: ${this.escapeHtml(r.savings)} hrs/week</div>
-                                    <div class="text-xs text-gray-600 mt-1">Suggested tools: ${(r.tools || []).map(x => this.escapeHtml(x)).join(' • ')}</div>
-                                </div>
-                            `).join('')}
+                    ${tools.length ? `
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-gray-900 mb-3">Recommended AI Use Cases for ${this.escapeHtml(businessUnit)}</h3>
+                            <div class="space-y-3">
+                                ${tools.map(t => `
+                                    <div class="bg-white rounded-lg p-4 border border-green-200">
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="text-sm font-semibold text-gray-900">${this.escapeHtml(t.name)}</div>
+                                            <span class="text-xs px-2 py-1 rounded-full ${t.priority === 'high' ? 'bg-orange-100 text-orange-700' : t.priority === 'critical' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
+                                                ${this.escapeHtml((t.priority || 'medium').toUpperCase())}
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-gray-600 mt-2">
+                                            Tools: ${(t.tools || []).map(x => this.escapeHtml(x)).join(' • ')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
-                    </div>
-                ` : ''}
-            </div>
+                    ` : ''}
+
+                    ${recommendations.length ? `
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-3">Start Here (Top Recommendations)</h3>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                ${recommendations.slice(0, 4).map(r => `
+                                    <div class="bg-white rounded-lg p-4 border border-green-200">
+                                        <div class="text-sm font-semibold text-gray-900">${this.escapeHtml(r.name)}</div>
+                                        <div class="text-xs text-gray-600 mt-1">Estimated savings: ${this.escapeHtml(r.savings)} hrs/week</div>
+                                        <div class="text-xs text-gray-600 mt-1">Suggested tools: ${(r.tools || []).map(x => this.escapeHtml(x)).join(' • ')}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            </details>
         `;
     }
 

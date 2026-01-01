@@ -195,6 +195,7 @@ export default async function handler(req, res) {
     ).filter(Boolean);
 
     // Build a structured instruction for Gemini to craft a CREATE-style, ready-to-use prompt (the "Gem")
+    // Few-shot examples below help Gemini match the desired style and completeness.
     const instruction = `You are an expert prompt engineer for Google Gemini.
 Craft a single, polished prompt (a \"Gem\") using the CREATE framework internally, but OUTPUT a clean, unified prompt WITHOUT any section labels (no Title/C/R/E/A/T/E labels). The result must be copy-ready, concise, and clearly structured so a user immediately sees value yet can edit easily.
 
@@ -213,6 +214,42 @@ Rules:
 - If some fields are missing, infer sensible defaults without inventing domain-specific facts.
 - If seed text is provided, harmonize phrasing and terminology with it.
 - Return ONLY the final prompt text (no commentary).
+
+Examples (study the pattern, then produce a similar result for the user's inputs):
+
+EXAMPLE A: Boolean Search String Generator
+Act as an expert recruiter. Create an optimized Boolean search string to find qualified candidates for the specified role.
+1) Include the core must-have skills and 3-5 related skills.
+2) Add synonyms and common variants (but avoid irrelevant noise).
+3) Exclude junior/irrelevant terms.
+4) Include location/radius if provided; otherwise ask for the location as the first clarifying question.
+Audience: Non-technical recruiters.
+Tone: Professional and practical.
+Output Format:
+- Boolean String:
+- Explanation (2-3 sentences):
+- How to Adjust (3 bullets):
+
+EXAMPLE B: Outreach Email
+Act as a recruitment marketing specialist. Write a short outreach email for a passive candidate with a low-friction call-to-action.
+1) Use placeholders ({{candidate_name}}, {{role_title}}, {{company_name}}, {{personal_hook}}).
+2) Include 2-3 value propositions without exaggeration.
+3) End with a 15-minute chat CTA and two scheduling options.
+Audience: Busy professionals reading on mobile.
+Tone: Warm, respectful, non-salesy.
+Output Format:
+- Subject Line:
+- Email Body (3 paragraphs):
+
+EXAMPLE C: Interview Questions + Rubric
+Act as an I/O psychologist. Generate behavioral interview questions with follow-ups and a simple scoring rubric.
+1) Use STAR prompts; ask for real past experiences (no hypotheticals).
+2) Provide 2 follow-up probes per question.
+3) Include a 1/3/5 scoring rubric with behavioral anchors.
+Audience: Hiring managers with limited HR training.
+Tone: Clear, neutral, and defensible.
+Output Format:
+- Table: Question | Follow-Ups | Scoring Rubric (1/3/5)
 
 Fields:
 Persona: ${persona}
@@ -235,7 +272,10 @@ Seed prompt (optional): ${seed}`;
         temperature: 0.4,
         topK: 40,
         topP: 0.95,
-        maxOutputTokens: 400,
+        // Gem output can be fairly long (title + instructions + constraints + output format)
+        maxOutputTokens: 1200,
+        // Encourage a single plain-text output (helps avoid partial/multipart parsing issues).
+        responseMimeType: 'text/plain',
       },
     };
 
@@ -289,7 +329,10 @@ Seed prompt (optional): ${seed}`;
           }
 
           const data = await resp.json();
-          const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          const parts = data?.candidates?.[0]?.content?.parts;
+          const text = Array.isArray(parts)
+            ? parts.map((p) => (p && typeof p.text === 'string' ? p.text : '')).join('')
+            : (data?.candidates?.[0]?.content?.parts?.[0]?.text || '');
           if (!text) {
             const err = new Error('Empty response from Gemini');
             err.status = 502;
