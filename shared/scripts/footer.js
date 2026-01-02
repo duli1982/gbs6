@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <a href="${getRelativePath('/feedback/')}" class="text-gray-600 hover:text-blue-600">Feedback</a>
                         </div>
                         <div class="text-sm text-gray-500 pt-4 border-t border-gray-200">
-                            © 2025 GBS EMEA. All rights reserved.
+                            © 2026 GBS EMEA. All rights reserved.
                         </div>
                     </div>
                 </div>
