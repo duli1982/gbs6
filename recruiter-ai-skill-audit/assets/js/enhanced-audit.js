@@ -1179,6 +1179,11 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
                     setTimeout(() => {
                         e.target.textContent = 'Copy Prompt';
                     }, 2000);
+                    try {
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('share_copy_link', { app: 'recruiter_ai_skill_audit', action: 'copy_prompt' });
+                        }
+                    } catch { }
                 });
             });
         });
@@ -1187,11 +1192,26 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         document.querySelectorAll('.roadmap-task').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
                 this.saveTaskProgress(e.target.dataset.week, e.target.dataset.task, e.target.checked);
+                try {
+                    if (typeof window.trackEvent === 'function') {
+                        window.trackEvent('feature_usage', {
+                            app: 'recruiter_ai_skill_audit',
+                            feature: 'roadmap_task_toggle',
+                            week: Number(e.target.dataset.week || 0),
+                            completed: Boolean(e.target.checked)
+                        });
+                    }
+                } catch { }
             });
         });
 
         // Enhanced action buttons
         document.getElementById('download-enhanced-pdf-btn')?.addEventListener('click', () => {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('download_report', { app: 'recruiter_ai_skill_audit', format: 'pdf', variant: 'enhanced' });
+                }
+            } catch { }
             this.generateEnhancedPDF();
         });
 
@@ -1208,26 +1228,56 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
 
         // Export button listeners
         document.getElementById('export-pdf-executive-btn')?.addEventListener('click', () => {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('download_report', { app: 'recruiter_ai_skill_audit', format: 'pdf', variant: 'executive' });
+                }
+            } catch { }
             this.reportExports.exportPDF('executive');
         });
 
         document.getElementById('export-pdf-full-btn')?.addEventListener('click', () => {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('download_report', { app: 'recruiter_ai_skill_audit', format: 'pdf', variant: 'full' });
+                }
+            } catch { }
             this.reportExports.exportPDF('full');
         });
 
         document.getElementById('export-pdf-checklist-btn')?.addEventListener('click', () => {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('download_report', { app: 'recruiter_ai_skill_audit', format: 'pdf', variant: 'checklist' });
+                }
+            } catch { }
             this.reportExports.exportPDF('checklist');
         });
 
         document.getElementById('export-excel-btn')?.addEventListener('click', () => {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('download_report', { app: 'recruiter_ai_skill_audit', format: 'xlsx' });
+                }
+            } catch { }
             this.reportExports.exportExcel();
         });
 
         document.getElementById('export-google-sheets-btn')?.addEventListener('click', () => {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('feature_usage', { app: 'recruiter_ai_skill_audit', feature: 'export_google_sheets' });
+                }
+            } catch { }
             this.reportExports.exportGoogleSheets();
         });
 
         document.getElementById('export-presentation-btn')?.addEventListener('click', async () => {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('feature_usage', { app: 'recruiter_ai_skill_audit', feature: 'presentation_mode' });
+                }
+            } catch { }
             await this.reportExports.createPresentationMode();
         });
     }
@@ -1285,11 +1335,21 @@ class EnhancedAISkillsAudit extends AISkillsAudit {
         };
 
         if (navigator.share) {
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('share_copy_link', { app: 'recruiter_ai_skill_audit', action: 'share_results', method: 'native_share' });
+                }
+            } catch { }
             navigator.share(shareData);
         } else {
             // Fallback to copying link
             navigator.clipboard.writeText(window.location.href).then(() => {
                 this.showNotification('Link copied to clipboard!', 'success');
+                try {
+                    if (typeof window.trackEvent === 'function') {
+                        window.trackEvent('share_copy_link', { app: 'recruiter_ai_skill_audit', action: 'share_results', method: 'copy_link' });
+                    }
+                } catch { }
             });
         }
     }

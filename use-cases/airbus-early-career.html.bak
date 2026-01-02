@@ -10,7 +10,6 @@
     <meta name="keywords" content="AI, recruitment automation, Airbus, Gemini Gems, JR processing, interview analysis, early career">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
     <script src="../shared/scripts/analytics.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>

@@ -10,7 +10,6 @@
     <meta name="keywords" content="AI, recruitment automation, Airbus, Gemini Gems, JR processing, interview analysis, early career">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
     <script src="../shared/scripts/analytics.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -395,7 +394,7 @@
                     <p class="text-gray-600 mb-2">Copy this entire prompt and paste it into your Gemini Gem:</p>
                 </div>
                 <div class="prompt-container">
-                    <button class="copy-prompt-btn" onclick="copyGemPrompt('gem1-prompt')">Copy Full Prompt</button>
+                    <button class="copy-prompt-btn" onclick="copyGemPrompt('gem1-prompt', this)">Copy Full Prompt</button>
                     <div id="gem1-prompt">Act as a senior Airbus HR/Recruitment Officer. Your primary task is to ensure the compliance and quality of the Job Requisition (JR) draft provided below.
 
 Analyse the text: [Paste JR Text Here].
@@ -460,7 +459,7 @@ AIRBUS JR QUALITY CHECK REPORT
                     <p class="text-gray-600 mb-2">Copy this entire prompt and paste it into your Gemini Gem:</p>
                 </div>
                 <div class="prompt-container">
-                    <button class="copy-prompt-btn" onclick="copyGemPrompt('gem2-prompt')">Copy Full Prompt</button>
+                    <button class="copy-prompt-btn" onclick="copyGemPrompt('gem2-prompt', this)">Copy Full Prompt</button>
                     <div id="gem2-prompt">Act as a senior Airbus evaluator. You have the JR for an internship/apprenticeship in [Title/Field].
 
 Here is the transcription of the video interview: [Paste Transcription Here].
@@ -605,14 +604,20 @@ Key Observations: [Brief analysis]
 
     <script>
         // Copy Gem Prompt Function
-        function copyGemPrompt(promptId) {
+        function copyGemPrompt(promptId, buttonEl) {
             const promptElement = document.getElementById(promptId);
+            if (!promptElement) {
+                console.error('Prompt element not found:', promptId);
+                return;
+            }
             const promptText = promptElement.textContent;
 
             navigator.clipboard.writeText(promptText).then(() => {
-                const button = event.target;
+                const button = buttonEl;
+                if (!button) return;
                 const originalText = button.textContent;
-                button.textContent = '✓ Copied!';
+                const originalBackground = button.style.background;
+                button.textContent = '✅ Copied!';
                 button.style.background = '#10b981';
 
                 // Track copy event
@@ -625,11 +630,11 @@ Key Observations: [Brief analysis]
 
                 setTimeout(() => {
                     button.textContent = originalText;
-                    button.style.background = '#667eea';
+                    button.style.background = originalBackground || '#667eea';
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy:', err);
-                alert('Failed to copy. Please select and copy manually.');
+                // No alert() to keep UX consistent; user can still manually copy from the prompt box.
             });
         }
 

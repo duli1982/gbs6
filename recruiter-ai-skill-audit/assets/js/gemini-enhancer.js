@@ -581,15 +581,30 @@ Generate:
     async callGeminiWithRetry(payload) {
         for (let attempt = 1; attempt <= this.retryAttempts; attempt++) {
             try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 15000);
+
                 const response = await fetch(this.apiEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    signal: controller.signal
                 });
+                clearTimeout(timeout);
 
                 if (!response.ok) {
+                    try {
+                        if (typeof window.trackApiFailure === 'function') {
+                            window.trackApiFailure({ endpoint: this.apiEndpoint, status: response.status, attempt, kind: 'gemini_audit' });
+                        } else if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('api_failure', { app: 'recruiter_ai_skill_audit', endpoint: this.apiEndpoint, status: Number(response.status || 0), attempt: Number(attempt || 0) });
+                        }
+                        if (response.status === 429 && typeof window.trackEvent === 'function') {
+                            window.trackEvent('rate_limit_hit', { app: 'recruiter_ai_skill_audit', endpoint: this.apiEndpoint });
+                        }
+                    } catch { }
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
@@ -597,11 +612,20 @@ Generate:
                 return data.text || data.response;
             } catch (error) {
                 console.warn(`Gemini API attempt ${attempt} failed:`, error);
-                
+
+                try {
+                    if (error?.name === 'AbortError' && typeof window.trackEvent === 'function') {
+                        window.trackEvent('timeout_occurrence', { app: 'recruiter_ai_skill_audit', endpoint: this.apiEndpoint, attempt: Number(attempt || 0) });
+                    }
+                    if (attempt < this.retryAttempts && typeof window.trackEvent === 'function') {
+                        window.trackEvent('retries', { app: 'recruiter_ai_skill_audit', endpoint: this.apiEndpoint, attempt: Number(attempt || 0) });
+                    }
+                } catch { }
+                 
                 if (attempt === this.retryAttempts) {
                     throw error;
                 }
-                
+                 
                 await this.delay(this.retryDelay * attempt);
             }
         }

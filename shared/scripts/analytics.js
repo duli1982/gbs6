@@ -12,11 +12,232 @@ function gtag() {
     dataLayer.push(arguments);
 }
 
+// Capture this script's URL while document.currentScript is still available.
+const ANALYTICS_SCRIPT_SRC = (document.currentScript && document.currentScript.src) ? String(document.currentScript.src) : '';
+
 // Google Analytics ID
 const GA_TRACKING_ID = 'G-RGZJ52VXFF';
 
 // Flag to track if GA has been initialized
 let analyticsInitialized = false;
+
+// Default to disabled until explicit consent (important if gtag.js is loaded in the HTML head).
+window['ga-disable-' + GA_TRACKING_ID] = true;
+
+// Google Consent Mode v2: default to denied until the user consents.
+// This is safe even if GA is never loaded; if GA is loaded, it stays in restricted mode until update.
+try {
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'denied',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+    });
+} catch { }
+
+// Queue events until analytics is initialized (after consent)
+const pendingTelemetry = [];
+const PENDING_TELEMETRY_MAX = 200;
+
+function enqueueTelemetry(item) {
+    pendingTelemetry.push({ ...item, queuedAt: Date.now() });
+    if (pendingTelemetry.length > PENDING_TELEMETRY_MAX) pendingTelemetry.shift();
+}
+
+function safeString(value, maxLen = 120) {
+    if (value == null) return '';
+    const text = String(value);
+    return text.length > maxLen ? text.slice(0, maxLen) : text;
+}
+
+function safePath(urlString) {
+    try {
+        const u = new URL(urlString, window.location.origin);
+        return `${u.origin}${u.pathname}`;
+    } catch {
+        return safeString(urlString, 200);
+    }
+}
+
+function flushTelemetryQueue() {
+    if (!analyticsInitialized) return;
+    while (pendingTelemetry.length) {
+        const item = pendingTelemetry.shift();
+        if (!item) continue;
+        if (item.type === 'event') {
+            gtag('event', item.name, item.params || {});
+        } else if (item.type === 'page_view') {
+            gtag('config', GA_TRACKING_ID, {
+                page_path: item.pagePath,
+                page_title: item.pageTitle
+            });
+        }
+    }
+}
+
+let autoTrackingInitialized = false;
+function initAutoTracking() {
+    if (autoTrackingInitialized) return;
+    autoTrackingInitialized = true;
+
+    // UTM attribution (captured once per session)
+    try {
+        const params = new URLSearchParams(window.location.search);
+        const utm_source = params.get('utm_source');
+        const utm_medium = params.get('utm_medium');
+        const utm_campaign = params.get('utm_campaign');
+        const utm_content = params.get('utm_content');
+        const utm_term = params.get('utm_term');
+        const hasAny = Boolean(utm_source || utm_medium || utm_campaign || utm_content || utm_term);
+        const sent = sessionStorage.getItem('utm_attribution_sent') === '1';
+        if (hasAny && !sent) {
+            window.trackEvent('utm_attribution', {
+                utm_source: safeString(utm_source, 80),
+                utm_medium: safeString(utm_medium, 80),
+                utm_campaign: safeString(utm_campaign, 120),
+                utm_content: safeString(utm_content, 120),
+                utm_term: safeString(utm_term, 120)
+            });
+            sessionStorage.setItem('utm_attribution_sent', '1');
+        }
+    } catch { }
+
+    // Simple 404/route-not-found detection
+    try {
+        const path = window.location.pathname || '';
+        const title = (document.title || '').toLowerCase();
+        const looks404 = path.includes('404') || title.includes('404') || title.includes('not found');
+        if (looks404) {
+            window.trackEvent('route_not_found', {
+                page_path: safeString(path, 200),
+                page_title: safeString(document.title, 120)
+            });
+        }
+    } catch { }
+
+    // Outbound click tracking + file download tracking
+    document.addEventListener('click', function (event) {
+        const target = event.target && event.target.closest ? event.target.closest('a') : null;
+        if (!target || !target.href) return;
+
+        let url;
+        try {
+            url = new URL(target.href, window.location.href);
+        } catch {
+            return;
+        }
+
+        const isExternal = url.origin !== window.location.origin;
+        const pathname = url.pathname || '';
+        const fileMatch = pathname.match(/\.([a-z0-9]{2,6})$/i);
+        const isDownload = Boolean(target.hasAttribute('download') || fileMatch);
+
+        if (isDownload) {
+            window.trackEvent('file_download', {
+                file_path: safeString(pathname, 200),
+                file_extension: fileMatch ? safeString(fileMatch[1].toLowerCase(), 10) : ''
+            });
+            return;
+        }
+
+        if (isExternal) {
+            window.trackEvent('outbound_click', {
+                link_url: safePath(url.toString())
+            });
+        }
+    }, true);
+
+    // Scroll depth tracking (25/50/75/90)
+    const thresholds = [25, 50, 75, 90];
+    const seen = new Set();
+    let scrollTicking = false;
+    function onScroll() {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+            scrollTicking = false;
+            const doc = document.documentElement;
+            const scrollTop = window.scrollY || doc.scrollTop || 0;
+            const height = Math.max(1, (doc.scrollHeight || 0) - (window.innerHeight || 0));
+            const percent = Math.min(100, Math.round((scrollTop / height) * 100));
+            for (const t of thresholds) {
+                if (percent >= t && !seen.has(t)) {
+                    seen.add(t);
+                    window.trackEvent('scroll_depth', { percent: t });
+                }
+            }
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Error tracking (respect consent by queueing until GA is ready)
+    window.addEventListener('error', function (e) {
+        try {
+            window.trackEvent('js_error', {
+                message: safeString(e.message, 200),
+                source: safeString(e.filename, 160),
+                lineno: e.lineno || 0,
+                colno: e.colno || 0,
+                page_path: safeString(window.location.pathname, 200)
+            });
+        } catch { }
+    });
+
+    window.addEventListener('unhandledrejection', function (e) {
+        try {
+            const reason = e.reason;
+            const message = (reason && reason.message) ? reason.message : String(reason);
+            window.trackEvent('promise_rejection', {
+                message: safeString(message, 200),
+                page_path: safeString(window.location.pathname, 200)
+            });
+        } catch { }
+    });
+}
+
+let cookieConsentLoadAttempted = false;
+function ensureCookieConsentLoaded() {
+    if (typeof CookieConsentManager !== 'undefined' || window.cookieConsentManager) return;
+    if (cookieConsentLoadAttempted) return;
+    cookieConsentLoadAttempted = true;
+
+    try {
+        const candidates = [];
+        if (ANALYTICS_SCRIPT_SRC) {
+            candidates.push(new URL('./cookie-consent.js', ANALYTICS_SCRIPT_SRC).toString());
+        }
+        // Fallback for simple local servers that serve files from project root.
+        candidates.push('/shared/scripts/cookie-consent.js');
+        candidates.push('./shared/scripts/cookie-consent.js');
+        candidates.push('./cookie-consent.js');
+
+        const tryLoadAt = (idx) => {
+            if (idx >= candidates.length) {
+                console.warn('Failed to load cookie-consent.js; analytics will remain disabled until consent is available.');
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = candidates[idx];
+            script.async = true;
+            script.onload = function () {
+                checkAnalyticsConsent();
+            };
+            script.onerror = function () {
+                tryLoadAt(idx + 1);
+            };
+            document.head.appendChild(script);
+        };
+
+        tryLoadAt(0);
+    } catch {
+        // ignore
+    }
+}
 
 /**
  * Enable Google Analytics after consent
@@ -29,34 +250,49 @@ window.enableAnalytics = function() {
     }
 
     console.log('Initializing Google Analytics with user consent');
+    window['ga-disable-' + GA_TRACKING_ID] = false;
 
-    // Load Google Analytics script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
-
-    script.onload = function() {
-        // Configure Google Analytics
-        gtag('js', new Date());
-        gtag('config', GA_TRACKING_ID, {
-            'anonymize_ip': true, // Anonymize IP addresses for privacy
-            'cookie_flags': 'SameSite=Lax;Secure', // Secure cookie settings
-            'cookie_expires': 63072000 // 2 years in seconds (GA default)
+    // Consent Mode v2: grant analytics storage (keep ads denied).
+    try {
+        gtag('consent', 'update', {
+            ad_storage: 'denied',
+            analytics_storage: 'granted',
+            functionality_storage: 'granted',
+            personalization_storage: 'denied',
+            security_storage: 'granted',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
         });
+    } catch { }
 
-        analyticsInitialized = true;
-        console.log('Google Analytics initialized successfully');
+    // Configure Google Analytics (queued until gtag.js loads).
+    gtag('js', new Date());
+    gtag('config', GA_TRACKING_ID, {
+        anonymize_ip: true, // Anonymize IP addresses for privacy
+        cookie_flags: 'SameSite=Lax;Secure', // Secure cookie settings
+        cookie_expires: 63072000 // 2 years in seconds (GA default)
+    });
 
-        // Dispatch event for other scripts to know GA is ready
-        window.dispatchEvent(new CustomEvent('analyticsReady'));
-    };
+    // Load Google Analytics script (only after consent)
+    const existing = document.querySelector(`script[src^="https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}"]`);
+    if (!existing) {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
+        script.onerror = function() {
+            console.error('Failed to load Google Analytics');
+        };
+        document.head.appendChild(script);
+    }
 
-    script.onerror = function() {
-        console.error('Failed to load Google Analytics');
-    };
+    analyticsInitialized = true;
+    console.log('Google Analytics initialized successfully');
 
-    // Add script to page
-    document.head.appendChild(script);
+    flushTelemetryQueue();
+    initAutoTracking();
+
+    // Dispatch event for other scripts to know GA is ready
+    window.dispatchEvent(new CustomEvent('analyticsReady'));
 };
 
 /**
@@ -66,12 +302,26 @@ window.disableAnalytics = function() {
     // Set Google Analytics opt-out property
     window['ga-disable-' + GA_TRACKING_ID] = true;
     console.log('Google Analytics disabled');
+
+    try {
+        gtag('consent', 'update', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            functionality_storage: 'denied',
+            personalization_storage: 'denied',
+            security_storage: 'granted',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+        });
+    } catch { }
 };
 
 /**
  * Check if analytics consent has been given and enable if so
  */
 function checkAnalyticsConsent() {
+    ensureCookieConsentLoaded();
+
     // Check if cookie consent exists
     if (typeof window.cookieConsent !== 'undefined' && window.cookieConsent.analytics) {
         window.enableAnalytics();
@@ -100,7 +350,7 @@ window.addEventListener('cookieConsentUpdate', function(event) {
  */
 window.trackEvent = function(eventName, eventParams = {}) {
     if (!analyticsInitialized) {
-        console.warn('Analytics not initialized - event not tracked:', eventName);
+        enqueueTelemetry({ type: 'event', name: eventName, params: eventParams });
         return;
     }
 
@@ -113,13 +363,27 @@ window.trackEvent = function(eventName, eventParams = {}) {
  */
 window.trackPageView = function(pagePath, pageTitle) {
     if (!analyticsInitialized) {
-        console.warn('Analytics not initialized - page view not tracked');
+        enqueueTelemetry({ type: 'page_view', pagePath: pagePath || window.location.pathname, pageTitle: pageTitle || document.title });
         return;
     }
 
     gtag('config', GA_TRACKING_ID, {
         'page_path': pagePath || window.location.pathname,
         'page_title': pageTitle || document.title
+    });
+};
+
+/**
+ * Standardized API error tracking helper
+ * (Never include request bodies/user-entered text in params.)
+ */
+window.trackApiFailure = function({ endpoint = '', status = 0, attempt = 0, kind = '' } = {}) {
+    window.trackEvent('api_failure', {
+        endpoint: safeString(endpoint, 120),
+        status: Number(status) || 0,
+        attempt: Number(attempt) || 0,
+        kind: safeString(kind, 40),
+        page_path: safeString(window.location.pathname, 200)
     });
 };
 

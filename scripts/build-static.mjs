@@ -30,7 +30,6 @@ const excludeTopLevelFiles = new Set([
   "build_search_index.py",
   "heading_hierarchy_report.txt",
   "README.md",
-  "index_copy.html",
   "secure-template.html",
   "test-progress.html",
 ]);

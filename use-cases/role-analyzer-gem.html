@@ -10,7 +10,6 @@
     <meta name="keywords" content="AI, recruitment, job analysis, role analyzer, GBS, Dione Boks">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
     <script src="../shared/scripts/analytics.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -431,10 +430,26 @@ The language should be clear and business-oriented, similar to a professional co
 
     <script>
         function copyFullPrompt() {
-            const promptText = document.getElementById('full-prompt').textContent;
+            const promptEl = document.getElementById('full-prompt');
+            const promptText = promptEl ? promptEl.textContent : '';
+            const button = document.querySelector('.copy-prompt-btn');
+
+            if (!promptText) {
+                console.error('Failed to copy: missing prompt element or empty prompt');
+                if (button) {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copy failed';
+                    button.style.background = '#ef4444';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#667eea';
+                    }, 2000);
+                }
+                return;
+            }
 
             navigator.clipboard.writeText(promptText).then(() => {
-                const button = document.querySelector('.copy-prompt-btn');
+                if (!button) return;
                 const originalText = button.textContent;
                 button.textContent = '✅ Copied!';
                 button.style.background = '#10b981';
@@ -445,11 +460,18 @@ The language should be clear and business-oriented, similar to a professional co
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy:', err);
-                alert('Failed to copy prompt. Please select and copy manually.');
+                if (button) {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copy failed';
+                    button.style.background = '#ef4444';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#667eea';
+                    }, 2000);
+                }
             });
         }
     </script>
 </body>
 
 </html>
-

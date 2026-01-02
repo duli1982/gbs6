@@ -11,6 +11,15 @@ class AISkillsAudit {
         this.answers = {};
         this.results = null;
         this.step = 'welcome';
+        this._telemetry = {
+            assessmentStartAt: null,
+            firstAnswerAt: null,
+            currentQuestionId: null,
+            currentQuestionIndex: null,
+            currentQuestionShownAt: null,
+            completedAt: null,
+            dropoffTracked: false,
+        };
 
         // DOM elements
         this.welcomeStep = document.getElementById('welcome-step');
@@ -40,6 +49,45 @@ class AISkillsAudit {
         }
 
         this.init();
+    }
+
+    trackGA(eventName, params = {}) {
+        if (typeof window.trackEvent === 'function') {
+            window.trackEvent(eventName, params);
+        }
+    }
+
+    setupDropoffTracking() {
+        if (this._telemetry.dropoffTracked) return;
+        this._telemetry.dropoffTracked = true;
+
+        const sendLastStep = (reason) => {
+            if (!this._telemetry.assessmentStartAt) return;
+            if (this._telemetry.completedAt) return;
+            if (this.step !== 'questions') return;
+
+            const answeredCount = Object.keys(this.answers || {}).length;
+            this.trackGA('last_step_reached', {
+                reason,
+                step: safeString(this.step),
+                question_id: safeString(this._telemetry.currentQuestionId || ''),
+                question_index: Number(this._telemetry.currentQuestionIndex || 0),
+                answered_count: Number(answeredCount || 0),
+                elapsed_ms: Date.now() - this._telemetry.assessmentStartAt,
+            });
+        };
+
+        // Avoid reference errors if safeString isn't present (fallback to String).
+        function safeString(v) {
+            if (v == null) return '';
+            const s = String(v);
+            return s.length > 80 ? s.slice(0, 80) : s;
+        }
+
+        window.addEventListener('beforeunload', () => sendLastStep('beforeunload'));
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') sendLastStep('hidden');
+        });
     }
 
     async init() {
@@ -174,6 +222,10 @@ class AISkillsAudit {
                 });
             }
 
+            this._telemetry.assessmentStartAt = Date.now();
+            this.trackGA('start_assessment', { app: 'recruiter_ai_skill_audit' });
+            this.setupDropoffTracking();
+
             this.changeStep('questions');
             this.renderQuestion();
         });
@@ -185,6 +237,10 @@ class AISkillsAudit {
         this.questionsStep.classList.toggle('hidden', this.step !== 'questions');
         this.resultsStep.classList.toggle('hidden', this.step !== 'results');
         window.scrollTo(0, 0);
+
+        if (newStep === 'results') {
+            this.trackGA('viewed_report', { app: 'recruiter_ai_skill_audit' });
+        }
     }
 
     getRelevantQuestions() {
@@ -218,11 +274,25 @@ class AISkillsAudit {
                 });
             }
 
+            this._telemetry.completedAt = Date.now();
+            const answeredCount = Object.keys(this.answers || {}).filter((key) => relevantQuestions.some((q) => q.id === key)).length;
+            const elapsedMs = this._telemetry.assessmentStartAt ? (Date.now() - this._telemetry.assessmentStartAt) : 0;
+            this.trackGA('completed_assessment', {
+                app: 'recruiter_ai_skill_audit',
+                business_unit: String(this.answers.businessUnit || ''),
+                total_questions: Number(relevantQuestions.length || 0),
+                answered_questions: Number(answeredCount || 0),
+                time_to_complete_ms: Number(elapsedMs || 0),
+            });
+
             this.calculateResults();
             return;
         }
 
         const currentQuestion = relevantQuestions[currentQuestionIndex];
+        this._telemetry.currentQuestionId = currentQuestion.id;
+        this._telemetry.currentQuestionIndex = currentQuestionIndex + 1;
+        this._telemetry.currentQuestionShownAt = Date.now();
 
         // Track question view
         if (this.analyticsTracker) {
@@ -231,6 +301,13 @@ class AISkillsAudit {
                 questionIndex: currentQuestionIndex
             });
         }
+        this.trackGA('view_question', {
+            app: 'recruiter_ai_skill_audit',
+            business_unit: String(this.answers.businessUnit || ''),
+            question_id: String(currentQuestion.id || ''),
+            question_index: Number(currentQuestionIndex + 1),
+            total_questions: Number(relevantQuestions.length || 0),
+        });
 
         const progress = (Object.keys(this.answers).filter(key =>
             relevantQuestions.find(q => q.id === key)).length / relevantQuestions.length) * 100;
@@ -415,6 +492,27 @@ class AISkillsAudit {
                     });
                 }
 
+                const now = Date.now();
+                if (!this._telemetry.firstAnswerAt) {
+                    this._telemetry.firstAnswerAt = now;
+                    if (this._telemetry.assessmentStartAt) {
+                        this.trackGA('time_to_first_answer', {
+                            app: 'recruiter_ai_skill_audit',
+                            time_to_first_answer_ms: now - this._telemetry.assessmentStartAt,
+                        });
+                    }
+                }
+                const stepTimeMs = this._telemetry.currentQuestionShownAt ? (now - this._telemetry.currentQuestionShownAt) : 0;
+                this.trackGA('answered_question', {
+                    app: 'recruiter_ai_skill_audit',
+                    business_unit: String(this.answers.businessUnit || ''),
+                    question_id: String(question.id || ''),
+                    question_index: Number(currentIndex + 1),
+                    total_questions: Number(relevantQuestions.length || 0),
+                    answer_count: Number(selectedValues.length || 0),
+                    step_time_ms: Number(stepTimeMs || 0),
+                });
+
                 this.answers[question.id] = selectedValues;
                 this.proceedToNext(currentIndex, relevantQuestions);
             });
@@ -475,6 +573,31 @@ class AISkillsAudit {
                             });
                         }
 
+                        const now = Date.now();
+                        if (!this._telemetry.firstAnswerAt) {
+                            this._telemetry.firstAnswerAt = now;
+                            if (this._telemetry.assessmentStartAt) {
+                                this.trackGA('time_to_first_answer', {
+                                    app: 'recruiter_ai_skill_audit',
+                                    time_to_first_answer_ms: now - this._telemetry.assessmentStartAt,
+                                });
+                            }
+                        }
+                        const stepTimeMs = this._telemetry.currentQuestionShownAt ? (now - this._telemetry.currentQuestionShownAt) : 0;
+                        const value = btn.dataset.value;
+                        const baseParams = {
+                            app: 'recruiter_ai_skill_audit',
+                            business_unit: String(this.answers.businessUnit || ''),
+                            question_id: String(question.id || ''),
+                            question_index: Number(currentIndex + 1),
+                            total_questions: Number(relevantQuestions.length || 0),
+                            step_time_ms: Number(stepTimeMs || 0),
+                        };
+                        if (question.id === 'businessUnit') {
+                            baseParams.business_unit = String(value || '');
+                        }
+                        this.trackGA('answered_question', baseParams);
+
                         this.answers[question.id] = btn.dataset.value;
                         this.proceedToNext(currentIndex, relevantQuestions);
                     });
@@ -492,6 +615,11 @@ class AISkillsAudit {
                         questionId: prevQuestion.id
                     });
                 }
+                this.trackGA('back_navigation', {
+                    app: 'recruiter_ai_skill_audit',
+                    from_question_id: String(question.id || ''),
+                    to_question_id: String(prevQuestion.id || ''),
+                });
 
                 delete this.answers[prevQuestion.id];
                 this.renderQuestion();

@@ -29,7 +29,6 @@ EXCLUDE_DIRS = {
 }
 
 EXCLUDE_FILES = {
-    "index_copy.html",
     "secure-template.html",
     "test-progress.html",
     "shared/footer.html",
@@ -275,4 +274,3 @@ def main(argv: Optional[list[str]] = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

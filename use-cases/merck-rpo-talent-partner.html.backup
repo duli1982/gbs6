@@ -10,7 +10,6 @@
     <meta name="keywords" content="AI, recruitment automation, Merck RPO, Gemini Gems, talent acquisition, end-to-end TA, sourcing, market analysis">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
     <script src="../shared/scripts/analytics.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>

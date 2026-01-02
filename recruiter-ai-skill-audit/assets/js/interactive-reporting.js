@@ -883,6 +883,19 @@ window.toggleRecDetails = function(index) {
 };
 
 window.showWeekDetails = function(weekNumber) {
+    try {
+        if (typeof window.trackEvent === 'function') {
+            window.trackEvent('view_details_timeline', {
+                app: 'recruiter_ai_skill_audit',
+                week: Number(weekNumber) || 0
+            });
+            window.trackEvent('open_modal', {
+                app: 'recruiter_ai_skill_audit',
+                modal: 'week_details'
+            });
+        }
+    } catch { }
+
     const existing = document.getElementById('week-details-modal-overlay');
     if (existing) existing.remove();
 

@@ -10,7 +10,6 @@
     <meta name="keywords" content="AI, recruitment automation, Merck RPO, Gemini Gems, talent acquisition, end-to-end TA, sourcing, market analysis">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
     <script src="../shared/scripts/analytics.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -409,7 +408,7 @@
                     <p class="text-gray-600 mb-2">Copy this entire prompt and paste it into your Gemini Gem to create your own AI Talent Strategy Partner:</p>
                 </div>
                 <div class="prompt-container">
-                    <button class="copy-prompt-btn" onclick="copyGemPrompt('merck-prompt')">Copy Full Prompt</button>
+                    <button class="copy-prompt-btn" onclick="copyGemPrompt('merck-prompt', this)">Copy Full Prompt</button>
                     <div id="merck-prompt">
 AI Talent Strategy Partner - All-in-One Prompt
 
@@ -812,12 +811,28 @@ Your Talent Strategy Partner is ready. Type your command to begin.
 
     <script>
         // Copy Gem Prompt Function
-        function copyGemPrompt(promptId) {
+        function copyGemPrompt(promptId, buttonEl) {
             const promptElement = document.getElementById(promptId);
-            const promptText = promptElement.textContent;
+            const promptText = promptElement ? promptElement.textContent : '';
+
+            const button = buttonEl || (typeof event !== 'undefined' ? event.target : null);
+
+            if (!promptText) {
+                console.error('Failed to copy: missing prompt element or empty prompt', { promptId });
+                if (button) {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copy failed';
+                    button.style.background = '#ef4444';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#4f46e5';
+                    }, 2000);
+                }
+                return;
+            }
 
             navigator.clipboard.writeText(promptText).then(() => {
-                const button = event.target;
+                if (!button) return;
                 const originalText = button.textContent;
                 button.textContent = '✓ Copied!';
                 button.style.background = '#10b981';
@@ -836,7 +851,15 @@ Your Talent Strategy Partner is ready. Type your command to begin.
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy:', err);
-                alert('Failed to copy. Please select and copy manually.');
+                if (button) {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copy failed';
+                    button.style.background = '#ef4444';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#4f46e5';
+                    }, 2000);
+                }
             });
         }
 

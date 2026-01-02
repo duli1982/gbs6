@@ -12,6 +12,8 @@ class CookieConsentManager {
         this.consentVersion = '1.0';
         this.consentExpiry = 365; // days
 
+        this.ensureStylesLoaded();
+
         // Cookie categories
         this.cookieCategories = {
             necessary: true, // Always enabled
@@ -39,6 +41,25 @@ class CookieConsentManager {
 
         // Listen for settings button clicks
         this.setupEventListeners();
+    }
+
+    ensureStylesLoaded() {
+        try {
+            if (document.getElementById('cookie-consent-styles')) return;
+
+            const current = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
+            const href = current
+                ? new URL('../styles/cookie-consent.css', current).toString()
+                : '/shared/styles/cookie-consent.css';
+
+            const link = document.createElement('link');
+            link.id = 'cookie-consent-styles';
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+        } catch {
+            // ignore
+        }
     }
 
     /**

@@ -7,7 +7,6 @@
     <title>Gemini Prompt Library</title>
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGZJ52VXFF"></script>
     <script src="../shared/scripts/analytics.js"></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1059,6 +1058,19 @@
         // --- NAVIGATION LOGIC ---
         function showDetailView(category, subCategory) {
             lastScrollPosition = window.scrollY;
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('category_selected', {
+                        app: 'gbs_prompts',
+                        category: String(category || ''),
+                        subcategory: String(subCategory || '')
+                    });
+                    window.trackEvent('filter_applied', {
+                        app: 'gbs_prompts',
+                        filter_type: 'subcategory'
+                    });
+                }
+            } catch { }
             renderDetailView(category, subCategory);
             homepageView.classList.add('hidden');
             detailView.classList.remove('hidden');
@@ -1074,6 +1086,19 @@
 
         function showAllCategoryView(categoryName) {
             lastScrollPosition = window.scrollY;
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('category_selected', {
+                        app: 'gbs_prompts',
+                        category: String(categoryName || ''),
+                        subcategory: ''
+                    });
+                    window.trackEvent('filter_applied', {
+                        app: 'gbs_prompts',
+                        filter_type: 'category'
+                    });
+                }
+            } catch { }
             renderAllCategoryView(categoryName);
             homepageView.classList.add('hidden');
             detailView.classList.remove('hidden');
@@ -1106,6 +1131,11 @@
             populateGemModal(content);
             gemModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('open_modal', { app: 'gbs_prompts', modal: 'gem_builder' });
+                }
+            } catch { }
         }
 
         function hideGemModal() {
@@ -1116,6 +1146,8 @@
         }
 
         // --- EVENT LISTENERS ---
+        let homepageSearchDebounce = null;
+        let lastHomepageSearchToken = '';
         homepageSearchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.trim().toLowerCase();
             if (searchTerm === '') { renderHomepage(); clearSearchBtn.classList.add('hidden'); return; }
@@ -1126,6 +1158,31 @@
                 return titleMatch || contentMatch;
             });
             renderSearchResults(filteredPrompts);
+
+            // GA: search usage (never send the query text)
+            try {
+                if (homepageSearchDebounce) clearTimeout(homepageSearchDebounce);
+                const token = `${searchTerm.length}:${filteredPrompts.length}`;
+                homepageSearchDebounce = setTimeout(() => {
+                    if (token === lastHomepageSearchToken) return;
+                    lastHomepageSearchToken = token;
+                    if (typeof window.trackEvent === 'function') {
+                        window.trackEvent('search_query_used', {
+                            app: 'gbs_prompts',
+                            context: 'homepage_prompts',
+                            query_length: Number(searchTerm.length || 0),
+                            result_count: Number(filteredPrompts.length || 0)
+                        });
+                        if (filteredPrompts.length === 0) {
+                            window.trackEvent('zero_results', {
+                                app: 'gbs_prompts',
+                                context: 'homepage_prompts',
+                                query_length: Number(searchTerm.length || 0)
+                            });
+                        }
+                    }
+                }, 350);
+            } catch { }
         });
         clearSearchBtn.addEventListener('click', () => { homepageSearchInput.value = ''; clearSearchBtn.classList.add('hidden'); renderHomepage(); });
 
@@ -1138,6 +1195,11 @@
                     target.textContent = 'Copied!';
                     target.classList.add('bg-green-200', 'text-green-800');
                     setTimeout(() => { target.textContent = 'Copy'; target.classList.remove('bg-green-200', 'text-green-800'); }, 2000);
+                    try {
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('share_copy_link', { app: 'gbs_prompts', action: 'copy_prompt' });
+                        }
+                    } catch { }
                 }).catch(err => { console.error('Failed to copy text: ', err); target.textContent = 'Error'; setTimeout(() => { target.textContent = 'Copy'; }, 2000); });
             }
         }
@@ -1182,6 +1244,11 @@
             generateGemBtn.disabled = true;
             generateGemBtn.classList.add('opacity-60', 'cursor-not-allowed');
             generateGemBtn.innerHTML = 'Generating...';
+            try {
+                if (typeof window.trackEvent === 'function') {
+                    window.trackEvent('generate_gem', { app: 'gbs_prompts', status: 'started' });
+                }
+            } catch { }
             if (statusEl) {
                 statusEl.classList.add('hidden');
                 statusEl.textContent = '';
@@ -1255,6 +1322,11 @@
                         generatedGemTextarea.value = data.gem;
                     }
                     if (statusEl) statusEl.classList.add('hidden');
+                    try {
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('generate_gem', { app: 'gbs_prompts', status: 'success' });
+                        }
+                    } catch { }
                 } else {
                     const retryAfterHeader = resp.headers.get('Retry-After');
                     const retryAfterSecondsHeader = retryAfterHeader ? Number(retryAfterHeader) : NaN;
@@ -1262,6 +1334,13 @@
                     // Log error details for debugging
                     const errorData = await resp.json().catch(() => ({ error: 'Unknown error' }));
                     console.warn('Gemini API unavailable:', errorData);
+                    try {
+                        if (typeof window.trackApiFailure === 'function') {
+                            window.trackApiFailure({ endpoint: '/api/generate-gem', status: resp.status, attempt: 1, kind: 'generate_gem' });
+                        } else if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('api_failure', { app: 'gbs_prompts', endpoint: '/api/generate-gem', status: Number(resp.status || 0) });
+                        }
+                    } catch { }
 
                     if (resp.status === 429) {
                         const retryAfterSeconds =
@@ -1282,6 +1361,11 @@
                         }
 
                         console.info('Using local prompt generation (API quota exceeded / rate limited)');
+                        try {
+                            if (typeof window.trackEvent === 'function') {
+                                window.trackEvent('rate_limit_hit', { app: 'gbs_prompts', endpoint: '/api/generate-gem' });
+                            }
+                        } catch { }
                     } else if (statusEl) {
                         statusEl.textContent = 'Gemini enhancement failed; using local generation.';
                         statusEl.classList.remove('hidden');
@@ -1294,6 +1378,11 @@
                     statusEl.textContent = 'Gemini enhancement failed; using local generation.';
                     statusEl.classList.remove('hidden');
                 }
+                try {
+                    if (typeof window.trackApiFailure === 'function') {
+                        window.trackApiFailure({ endpoint: '/api/generate-gem', status: 0, attempt: 1, kind: 'network_or_runtime' });
+                    }
+                } catch { }
             }
         } catch (e) {
             console.error('Gem generation failed', e);
@@ -1317,10 +1406,20 @@
                     copyGemBtn.innerHTML = originalText;
                     copyGemBtn.classList.remove('bg-green-500');
                 }, 2000);
+                try {
+                    if (typeof window.trackEvent === 'function') {
+                        window.trackEvent('copy_gem', { app: 'gbs_prompts', status: 'success' });
+                    }
+                } catch { }
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
                 copyGemBtn.innerHTML = '❌ Error';
                 setTimeout(() => { copyGemBtn.innerHTML = '📋 Copy Gem'; }, 2000);
+                try {
+                    if (typeof window.trackEvent === 'function') {
+                        window.trackEvent('copy_gem', { app: 'gbs_prompts', status: 'error' });
+                    }
+                } catch { }
             });
         });
 
@@ -1368,7 +1467,30 @@
                 searchInput.addEventListener('input', () => {
                     const term = searchInput.value.trim().toLowerCase();
                     const items = Array.from(nav.querySelectorAll('a'));
-                    items.forEach(a => { const text = a.textContent.toLowerCase(); a.style.display = text.includes(term) ? '' : 'none'; });
+                    let visibleCount = 0;
+                    items.forEach(a => {
+                        const text = a.textContent.toLowerCase();
+                        const visible = text.includes(term);
+                        a.style.display = visible ? '' : 'none';
+                        if (visible) visibleCount += 1;
+                    });
+                    try {
+                        if (typeof window.trackEvent === 'function') {
+                            window.trackEvent('search_query_used', {
+                                app: 'gbs_prompts',
+                                context: 'quick_links',
+                                query_length: Number(term.length || 0),
+                                result_count: Number(visibleCount || 0)
+                            });
+                            if (term && visibleCount === 0) {
+                                window.trackEvent('zero_results', {
+                                    app: 'gbs_prompts',
+                                    context: 'quick_links',
+                                    query_length: Number(term.length || 0)
+                                });
+                            }
+                        }
+                    } catch { }
                 });
             }
         });
