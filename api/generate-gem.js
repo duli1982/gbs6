@@ -179,12 +179,18 @@ export default async function handler(req, res) {
   }
 
   if (!isAllowedOrigin(req)) {
-    return res.status(403).json({ error: 'Forbidden' });
+    return res.status(403).json({
+      error: 'Forbidden',
+      details: 'Request origin not allowed. Please ensure you are accessing this from the correct domain.'
+    });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'GEMINI_API_KEY is not configured' });
+    return res.status(500).json({
+      error: 'Configuration error',
+      details: 'GEMINI_API_KEY is not configured. Please contact support.'
+    });
   }
 
   try {
@@ -208,6 +214,26 @@ export default async function handler(req, res) {
       seed = '',
       model: modelOverride,
     } = req.body || {};
+
+    // Input validation: prevent extremely long inputs that could cause API errors
+    const MAX_FIELD_LENGTH = 5000;
+    const fields = { persona, task, context, audience, tone, format, seed };
+    for (const [fieldName, fieldValue] of Object.entries(fields)) {
+      if (typeof fieldValue === 'string' && fieldValue.length > MAX_FIELD_LENGTH) {
+        return res.status(400).json({
+          error: 'Input too long',
+          details: `The "${fieldName}" field exceeds the maximum length of ${MAX_FIELD_LENGTH} characters (current: ${fieldValue.length}). Please shorten your input.`,
+        });
+      }
+    }
+
+    // Ensure at least task or persona is provided
+    if (!task.trim() && !persona.trim()) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        details: 'Please provide at least a "task" or "persona" field to generate a gem.',
+      });
+    }
 
     // Model selection:
     // - Primary model: request override -> GEMINI_MODEL -> gemini-2.5-flash
@@ -311,8 +337,8 @@ Seed prompt (optional): ${seed || ''}`;
           topK: 40,
           topP: 0.95,
           // Gem output can be fairly long (title + instructions + constraints + output format)
-          // Increased to 3000 to prevent truncation of complete prompts
-          maxOutputTokens: 3000,
+          // Increased to 4000 to provide buffer for very complex prompts with extensive examples
+          maxOutputTokens: 4000,
           // responseMimeType is not supported on all Gemini endpoints/models; omit for compatibility.
         },
       };
@@ -350,7 +376,7 @@ Seed prompt (optional): ${seed || ''}`;
 
       const run = (async () => {
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 15000); // 15s safety timeout
+        const timeout = setTimeout(() => controller.abort(), 30000); // 30s timeout for complex gem generation
         try {
           async function callGemini(payloadToSend) {
             const resp = await fetch(endpoint, {
@@ -380,8 +406,9 @@ Seed prompt (optional): ${seed || ''}`;
 
           let text = await callGemini(payload);
           if (!text) {
-            const err = new Error('Empty response from Gemini');
+            const err = new Error('Empty response from Gemini API. Please try again.');
             err.status = 502;
+            err.details = 'The Gemini API returned an empty response. This may be a temporary issue. Please wait a moment and try generating the gem again.';
             throw err;
           }
 
@@ -434,9 +461,15 @@ Seed prompt (optional): ${seed || ''}`;
         // Avoid returning 404/400 to the browser (it looks like the route is missing);
         // treat those as upstream/model issues instead.
         const outwardStatus = status === 404 || status === 400 ? 502 : status;
+        const userFriendlyMessage = status === 404 || status === 400
+          ? 'The AI model encountered an error. Please try again in a few moments.'
+          : (status === 500
+            ? 'An unexpected error occurred while generating the gem. Please try again.'
+            : err?.details ?? String(err));
+
         return res.status(outwardStatus).json({
-          error: 'Gemini API error',
-          details: err?.details ?? String(err),
+          error: 'Failed to generate gem',
+          details: userFriendlyMessage,
         });
       } finally {
         inFlight.delete(cacheKey);
@@ -449,18 +482,31 @@ Seed prompt (optional): ${seed || ''}`;
       const retryAfterSeconds = lastError?.retryAfterSeconds || 30;
       res.setHeader('Retry-After', String(retryAfterSeconds));
       return res.status(429).json({
-        error: 'Gemini API rate-limited',
+        error: 'Rate limit exceeded',
         retryAfterSeconds,
-        details: lastError?.details ?? String(lastError),
+        details: `The Gemini API is temporarily rate-limited. Please wait ${retryAfterSeconds} seconds and try again. If this persists, try again later.`,
       });
     }
 
     const outwardStatus = status === 404 || status === 400 ? 502 : status;
+    const userFriendlyMessage = status === 404 || status === 400
+      ? 'The AI model is temporarily unavailable. Please try again in a few moments.'
+      : lastError?.details ?? String(lastError);
+
     return res.status(outwardStatus).json({
-      error: 'Gemini API error',
-      details: lastError?.details ?? String(lastError),
+      error: 'Failed to generate gem',
+      details: userFriendlyMessage,
     });
   } catch (err) {
-    return res.status(500).json({ error: 'Server error', details: String(err) });
+    const isTimeout = err.name === 'AbortError' || String(err).includes('abort');
+    const userMessage = isTimeout
+      ? 'The request took too long to complete. This may happen with very complex prompts. Please try again or simplify your input.'
+      : 'An unexpected server error occurred. Please try again. If the problem persists, contact support.';
+
+    return res.status(500).json({
+      error: 'Server error',
+      details: userMessage,
+      technicalDetails: process.env.NODE_ENV === 'development' ? String(err) : undefined
+    });
   }
 }
