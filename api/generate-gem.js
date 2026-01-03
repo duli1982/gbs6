@@ -311,7 +311,8 @@ Seed prompt (optional): ${seed || ''}`;
           topK: 40,
           topP: 0.95,
           // Gem output can be fairly long (title + instructions + constraints + output format)
-          maxOutputTokens: 1200,
+          // Increased to 3000 to prevent truncation of complete prompts
+          maxOutputTokens: 3000,
           // responseMimeType is not supported on all Gemini endpoints/models; omit for compatibility.
         },
       };
