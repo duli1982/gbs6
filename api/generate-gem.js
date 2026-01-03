@@ -197,59 +197,72 @@ export default async function handler(req, res) {
     // Build a structured instruction for Gemini to craft a CREATE-style, ready-to-use prompt (the "Gem")
     // Few-shot examples below help Gemini match the desired style and completeness.
     const instruction = `You are an expert prompt engineer for Google Gemini.
-Craft a single, polished prompt (a \"Gem\") using the CREATE framework internally, but OUTPUT a clean, unified prompt WITHOUT any section labels (no Title/C/R/E/A/T/E labels). The result must be copy-ready, concise, and clearly structured so a user immediately sees value yet can edit easily.
+Craft a single, polished prompt (a "Gem") using the CREATE framework internally, but OUTPUT a clean, unified prompt WITHOUT any section labels (no Title/C/R/E/A/T/E labels). The result must be copy-ready, concise, and clearly structured so a user immediately sees value yet can edit easily.
 
 Desired shape of the final text (no labels):
 - Begin with a short, task-focused title line.
-- Immediately follow with an instruction paragraph that includes the role (\"Act as...\"), context, and the core task.
-- Provide 3-6 numbered constraints/steps (expectations) as a single list.
+- Immediately follow with an instruction paragraph that includes the role ("Act as..."), context, and the core task.
+- Provide 3–6 numbered constraints/steps (expectations) as a single list.
+- Include an "Inputs" line/block that states exactly what the user must paste/provide (e.g., job role, JD, resumes, constraints).
 - Include a single sentence clarifying the intended audience.
 - Include one concise sentence for tone/style.
-- End with an explicit Output Format block (Markdown section list or a fenced code block with schema) so responses are consistent.
+- End with an explicit Output Format block (Markdown headings + bullets OR a fenced code block with schema). The Output Format must be the LAST part of the prompt.
 
 Rules:
 - DO NOT include any explicit section labels like \"Title\", \"C — Context\", etc.
+- DO NOT include any explicit section labels like "Title", "C — Context", etc.
 - Be directive and specific; avoid filler.
 - Keep the total length focused; only expand if the Output Format needs it.
-- If some fields are missing, infer sensible defaults without inventing domain-specific facts.
+- If some fields are missing, infer ONLY structural defaults (e.g., scoring scale, headings). Do NOT invent domain requirements (must-have skills, years, location, industry, compliance constraints). Use placeholders like {{job_role}}, {{must_haves}}, {{location}} when details are missing.
+- Do not add clarifying questions unless missing info prevents completing the task. If questions are necessary, ask at most 2, at the very top of the prompt.
+- Avoid tables unless the user explicitly requests them; prefer headings + bullets or a fenced schema.
 - If seed text is provided, harmonize phrasing and terminology with it.
-- Return ONLY the final prompt text (no commentary).
+- Return ONLY the final prompt text (no commentary, no alternatives).
 
 Examples (study the pattern, then produce a similar result for the user's inputs):
 
 EXAMPLE A: Boolean Search String Generator
+Boolean Search String Generator
 Act as an expert recruiter. Create an optimized Boolean search string to find qualified candidates for the specified role.
-1) Include the core must-have skills and 3-5 related skills.
+1) Include the core must-have skills and 3–5 related skills.
 2) Add synonyms and common variants (but avoid irrelevant noise).
 3) Exclude junior/irrelevant terms.
-4) Include location/radius if provided; otherwise ask for the location as the first clarifying question.
+4) If location/radius is missing, use {{location}} and {{radius}} placeholders.
+Inputs: {{job_role}}, {{must_haves}}, {{nice_to_haves}} (optional), {{location}} (optional), {{radius}} (optional), {{target_platform}} (optional).
 Audience: Non-technical recruiters.
 Tone: Professional and practical.
 Output Format:
 - Boolean String:
-- Explanation (2-3 sentences):
+- Explanation (2–3 sentences):
 - How to Adjust (3 bullets):
 
 EXAMPLE B: Outreach Email
+Outreach Email Draft
 Act as a recruitment marketing specialist. Write a short outreach email for a passive candidate with a low-friction call-to-action.
 1) Use placeholders ({{candidate_name}}, {{role_title}}, {{company_name}}, {{personal_hook}}).
 2) Include 2-3 value propositions without exaggeration.
 3) End with a 15-minute chat CTA and two scheduling options.
+Inputs: {{candidate_name}}, {{role_title}}, {{company_name}}, {{personal_hook}}, {{value_props}} (optional), {{scheduling_link}} (optional).
 Audience: Busy professionals reading on mobile.
 Tone: Warm, respectful, non-salesy.
 Output Format:
 - Subject Line:
-- Email Body (3 paragraphs):
+- Email Body (3 short paragraphs):
 
 EXAMPLE C: Interview Questions + Rubric
+Interview Questions + Rubric
 Act as an I/O psychologist. Generate behavioral interview questions with follow-ups and a simple scoring rubric.
 1) Use STAR prompts; ask for real past experiences (no hypotheticals).
 2) Provide 2 follow-up probes per question.
 3) Include a 1/3/5 scoring rubric with behavioral anchors.
+Inputs: {{role_title}}, {{competencies}}, {{level}} (optional), {{team_context}} (optional).
 Audience: Hiring managers with limited HR training.
 Tone: Clear, neutral, and defensible.
 Output Format:
-- Table: Question | Follow-Ups | Scoring Rubric (1/3/5)
+- Questions (each):
+  - Question:
+  - Follow-ups (2):
+  - Scoring (1/3/5 anchors):
 
 Fields:
 Persona: ${persona}
@@ -257,9 +270,9 @@ Task: ${task}
 Context: ${context}
 Audience: ${audience}
 Tone: ${tone}
-Format: ${format}
+Output Format Preferences: ${format}
 
-Seed prompt (optional): ${seed}`;
+Seed prompt (optional): ${seed || ''}`;
 
     const payload = {
       contents: [
