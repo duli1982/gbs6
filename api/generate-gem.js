@@ -9,6 +9,9 @@ const CACHE_MAX = 500;
 const cache = new Map(); // key -> { value, expiresAt }
 const inFlight = new Map(); // key -> Promise<string>
 
+// Bump to invalidate cached gems when instruction changes.
+const INSTRUCTION_VERSION = '2026-01-03-v3';
+
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 8; // per IP, per window
 const rateLimit = new Map(); // ip -> { count, resetAt }
@@ -118,6 +121,7 @@ function setModelCooldownSeconds(model, seconds) {
 
 function makeCacheKey(model, fields) {
   const stable = JSON.stringify({
+    v: INSTRUCTION_VERSION,
     model,
     persona: fields.persona || '',
     task: fields.task || '',
@@ -145,6 +149,27 @@ function setCached(key, value) {
   if (cache.size <= CACHE_MAX) return;
   const oldestKey = cache.keys().next().value;
   if (oldestKey) cache.delete(oldestKey);
+}
+
+function isLikelyIncompleteGem(text) {
+  const normalized = String(text || '').trim();
+  if (!normalized) return true;
+
+  // Our instruction requires an Inputs line and an Output Format block at the end.
+  if (!/\bInputs\s*:/i.test(normalized)) return true;
+  if (!/\bOutput\s*Format\s*:/i.test(normalized)) return true;
+
+  // Common truncation patterns (ends mid-enumeration / mid-sentence).
+  if (/\n\s*1\s*$/.test(normalized)) return true;
+  if (/[,:;–-]\s*$/.test(normalized)) return true;
+
+  const idx = normalized.toLowerCase().lastIndexOf('output format:');
+  if (idx >= 0) {
+    const tail = normalized.slice(idx);
+    if (tail.length < 40) return true;
+  }
+
+  return false;
 }
 
 export default async function handler(req, res) {
@@ -209,7 +234,6 @@ Desired shape of the final text (no labels):
 - End with an explicit Output Format block (Markdown headings + bullets OR a fenced code block with schema). The Output Format must be the LAST part of the prompt.
 
 Rules:
-- DO NOT include any explicit section labels like \"Title\", \"C — Context\", etc.
 - DO NOT include any explicit section labels like "Title", "C — Context", etc.
 - Be directive and specific; avoid filler.
 - Keep the total length focused; only expand if the Output Format needs it.
@@ -274,22 +298,26 @@ Output Format Preferences: ${format}
 
 Seed prompt (optional): ${seed || ''}`;
 
-    const payload = {
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: instruction }],
+    function buildPayload(instructionText) {
+      return {
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: instructionText }],
+          },
+        ],
+        generationConfig: {
+          temperature: 0.4,
+          topK: 40,
+          topP: 0.95,
+          // Gem output can be fairly long (title + instructions + constraints + output format)
+          maxOutputTokens: 1200,
+          // responseMimeType is not supported on all Gemini endpoints/models; omit for compatibility.
         },
-      ],
-      generationConfig: {
-        temperature: 0.4,
-        topK: 40,
-        topP: 0.95,
-        // Gem output can be fairly long (title + instructions + constraints + output format)
-        maxOutputTokens: 1200,
-        // responseMimeType is not supported on all Gemini endpoints/models; omit for compatibility.
-      },
-    };
+      };
+    }
+
+    const payload = buildPayload(instruction);
 
     let lastError = null;
 
@@ -323,32 +351,51 @@ Seed prompt (optional): ${seed || ''}`;
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000); // 15s safety timeout
         try {
-          const resp = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-            signal: controller.signal,
-          });
+          async function callGemini(payloadToSend) {
+            const resp = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payloadToSend),
+              signal: controller.signal,
+            });
 
-          if (!resp.ok) {
-            const details = await resp.text();
-            const retryAfterSeconds = resp.status === 429 ? parseRetryAfterSeconds(details) : null;
-            const err = new Error(`Gemini API error (${resp.status})`);
-            err.status = resp.status;
-            err.details = details;
-            err.retryAfterSeconds = retryAfterSeconds;
-            throw err;
+            if (!resp.ok) {
+              const details = await resp.text();
+              const retryAfterSeconds = resp.status === 429 ? parseRetryAfterSeconds(details) : null;
+              const err = new Error(`Gemini API error (${resp.status})`);
+              err.status = resp.status;
+              err.details = details;
+              err.retryAfterSeconds = retryAfterSeconds;
+              throw err;
+            }
+
+            const data = await resp.json();
+            const parts = data?.candidates?.[0]?.content?.parts;
+            const text = Array.isArray(parts)
+              ? parts.map((p) => (p && typeof p.text === 'string' ? p.text : '')).join('')
+              : (data?.candidates?.[0]?.content?.parts?.[0]?.text || '');
+            return String(text || '');
           }
 
-          const data = await resp.json();
-          const parts = data?.candidates?.[0]?.content?.parts;
-          const text = Array.isArray(parts)
-            ? parts.map((p) => (p && typeof p.text === 'string' ? p.text : '')).join('')
-            : (data?.candidates?.[0]?.content?.parts?.[0]?.text || '');
+          let text = await callGemini(payload);
           if (!text) {
             const err = new Error('Empty response from Gemini');
             err.status = 502;
             throw err;
+          }
+
+          // Retry once if Gemini returned a clearly incomplete "Gem" (e.g., ends mid-list like "\n\n1").
+          if (isLikelyIncompleteGem(text)) {
+            const retryInstruction =
+              `IMPORTANT: Your previous output was incomplete or cut off.\n` +
+              `Regenerate the FULL final Gem from scratch. It MUST include an "Inputs:" line and MUST end with the "Output Format:" block as the LAST part of the prompt.\n` +
+              `Do not end mid-sentence or mid-numbered list.\n\n` +
+              instruction;
+            const retryPayload = buildPayload(retryInstruction);
+            const retryText = await callGemini(retryPayload);
+            if (retryText && !isLikelyIncompleteGem(retryText)) {
+              text = retryText;
+            }
           }
 
           return text;
