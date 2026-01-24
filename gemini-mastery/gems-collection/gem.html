@@ -323,7 +323,7 @@
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">📝 Complete Gem Prompt</h2>
                 <p class="text-gray-600 mb-4">Copy this entire prompt and paste it into your Gemini Gem:</p>
                 <div class="prompt-container">
-                    <button class="copy-prompt-btn" onclick="copyFullPrompt()">Copy Full Prompt</button>
+                    <button class="copy-prompt-btn" onclick="copyFullPrompt(this)">Copy Full Prompt</button>
                     <div id="full-prompt"></div>
                 </div>
             </div>
@@ -457,20 +457,52 @@
             document.getElementById('error-state').style.display = 'block';
         }
 
-        function copyFullPrompt() {
+        function copyFullPrompt(button) {
             const promptText = document.getElementById('full-prompt').textContent;
-            navigator.clipboard.writeText(promptText).then(() => {
-                const button = event.target;
+            const resetButton = () => {
+                button.textContent = 'Copy Full Prompt';
+                button.style.background = '#667eea';
+            };
+
+            const setCopiedState = () => {
                 button.textContent = 'Copied!';
                 button.style.background = '#10b981';
-                setTimeout(() => {
-                    button.textContent = 'Copy Full Prompt';
-                    button.style.background = '#667eea';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy:', err);
-                alert('Failed to copy prompt. Please select and copy manually.');
-            });
+                setTimeout(resetButton, 2000);
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(promptText).then(setCopiedState).catch(err => {
+                    console.error('Failed to copy:', err);
+                    fallbackCopy(promptText, setCopiedState);
+                });
+                return;
+            }
+
+            fallbackCopy(promptText, setCopiedState);
+        }
+
+        function fallbackCopy(text, onSuccess) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.setAttribute('readonly', '');
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    onSuccess();
+                    return;
+                }
+            } catch (error) {
+                console.error('Fallback copy failed:', error);
+            } finally {
+                document.body.removeChild(textArea);
+            }
+
+            alert('Failed to copy prompt. Please select and copy manually.');
         }
 
         document.addEventListener('DOMContentLoaded', loadGemDetails);
