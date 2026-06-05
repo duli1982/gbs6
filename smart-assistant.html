@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Assistant — GBS AI Hub</title>
+  <meta name="description" content="Describe what you need. The hub auto-selects the right skills and runs them for you." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/breadcrumb-nav.css">
+  <link rel="stylesheet" href="/shared/hub-button.css">
+  <link rel="stylesheet" href="/shared/fonts.css">
+  <link rel="stylesheet" href="/shared/scroll-to-top.css">
+  <style>
+    .step-output { word-wrap: break-word; }
+    .prose-output h1, .prose-output h2, .prose-output h3, .prose-output h4 { color: #1e293b; }
+    .spin { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+  <nav class="breadcrumb-container" aria-label="Breadcrumb">
+    <div class="breadcrumb-wrapper">
+      <div class="breadcrumb-nav">
+        <ol>
+          <li class="breadcrumb-item">
+            <a href="/index.html" class="breadcrumb-link" aria-label="Go to Home">
+              <span class="breadcrumb-icon icon-home"></span>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="breadcrumb-separator" aria-hidden="true">›</li>
+          <li class="breadcrumb-item">
+            <a href="/gbs-prompts/index.html" class="breadcrumb-link" aria-label="Go to GBS Prompts">
+              <span class="breadcrumb-icon icon-folder"></span>
+              <span>GBS Prompts</span>
+            </a>
+          </li>
+          <li class="breadcrumb-separator" aria-hidden="true">›</li>
+          <li class="breadcrumb-item">
+            <span class="breadcrumb-current" aria-current="page">
+              <span class="breadcrumb-icon icon-file"></span>
+              <span>Smart Assistant</span>
+            </span>
+          </li>
+        </ol>
+      </div>
+      <div class="breadcrumb-actions">
+        <a href="/index.html" class="breadcrumb-hub-btn" aria-label="Return to Hub">
+          <span class="icon-home"></span>
+          <span>Hub</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <button id="scroll-to-top" class="scroll-to-top" title="Scroll to top">↑</button>
+
+  <main class="max-w-3xl mx-auto px-4 py-10">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold flex items-center gap-2">✨ Smart Assistant</h1>
+      <p class="text-slate-600 mt-2">
+        Describe what you need in your own words — a vague JD, a stuck role, a rejection to write,
+        a pipeline to plan. The hub <strong>auto-selects the right skills</strong> and runs them.
+      </p>
+    </header>
+
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+      <label for="ask" class="block text-sm font-medium text-slate-700 mb-2">What do you need?</label>
+      <textarea id="ask" rows="8" maxlength="8000"
+        class="w-full rounded-lg border border-slate-300 p-3 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        placeholder="e.g. 'This senior data engineer role in Berlin has been open 70 days with no shortlist — what's going wrong and how do I source differently?'"></textarea>
+      <div class="flex items-center justify-between mt-3">
+        <span id="count" class="text-xs text-slate-400">0 / 8000</span>
+        <button id="run"
+          class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+          <span id="run-label">Run</span>
+          <svg id="run-spin" class="hidden spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
+            <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+      <p class="text-xs text-amber-600 mt-3">
+        ⚠️ Use non-confidential or anonymised content. Don't paste candidate names, contact
+        details, or full CVs. AI supports the work — you own the final decision.
+      </p>
+    </section>
+
+    <div id="status" class="hidden mt-6 text-sm text-slate-600 font-medium animate-pulse"></div>
+    <div id="routing" class="hidden mt-6 bg-indigo-50 border border-indigo-100 rounded-lg p-4 text-sm"></div>
+    <div id="error" class="hidden mt-6 bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 text-sm"></div>
+    <div id="results" class="mt-6 space-y-6"></div>
+  </main>
+
+  <script>
+    const ask = document.getElementById('ask');
+    const count = document.getElementById('count');
+    const runBtn = document.getElementById('run');
+    const runLabel = document.getElementById('run-label');
+    const runSpin = document.getElementById('run-spin');
+    const statusBox = document.getElementById('status');
+    const routingBox = document.getElementById('routing');
+    const errorBox = document.getElementById('error');
+    const results = document.getElementById('results');
+
+    ask.addEventListener('input', () => { count.textContent = `${ask.value.length} / 8000`; });
+
+    const riskBadge = (risk) => {
+      const map = { low: 'bg-green-100 text-green-700', medium: 'bg-amber-100 text-amber-700', high: 'bg-red-100 text-red-700' };
+      return `<span class="text-xs px-2 py-0.5 rounded-full ${map[risk] || map.low}">risk: ${risk}</span>`;
+    };
+
+    function setLoading(on, label) {
+      runBtn.disabled = on;
+      runSpin.classList.toggle('hidden', !on);
+      runLabel.textContent = on ? (label || 'Running…') : 'Run';
+    }
+
+    async function postJson(body) {
+      const resp = await fetch('/api/run-workflow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const raw = await resp.text();
+      let data;
+      try { data = raw ? JSON.parse(raw) : {}; }
+      catch {
+        throw new Error('The workflow API is not responding. Run "npm start" (vercel dev) or use the deployed site — a static server can\'t run /api.');
+      }
+      if (!resp.ok) throw new Error(data.details || data.error || `Request failed (${resp.status}).`);
+      return data;
+    }
+
+    async function run() {
+      errorBox.classList.add('hidden');
+      routingBox.classList.add('hidden');
+      results.innerHTML = '';
+      const input = ask.value.trim();
+      if (!input) {
+        errorBox.textContent = 'Please describe what you need first.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      setLoading(true, 'Thinking…');
+      try {
+        // Phase 1 — route (fast). Show the model "thinking" about which skills to use.
+        showStatus('🧠 Thinking — analysing your request and choosing skills…');
+        const { routing } = await postJson({ workflow: 'auto', action: 'route', input });
+        if (!routing || !routing.length) {
+          errorBox.textContent = 'No skill matched your request. Try rephrasing with more detail.';
+          errorBox.classList.remove('hidden');
+          return;
+        }
+        renderRouting(routing);
+
+        // Lay out a pending card per selected skill, each showing a "Working…" spinner.
+        results.innerHTML = routing.map((s, i) => stepCard(i, s, { pending: true })).join('');
+
+        // Phase 2 — run all skills IN PARALLEL; fill each card the moment it resolves.
+        let remaining = routing.length;
+        showStatus(`⚙️ Working — running ${remaining} skills in parallel…`);
+        await Promise.all(routing.map(async (s, i) => {
+          try {
+            const { step } = await postJson({
+              workflow: 'auto', action: 'run', input, skillId: s.skillId, reason: s.reason,
+            });
+            updateCard(i, step);
+          } catch (err) {
+            updateCard(i, { ...s, error: err.message || 'This step failed. Please try again.' });
+          } finally {
+            remaining -= 1;
+            if (remaining > 0) showStatus(`⚙️ Working — ${remaining} skill${remaining > 1 ? 's' : ''} still running…`);
+          }
+        }));
+        showStatus('✅ Done.', true);
+      } catch (err) {
+        errorBox.textContent = err.message || String(err);
+        errorBox.classList.remove('hidden');
+        statusBox.classList.add('hidden');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function showStatus(text, fade) {
+      statusBox.textContent = text;
+      statusBox.classList.remove('hidden');
+      if (fade) setTimeout(() => statusBox.classList.add('hidden'), 1500);
+    }
+
+    function renderRouting(routing) {
+      routingBox.innerHTML =
+        `<p class="font-semibold text-indigo-800 mb-1">🧭 Skills selected for you</p>` +
+        `<ul class="list-disc pl-5 space-y-1 text-indigo-900">` +
+        routing.map((s) => `<li><strong>${escapeHtml(s.skillTitle || s.skillId)}</strong>${s.reason ? ' — ' + escapeHtml(s.reason) : ''}</li>`).join('') +
+        `</ul>`;
+      routingBox.classList.remove('hidden');
+    }
+
+    function stepCard(i, s, opts = {}) {
+      const body = opts.pending
+        ? `<div class="flex items-center gap-2 text-slate-400">
+             <svg class="spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+               <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
+               <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+             </svg> Working…
+           </div>`
+        : (s.error
+            ? `<p class="text-red-600">${escapeHtml(s.error)}</p>`
+            : `<div class="step-output prose-output">${renderMarkdown(s.output || '')}</div>`);
+      return `
+        <article id="step-${i}" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 bg-slate-50 border-b border-slate-200">
+            <div>
+              <h2 class="font-semibold">${i + 1}. ${escapeHtml(s.skillTitle || s.label || s.skillId)}</h2>
+              <p class="text-xs text-slate-500">via ${escapeHtml(s.skillTitle || s.skillId)}</p>
+            </div>
+            ${riskBadge(s.risk)}
+          </div>
+          <div class="p-5 text-sm leading-relaxed">${body}</div>
+        </article>`;
+    }
+
+    function updateCard(i, step) {
+      const el = document.getElementById(`step-${i}`);
+      if (el) el.outerHTML = stepCard(i, step);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    // Minimal, XSS-safe markdown: escape first, then format a known subset.
+    function renderMarkdown(src) {
+      const lines = String(src).replace(/\r\n/g, '\n').split('\n');
+      const inline = (t) => escapeHtml(t)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code class="bg-slate-100 px-1 rounded text-xs">$1</code>');
+      let html = '', list = null;
+      const closeList = () => { if (list) { html += `</${list}>`; list = null; } };
+      for (const raw of lines) {
+        const line = raw.trimEnd();
+        let m;
+        if ((m = line.match(/^(#{1,4})\s+(.*)$/))) {
+          closeList();
+          const lvl = m[1].length;
+          const size = ['text-lg', 'text-base', 'text-sm', 'text-sm'][lvl - 1];
+          html += `<h${lvl} class="font-semibold ${size} mt-4 mb-1">${inline(m[2])}</h${lvl}>`;
+        } else if ((m = line.match(/^\s*[-*]\s+(.*)$/))) {
+          if (list !== 'ul') { closeList(); list = 'ul'; html += '<ul class="list-disc pl-5 space-y-1 my-2">'; }
+          html += `<li>${inline(m[1])}</li>`;
+        } else if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) {
+          if (list !== 'ol') { closeList(); list = 'ol'; html += '<ol class="list-decimal pl-5 space-y-1 my-2">'; }
+          html += `<li>${inline(m[1])}</li>`;
+        } else if (line === '') {
+          closeList();
+        } else {
+          closeList();
+          html += `<p class="my-2">${inline(line)}</p>`;
+        }
+      }
+      closeList();
+      return html;
+    }
+
+    runBtn.addEventListener('click', run);
+  </script>
+
+  <div id="footer-placeholder"></div>
+  <script src="/shared/scripts/footer.js" defer></script>
+  <script src="/shared/scripts/scroll-to-top.js" defer></script>
+  <script src="/shared/scripts/breadcrumb-nav.js"></script>
+</body>
+</html>
