@@ -265,8 +265,12 @@ async function routeSkills({ apiKey, modelsToTry, input }) {
     generationConfig: { temperature: 0.1, topK: 20, topP: 0.9, maxOutputTokens: 2048 },
   };
 
+  // Prefer the lighter model for routing: it uses little/no "thinking" budget, so it
+  // reliably returns the JSON selection. Fall back to the heavier models if needed.
+  const routerModels = Array.from(new Set(['gemini-2.5-flash-lite', ...modelsToTry])).filter(Boolean);
+
   let lastError = null;
-  for (const model of modelsToTry) {
+  for (const model of routerModels) {
     if (getCooldownRemainingSeconds(model) > 0) continue;
     const endpoint =
       `https://generativelanguage.googleapis.com/v1/models/${encodeURIComponent(model)}` +
@@ -298,8 +302,9 @@ async function routeSkills({ apiKey, modelsToTry, input }) {
             .map((x) => ({ skillId: x.skillId, reason: String(x.reason || '').slice(0, 200) }))
         : [];
       if (valid.length) return valid;
-      // Model replied but selection was unusable — fall back to closest by keyword.
-      return keywordFallback(input);
+      // Model replied but selection was unusable (e.g. empty output from thinking
+      // truncation). Try the NEXT model rather than giving up to keyword fallback.
+      continue;
     } catch (err) {
       lastError = err;
       if (err?.status === 429) {
@@ -312,20 +317,48 @@ async function routeSkills({ apiKey, modelsToTry, input }) {
       clearTimeout(timeout);
     }
   }
-  if (lastError) throw lastError;
+  // Only fall back after every model failed to produce a usable selection.
   return keywordFallback(input);
 }
 
 // Deterministic safety net if the router call yields nothing usable.
+// Scores each skill by how many of its signal terms (keywords + use_when + title +
+// description words) appear in the input, then returns the top matches.
 function keywordFallback(input) {
-  const text = String(input).toLowerCase();
-  let best = null, bestScore = 0;
-  for (const s of SKILL_CATALOG) {
-    const score = s.keywords.reduce((n, k) => (text.includes(k.toLowerCase()) ? n + 1 : n), 0);
-    if (score > bestScore) { bestScore = score; best = s; }
-  }
-  const chosen = best || SKILL_CATALOG[0];
-  return [{ skillId: chosen.id, reason: 'Closest match by keyword (router fallback).' }];
+  const words = new Set(
+    String(input).toLowerCase().match(/[a-z][a-z\-]{2,}/g) || []
+  );
+  const STOP = new Set(['the', 'and', 'for', 'with', 'that', 'this', 'are', 'was', 'how',
+    'what', 'why', 'who', 'role', 'roles', 'need', 'help', 'open', 'days', 'has', 'have',
+    'been', 'into', 'out', 'can', 'should', 'would', 'about', 'from', 'your', 'you']);
+
+  const scored = SKILL_CATALOG.map((s) => {
+    const terms = [
+      ...s.keywords,
+      ...s.use_when.join(' ').toLowerCase().match(/[a-z][a-z\-]{2,}/g) || [],
+      ...s.title.toLowerCase().match(/[a-z][a-z\-]{2,}/g) || [],
+      ...String(s.description || '').toLowerCase().match(/[a-z][a-z\-]{2,}/g) || [],
+    ];
+    let score = 0;
+    const seen = new Set();
+    const wordList = [...words];
+    for (const t of terms) {
+      if (STOP.has(t) || seen.has(t)) continue;
+      seen.add(t);
+      // Match on exact word OR shared prefix (so "source" ~ "sourcing", "hire" ~ "hiring").
+      const hit = words.has(t) || wordList.some((w) =>
+        w.length >= 4 && t.length >= 4 && (w.startsWith(t.slice(0, 4)) && t.startsWith(w.slice(0, 4))));
+      if (hit) score += 1;
+    }
+    return { s, score };
+  }).sort((a, b) => b.score - a.score);
+
+  const top = scored.filter((x) => x.score > 0).slice(0, 2);
+  const chosen = top.length ? top : [{ s: SKILL_CATALOG[0], score: 0 }];
+  return chosen.map((x) => ({
+    skillId: x.s.id,
+    reason: 'Selected by keyword match (router unavailable).',
+  }));
 }
 
 export default async function handler(req, res) {
