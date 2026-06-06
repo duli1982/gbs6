@@ -265,9 +265,12 @@ async function routeSkills({ apiKey, modelsToTry, input }) {
     generationConfig: { temperature: 0.1, topK: 20, topP: 0.9, maxOutputTokens: 2048 },
   };
 
-  // Prefer the lighter model for routing: it uses little/no "thinking" budget, so it
-  // reliably returns the JSON selection. Fall back to the heavier models if needed.
-  const routerModels = Array.from(new Set(['gemini-2.5-flash-lite', ...modelsToTry])).filter(Boolean);
+  // Prefer lighter models for routing: they use little/no "thinking" budget, so they
+  // reliably return the JSON selection. Lead with the primary (a flash-lite) and keep
+  // gemini-2.5-flash-lite as a light backup before any heavier model is tried.
+  const routerModels = Array.from(
+    new Set([modelsToTry[0], 'gemini-2.5-flash-lite', ...modelsToTry])
+  ).filter(Boolean);
 
   let lastError = null;
   for (const model of routerModels) {
@@ -398,10 +401,10 @@ export default async function handler(req, res) {
       });
     }
 
-    const primaryModel = (process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+    const primaryModel = (process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite-preview').trim();
     const extraFallbackModels = parseList(process.env.GEMINI_FALLBACK_MODELS);
     const modelsToTry = Array.from(
-      new Set([primaryModel, 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
+      new Set([primaryModel, 'gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
     ).filter(Boolean);
 
     const rateLimit429 = (err) => {

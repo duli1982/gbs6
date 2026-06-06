@@ -236,13 +236,13 @@ export default async function handler(req, res) {
     }
 
     // Model selection:
-    // - Primary model: request override -> GEMINI_MODEL -> gemini-2.5-flash
-    // - Rate-limit fallbacks (ordered): gemini-2.5-flash-lite -> gemini-3-flash
+    // - Primary model: request override -> GEMINI_MODEL -> gemini-3.1-flash-lite-preview
+    // - Rate-limit fallbacks (ordered): gemini-2.5-flash -> gemini-2.5-flash-lite -> gemini-3-flash
     // - Optional extra fallbacks: GEMINI_FALLBACK_MODELS (comma-separated)
-    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite-preview').trim();
     const extraFallbackModels = parseList(process.env.GEMINI_FALLBACK_MODELS);
     const modelsToTry = Array.from(
-      new Set([primaryModel, 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
+      new Set([primaryModel, 'gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
     ).filter(Boolean);
 
     // Build a structured instruction for Gemini to craft a CREATE-style, ready-to-use prompt (the "Gem")

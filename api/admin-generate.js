@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing type' });
   }
 
-  const model = (process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+  const model = (process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite-preview').trim();
 
   const instruction = buildInstruction(type, params);
   if (!instruction) return res.status(400).json({ error: 'Invalid type or params' });

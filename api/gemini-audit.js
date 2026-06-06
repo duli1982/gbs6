@@ -189,10 +189,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+    const primaryModel = (modelOverride || process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite-preview').trim();
     const extraFallbackModels = parseList(process.env.GEMINI_FALLBACK_MODELS);
     const modelsToTry = Array.from(
-      new Set([primaryModel, 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
+      new Set([primaryModel, 'gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-3-flash', ...extraFallbackModels])
     ).filter(Boolean);
 
     const payload = {
