@@ -259,7 +259,10 @@ async function routeSkills({ apiKey, modelsToTry, input }) {
 
   const payload = {
     contents: [{ role: 'user', parts: [{ text: routerPrompt }] }],
-    generationConfig: { temperature: 0.1, topK: 20, topP: 0.9, maxOutputTokens: 512 },
+    // 2048 leaves room for gemini-2.5-flash's internal "thinking" tokens PLUS the
+    // JSON selection. At 512 the thinking budget swallowed the output, the JSON came
+    // back empty/truncated, and routing silently fell back to a crude keyword match.
+    generationConfig: { temperature: 0.1, topK: 20, topP: 0.9, maxOutputTokens: 2048 },
   };
 
   let lastError = null;
